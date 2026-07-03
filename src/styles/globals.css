@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* Design Tokens */
+@theme {
+  /* Colors */
+  --color-brand-bg:           #000000;
+  --color-brand-surface:      #0F0F18;
+  --color-brand-surface-2:    #141420;
+  --color-brand-accent:       #875DD9;
+  --color-brand-accent-light: #9D70F5;
+  --color-brand-accent-dim:   #5328A8;
+  --color-brand-white:        #FFFFFF;
+  --color-brand-muted:        #9CA3AF;
+  --color-brand-subtle:       #6B7280;
+  --color-brand-border:       #1A1A2A;
+  --color-brand-border-2:     #252535;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-hero:    'DM Sans', sans-serif;
+
+  /* Type scale */
+  --text-display-2xl: 6rem;
+  --text-display-xl:  4.5rem;
+  --text-display-lg:  3.5rem;
+  --text-display-md:  2.5rem;
+  --text-display-sm:  1.75rem;
+  --text-body-lg:     1.125rem;
+  --text-body:        1rem;
+  --text-body-sm:     0.875rem;
+  --text-label:       0.75rem;
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-accent-sm: 0 0 20px rgba(135, 93, 217, 0.2);
+  --shadow-accent-md: 0 0 40px rgba(135, 93, 217, 0.3);
+  --shadow-accent-lg: 0 0 80px rgba(135, 93, 217, 0.4);
+  --shadow-card:      0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-elevated:  0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Base Reset */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-white);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.5;
+  }
+
+  #root {
+    isolation: isolate;
+  }
+
+  img, video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Focus ring — visible on keyboard, hidden on mouse */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-accent-light);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Global Typography System
+   Standardized text styles applied across every section. Each utility sets only
+   font-family / size / weight — colour, tracking, uppercase, and margins stay on
+   the element so existing design isn't disturbed. Sizes target the spec value on
+   desktop and scale down with clamp() to stay responsive on small screens.
+
+     Section label  → Inter 14px         (SERVICES, ABOUT US …)
+     Section title  → DM Sans 42px bold   (OUR SERVICES, CUSTOMER SUCCESS STORIES …)
+     Subtitle       → Inter 18px          (descriptive text under section titles)
+     Hero subtitle  → Inter 22px          (Hero only)
+   Buttons (Inter 16px) are set in components/ui/Button.tsx. */
+@layer components {
+  .text-section-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  .text-section-title {
+    font-family: var(--font-hero);
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 42px);
+  }
+
+  .text-section-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.6vw, 18px);
+  }
+
+  .text-hero-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2.2vw, 22px);
+  }
+}

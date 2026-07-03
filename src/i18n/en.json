@@ -1,0 +1,271 @@
+{
+  "nav": {
+    "links": ["Home", "About", "Portfolio", "Templates", "Services", "Contact"],
+    "cta": "Language"
+  },
+
+  "hero": {
+    "badge": "Web Development",
+    "badgePrefix": "Services",
+    "headline": [
+      "TRUS delivers smart websites",
+      "for business growth powered",
+      "by [GrowthAI]"
+    ],
+    "body": "Turns your website into a 24/7 growth system that brings customers, grows sales, and automates your marketing—without extra staff.",
+    "cta": {
+      "primary": "Browse Templates",
+      "secondary": "Why TruS"
+    },
+    "stats": [
+      { "value": "200+", "label": "Projects Delivered" },
+      { "value": "4.8", "label": "Client Rating" },
+      { "value": "1,200+", "label": "Happy Clients" }
+    ]
+  },
+
+  "about": {
+    "eyebrow": "ABOUT US",
+    "headline": ["Discover More About [TruS]"],
+    "body": [
+      "TruS is a modern digital studio specialising in premium React websites, AI integrations, and advanced motion design. We turn ambitious ideas into polished, production-ready products.",
+      "Every project we touch is built from scratch — no bloated page builders, no recycled themes. Just clean code, thoughtful UX, and meticulous attention to detail.",
+      "From solo founders to growing companies, we help our clients stand out online with websites that are as fast as they are beautiful."
+    ],
+    "stats": [
+      { "value": "250+", "label": "Projects Delivered" },
+      { "value": "4.9", "label": "Client Rating" },
+      { "value": "1,000+", "label": "Happy Clients" }
+    ]
+  },
+
+  "portfolio": {
+    "eyebrow": "PORTFOLIO",
+    "headline": "EXPLORE OUR PROJECT",
+    "description": [
+      "A selection of our recent work showcasing creativity,",
+      "performance, and attention to detail."
+    ],
+    "seeMore": "See More",
+    "projects": [
+      { "name": "Arquivo", "category": "Corporate" },
+      { "name": "Avansi", "category": "SaaS" },
+      { "name": "Slingshot", "category": "Product" },
+      { "name": "Nexora", "category": "E-Commerce" },
+      { "name": "DataFlow", "category": "Dashboard" },
+      { "name": "TechVault", "category": "Web App" },
+      { "name": "Orbis", "category": "Portfolio" },
+      { "name": "Luminary", "category": "Agency" }
+    ]
+  },
+
+  "whyUs": {
+    "eyebrow": "WHY US",
+    "headline": ["Why Businesses Choose TruS"],
+    "cards": [
+      {
+        "number": "01",
+        "title": "Premium Design Quality",
+        "description": "Every template is handcrafted with meticulous attention to detail — not auto-generated or recycled."
+      },
+      {
+        "number": "02",
+        "title": "Built for Performance",
+        "description": "Clean React code, zero bloat. Your site loads fast and scores well on every metric."
+      },
+      {
+        "number": "03",
+        "title": "Fully Customisable",
+        "description": "Comprehensive design tokens and config files make rebranding and adapting content trivial."
+      },
+      {
+        "number": "04",
+        "title": "You Own Everything",
+        "description": "Full source code ownership. No subscriptions, no lock-in, no hidden fees ever."
+      }
+    ]
+  },
+
+  "team": {
+    "eyebrow": "MEET OUR TEAM",
+    "heading": [
+      "Meet the expert strategists and",
+      "creative thinkers driving",
+      "measurable growth"
+    ],
+    "members": [
+      {
+        "name": "Sara Ahmadi",
+        "role": "UI/UX Designer",
+        "description": "Designing intuitive and engaging experiences focused on clarity, usability, and modern interaction."
+      },
+      {
+        "name": "Daniel Weber",
+        "role": "Web Developer",
+        "description": "Building scalable front-end systems with clean architecture and performance-focused development."
+      },
+      {
+        "name": "Lina Farhadi",
+        "role": "Brand Strategist",
+        "description": "Shaping digital identities that help businesses communicate clearly and grow with confidence."
+      },
+      {
+        "name": "Nina Roberts",
+        "role": "Content Lead",
+        "description": "Creating meaningful content systems that connect brands with their audience effectively."
+      }
+    ]
+  },
+
+  "services": {
+    "eyebrow": "SERVICES",
+    "heading": "OUR SERVICES",
+    "description": "We design and build modern websites that help businesses grow and stand out.",
+    "items": [
+      { "title": "SEO", "description": "Improving visibility with smart search strategies and organic traffic." },
+      { "title": "Web Development", "description": "Building fast, responsive, and scalable websites with modern technologies." },
+      { "title": "Web Design", "description": "Designing modern, user-friendly interfaces that improve usability and engagement." },
+      { "title": "Lead Maker", "description": "Creating conversion-focused systems that help turn visitors into potential clients." },
+      { "title": "AI Agent", "description": "Building intelligent assistants and automations that support business workflows." },
+      { "title": "Content Generation", "description": "Creating engaging digital content that connects brands with their audience." }
+    ]
+  },
+
+  "templateCategories": {
+    "eyebrow": "EXPLORE CATEGORIES",
+    "heading": "TEMPLATE CATEGORIES",
+    "description": "Choose from professionally designed templates for every need",
+    "seeMore": "See More",
+    "categories": ["Lawyers", "Fitness", "Real Estate", "Clinics", "Barbershops"],
+    "templates": {
+      "Lawyers": [
+        { "name": "LegalEdge Pro", "tag": "Law Firm" },
+        { "name": "Justice Suite", "tag": "Attorney" },
+        { "name": "Counsel Hub", "tag": "Legal Services" },
+        { "name": "Verdict Studio", "tag": "Corporate Law" },
+        { "name": "Lex Modern", "tag": "Family Law" },
+        { "name": "Charter Law", "tag": "Estate Planning" },
+        { "name": "Gavel & Co.", "tag": "Criminal Defense" },
+        { "name": "TrueCase", "tag": "Litigation" },
+        { "name": "Advocate Plus", "tag": "Immigration" },
+        { "name": "Pinnacle Legal", "tag": "Civil Rights" }
+      ],
+      "Fitness": [
+        { "name": "GymCore", "tag": "Gym" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Personal Training" },
+        { "name": "SweatBox", "tag": "CrossFit" },
+        { "name": "Zen Flow", "tag": "Wellness" },
+        { "name": "IronGrip", "tag": "Powerlifting" },
+        { "name": "Aqua Motion", "tag": "Swimming" },
+        { "name": "CycleFit", "tag": "Cycling Studio" },
+        { "name": "PilatesPlus", "tag": "Pilates" },
+        { "name": "Marathon Hub", "tag": "Running Club" }
+      ],
+      "Real Estate": [
+        { "name": "Domaine", "tag": "Luxury Homes" },
+        { "name": "PropVault", "tag": "Property Sales" },
+        { "name": "Urbanest", "tag": "Urban Living" },
+        { "name": "CasaElite", "tag": "Villa Rentals" },
+        { "name": "HorizonHomes", "tag": "New Developments" },
+        { "name": "LandMark Pro", "tag": "Commercial" },
+        { "name": "NestFinder", "tag": "Apartments" },
+        { "name": "Terra Realty", "tag": "Land Sales" },
+        { "name": "PrimeSpace", "tag": "Office Space" },
+        { "name": "KeyStone", "tag": "Investment" }
+      ],
+      "Clinics": [
+        { "name": "MediCore", "tag": "General Practice" },
+        { "name": "DentaPlus", "tag": "Dental Clinic" },
+        { "name": "VisionCare", "tag": "Eye Clinic" },
+        { "name": "SkinGlow", "tag": "Dermatology" },
+        { "name": "OrthoFit", "tag": "Orthopedics" },
+        { "name": "PediaCare", "tag": "Pediatrics" },
+        { "name": "MindSpace", "tag": "Mental Health" },
+        { "name": "CardioVita", "tag": "Cardiology" },
+        { "name": "NutriMed", "tag": "Nutrition" },
+        { "name": "PhysioMove", "tag": "Physiotherapy" }
+      ],
+      "Barbershops": [
+        { "name": "BladeCraft", "tag": "Classic Barber" },
+        { "name": "Sharp & Co.", "tag": "Luxury Grooming" },
+        { "name": "FadeKing", "tag": "Urban Barber" },
+        { "name": "The Clipped", "tag": "Vintage Style" },
+        { "name": "RazorEdge", "tag": "Men's Grooming" },
+        { "name": "BarberHaus", "tag": "Premium Cuts" },
+        { "name": "TrimMaster", "tag": "Family Barber" },
+        { "name": "CutCulture", "tag": "Streetwear Style" },
+        { "name": "GentleMan", "tag": "Beard Studio" },
+        { "name": "ScissorKings", "tag": "Trend Cuts" }
+      ]
+    }
+  },
+
+  "contact": {
+    "eyebrow": "CONTACT US",
+    "heading": "Let's Start a Conversation",
+    "card": {
+      "tagline": "Have a project in mind?",
+      "cta": "Book a call now",
+      "office": "2847 Oak Street, San Francisco, CA 94102",
+      "phone": "+98 1223344565",
+      "email": "Info@test100.devops-uni.com"
+    },
+    "form": {
+      "fields": [
+        { "label": "Full Name", "placeholder": "Enter name" },
+        { "label": "Email", "placeholder": "Enter email address" },
+        { "label": "Company Name", "placeholder": "Enter company name" },
+        { "label": "Message", "placeholder": "Enter your message" }
+      ],
+      "submit": "Send Email"
+    }
+  },
+
+  "testimonials": {
+    "eyebrow": "TESTIMONIALS",
+    "heading": "CUSTOMER SUCCESS STORIES",
+    "subtitle": [
+      "Trusted by forward-thinking businesses worldwide, we've helped",
+      "teams unlock growth and build lasting impact."
+    ],
+    "items": [
+      {
+        "name": "Sarah Mitchell",
+        "role": "Marketing Director, Lumora Health",
+        "quote": "Altero transformed the way we approach strategy. Their insights were sharp, actionable, and truly accelerated our growth."
+      },
+      {
+        "name": "Arjun Mehta",
+        "role": "Software Developer",
+        "quote": "The team brought clarity to complex challenges and delivered measurable results. Working with them felt like an extension of our own team."
+      },
+      {
+        "name": "Emily Zhao",
+        "role": "Head of Operations, VitaHealth",
+        "quote": "Our collaboration with Altero led to a 35% improvement in efficiency. Their process was seamless and deeply data-driven."
+      },
+      {
+        "name": "Daniel Reyes",
+        "role": "CEO, NovaTech Solutions",
+        "quote": "Professional, insightful, and results-oriented. Altero helped us scale smarter and operate more efficiently."
+      },
+      {
+        "name": "Julie Reed",
+        "role": "Founder, Lumora Health",
+        "quote": "Working with Altero felt effortless. They understood our challenges quickly and provided actionable solutions that worked."
+      }
+    ]
+  },
+
+  "footer": {
+    "tagline": "Building Innovative Digital Experiences for Modern Businesses.",
+    "mainPages": ["Home", "Services", "Portfolio", "Templates", "Pricing", "About", "Contact"],
+    "legal": ["Privacy Policy", "Terms"],
+    "contact": {
+      "phone": "+98 1223344565",
+      "address": "2847 Oak Street,\nSan Francisco, CA 94102"
+    },
+    "socials": ["Instagram", "LinkedIn", "X"]
+  }
+}
