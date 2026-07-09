@@ -29,6 +29,7 @@ export default function App() {
   // Gate the preloader on real hero-video readiness (canplaythrough), so it
   // fades out only when the galaxy is actually playing — not a frozen frame.
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const [templateReady, setTemplateReady] = useState(false);
 
   // Hero galaxy opacity
   // Fades the entire orbital galaxy out as the user scrolls past the hero.
@@ -40,7 +41,7 @@ export default function App() {
 
   return (
     <div className="bg-brand-bg min-h-screen font-body antialiased">
-      <Preloader ready={heroVideoReady} />
+      <Preloader ready={heroVideoReady && templateReady} />
 
       <NavbarMotion hidden={hideNavbar}>
         <Navbar />
@@ -63,6 +64,7 @@ export default function App() {
       <TemplateSection
         onEnter={() => setHideNavbar(true)}
         onLeave={() => setHideNavbar(false)}
+        onReady={() => setTemplateReady(true)}
       />
 
       {/* Services: scroll-driven two-row card parallax. */}

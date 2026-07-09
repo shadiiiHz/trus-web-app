@@ -117,7 +117,9 @@ function preloadImages(urls: string[]): Promise<void[]> {
     urls.map((url) => {
       const img = new Image();
       img.src = url;
-      return img.decode ? img.decode().catch(() => undefined) : Promise.resolve(undefined);
+      return img.decode
+        ? img.decode().catch(() => undefined)
+        : Promise.resolve(undefined);
     }),
   );
 }
@@ -426,8 +428,7 @@ export default function TemplateGridReveal({
       const tabsOpacity = gsap.utils.clamp(
         0,
         1,
-        (currentProgress - TABS_FADE_START) /
-          (TABS_FADE_END - TABS_FADE_START),
+        (currentProgress - TABS_FADE_START) / (TABS_FADE_END - TABS_FADE_START),
       );
 
       if (headerWrapRef.current) {
@@ -568,6 +569,8 @@ export default function TemplateGridReveal({
               style={{ transformStyle: "preserve-3d" }}
             >
               <img
+                loading="lazy"
+                decoding="async"
                 src={tpl.image}
                 alt={tpl.name}
                 className="h-full w-full object-cover"

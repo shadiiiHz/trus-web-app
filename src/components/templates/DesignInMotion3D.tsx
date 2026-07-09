@@ -17,6 +17,73 @@ export interface DesignTemplate {
   image: string;
   title?: string;
 }
+function ReadySignal({ onReady }: { onReady?: () => void }) {
+  useEffect(() => {
+    onReady?.();
+  }, [onReady]);
+  return null;
+}
+// ---------------------------------------------------------------------
+// Depth falloff (front/back scale curve)
+// ---------------------------------------------------------------------
+// Pulled out to module scope (pure function, no closures) so it can be
+// reused both to build the arc-length lookup table AND to compute a
+// card's own current scale — same single source of truth as before,
+// just no longer redefined inside every Card's render/frame closure.
+const DEPTH_MIN_SCALE = 0.55;
+const DEPTH_MAX_SCALE = 1.0;
+
+function scaleFromRad(rad: number): number {
+  const frontFactor = Math.cos(rad);
+  const backAmount = THREE.MathUtils.clamp((1 - frontFactor) / 2, 0, 1);
+  const backAmountSmooth = backAmount * backAmount * (3 - 2 * backAmount);
+  return THREE.MathUtils.lerp(DEPTH_MAX_SCALE, DEPTH_MIN_SCALE, backAmountSmooth);
+}
+
+// ---------------------------------------------------------------------
+// Arc-length lookup table
+// ---------------------------------------------------------------------
+// `integrateU` used to numerically re-integrate `du/do = scale(rad(u))`
+// from scratch (36 Euler steps) on EVERY call — and it was being called
+// 3x per card per frame (once for the card's own position, twice more
+// for the finite-difference tangent). That's ~108 trig-heavy iterations
+// per card per frame, ~972/frame across 9 cards, 60x/sec.
+//
+// The integrand only depends on `angleStep` (via `rad = u * angleStep`),
+// which never changes during the component's lifetime. So instead of
+// re-solving the same ODE every frame, we solve it ONCE into a dense
+// table and look it up (with linear interpolation) afterwards — turning
+// an O(steps) computation into an O(1) one, with no visible change in
+// the curve itself (the table resolution is much finer than the old
+// per-call step count).
+const LUT_RANGE = 40; // must cover the largest |offset| the ribbon can produce
+const LUT_SAMPLES = 2000; // resolution — far finer than the old 36-step integration
+
+function buildArcLengthLUT(angleStep: number) {
+  const table = new Float32Array(LUT_SAMPLES + 1);
+  const dO = LUT_RANGE / LUT_SAMPLES;
+  let u = 0;
+  table[0] = 0;
+  for (let i = 1; i <= LUT_SAMPLES; i++) {
+    const rad = THREE.MathUtils.degToRad(u * angleStep);
+    const s = scaleFromRad(rad);
+    u += s * dO;
+    table[i] = u;
+  }
+  return table;
+}
+
+/** O(1) lookup replacing the old per-call Euler integration. */
+function integrateUFromLUT(o: number, table: Float32Array): number {
+  const sign = Math.sign(o) || 1;
+  const absO = Math.min(Math.abs(o), LUT_RANGE);
+  const idx = (absO / LUT_RANGE) * LUT_SAMPLES;
+  const i0 = Math.floor(idx);
+  const i1 = Math.min(i0 + 1, LUT_SAMPLES);
+  const frac = idx - i0;
+  const u = table[i0] + (table[i1] - table[i0]) * frac;
+  return sign * u;
+}
 
 interface CardProps {
   index: number;
@@ -41,6 +108,10 @@ interface CardProps {
    * it can never re-introduce a front/back mismatch. */
   verticalStride: number;
   shiftRef: React.MutableRefObject<number>;
+  /** Shared arc-length LUT (one per angleStep, built once in the parent
+   * and passed down) so every card reuses the same table instead of
+   * each rebuilding its own. */
+  arcLengthLUT: Float32Array;
 }
 
 function Card({
@@ -54,6 +125,7 @@ function Card({
   waveFrequency,
   verticalStride,
   shiftRef,
+  arcLengthLUT,
 }: CardProps) {
   const [hovered, setHovered] = useState(false);
   const scaleRef = useRef(1);
@@ -70,6 +142,23 @@ function Card({
     [cardWidth, height, curvature],
   );
 
+  // Pre-allocated scratch vectors, reused every frame instead of being
+  // allocated fresh. `getPosition` used to `new THREE.Vector3()` on every
+  // call, and it was called 3x/frame/card (position + 2 tangent samples)
+  // — ~1600 short-lived objects/sec across the ribbon, all pure GC
+  // pressure. Writing into these instead removes that allocation entirely.
+  const posVecRef = useRef(new THREE.Vector3());
+  const posARef = useRef(new THREE.Vector3());
+  const posBRef = useRef(new THREE.Vector3());
+  const tangentRef = useRef(new THREE.Vector3());
+
+  // Tracks the last twist amount actually written to the geometry, so we
+  // can skip the (relatively expensive, full-buffer-upload) call to
+  // `applyCornerTwist` when the change since last frame is imperceptible
+  // — this is common for back-of-ribbon cards whose twist sits at ~0 for
+  // many consecutive frames.
+  const lastTwistRef = useRef<number | null>(null);
+
   useFrame((_, delta) => {
     const group = groupRef.current;
     const mat = materialRef.current;
@@ -81,57 +170,7 @@ function Card({
 
     const offset = index - shiftRef.current;
 
-    // Depth scale: how much a card shrinks the further "back" it rotates.
-    // Lower `minScale` = stronger, more dramatic depth falloff.
-    const minScale = 0.55;
-    const maxScale = 1.0;
-
-    // scale as a function of the ACTUAL displayed angle (rad), not raw index.
-    const scaleFromRad = (rad: number) => {
-      const frontFactor = Math.cos(rad);
-      const backAmount = THREE.MathUtils.clamp((1 - frontFactor) / 2, 0, 1);
-      const backAmountSmooth = backAmount * backAmount * (3 - 2 * backAmount);
-      return THREE.MathUtils.lerp(maxScale, minScale, backAmountSmooth);
-    };
-
-    // Self-consistent arc-length warp: du/do = scale(displayed angle at u).
-    // Uses the SAME falloff as the visual scale (no separate spacing floor)
-    // so the perceived gap between any two neighboring cards stays
-    // constant no matter how deep they are — a card that's half the size
-    // also sits half the (perceived) distance from its neighbor.
-    //
-    // THIS is now the ONLY arc-length curve. Previously the vertical (y)
-    // axis integrated its OWN separate curve (`integrateVerticalU` /
-    // `verticalStepFromRad`) with different front/back target values than
-    // this one. Two independently-tuned curves can each look "smooth" on
-    // their own and still be mutually INCONSISTENT — the ratio between how
-    // fast a card moves sideways (x/z) vs. how fast it drops (y) changed
-    // unevenly from card to card. That inconsistency, not either curve on
-    // its own, is what read as a "staircase": the back looked fine because
-    // `backVerticalStep` happened to equal `minScale` (the same value
-    // `scaleFromRad` settles to at the back — matching ratio, by
-    // coincidence), but the front used an unrelated constant (0.5) instead
-    // of `maxScale` (1.0), breaking that proportionality exactly where
-    // cards are biggest and the mismatch is most visible.
-    //
-    // Fix: reuse this exact curve for BOTH axes (`u` drives x/z as before,
-    // and now `y = -u * verticalStride`). Scaling the whole result by one
-    // global constant preserves proportionality everywhere, so the back
-    // keeps looking exactly as it does today, and the front now follows
-    // the identical rule instead of a disconnected one.
-    const integrateU = (o: number) => {
-      const steps = 36;
-      const sign = Math.sign(o) || 1;
-      const absO = Math.abs(o);
-      const dO = absO / steps;
-      let u = 0;
-      for (let i = 0; i < steps; i++) {
-        const rad = THREE.MathUtils.degToRad(u * angleStep);
-        const s = scaleFromRad(rad);
-        u += s * dO;
-      }
-      return sign * u;
-    };
+    const integrateU = (o: number) => integrateUFromLUT(o, arcLengthLUT);
 
     // Extra straight-back push along Z for deeper cards. This is what
     // actually prevents a tilted back card's corner from poking through
@@ -141,7 +180,10 @@ function Card({
     // instead, which doesn't affect the on-screen gap.
     const depthPushStrength = 0.35;
 
-    const getPosition = (o: number) => {
+    // Writes into `target` instead of allocating a new Vector3 (see
+    // scratch-vector note above). Returns the scalar `rad`/`u` alongside
+    // since those are still needed by the caller.
+    const getPosition = (o: number, target: THREE.Vector3) => {
       const u = integrateU(o);
       const angleDeg = u * angleStep;
       const rad = THREE.MathUtils.degToRad(angleDeg);
@@ -158,26 +200,32 @@ function Card({
       const zFinal = z0 - bulgeOffset - depthPush;
 
       // Uniform descent driven by the SAME arc-length parameter `u` used
-      // for x/z above (see note on integrateU) — guaranteed proportional
-      // front-to-back, so no seam. `verticalStride` just scales the whole
-      // thing uniformly (steeper/shallower ribbon overall) without ever
-      // reintroducing a mismatch. Plus an OPTIONAL ripple on top; with
-      // waveAmplitude at its default of 0 this is just
-      // `y = -u * verticalStride`, a perfectly smooth, monotonic curve.
+      // for x/z above — guaranteed proportional front-to-back, so no
+      // seam. `verticalStride` just scales the whole thing uniformly
+      // (steeper/shallower ribbon overall) without ever reintroducing a
+      // mismatch. Plus an OPTIONAL ripple on top; with waveAmplitude at
+      // its default of 0 this is just `y = -u * verticalStride`, a
+      // perfectly smooth, monotonic curve.
       const y =
         -u * verticalStride + Math.sin(u * waveFrequency) * waveAmplitude;
 
-      return { pos: new THREE.Vector3(x, y, zFinal), rad, u };
+      target.set(x, y, zFinal);
+      return { rad, u };
     };
 
-    const { pos, rad } = getPosition(offset);
+    const posVec = posVecRef.current;
+    const posA = posARef.current;
+    const posB = posBRef.current;
+    const tangent = tangentRef.current;
+
+    const { rad } = getPosition(offset, posVec);
 
     const eps = 0.12;
-    const a = getPosition(offset + eps).pos;
-    const b = getPosition(offset - eps).pos;
-    const tangent = a.sub(b).normalize();
+    getPosition(offset + eps, posA);
+    getPosition(offset - eps, posB);
+    tangent.copy(posA).sub(posB).normalize();
 
-    group.position.copy(pos);
+    group.position.copy(posVec);
     group.rotation.y = rad;
 
     // baseScale is needed both for the card's own scale AND to drive the
@@ -193,7 +241,7 @@ function Card({
     // front and fades away by max depth — same depth logic as everything
     // else on this card, just a much smaller, Z-only amount.
     const frontness = THREE.MathUtils.clamp(
-      (baseScale - minScale) / (maxScale - minScale),
+      (baseScale - DEPTH_MIN_SCALE) / (DEPTH_MAX_SCALE - DEPTH_MIN_SCALE),
       0,
       1,
     );
@@ -217,7 +265,16 @@ function Card({
     // (separately from `parity`) if the overall twist direction doesn't
     // match the way this ribbon actually spirals.
     const cornerTwistAmount = curvature * 0.2 * frontness * parity;
-    applyCornerTwist(geo, cornerTwistAmount);
+
+    // Skip the (full-buffer, GPU-upload-triggering) geometry write when
+    // the twist hasn't meaningfully changed since last frame — common
+    // for cards sitting at the back of the ribbon where `frontness` (and
+    // therefore the twist) sits at ~0 for many consecutive frames.
+    const lastTwist = lastTwistRef.current;
+    if (lastTwist === null || Math.abs(cornerTwistAmount - lastTwist) > 0.0005) {
+      applyCornerTwist(geo, cornerTwistAmount);
+      lastTwistRef.current = cornerTwistAmount;
+    }
 
     const frontFactor = Math.cos(rad);
     const backAmount = THREE.MathUtils.clamp((1 - frontFactor) / 2, 0, 1);
@@ -334,6 +391,7 @@ function ShiftDriver({
 }
 
 interface DesignInMotion3DProps {
+  onReady?: () => void;
   /** Your 9 template cards, in the order they should travel through. */
   templates: DesignTemplate[];
   /** Card width in three.js world units (not px — tune alongside camera distance/fov). */
@@ -399,6 +457,7 @@ interface DesignInMotion3DProps {
 const DEFAULT_WAVE_AMPLITUDE_RATIO = 0.6;
 
 export default function DesignInMotion3D({
+  onReady,
   templates,
   cardWidth = 4,
   radius = 7,
@@ -434,6 +493,11 @@ export default function DesignInMotion3D({
   const templatesRef = useRef<HTMLHeadingElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [gridProgress, setGridProgress] = useState(0);
+
+  // Built once per `angleStep` and shared by every card — see the LUT
+  // note above `buildArcLengthLUT`. `angleStep` essentially never changes
+  // at runtime, so in practice this table is built exactly once.
+  const arcLengthLUT = useMemo(() => buildArcLengthLUT(angleStep), [angleStep]);
 
   // Lenis: smooth scroll only for the lifetime of this component.
   // Destroyed completely on unmount, so it never leaks into the rest
@@ -571,7 +635,7 @@ export default function DesignInMotion3D({
         >
           <Canvas
             style={{ position: "fixed", inset: 0 }}
-            dpr={[1, 2]}
+            dpr={1}
             camera={{ position: [0, 0, cameraDistance], fov }}
             gl={{ antialias: true, alpha: true }}
           >
@@ -599,11 +663,13 @@ export default function DesignInMotion3D({
                 waveFrequency={waveFrequency}
                 verticalStride={verticalStride}
                 shiftRef={displayShiftRef}
+                arcLengthLUT={arcLengthLUT}
               />
             ))}
           </Canvas>
         </div>
         <TemplateGridReveal progress={gridProgress} />
+        <ReadySignal onReady={onReady} />
       </Suspense>
     </section>
   );

@@ -5,9 +5,14 @@ import DesignInMotion3D from "../templates/DesignInMotion3D";
 type TemplateSectionProps = {
   onEnter?: () => void;
   onLeave?: () => void;
+  onReady?: () => void;
 };
 
-export function TemplateSection({ onEnter, onLeave }: TemplateSectionProps) {
+export function TemplateSection({
+  onEnter,
+  onLeave,
+  onReady,
+}: TemplateSectionProps) {
   const { LeftWord, RightWord, templates } = siteConfig.templateCategories;
   // Refs
   const sectionRef = useRef<HTMLElement>(null);
@@ -59,6 +64,7 @@ export function TemplateSection({ onEnter, onLeave }: TemplateSectionProps) {
             pinTargetRef={sectionRef}
             LeftWord={LeftWord}
             RightWord={RightWord}
+            onReady={onReady}
           />
         </div>
       </section>
