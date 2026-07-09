@@ -45,13 +45,44 @@ const serviceMeta = [
   { id: 'seo' }, { id: 'web-dev' }, { id: 'web-design' },
   { id: 'lead-maker' }, { id: 'ai-agent' }, { id: 'content' },
 ]
+const imageMap = {
+  law: [
+    "/templates/t1.svg",
+  ],
+  fit: [
+    "/templates/t2.svg",
+    "/templates/t3.svg",
+    "/templates/t4.svg",
+  ],
+  re: [
+    "/templates/t5.svg",
+  ],
+  cl: [
+    "/templates/t6.svg",
+    "/templates/t7.svg",
+  ],
+  bar: [
+    "/templates/t8.svg",
+    "/templates/t9.svg",
+  ],
+  all: [
+    "/templates/t1.svg",
+    "/templates/t2.svg",
+    "/templates/t3.svg",
+    "/templates/t4.svg",
+    "/templates/t5.svg",
+    "/templates/t6.svg",
+    "/templates/t7.svg",
+    "/templates/t8.svg",
+    "/templates/t9.svg",
+  ],
+};
 
-/** Builds 10 picsum placeholders (id + image) for one template category. */
-const seedMeta = (prefix: string) =>
-  Array.from({ length: 10 }, (_, i) => ({
+const seedMeta = (prefix: keyof typeof imageMap) =>
+  imageMap[prefix].map((img, i) => ({
     id: i + 1,
-    image: `https://picsum.photos/seed/${prefix}${i + 1}/900/600`,
-  }))
+    image: img,
+  }));
 
 const testimonialMeta = [
   { avatar: 'https://picsum.photos/seed/tmember-sarah/64/64'  },
@@ -138,6 +169,8 @@ export const siteConfig = {
     heading:     en.templateCategories.heading,
     description: en.templateCategories.description,
     seeMore:     { label: en.templateCategories.seeMore, href: '#' },
+    RightWord:     en.templateCategories.RightWord,
+    LeftWord:     en.templateCategories.LeftWord,
     categories:  en.templateCategories.categories,
     templates: {
       Lawyers:       merge(en.templateCategories.templates.Lawyers,         seedMeta('law')),
@@ -145,6 +178,7 @@ export const siteConfig = {
       'Real Estate': merge(en.templateCategories.templates['Real Estate'],  seedMeta('re')),
       Clinics:       merge(en.templateCategories.templates.Clinics,         seedMeta('cl')),
       Barbershops:   merge(en.templateCategories.templates.Barbershops,     seedMeta('bar')),
+      All:       merge(en.templateCategories.templates.All,         seedMeta('all')),
     } as Record<string, Array<{ id: number; name: string; tag: string; image: string }>>,
   },
 

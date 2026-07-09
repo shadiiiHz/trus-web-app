@@ -66,6 +66,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
   #root {

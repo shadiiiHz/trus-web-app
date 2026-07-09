@@ -122,81 +122,74 @@
     "heading": "OUR SERVICES",
     "description": "We design and build modern websites that help businesses grow and stand out.",
     "items": [
-      { "title": "SEO", "description": "Improving visibility with smart search strategies and organic traffic." },
-      { "title": "Web Development", "description": "Building fast, responsive, and scalable websites with modern technologies." },
-      { "title": "Web Design", "description": "Designing modern, user-friendly interfaces that improve usability and engagement." },
-      { "title": "Lead Maker", "description": "Creating conversion-focused systems that help turn visitors into potential clients." },
-      { "title": "AI Agent", "description": "Building intelligent assistants and automations that support business workflows." },
-      { "title": "Content Generation", "description": "Creating engaging digital content that connects brands with their audience." }
+      {
+        "title": "SEO",
+        "description": "Improving visibility with smart search strategies and organic traffic."
+      },
+      {
+        "title": "Web Development",
+        "description": "Building fast, responsive, and scalable websites with modern technologies."
+      },
+      {
+        "title": "Web Design",
+        "description": "Designing modern, user-friendly interfaces that improve usability and engagement."
+      },
+      {
+        "title": "Lead Maker",
+        "description": "Creating conversion-focused systems that help turn visitors into potential clients."
+      },
+      {
+        "title": "AI Agent",
+        "description": "Building intelligent assistants and automations that support business workflows."
+      },
+      {
+        "title": "Content Generation",
+        "description": "Creating engaging digital content that connects brands with their audience."
+      }
     ]
   },
 
   "templateCategories": {
-    "eyebrow": "EXPLORE CATEGORIES",
-    "heading": "TEMPLATE CATEGORIES",
-    "description": "Choose from professionally designed templates for every need",
+    "eyebrow": "Designs Template",
+    "heading": "Template Categories",
+    "description": "Explore professionally designed templates built for modern businesses, startups, and digital products.",
     "seeMore": "See More",
-    "categories": ["Lawyers", "Fitness", "Real Estate", "Clinics", "Barbershops"],
+    "RightWord": "Designs",
+    "LeftWord": "Template",
+    "categories": [
+      "Lawyers",
+      "Fitness",
+      "Real Estate",
+      "Clinics",
+      "Barbershops",
+      "All"
+    ],
     "templates": {
-      "Lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Law Firm" },
-        { "name": "Justice Suite", "tag": "Attorney" },
-        { "name": "Counsel Hub", "tag": "Legal Services" },
-        { "name": "Verdict Studio", "tag": "Corporate Law" },
-        { "name": "Lex Modern", "tag": "Family Law" },
-        { "name": "Charter Law", "tag": "Estate Planning" },
-        { "name": "Gavel & Co.", "tag": "Criminal Defense" },
-        { "name": "TrueCase", "tag": "Litigation" },
-        { "name": "Advocate Plus", "tag": "Immigration" },
-        { "name": "Pinnacle Legal", "tag": "Civil Rights" }
-      ],
+      "Lawyers": [{ "name": "LegalEdge Pro", "tag": "Law Firm" }],
       "Fitness": [
         { "name": "GymCore", "tag": "Gym" },
         { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "EliteBody Pro", "tag": "Personal Training" },
-        { "name": "SweatBox", "tag": "CrossFit" },
-        { "name": "Zen Flow", "tag": "Wellness" },
-        { "name": "IronGrip", "tag": "Powerlifting" },
-        { "name": "Aqua Motion", "tag": "Swimming" },
-        { "name": "CycleFit", "tag": "Cycling Studio" },
-        { "name": "PilatesPlus", "tag": "Pilates" },
-        { "name": "Marathon Hub", "tag": "Running Club" }
+        { "name": "EliteBody Pro", "tag": "Personal Training" }
       ],
-      "Real Estate": [
-        { "name": "Domaine", "tag": "Luxury Homes" },
-        { "name": "PropVault", "tag": "Property Sales" },
-        { "name": "Urbanest", "tag": "Urban Living" },
-        { "name": "CasaElite", "tag": "Villa Rentals" },
-        { "name": "HorizonHomes", "tag": "New Developments" },
-        { "name": "LandMark Pro", "tag": "Commercial" },
-        { "name": "NestFinder", "tag": "Apartments" },
-        { "name": "Terra Realty", "tag": "Land Sales" },
-        { "name": "PrimeSpace", "tag": "Office Space" },
-        { "name": "KeyStone", "tag": "Investment" }
-      ],
+      "Real Estate": [{ "name": "Domaine", "tag": "Luxury Homes" }],
       "Clinics": [
         { "name": "MediCore", "tag": "General Practice" },
-        { "name": "DentaPlus", "tag": "Dental Clinic" },
-        { "name": "VisionCare", "tag": "Eye Clinic" },
-        { "name": "SkinGlow", "tag": "Dermatology" },
-        { "name": "OrthoFit", "tag": "Orthopedics" },
-        { "name": "PediaCare", "tag": "Pediatrics" },
-        { "name": "MindSpace", "tag": "Mental Health" },
-        { "name": "CardioVita", "tag": "Cardiology" },
-        { "name": "NutriMed", "tag": "Nutrition" },
-        { "name": "PhysioMove", "tag": "Physiotherapy" }
+        { "name": "DentaPlus", "tag": "Dental Clinic" }
       ],
       "Barbershops": [
         { "name": "BladeCraft", "tag": "Classic Barber" },
-        { "name": "Sharp & Co.", "tag": "Luxury Grooming" },
-        { "name": "FadeKing", "tag": "Urban Barber" },
-        { "name": "The Clipped", "tag": "Vintage Style" },
-        { "name": "RazorEdge", "tag": "Men's Grooming" },
-        { "name": "BarberHaus", "tag": "Premium Cuts" },
-        { "name": "TrimMaster", "tag": "Family Barber" },
-        { "name": "CutCulture", "tag": "Streetwear Style" },
-        { "name": "GentleMan", "tag": "Beard Studio" },
-        { "name": "ScissorKings", "tag": "Trend Cuts" }
+        { "name": "Sharp & Co.", "tag": "Luxury Grooming" }
+      ],
+      "All": [
+        { "name": "LegalEdge Pro", "tag": "Law Firm" },
+        { "name": "GymCore", "tag": "Gym" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Personal Training" },
+        { "name": "Domaine", "tag": "Luxury Homes" },
+        { "name": "MediCore", "tag": "General Practice" },
+        { "name": "DentaPlus", "tag": "Dental Clinic" },
+        { "name": "BladeCraft", "tag": "Classic Barber" },
+        { "name": "Sharp & Co.", "tag": "Luxury Grooming" }
       ]
     }
   },
@@ -260,7 +253,15 @@
 
   "footer": {
     "tagline": "Building Innovative Digital Experiences for Modern Businesses.",
-    "mainPages": ["Home", "Services", "Portfolio", "Templates", "Pricing", "About", "Contact"],
+    "mainPages": [
+      "Home",
+      "Services",
+      "Portfolio",
+      "Templates",
+      "Pricing",
+      "About",
+      "Contact"
+    ],
     "legal": ["Privacy Policy", "Terms"],
     "contact": {
       "phone": "+98 1223344565",
