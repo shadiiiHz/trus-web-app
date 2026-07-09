@@ -86,6 +86,11 @@ const HOVER_EASE_SPEED = 0.12;
 // duration used on the grid wrapper below.
 const CATEGORY_SWITCH_DURATION = 260;
 
+// Safety cap: if a category's images take unusually long to load (slow
+// network, huge file), don't leave the grid hidden forever — reveal it
+// anyway after this many ms even if preloading hasn't resolved yet.
+const PRELOAD_TIMEOUT_MS = 2500;
+
 // How much lag/inertia the incoming `progress` prop gets before driving
 // any animation. Lower = heavier/laggier and smoother, higher = snappier
 // and closer to a 1:1 scroll response.
@@ -96,6 +101,31 @@ const POINTER_ENABLE_PROGRESS = 0.85;
 const WIND_SEED = [0.13, 0.71, 0.42, 0.95, 0.24, 0.63, 0.08, 0.86, 0.37];
 
 type Category = keyof typeof siteConfig.templateCategories.templates;
+
+/**
+ * Preloads and decodes a list of image URLs so they're actually ready to
+ * paint the instant they're swapped into the DOM — not just requested.
+ * `img.decode()` resolves only once the browser has fully decoded the
+ * image, which is what prevents the old category's cards from lingering
+ * on screen while the new ones are still streaming in.
+ *
+ * Individual failures (broken url, decode error) are swallowed so one bad
+ * image can't block the rest of the category from revealing.
+ */
+function preloadImages(urls: string[]): Promise<void[]> {
+  return Promise.all(
+    urls.map((url) => {
+      const img = new Image();
+      img.src = url;
+      return img.decode ? img.decode().catch(() => undefined) : Promise.resolve(undefined);
+    }),
+  );
+}
+
+/** Resolves after `ms` milliseconds — used as a safety cap alongside preloading. */
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
 
 export default function TemplateGridReveal({
   progress,
@@ -110,7 +140,8 @@ export default function TemplateGridReveal({
     "All" as Category,
   );
   // What's actually rendered in the grid right now. Only updates once the
-  // fade-out has finished, so the swap happens while invisible.
+  // fade-out has finished AND the next category's images are preloaded,
+  // so the swap happens while invisible and paints instantly when shown.
   const [displayedCategory, setDisplayedCategory] = useState<Category>(
     "All" as Category,
   );
@@ -138,7 +169,20 @@ export default function TemplateGridReveal({
     setActiveCategory(category as Category);
   }
 
-  // Crossfade: hide the grid, swap its content once hidden, then reveal it.
+  // Preload every category's images up front (in the background) so that,
+  // by the time the user actually switches tabs, the images are already in
+  // the browser's cache and the per-switch preload below resolves near
+  // instantly instead of triggering a fresh download.
+  useEffect(() => {
+    const allUrls = Object.values(templates)
+      .flat()
+      .slice(0, 200) // sane upper bound, just in case
+      .map((t) => t.image);
+    preloadImages(allUrls);
+  }, [templates]);
+
+  // Crossfade: hide the grid, wait for the next category's images to be
+  // fully decoded (not just requested), swap its content, then reveal it.
   useEffect(() => {
     if (isFirstRenderRef.current) {
       isFirstRenderRef.current = false;
@@ -147,19 +191,36 @@ export default function TemplateGridReveal({
     }
 
     setGridVisible(false);
+    let cancelled = false;
 
     const hideTimeout = window.setTimeout(() => {
-      setDisplayedCategory(activeCategory);
-      // Wait a couple frames so the browser paints the new, invisible
-      // content before we flip opacity back on — otherwise there's no
-      // transition to animate from.
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setGridVisible(true));
-      });
+      const nextTemplates = templates[activeCategory] ?? templates.All ?? [];
+      const urls = nextTemplates.slice(0, 6).map((t) => t.image);
+
+      // Race the real preload against a safety timeout, so a slow network
+      // or a stuck image can never leave the grid hidden indefinitely.
+      Promise.race([preloadImages(urls), delay(PRELOAD_TIMEOUT_MS)]).then(
+        () => {
+          if (cancelled) return;
+
+          setDisplayedCategory(activeCategory);
+          // Wait a couple frames so the browser paints the new, already-
+          // decoded content before we flip opacity back on — otherwise
+          // there's no transition to animate from.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (!cancelled) setGridVisible(true);
+            });
+          });
+        },
+      );
     }, CATEGORY_SWITCH_DURATION);
 
-    return () => window.clearTimeout(hideTimeout);
-  }, [activeCategory]);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(hideTimeout);
+    };
+  }, [activeCategory, templates]);
 
   useEffect(() => {
     progressRef.current = progress;
