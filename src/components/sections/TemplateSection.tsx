@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site.config";
 import DesignInMotion3D from "../templates/DesignInMotion3D";
 
@@ -8,11 +8,7 @@ type TemplateSectionProps = {
   onReady?: () => void;
 };
 
-export function TemplateSection({
-  onEnter,
-  onLeave,
-  onReady,
-}: TemplateSectionProps) {
+function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
   const { LeftWord, RightWord, templates } = siteConfig.templateCategories;
   // Refs
   const sectionRef = useRef<HTMLElement>(null);
@@ -72,4 +68,4 @@ export function TemplateSection({
   );
 }
 
-export default TemplateSection;
+export default memo(TemplateSection);
