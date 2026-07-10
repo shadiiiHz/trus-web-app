@@ -12,7 +12,6 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FooterSection } from "@/components/sections/FooterSection";
 import TemplateSection from "./components/sections/TemplateSection";
-import { NavbarMotion } from "./components/motion/NavbarMotion";
 
 export default function App() {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -43,9 +42,7 @@ export default function App() {
     <div className="bg-brand-bg min-h-screen font-body antialiased">
       <Preloader ready={heroVideoReady && templateReady} />
 
-      <NavbarMotion hidden={hideNavbar}>
-        <Navbar />
-      </NavbarMotion>
+      <Navbar hidden={hideNavbar} />
 
       <HeroSection
         orbitOpacity={heroOrbitOpacity}

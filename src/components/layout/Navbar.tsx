@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { siteConfig } from '@/config/site.config'
-import { Button } from '@/components/ui/Button'
-import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from '@/motion/variants'
-import trusLogo from '@/assets/logo.png'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/config/site.config";
+import { Button } from "@/components/ui/Button";
+import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
+import trusLogo from "@/assets/logo.png";
 
 // Scroll-spy
 // IDs of every section that has a corresponding nav link.
@@ -14,12 +14,18 @@ import trusLogo from '@/assets/logo.png'
 // 'why-us' is excluded — it has no nav link.
 // When the user scrolls through an untracked section (WhyUs, Team, Testimonials)
 // the previous tracked section stays active, which is the expected behaviour.
-const TRACKED_SECTION_IDS = ['about', 'portfolio', 'templates', 'services', 'contact'] as const
+const TRACKED_SECTION_IDS = [
+  "about",
+  "portfolio",
+  "templates",
+  "services",
+  "contact",
+] as const;
 
 // Fraction of viewport height at which a section "activates" — 40% from top.
 // Using 40% (rather than 50%) means the nav updates slightly before the section
 // fully dominates the view, which feels more responsive.
-const TRIGGER_FRACTION = 0.40
+const TRIGGER_FRACTION = 0.4;
 
 /**
  * Returns the ID of the last tracked section whose top edge has scrolled
@@ -30,78 +36,87 @@ const TRIGGER_FRACTION = 0.40
  * condition is the deepest visible section — therefore the active one.
  */
 function useScrollSpy(): string {
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const update = () => {
-      const trigger = window.innerHeight * TRIGGER_FRACTION
-      let current = ''
+      const trigger = window.innerHeight * TRIGGER_FRACTION;
+      let current = "";
 
       for (const id of TRACKED_SECTION_IDS) {
-        const el = document.getElementById(id)
-        if (!el) continue
+        const el = document.getElementById(id);
+        if (!el) continue;
         if (el.getBoundingClientRect().top <= trigger) {
-          current = id
+          current = id;
         }
       }
 
-      setActive(current)
-    }
+      setActive(current);
+    };
 
     // rAF-throttle: coalesce bursts of scroll events into one layout read per frame.
-    let frame = 0
+    let frame = 0;
     const onScroll = () => {
-      if (frame) return
+      if (frame) return;
       frame = window.requestAnimationFrame(() => {
-        frame = 0
-        update()
-      })
-    }
+        frame = 0;
+        update();
+      });
+    };
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    update() // initialise immediately so state is correct on mount
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update(); // initialise immediately so state is correct on mount
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, []) // empty — TRACKED_SECTION_IDS and TRIGGER_FRACTION are module-level constants
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []); // empty — TRACKED_SECTION_IDS and TRIGGER_FRACTION are module-level constants
 
-  return active
+  return active;
 }
 
 // Navbar
 
 export interface NavbarProps {
-  data?: typeof siteConfig.nav
+  data?: typeof siteConfig.nav;
+  /** Slides the whole navbar up and fades it out (e.g. while a pinned section beneath it owns the viewport). */
+  hidden?: boolean;
 }
 
-export function Navbar({ data = siteConfig.nav }: NavbarProps) {
-  const [scrolled,   setScrolled]   = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // Backdrop blur/bg — triggers after 20 px of scroll
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false) }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
+    const onResize = () => {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   // Live active-section ID from scroll position
-  const activeSection = useScrollSpy()
+  const activeSection = useScrollSpy();
 
   return (
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ duration: DURATION_MD, ease: EASE_PREMIUM, delay: 0.1 }}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        style={{
+          willChange: "transform, opacity",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+        }}
         className="fixed inset-x-0 top-0 z-50"
         role="banner"
       >
@@ -109,8 +124,10 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
         <motion.div
           className="absolute inset-0"
           animate={{
-            backgroundColor: scrolled ? 'rgba(7, 7, 13, 0.92)' : 'rgba(0,0,0,0)',
-            backdropFilter:  scrolled ? 'blur(20px)'            : 'blur(0px)',
+            backgroundColor: scrolled
+              ? "rgba(7, 7, 13, 0.92)"
+              : "rgba(0,0,0,0)",
+            backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
           }}
           transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
           aria-hidden="true"
@@ -123,12 +140,12 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
         >
           <div
             className="w-full max-w-300 h-px"
-            style={{ background: 'rgba(255,255,255,0.18)' }}
+            style={{ background: "rgba(255,255,255,0.18)" }}
           />
         </div>
 
         <nav
-          className="relative mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-5"
+          className="relative mx-auto flex h-18 max-w-300 items-center justify-between px-5"
           aria-label="Main navigation"
         >
           {/* Logo — same asset as Footer */}
@@ -141,7 +158,7 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
               src={trusLogo}
               alt="TruS"
               decoding="async"
-              style={{ height: '32px', width: 'auto', display: 'block' }}
+              style={{ height: "32px", width: "auto", display: "block" }}
             />
           </a>
 
@@ -151,14 +168,18 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
               // Derive the section ID from the href.
               // href '#'       → sectionId ''        → active when at top of page
               // href '#about'  → sectionId 'about'   → active when about is in view
-              const sectionId = link.href === '#' ? '' : link.href.slice(1)
-              const isActive  = activeSection === sectionId
+              const sectionId = link.href === "#" ? "" : link.href.slice(1);
+              const isActive = activeSection === sectionId;
 
               return (
                 <li key={link.label}>
-                  <NavLink href={link.href} label={link.label} active={isActive} />
+                  <NavLink
+                    href={link.href}
+                    label={link.label}
+                    active={isActive}
+                  />
                 </li>
-              )
+              );
             })}
           </ul>
 
@@ -179,7 +200,7 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
             onClick={() => setMobileOpen((o) => !o)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             <HamburgerIcon open={mobileOpen} />
           </button>
@@ -195,7 +216,10 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
             aria-modal="true"
             aria-label="Mobile navigation"
             className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-10"
-            style={{ background: 'rgba(7, 7, 13, 0.97)', backdropFilter: 'blur(24px)' }}
+            style={{
+              background: "rgba(7, 7, 13, 0.97)",
+              backdropFilter: "blur(24px)",
+            }}
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -207,7 +231,11 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
                   key={link.label}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: DURATION_MD, ease: EASE_PREMIUM }}
+                  transition={{
+                    delay: i * 0.06,
+                    duration: DURATION_MD,
+                    ease: EASE_PREMIUM,
+                  }}
                 >
                   <a
                     href={link.href}
@@ -220,7 +248,11 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
               ))}
             </ul>
             <div className="mt-auto">
-              <Button variant="gradient" href={data.cta.href} className="w-full justify-center">
+              <Button
+                variant="gradient"
+                href={data.cta.href}
+                className="w-full justify-center"
+              >
                 {data.cta.label}
               </Button>
             </div>
@@ -228,33 +260,39 @@ export function Navbar({ data = siteConfig.nav }: NavbarProps) {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
 
-
-function NavLink({ href, label, active = false }: { href: string; label: string; active?: boolean }) {
+function NavLink({
+  href,
+  label,
+  active = false,
+}: {
+  href: string;
+  label: string;
+  active?: boolean;
+}) {
   return (
     <a
       href={href}
-      className="group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light transition-colors duration-200 px-[7px] py-[4px]"
-      aria-current={active ? 'page' : undefined}
+      className="group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light transition-colors duration-200 px-1.75 py-1"
+      aria-current={active ? "page" : undefined}
     >
       {label}
       {/* Underline — full width when active, animates in on hover otherwise */}
       <span
         className={[
-          'absolute -bottom-0.5 left-[7px] h-px rounded-full transition-all duration-300',
+          "absolute -bottom-0.5 left-1.75 h-px rounded-full transition-all duration-300",
           active
-            ? 'w-[calc(100%-14px)]'
-            : 'w-0 group-hover:w-[calc(100%-14px)]',
-        ].join(' ')}
-        style={{ background: 'var(--color-brand-accent)' }}
+            ? "w-[calc(100%-14px)]"
+            : "w-0 group-hover:w-[calc(100%-14px)]",
+        ].join(" ")}
+        style={{ background: "var(--color-brand-accent)" }}
         aria-hidden="true"
       />
     </a>
-  )
+  );
 }
-
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
@@ -275,7 +313,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
         transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
       />
     </span>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

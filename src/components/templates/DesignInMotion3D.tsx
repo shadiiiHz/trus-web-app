@@ -161,6 +161,7 @@ function DesignInMotion3D({
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
+      anchors: true,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
