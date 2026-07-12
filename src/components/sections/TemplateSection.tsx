@@ -43,7 +43,7 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
         ref={sectionRef}
         className="relative group"
         style={{
-          background: "linear-gradient(180deg, #FFFFFF 0%, #D9D9D9 100%)",
+          background: "#C3C3C3",
           overflow: "hidden",
         }}
         aria-label="Template Categories"

@@ -249,7 +249,7 @@ function DesignInMotion3D({
         progress={scrollProgress}
         className="top-[27%]"
       >
-        <h2 className="text-[120px] font-bold uppercase text-[#AAAAAA]">
+        <h2 className="text-[130px] font-medium uppercase text-[#434343] tracking-tighter">
           {RightWord}
         </h2>
       </SlideText>
@@ -260,7 +260,7 @@ function DesignInMotion3D({
         progress={scrollProgress}
         className="top-[50%]"
       >
-        <h2 className="text-[120px] font-bold uppercase text-[#AAAAAA]">
+        <h2 className="text-[130px] font-medium uppercase text-[#434343] tracking-tighter">
           {LeftWord}
         </h2>
       </SlideText>
