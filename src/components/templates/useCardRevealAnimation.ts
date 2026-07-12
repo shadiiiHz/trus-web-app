@@ -128,20 +128,31 @@ export function useCardRevealAnimation({
     progressRef.current = progress;
   }, [progress]);
 
+  const fromVarsRef = useRef<FromVars[]>([]);
+
   useEffect(() => {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
     const total = cardRefs.current.length || cardCount;
     const staggerWindow = STAGGER_WINDOW;
     const perCardStagger = total > 1 ? staggerWindow / (total - 1) : 0;
 
     // Static per-card values, computed once instead of every frame.
-    const fromVarsByIndex = Array.from({ length: total }, (_, i) =>
-      computeFromVars(i, vw, vh),
-    );
     const windProfileByIndex = Array.from({ length: total }, (_, i) =>
       computeWindProfile(i),
     );
+
+    // Off-screen "from" positions are a fraction of viewport size, so they
+    // go stale if the window is resized (or moved to a bigger screen)
+    // after mount — without recomputing, a card's hidden offset may no
+    // longer be far enough to keep it off-screen before its reveal.
+    const measure = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      fromVarsRef.current = Array.from({ length: total }, (_, i) =>
+        computeFromVars(i, vw, vh),
+      );
+    };
+    measure();
+    window.addEventListener("resize", measure);
 
     const startTime = performance.now();
     let lastTime = startTime;
@@ -167,7 +178,7 @@ export function useCardRevealAnimation({
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
 
-        const { fromX, fromY, fromScale, fromRotate } = fromVarsByIndex[i];
+        const { fromX, fromY, fromScale, fromRotate } = fromVarsRef.current[i];
         const { freq1, freq2, freq3, freq4, phase } = windProfileByIndex[i];
 
         const cardStart = i * perCardStagger;
@@ -326,6 +337,7 @@ export function useCardRevealAnimation({
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
+      window.removeEventListener("resize", measure);
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
