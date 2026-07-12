@@ -13,7 +13,7 @@ interface Props {
 
 const SlideText = forwardRef<HTMLDivElement, Props>(
   ({ direction, progress, className = "", children }, ref) => {
-    const offscreen = 68;
+    const offscreen = 73;
     const t = THREE.MathUtils.smoothstep(progress, 0, 1);
 
     const baseX = THREE.MathUtils.lerp(offscreen, -offscreen, t);
