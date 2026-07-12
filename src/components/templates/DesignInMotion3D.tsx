@@ -70,7 +70,6 @@ interface DesignInMotion3DProps {
   pinTargetRef?: React.RefObject<HTMLElement | null>;
   RightWord?: string;
   LeftWord?: string;
-  ribbonVisibilityPadding?: number;
   /** Where (0-1 of total scroll) the ribbon-exit / grid-enter sequence starts. */
   gridRevealStart?: number;
   /**
@@ -118,14 +117,13 @@ function DesignInMotion3D({
   stageTiltDeg = -14,
   stagePitchDeg = 5,
   edgePadding = 3.5,
-  scrollPerCard = 0.55,
-  scrollLength = 10,
+  scrollPerCard = 0.3,
+  scrollLength = 7.5,
   fov = 35,
   cameraDistance = 10,
   pinTargetRef,
   RightWord,
   LeftWord,
-  ribbonVisibilityPadding = -30,
   gridRevealStart = 0.8,
   ribbonExitFrac = 0,
   waveAmplitude,
@@ -184,7 +182,12 @@ function DesignInMotion3D({
 
     const total = templates.length;
 
-    const bufferPad = 12;
+    // Small run-up/run-out margin so the ribbon doesn't visibly clip at the
+    // very start/end of the pin. Kept tight (vs. the old 12) so the first
+    // cards are already swinging into frame as soon as the section is
+    // entered, instead of the scroll spending most of its length on empty
+    // lead-in/lead-out.
+    const bufferPad = 9.5;
 
     const shiftStart = -edgePadding - bufferPad;
     const shiftEnd = total - 1 + edgePadding + bufferPad;
@@ -195,9 +198,6 @@ function DesignInMotion3D({
     const totalShiftRange = shiftEnd - shiftStart;
     const computedScrollLength = totalShiftRange * scrollPerCard;
     const effectiveScrollLength = scrollLength ?? computedScrollLength;
-
-    const ribbonStartFrac = ribbonVisibilityPadding / totalShiftRange;
-    const ribbonEndFrac = 1 - ribbonVisibilityPadding / totalShiftRange;
 
     const tailRange = 1 - gridRevealStart;
     const ribbonExitEnd = gridRevealStart + tailRange * ribbonExitFrac;
@@ -216,11 +216,7 @@ function DesignInMotion3D({
           shiftEnd,
           self.progress,
         );
-
-        const ribbonProgress = clamp01(
-          (self.progress - ribbonStartFrac) / (ribbonEndFrac - ribbonStartFrac),
-        );
-        setScrollProgress(ribbonProgress);
+        setScrollProgress(self.progress);
 
         const grid = clamp01((self.progress - ribbonExitEnd) / (1 - ribbonExitEnd));
         setGridProgress(grid);
@@ -230,7 +226,6 @@ function DesignInMotion3D({
     return () => {
       st.kill();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     templates.length,
     edgePadding,
