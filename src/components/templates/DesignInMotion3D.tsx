@@ -14,6 +14,7 @@ import { buildArcLengthLUT } from "./ribbonMath";
 import SlideText from "./SlideText";
 import TemplateGridReveal from "./TemplateGridReveal";
 import type { DesignTemplate } from "./types";
+import { SeeMoreLink } from "./SeeMore";
 
 export type { DesignTemplate };
 
@@ -70,6 +71,13 @@ interface DesignInMotion3DProps {
   pinTargetRef?: React.RefObject<HTMLElement | null>;
   RightWord?: string;
   LeftWord?: string;
+  /** Two-line tagline shown centered between the two slide texts. */
+  tagline?: string[];
+  sectionDes: string[];
+  seeMore?: {
+    label: string;
+    href: string;
+  };
   /** Where (0-1 of total scroll) the ribbon-exit / grid-enter sequence starts. */
   gridRevealStart?: number;
   /**
@@ -124,6 +132,9 @@ function DesignInMotion3D({
   pinTargetRef,
   RightWord,
   LeftWord,
+  tagline,
+  sectionDes,
+  seeMore,
   gridRevealStart = 0.8,
   ribbonExitFrac = 0,
   waveAmplitude,
@@ -218,7 +229,9 @@ function DesignInMotion3D({
         );
         setScrollProgress(self.progress);
 
-        const grid = clamp01((self.progress - ribbonExitEnd) / (1 - ribbonExitEnd));
+        const grid = clamp01(
+          (self.progress - ribbonExitEnd) / (1 - ribbonExitEnd),
+        );
         setGridProgress(grid);
       },
     });
@@ -247,7 +260,7 @@ function DesignInMotion3D({
         ref={designRef}
         direction="right"
         progress={scrollProgress}
-        className="top-[27%]"
+        className="top-[25%]"
       >
         <h2 className="text-[130px] font-medium uppercase text-[#434343] tracking-tighter">
           {RightWord}
@@ -258,13 +271,40 @@ function DesignInMotion3D({
         ref={templatesRef}
         direction="left"
         progress={scrollProgress}
-        className="top-[50%]"
+        className="top-[49%]"
       >
         <h2 className="text-[130px] font-medium uppercase text-[#434343] tracking-tighter">
           {LeftWord}
         </h2>
       </SlideText>
 
+      {tagline && (
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 text-center z-0 leading-3"
+          style={{ opacity: 1 - gridProgress, transition: "opacity 0.3s ease" }}
+        >
+          <p className="text-[10px] font-medium uppercase  tracking-normal text-[#434343]">
+            {tagline[0]}
+            <br />
+            {tagline[1]}
+          </p>
+        </div>
+      )}
+      {sectionDes && (
+        <div
+          className="absolute left-[10%] bottom-[10%] -translate-x-1/2 text-left z-0 leading-3.5"
+          style={{ opacity: 1 - gridProgress, transition: "opacity 0.3s ease" }}
+        >
+          <p className="text-label font-normal tracking-normal text-[#434343]">
+            {sectionDes[0]}
+            <br />
+            {sectionDes[1]}
+            <br />
+            {sectionDes[2]}
+          </p>
+        </div>
+      )}
+     {seeMore && <SeeMoreLink label={seeMore.label} href={seeMore.href} />}
       <Suspense fallback={null}>
         <div
           ref={canvasWrapperRef}

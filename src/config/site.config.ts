@@ -192,6 +192,8 @@ export const siteConfig = {
     seeMore: { label: en.templateCategories.seeMore, href: "#" },
     RightWord: en.templateCategories.RightWord,
     LeftWord: en.templateCategories.LeftWord,
+    tagline: en.templateCategories.tagline,
+    sectionDes: en.templateCategories.sectionDes,
     categories: en.templateCategories.categories,
     templates: {
       Lawyers: merge(en.templateCategories.templates.Lawyers, seedMeta("law")),

@@ -9,7 +9,8 @@ type TemplateSectionProps = {
 };
 
 function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
-  const { LeftWord, RightWord, templates } = siteConfig.templateCategories;
+  const { LeftWord, RightWord, tagline, sectionDes, templates , seeMore } =
+    siteConfig.templateCategories;
   // Refs
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -60,6 +61,9 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
             pinTargetRef={sectionRef}
             LeftWord={LeftWord}
             RightWord={RightWord}
+            tagline={tagline}
+            sectionDes={sectionDes}
+            seeMore={seeMore}
             onReady={onReady}
           />
         </div>
