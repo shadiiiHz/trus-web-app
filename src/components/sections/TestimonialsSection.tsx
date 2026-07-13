@@ -56,8 +56,9 @@ function AnimatedCard({ index, scrollYMV, containerRef, isDesktop, children }: A
 
     const t = Math.max(0, Math.min(1, (p - rs) / (1 - rs)))
 
-    // continuous movement: enters from bottom and keeps going out from top
-    return (0.95 - t * 2.15) * vh
+    // continuous movement: enters from bottom and exits off the top, timed to
+    // finish right as t reaches 1 so no dead scroll is left after the last card clears
+    return (0.95 - t * 1.35) * vh
   })
 
   const opMV = useTransform(scrollYMV, (y) => {

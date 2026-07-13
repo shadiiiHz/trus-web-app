@@ -1,6 +1,7 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import DesignInMotion3D from "../templates/DesignInMotion3D";
+import TemplateMenuFAB from "./TemplateMenuFAB";
 
 type TemplateSectionProps = {
   onEnter?: () => void;
@@ -14,6 +15,10 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
   // Refs
   const sectionRef = useRef<HTMLElement>(null);
 
+  // The main Navbar hides itself while this section is in view (see App.tsx),
+  // so the floating menu tab is the only way to reach nav links here.
+  const [isActive, setIsActive] = useState(false);
+
   const ribbonTemplates = templates.All;
 
   useEffect(() => {
@@ -21,6 +26,7 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        setIsActive(entry.isIntersecting);
         if (entry.isIntersecting) {
           onEnter?.();
         } else {
@@ -68,6 +74,8 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
           />
         </div>
       </section>
+
+      <TemplateMenuFAB active={isActive} />
     </>
   );
 }
