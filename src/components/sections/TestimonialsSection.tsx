@@ -58,14 +58,14 @@ function AnimatedCard({ index, scrollYMV, containerRef, isDesktop, children }: A
 
     // continuous movement: enters from bottom and exits off the top, timed to
     // finish right as t reaches 1 so no dead scroll is left after the last card clears
-    return (0.95 - t * 1.35) * vh
+    return (0.95 - t * 1.1) * vh
   })
 
   const opMV = useTransform(scrollYMV, (y) => {
     const p = prog(y)
 
     const fadeIn = Math.max(0, Math.min(1, (p - rs) / 0.16))
-    const fadeOut = Math.max(0, Math.min(1, (1 - p) / 0.18))
+    const fadeOut = 1
 
     return Math.min(fadeIn, fadeOut)
   })
@@ -104,14 +104,14 @@ function MobileStack({ items, scrollYMV, containerRef }: MobileStackProps) {
 
     const t = Math.max(0, Math.min(1, (p - 0.05) / 0.95))
 
-    return (0.6 - t * 2) * vh
+    return (0.6 - t * 1.3) * vh
   })
 
   const opMV = useTransform(scrollYMV, (y) => {
     const p = prog(y)
 
     const fadeIn = Math.max(0, Math.min(1, (p - 0.05) / 0.18))
-    const fadeOut = Math.max(0, Math.min(1, (1 - p) / 0.18))
+    const fadeOut = 1
 
     return Math.min(fadeIn, fadeOut)
   })
