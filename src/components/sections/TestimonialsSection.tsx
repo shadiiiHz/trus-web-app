@@ -334,7 +334,7 @@ export function TestimonialsSection() {
               style={{
                 position:      'absolute',
                 inset:         0,
-                background:    'radial-gradient(ellipse 50% 50% at 50% 50%, transparent 42%, rgba(7,7,13,0.55) 62%, rgba(7,7,13,1.00) 76%)',
+                // background:    'radial-gradient(ellipse 50% 50% at 50% 50%, transparent 42%, rgba(7,7,13,0.55) 62%, rgba(7,7,13,1.00) 76%)',
                 pointerEvents: 'none',
               }}
             />
