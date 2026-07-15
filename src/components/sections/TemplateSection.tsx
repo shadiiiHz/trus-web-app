@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import DesignInMotion3D from "../templates/DesignInMotion3D";
-import TemplateMenuFAB from "./TemplateMenuFAB";
+import TemplateMenuFAB from "../templates/TemplateMenuFAB";
 
 type TemplateSectionProps = {
   onEnter?: () => void;

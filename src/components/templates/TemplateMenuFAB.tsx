@@ -41,7 +41,7 @@ export function TemplateMenuFAB({ active }: TemplateMenuFABProps) {
             animate={{ x: 0 }}
             exit={{ x: 24 }}
             transition={{ duration: DURATION_MD, ease: EASE_PREMIUM }}
-            className="fixed top-1/2 -right-4 z-50 -translate-y-1/2"
+            className="fixed top-1/2 -right-4 z-30 -translate-y-1/2"
             style={{ willChange: "transform", transform: "translateZ(0)" }}
           >
             <button
