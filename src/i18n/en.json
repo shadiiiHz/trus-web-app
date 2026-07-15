@@ -157,7 +157,11 @@
     "RightWord": "Designs",
     "LeftWord": "Template",
     "tagline": ["EXPLORING IDEAS THROUGH", "DAILY DESIGN PRACTICE."],
-    "sectionDes": ["Concepts, explorations, and interface ","experiments shared openly as part of ","our creative process."],
+    "sectionDes": [
+      "Concepts, explorations, and interface ",
+      "experiments shared openly as part of ",
+      "our creative process."
+    ],
     "categories": [
       "Lawyers",
       "Fitness",
@@ -254,21 +258,16 @@
   },
 
   "footer": {
-    "tagline": "Building Innovative Digital Experiences for Modern Businesses.",
-    "mainPages": [
-      "Home",
-      "Services",
-      "Portfolio",
-      "Templates",
-      "Pricing",
-      "About",
-      "Contact"
-    ],
-    "legal": ["Privacy Policy", "Terms"],
+    "firstColumn": "Company",
+    "secondColumn": "Legal",
+    "thirdColumn": "Contact Us",
+    "company": ["About", "Contact"],
+    "legal": ["Privacy Policy", "Terms of Service"],
     "contact": {
+      "email": "Info@test100.devops-uni.com",
       "phone": "+98 1223344565",
-      "address": "2847 Oak Street,\nSan Francisco, CA 94102"
+      "address": "2847 Oak Street, San Francisco, CA 94102"
     },
-    "socials": ["Instagram", "LinkedIn", "X"]
+    "socials": ["Facebook", "Instagram", "X"]
   }
 }

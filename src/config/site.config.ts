@@ -12,6 +12,16 @@
  */
 import { en } from "@/i18n";
 
+// Footer social icons — MUST be real `import`s, not string paths.
+// A plain string like "@/assets/facebook.svg" is never resolved by the
+// bundler (the `@/` alias only applies inside actual `import` statements),
+// so using it directly as an <img src> 404s and the icon never renders.
+// Importing here lets Vite/webpack process the file and give us the real,
+// hashed build URL.
+import facebookIcon from "@/assets/facebook.svg";
+import instagramIcon from "@/assets/instagram.svg";
+import xIcon from "@/assets/x.svg";
+
 /** Zips an array of translated text objects with its structural-meta array (by index). */
 function merge<T extends object, M extends object>(
   text: readonly T[],
@@ -107,17 +117,13 @@ const testimonialMeta = [
 
 const contactFieldIds = ["name", "email", "company", "message"];
 
-const footerMainHrefs = [
-  "#",
-  "#services",
-  "#portfolio",
-  "#templates",
-  "#pricing",
+const footerCompanyHrefs = [
   "#about",
   "#contact",
 ];
 const footerLegalHrefs = ["#", "#"];
 const footerSocialHrefs = ["#", "#", "#"];
+const footerIconLinks = [facebookIcon, instagramIcon, xIcon];
 
 // Composed config
 export const siteConfig = {
@@ -235,10 +241,12 @@ export const siteConfig = {
   },
 
   footer: {
-    tagline: en.footer.tagline,
-    mainPages: en.footer.mainPages.map((label, i) => ({
+    firstColumn: en.footer.firstColumn,
+    secondColumn: en.footer.secondColumn,
+    thirdColumn: en.footer.thirdColumn,
+    company: en.footer.company.map((label, i) => ({
       label,
-      href: footerMainHrefs[i],
+      href: footerCompanyHrefs[i],
     })),
     legal: en.footer.legal.map((label, i) => ({
       label,
@@ -248,6 +256,7 @@ export const siteConfig = {
     socials: en.footer.socials.map((label, i) => ({
       label,
       href: footerSocialHrefs[i],
+      icon: footerIconLinks[i],
     })),
   },
 };
