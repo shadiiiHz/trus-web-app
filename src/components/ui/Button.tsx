@@ -152,9 +152,6 @@ function GlowTracePaths({ width: w, height: h, radius, pill }: { width: number; 
     '--trace-hold':      holdOffset,
   } as React.CSSProperties
 
-  // Fade the leading/trailing tips of each light to transparent instead of
-  // a hard cap, by painting the stroke with a gradient along the path's own
-  // start/end direction rather than a flat color.
   const fadeIdA = `${gradId}-fade-a`
   const fadeIdB = `${gradId}-fade-b`
 
