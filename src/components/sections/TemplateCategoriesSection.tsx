@@ -40,14 +40,14 @@ const CASCADE_DELAYS = [0, 180, 360, 560, 780, 1000, 1240, 1510, 1800]   // ms f
 const CARD5_LIT_DELAY = 300   // ms before the featured card lights up
 const CASCADE_DELAY   = 780   // ms before the cascade spreads to other cards
 
-type Category = typeof siteConfig.templateCategories.categories[number]
+type Category = typeof siteConfig.templateCategories.categories[number]['id']
 
 export function TemplateCategoriesSection() {
   const { eyebrow, heading, description, seeMore, categories, templates } =
     siteConfig.templateCategories
 
   // State
-  const [activeCategory, setActiveCategory] = useState<Category>(categories[0])
+  const [activeCategory, setActiveCategory] = useState<Category>(categories[0].id)
   const [card5Lit, setCard5Lit]             = useState(false)
   const [activatedSet, setActivatedSet]     = useState<Set<number>>(new Set())
 
