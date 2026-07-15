@@ -1,24 +1,28 @@
-import { useEffect, useRef } from 'react'
-import { motion, MotionValue } from 'framer-motion'
-import { siteConfig } from '@/config/site.config'
-import { parseHeadline } from '@/utils/text'
-import { Button } from '@/components/ui/Button'
-import { FadeIn } from '@/components/motion/FadeIn'
+import { useEffect, useRef, useState } from "react";
+import { motion, MotionValue } from "framer-motion";
+import { siteConfig } from "@/config/site.config";
+import { parseHeadline } from "@/utils/text";
+import { Button } from "@/components/ui/Button";
+import { FadeIn } from "@/components/motion/FadeIn";
 // import { BackgroundStars } from '@/components/hero/BackgroundStars'
 
 export interface HeroSectionProps {
-  data?: typeof siteConfig.hero
+  data?: typeof siteConfig.hero;
   /** Scroll-driven opacity — fades the right visual out as the hero exits. */
-  orbitOpacity?: MotionValue<number>
+  orbitOpacity?: MotionValue<number>;
   /** Fired once the hero video is buffered enough to play through. */
-  onVideoReady?: () => void
+  onVideoReady?: () => void;
 }
 
-export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady }: HeroSectionProps) {
+export function HeroSection({
+  data = siteConfig.hero,
+  orbitOpacity,
+  onVideoReady,
+}: HeroSectionProps) {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ minHeight: '100svh' }}
+      style={{ minHeight: "100svh" }}
       aria-label="Hero"
     >
       {/* Background */}
@@ -27,22 +31,24 @@ export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady
       {/* Main content grid */}
       <div
         className="relative z-10 mx-auto w-full max-w-300 px-5 flex items-center"
-        style={{ minHeight: '100svh', paddingTop: '88px', paddingBottom: '80px' }}
+        style={{
+          minHeight: "100svh",
+          paddingTop: "88px",
+          paddingBottom: "80px",
+        }}
       >
         <div className="grid w-full grid-cols-1 lg:grid-cols-[65%_80%] items-center gap-4">
-
           {/* LEFT COLUMN — copy */}
           <div className="flex flex-col gap-6 lg:gap-7">
-
             <h1 className="flex flex-col gap-1">
               {data.headline.map((line, i) => {
-                const segs   = parseHeadline(line as string)
-                const isLast = i === data.headline.length - 1
+                const segs = parseHeadline(line as string);
+                const isLast = i === data.headline.length - 1;
                 return (
                   <FadeIn key={line} delay={0.12 + i * 0.16} direction="up">
                     <span
                       className="block font-hero font-normal leading-[1.12] tracking-tight"
-                      style={{ fontSize: 'clamp(2rem, 2.7vw, 3.1rem)' }}
+                      style={{ fontSize: "clamp(2rem, 2.7vw, 3.1rem)" }}
                     >
                       {segs.map((seg) =>
                         seg.accent ? (
@@ -50,36 +56,40 @@ export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady
                             key={seg.text}
                             className="font-bold"
                             style={{
-                              color:      'var(--color-brand-accent)',
-                              textShadow: '0 0 30px rgba(135,93,217,0.7)',
+                              color: "var(--color-brand-accent)",
+                              textShadow: "0 0 30px rgba(135,93,217,0.7)",
                             }}
                           >
-                            {seg.text}
+                            <TypingAccent text={seg.text} />
                           </span>
                         ) : (
                           <span key={seg.text} className="text-brand-white">
                             {seg.text}
                           </span>
-                        )
+                        ),
                       )}
                       {isLast && <CursorBlink />}
                     </span>
                   </FadeIn>
-                )
+                );
               })}
             </h1>
 
             <FadeIn delay={0.52} direction="up">
               <p
                 className="font-body font-normal text-brand-muted leading-relaxed"
-                style={{ fontSize: '1rem', maxWidth: '440px' }}
+                style={{ fontSize: "1rem", maxWidth: "440px" }}
               >
                 {data.body}
               </p>
             </FadeIn>
 
             {/* CTAs */}
-            <FadeIn delay={0.68} direction="up" className="flex flex-wrap gap-3">
+            <FadeIn
+              delay={0.68}
+              direction="up"
+              className="flex flex-wrap gap-3"
+            >
               <Button
                 variant="ghost"
                 href={data.cta.secondary.href}
@@ -90,12 +100,13 @@ export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady
               <Button
                 variant="gradient"
                 href={data.cta.primary.href}
+                glow
+                hoverScale={false}
                 className="h-11 w-51.75"
               >
                 {data.cta.primary.label}
               </Button>
             </FadeIn>
-
           </div>
 
           {/* RIGHT COLUMN — video placeholder (hidden on mobile, lg+ only) */}
@@ -105,19 +116,18 @@ export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady
               opacity: orbitOpacity,
               x: 20,
               scale: 1.1,
-              transformOrigin: 'center right',
+              transformOrigin: "center right",
             }}
           >
             <HeroVideo onReady={onVideoReady} />
           </motion.div>
-
         </div>
       </div>
 
       {/* Bottom label */}
       <BottomLabel badge={data.badge} prefix={data.badgePrefix} />
     </section>
-  )
+  );
 }
 
 /**
@@ -142,7 +152,7 @@ export function HeroSection({ data = siteConfig.hero, orbitOpacity, onVideoReady
  *            the edges dissolve completely — no rectangular frame.
  */
 function HeroVideo({ onReady }: { onReady?: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Signal readiness only once the video is buffered enough to play through,
   // so the loader hands off to a live galaxy rather than a frozen first frame.
@@ -150,52 +160,55 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
   // path so a failed/404 video never blocks the loader, and a `canplay` grace
   // for conservative browsers that delay/skip `canplaythrough`.
   useEffect(() => {
-    const video = videoRef.current
-    if (!video || !onReady) return
+    const video = videoRef.current;
+    if (!video || !onReady) return;
 
-    let settled = false
-    let graceTimer: number | undefined
+    let settled = false;
+    let graceTimer: number | undefined;
     const settle = () => {
-      if (settled) return
-      settled = true
-      window.clearTimeout(graceTimer)
-      onReady()
-    }
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(graceTimer);
+      onReady();
+    };
 
     // HAVE_ENOUGH_DATA already (e.g. cached on reload / HMR).
     if (video.readyState >= 4) {
-      settle()
-      return
+      settle();
+      return;
     }
 
-    const onCanPlay = () => { graceTimer = window.setTimeout(settle, 2500) }
+    const onCanPlay = () => {
+      graceTimer = window.setTimeout(settle, 2500);
+    };
 
-    video.addEventListener('canplaythrough', settle)
-    video.addEventListener('canplay', onCanPlay)
-    video.addEventListener('error', settle)
+    video.addEventListener("canplaythrough", settle);
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("error", settle);
     return () => {
-      window.clearTimeout(graceTimer)
-      video.removeEventListener('canplaythrough', settle)
-      video.removeEventListener('canplay', onCanPlay)
-      video.removeEventListener('error', settle)
-    }
-  }, [onReady])
+      window.clearTimeout(graceTimer);
+      video.removeEventListener("canplaythrough", settle);
+      video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("error", settle);
+    };
+  }, [onReady]);
 
   // Horizontal and vertical fade gradients — each fades its respective edges
-  const maskH = 'linear-gradient(to right,  transparent 0%, black 52%, black 78%, transparent 100%)'
-  const maskV = 'linear-gradient(to bottom, transparent 0%, black 15%, black 75%, transparent 100%)'
+  const maskH =
+    "linear-gradient(to right,  transparent 0%, black 52%, black 78%, transparent 100%)";
+  const maskV =
+    "linear-gradient(to bottom, transparent 0%, black 15%, black 75%, transparent 100%)";
 
   return (
     // No maxWidth, no background, no border, no overflow:hidden.
     // overflow:visible (default) lets the video and glow bleed naturally.
     <div
       style={{
-        position:      'relative',
-        width:         '100%',
-        pointerEvents: 'none',   // never block left-column clicks
+        position: "relative",
+        width: "100%",
+        pointerEvents: "none", // never block left-column clicks
       }}
     >
-
       {/* Atmospheric glow — intentionally larger than the video */}
       {/* <div
         aria-hidden="true"
@@ -225,29 +238,64 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
         playsInline
         preload="auto"
         style={{
-          position:  'relative',
-          zIndex:    1,
-          display:   'block',
-          transform: 'translateY(-5px)',
+          position: "relative",
+          zIndex: 1,
+          display: "block",
+          transform: "translateY(-5px)",
           // 30 % size increase: 130 % width, centred via negative left margin
-          width:              '190%',
-          marginLeft:         '-33%',
-          height:             'auto',
+          width: "190%",
+          marginLeft: "-33%",
+          height: "auto",
           // Screen blend — makes the video's dark background pixels
           // identical to the page background (effectively transparent)
-          mixBlendMode:       'screen',
+          mixBlendMode: "screen",
           // Dual-axis mask: H gradient × V gradient = precise 4-edge fade
-          WebkitMaskImage:     `${maskH}, ${maskV}`,
-          WebkitMaskComposite: 'destination-in',   // WebKit intersection
-          maskImage:           `${maskH}, ${maskV}`,
-          maskComposite:       'intersect',         // standard
+          WebkitMaskImage: `${maskH}, ${maskV}`,
+          WebkitMaskComposite: "destination-in", // WebKit intersection
+          maskImage: `${maskH}, ${maskV}`,
+          maskComposite: "intersect", // standard
         }}
       >
         <source src="/map world 2k_v5_1.webm" type="video/mp4" />
       </video>
-
     </div>
-  )
+  );
+}
+
+/** Types `text` out, pauses, deletes it letter by letter, then loops. */
+function useTypewriter(text: string) {
+  const [length, setLength] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const TYPE_SPEED = 150;
+    const DELETE_SPEED = 150;
+    const PAUSE_AFTER_TYPE = 1400;
+    const PAUSE_AFTER_DELETE = 400;
+
+    let delay = deleting ? DELETE_SPEED : TYPE_SPEED;
+    if (!deleting && length === text.length) delay = PAUSE_AFTER_TYPE;
+    if (deleting && length === 0) delay = PAUSE_AFTER_DELETE;
+
+    const id = window.setTimeout(() => {
+      if (!deleting) {
+        if (length < text.length) setLength((l) => l + 1);
+        else setDeleting(true);
+      } else {
+        if (length > 0) setLength((l) => l - 1);
+        else setDeleting(false);
+      }
+    }, delay);
+
+    return () => window.clearTimeout(id);
+  }, [length, deleting, text]);
+
+  return text.slice(0, length);
+}
+
+function TypingAccent({ text }: { text: string }) {
+  const display = useTypewriter(text);
+  return <>{display}</>;
 }
 
 function CursorBlink() {
@@ -255,16 +303,21 @@ function CursorBlink() {
     <motion.span
       className="inline-block align-middle rounded-xs ml-1"
       style={{
-        width:      '3px',
-        height:     '0.82em',
-        background: 'var(--color-brand-accent)',
-        boxShadow:  '0 0 8px var(--color-brand-accent)',
+        width: "3px",
+        height: "0.82em",
+        background: "var(--color-brand-accent)",
+        boxShadow: "0 0 8px var(--color-brand-accent)",
       }}
       animate={{ opacity: [1, 1, 0, 0] }}
-      transition={{ duration: 1, repeat: Infinity, times: [0, 0.45, 0.5, 0.95], ease: 'linear' }}
+      transition={{
+        duration: 1,
+        repeat: Infinity,
+        times: [0, 0.45, 0.5, 0.95],
+        ease: "linear",
+      }}
       aria-hidden="true"
     />
-  )
+  );
 }
 
 function BottomLabel({ badge, prefix }: { badge: string; prefix: string }) {
@@ -274,42 +327,47 @@ function BottomLabel({ badge, prefix }: { badge: string; prefix: string }) {
         <div className="flex items-center gap-3">
           <span
             className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: '12px' }}
+            style={{ fontSize: "12px" }}
           >
             {prefix}
           </span>
 
           {/* Glowing dot */}
-          <span className="relative flex items-center justify-center" style={{ width: '14px', height: '14px' }}>
+          <span
+            className="relative flex items-center justify-center"
+            style={{ width: "14px", height: "14px" }}
+          >
             <span
               className="absolute rounded-full"
               style={{
-                inset:      '-4px',
-                background: 'radial-gradient(circle, rgba(255,60,60,0.55) 0%, transparent 70%)',
-                filter:     'blur(3px)',
+                inset: "-4px",
+                background:
+                  "radial-gradient(circle, rgba(255,60,60,0.55) 0%, transparent 70%)",
+                filter: "blur(3px)",
               }}
             />
             <span
               className="relative rounded-full"
               style={{
-                width:      '9px',
-                height:     '9px',
-                background: '#ff3333',
-                boxShadow:  '0 0 8px rgba(255,60,60,0.9), 0 0 16px rgba(255,60,60,0.5)',
+                width: "9px",
+                height: "9px",
+                background: "#ff3333",
+                boxShadow:
+                  "0 0 8px rgba(255,60,60,0.9), 0 0 16px rgba(255,60,60,0.5)",
               }}
             />
           </span>
 
           <span
             className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: '12px' }}
+            style={{ fontSize: "12px" }}
           >
             {badge}
           </span>
         </div>
       </FadeIn>
     </div>
-  )
+  );
 }
 
-export default HeroSection
+export default HeroSection;

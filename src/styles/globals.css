@@ -122,4 +122,45 @@
     font-family: var(--font-body);
     font-size: clamp(18px, 2.2vw, 22px);
   }
+
+  /* Two neon-cyan lights trace a button's border on hover: one climbs the
+     left edge, turns onto the top edge and stops just past its midpoint;
+     the other (mirrored, simultaneous) descends the right edge, turns onto
+     the bottom edge and stops just past its midpoint. Each light's own
+     leading/trailing tips fade to transparent (via a gradient stroke set
+     inline per path) instead of ending in a hard cap. */
+  .btn-glow-wrap {
+    position: relative;
+    display:  inline-flex;
+  }
+
+  .btn-trace-svg {
+    position:       absolute;
+    inset:          0;
+    z-index:        20;
+    pointer-events: none;
+  }
+
+  .btn-trace-light {
+    fill:               none;
+    stroke:             rgb(160, 33, 246);
+    stroke-width:       3;
+    stroke-linecap:     round;
+    stroke-dasharray:   var(--trace-dash, 34) 100;
+    stroke-dashoffset:  var(--trace-rest, 34);
+    opacity:            0;
+    filter:             drop-shadow(0 0 1px rgb(160, 33, 246)) drop-shadow(0 0 8px rgb(160, 33, 246));
+    transition:         stroke-dashoffset 0.3s ease-out, opacity 0.5s ease;
+  }
+
+  .btn-glow-wrap:hover .btn-trace-light {
+    stroke-dashoffset: var(--trace-hold, -66);
+    opacity:           1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-trace-light {
+      transition: opacity 0.3s ease;
+    }
+  }
 }

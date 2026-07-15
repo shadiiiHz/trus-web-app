@@ -188,6 +188,8 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             <Button
               variant="gradient"
               href={data.cta.href}
+              glow
+              hoverScale={false}
               className="h-11 w-37 text-body font-medium"
             >
               {data.cta.label}
