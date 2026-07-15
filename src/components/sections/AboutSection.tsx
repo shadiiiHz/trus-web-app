@@ -102,7 +102,7 @@ export function AboutSection({
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 py-32 lg:py-36">
+      <div className="relative z-10 mx-auto w-full max-w-300 px-5 py-32 lg:py-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-14 lg:gap-20">
 
           {/* LEFT COLUMN — copy */}

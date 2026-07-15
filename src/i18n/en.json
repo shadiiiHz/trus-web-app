@@ -1,7 +1,7 @@
 {
   "nav": {
     "links": ["Home", "About", "Portfolio", "Templates", "Services", "Contact"],
-    "cta": "Language"
+    "cta": "Login"
   },
 
   "hero": {
@@ -163,30 +163,30 @@
       "our creative process."
     ],
     "categories": [
-      "Lawyers",
-      "Fitness",
-      "Real Estate",
-      "Clinics",
-      "Barbershops",
-      "All"
+      { "id": "lawyers", "label": "Lawyers" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Real Estate" },
+      { "id": "clinics", "label": "Clinics" },
+      { "id": "barbershops", "label": "Barbershops" },
+      { "id": "all", "label": "All" }
     ],
     "templates": {
-      "Lawyers": [{ "name": "LegalEdge Pro", "tag": "Law Firm" }],
-      "Fitness": [
+      "lawyers": [{ "name": "LegalEdge Pro", "tag": "Law Firm" }],
+      "fitness": [
         { "name": "GymCore", "tag": "Gym" },
         { "name": "FitPulse Studio", "tag": "Yoga" },
         { "name": "EliteBody Pro", "tag": "Personal Training" }
       ],
-      "Real Estate": [{ "name": "Domaine", "tag": "Luxury Homes" }],
-      "Clinics": [
+      "realEstate": [{ "name": "Domaine", "tag": "Luxury Homes" }],
+      "clinics": [
         { "name": "MediCore", "tag": "General Practice" },
         { "name": "DentaPlus", "tag": "Dental Clinic" }
       ],
-      "Barbershops": [
+      "barbershops": [
         { "name": "BladeCraft", "tag": "Classic Barber" },
         { "name": "Sharp & Co.", "tag": "Luxury Grooming" }
       ],
-      "All": [
+      "all": [
         { "name": "LegalEdge Pro", "tag": "Law Firm" },
         { "name": "GymCore", "tag": "Gym" },
         { "name": "FitPulse Studio", "tag": "Yoga" },
@@ -268,6 +268,6 @@
       "phone": "+98 1223344565",
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
-    "socials": ["Facebook", "Instagram", "X"]
+    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"]
   }
 }

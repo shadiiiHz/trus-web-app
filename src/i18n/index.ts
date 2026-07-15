@@ -1,27 +1,78 @@
 /**
  * i18n foundation.
  *
- * `en.json` is the single source of truth for every user-facing string on the
- * site, grouped by section. `site.config.ts` composes this text with structural
- * data (hrefs, ids, colours, image URLs) so components keep a single import.
+ * Each `{locale}.json` file is the single source of truth for every
+ * user-facing string on the site, grouped by section. `site.config.ts`
+ * composes this text with structural data (hrefs, ids, colours, image URLs)
+ * so components keep a single import.
  *
- * Multiple languages are NOT implemented yet — this only prepares the
- * architecture. To add a locale later: drop in `fr.json`, register it in
- * `locales`, and switch `currentLocale` (e.g. via React context).
+ * The active locale lives in a tiny external store (below), persisted to
+ * `localStorage`. `useLocale()` subscribes a component to changes; `setLocale()`
+ * switches it. Components that read `siteConfig`/`t` during render (the
+ * pattern used throughout this codebase) automatically show the new
+ * language once something up the tree re-renders after a switch.
  */
-import en from './en.json'
+import { useSyncExternalStore } from "react";
+import en from "./en.json";
+import de from "./de.json";
 
-export const defaultLocale = 'en' as const
+export const defaultLocale = "en" as const;
 
-export type Locale = typeof defaultLocale
+export const locales = { en, de } as const;
 
-export const locales = { en } as const
+export type Locale = keyof typeof locales;
 
-/** Active locale. Wire this to user/browser preference when i18n ships. */
-export const currentLocale: Locale = defaultLocale
+export const localeNames: Record<Locale, string> = {
+  en: "English",
+  de: "Deutsch",
+};
 
-/** The resolved translation dictionary for the active locale. */
-export const t = locales[currentLocale]
+const STORAGE_KEY = "trus-locale";
+
+function isLocale(value: string | null): value is Locale {
+  return value === "en" || value === "de";
+}
+
+function readInitialLocale(): Locale {
+  if (typeof window === "undefined") return defaultLocale;
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  return isLocale(stored) ? stored : defaultLocale;
+}
+
+let currentLocale: Locale = readInitialLocale();
+const listeners = new Set<() => void>();
+
+/** Reads the active locale outside of React (e.g. from `site.config.ts`). */
+export function getLocale(): Locale {
+  return currentLocale;
+}
+
+/** Switches the active locale, persists it, and notifies every `useLocale()` subscriber. */
+export function setLocale(locale: Locale): void {
+  if (locale === currentLocale) return;
+  currentLocale = locale;
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(STORAGE_KEY, locale);
+  }
+  listeners.forEach((listener) => listener());
+}
+
+function subscribe(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+/** Subscribes the calling component to locale changes, re-rendering it on switch. */
+export function useLocale(): Locale {
+  return useSyncExternalStore(subscribe, getLocale, () => defaultLocale);
+}
+
+/** The resolved translation dictionary for the active locale, read live. */
+export const t = new Proxy({} as (typeof locales)[Locale], {
+  get(_target, prop: string | symbol) {
+    return (locales[currentLocale] as Record<string | symbol, unknown>)[prop];
+  },
+});
 
 /**
  * Dot-path accessor for translations, e.g. `tr('hero.cta.primary')`.
@@ -30,10 +81,13 @@ export const t = locales[currentLocale]
  */
 export function tr(path: string): string {
   const value = path
-    .split('.')
-    .reduce<unknown>((acc, key) => (acc != null ? (acc as Record<string, unknown>)[key] : undefined), t)
-  return typeof value === 'string' ? value : path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) => (acc != null ? (acc as Record<string, unknown>)[key] : undefined),
+      locales[currentLocale],
+    );
+  return typeof value === "string" ? value : path;
 }
 
-export { en }
-export default t
+export { en, de };
+export default t;

@@ -110,12 +110,12 @@
   .text-section-title {
     font-family: var(--font-hero);
     font-weight: 700;
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: 38px;
   }
 
   .text-section-subtitle {
     font-family: var(--font-body);
-    font-size: clamp(16px, 1.6vw, 18px);
+    font-size: 18px;
   }
 
   .text-hero-subtitle {
@@ -143,13 +143,12 @@
 
   .btn-trace-light {
     fill:               none;
-    stroke:             rgb(160, 33, 246);
-    stroke-width:       3;
+    stroke:             rgb(135,93,217);
+    stroke-width:       4;
     stroke-linecap:     round;
     stroke-dasharray:   var(--trace-dash, 34) 100;
     stroke-dashoffset:  var(--trace-rest, 34);
     opacity:            0;
-    filter:             drop-shadow(0 0 1px rgb(160, 33, 246)) drop-shadow(0 0 8px rgb(160, 33, 246));
     transition:         stroke-dashoffset 0.3s ease-out, opacity 0.5s ease;
   }
 

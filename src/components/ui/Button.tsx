@@ -26,7 +26,7 @@ export interface ButtonProps {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 px-6 py-3 text-[16px] font-medium font-body cursor-pointer transition-all focus-visible:outline-none select-none'
+  'inline-flex items-center justify-center gap-2 px-6 py-3 text-[16px] font-medium font-body cursor-pointer transition-all focus-visible:outline-none select-none whitespace-nowrap'
 
 const variants: Record<ButtonVariant, string> = {
   'primary':
@@ -36,7 +36,7 @@ const variants: Record<ButtonVariant, string> = {
   'outline-accent':
     'rounded-full bg-transparent text-brand-accent border border-brand-accent hover:bg-[rgba(135,93,217,0.1)]',
   'gradient':
-    'rounded-[8px] text-white hover:opacity-90',
+    'rounded-[8px] text-white',
 }
 
 const gradientBg: React.CSSProperties = {
@@ -162,16 +162,16 @@ function GlowTracePaths({ width: w, height: h, radius, pill }: { width: number; 
     <svg className="btn-trace-svg" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id={fadeIdA} gradientUnits="userSpaceOnUse" x1={0} y1={h - r} x2={stopTop} y2={0}>
-          <stop offset="0%"   stopColor="rgb(160, 33, 246)" stopOpacity="0" />
-          <stop offset="12%"  stopColor="rgb(160, 33, 246)" stopOpacity="1" />
-          <stop offset="88%"  stopColor="rgb(160, 33, 246)" stopOpacity="1" />
-          <stop offset="100%" stopColor="rgb(160, 33, 246)" stopOpacity="0" />
+          <stop offset="0%"   stopColor="rgb(135,93,217)" stopOpacity="0" />
+          <stop offset="12%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
+          <stop offset="88%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
+          <stop offset="100%" stopColor="rgb(135,93,217)" stopOpacity="0" />
         </linearGradient>
         <linearGradient id={fadeIdB} gradientUnits="userSpaceOnUse" x1={w} y1={r} x2={stopBottom} y2={h}>
-          <stop offset="0%"   stopColor="rgb(160, 33, 246)" stopOpacity="0" />
-          <stop offset="12%"  stopColor="rgb(160, 33, 246)" stopOpacity="1" />
-          <stop offset="88%"  stopColor="rgb(160, 33, 246)" stopOpacity="1" />
-          <stop offset="100%" stopColor="rgb(160, 33, 246)" stopOpacity="0" />
+          <stop offset="0%"   stopColor="rgb(135,93,217)" stopOpacity="0" />
+          <stop offset="12%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
+          <stop offset="88%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
+          <stop offset="100%" stopColor="rgb(135,93,217)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path className="btn-trace-light" pathLength={100} style={{ ...dashStyle, stroke: `url(#${fadeIdA})` }} d={pathA} />

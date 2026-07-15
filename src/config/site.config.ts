@@ -1,16 +1,20 @@
 /**
  * Structural configuration for the site.
  *
- * All user-facing TEXT lives in `/src/i18n/en.json` (the single source of truth,
- * ready for future translation). This file composes that text with structural
- * data — hrefs, ids, colours, image URLs, socials — so components keep a single
- * `siteConfig` import. To rebrand: edit `en.json` (copy) and the meta arrays
- * below (assets/links).
+ * All user-facing TEXT lives in `/src/i18n/{locale}.json` (`en.json` is the
+ * source of truth; other locales mirror its shape). This file composes that
+ * text with structural data — hrefs, ids, colours, image URLs, socials — so
+ * components keep a single `siteConfig` import. To rebrand: edit the locale
+ * JSON files (copy) and the meta arrays below (assets/links).
+ *
+ * `siteConfig` is a Proxy that rebuilds itself from the active locale on
+ * every property access, so switching locale (see `@/i18n`) updates every
+ * consumer on their next render without any code changes on their end.
  *
  * Accent convention: wrap any word in [brackets] to render it in the accent
  * colour. Example: "at [TruS]" → "at " (white) + "TruS" (brand-accent, bold).
  */
-import { en } from "@/i18n";
+import { getLocale, locales, type Locale } from "@/i18n";
 
 // Footer social icons — MUST be real `import`s, not string paths.
 // A plain string like "@/assets/facebook.svg" is never resolved by the
@@ -21,6 +25,8 @@ import { en } from "@/i18n";
 import facebookIcon from "@/assets/facebook.svg";
 import instagramIcon from "@/assets/instagram.svg";
 import xIcon from "@/assets/x.svg";
+import whatsappIcon from "@/assets/whatsapp.svg";
+import telegramIcon from "@/assets/telegram.svg";
 
 /** Zips an array of translated text objects with its structural-meta array (by index). */
 function merge<T extends object, M extends object>(
@@ -117,148 +123,192 @@ const testimonialMeta = [
 
 const contactFieldIds = ["name", "email", "company", "message"];
 
-const footerCompanyHrefs = [
-  "#about",
-  "#contact",
-];
+const footerCompanyHrefs = ["#about", "#contact"];
 const footerLegalHrefs = ["#", "#"];
 const footerSocialHrefs = ["#", "#", "#"];
-const footerIconLinks = [facebookIcon, instagramIcon, xIcon];
+const footerIconLinks = [
+  telegramIcon,
+  whatsappIcon,
+  instagramIcon,
+  facebookIcon,
+  xIcon,
+];
 
-// Composed config
-export const siteConfig = {
-  name: "TruS",
-  tagline: "Turning Ideas into Products",
-  description:
-    "TruS is a modern web development studio building premium, interactive, and scalable React websites with advanced motion design and full client ownership.",
-  url: "https://trus.dev",
+/** Composes the structural config from the text dictionary of a given locale. */
+function buildSiteConfig(locale: Locale) {
+  const dict = locales[locale];
 
-  nav: {
-    logo: "TruS",
-    links: en.nav.links.map((label, i) => ({ label, href: navHrefs[i] })),
-    cta: { label: en.nav.cta, href: "#contact" },
-  },
+  return {
+    name: "TruS",
+    tagline: "Turning Ideas into Products",
+    description:
+      "TruS is a modern web development studio building premium, interactive, and scalable React websites with advanced motion design and full client ownership.",
+    url: "https://trus.dev",
 
-  hero: {
-    /** Displayed below CTAs as "We ◉ READY-MADE TEMPLATES" */
-    badge: en.hero.badge,
-    badgePrefix: en.hero.badgePrefix,
-    /**
-     * Headline lines. Use [word] to apply accent colour + bold weight to that word.
-     * The last line's accent word animates via a type/delete loop in the Hero.
-     */
-    headline: en.hero.headline,
-    body: en.hero.body,
-    cta: {
-      primary: { label: en.hero.cta.primary, href: "#templates" },
-      secondary: { label: en.hero.cta.secondary, href: "#why-us" },
+    nav: {
+      logo: "TruS",
+      links: dict.nav.links.map((label, i) => ({ label, href: navHrefs[i] })),
+      cta: { label: dict.nav.cta, href: "#contact" },
     },
-    stats: en.hero.stats,
-  },
 
-  about: {
-    eyebrow: en.about.eyebrow,
-    headline: en.about.headline,
-    body: en.about.body,
-    stats: en.about.stats,
-    image: "/about-team.jpg",
-  },
+    hero: {
+      /** Displayed below CTAs as "We ◉ READY-MADE TEMPLATES" */
+      badge: dict.hero.badge,
+      badgePrefix: dict.hero.badgePrefix,
+      /**
+       * Headline lines. Use [word] to apply accent colour + bold weight to that word.
+       * The last line's accent word animates via a type/delete loop in the Hero.
+       */
+      headline: dict.hero.headline,
+      body: dict.hero.body,
+      cta: {
+        primary: { label: dict.hero.cta.primary, href: "#templates" },
+        secondary: { label: dict.hero.cta.secondary, href: "#why-us" },
+      },
+      stats: dict.hero.stats,
+    },
 
-  portfolio: {
-    eyebrow: en.portfolio.eyebrow,
-    headline: en.portfolio.headline,
-    description: en.portfolio.description,
-    seeMore: { label: en.portfolio.seeMore, href: "#" },
-    projects: merge(en.portfolio.projects, projectMeta),
-  },
+    about: {
+      eyebrow: dict.about.eyebrow,
+      headline: dict.about.headline,
+      body: dict.about.body,
+      stats: dict.about.stats,
+      image: "/about-team.jpg",
+    },
 
-  whyUs: {
-    eyebrow: en.whyUs.eyebrow,
-    headline: en.whyUs.headline,
-    cards: en.whyUs.cards,
-  },
+    portfolio: {
+      eyebrow: dict.portfolio.eyebrow,
+      headline: dict.portfolio.headline,
+      description: dict.portfolio.description,
+      seeMore: { label: dict.portfolio.seeMore, href: "#" },
+      projects: merge(dict.portfolio.projects, projectMeta),
+    },
 
-  team: {
-    eyebrow: en.team.eyebrow,
-    heading: en.team.heading,
-    members: merge(en.team.members, teamMeta),
-  },
+    whyUs: {
+      eyebrow: dict.whyUs.eyebrow,
+      headline: dict.whyUs.headline,
+      cards: dict.whyUs.cards,
+    },
 
-  services: {
-    eyebrow: en.services.eyebrow,
-    heading: en.services.heading,
-    description: en.services.description,
-    items: merge(en.services.items, serviceMeta),
-  },
+    team: {
+      eyebrow: dict.team.eyebrow,
+      heading: dict.team.heading,
+      members: merge(dict.team.members, teamMeta),
+    },
 
-  templateCategories: {
-    eyebrow: en.templateCategories.eyebrow,
-    heading: en.templateCategories.heading,
-    description: en.templateCategories.description,
-    seeMore: { label: en.templateCategories.seeMore, href: "#" },
-    RightWord: en.templateCategories.RightWord,
-    LeftWord: en.templateCategories.LeftWord,
-    tagline: en.templateCategories.tagline,
-    sectionDes: en.templateCategories.sectionDes,
-    categories: en.templateCategories.categories,
-    templates: {
-      Lawyers: merge(en.templateCategories.templates.Lawyers, seedMeta("law")),
-      Fitness: merge(en.templateCategories.templates.Fitness, seedMeta("fit")),
-      "Real Estate": merge(
-        en.templateCategories.templates["Real Estate"],
-        seedMeta("re"),
-      ),
-      Clinics: merge(en.templateCategories.templates.Clinics, seedMeta("cl")),
-      Barbershops: merge(
-        en.templateCategories.templates.Barbershops,
-        seedMeta("bar"),
-      ),
-      All: merge(en.templateCategories.templates.All, seedMeta("all")),
-    } as Record<
-      string,
-      Array<{ id: number; name: string; tag: string; image: string }>
-    >,
-  },
+    services: {
+      eyebrow: dict.services.eyebrow,
+      heading: dict.services.heading,
+      description: dict.services.description,
+      items: merge(dict.services.items, serviceMeta),
+    },
 
-  contact: {
-    eyebrow: en.contact.eyebrow,
-    heading: en.contact.heading,
-    card: en.contact.card,
-    form: {
-      fields: en.contact.form.fields.map((f, i) => ({
-        id: contactFieldIds[i],
-        ...f,
+    templateCategories: {
+      eyebrow: dict.templateCategories.eyebrow,
+      heading: dict.templateCategories.heading,
+      description: dict.templateCategories.description,
+      seeMore: { label: dict.templateCategories.seeMore, href: "#" },
+      RightWord: dict.templateCategories.RightWord,
+      LeftWord: dict.templateCategories.LeftWord,
+      tagline: dict.templateCategories.tagline,
+      sectionDes: dict.templateCategories.sectionDes,
+      categories: dict.templateCategories.categories,
+      templates: {
+        lawyers: merge(
+          dict.templateCategories.templates.lawyers,
+          seedMeta("law"),
+        ),
+        fitness: merge(
+          dict.templateCategories.templates.fitness,
+          seedMeta("fit"),
+        ),
+        realEstate: merge(
+          dict.templateCategories.templates.realEstate,
+          seedMeta("re"),
+        ),
+        clinics: merge(
+          dict.templateCategories.templates.clinics,
+          seedMeta("cl"),
+        ),
+        barbershops: merge(
+          dict.templateCategories.templates.barbershops,
+          seedMeta("bar"),
+        ),
+        all: merge(dict.templateCategories.templates.all, seedMeta("all")),
+      } as Record<
+        string,
+        Array<{ id: number; name: string; tag: string; image: string }>
+      >,
+    },
+
+    contact: {
+      eyebrow: dict.contact.eyebrow,
+      heading: dict.contact.heading,
+      card: dict.contact.card,
+      form: {
+        fields: dict.contact.form.fields.map((f, i) => ({
+          id: contactFieldIds[i],
+          ...f,
+        })),
+        submit: dict.contact.form.submit,
+      },
+    },
+
+    testimonials: {
+      eyebrow: dict.testimonials.eyebrow,
+      heading: dict.testimonials.heading,
+      subtitle: dict.testimonials.subtitle,
+      items: merge(dict.testimonials.items, testimonialMeta),
+    },
+
+    footer: {
+      firstColumn: dict.footer.firstColumn,
+      secondColumn: dict.footer.secondColumn,
+      thirdColumn: dict.footer.thirdColumn,
+      company: dict.footer.company.map((label, i) => ({
+        label,
+        href: footerCompanyHrefs[i],
       })),
-      submit: en.contact.form.submit,
+      legal: dict.footer.legal.map((label, i) => ({
+        label,
+        href: footerLegalHrefs[i],
+      })),
+      contact: dict.footer.contact,
+      socials: dict.footer.socials.map((label, i) => ({
+        label,
+        href: footerSocialHrefs[i],
+        icon: footerIconLinks[i],
+      })),
     },
-  },
+  };
+}
 
-  testimonials: {
-    eyebrow: en.testimonials.eyebrow,
-    heading: en.testimonials.heading,
-    subtitle: en.testimonials.subtitle,
-    items: merge(en.testimonials.items, testimonialMeta),
-  },
+export type SiteConfig = ReturnType<typeof buildSiteConfig>;
 
-  footer: {
-    firstColumn: en.footer.firstColumn,
-    secondColumn: en.footer.secondColumn,
-    thirdColumn: en.footer.thirdColumn,
-    company: en.footer.company.map((label, i) => ({
-      label,
-      href: footerCompanyHrefs[i],
-    })),
-    legal: en.footer.legal.map((label, i) => ({
-      label,
-      href: footerLegalHrefs[i],
-    })),
-    contact: en.footer.contact,
-    socials: en.footer.socials.map((label, i) => ({
-      label,
-      href: footerSocialHrefs[i],
-      icon: footerIconLinks[i],
-    })),
-  },
-};
+// Memoized per locale (there are only ever as many as `locales` has keys) so
+// that `siteConfig.foo` returns the *same* object reference across renders
+// as long as the locale hasn't changed. This matters: several components
+// (e.g. TemplateGridReveal's scroll-driven crossfade) put nested siteConfig
+// values straight into a `useEffect`/`useMemo` dependency array, and a fresh
+// object identity on every read — even with identical content — would make
+// those effects think something changed on every render, not just on an
+// actual locale switch.
+const configCache = new Map<Locale, SiteConfig>();
+function getCachedSiteConfig(locale: Locale): SiteConfig {
+  let config = configCache.get(locale);
+  if (!config) {
+    config = buildSiteConfig(locale);
+    configCache.set(locale, config);
+  }
+  return config;
+}
 
-export type SiteConfig = typeof siteConfig;
+// `siteConfig` re-derives itself from the active locale, so every consumer
+// that reads `siteConfig.xxx` during render (the pattern used throughout
+// this codebase) picks up the current locale automatically — no
+// consumer-side changes needed when the locale switches.
+export const siteConfig: SiteConfig = new Proxy({} as SiteConfig, {
+  get(_target, prop: string | symbol) {
+    return getCachedSiteConfig(getLocale())[prop as keyof SiteConfig];
+  },
+});

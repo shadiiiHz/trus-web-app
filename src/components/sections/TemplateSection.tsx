@@ -19,7 +19,7 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
   // so the floating menu tab is the only way to reach nav links here.
   const [isActive, setIsActive] = useState(false);
 
-  const ribbonTemplates = templates.All;
+  const ribbonTemplates = templates.all;
 
   useEffect(() => {
     if (!sectionRef.current) return;

@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "links": [
+      "Startseite",
+      "Über uns",
+      "Portfolio",
+      "Vorlagen",
+      "Leistungen",
+      "Kontakt"
+    ],
+    "cta": "Anmelden"
+  },
+
+  "hero": {
+    "badge": "Webentwicklung",
+    "badgePrefix": "Leistungen",
+    "headline": [
+      "TRUS liefert smarte Websites",
+      "für Unternehmenswachstum,",
+      "angetrieben von [GrowthAI]"
+    ],
+    "body": "Verwandelt Ihre Website in ein 24/7-Wachstumssystem, das Kunden gewinnt, den Umsatz steigert und Ihr Marketing automatisiert – ganz ohne zusätzliches Personal.",
+    "cta": {
+      "primary": "Vorlagen durchsuchen",
+      "secondary": "Warum TruS"
+    },
+    "stats": [
+      { "value": "200+", "label": "Abgeschlossene Projekte" },
+      { "value": "4,8", "label": "Kundenbewertung" },
+      { "value": "1.200+", "label": "Zufriedene Kunden" }
+    ]
+  },
+
+  "about": {
+    "eyebrow": "ÜBER UNS",
+    "headline": ["Erfahren Sie mehr über [TruS]"],
+    "body": [
+      "TruS ist ein modernes Digitalstudio, spezialisiert auf hochwertige React-Websites, KI-Integrationen und anspruchsvolles Motion Design. Wir verwandeln ambitionierte Ideen in ausgereifte, produktionsreife Produkte.",
+      "Jedes Projekt entsteht bei uns von Grund auf – keine überladenen Page-Builder, keine recycelten Themes. Nur sauberer Code, durchdachtes UX und akribische Liebe zum Detail.",
+      "Vom Solo-Gründer bis zum wachsenden Unternehmen helfen wir unseren Kunden, online herauszustechen – mit Websites, die genauso schnell wie schön sind."
+    ],
+    "stats": [
+      { "value": "250+", "label": "Abgeschlossene Projekte" },
+      { "value": "4,9", "label": "Kundenbewertung" },
+      { "value": "1.000+", "label": "Zufriedene Kunden" }
+    ]
+  },
+
+  "portfolio": {
+    "eyebrow": "PORTFOLIO",
+    "headline": "ENTDECKEN SIE UNSERE PROJEKTE",
+    "description": [
+      "Eine Auswahl unserer aktuellen Arbeiten – Kreativität,",
+      "Leistung und Liebe zum Detail."
+    ],
+    "seeMore": "Mehr anzeigen",
+    "projects": [
+      { "name": "Arquivo", "category": "Unternehmen" },
+      { "name": "Avansi", "category": "SaaS" },
+      { "name": "Slingshot", "category": "Produkt" },
+      { "name": "Nexora", "category": "E-Commerce" },
+      { "name": "DataFlow", "category": "Dashboard" },
+      { "name": "TechVault", "category": "Web-App" },
+      { "name": "Orbis", "category": "Portfolio" },
+      { "name": "Luminary", "category": "Agentur" }
+    ]
+  },
+
+  "whyUs": {
+    "eyebrow": "WARUM WIR",
+    "headline": ["Warum Unternehmen sich für TruS entscheiden"],
+    "cards": [
+      {
+        "number": "01",
+        "title": "Erstklassige Designqualität",
+        "description": "Jede Vorlage wird von Hand gefertigt und mit größter Sorgfalt gestaltet – nicht automatisch generiert oder wiederverwendet."
+      },
+      {
+        "number": "02",
+        "title": "Für Performance gebaut",
+        "description": "Sauberer React-Code, kein unnötiger Ballast. Ihre Website lädt schnell und überzeugt bei jeder Kennzahl."
+      },
+      {
+        "number": "03",
+        "title": "Vollständig anpassbar",
+        "description": "Umfassende Design-Tokens und Konfigurationsdateien machen Rebranding und Inhaltsanpassung zum Kinderspiel."
+      },
+      {
+        "number": "04",
+        "title": "Ihnen gehört alles",
+        "description": "Vollständiges Eigentum am Quellcode. Keine Abos, keine Bindung, niemals versteckte Kosten."
+      }
+    ]
+  },
+
+  "team": {
+    "eyebrow": "LERNEN SIE UNSER TEAM KENNEN",
+    "heading": [
+      "Lernen Sie die erfahrenen Strategen und",
+      "kreativen Köpfe kennen, die",
+      "messbares Wachstum vorantreiben"
+    ],
+    "members": [
+      {
+        "name": "Sara Ahmadi",
+        "role": "UI/UX-Designerin",
+        "description": "Gestaltet intuitive und ansprechende Erlebnisse mit Fokus auf Klarheit, Benutzerfreundlichkeit und moderne Interaktion."
+      },
+      {
+        "name": "Daniel Weber",
+        "role": "Webentwickler",
+        "description": "Entwickelt skalierbare Frontend-Systeme mit sauberer Architektur und performanceorientierter Entwicklung."
+      },
+      {
+        "name": "Lina Farhadi",
+        "role": "Markenstrategin",
+        "description": "Formt digitale Identitäten, die Unternehmen helfen, klar zu kommunizieren und selbstbewusst zu wachsen."
+      },
+      {
+        "name": "Nina Roberts",
+        "role": "Content-Leitung",
+        "description": "Entwickelt aussagekräftige Content-Systeme, die Marken effektiv mit ihrem Publikum verbinden."
+      }
+    ]
+  },
+
+  "services": {
+    "eyebrow": "LEISTUNGEN",
+    "heading": "UNSERE LEISTUNGEN",
+    "description": "Wir gestalten und entwickeln moderne Websites, die Unternehmen wachsen lassen und hervorstechen.",
+    "items": [
+      {
+        "title": "SEO",
+        "description": "Verbessert die Sichtbarkeit durch intelligente Suchstrategien und organischen Traffic."
+      },
+      {
+        "title": "Webentwicklung",
+        "description": "Erstellung schneller, responsiver und skalierbarer Websites mit modernen Technologien."
+      },
+      {
+        "title": "Webdesign",
+        "description": "Gestaltung moderner, benutzerfreundlicher Oberflächen für bessere Nutzbarkeit und mehr Engagement."
+      },
+      {
+        "title": "Lead Maker",
+        "description": "Erstellung konversionsorientierter Systeme, die Besucher in potenzielle Kunden verwandeln."
+      },
+      {
+        "title": "KI-Agent",
+        "description": "Entwicklung intelligenter Assistenten und Automatisierungen zur Unterstützung von Geschäftsprozessen."
+      },
+      {
+        "title": "Content-Erstellung",
+        "description": "Erstellung ansprechender digitaler Inhalte, die Marken mit ihrem Publikum verbinden."
+      }
+    ]
+  },
+
+  "templateCategories": {
+    "eyebrow": "Design-Vorlagen",
+    "heading": "Vorlagenkategorien",
+    "description": "Entdecken Sie professionell gestaltete Vorlagen für moderne Unternehmen, Start-ups und digitale Produkte.",
+    "seeMore": "Mehr anzeigen",
+    "RightWord": "Designs",
+    "LeftWord": "Vorlagen",
+    "tagline": ["IDEEN ERKUNDEN DURCH", "TÄGLICHE DESIGNPRAXIS."],
+    "sectionDes": [
+      "Konzepte, Explorationen und Interface-",
+      "Experimente, offen geteilt als Teil ",
+      "unseres kreativen Prozesses."
+    ],
+    "categories": [
+      { "id": "lawyers", "label": "Anwälte" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Immobilien" },
+      { "id": "clinics", "label": "Kliniken" },
+      { "id": "barbershops", "label": "Barbershops" },
+      { "id": "all", "label": "Alle" }
+    ],
+    "templates": {
+      "lawyers": [{ "name": "LegalEdge Pro", "tag": "Anwaltskanzlei" }],
+      "fitness": [
+        { "name": "GymCore", "tag": "Fitnessstudio" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Personal Training" }
+      ],
+      "realEstate": [{ "name": "Domaine", "tag": "Luxusimmobilien" }],
+      "clinics": [
+        { "name": "MediCore", "tag": "Allgemeinmedizin" },
+        { "name": "DentaPlus", "tag": "Zahnklinik" }
+      ],
+      "barbershops": [
+        { "name": "BladeCraft", "tag": "Klassischer Barbier" },
+        { "name": "Sharp & Co.", "tag": "Luxus-Grooming" }
+      ],
+      "all": [
+        { "name": "LegalEdge Pro", "tag": "Anwaltskanzlei" },
+        { "name": "GymCore", "tag": "Fitnessstudio" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Personal Training" },
+        { "name": "Domaine", "tag": "Luxusimmobilien" },
+        { "name": "MediCore", "tag": "Allgemeinmedizin" },
+        { "name": "DentaPlus", "tag": "Zahnklinik" },
+        { "name": "BladeCraft", "tag": "Klassischer Barbier" },
+        { "name": "Sharp & Co.", "tag": "Luxus-Grooming" }
+      ]
+    }
+  },
+
+  "contact": {
+    "eyebrow": "KONTAKT",
+    "heading": "Lassen Sie uns ins Gespräch kommen",
+    "card": {
+      "tagline": "Haben Sie ein Projekt im Kopf?",
+      "cta": "Jetzt Termin vereinbaren",
+      "office": "2847 Oak Street, San Francisco, CA 94102",
+      "phone": "+98 1223344565",
+      "email": "Info@test100.devops-uni.com"
+    },
+    "form": {
+      "fields": [
+        { "label": "Vollständiger Name", "placeholder": "Name eingeben" },
+        { "label": "E-Mail", "placeholder": "E-Mail-Adresse eingeben" },
+        { "label": "Firmenname", "placeholder": "Firmenname eingeben" },
+        { "label": "Nachricht", "placeholder": "Ihre Nachricht eingeben" }
+      ],
+      "submit": "E-Mail senden"
+    }
+  },
+
+  "testimonials": {
+    "eyebrow": "REFERENZEN",
+    "heading": "ERFOLGSGESCHICHTEN UNSERER KUNDEN",
+    "subtitle": [
+      "Vertraut von zukunftsorientierten Unternehmen weltweit – wir haben Teams",
+      "geholfen, Wachstum zu erschließen und nachhaltige Wirkung zu erzielen."
+    ],
+    "items": [
+      {
+        "name": "Sarah Mitchell",
+        "role": "Marketingleiterin, Lumora Health",
+        "quote": "Altero hat unsere Herangehensweise an Strategie verändert. Ihre Einblicke waren scharfsinnig, umsetzbar und haben unser Wachstum wirklich beschleunigt."
+      },
+      {
+        "name": "Arjun Mehta",
+        "role": "Softwareentwickler",
+        "quote": "Das Team hat komplexe Herausforderungen klar strukturiert und messbare Ergebnisse geliefert. Die Zusammenarbeit fühlte sich an wie eine Erweiterung unseres eigenen Teams."
+      },
+      {
+        "name": "Emily Zhao",
+        "role": "Leiterin Betrieb, VitaHealth",
+        "quote": "Unsere Zusammenarbeit mit Altero führte zu einer Effizienzsteigerung von 35 %. Ihr Prozess war nahtlos und stark datengetrieben."
+      },
+      {
+        "name": "Daniel Reyes",
+        "role": "CEO, NovaTech Solutions",
+        "quote": "Professionell, einsichtsvoll und ergebnisorientiert. Altero half uns, intelligenter zu skalieren und effizienter zu arbeiten."
+      },
+      {
+        "name": "Julie Reed",
+        "role": "Gründerin, Lumora Health",
+        "quote": "Die Zusammenarbeit mit Altero fühlte sich mühelos an. Sie verstanden unsere Herausforderungen schnell und boten Lösungen, die wirklich funktionierten."
+      }
+    ]
+  },
+
+  "footer": {
+    "firstColumn": "Unternehmen",
+    "secondColumn": "Rechtliches",
+    "thirdColumn": "Kontakt",
+    "company": ["Über uns", "Kontakt"],
+    "legal": ["Datenschutzerklärung", "Nutzungsbedingungen"],
+    "contact": {
+      "email": "Info@test100.devops-uni.com",
+      "phone": "+98 1223344565",
+      "address": "2847 Oak Street, San Francisco, CA 94102"
+    },
+    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"]
+  }
+}

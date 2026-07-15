@@ -10,7 +10,7 @@ interface TemplateGridRevealProps {
   progress: number;
 }
 
-type Category = keyof typeof siteConfig.templateCategories.templates;
+type Category = typeof siteConfig.templateCategories.categories[number]["id"];
 
 const MAX_CARDS = 6;
 
@@ -21,12 +21,12 @@ export default function TemplateGridReveal({
     siteConfig.templateCategories;
 
   const { activeCategory, setActiveCategory, displayedCategory, gridVisible } =
-    useCategoryCrossfade<Category>(templates, "All" as Category);
+    useCategoryCrossfade<Category>(templates, "all" as Category);
 
   // The cards to actually render, based on `displayedCategory` (not the
   // just-clicked `activeCategory`) so content only changes while hidden.
   const activeTemplates = useMemo(() => {
-    return (templates[displayedCategory] ?? templates.All ?? []).slice(
+    return (templates[displayedCategory] ?? templates.all ?? []).slice(
       0,
       MAX_CARDS,
     );

@@ -28,7 +28,7 @@ export function ContactSection() {
     >
       {/* Content */}
       <div
-        className="relative mx-auto w-full max-w-[1200px] px-5"
+        className="relative mx-auto w-full max-w-300 px-5"
         style={{ paddingTop: '100px', paddingBottom: '120px', position: 'relative', zIndex: 2 }}
       >
 

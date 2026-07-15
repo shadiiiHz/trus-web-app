@@ -77,8 +77,8 @@ export function HeroSection({
 
             <FadeIn delay={0.52} direction="up">
               <p
-                className="font-body font-normal text-brand-muted leading-relaxed"
-                style={{ fontSize: "1rem", maxWidth: "440px" }}
+                className="font-body font-normal color-brand-white leading-relaxed"
+                style={{ fontSize: "16px", maxWidth: "440px" }}
               >
                 {data.body}
               </p>
@@ -93,7 +93,7 @@ export function HeroSection({
               <Button
                 variant="ghost"
                 href={data.cta.secondary.href}
-                className="h-11 w-32.75"
+                className="h-11"
               >
                 {data.cta.secondary.label}
               </Button>
@@ -102,7 +102,7 @@ export function HeroSection({
                 href={data.cta.primary.href}
                 glow
                 hoverScale={false}
-                className="h-11 w-51.75"
+                className="h-11"
               >
                 {data.cta.primary.label}
               </Button>
@@ -327,7 +327,7 @@ function BottomLabel({ badge, prefix }: { badge: string; prefix: string }) {
         <div className="flex items-center gap-3">
           <span
             className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: "14px" }}
           >
             {prefix}
           </span>
@@ -360,7 +360,7 @@ function BottomLabel({ badge, prefix }: { badge: string; prefix: string }) {
 
           <span
             className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: "14px" }}
           >
             {badge}
           </span>

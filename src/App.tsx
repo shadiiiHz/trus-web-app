@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useScroll, useTransform } from "framer-motion";
+import { useLocale } from "@/i18n";
 import { Preloader } from "@/components/loader/Preloader";
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/Hero";
@@ -14,6 +15,10 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import TemplateSection from "./components/sections/TemplateSection";
 
 export default function App() {
+  // Subscribing here re-renders the whole tree (siteConfig re-derives itself
+  // per-locale on read) whenever the navbar's language switch fires.
+  useLocale();
+
   const [hideNavbar, setHideNavbar] = useState(false);
   // Raw scrollY (pixels) so Hero / About animations fire at fixed pixel offsets
   // regardless of how many sections are added below.

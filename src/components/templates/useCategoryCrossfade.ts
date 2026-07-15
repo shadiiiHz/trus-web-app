@@ -47,7 +47,7 @@ export function useCategoryCrossfade<C extends string>(
     let cancelled = false;
 
     const hideTimeout = window.setTimeout(() => {
-      const nextTemplates = templates[activeCategory] ?? templates.All ?? [];
+      const nextTemplates = templates[activeCategory] ?? templates.all ?? [];
       const urls = nextTemplates.slice(0, 6).map((t) => t.image);
 
       // Race the real preload against a safety timeout, so a slow network

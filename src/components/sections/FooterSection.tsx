@@ -120,7 +120,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
     >
       {label}
       <span
-        className="absolute -bottom-0.5 left-0 h-px rounded-full w-0 group-hover:w-full"
+        className="absolute -bottom-0.5 left-0 h-px rounded-full w-0 group-hover:w-full transition-all duration-300"
         style={{ background: "#FFFFFF" }}
         aria-hidden="true"
       />

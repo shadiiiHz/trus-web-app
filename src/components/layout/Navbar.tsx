@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
 
@@ -184,13 +185,14 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center shrink-0">
+          <div className="hidden lg:flex items-center gap-5 shrink-0">
+            <LanguageSwitch />
             <Button
               variant="gradient"
               href={data.cta.href}
               glow
               hoverScale={false}
-              className="h-11 w-37 text-body font-medium"
+              className="h-11 w-22.5 text-body font-medium"
             >
               {data.cta.label}
             </Button>
@@ -249,7 +251,8 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
                 </motion.li>
               ))}
             </ul>
-            <div className="mt-auto">
+            <div className="mt-auto flex flex-col gap-4">
+              <LanguageSwitch className="self-center" />
               <Button
                 variant="gradient"
                 href={data.cta.href}

@@ -1,7 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion'
 
+export interface CategoryTabItem {
+  id:    string
+  label: string
+}
+
 export interface CategoryTabsProps {
-  categories:     readonly string[]
+  categories:     readonly CategoryTabItem[]
   activeCategory: string
   onChange:       (category: string) => void
 }
@@ -28,13 +33,13 @@ export function CategoryTabs({ categories, activeCategory, onChange }: CategoryT
       }}
     >
       {categories.map((cat) => {
-        const isActive = cat === activeCategory
+        const isActive = cat.id === activeCategory
         return (
           <button
-            key={cat}
+            key={cat.id}
             role="tab"
             aria-selected={isActive}
-            onClick={() => onChange(cat)}
+            onClick={() => onChange(cat.id)}
             style={{
               position:        'relative',
               padding:         '9px 20px',
@@ -73,7 +78,7 @@ export function CategoryTabs({ categories, activeCategory, onChange }: CategoryT
               )}
             </AnimatePresence>
 
-            <span style={{ position: 'relative', zIndex: 1 }}>{cat}</span>
+            <span style={{ position: 'relative', zIndex: 1 }}>{cat.label}</span>
           </button>
         )
       })}
