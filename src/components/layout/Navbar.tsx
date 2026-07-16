@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
-import { Button } from "@/components/ui/Button";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
+import GradientButton from "../ui/GradientButton";
 
 // Scroll-spy
 // IDs of every section that has a corresponding nav link.
@@ -187,13 +187,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-5 shrink-0">
             <LanguageSwitch />
-            <Button
-              variant="gradient"
-              href={data.cta.href}
-              className="h-11 w-22.5 text-body font-medium"
-            >
-              {data.cta.label}
-            </Button>
+            <GradientButton text={data.cta.label} href={data.cta.href} />
           </div>
 
           {/* Mobile hamburger */}
@@ -251,13 +245,11 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             </ul>
             <div className="mt-auto flex flex-col gap-4">
               <LanguageSwitch className="self-center" />
-              <Button
-                variant="gradient"
+              <GradientButton
+                text={data.cta.label}
                 href={data.cta.href}
                 className="w-full justify-center"
-              >
-                {data.cta.label}
-              </Button>
+              />
             </div>
           </motion.div>
         )}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import GradientButton from '../ui/GradientButton'
 
 interface Field {
   readonly id:          string
@@ -96,33 +97,15 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
         ))}
 
         <div>
-          <button
+          <GradientButton
             type="submit"
+            text={submit}
+            className="justify-center"
             style={{
-              background:    'linear-gradient(135deg, #875DD9 0%, #5328A8 100%)',
-              color:         '#FFFFFF',
-              fontFamily:    'var(--font-body)',
-              fontWeight:    600,
-              fontSize:      '15px',
-              lineHeight:    '20px',
-              border:        'none',
-              borderRadius:  '8px',
-              padding:       '14px 32px',
-              cursor:        'pointer',
-              transition:    'opacity 0.2s, transform 0.15s',
-              letterSpacing: '0.01em',
+              // Overrides the default purple gradient just for this button
+              ['--fill-gradient' as string]: 'linear-gradient(135deg, #875DD9 0%, #5328A8 100%)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity   = '0.88'
-              e.currentTarget.style.transform = 'scale(1.02)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity   = '1'
-              e.currentTarget.style.transform = 'scale(1)'
-            }}
-          >
-            {submit}
-          </button>
+          />
         </div>
       </form>
     </>

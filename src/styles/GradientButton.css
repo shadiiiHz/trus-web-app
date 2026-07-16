@@ -1,0 +1,111 @@
+.framer-btn {
+  --from-angle: 62deg;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 12px 24px;
+  border: none;
+  font: inherit;
+}
+
+/* .framer-btn .border {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border-radius: 8px;
+  z-index: 1;
+} */
+
+.framer-btn .color1,
+.framer-btn .color1-glow,
+.framer-btn .color2,
+.framer-btn .color2-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  opacity: 0;
+  background: conic-gradient(
+    from var(--from-angle) at 50% 50%,
+    rgba(255, 255, 255, 0) 249.011deg,
+    rgb(135,93,217) 249.577deg
+  );
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.9, 0.25, 1),
+    transform 0.72s cubic-bezier(0.2, 0.9, 0.25, 1);
+  z-index: 2;
+  pointer-events: none;
+  transform: rotate(0deg) scale(2);
+}
+
+.framer-btn .color1-glow,
+.framer-btn .color2-glow {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  z-index: 3;
+}
+
+.framer-btn .color1 {
+  transform: rotate(0deg) scale(2);
+}
+
+.framer-btn .color2,
+.framer-btn .color2-glow {
+  transform: rotate(180deg) scale(2);
+}
+
+.framer-btn .fill {
+  position: absolute;
+  inset: 2px;
+  border-radius: 7px;
+  background: var(
+    --fill-gradient,
+    linear-gradient(90deg, #875dd9 0%, #5328a8 100%)
+  );
+  z-index: 4;
+}
+
+.framer-btn .btn-text {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-body);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.framer-btn:hover {
+  --from-angle: 224deg;
+}
+
+.framer-btn:hover .color1,
+.framer-btn:hover .color1-glow {
+  opacity: 1;
+  transform: rotate(180deg) scale(2);
+}
+
+.framer-btn:hover .color2,
+.framer-btn:hover .color2-glow {
+  opacity: 1;
+  transform: rotate(360deg) scale(2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .framer-btn .color1,
+  .framer-btn .color1-glow,
+  .framer-btn .color2,
+  .framer-btn .color2-glow {
+    transition: none !important;
+  }
+}

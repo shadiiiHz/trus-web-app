@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site.config";
 import { parseHeadline } from "@/utils/text";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/motion/FadeIn";
+import GradientButton from "../ui/GradientButton";
 // import { BackgroundStars } from '@/components/hero/BackgroundStars'
 
 export interface HeroSectionProps {
@@ -97,13 +98,10 @@ export function HeroSection({
               >
                 {data.cta.secondary.label}
               </Button>
-              <Button
-                variant="gradient"
+              <GradientButton
+                text={data.cta.primary.label}
                 href={data.cta.primary.href}
-                className="h-11"
-              >
-                {data.cta.primary.label}
-              </Button>
+              />
             </FadeIn>
           </div>
 

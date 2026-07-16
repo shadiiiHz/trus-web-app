@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
-import { Button } from "@/components/ui/Button";
 import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
+import GradientButton from "../ui/GradientButton";
 
 interface TemplateMenuFABProps {
   /** Only rendered while the Template section owns the viewport (navbar is hidden then). */
@@ -175,9 +175,16 @@ export function TemplateMenuFAB({ active }: TemplateMenuFABProps) {
                 <X className="h-4 w-4" strokeWidth={2} />
               </button>
 
-              <img src={trusLogo} alt="Trus" className="relative z-10 h-6 w-auto" />
+              <img
+                src={trusLogo}
+                alt="Trus"
+                className="relative z-10 h-6 w-auto"
+              />
 
-              <ul className="relative z-10 mt-4 flex flex-col gap-0.5" role="list">
+              <ul
+                className="relative z-10 mt-4 flex flex-col gap-0.5"
+                role="list"
+              >
                 {links.map((link) => (
                   <li key={link.label}>
                     <a
@@ -192,9 +199,7 @@ export function TemplateMenuFAB({ active }: TemplateMenuFABProps) {
               </ul>
 
               <div className="relative z-10" onClick={() => setOpen(false)}>
-                <Button variant="gradient" href={cta.href} className="mt-4 w-full justify-center cursor-pointer">
-                  {cta.label}
-                </Button>
+                <GradientButton text={cta.label} href={cta.href} className="mt-4 w-full justify-center"/>
               </div>
             </motion.div>
           </>
