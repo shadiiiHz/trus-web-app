@@ -187,7 +187,11 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-5 shrink-0">
             <LanguageSwitch />
-            <GradientButton text={data.cta.label} href={data.cta.href} />
+            <GradientButton
+              text={data.cta.label}
+              href={data.cta.href}
+              className="min-w-32 justify-center"
+            />
           </div>
 
           {/* Mobile hamburger */}
