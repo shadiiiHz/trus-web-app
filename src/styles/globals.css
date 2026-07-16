@@ -126,46 +126,113 @@
     font-size: clamp(18px, 2.2vw, 22px);
   }
 
-  /* Two white lights trace a button's border on hover: one climbs the
-     left edge, turns onto the top edge and stops just past its midpoint;
-     the other (mirrored, simultaneous) descends the right edge, turns onto
-     the bottom edge and stops just past its midpoint. Each light's own
-     leading/trailing tips dim toward the ends (via a gradient stroke set
-     inline per path) instead of ending in a hard cap — the full path stays
-     visible throughout, brightest in the middle. */
-  .btn-glow-wrap {
-    position: relative;
+  .framer-btn {
+    --btn-radius: 8px;
+    --from-angle: 62deg;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 55px;
+    border-radius: var(--btn-radius);
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0 24px;
   }
 
-  .btn-trace-svg {
+  .framer-btn .border {
     position: absolute;
     inset: 0;
-    z-index: 20;
-    pointer-events: none;
+    background-color: rgb(34 36 38 / 26%);
+    border-radius: var(--btn-radius);
+    z-index: 1;
   }
 
-  .btn-trace-light {
-    fill: none;
-    stroke: rgb(255, 255, 255);
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-dasharray: var(--trace-dash, 34) 100;
-    stroke-dashoffset: var(--trace-rest, 34);
+  .framer-btn .color1,
+  .framer-btn .color1-glow,
+  .framer-btn .color2,
+  .framer-btn .color2-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--btn-radius);
     opacity: 0;
+    background: conic-gradient(
+      from var(--from-angle) at 50% 50%,
+      rgba(255, 255, 255, 0) 249.011deg,
+      var(--glow-color, rgb(176, 4, 255)) 249.577deg
+    );
+    transform-origin: center center;
+    transform-style: preserve-3d;
     transition:
-      stroke-dashoffset 0.3s ease-out,
-      opacity 0.5s ease;
+      opacity 0.9s cubic-bezier(0.2, 0.9, 0.25, 1),
+      transform 0.72s cubic-bezier(0.2, 0.9, 0.25, 1);
+    z-index: 2;
+    pointer-events: none;
+    transform: rotate(0deg) scale(2);
   }
 
-  .btn-glow-wrap:hover .btn-trace-light {
-    stroke-dashoffset: var(--trace-hold, -66);
+  .framer-btn .color1-glow,
+  .framer-btn .color2-glow {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: 3;
+  }
+
+  .framer-btn .color2,
+  .framer-btn .color2-glow {
+    transform: rotate(180deg) scale(2);
+  }
+
+  .framer-btn .fill {
+    position: absolute;
+    inset: var(--btn-border-w, 2px);
+    border-radius: calc(var(--btn-radius) - var(--btn-border-w, 2px));
+    background: linear-gradient(
+      0deg,
+      var(--fill-from, rgb(147, 5, 255)) 0%,
+      var(--fill-to, rgb(63, 88, 143)) 100%
+    );
+    z-index: 4;
+  }
+
+  .framer-btn .btn-text-wrap {
+    position: relative;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 20px;
+    font-family: "Lufga", sans-serif;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .framer-btn:hover {
+    --from-angle: 224deg;
+  }
+
+  .framer-btn:hover .color1,
+  .framer-btn:hover .color1-glow {
     opacity: 1;
+    transform: rotate(180deg) scale(2);
+  }
+
+  .framer-btn:hover .color2,
+  .framer-btn:hover .color2-glow {
+    opacity: 1;
+    transform: rotate(360deg) scale(2);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-trace-light {
-      transition: opacity 0.3s ease;
+    .framer-btn .color1,
+    .framer-btn .color1-glow,
+    .framer-btn .color2,
+    .framer-btn .color2-glow {
+      transition: none !important;
     }
   }
 }
