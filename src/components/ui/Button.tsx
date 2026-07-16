@@ -125,24 +125,40 @@ function GlowTracePaths({ width: w, height: h, radius, pill }: { width: number; 
   if (w === 0 || h === 0) return null
 
   const r = pill ? h / 2 : Math.min(radius ?? 8, h / 2)
-  const stopTop = Math.min(w - r, w / 2 + 16)
-  const stopBottom = Math.max(r, w / 2 - 16)
+  // pathA (the "top" light) now genuinely starts on the BOTTOM edge, sweeps
+  // through the bottom-left corner, climbs the whole left edge, sweeps
+  // through the top-left corner, and settles on the top edge — a real
+  // rotation around one whole side, instead of starting on the flat left
+  // edge. pathB mirrors it: starts on the TOP edge, rotates down through
+  // the right side, settles on the bottom edge.
+  const NEAR_FRACTION = 0.5  // tail length on the starting (opposite) edge — animation only, never shown at rest
+  const MID_FRACTION  = 0.3   // how much of the connecting side edge the *animation* sweeps through
+  const FAR_FRACTION  = 0.55  // resting-bar length on the destination edge
+  const REST_VERT_FRACTION = 0.26 // how much of the side edge stays visible once held — matches the old, compact resting look
+  const availableVert  = h - 2 * r
+  const availableHoriz = w - 2 * r
+  const nearRun = availableHoriz * NEAR_FRACTION
+  const midRun  = availableVert * MID_FRACTION
+  const farRun  = availableHoriz * FAR_FRACTION
+  const restVertRun = availableVert * REST_VERT_FRACTION
 
-  const pathA = `M 0,${h - r} V ${r} A ${r},${r} 0 0 1 ${r},0 H ${stopTop}`
-  const pathB = `M ${w},${r} V ${h - r} A ${r},${r} 0 0 1 ${w - r},${h} H ${stopBottom}`
+  const stopTop = r + farRun
+  const stopBottom = w - r - farRun
 
-  // The dash has a constant true length along the path, but while it still
-  // straddles the corner it visually spans two directions at once and reads
-  // as bigger than the same length lying flat. Size the dash off the final
-  // straight run it comes to rest on so the held state stays a full, solid
-  // bar instead of visually "shrinking" once it stops bending the corner.
-  const verticalLen = h - 2 * r
-  const arcLen       = (Math.PI / 2) * r
-  const horizLen      = stopTop - r
-  const totalLen      = verticalLen + arcLen + horizLen
+  const pathA = `M ${r + nearRun},${h} H ${r} A ${r},${r} 0 0 1 0,${h - r} V ${r} A ${r},${r} 0 0 1 ${r},0 H ${stopTop}`
+  const pathB = `M ${w - r - nearRun},0 H ${w - r} A ${r},${r} 0 0 1 ${w},${r} V ${h - r} A ${r},${r} 0 0 1 ${w - r},${h} H ${stopBottom}`
 
-  const dashPx     = Math.min(horizLen - 4, Math.max(24, horizLen * 0.85))
-  const dashUnits  = (dashPx / totalLen) * 100
+  // The *drawn* path is long (starts on the opposite edge, through both
+  // corners) so the reveal sweep genuinely travels from there — but only
+  // its final stretch (matching the old, compact single-corner look) stays
+  // on screen once held. dashUnits sizes that visible stretch; rest/hold
+  // offsets grow it in starting from position 0 (the far starting tail)
+  // and ending exactly on that stretch, same as always.
+  const arcLen   = (Math.PI / 2) * r
+  const totalLen = nearRun + arcLen + midRun + arcLen + farRun
+  const visibleLen = restVertRun + arcLen + farRun
+
+  const dashUnits  = (visibleLen / totalLen) * 100
   const restOffset = dashUnits
   const holdOffset = -(100 - dashUnits)
 
@@ -155,20 +171,37 @@ function GlowTracePaths({ width: w, height: h, radius, pill }: { width: number; 
   const fadeIdA = `${gradId}-fade-a`
   const fadeIdB = `${gradId}-fade-b`
 
+  // Everything before `windowStart` (the far starting tail, its corner, and
+  // the excess mid-run beyond `restVertRun`) is never part of the held
+  // shape, only flashed through during the fast sweep — keep it uniformly
+  // dim so that's consistent whether or not it happens to be visible. The
+  // dim-to-bright transition then lands at the same relative spot within
+  // the visible stretch as the old single-corner design did.
+  const DIM_OPACITY        = 0.25
+  const FAR_DIM_START_OPACITY = 0.8
+  const FAR_DIM_OPACITY    = 0.6
+  const FAR_DIM_SPAN       = 50
+  const windowStart = 100 - dashUnits
+  const cornerPct  = windowStart + ((restVertRun + arcLen) / totalLen) * 100
+  const rampEnd    = cornerPct + 10
+  const farDimStart = 100 - FAR_DIM_SPAN
+
   return (
     <svg className="btn-trace-svg" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
       <defs>
-        <linearGradient id={fadeIdA} gradientUnits="userSpaceOnUse" x1={0} y1={h - r} x2={stopTop} y2={0}>
-          <stop offset="0%"   stopColor="rgb(135,93,217)" stopOpacity="0" />
-          <stop offset="12%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
-          <stop offset="88%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
-          <stop offset="100%" stopColor="rgb(135,93,217)" stopOpacity="0" />
+        <linearGradient id={fadeIdA} gradientUnits="userSpaceOnUse" x1={r + nearRun} y1={h} x2={stopTop} y2={0}>
+          <stop offset="0%"               stopColor="rgb(255,255,255)" stopOpacity={DIM_OPACITY} />
+          <stop offset={`${cornerPct}%`}  stopColor="rgb(255,255,255)" stopOpacity={DIM_OPACITY} />
+          <stop offset={`${rampEnd}%`}    stopColor="rgb(255,255,255)" stopOpacity="1" />
+          <stop offset={`${farDimStart}%`} stopColor="rgb(255,255,255)" stopOpacity={FAR_DIM_START_OPACITY} />
+          <stop offset="100%"             stopColor="rgb(255,255,255)" stopOpacity={FAR_DIM_OPACITY} />
         </linearGradient>
-        <linearGradient id={fadeIdB} gradientUnits="userSpaceOnUse" x1={w} y1={r} x2={stopBottom} y2={h}>
-          <stop offset="0%"   stopColor="rgb(135,93,217)" stopOpacity="0" />
-          <stop offset="12%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
-          <stop offset="88%"  stopColor="rgb(135,93,217)" stopOpacity="1" />
-          <stop offset="100%" stopColor="rgb(135,93,217)" stopOpacity="0" />
+        <linearGradient id={fadeIdB} gradientUnits="userSpaceOnUse" x1={w - r - nearRun} y1={0} x2={stopBottom} y2={h}>
+          <stop offset="0%"               stopColor="rgb(255,255,255)" stopOpacity={DIM_OPACITY} />
+          <stop offset={`${cornerPct}%`}  stopColor="rgb(255,255,255)" stopOpacity={DIM_OPACITY} />
+          <stop offset={`${rampEnd}%`}    stopColor="rgb(255,255,255)" stopOpacity="1" />
+          <stop offset={`${farDimStart}%`} stopColor="rgb(255,255,255)" stopOpacity={FAR_DIM_START_OPACITY} />
+          <stop offset="100%"             stopColor="rgb(255,255,255)" stopOpacity={FAR_DIM_OPACITY} />
         </linearGradient>
       </defs>
       <path className="btn-trace-light" pathLength={100} style={{ ...dashStyle, stroke: `url(#${fadeIdA})` }} d={pathA} />

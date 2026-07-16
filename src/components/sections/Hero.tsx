@@ -100,8 +100,8 @@ export function HeroSection({
               <Button
                 variant="gradient"
                 href={data.cta.primary.href}
-                glow
-                hoverScale={false}
+                // glow
+                // hoverScale={false}
                 className="h-11"
               >
                 {data.cta.primary.label}

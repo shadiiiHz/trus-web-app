@@ -3,52 +3,54 @@
 /* Design Tokens */
 @theme {
   /* Colors */
-  --color-brand-bg:           #000000;
-  --color-brand-surface:      #0F0F18;
-  --color-brand-surface-2:    #141420;
-  --color-brand-accent:       #875DD9;
-  --color-brand-accent-light: #9D70F5;
-  --color-brand-accent-dim:   #5328A8;
-  --color-brand-white:        #FFFFFF;
-  --color-brand-muted:        #9CA3AF;
-  --color-brand-subtle:       #6B7280;
-  --color-brand-border:       #1A1A2A;
-  --color-brand-border-2:     #252535;
+  --color-brand-bg: #000000;
+  --color-brand-surface: #0f0f18;
+  --color-brand-surface-2: #141420;
+  --color-brand-accent: #875dd9;
+  --color-brand-accent-light: #9d70f5;
+  --color-brand-accent-dim: #5328a8;
+  --color-brand-white: #ffffff;
+  --color-brand-muted: #9ca3af;
+  --color-brand-subtle: #6b7280;
+  --color-brand-border: #1a1a2a;
+  --color-brand-border-2: #252535;
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-hero:    'DM Sans', sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-hero: "DM Sans", sans-serif;
 
   /* Type scale */
   --text-display-2xl: 6rem;
-  --text-display-xl:  4.5rem;
-  --text-display-lg:  3.5rem;
-  --text-display-md:  2.5rem;
-  --text-display-sm:  1.75rem;
-  --text-body-lg:     1.125rem;
-  --text-body:        1rem;
-  --text-body-sm:     0.875rem;
-  --text-label:       0.75rem;
+  --text-display-xl: 4.5rem;
+  --text-display-lg: 3.5rem;
+  --text-display-md: 2.5rem;
+  --text-display-sm: 1.75rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label: 0.75rem;
 
   /* Border radius */
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   /* Shadows */
   --shadow-accent-sm: 0 0 20px rgba(135, 93, 217, 0.2);
   --shadow-accent-md: 0 0 40px rgba(135, 93, 217, 0.3);
   --shadow-accent-lg: 0 0 80px rgba(135, 93, 217, 0.4);
-  --shadow-card:      0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-elevated:  0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Base Reset */
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -73,7 +75,8 @@
     isolation: isolate;
   }
 
-  img, video {
+  img,
+  video {
     display: block;
     max-width: 100%;
   }
@@ -123,38 +126,41 @@
     font-size: clamp(18px, 2.2vw, 22px);
   }
 
-  /* Two neon-cyan lights trace a button's border on hover: one climbs the
+  /* Two white lights trace a button's border on hover: one climbs the
      left edge, turns onto the top edge and stops just past its midpoint;
      the other (mirrored, simultaneous) descends the right edge, turns onto
      the bottom edge and stops just past its midpoint. Each light's own
-     leading/trailing tips fade to transparent (via a gradient stroke set
-     inline per path) instead of ending in a hard cap. */
+     leading/trailing tips dim toward the ends (via a gradient stroke set
+     inline per path) instead of ending in a hard cap — the full path stays
+     visible throughout, brightest in the middle. */
   .btn-glow-wrap {
     position: relative;
-    display:  inline-flex;
+    display: inline-flex;
   }
 
   .btn-trace-svg {
-    position:       absolute;
-    inset:          0;
-    z-index:        20;
+    position: absolute;
+    inset: 0;
+    z-index: 20;
     pointer-events: none;
   }
 
   .btn-trace-light {
-    fill:               none;
-    stroke:             rgb(135,93,217);
-    stroke-width:       4;
-    stroke-linecap:     round;
-    stroke-dasharray:   var(--trace-dash, 34) 100;
-    stroke-dashoffset:  var(--trace-rest, 34);
-    opacity:            0;
-    transition:         stroke-dashoffset 0.3s ease-out, opacity 0.5s ease;
+    fill: none;
+    stroke: rgb(255, 255, 255);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: var(--trace-dash, 34) 100;
+    stroke-dashoffset: var(--trace-rest, 34);
+    opacity: 0;
+    transition:
+      stroke-dashoffset 0.3s ease-out,
+      opacity 0.5s ease;
   }
 
   .btn-glow-wrap:hover .btn-trace-light {
     stroke-dashoffset: var(--trace-hold, -66);
-    opacity:           1;
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
