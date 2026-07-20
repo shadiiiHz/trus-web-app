@@ -25,7 +25,6 @@ export default function App() {
   //
   // Pixel anchors (900 px viewport, Hero = 100 svh = 900 px):
   //   Galaxy fade-out : 0 → 280 px  (galaxy dims as user scrolls away)
-  //   About glow ramp : scrollY 630–800 px
   //
   // WhyUsSection and PortfolioSection own their scroll progress internally.
   const { scrollY } = useScroll();
@@ -39,10 +38,6 @@ export default function App() {
   // Fades the entire orbital galaxy out as the user scrolls past the hero.
   const heroOrbitOpacity = useTransform(scrollY, [0, 280], [1, 0]);
 
-  // About image border glow
-  // Brightens the About section image border as the user scrolls into it.
-  const imageGlowIntensity = useTransform(scrollY, [630, 800], [0, 1]);
-
   return (
     <div className="bg-brand-bg min-h-screen font-body antialiased">
       <Preloader ready={heroVideoReady && templateReady} />
@@ -54,7 +49,7 @@ export default function App() {
         onVideoReady={() => setHeroVideoReady(true)}
       />
 
-      <AboutSection imageGlowIntensity={imageGlowIntensity} />
+      <AboutSection />
 
       {/* Portfolio: self-contained sticky section — horizontal card parallax. */}
       <PortfolioSection />

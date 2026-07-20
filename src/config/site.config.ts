@@ -172,7 +172,6 @@ function buildSiteConfig(locale: Locale) {
         primary: { label: dict.hero.cta.primary, href: "#templates" },
         secondary: { label: dict.hero.cta.secondary, href: "#why-us" },
       },
-      stats: dict.hero.stats,
     },
 
     about: {

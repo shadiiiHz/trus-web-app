@@ -23,12 +23,7 @@
     "cta": {
       "primary": "Vorlagen durchsuchen",
       "secondary": "Warum TruS"
-    },
-    "stats": [
-      { "value": "200+", "label": "Abgeschlossene Projekte" },
-      { "value": "4,8", "label": "Kundenbewertung" },
-      { "value": "1.200+", "label": "Zufriedene Kunden" }
-    ]
+    }
   },
 
   "about": {
@@ -41,7 +36,7 @@
     ],
     "stats": [
       { "value": "250+", "label": "Abgeschlossene Projekte" },
-      { "value": "4,9", "label": "Kundenbewertung" },
+      { "value": "4,9+", "label": "Kundenbewertung" },
       { "value": "1.000+", "label": "Zufriedene Kunden" }
     ]
   },
@@ -283,7 +278,11 @@
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
     "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
-    "bottomLinks": ["Datenschutzerklärung", "Nutzungsbedingungen", "Powered by Trust AI"],
+    "bottomLinks": [
+      "Datenschutzerklärung",
+      "Nutzungsbedingungen",
+      "Powered by Trust AI"
+    ],
     "copyright": "© {year} TruS. Alle Rechte vorbehalten."
   }
 }

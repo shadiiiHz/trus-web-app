@@ -16,12 +16,7 @@
     "cta": {
       "primary": "Browse Templates",
       "secondary": "Why TruS"
-    },
-    "stats": [
-      { "value": "200+", "label": "Projects Delivered" },
-      { "value": "4.8", "label": "Client Rating" },
-      { "value": "1,200+", "label": "Happy Clients" }
-    ]
+    }
   },
 
   "about": {
@@ -34,7 +29,7 @@
     ],
     "stats": [
       { "value": "250+", "label": "Projects Delivered" },
-      { "value": "4.9", "label": "Client Rating" },
+      { "value": "4.9+", "label": "Client Rating" },
       { "value": "1,000+", "label": "Happy Clients" }
     ]
   },

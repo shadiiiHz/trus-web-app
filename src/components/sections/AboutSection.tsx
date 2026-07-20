@@ -1,12 +1,9 @@
 import React, { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  MotionValue,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { StatCounter } from "@/components/motion/StatCounter";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { parseHeadline } from "@/utils/text";
 
 // Sparse background stars generated once at module level — no re-render churn
@@ -20,35 +17,31 @@ const ABOUT_STARS = Array.from({ length: 35 }, (_, i) => ({
 
 export interface AboutSectionProps {
   data?: typeof siteConfig.about;
-  /** Scroll-driven value (0 → 1). Brightens the image border glow as the T "arrives". */
-  imageGlowIntensity?: MotionValue<number>;
 }
 
-export function AboutSection({
-  data = siteConfig.about,
-  imageGlowIntensity,
-}: AboutSectionProps) {
+export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
   const ref = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
-  // Fallback: static 0 when no scroll prop is provided (e.g. isolated render)
-  const fallbackGlow = useMotionValue(0);
-  const glow = imageGlowIntensity ?? fallbackGlow;
-
-  // Animate the gradient border wrapper's box-shadow so the border itself
-  // visibly lights up (not just the blurred halo behind it).
-  // Both shadow strings have the same structure so Framer Motion interpolates cleanly.
-  const borderGlowShadow = useTransform(
-    glow,
+  // Top edge stays fixed; the image hinges from there, leaning back into
+  // depth and rotating forward to flat as the section scrolls into view —
+  // scrubbed continuously with scroll position rather than a one-shot
+  // trigger, so it tracks scroll direction and speed directly.
+  const { scrollYProgress: imageProgress } = useScroll({
+    target: ref,
+    offset: ["start 100%", "start -10%"],
+  });
+  const imageRotateX = useTransform(
+    imageProgress,
     [0, 1],
-    [
-      "0 0 0px rgba(185,120,255,0), 0 0 0px rgba(135,93,217,0), 0 0 0px rgba(100,60,200,0)",
-      "0 0 30px rgba(185,120,255,0.95), 0 0 65px rgba(135,93,217,0.65), 0 0 110px rgba(100,60,200,0.35)",
-    ],
+    shouldReduceMotion ? [0, 0] : [-85, 0],
+    { clamp: true },
   );
-  const imageFilter = useTransform(
-    glow,
+  const imageOpacity = useTransform(
+    imageProgress,
+    [0, 0.08],
     [0, 1],
-    ["grayscale(100%)", "grayscale(0%)"],
+    { clamp: true },
   );
 
   return (
@@ -119,44 +112,46 @@ export function AboutSection({
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-14 lg:gap-20">
           {/* LEFT COLUMN — copy */}
           <div className="flex flex-col gap-7">
-            <FadeIn direction="up" delay={0.1}>
-              <span
-                className="text-section-label font-normal uppercase tracking-[0.22em]"
-                style={{ color: "var(--color-brand-accent-light)" }}
-              >
-                {data.eyebrow}
-              </span>
-            </FadeIn>
+            <div className="flex flex-col gap-2">
+              <FadeIn direction="up" delay={0.1}>
+                <span
+                  className="text-section-label font-normal uppercase tracking-[0.22em]"
+                  style={{ color: "var(--color-brand-accent-light)" }}
+                >
+                  {data.eyebrow}
+                </span>
+              </FadeIn>
 
-            <FadeIn direction="up" delay={0.22}>
-              <h2 className="flex flex-col gap-0.5 m-0 p-0">
-                {data.headline.map((line) => {
-                  const segs = parseHeadline(line as string);
-                  return (
-                    <span
-                      key={line}
-                      className="block text-section-title leading-[1.14] tracking-tight text-[#070606]"
-                    >
-                      {segs.map((seg) =>
-                        seg.accent ? (
-                          <span
-                            key={seg.text}
-                            style={{
-                              color: "var(--color-brand-accent)",
-                              textShadow: "0 0 26px rgba(135,93,217,0.65)",
-                            }}
-                          >
-                            {seg.text}
-                          </span>
-                        ) : (
-                          <span key={seg.text}>{seg.text}</span>
-                        ),
-                      )}
-                    </span>
-                  );
-                })}
-              </h2>
-            </FadeIn>
+              <FadeIn direction="up" delay={0.22}>
+                <h2 className="flex flex-col gap-0.5 m-0 p-0">
+                  {data.headline.map((line) => {
+                    const segs = parseHeadline(line as string);
+                    return (
+                      <span
+                        key={line}
+                        className="block text-section-title leading-[1.14] tracking-tight text-[#070606]"
+                      >
+                        {segs.map((seg) =>
+                          seg.accent ? (
+                            <span
+                              key={seg.text}
+                              style={{
+                                color: "var(--color-brand-accent)",
+                                textShadow: "0 0 26px rgba(135,93,217,0.65)",
+                              }}
+                            >
+                              {seg.text}
+                            </span>
+                          ) : (
+                            <span key={seg.text}>{seg.text}</span>
+                          ),
+                        )}
+                      </span>
+                    );
+                  })}
+                </h2>
+              </FadeIn>
+            </div>
 
             {/* Body paragraphs */}
             <div className="flex flex-col gap-4">
@@ -176,34 +171,34 @@ export function AboutSection({
               ))}
             </div>
 
-            {/* Stats row */}
-            <FadeIn direction="up" delay={0.66}>
-              <div className="flex items-start pt-2">
-                {(
-                  data.stats as readonly { value: string; label: string }[]
-                ).map((stat, i) => (
-                  <React.Fragment key={stat.value}>
-                    {/* Vertical divider between stats */}
-                    {i > 0 && (
-                      <div
-                        className="shrink-0 self-stretch mx-7"
-                        style={{
-                          width: "1px",
-                          // background:
-                          //   'linear-gradient(to bottom, transparent, rgba(135,93,217,0.45), transparent)',
-                        }}
-                      />
-                    )}
+            {/* Stats row — each card cascades in with its own delay */}
+            <div className="flex items-start pt-2">
+              {(
+                data.stats as readonly { value: string; label: string }[]
+              ).map((stat, i) => (
+                <React.Fragment key={stat.value}>
+                  {/* Vertical divider between stats */}
+                  {i > 0 && (
+                    <div
+                      className="shrink-0 self-stretch mx-7"
+                      style={{
+                        width: "1px",
+                      }}
+                    />
+                  )}
+                  <FadeIn
+                    direction="up"
+                    delay={0.66 + i * 0.15}
+                    duration={0.8}
+                    scale={0.95}
+                    margin="0px 0px -20% 0px"
+                  >
                     <div className="flex flex-col items-center gap-3">
-                      <span
+                      <StatCounter
+                        value={stat.value}
                         className="font-hero font-bold text-[#070606] leading-none"
-                        style={{
-                          fontSize: "32px",
-                          // textShadow: '0 0 18px rgba(135,93,217,0.5)',
-                        }}
-                      >
-                        {stat.value}
-                      </span>
+                        style={{ fontSize: "32px" }}
+                      />
                       <span
                         className="font-body text-[#070606] tracking-wider leading-tight"
                         style={{ fontSize: "16px" }}
@@ -211,111 +206,46 @@ export function AboutSection({
                         {stat.label}
                       </span>
                     </div>
-                  </React.Fragment>
-                ))}
-              </div>
-            </FadeIn>
+                  </FadeIn>
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
-          {/* RIGHT COLUMN — image card with glow */}
-          <FadeIn
-            direction="up"
-            delay={0.18}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              {/* Glow halo — intensity driven by scroll (T arriving) */}
-              <motion.div
-                className="absolute pointer-events-none"
-                aria-hidden="true"
+          {/* RIGHT COLUMN — image card (488x586), unfolds from flat-on-the-ground to facing the viewer as the section scrolls in */}
+          <div className="flex justify-center lg:justify-end">
+            <motion.div
+              style={{
+                width: "min(488px, 100%)",
+                aspectRatio: "488 / 586",
+                borderRadius: "16px",
+                overflow: "hidden",
+                background:
+                  "linear-gradient(135deg, #1a0440 0%, #2d0878 48%, #0e0222 100%)",
+                position: "relative",
+                transformPerspective: 900,
+                transformOrigin: "50% 0%",
+                rotateX: imageRotateX,
+                opacity: imageOpacity,
+              }}
+            >
+              {/* Team image — hidden via onError when file is absent */}
+              <img
+                src={data.image}
+                alt="TruS team at work"
                 style={{
-                  inset: "-60px",
-                  background:
-                    "radial-gradient(ellipse 75% 75% at 50% 50%, rgba(185,120,255,0.95) 0%, rgba(135,93,217,0.55) 38%, transparent 68%)",
-                  filter: "blur(32px)",
-                  opacity: glow,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
                 }}
               />
-
-              {/* Always-on subtle base glow */}
-              <div
-                className="absolute pointer-events-none"
-                aria-hidden="true"
-                style={{
-                  inset: "-15px",
-                  background:
-                    "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(83,40,168,0.3) 0%, transparent 65%)",
-                  filter: "blur(16px)",
-                }}
-              />
-
-              {/* Gradient border wrapper — boxShadow animates from dark to bright glow */}
-              <motion.div
-                style={{
-                  position: "relative",
-                  padding: "5px",
-                  background:
-                    "linear-gradient(135deg, rgba(255,255,255,0.72) 0%, #5328A8 55%, rgba(135,93,217,0.4) 100%)",
-                  borderRadius: "20px",
-                  boxShadow: borderGlowShadow,
-                }}
-              >
-                {/* Inner card */}
-                <div
-                  style={{
-                    width: "clamp(300px, 38vw, 488px)",
-                    height: "clamp(320px, 42vw, 500px)",
-                    borderRadius: "16px",
-                    overflow: "hidden",
-                    background:
-                      "linear-gradient(135deg, #1a0440 0%, #2d0878 48%, #0e0222 100%)",
-                    position: "relative",
-                  }}
-                >
-                  {/* Team image — hidden via onError when file is absent */}
-                  <motion.img
-                    src={data.image}
-                    alt="TruS team at work"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                      filter: imageFilter,
-                    }}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                    }}
-                  />
-
-                  {/* Depth overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(135,93,217,0.10) 0%, transparent 45%, rgba(83,40,168,0.07) 100%)",
-                    }}
-                  />
-
-                  {/* Top-left corner light leak */}
-                  <div
-                    className="absolute pointer-events-none"
-                    aria-hidden="true"
-                    style={{
-                      top: 0,
-                      left: 0,
-                      width: "55%",
-                      height: "55%",
-                      background:
-                        "radial-gradient(ellipse at 5% 5%, rgba(210,170,255,0.14) 0%, transparent 60%)",
-                    }}
-                  />
-                </div>
-              </motion.div>
-            </div>
-          </FadeIn>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
