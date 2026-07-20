@@ -140,7 +140,7 @@ export function PortfolioSection() {
             top: 0,
             height: "100vh",
             overflow: "hidden",
-            background: "#ffffff",
+            background: "#000000",
           }}
         >
           {/* Background layers */}
@@ -213,7 +213,7 @@ export function PortfolioSection() {
                 left: 0,
                 right: 0,
                 height: "80px",
-                background: "linear-gradient(to bottom, #ffffff, transparent)",
+                background: "linear-gradient(to bottom, #000000, transparent)",
               }}
             />
           </div>
@@ -260,7 +260,7 @@ export function PortfolioSection() {
                   style={{
                     lineHeight: "1.1",
                     marginBottom: "5px",
-                    color: "#111111",
+                    color: "#FFFFFF",
                   }}
                 >
                   {siteConfig.portfolio.headline}
@@ -269,7 +269,7 @@ export function PortfolioSection() {
                 {/* Description — two lines as specified */}
                 <div
                   className="text-section-subtitle font-normal"
-                  style={{ lineHeight: "20px", color: "#555555" }}
+                  style={{ lineHeight: "20px", color: "#BFBFBF" }}
                 >
                   {siteConfig.portfolio.description.map((line, i) => (
                     <p key={i} style={{ margin: 1 }}>
