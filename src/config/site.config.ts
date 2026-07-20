@@ -123,15 +123,22 @@ const testimonialMeta = [
 
 const contactFieldIds = ["name", "email", "company", "message"];
 
-const footerCompanyHrefs = ["#about", "#contact"];
-const footerLegalHrefs = ["#", "#"];
-const footerSocialHrefs = ["#", "#", "#"];
+const footerServicesHrefs = [
+  "#services",
+  "#services",
+  "#services",
+  "#services",
+  "#services",
+];
+const footerCompanyHrefs = ["#about", "#team", "#portfolio", "#contact"];
+const footerSocialHrefs = ["#", "#", "#", "#", "#"];
+const footerBottomHrefs = ["#", "#", "#"];
 const footerIconLinks = [
-  telegramIcon,
-  whatsappIcon,
+  xIcon,
   instagramIcon,
   facebookIcon,
-  xIcon,
+  telegramIcon,
+  whatsappIcon,
 ];
 
 /** Composes the structural config from the text dictionary of a given locale. */
@@ -265,13 +272,14 @@ function buildSiteConfig(locale: Locale) {
       firstColumn: dict.footer.firstColumn,
       secondColumn: dict.footer.secondColumn,
       thirdColumn: dict.footer.thirdColumn,
+      tagline: dict.footer.tagline,
+      services: dict.footer.services.map((label, i) => ({
+        label,
+        href: footerServicesHrefs[i],
+      })),
       company: dict.footer.company.map((label, i) => ({
         label,
         href: footerCompanyHrefs[i],
-      })),
-      legal: dict.footer.legal.map((label, i) => ({
-        label,
-        href: footerLegalHrefs[i],
       })),
       contact: dict.footer.contact,
       socials: dict.footer.socials.map((label, i) => ({
@@ -279,6 +287,11 @@ function buildSiteConfig(locale: Locale) {
         href: footerSocialHrefs[i],
         icon: footerIconLinks[i],
       })),
+      bottomLinks: dict.footer.bottomLinks.map((label, i) => ({
+        label,
+        href: footerBottomHrefs[i],
+      })),
+      copyright: dict.footer.copyright,
     },
   };
 }

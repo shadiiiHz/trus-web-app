@@ -258,16 +258,25 @@
   },
 
   "footer": {
-    "firstColumn": "Company",
-    "secondColumn": "Legal",
+    "firstColumn": "Services",
+    "secondColumn": "Company",
     "thirdColumn": "Contact Us",
-    "company": ["About", "Contact"],
-    "legal": ["Privacy Policy", "Terms of Service"],
+    "tagline": "Building Innovative Digital Experiences for Modern Businesses.",
+    "services": [
+      "Website Development",
+      "SEO Services",
+      "Digital Marketing",
+      "Social Media Marketing",
+      "AI Solutions (Trust AI)"
+    ],
+    "company": ["About Us", "Our Team", "Portfolio", "Contact us"],
     "contact": {
       "email": "Info@test100.devops-uni.com",
       "phone": "+98 1223344565",
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
-    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"]
+    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
+    "bottomLinks": ["Privacy Policy", "Terms & Conditions", "Powered by Trust AI"],
+    "copyright": "© {year} TruS. All rights reserved."
   }
 }
