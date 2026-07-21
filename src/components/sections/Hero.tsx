@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, MotionValue } from "framer-motion";
+import { AnimatePresence, motion, MotionValue } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { parseHeadline } from "@/utils/text";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import GradientButton from "../ui/GradientButton";
 // import { BackgroundStars } from '@/components/hero/BackgroundStars'
 
@@ -121,7 +122,7 @@ export function HeroSection({
       </div>
 
       {/* Bottom label */}
-      <BottomLabel badge={data.badge} prefix={data.badgePrefix} />
+      <BottomLabel prefix={data.badgePrefix} />
     </section>
   );
 }
@@ -316,53 +317,86 @@ function CursorBlink() {
   );
 }
 
-function BottomLabel({ badge, prefix }: { badge: string; prefix: string }) {
+function BottomLabel({ prefix }: { prefix: string }) {
+  const titles = siteConfig.services.items.map((item) => item.title);
+
   return (
     <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20 pointer-events-none">
-      <FadeIn delay={1.1} direction="up">
-        <div className="flex items-center gap-3">
-          <span
-            className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: "14px" }}
-          >
-            {prefix}
-          </span>
+      <div className="flex items-center gap-3">
+        <span
+          className="font-body font-medium text-white tracking-[0.22em] uppercase"
+          style={{ fontSize: "14px" }}
+        >
+          {prefix}
+        </span>
 
-          {/* Glowing dot */}
+        {/* Glowing dot */}
+        <span
+          className="relative flex items-center justify-center"
+          style={{ width: "14px", height: "14px" }}
+        >
           <span
-            className="relative flex items-center justify-center"
-            style={{ width: "14px", height: "14px" }}
-          >
-            <span
-              className="absolute rounded-full"
-              style={{
-                inset: "-4px",
-                background:
-                  "radial-gradient(circle, rgba(255,60,60,0.55) 0%, transparent 70%)",
-                filter: "blur(3px)",
-              }}
-            />
-            <span
-              className="relative rounded-full"
-              style={{
-                width: "9px",
-                height: "9px",
-                background: "#ff3333",
-                boxShadow:
-                  "0 0 8px rgba(255,60,60,0.9), 0 0 16px rgba(255,60,60,0.5)",
-              }}
-            />
-          </span>
+            className="absolute rounded-full"
+            style={{
+              inset: "-4px",
+              background:
+                "radial-gradient(circle, rgba(255,60,60,0.55) 0%, transparent 70%)",
+              filter: "blur(3px)",
+            }}
+          />
+          <span
+            className="relative rounded-full"
+            style={{
+              width: "9px",
+              height: "9px",
+              background: "#ff3333",
+              boxShadow:
+                "0 0 8px rgba(255,60,60,0.9), 0 0 16px rgba(255,60,60,0.5)",
+            }}
+          />
+        </span>
 
-          <span
-            className="font-body font-medium text-white tracking-[0.22em] uppercase"
-            style={{ fontSize: "14px" }}
-          >
-            {badge}
-          </span>
-        </div>
-      </FadeIn>
+        <RotatingServiceTitle titles={titles} />
+      </div>
     </div>
+  );
+}
+
+/** Cycles through service titles, crossfading/sliding one into the next. */
+function RotatingServiceTitle({
+  titles,
+  interval = 2200,
+}: {
+  titles: string[];
+  interval?: number;
+}) {
+  const [index, setIndex] = useState(0);
+  const shouldReduce = useReducedMotion();
+
+  useEffect(() => {
+    if (titles.length <= 1) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % titles.length);
+    }, interval);
+    return () => window.clearInterval(id);
+  }, [titles.length, interval]);
+
+  return (
+    <span className="relative grid" style={{ height: "1.3em" }}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={titles[index]}
+          initial={shouldReduce ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={shouldReduce ? undefined : { opacity: 0, y: -8 }}
+          transition={{ duration: shouldReduce ? 0 : 0.35, ease: "easeOut" }}
+          className="col-start-1 row-start-1 font-body font-medium text-white tracking-[0.22em] uppercase whitespace-nowrap"
+          style={{ fontSize: "14px" }}
+        >
+          {titles[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 }
 
