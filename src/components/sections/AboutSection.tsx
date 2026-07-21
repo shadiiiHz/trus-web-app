@@ -39,8 +39,8 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
   );
   const imageOpacity = useTransform(
     imageProgress,
-    [0, 0.08],
     [0, 1],
+    shouldReduceMotion ? [1, 1] : [0.12, 1],
     { clamp: true },
   );
 
@@ -50,7 +50,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
       ref={ref}
       className="relative overflow-hidden"
       aria-label="About TruS"
-      style={{ background: "#C3C3C3" }}
+      style={{ background: "#E3E3E3" }}
     >
       {/* Background layer */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -116,7 +116,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               <FadeIn direction="up" delay={0.1}>
                 <span
                   className="text-section-label font-normal uppercase tracking-[0.22em]"
-                  style={{ color: "var(--color-brand-accent-light)" }}
+                  style={{ color: "#5B2BB9" }}
                 >
                   {data.eyebrow}
                 </span>
@@ -173,26 +173,18 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
 
             {/* Stats row — each card cascades in with its own delay */}
             <div className="flex items-start pt-2">
-              {(
-                data.stats as readonly { value: string; label: string }[]
-              ).map((stat, i) => (
-                <React.Fragment key={stat.value}>
-                  {/* Vertical divider between stats */}
-                  {i > 0 && (
-                    <div
-                      className="shrink-0 self-stretch mx-7"
-                      style={{
-                        width: "1px",
-                      }}
-                    />
-                  )}
-                  <FadeIn
-                    direction="up"
-                    delay={0.66 + i * 0.15}
-                    duration={0.8}
-                    scale={0.95}
-                    margin="0px 0px -20% 0px"
-                  >
+              {(data.stats as readonly { value: string; label: string }[]).map(
+                (stat, i) => (
+                  <React.Fragment key={stat.value}>
+                    {/* Vertical divider between stats */}
+                    {i > 0 && (
+                      <div
+                        className="shrink-0 self-stretch mx-7"
+                        style={{
+                          width: "1px",
+                        }}
+                      />
+                    )}
                     <div className="flex flex-col items-center gap-3">
                       <StatCounter
                         value={stat.value}
@@ -206,9 +198,9 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                         {stat.label}
                       </span>
                     </div>
-                  </FadeIn>
-                </React.Fragment>
-              ))}
+                  </React.Fragment>
+                ),
+              )}
             </div>
           </div>
 
