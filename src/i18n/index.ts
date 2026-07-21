@@ -14,23 +14,29 @@
  */
 import { useSyncExternalStore } from "react";
 import en from "./en.json";
+import fr from "./fr.json";
+import es from "./es.json";
 import de from "./de.json";
+import ru from "./ru.json";
 
 export const defaultLocale = "en" as const;
 
-export const locales = { en, de } as const;
+export const locales = { en, fr, es, de, ru } as const;
 
 export type Locale = keyof typeof locales;
 
 export const localeNames: Record<Locale, string> = {
   en: "English",
+  fr: "Français",
+  es: "Español",
   de: "Deutsch",
+  ru: "Русский",
 };
 
 const STORAGE_KEY = "trus-locale";
 
 function isLocale(value: string | null): value is Locale {
-  return value === "en" || value === "de";
+  return value != null && value in locales;
 }
 
 function readInitialLocale(): Locale {
@@ -89,5 +95,5 @@ export function tr(path: string): string {
   return typeof value === "string" ? value : path;
 }
 
-export { en, de };
+export { en, fr, es, de, ru };
 export default t;

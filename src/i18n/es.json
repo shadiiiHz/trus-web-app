@@ -1,0 +1,277 @@
+{
+  "nav": {
+    "links": ["Inicio", "Nosotros", "Portafolio", "Plantillas", "Servicios", "Contacto"],
+    "cta": "Iniciar sesión"
+  },
+
+  "hero": {
+    "badge": "Desarrollo Web",
+    "badgePrefix": "Servicios",
+    "headline": [
+      "TRUS crea sitios web inteligentes",
+      "para el crecimiento empresarial,",
+      "impulsados por [GrowthAI]"
+    ],
+    "body": "Convierte tu sitio web en un sistema de crecimiento activo 24/7 que atrae clientes, aumenta las ventas y automatiza tu marketing, sin personal adicional.",
+    "cta": {
+      "primary": "Explorar plantillas",
+      "secondary": "Por qué TruS"
+    }
+  },
+
+  "about": {
+    "eyebrow": "NOSOTROS",
+    "headline": ["Descubre más sobre [TruS]"],
+    "body": [
+      "TruS es un estudio digital moderno especializado en sitios web premium en React, integraciones de IA y diseño de movimiento avanzado. Convertimos ideas ambiciosas en productos pulidos y listos para producción.",
+      "Cada proyecto que tocamos se construye desde cero: sin constructores de páginas sobrecargados, sin temas reciclados. Solo código limpio, UX bien pensada y una atención meticulosa al detalle.",
+      "Desde fundadores independientes hasta empresas en crecimiento, ayudamos a nuestros clientes a destacar en línea con sitios web tan rápidos como hermosos."
+    ],
+    "stats": [
+      { "value": "250+", "label": "Proyectos entregados" },
+      { "value": "4.9+", "label": "Valoración de clientes" },
+      { "value": "1.000+", "label": "Clientes satisfechos" }
+    ]
+  },
+
+  "portfolio": {
+    "eyebrow": "PORTAFOLIO",
+    "headline": "EXPLORA NUESTROS PROYECTOS",
+    "description": [
+      "Una selección de nuestros trabajos recientes que muestra creatividad,",
+      "rendimiento y atención al detalle."
+    ],
+    "seeMore": "Ver más",
+    "projects": [
+      { "name": "Arquivo", "category": "Corporativo" },
+      { "name": "Avansi", "category": "SaaS" },
+      { "name": "Slingshot", "category": "Producto" },
+      { "name": "Nexora", "category": "E-Commerce" },
+      { "name": "DataFlow", "category": "Panel de control" },
+      { "name": "TechVault", "category": "Aplicación Web" },
+      { "name": "Orbis", "category": "Portafolio" },
+      { "name": "Luminary", "category": "Agencia" }
+    ]
+  },
+
+  "whyUs": {
+    "eyebrow": "POR QUÉ NOSOTROS",
+    "headline": ["Por qué las empresas eligen TruS"],
+    "cards": [
+      {
+        "number": "01",
+        "title": "Calidad de diseño premium",
+        "description": "Cada plantilla está hecha a mano con atención meticulosa al detalle, no generada automáticamente ni reciclada."
+      },
+      {
+        "number": "02",
+        "title": "Diseñado para el rendimiento",
+        "description": "Código React limpio, sin excesos. Tu sitio carga rápido y destaca en cada métrica."
+      },
+      {
+        "number": "03",
+        "title": "Totalmente personalizable",
+        "description": "Tokens de diseño completos y archivos de configuración hacen que el rebranding y la adaptación del contenido sean triviales."
+      },
+      {
+        "number": "04",
+        "title": "Tú eres dueño de todo",
+        "description": "Propiedad completa del código fuente. Sin suscripciones, sin dependencia, sin costos ocultos jamás."
+      }
+    ]
+  },
+
+  "team": {
+    "eyebrow": "CONOCE A NUESTRO EQUIPO",
+    "heading": [
+      "Conoce a los estrategas expertos y",
+      "mentes creativas que impulsan",
+      "un crecimiento medible"
+    ],
+    "members": [
+      {
+        "name": "Sara Ahmadi",
+        "role": "Diseñadora UI/UX",
+        "description": "Diseña experiencias intuitivas y atractivas centradas en la claridad, la usabilidad y la interacción moderna."
+      },
+      {
+        "name": "Daniel Weber",
+        "role": "Desarrollador Web",
+        "description": "Construye sistemas front-end escalables con arquitectura limpia y desarrollo enfocado en el rendimiento."
+      },
+      {
+        "name": "Lina Farhadi",
+        "role": "Estratega de marca",
+        "description": "Da forma a identidades digitales que ayudan a las empresas a comunicarse con claridad y crecer con confianza."
+      },
+      {
+        "name": "Nina Roberts",
+        "role": "Líder de contenido",
+        "description": "Crea sistemas de contenido significativos que conectan a las marcas con su audiencia de manera efectiva."
+      }
+    ]
+  },
+
+  "services": {
+    "eyebrow": "SERVICIOS",
+    "heading": "NUESTROS SERVICIOS",
+    "description": "Diseñamos y construimos sitios web modernos que ayudan a las empresas a crecer y destacar.",
+    "items": [
+      {
+        "title": "SEO",
+        "description": "Mejora la visibilidad con estrategias de búsqueda inteligentes y tráfico orgánico."
+      },
+      {
+        "title": "Desarrollo Web",
+        "description": "Construcción de sitios web rápidos, responsivos y escalables con tecnologías modernas."
+      },
+      {
+        "title": "Diseño Web",
+        "description": "Diseño de interfaces modernas y fáciles de usar que mejoran la usabilidad y el compromiso."
+      },
+      {
+        "title": "Generador de leads",
+        "description": "Creación de sistemas enfocados en la conversión que ayudan a convertir visitantes en clientes potenciales."
+      },
+      {
+        "title": "Agente de IA",
+        "description": "Creación de asistentes inteligentes y automatizaciones que respaldan los flujos de trabajo empresariales."
+      },
+      {
+        "title": "Generación de contenido",
+        "description": "Creación de contenido digital atractivo que conecta a las marcas con su audiencia."
+      }
+    ]
+  },
+
+  "templateCategories": {
+    "eyebrow": "Plantillas de diseño",
+    "heading": "Categorías de plantillas",
+    "description": "Explora plantillas diseñadas profesionalmente para empresas modernas, startups y productos digitales.",
+    "seeMore": "Ver más",
+    "RightWord": "Diseños",
+    "LeftWord": "Plantillas",
+    "tagline": ["EXPLORANDO IDEAS A TRAVÉS DE", "LA PRÁCTICA DIARIA DEL DISEÑO."],
+    "sectionDes": [
+      "Conceptos, exploraciones y experimentos ",
+      "de interfaz compartidos abiertamente como parte ",
+      "de nuestro proceso creativo."
+    ],
+    "categories": [
+      { "id": "lawyers", "label": "Abogados" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Bienes raíces" },
+      { "id": "clinics", "label": "Clínicas" },
+      { "id": "barbershops", "label": "Barberías" },
+      { "id": "all", "label": "Todos" }
+    ],
+    "templates": {
+      "lawyers": [{ "name": "LegalEdge Pro", "tag": "Bufete de abogados" }],
+      "fitness": [
+        { "name": "GymCore", "tag": "Gimnasio" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Entrenamiento personal" }
+      ],
+      "realEstate": [{ "name": "Domaine", "tag": "Viviendas de lujo" }],
+      "clinics": [
+        { "name": "MediCore", "tag": "Medicina general" },
+        { "name": "DentaPlus", "tag": "Clínica dental" }
+      ],
+      "barbershops": [
+        { "name": "BladeCraft", "tag": "Barbería clásica" },
+        { "name": "Sharp & Co.", "tag": "Cuidado de lujo" }
+      ],
+      "all": [
+        { "name": "LegalEdge Pro", "tag": "Bufete de abogados" },
+        { "name": "GymCore", "tag": "Gimnasio" },
+        { "name": "FitPulse Studio", "tag": "Yoga" },
+        { "name": "EliteBody Pro", "tag": "Entrenamiento personal" },
+        { "name": "Domaine", "tag": "Viviendas de lujo" },
+        { "name": "MediCore", "tag": "Medicina general" },
+        { "name": "DentaPlus", "tag": "Clínica dental" },
+        { "name": "BladeCraft", "tag": "Barbería clásica" },
+        { "name": "Sharp & Co.", "tag": "Cuidado de lujo" }
+      ]
+    }
+  },
+
+  "contact": {
+    "eyebrow": "CONTÁCTANOS",
+    "heading": "Iniciemos una conversación",
+    "card": {
+      "tagline": "¿Tienes un proyecto en mente?",
+      "cta": "Reserva una llamada",
+      "office": "2847 Oak Street, San Francisco, CA 94102",
+      "phone": "+98 1223344565",
+      "email": "Info@test100.devops-uni.com"
+    },
+    "form": {
+      "fields": [
+        { "label": "Nombre completo", "placeholder": "Ingresa tu nombre" },
+        { "label": "Correo electrónico", "placeholder": "Ingresa tu correo electrónico" },
+        { "label": "Nombre de la empresa", "placeholder": "Ingresa el nombre de la empresa" },
+        { "label": "Mensaje", "placeholder": "Ingresa tu mensaje" }
+      ],
+      "submit": "Enviar correo"
+    }
+  },
+
+  "testimonials": {
+    "eyebrow": "TESTIMONIOS",
+    "heading": "HISTORIAS DE ÉXITO DE CLIENTES",
+    "subtitle": [
+      "Confiado por empresas innovadoras en todo el mundo, hemos ayudado a",
+      "equipos a desbloquear el crecimiento y generar un impacto duradero."
+    ],
+    "items": [
+      {
+        "name": "Sarah Mitchell",
+        "role": "Directora de Marketing, Lumora Health",
+        "quote": "Altero transformó nuestra forma de abordar la estrategia. Sus ideas fueron precisas, aplicables y realmente aceleraron nuestro crecimiento."
+      },
+      {
+        "name": "Arjun Mehta",
+        "role": "Desarrollador de software",
+        "quote": "El equipo aportó claridad a desafíos complejos y entregó resultados medibles. Trabajar con ellos se sintió como una extensión de nuestro propio equipo."
+      },
+      {
+        "name": "Emily Zhao",
+        "role": "Jefa de Operaciones, VitaHealth",
+        "quote": "Nuestra colaboración con Altero llevó a una mejora del 35% en eficiencia. Su proceso fue fluido y profundamente basado en datos."
+      },
+      {
+        "name": "Daniel Reyes",
+        "role": "CEO, NovaTech Solutions",
+        "quote": "Profesionales, perspicaces y orientados a resultados. Altero nos ayudó a escalar de forma más inteligente y operar con mayor eficiencia."
+      },
+      {
+        "name": "Julie Reed",
+        "role": "Fundadora, Lumora Health",
+        "quote": "Trabajar con Altero se sintió sin esfuerzo. Entendieron rápidamente nuestros desafíos y ofrecieron soluciones que funcionaron."
+      }
+    ]
+  },
+
+  "footer": {
+    "firstColumn": "Servicios",
+    "secondColumn": "Empresa",
+    "thirdColumn": "Contáctanos",
+    "tagline": "Creando experiencias digitales innovadoras para empresas modernas.",
+    "services": [
+      "Desarrollo de sitios web",
+      "Servicios SEO",
+      "Marketing digital",
+      "Marketing en redes sociales",
+      "Soluciones de IA (Trust AI)"
+    ],
+    "company": ["Nosotros", "Nuestro equipo", "Portafolio", "Contáctanos"],
+    "contact": {
+      "email": "Info@test100.devops-uni.com",
+      "phone": "+98 1223344565",
+      "address": "2847 Oak Street, San Francisco, CA 94102"
+    },
+    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
+    "bottomLinks": ["Política de privacidad", "Términos y condiciones", "Desarrollado por Trust AI"],
+    "copyright": "© {year} TruS. Todos los derechos reservados."
+  }
+}

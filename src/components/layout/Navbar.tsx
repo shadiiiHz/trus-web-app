@@ -190,7 +190,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             <GradientButton
               text={data.cta.label}
               href={data.cta.href}
-              className="min-w-32 justify-center"
+              className="w-34 justify-center"
             />
           </div>
 
