@@ -211,10 +211,10 @@ export function TestimonialsSection() {
   // eslint-disable-next-line react-hooks/refs
   const prog = makeProgressFn(containerRef)
 
-  // Globe + header: fades 1→0 between progress 0.08 and 0.50
+  // Globe + header: fades 1→0 between progress 0.78 and 1.00 (end of section)
   const globeHeaderOpacity = useTransform(scrollYMV, (y) => {
     const p = prog(y)
-    return Math.max(0, Math.min(1, 1 - (p - 0.08) / (0.50 - 0.08)))
+    return Math.max(0, Math.min(1, 1 - (p - 0.78) / (1.00 - 0.75)))
   })
 
   // Dark overlay: ramps 0→0.55 between progress 0.40 and 0.80
