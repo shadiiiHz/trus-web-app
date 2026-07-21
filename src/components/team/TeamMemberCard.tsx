@@ -50,22 +50,39 @@ export function TeamMemberCard({
       onMouseLeave={onMouseLeave}
       onClick={onClick}
     >
-      {/* Image — grayscale(100%) idle/dim, partial colour active, full colour hovered */}
-      <motion.img
-        src={image}
-        alt={name}
-        loading="lazy"
-        draggable={false}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-        animate={{
-          filter: isHovered
-            ? 'grayscale(0%)'
-            : isActive
-            ? 'grayscale(55%)'
-            : 'grayscale(100%)',
-        }}
-        transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-      />
+      {/* Image — grayscale(100%) idle/dim, partial colour active, full colour hovered.
+          Keyed by src so a carousel swap crossfades the old/new photo instead of popping. */}
+      <AnimatePresence initial={false}>
+        <motion.img
+          key={image}
+          src={image}
+          alt={name}
+          loading="lazy"
+          draggable={false}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            filter: isHovered
+              ? 'grayscale(0%)'
+              : isActive
+              ? 'grayscale(55%)'
+              : 'grayscale(100%)',
+          }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+            filter: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
+          }}
+        />
+      </AnimatePresence>
 
       {/* Purple glow border */}
       <motion.div

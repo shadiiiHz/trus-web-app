@@ -60,42 +60,42 @@ const projectMeta = [
 const teamMeta = [
   {
     id: "sara",
-    image: "/team/member1.png",
+    image: "https://picsum.photos/seed/member-sara/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "daniel",
-    image: "/team/member2.png",
+    image: "https://picsum.photos/seed/member-daniel/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "lina",
-    image: "/team/member3.png",
+    image: "https://picsum.photos/seed/member-lina/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "nina",
-    image: "/team/member4.png",
+    image: "https://picsum.photos/seed/member-nina/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "omar",
-    image: "/team/member4.png",
+    image: "https://picsum.photos/seed/member-omar/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "elena",
-    image: "/team/member3.png",
+    image: "https://picsum.photos/seed/member-elena/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "marcus",
-    image: "/team/member2.png",
+    image: "https://picsum.photos/seed/member-marcus/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
   {
     id: "aisha",
-    image: "/team/member1.png",
+    image: "https://picsum.photos/seed/member-aisha/400/480",
     socials: { instagram: "#", twitter: "#", linkedin: "#" },
   },
 ];

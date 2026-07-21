@@ -108,6 +108,26 @@
         "name": "Nina Roberts",
         "role": "Responsable de contenu",
         "description": "Crée des systèmes de contenu pertinents qui connectent efficacement les marques à leur audience."
+      },
+      {
+        "name": "Omar Haddad",
+        "role": "Ingénieur backend",
+        "description": "Conçoit des systèmes serveur robustes et sécurisés qui évoluent avec l'entreprise."
+      },
+      {
+        "name": "Elena Petrova",
+        "role": "Stratège marketing",
+        "description": "Crée des campagnes basées sur les données qui transforment l'attention en croissance mesurable."
+      },
+      {
+        "name": "Marcus Chen",
+        "role": "Chef de produit",
+        "description": "Aligne les équipes et les feuilles de route pour livrer des fonctionnalités que les utilisateurs veulent vraiment."
+      },
+      {
+        "name": "Aisha Khan",
+        "role": "Spécialiste SEO",
+        "description": "Améliore la visibilité et la portée organique grâce à un SEO technique et éditorial."
       }
     ]
   },

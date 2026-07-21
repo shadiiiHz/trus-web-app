@@ -1,84 +1,140 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type RefObject } from "react";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
 import {
   TeamMemberCard,
   type CardState,
+  type TeamMemberCardProps,
 } from "@/components/team/TeamMemberCard";
 import { TeamInfoPanel } from "@/components/team/TeamInfoPanel";
-import { motion} from "framer-motion";
+import { TeamCarouselArrow } from "@/components/team/TeamCarouselArrow";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValueEvent,
+} from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 // Type helpers
 type Member = (typeof siteConfig.team.members)[number];
+type CardBindings = Omit<TeamMemberCardProps, "style">;
 
-export function TeamSection() {
-  const { eyebrow, heading, members } = siteConfig.team;
+// All three columns share one width so the row-1 gap (card0 ↔ card1) and
+// row-2 gap (card2 ↔ card3) read as the same 20px — a card sitting in a
+// wider/narrower column than its neighbour would throw the two off.
+const CARD_W = 337;
+const CARD_H = 294;
+const ENTRANCE_DISTANCE = 640;
 
-  // Interaction state
-  // hoveredId = null on desktop when no card is hovered → defaults to members[0]
-  // On mobile: click to select a member (click same to deselect)
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [mobileId, setMobileId] = useState<string | null>(null);
+interface TeamDesktopGridProps {
+  eyebrow: string;
+  heading: string[];
+  /** The 4 members currently visible on desktop (one page of the 8-member roster). */
+  visibleMembers: Member[];
+  hoveredId: string | null;
+  togglePage: () => void;
+  activeMember: Member;
+  cardProps: (m: Member) => CardBindings;
+  sectionRef: RefObject<HTMLElement | null>;
+}
 
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+// Mounted only once isDesktop flips true. sectionRef points at the always-
+// present <section> ancestor, so useScroll gets a populated ref immediately
+// (a ref local to this component would attach to a still-null node on first
+// mount, since this component itself only mounts after the desktop check).
+function TeamDesktopGrid({
+  eyebrow,
+  heading,
+  visibleMembers,
+  hoveredId,
+  togglePage,
+  activeMember,
+  cardProps,
+  sectionRef,
+}: TeamDesktopGridProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const [cardsSettled, setCardsSettled] = useState(false);
 
-  // Active member: hovered (desktop) → mobile selected → first member default
-  const activeId = hoveredId ?? mobileId ?? members[0].id;
-  const activeMember = (members.find((m) => m.id === activeId) ??
-    members[0]) as Member;
-
-  // Card state helper
-  function cardState(id: string): CardState {
-    if (hoveredId === id) return "hovered";
-    if (hoveredId !== null) return "dim";
-    if (mobileId === id) return "active";
-    if (mobileId === null && id === members[0].id) return "active";
-    return "idle";
-  }
-
-  function handleMobileClick(id: string) {
-    setMobileId((prev) => (prev === id ? null : id));
-  }
-
-  // Shared card bindings
-  const cardProps = (m: Member) => ({
-    image: m.image,
-    name: m.name,
-    state: cardState(m.id),
-    onMouseEnter: () => setHoveredId(m.id),
-    onMouseLeave: () => setHoveredId(null),
-    onClick: () => handleMobileClick(m.id),
+  // Tracks the section's entire time on screen, start to finish — not just
+  // the entrance — so scrolling past the top reverses the same motion the
+  // entrance used, and scrolling back down replays it.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
   });
 
-  // Desktop layout
-  //
-  // Diagonal staircase composition:
-  //   col →    [360px]      [1fr ≈380px]   [1fr ≈380px]
-  //   row 1:   heading      card[0]         card[1]
-  //   row 2:   card[2]      card[3]         info panel
-  //
-  // All 4 cards share identical dimensions (380px wide × 300px tall)
-  // set by the grid template — no explicit per-card width needed.
-  const CARD_H = 300;
+  // 1 = off-screen, 0 = settled in place. Plateaus through the middle of the
+  // section's on-screen time (roughly when it's centered in the viewport),
+  // so cards arrive, hold while the section reads as "in view", then reverse
+  // back out as it exits.
+  const tent = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [1, 0, 0, 1]);
 
-  const desktopLayout = (
+  // Spring-smoothed so the motion visibly catches up to scroll instead of
+  // snapping straight to it — slower, and legible as movement rather than a pop.
+  const smoothTent = useSpring(tent, { stiffness: 55, damping: 20, mass: 0.9 });
+
+  useMotionValueEvent(smoothTent, "change", (v) => {
+    setCardsSettled(v < 0.02);
+  });
+
+  const rightX = useTransform(smoothTent, (v) => v * ENTRANCE_DISTANCE);
+  const leftX = useTransform(smoothTent, (v) => v * -ENTRANCE_DISTANCE);
+  const cardOpacity = useTransform(smoothTent, (v) =>
+    Math.max(0, Math.min(1, 1 - v)),
+  );
+  const panelY = useTransform(smoothTent, (v) => v * 24);
+
+  const arrowsEnabled = shouldReduceMotion || cardsSettled;
+
+  // Diagonal staircase composition, centered as a block within the section:
+  //   col →      [337px]      [337px]        [337px]
+  //   row 0:     —            —               arrows
+  //   row 1:     heading      card[0]         card[1]
+  //   row 2:     card[2]      card[3]         info panel
+  //
+  // Top row (card[0], card[1]) slides in from/out to off-screen right;
+  // bottom row (card[2], card[3]) slides in from/out to off-screen left.
+  return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "360px 1fr 1fr",
-        gridTemplateRows: `${CARD_H}px ${CARD_H}px`,
+        gridTemplateColumns: `${CARD_W}px ${CARD_W}px ${CARD_W}px`,
+        gridTemplateRows: `44px ${CARD_H}px ${CARD_H}px`,
         gap: "20px",
+        width: "fit-content",
+        margin: "0 auto",
       }}
     >
-      {/* [0,0] Eyebrow + heading */}
+      {/* [row 0, col 3] Carousel arrows — sit above the top-right card */}
       <div
         style={{
+          gridColumn: 3,
+          gridRow: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: "12px",
+        }}
+      >
+        <TeamCarouselArrow
+          direction="left"
+          onClick={togglePage}
+          disabled={!arrowsEnabled}
+        />
+        <TeamCarouselArrow
+          direction="right"
+          onClick={togglePage}
+          disabled={!arrowsEnabled}
+        />
+      </div>
+
+      {/* [row 1, col 1] Eyebrow + heading */}
+      <div
+        style={{
+          gridColumn: 1,
+          gridRow: 2,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -106,7 +162,7 @@ export function TeamSection() {
             className="text-section-title"
             style={{
               // Section-title system (DM Sans / 700) but capped: this editorial
-              // heading lives in a fixed 360px column, so the full 42px clamp
+              // heading lives in a fixed 337px column, so the full 42px clamp
               // would overflow. Size stays tuned to fit the column.
               fontSize: "clamp(24px, 2.3vw, 32px)",
               lineHeight: 1.18,
@@ -121,8 +177,8 @@ export function TeamSection() {
         <div
           style={{
             position: "absolute",
-            top: -100,
-            left: -120,
+            top: -40,
+            left: -80,
             width: "300px",
             height: "300px",
             zIndex: -1,
@@ -170,45 +226,151 @@ export function TeamSection() {
         </div>
       </div>
 
-      {/* [0,1] Card[0] — top row, left card */}
-      <FadeIn direction="up" delay={0.22}>
+      {/* [row 1, col 2] Card[0] — top row, tracks scroll in from/out to off-screen right */}
+      <motion.div
+        style={{
+          gridColumn: 2,
+          gridRow: 2,
+          x: shouldReduceMotion ? 0 : rightX,
+          opacity: shouldReduceMotion ? 1 : cardOpacity,
+        }}
+      >
         <TeamMemberCard
-          {...cardProps(members[0])}
+          {...cardProps(visibleMembers[0])}
           style={{ width: "100%", height: CARD_H }}
         />
-      </FadeIn>
+      </motion.div>
 
-      {/* [0,2] Card[1] — top row, right card */}
-      <FadeIn direction="up" delay={0.3}>
+      {/* [row 1, col 3] Card[1] — top row, tracks scroll in from/out to off-screen right */}
+      <motion.div
+        style={{
+          gridColumn: 3,
+          gridRow: 2,
+          x: shouldReduceMotion ? 0 : rightX,
+          opacity: shouldReduceMotion ? 1 : cardOpacity,
+        }}
+      >
         <TeamMemberCard
-          {...cardProps(members[1])}
+          {...cardProps(visibleMembers[1])}
           style={{ width: "100%", height: CARD_H }}
         />
-      </FadeIn>
+      </motion.div>
 
-      {/* [1,0] Card[2] — bottom row, left card */}
-      <FadeIn direction="up" delay={0.38}>
+      {/* [row 2, col 1] Card[2] — bottom row, tracks scroll in from/out to off-screen left */}
+      <motion.div
+        style={{
+          gridColumn: 1,
+          gridRow: 3,
+          x: shouldReduceMotion ? 0 : leftX,
+          opacity: shouldReduceMotion ? 1 : cardOpacity,
+        }}
+      >
         <TeamMemberCard
-          {...cardProps(members[2])}
+          {...cardProps(visibleMembers[2])}
           style={{ width: "100%", height: CARD_H }}
         />
-      </FadeIn>
+      </motion.div>
 
-      {/* [1,1] Card[3] — bottom row, centre card */}
-      <FadeIn direction="up" delay={0.46}>
+      {/* [row 2, col 2] Card[3] — bottom row, tracks scroll in from/out to off-screen left */}
+      <motion.div
+        style={{
+          gridColumn: 2,
+          gridRow: 3,
+          x: shouldReduceMotion ? 0 : leftX,
+          opacity: shouldReduceMotion ? 1 : cardOpacity,
+        }}
+      >
         <TeamMemberCard
-          {...cardProps(members[3])}
+          {...cardProps(visibleMembers[3])}
           style={{ width: "100%", height: CARD_H }}
         />
-      </FadeIn>
+      </motion.div>
 
-      {/* [1,2] Info panel — bottom row, right */}
-      <FadeIn direction="up" delay={0.54}>
-        <div style={{ height: CARD_H, display: "flex", alignItems: "center" }}>
-          <TeamInfoPanel member={activeMember} />
-        </div>
-      </FadeIn>
+      {/* [row 2, col 3] Info panel */}
+      <motion.div
+        style={{
+          gridColumn: 3,
+          gridRow: 3,
+          height: CARD_H,
+          display: "flex",
+          alignItems: "center",
+          y: shouldReduceMotion ? 0 : panelY,
+          opacity: shouldReduceMotion ? 1 : cardOpacity,
+        }}
+      >
+        <TeamInfoPanel member={activeMember} />
+      </motion.div>
     </div>
+  );
+}
+
+export function TeamSection() {
+  const { eyebrow, heading, members } = siteConfig.team;
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Interaction state
+  // hoveredId = null on desktop when no card is hovered → defaults to the
+  // first member of the visible page. On mobile: click to select (click
+  // same to deselect).
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [mobileId, setMobileId] = useState<string | null>(null);
+
+  // Carousel state — arrows page the desktop grid between the first 4 and
+  // last 4 members of the roster (8 members total, 4 shown at a time).
+  const [page, setPage] = useState<0 | 1>(0);
+  const togglePage = () => {
+    setPage((prev) => (prev === 0 ? 1 : 0));
+    setHoveredId(null);
+  };
+  const visibleMembers = members.slice(page * 4, page * 4 + 4);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // Active member: hovered (desktop) → mobile selected → first visible default
+  const activeId = hoveredId ?? mobileId ?? visibleMembers[0].id;
+  const activeMember = (members.find((m) => m.id === activeId) ??
+    visibleMembers[0]) as Member;
+
+  // Card state helper
+  function cardState(id: string): CardState {
+    if (hoveredId === id) return "hovered";
+    if (hoveredId !== null) return "dim";
+    if (mobileId === id) return "active";
+    if (mobileId === null && id === visibleMembers[0].id) return "active";
+    return "idle";
+  }
+
+  function handleMobileClick(id: string) {
+    setMobileId((prev) => (prev === id ? null : id));
+  }
+
+  // Shared card bindings
+  const cardProps = (m: Member) => ({
+    image: m.image,
+    name: m.name,
+    state: cardState(m.id),
+    onMouseEnter: () => setHoveredId(m.id),
+    onMouseLeave: () => setHoveredId(null),
+    onClick: () => handleMobileClick(m.id),
+  });
+
+  const desktopLayout = (
+    <TeamDesktopGrid
+      eyebrow={eyebrow}
+      heading={heading}
+      visibleMembers={visibleMembers}
+      hoveredId={hoveredId}
+      togglePage={togglePage}
+      activeMember={activeMember}
+      cardProps={cardProps}
+      sectionRef={sectionRef}
+    />
   );
 
   // Mobile layout
@@ -288,6 +450,7 @@ export function TeamSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="team"
       aria-label="Meet Our Team"
       style={{

@@ -78,7 +78,7 @@ export function TeamInfoPanel({ member }: TeamInfoPanelProps) {
               fontSize:   '24px',
               fontWeight: 700,
               lineHeight: '40px',
-              color:      '#FFFFFF',
+              color:      '#9F7EE1',
               margin:     '0 0 10px 0',
             }}
           >

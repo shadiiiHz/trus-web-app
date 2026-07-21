@@ -115,6 +115,26 @@
         "name": "Nina Roberts",
         "role": "Content-Leitung",
         "description": "Entwickelt aussagekräftige Content-Systeme, die Marken effektiv mit ihrem Publikum verbinden."
+      },
+      {
+        "name": "Omar Haddad",
+        "role": "Backend-Entwickler",
+        "description": "Entwickelt robuste, sichere Server-Systeme, die mit dem Unternehmen mitwachsen."
+      },
+      {
+        "name": "Elena Petrova",
+        "role": "Marketingstrategin",
+        "description": "Entwickelt datengestützte Kampagnen, die Aufmerksamkeit in messbares Wachstum verwandeln."
+      },
+      {
+        "name": "Marcus Chen",
+        "role": "Produktmanager",
+        "description": "Bringt Teams und Roadmaps in Einklang, um Funktionen zu liefern, die Nutzer wirklich wollen."
+      },
+      {
+        "name": "Aisha Khan",
+        "role": "SEO-Spezialistin",
+        "description": "Verbessert Sichtbarkeit und organische Reichweite durch technisches und inhaltsgetriebenes SEO."
       }
     ]
   },
