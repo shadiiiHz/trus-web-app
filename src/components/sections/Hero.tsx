@@ -381,8 +381,23 @@ function RotatingServiceTitle({
     return () => window.clearInterval(id);
   }, [titles.length, interval]);
 
+  // Reserve width for the longest title so the box never shrinks/grows —
+  // that keeps the prefix + dot to its left perfectly still while only
+  // this side animates.
+  const longestTitle = titles.reduce(
+    (longest, title) => (title.length > longest.length ? title : longest),
+    ""
+  );
+
   return (
-    <span className="relative grid" style={{ height: "1.3em" }}>
+    <span className="relative inline-grid" style={{ height: "1.3em" }}>
+      <span
+        aria-hidden
+        className="invisible col-start-1 row-start-1 font-body font-medium tracking-[0.22em] uppercase whitespace-nowrap"
+        style={{ fontSize: "14px" }}
+      >
+        {longestTitle}
+      </span>
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={titles[index]}
@@ -390,7 +405,7 @@ function RotatingServiceTitle({
           animate={{ opacity: 1, y: 0 }}
           exit={shouldReduce ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: shouldReduce ? 0 : 0.35, ease: "easeOut" }}
-          className="col-start-1 row-start-1 font-body font-medium text-white tracking-[0.22em] uppercase whitespace-nowrap"
+          className="col-start-1 row-start-1 text-left font-body font-medium text-white tracking-[0.22em] uppercase whitespace-nowrap"
           style={{ fontSize: "14px" }}
         >
           {titles[index]}
