@@ -115,8 +115,8 @@ export function WhyUsSection() {
                 position:        'absolute',
                 inset:           0,
                 backgroundImage:
-                  'linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px), ' +
-                  'linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px)',
+                  'linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px), ' +
+                  'linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px)',
                 backgroundSize:  '120px 120px',
                 // Radial mask: fully opaque at centre, fully transparent at edges
                 maskImage:        'radial-gradient(ellipse 70% 60% at 50% 55%, black 25%, transparent 100%)',
@@ -239,7 +239,7 @@ export function WhyUsSection() {
             */}
             <div
               className="flex flex-wrap lg:flex-nowrap justify-center"
-              style={{ gap: '20px' }}
+              style={{ gap: '0px' }}
             >
               {/* Desktop — scroll-animated */}
               {cards.map((card, i) => {
