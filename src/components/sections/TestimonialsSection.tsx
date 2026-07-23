@@ -211,10 +211,12 @@ export function TestimonialsSection() {
   // eslint-disable-next-line react-hooks/refs
   const prog = makeProgressFn(containerRef)
 
-  // Globe + header: fades 1→0 between progress 0.78 and 1.00 (end of section)
+  // Globe + header: dims from 1→0.35 between progress 0.78 and 1.00 (end of section)
+  // Never fully disappears — stays visible, just fainter, through the end of the scroll.
   const globeHeaderOpacity = useTransform(scrollYMV, (y) => {
     const p = prog(y)
-    return Math.max(0, Math.min(1, 1 - (p - 0.78) / (1.00 - 0.75)))
+    const t = Math.max(0, Math.min(1, (p - 0.78) / (1.00 - 0.78)))
+    return 1 - t * 0.65
   })
 
   // Dark overlay: ramps 0→0.55 between progress 0.40 and 0.80
@@ -329,12 +331,12 @@ export function TestimonialsSection() {
               }}
             />
 
-            {/* Vignette — fades globe edges into the section background; no visible rectangle */}
+            {/* Dim layer over the globe — keeps header text readable against the bright video */}
             <div
               style={{
                 position:      'absolute',
                 inset:         0,
-                // background:    'radial-gradient(ellipse 50% 50% at 50% 50%, transparent 42%, rgba(7,7,13,0.55) 62%, rgba(7,7,13,1.00) 76%)',
+                background:    'rgba(7,7,13,0.46)',
                 pointerEvents: 'none',
               }}
             />
