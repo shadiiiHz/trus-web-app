@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
 
 /**
- * ContactSection — white section with info card + contact form.
+ * ContactSection — #E3E3E3 section with info card + contact form.
  *
  * Crystal T logic has been removed (paused for future redesign).
  * The info card border glow now activates via scroll:
@@ -24,7 +24,7 @@ export function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      style={{ position: 'relative', background: '#FFFFFF', overflow: 'visible' }}
+      style={{ position: 'relative', background: '#E3E3E3', overflow: 'visible' }}
     >
       {/* Content */}
       <div
@@ -64,10 +64,10 @@ export function ContactSection() {
         {/* Two-column layout */}
         <div
           className="flex flex-col lg:flex-row"
-          style={{ gap: '48px', alignItems: 'flex-start' }}
+          style={{ gap: '48px', alignItems: 'stretch' }}
         >
           {/* Left — info card */}
-          <div style={{ flexShrink: 0, width: 'min(380px, 100%)' }}>
+          <div style={{ flexShrink: 0, width: 'min(386px, 100%)' }}>
             <ContactInfoCard
               tagline={card.tagline}
               cta={card.cta}

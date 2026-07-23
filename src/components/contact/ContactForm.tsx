@@ -53,7 +53,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
       <form
         className="trus-contact-form"
         onSubmit={(e) => e.preventDefault()}
-        style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
       >
         {fields.map((field) => (
           <div key={field.id}>
@@ -78,7 +78,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
                 name={field.id}
                 placeholder={field.placeholder}
                 value={values[field.id]}
-                rows={5}
+                rows={3}
                 onChange={(e) => set(field.id, e.target.value)}
                 style={inputBase}
               />

@@ -15,7 +15,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
     // tel: link derived dynamically from the displayed phone value — no hardcoded number
     const telHref = `tel:${phone.replace(/\s+/g, "")}`;
     return (
-      <div ref={ref} style={{ position: "relative" }}>
+      <div ref={ref} style={{ position: "relative", height: "100%" }}>
         {/* Outer ambient glow — very subtle on white background */}
         <motion.div
           aria-hidden="true"
@@ -36,9 +36,11 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
         <div
           style={{
             position: "relative",
+            height: "100%",
             padding: "1px",
             borderRadius: "17px",
             overflow: "hidden",
+            boxSizing: "border-box",
           }}
         >
           {/* Static inactive border — always present */}
@@ -138,11 +140,13 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
               zIndex: 2,
               borderRadius: "16px",
               background:
-                "radial-gradient(circle at center, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.92) 70%, rgba(255,255,255,1) 100%)",
+                "radial-gradient(circle at center, rgba(227,227,227,0.65) 0%, rgba(227,227,227,0.92) 70%, rgba(227,227,227,1) 100%)",
               padding: "32px 28px 28px",
               display: "flex",
               flexDirection: "column",
-              minHeight: "430px",
+              height: "100%",
+              minHeight: "448px",
+              boxSizing: "border-box",
             }}
           >
             {/* Tagline */}
