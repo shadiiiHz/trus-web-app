@@ -32,16 +32,19 @@ export function HeroSection({
 
       {/* Main content grid */}
       <div
-        className="relative z-10 mx-auto w-full max-w-300 px-5 flex items-center"
+        className="relative z-10 mx-auto w-full max-w-300 px-5 flex"
         style={{
           minHeight: "100svh",
           paddingTop: "88px",
           paddingBottom: "80px",
         }}
       >
-        <div className="grid w-full grid-cols-1 lg:grid-cols-[65%_80%] items-center gap-4">
+        <div
+          className="grid w-full grid-cols-1 lg:grid-cols-[1fr_1.3fr] items-center"
+          style={{ gridTemplateRows: "1fr" }}
+        >
           {/* LEFT COLUMN — copy */}
-          <div className="flex flex-col gap-6 lg:gap-7">
+          <div className="relative z-20 flex flex-col gap-6 lg:gap-7">
             <h1 className="flex flex-col gap-1">
               {data.headline.map((line, i) => {
                 const segs = parseHeadline(line as string);
@@ -106,14 +109,14 @@ export function HeroSection({
             </FadeIn>
           </div>
 
-          {/* RIGHT COLUMN — video placeholder (hidden on mobile, lg+ only) */}
+          {/* RIGHT COLUMN — video (hidden on mobile, lg+ only). self-stretch
+              fills the full row height (overriding the grid's items-center)
+              so the video covers its entire half edge-to-edge; overflow-hidden
+              still hard-clips it to this half. */}
           <motion.div
-            className="hidden lg:flex items-center justify-center"
+            className="relative z-0 hidden lg:flex self-stretch overflow-hidden"
             style={{
               opacity: orbitOpacity,
-              x: 20,
-              scale: 1.1,
-              transformOrigin: "center right",
             }}
           >
             <HeroVideo onReady={onVideoReady} />
@@ -127,27 +130,7 @@ export function HeroSection({
   );
 }
 
-/**
- * Temporary video placeholder — right-side Hero visual.
- *
- * "Floating in space" technique — three layers:
- *
- * 1. GLOW  — absolute div, bleeds 45 % beyond the video on every side,
- *            completely detached from any box boundary.
- *
- * 2. SIZE  — video is rendered at 130 % of the column width and shifted
- *            left by 15 % so it is centred. The extra 15 % on each side
- *            sits in the fade zone so the active galaxy content is still
- *            ~30 % larger than the old implementation.
- *
- * 3. MASK  — two intersecting linear gradients (one per axis) instead of
- *            a single radial gradient. This gives independent, precise
- *            control over each of the four edges with no ellipse maths:
- *              H: transparent → black 22 % … 78 % → transparent
- *              V: transparent → black 25 % … 75 % → transparent
- *            Combined with mix-blend-mode: screen (dark pixels → transparent)
- *            the edges dissolve completely — no rectangular frame.
- */
+/** Right-side Hero visual — fills its entire column edge-to-edge. */
 function HeroVideo({ onReady }: { onReady?: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -189,44 +172,20 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
       video.removeEventListener("error", settle);
     };
   }, [onReady]);
-
   // Horizontal and vertical fade gradients — each fades its respective edges
   const maskH =
     "linear-gradient(to right,  transparent 0%, black 52%, black 78%, transparent 100%)";
   const maskV =
     "linear-gradient(to bottom, transparent 0%, black 15%, black 75%, transparent 100%)";
-
   return (
-    // No maxWidth, no background, no border, no overflow:hidden.
-    // overflow:visible (default) lets the video and glow bleed naturally.
     <div
       style={{
         position: "relative",
         width: "100%",
+        height: "100%",
         pointerEvents: "none", // never block left-column clicks
       }}
     >
-      {/* Atmospheric glow — intentionally larger than the video */}
-      {/* <div
-        aria-hidden="true"
-        style={{
-          position:   'absolute',
-          top:        '-28%',
-          left:       '-35%',
-          right:      '-28%',
-          bottom:     '-45%',
-          background:
-            'radial-gradient(ellipse 55% 55% at 52% 45%,' +
-            ' rgba(118,42,240,0.55) 0%,' +
-            ' rgba(88,18,198,0.26) 38%,' +
-            // ' rgba(55,8,145,0.10) 75%,' +
-            ' transparent 70%)',
-          filter:     'blur(32px)',
-          zIndex:     0,
-        }}
-      /> */}
-
-      {/* Video — 30 % wider than column, centred, all four edges faded */}
       <video
         ref={videoRef}
         autoPlay
@@ -235,14 +194,16 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
         playsInline
         preload="auto"
         style={{
-          position: "relative",
-          zIndex: 1,
-          display: "block",
-          transform: "translateY(-5px)",
-          // 30 % size increase: 130 % width, centred via negative left margin
-          width: "190%",
-          marginLeft: "-33%",
-          height: "auto",
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          // The source clip has ~20% black padding above/below the map
+          // graphic itself; cover alone still shows that padding since it
+          // only crops horizontally here. Scale past cover to crop it out
+          // too, so the visible content (not just the box) fills the frame.
+          transformOrigin: "50% 48%",
           // Screen blend — makes the video's dark background pixels
           // identical to the page background (effectively transparent)
           mixBlendMode: "screen",
@@ -386,7 +347,7 @@ function RotatingServiceTitle({
   // this side animates.
   const longestTitle = titles.reduce(
     (longest, title) => (title.length > longest.length ? title : longest),
-    ""
+    "",
   );
 
   return (
