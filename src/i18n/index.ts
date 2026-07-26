@@ -18,10 +18,11 @@ import fr from "./fr.json";
 import es from "./es.json";
 import de from "./de.json";
 import ru from "./ru.json";
+import it from "./it.json";
 
 export const defaultLocale = "en" as const;
 
-export const locales = { en, fr, es, de, ru } as const;
+export const locales = { en, fr, es, ru, de, it } as const;
 
 export type Locale = keyof typeof locales;
 
@@ -29,8 +30,9 @@ export const localeNames: Record<Locale, string> = {
   en: "English",
   fr: "Français",
   es: "Español",
-  de: "Deutsch",
   ru: "Русский",
+  de: "Deutsch",
+  it: "Italiano",
 };
 
 const STORAGE_KEY = "trus-locale";
@@ -95,5 +97,5 @@ export function tr(path: string): string {
   return typeof value === "string" ? value : path;
 }
 
-export { en, fr, es, de, ru };
+export { en, fr, es, de, ru, it };
 export default t;

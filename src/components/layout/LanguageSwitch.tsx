@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { Check, ChevronDown } from "lucide-react";
-import { useLocale, setLocale, localeNames, type Locale } from "@/i18n";
+import { ChevronDown } from "lucide-react";
+import { useLocale, setLocale, type Locale } from "@/i18n";
 
 type FlagFit = "slice" | "meet";
 
@@ -12,11 +12,12 @@ interface LanguageOption {
 }
 
 const LANGUAGES: LanguageOption[] = [
-  { code: "en", label: "EN", name: localeNames.en, Flag: FlagGB },
-  { code: "fr", label: "FR", name: localeNames.fr, Flag: FlagFR },
-  { code: "es", label: "ES", name: localeNames.es, Flag: FlagES },
-  { code: "de", label: "DE", name: localeNames.de, Flag: FlagDE },
-  { code: "ru", label: "RU", name: localeNames.ru, Flag: FlagRU },
+  { code: "en", label: "EN", name: "English", Flag: FlagGB },
+  { code: "fr", label: "FR", name: "French", Flag: FlagFR },
+  { code: "es", label: "ES", name: "Spanish", Flag: FlagES },
+  { code: "ru", label: "RU", name: "Russian", Flag: FlagRU },
+  { code: "de", label: "DE", name: "German", Flag: FlagDE },
+  { code: "it", label: "IT", name: "Italian", Flag: FlagIT },
 ];
 
 const LANGUAGE_BY_CODE = Object.fromEntries(
@@ -119,20 +120,28 @@ export function LanguageSwitch({ className = "" }: LanguageSwitchProps) {
   const current = LANGUAGE_BY_CODE[locale];
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
+  // Distance from the trigger's own top edge down to the header's bottom
+  // border, in px — lets the panel sit flush on that line instead of
+  // hanging off the trigger button (which is vertically centred in the
+  // taller header and doesn't reach the border itself). Null when there's
+  // no header ancestor (e.g. the mobile menu's switcher).
+  const [headerLineOffset, setHeaderLineOffset] = useState<number | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
 
-  // Room needed for the full option list (5 rows + padding). Flip the panel
+  // Room needed for the full option grid (2 rows + padding). Flip the panel
   // above the trigger when there isn't enough space below — e.g. the mobile
   // menu's switcher sits near the bottom of the viewport.
-  const PANEL_HEIGHT_ESTIMATE = 300;
+  const PANEL_HEIGHT_ESTIMATE = 170;
 
   useEffect(() => {
     if (!open) return;
 
-    const spaceBelow = rootRef.current
-      ? window.innerHeight - rootRef.current.getBoundingClientRect().bottom
-      : Infinity;
+    const rootRect = rootRef.current?.getBoundingClientRect();
+    const headerBottom = rootRef.current?.closest("header")?.getBoundingClientRect().bottom;
+    setHeaderLineOffset(rootRect && headerBottom != null ? headerBottom - rootRect.top : null);
+
+    const spaceBelow = rootRect ? window.innerHeight - rootRect.bottom : Infinity;
     setOpenUp(spaceBelow < PANEL_HEIGHT_ESTIMATE);
 
     const onPointerDown = (e: PointerEvent) => {
@@ -183,38 +192,46 @@ export function LanguageSwitch({ className = "" }: LanguageSwitchProps) {
           id={listboxId}
           role="listbox"
           aria-label="Select language"
-          className={`absolute left-1/2 z-50 w-64 -translate-x-1/2 overflow-hidden rounded-2xl border py-1 shadow-2xl backdrop-blur-2xl backdrop-saturate-150 ${openUp ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)]"}`}
+          className={`absolute left-0 z-50 grid h-35.75 w-51.75 grid-cols-3 grid-rows-2 overflow-hidden rounded-2xl border shadow-2xl backdrop-blur-2xl backdrop-saturate-150 ${openUp ? "bottom-[calc(100%+14px)]" : headerLineOffset == null ? "top-[calc(100%+14px)]" : ""}`}
           style={{
             background: "rgba(9, 5, 9, 0.8)",
             borderColor: "rgba(255, 255, 255, 0.3)",
+            ...(!openUp && headerLineOffset != null ? { top: headerLineOffset } : {}),
           }}
         >
+          {/* Grid dividers: 2 continuous vertical lines (between the 3 columns) and
+              1 continuous horizontal line (between the 2 rows), each inset slightly
+              from the panel edge. Single elements so they can't fragment/misalign —
+              they naturally cross where they overlap. */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 bottom-3 w-px"
+            style={{ left: "33.333%", background: "rgba(255, 255, 255, 0.1)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 bottom-3 w-px"
+            style={{ left: "66.666%", background: "rgba(255, 255, 255, 0.1)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute left-3 right-3 h-px"
+            style={{ top: "50%", background: "rgba(255, 255, 255, 0.1)" }}
+          />
           {LANGUAGES.map((lang, index) => {
             const selected = lang.code === locale;
+            const isTopRow = index < 3;
             return (
-              <li key={lang.code} role="none">
+              <li key={lang.code} role="none" className="relative list-none">
                 <button
                   type="button"
                   role="option"
                   aria-selected={selected}
                   onClick={() => choose(lang.code)}
-                  className={`flex w-full cursor-pointer items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-white/10 ${index > 0 ? "border-t" : ""}`}
-                  style={{ borderColor: "rgba(255, 255, 255, 0.3)" }}
+                  className={`relative flex h-full w-full cursor-pointer flex-col items-center gap-2 px-3 text-center transition-colors hover:bg-white/10 ${isTopRow ? "justify-end pb-2" : "justify-center py-4"}`}
                 >
                   <MenuFlagBadge Flag={lang.Flag} />
-                  <span className="flex flex-col">
-                    <span className="text-[15px] font-medium text-brand-white">{lang.name}</span>
-                    <span className="text-[13px] text-brand-muted">{lang.label}</span>
-                  </span>
-                  {selected && (
-                    <Check
-                      size={18}
-                      strokeWidth={3}
-                      className="ml-auto shrink-0"
-                      style={{ color: "var(--color-brand-accent)" }}
-                      aria-hidden="true"
-                    />
-                  )}
+                  <span className="text-label font-body font-normal text-brand-white">{lang.name}</span>
                 </button>
               </li>
             );
@@ -225,28 +242,26 @@ export function LanguageSwitch({ className = "" }: LanguageSwitchProps) {
   );
 }
 
-/** Navbar trigger flag — the flag graphic itself, cropped to fill a fixed 28×16.34 rect. */
+/** Navbar trigger flag — the flag graphic itself, cropped to fill a fixed 24×24 square. */
 function TriggerFlag({ Flag }: { Flag: React.FC<{ fit: FlagFit }> }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden"
-      style={{ width: 28, height: 16.34 }}
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-sm"
+      style={{ width: 24, height: 24 }}
     >
       <Flag fit="slice" />
     </span>
   );
 }
 
-/** Menu row flag — a 24×24 white square with the flag shown smaller, centred, uncropped. */
+/** Menu grid flag — a 24×24 square, cropped to fill, with a solid white border. */
 function MenuFlagBadge({ Flag }: { Flag: React.FC<{ fit: FlagFit }> }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden bg-white"
-      style={{ width: 24, height: 24, borderRadius: 4 }}
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-sm border"
+      style={{ width: 24, height: 24, borderWidth: 0.5, borderColor: "rgba(255, 255, 255, 1)" }}
     >
-      <span className="inline-flex" style={{ width: 16, height: 16 }}>
-        <Flag fit="meet" />
-      </span>
+      <Flag fit="slice" />
     </span>
   );
 }
@@ -256,32 +271,29 @@ function FlagGB({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 30 20"
+      viewBox="0 0 20 20"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M30 0H0V19.9998H30V0Z" fill="#F0F0F0" />
-      <path
-        d="M16.875 0H13.125V8.1248H0V11.8747H13.125V19.9995H16.875V11.8747H30V8.1248H16.875V0Z"
-        fill="#D80027"
-      />
-      <path d="M23.0742 13.478L30.0009 17.3262V13.478H23.0742Z" fill="#0052B4" />
-      <path d="M18.2617 13.478L30.0009 19.9996V18.1555L21.5813 13.478H18.2617Z" fill="#0052B4" />
-      <path d="M26.8739 19.9998L18.2617 15.2148V19.9998H26.8739Z" fill="#0052B4" />
-      <path d="M18.2617 13.478L30.0009 19.9996V18.1555L21.5813 13.478H18.2617Z" fill="#F0F0F0" />
-      <path d="M18.2617 13.478L30.0009 19.9996V18.1555L21.5813 13.478H18.2617Z" fill="#D80027" />
-      <path d="M5.29341 13.478L0 16.4188V13.478H5.29341Z" fill="#0052B4" />
-      <path d="M11.7397 14.3071V19.9995H1.49414L11.7397 14.3071Z" fill="#0052B4" />
-      <path d="M8.41951 13.478L0 18.1555V19.9996L11.7391 13.478H8.41951Z" fill="#D80027" />
-      <path d="M6.92665 6.52147L0 2.67334V6.52147H6.92665Z" fill="#0052B4" />
-      <path d="M11.7391 6.52159L0 0V1.84414L8.41951 6.52159H11.7391Z" fill="#0052B4" />
-      <path d="M3.12683 0L11.7391 4.78491V0H3.12683Z" fill="#0052B4" />
-      <path d="M11.7391 6.52159L0 0V1.84414L8.41951 6.52159H11.7391Z" fill="#F0F0F0" />
-      <path d="M11.7391 6.52159L0 0V1.84414L8.41951 6.52159H11.7391Z" fill="#D80027" />
-      <path d="M24.707 6.52182L30.0004 3.58105V6.52182H24.707Z" fill="#0052B4" />
-      <path d="M18.2617 5.69233V0H28.5072L18.2617 5.69233Z" fill="#0052B4" />
-      <path d="M21.5813 6.52159L30.0009 1.84414V0L18.2617 6.52159H21.5813Z" fill="#D80027" />
+      <path d="M20 0H0V20H20V0Z" fill="#F0F0F0" />
+      <path d="M0 11.875H8.125V20H11.875V11.875H20V8.125H11.875V0H8.125V8.125H0V11.875Z" fill="#D80027" />
+      <path d="M15.8945 13.0435L19.9992 17.1481V13.0435H15.8945Z" fill="#0052B4" />
+      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#0052B4" />
+      <path d="M18.1465 20.0001L13.043 14.896V20.0001H18.1465Z" fill="#0052B4" />
+      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#F0F0F0" />
+      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#D80027" />
+      <path d="M3.1368 13.0435L0 16.1803V13.0435H3.1368Z" fill="#0052B4" />
+      <path d="M6.95609 13.9282V20H0.884766L6.95609 13.9282Z" fill="#0052B4" />
+      <path d="M4.98922 13.0435L0 18.0327V19.9999L6.95641 13.0435H4.98922Z" fill="#D80027" />
+      <path d="M4.10469 6.95674L0 2.85205V6.95674H4.10469Z" fill="#0052B4" />
+      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#0052B4" />
+      <path d="M1.85352 0L6.95707 5.10402V0H1.85352Z" fill="#0052B4" />
+      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#F0F0F0" />
+      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#D80027" />
+      <path d="M16.8633 6.95662L20.0001 3.81982V6.95662H16.8633Z" fill="#0052B4" />
+      <path d="M13.043 6.0718V0H19.1143L13.043 6.0718Z" fill="#0052B4" />
+      <path d="M15.0102 6.9564L19.9994 1.96715V0L13.043 6.9564H15.0102Z" fill="#D80027" />
     </svg>
   );
 }
@@ -291,14 +303,14 @@ function FlagDE({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 30 20"
+      viewBox="0 0 20 20"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M30 0H0V20H30V0Z" fill="#D80027" />
-      <path d="M30 0H0V6.66643H30V0Z" fill="black" />
-      <path d="M30 13.333H0V19.9994H30V13.333Z" fill="#FFDA44" />
+      <path d="M20 0H0V20H20V0Z" fill="#D80027" />
+      <path d="M20 0H0V6.66652H20V0Z" fill="black" />
+      <path d="M20 13.3335H0V20H20V13.3335Z" fill="#FFDA44" />
     </svg>
   );
 }
@@ -308,14 +320,14 @@ function FlagFR({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 30 20"
+      viewBox="0 0 20 20"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M30 0H0V20H30V0Z" fill="#F0F0F0" />
-      <path d="M9.99978 0H0V20H9.99978V0Z" fill="#0052B4" />
-      <path d="M30 0H20.0002V20H30V0Z" fill="#D80027" />
+      <path d="M20 0H0V20H20V0Z" fill="#F0F0F0" />
+      <path d="M6.66652 0H0V20H6.66652V0Z" fill="#0052B4" />
+      <path d="M19.9995 0H13.333V20H19.9995V0Z" fill="#D80027" />
     </svg>
   );
 }
@@ -325,14 +337,31 @@ function FlagES({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 30 20"
+      viewBox="0 0 20 20"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M30 0H0V20H30V0Z" fill="#FFDA44" />
-      <path d="M30 0H0V6.66643H30V0Z" fill="#D80027" />
-      <path d="M30 13.333H0V19.9994H30V13.333Z" fill="#D80027" />
+      <path d="M20 0H0V20H20V0Z" fill="#FFDA44" />
+      <path d="M20 0H0V6.66652H20V0Z" fill="#D80027" />
+      <path d="M20 13.3335H0V20H20V13.3335Z" fill="#D80027" />
+    </svg>
+  );
+}
+
+function FlagIT({ fit }: { fit: FlagFit }) {
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 20 20"
+      preserveAspectRatio={`xMidYMid ${fit}`}
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M13.3333 0H6.66663H0V20H6.66663H13.3333H20V0H13.3333Z" fill="#F0F0F0" />
+      <path d="M6.66651 0H0V20H6.66651V0Z" fill="#6DA544" />
+      <path d="M20.0005 0H13.334V20H20.0005V0Z" fill="#D80027" />
     </svg>
   );
 }
@@ -342,15 +371,14 @@ function FlagRU({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 30 20"
+      viewBox="0 0 20 20"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M0 0V6.66649V13.333V19.9995H30V13.333V6.66649V0H0Z" fill="#F0F0F0" />
-      <path d="M30 0H0V19.9998H30V0Z" fill="#0052B4" />
-      <path d="M30 0H0V6.66637H30V0Z" fill="#F0F0F0" />
-      <path d="M30 13.333H0V19.9994H30V13.333Z" fill="#D80027" />
+      <path d="M20 0H0V20H20V0Z" fill="#0052B4" />
+      <path d="M20 0H0V6.66652H20V0Z" fill="#F0F0F0" />
+      <path d="M20 13.3335H0V20H20V13.3335Z" fill="#D80027" />
     </svg>
   );
 }
