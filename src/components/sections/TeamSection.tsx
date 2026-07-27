@@ -1,11 +1,7 @@
-import { useState, useEffect, useRef, type RefObject } from "react";
+import { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
-import {
-  TeamMemberCard,
-  type CardState,
-  type TeamMemberCardProps,
-} from "@/components/team/TeamMemberCard";
+import { TeamMemberCard, type CardState } from "@/components/team/TeamMemberCard";
 import { TeamInfoPanel } from "@/components/team/TeamInfoPanel";
 import { TeamCarouselArrow } from "@/components/team/TeamCarouselArrow";
 import {
@@ -19,7 +15,6 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 // Type helpers
 type Member = (typeof siteConfig.team.members)[number];
-type CardBindings = Omit<TeamMemberCardProps, "style">;
 
 // All three columns share one width so the row-1 gap (card0 ↔ card1) and
 // row-2 gap (card2 ↔ card3) read as the same 20px — a card sitting in a
@@ -31,110 +26,116 @@ const ENTRANCE_DISTANCE = 640;
 interface TeamDesktopGridProps {
   eyebrow: string;
   heading: string[];
-  /** The 4 members currently visible on desktop (one page of the 8-member roster). */
-  visibleMembers: Member[];
+  /** Full 8-member roster — the grid derives its own visible page from scroll. */
+  members: Member[];
   hoveredId: string | null;
-  togglePage: () => void;
-  activeMember: Member;
-  cardProps: (m: Member) => CardBindings;
-  sectionRef: RefObject<HTMLElement | null>;
+  onHoverChange: (id: string | null) => void;
+  page: 0 | 1;
+  onPageChange: (page: 0 | 1) => void;
+  cardState: (id: string, visibleMembers: Member[]) => CardState;
+  onMobileClick: (id: string) => void;
 }
 
-// Mounted only once isDesktop flips true. sectionRef points at the always-
-// present <section> ancestor, so useScroll gets a populated ref immediately
-// (a ref local to this component would attach to a still-null node on first
-// mount, since this component itself only mounts after the desktop check).
+// How long (in viewport heights) the section stays pinned while the user
+// scrolls through it — just entrance, a hold, then exit (see the progress
+// keyframes below). Which page shows is arrow-only, not scroll-driven.
+// TUNING: raise this to require more scrolling before the cards arrive/leave.
+const PIN_VH = 340;
+
+// Mounted only once isDesktop flips true. Owns its own pin/sticky scroll
+// container so the section locks in place while the user scrolls, giving
+// them a settled moment to look at the cards, then releases naturally once
+// they've scrolled past it (scrollYProgress reaching 1 unpins it, same as
+// scrolling any other content out of view). Paging between the two sets of
+// members is handled entirely by the arrows, independent of scroll.
 function TeamDesktopGrid({
   eyebrow,
   heading,
-  visibleMembers,
+  members,
   hoveredId,
-  togglePage,
-  activeMember,
-  cardProps,
-  sectionRef,
+  onHoverChange,
+  page,
+  onPageChange,
+  cardState,
+  onMobileClick,
 }: TeamDesktopGridProps) {
   const shouldReduceMotion = useReducedMotion();
   const [cardsSettled, setCardsSettled] = useState(false);
+  const pinRef = useRef<HTMLDivElement>(null);
 
-  // Tracks the section's entire time on screen, start to finish — not just
-  // the entrance — so scrolling past the top reverses the same motion the
-  // entrance used, and scrolling back down replays it.
+  // Progress across the pinned scroll range: 0 when the pin engages
+  // (wrapper top hits viewport top), 1 when it releases (wrapper bottom
+  // hits viewport bottom) — exactly the sticky panel's on-screen lifetime.
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
+    target: pinRef,
+    offset: ["start start", "end end"],
   });
 
-  // 1 = off-screen, 0 = settled in place. Plateaus through the middle of the
-  // section's on-screen time (roughly when it's centered in the viewport),
-  // so cards arrive, hold while the section reads as "in view", then reverse
-  // back out as it exits.
-  const tent = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [1, 0, 0, 1]);
-
-  // Spring-smoothed so the motion visibly catches up to scroll instead of
-  // snapping straight to it — slower, and legible as movement rather than a pop.
+  // 1 = off-screen, 0 = settled in place. Cards arrive during the first
+  // slice of the pin, hold through the middle (where paging happens), then
+  // leave gradually over the final quarter, so the exit needs real scroll
+  // distance instead of snapping away right before the section unpins.
+  const tent = useTransform(scrollYProgress, [0, 0.1, 0.75, 1], [1, 0, 0, 1]);
   const smoothTent = useSpring(tent, { stiffness: 55, damping: 20, mass: 0.9 });
 
   useMotionValueEvent(smoothTent, "change", (v) => {
     setCardsSettled(v < 0.02);
   });
 
-  const rightX = useTransform(smoothTent, (v) => v * ENTRANCE_DISTANCE);
-  const leftX = useTransform(smoothTent, (v) => v * -ENTRANCE_DISTANCE);
   const cardOpacity = useTransform(smoothTent, (v) =>
     Math.max(0, Math.min(1, 1 - v)),
   );
+
+  const rightX = useTransform(smoothTent, (v) => v * ENTRANCE_DISTANCE);
+  const leftX = useTransform(smoothTent, (v) => v * -ENTRANCE_DISTANCE);
   const panelY = useTransform(smoothTent, (v) => v * 24);
 
   const arrowsEnabled = shouldReduceMotion || cardsSettled;
 
-  // Diagonal staircase composition, centered as a block within the section:
+  // Which page is showing is arrow-driven only — scrolling through the
+  // pinned section never changes it, it just lets the cards settle in view.
+  const visibleMembers = members.slice(page * 4, page * 4 + 4);
+  const activeId = hoveredId ?? visibleMembers[0].id;
+  const activeMember = members.find((m) => m.id === activeId) ?? visibleMembers[0];
+
+  const boundCardProps = (m: Member) => ({
+    image: m.image,
+    name: m.name,
+    state: cardState(m.id, visibleMembers),
+    onMouseEnter: () => onHoverChange(m.id),
+    onMouseLeave: () => onHoverChange(null),
+    onClick: () => onMobileClick(m.id),
+  });
+
+  // The only way the page changes — a plain state flip, no scroll involved.
+  function handleArrowClick() {
+    onPageChange(page === 0 ? 1 : 0);
+    onHoverChange(null);
+  }
+
+  // Diagonal staircase composition, flush to the left edge of the section:
   //   col →      [337px]      [337px]        [337px]
-  //   row 0:     —            —               arrows
-  //   row 1:     heading      card[0]         card[1]
-  //   row 2:     card[2]      card[3]         info panel
+  //   row 0:     heading      card[0]         card[1]
+  //   row 1:     card[2]      card[3]         info panel
   //
+  // Carousel arrows sit left-aligned beneath the heading (col 0).
   // Top row (card[0], card[1]) slides in from/out to off-screen right;
   // bottom row (card[2], card[3]) slides in from/out to off-screen left.
-  return (
+  const grid = (
     <div
       style={{
         display: "grid",
         gridTemplateColumns: `${CARD_W}px ${CARD_W}px ${CARD_W}px`,
-        gridTemplateRows: `44px ${CARD_H}px ${CARD_H}px`,
+        gridTemplateRows: `${CARD_H}px ${CARD_H}px`,
         gap: "20px",
         width: "fit-content",
-        margin: "0 auto",
       }}
     >
-      {/* [row 0, col 3] Carousel arrows — sit above the top-right card */}
-      <div
-        style={{
-          gridColumn: 3,
-          gridRow: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          gap: "12px",
-        }}
-      >
-        <TeamCarouselArrow
-          direction="left"
-          onClick={togglePage}
-          disabled={!arrowsEnabled}
-        />
-        <TeamCarouselArrow
-          direction="right"
-          onClick={togglePage}
-          disabled={!arrowsEnabled}
-        />
-      </div>
-
-      {/* [row 1, col 1] Eyebrow + heading */}
+      {/* [row 0, col 0] Eyebrow + heading, with carousel arrows left-aligned beneath */}
       <div
         style={{
           gridColumn: 1,
-          gridRow: 2,
+          gridRow: 1,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -174,6 +175,29 @@ function TeamDesktopGrid({
             {heading.join("\n")}
           </h2>
         </FadeIn>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            gap: "12px",
+            marginTop: "auto",
+            paddingTop: "40px",
+          }}
+        >
+          <TeamCarouselArrow
+            direction="left"
+            onClick={handleArrowClick}
+            disabled={!arrowsEnabled}
+          />
+          <TeamCarouselArrow
+            direction="right"
+            onClick={handleArrowClick}
+            disabled={!arrowsEnabled}
+          />
+        </div>
+
         <div
           style={{
             position: "absolute",
@@ -226,71 +250,71 @@ function TeamDesktopGrid({
         </div>
       </div>
 
-      {/* [row 1, col 2] Card[0] — top row, tracks scroll in from/out to off-screen right */}
+      {/* [row 0, col 2] Card[0] — top row, tracks scroll in from/out to off-screen right */}
       <motion.div
         style={{
           gridColumn: 2,
-          gridRow: 2,
+          gridRow: 1,
           x: shouldReduceMotion ? 0 : rightX,
           opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
-          {...cardProps(visibleMembers[0])}
+          {...boundCardProps(visibleMembers[0])}
           style={{ width: "100%", height: CARD_H }}
         />
       </motion.div>
 
-      {/* [row 1, col 3] Card[1] — top row, tracks scroll in from/out to off-screen right */}
+      {/* [row 0, col 3] Card[1] — top row, tracks scroll in from/out to off-screen right */}
       <motion.div
         style={{
           gridColumn: 3,
-          gridRow: 2,
+          gridRow: 1,
           x: shouldReduceMotion ? 0 : rightX,
           opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
-          {...cardProps(visibleMembers[1])}
+          {...boundCardProps(visibleMembers[1])}
           style={{ width: "100%", height: CARD_H }}
         />
       </motion.div>
 
-      {/* [row 2, col 1] Card[2] — bottom row, tracks scroll in from/out to off-screen left */}
+      {/* [row 1, col 1] Card[2] — bottom row, tracks scroll in from/out to off-screen left */}
       <motion.div
         style={{
           gridColumn: 1,
-          gridRow: 3,
+          gridRow: 2,
           x: shouldReduceMotion ? 0 : leftX,
           opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
-          {...cardProps(visibleMembers[2])}
+          {...boundCardProps(visibleMembers[2])}
           style={{ width: "100%", height: CARD_H }}
         />
       </motion.div>
 
-      {/* [row 2, col 2] Card[3] — bottom row, tracks scroll in from/out to off-screen left */}
+      {/* [row 1, col 2] Card[3] — bottom row, tracks scroll in from/out to off-screen left */}
       <motion.div
         style={{
           gridColumn: 2,
-          gridRow: 3,
+          gridRow: 2,
           x: shouldReduceMotion ? 0 : leftX,
           opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
-          {...cardProps(visibleMembers[3])}
+          {...boundCardProps(visibleMembers[3])}
           style={{ width: "100%", height: CARD_H }}
         />
       </motion.div>
 
-      {/* [row 2, col 3] Info panel */}
+      {/* [row 1, col 3] Info panel */}
       <motion.div
         style={{
           gridColumn: 3,
-          gridRow: 3,
+          gridRow: 2,
           height: CARD_H,
           display: "flex",
           alignItems: "center",
@@ -300,6 +324,48 @@ function TeamDesktopGrid({
       >
         <TeamInfoPanel member={activeMember} />
       </motion.div>
+    </div>
+  );
+
+  // Reduced motion: render the grid in normal flow, no pin/sticky lock —
+  // scroll-jacking a section is itself a motion effect some users disable.
+  if (shouldReduceMotion) {
+    return (
+      <div
+        className="relative mx-auto w-full"
+        style={{ maxWidth: "1200px", padding: "0 20px" }}
+      >
+        {grid}
+      </div>
+    );
+  }
+
+  // The pin wrapper and sticky panel span the full section width (not the
+  // 1200px content column) so overflow:hidden clips at the section's edges
+  // instead of a few hundred px in — otherwise the entrance/exit slide hits
+  // that inner boundary almost immediately and cards fade out mid-slide
+  // instead of sliding past it. The 1200px column is reproduced just for
+  // the grid, inside the sticky panel, so its on-screen position is
+  // unchanged.
+  return (
+    <div ref={pinRef} style={{ height: `${PIN_VH}vh`, position: "relative" }}>
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className="relative mx-auto w-full"
+          style={{ maxWidth: "1200px", padding: "0 20px" }}
+        >
+          {grid}
+        </div>
+      </div>
     </div>
   );
 }
@@ -316,13 +382,10 @@ export function TeamSection() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileId, setMobileId] = useState<string | null>(null);
 
-  // Carousel state — arrows page the desktop grid between the first 4 and
-  // last 4 members of the roster (8 members total, 4 shown at a time).
+  // Carousel state — the desktop grid pages itself as the user scrolls
+  // through the pinned section (or via its arrows); mobile just needs the
+  // same page to compute its own default-active card, below.
   const [page, setPage] = useState<0 | 1>(0);
-  const togglePage = () => {
-    setPage((prev) => (prev === 0 ? 1 : 0));
-    setHoveredId(null);
-  };
   const visibleMembers = members.slice(page * 4, page * 4 + 4);
 
   useEffect(() => {
@@ -338,11 +401,11 @@ export function TeamSection() {
     visibleMembers[0]) as Member;
 
   // Card state helper
-  function cardState(id: string): CardState {
+  function cardState(id: string, forVisibleMembers: Member[]): CardState {
     if (hoveredId === id) return "hovered";
     if (hoveredId !== null) return "dim";
     if (mobileId === id) return "active";
-    if (mobileId === null && id === visibleMembers[0].id) return "active";
+    if (mobileId === null && id === forVisibleMembers[0].id) return "active";
     return "idle";
   }
 
@@ -350,11 +413,12 @@ export function TeamSection() {
     setMobileId((prev) => (prev === id ? null : id));
   }
 
-  // Shared card bindings
+  // Shared card bindings (mobile layout only — the desktop grid binds its
+  // own cards internally so it can derive visibleMembers from scroll).
   const cardProps = (m: Member) => ({
     image: m.image,
     name: m.name,
-    state: cardState(m.id),
+    state: cardState(m.id, visibleMembers),
     onMouseEnter: () => setHoveredId(m.id),
     onMouseLeave: () => setHoveredId(null),
     onClick: () => handleMobileClick(m.id),
@@ -364,12 +428,13 @@ export function TeamSection() {
     <TeamDesktopGrid
       eyebrow={eyebrow}
       heading={heading}
-      visibleMembers={visibleMembers}
+      members={members}
       hoveredId={hoveredId}
-      togglePage={togglePage}
-      activeMember={activeMember}
-      cardProps={cardProps}
-      sectionRef={sectionRef}
+      onHoverChange={setHoveredId}
+      page={page}
+      onPageChange={setPage}
+      cardState={cardState}
+      onMobileClick={handleMobileClick}
     />
   );
 
@@ -456,55 +521,72 @@ export function TeamSection() {
       style={{
         background: "var(--color-brand-bg)",
         position: "relative",
-        overflow: "hidden",
         paddingTop: "180px",
         paddingBottom: "180px",
       }}
     >
-      {/* Purple radial glow */}
+      {/*
+        Decorative layer, clipped on its own — kept off the <section> itself
+        because overflow:hidden on an ancestor breaks position:sticky, and
+        the desktop grid below pins itself via sticky while the user scrolls.
+      */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "40%",
-          left: "55%",
-          transform: "translate(-50%, -50%)",
-          width: "860px",
-          height: "480px",
-          background:
-            "radial-gradient(ellipse at center, rgba(124,58,237,0.09) 0%, transparent 72%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
-      {/* Dark Crystal T watermark — bottom-right */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          bottom: "-8%",
-          right: "-2%",
-          fontSize: "clamp(200px, 26vw, 380px)",
-          fontFamily: "var(--font-hero)",
-          fontWeight: 700,
-          color: "rgba(135, 93, 217, 0.028)",
-          lineHeight: 1,
-          userSelect: "none",
+          inset: 0,
+          overflow: "hidden",
           pointerEvents: "none",
           zIndex: 0,
         }}
       >
-        T
+        {/* Purple radial glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "55%",
+            transform: "translate(-50%, -50%)",
+            width: "860px",
+            height: "480px",
+            background:
+              "radial-gradient(ellipse at center, rgba(124,58,237,0.09) 0%, transparent 72%)",
+          }}
+        />
+
+        {/* Dark Crystal T watermark — bottom-right */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-8%",
+            right: "-2%",
+            fontSize: "clamp(200px, 26vw, 380px)",
+            fontFamily: "var(--font-hero)",
+            fontWeight: 700,
+            color: "rgba(135, 93, 217, 0.028)",
+            lineHeight: 1,
+            userSelect: "none",
+          }}
+        >
+          T
+        </div>
       </div>
 
-      {/* Content container */}
-      <div
-        className="relative mx-auto w-full"
-        style={{ maxWidth: "1200px", padding: "0 20px", zIndex: 1 }}
-      >
-        {isDesktop ? desktopLayout : mobileLayout}
-      </div>
+      {/* Content — desktop's pin/sticky grid spans the full section width
+          itself (see TeamDesktopGrid) so its exit slide isn't clipped by a
+          narrower container; mobile stays in the standard content column. */}
+      {isDesktop ? (
+        <div className="relative w-full" style={{ zIndex: 1 }}>
+          {desktopLayout}
+        </div>
+      ) : (
+        <div
+          className="relative mx-auto w-full"
+          style={{ maxWidth: "1200px", padding: "0 20px", zIndex: 1 }}
+        >
+          {mobileLayout}
+        </div>
+      )}
     </section>
   );
 }
