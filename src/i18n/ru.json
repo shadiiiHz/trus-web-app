@@ -41,17 +41,7 @@
       "Подборка наших недавних работ, демонстрирующих креативность,",
       "производительность и внимание к деталям."
     ],
-    "seeMore": "Показать больше",
-    "projects": [
-      { "name": "Arquivo", "category": "Корпоративный" },
-      { "name": "Avansi", "category": "SaaS" },
-      { "name": "Slingshot", "category": "Продукт" },
-      { "name": "Nexora", "category": "Электронная коммерция" },
-      { "name": "DataFlow", "category": "Дашборд" },
-      { "name": "TechVault", "category": "Веб-приложение" },
-      { "name": "Orbis", "category": "Портфолио" },
-      { "name": "Luminary", "category": "Агентство" }
-    ]
+    "seeMore": "Показать больше"
   },
 
   "whyUs": {

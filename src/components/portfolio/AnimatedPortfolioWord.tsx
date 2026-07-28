@@ -22,9 +22,12 @@ interface AnimatedPortfolioWordProps {
  * colour + glow transition so the word appears to light up letter-by-letter
  * as the Crystal T transfers energy into it, then dims as the cards slide away.
  *
- * Light-up  : sectionProgress  0.03 → 0.35  (staggered per letter)
- * Hold lit  : sectionProgress  0.35 → 0.55
- * Dim       : sectionProgress  0.55 → 0.75
+ * Timed to track the card rows' actual travel (rows enter off-screen right
+ * at progress 0 and finish exiting off-screen left by ~0.92 — see
+ * cardsRow1X/cardsRow2X in PortfolioSection.tsx):
+ *
+ * Light-up  : sectionProgress  0.02 → 0.95  (staggered per letter, very slow cascade)
+ * Dim       : sectionProgress  0.95 → 1.00  (word is fully off right at the end)
  */
 export function AnimatedPortfolioWord({ sectionProgress }: AnimatedPortfolioWordProps) {
   return (
@@ -61,11 +64,17 @@ function MotionLetter({
   index: number
   sectionProgress: MotionValue<number>
 }) {
-  // Each letter lights up ~0.03 progress after the previous one
-  const litStart  = 0.03 + index * 0.03   // P:0.03, O:0.06, R:0.09 … O:0.27
-  const litEnd    = litStart + 0.06
-  const dimStart  = 0.55
-  const dimEnd    = 0.75
+  // Each letter lights up ~0.085 progress after the previous one, and each
+  // individual fade-in now takes ~0.23 progress — an even slower, longer
+  // glow-in than before (see file header for the overall timing). Keep the
+  // last letter's litEnd comfortably below dimStart — the keyframe arrays
+  // below must be strictly increasing, and floating-point rounding on the
+  // stagger math can push litEnd right up to (or past) an exactly-equal
+  // dimStart, which crashes the underlying WAAPI animation.
+  const litStart  = 0.02 + index * 0.085   // P:0.02, O:0.105, R:0.19 … O:0.70
+  const litEnd    = litStart + 0.23
+  const dimStart  = 0.95
+  const dimEnd    = 1.0
 
   // Base colour: dim purple hex with 30% alpha (matches #5B2BB94D)
   const DIM = 'rgba(91,43,185,0.30)'

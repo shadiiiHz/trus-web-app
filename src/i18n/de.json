@@ -48,17 +48,7 @@
       "Eine Auswahl unserer aktuellen Arbeiten – Kreativität,",
       "Leistung und Liebe zum Detail."
     ],
-    "seeMore": "Mehr anzeigen",
-    "projects": [
-      { "name": "Arquivo", "category": "Unternehmen" },
-      { "name": "Avansi", "category": "SaaS" },
-      { "name": "Slingshot", "category": "Produkt" },
-      { "name": "Nexora", "category": "E-Commerce" },
-      { "name": "DataFlow", "category": "Dashboard" },
-      { "name": "TechVault", "category": "Web-App" },
-      { "name": "Orbis", "category": "Portfolio" },
-      { "name": "Luminary", "category": "Agentur" }
-    ]
+    "seeMore": "Mehr anzeigen"
   },
 
   "whyUs": {

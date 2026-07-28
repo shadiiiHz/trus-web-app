@@ -41,17 +41,7 @@
       "Una selezione dei nostri lavori recenti che mostra creatività,",
       "performance e attenzione ai dettagli."
     ],
-    "seeMore": "Vedi Altro",
-    "projects": [
-      { "name": "Arquivo", "category": "Corporate" },
-      { "name": "Avansi", "category": "SaaS" },
-      { "name": "Slingshot", "category": "Prodotto" },
-      { "name": "Nexora", "category": "E-Commerce" },
-      { "name": "DataFlow", "category": "Dashboard" },
-      { "name": "TechVault", "category": "Web App" },
-      { "name": "Orbis", "category": "Portfolio" },
-      { "name": "Luminary", "category": "Agenzia" }
-    ]
+    "seeMore": "Vedi Altro"
   },
 
   "whyUs": {

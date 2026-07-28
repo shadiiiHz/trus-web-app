@@ -29,7 +29,17 @@ const PORT_STARS = Array.from({ length: 28 }, (_, i) => ({
 const CARD_H = 240;
 const MIN_SCALE = 0.68;
 
-function computeLayout(vh: number) {
+/**
+ * Estimated rendered height (px) of the PORTFOLIO word at a given viewport
+ * width — must mirror AnimatedPortfolioWord's `fontSize: clamp(100px, 14vw,
+ * 200px)` (line-height 1, so letter height ≈ font size) so the word can be
+ * vertically centered in the row gap below.
+ */
+function wordHeight(vw: number) {
+  return Math.min(Math.max(100, vw * 0.14), 200);
+}
+
+function computeLayout(vh: number, vw: number) {
   // Original desktop formulas (unchanged from the approved desktop design)
   const row1Desktop = Math.min(Math.max(280, vh * 0.34), 420);
   const row2Desktop = Math.max(
@@ -39,13 +49,16 @@ function computeLayout(vh: number) {
 
   if (vh >= 825) {
     // Desktop: row 2 bottom (row2 + 240) fits inside vh for all vh ≥ 825
-    const gap = row2Desktop - (row1Desktop + CARD_H);
+    const row1Bottom = row1Desktop + CARD_H;
+    const gapCenter = row1Bottom + (row2Desktop - row1Bottom) / 2;
     return {
       row1Top: Math.round(row1Desktop),
       row2Top: Math.round(row2Desktop),
       scale: 1,
-      // Word top sits in the row gap; 72px offset = approved desktop position
-      wordTop: Math.round(row2Desktop - Math.min(72, gap * 0.7)),
+      // Word is vertically centred on the gap between the two rows — its
+      // top/bottom overflow (word is usually taller than the gap) tucks
+      // behind Row 1/Row 2 symmetrically since the word sits at z:2.
+      wordTop: Math.round(gapCenter - wordHeight(vw) / 2),
     };
   }
 
@@ -59,11 +72,13 @@ function computeLayout(vh: number) {
   );
   const cardH = CARD_H * scale;
   const row2Top = row1Top + cardH + gap;
+  const row1Bottom = row1Top + cardH;
+  const gapCenter = row1Bottom + (row2Top - row1Bottom) / 2;
   return {
     row1Top: Math.round(row1Top),
     row2Top: Math.round(row2Top),
     scale,
-    wordTop: Math.round(row2Top - Math.min(72, gap * 0.7)),
+    wordTop: Math.round(gapCenter - wordHeight(vw) / 2),
   };
 }
 
@@ -80,6 +95,29 @@ function useViewportHeight() {
   return vh;
 }
 
+/**
+ * Live viewport width in CSS px — used instead of the `vw` unit for the
+ * cards' start/end travel positions. Browser zoom changes how many CSS px
+ * fit in the window (window.innerWidth shrinks as you zoom in) but leaves
+ * fixed-px card sizes unchanged, so a `vw`-based offset stops being "fully
+ * off-screen" at other zoom levels — the ratio between the fixed card size
+ * and the vw unit drifts. Reading window.innerWidth directly and computing
+ * the travel distance in px keeps the enter/exit points pixel-exact at any
+ * zoom level. (`resize` fires on browser zoom in Chrome/Firefox/Edge, same
+ * as the vh hook above relies on.)
+ */
+function useViewportWidth() {
+  const [vw, setVw] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 1440,
+  );
+  useEffect(() => {
+    const onResize = () => setVw(window.innerWidth);
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return vw;
+}
+
 export function PortfolioSection() {
   // Scroll tracking scoped to THIS container
   // progress 0 = container top at viewport top
@@ -90,35 +128,50 @@ export function PortfolioSection() {
     offset: ["start start", "end end"],
   });
 
-  // Derived MotionValues
+  // Live viewport width — the cards' enter/exit positions are computed in
+  // px from this (see useViewportWidth) so they stay fully off-screen at
+  // any browser zoom level, not just 100%.
+  const vw = useViewportWidth();
+
+  // Each row is `paddingLeft(60) + 5 cards × 337px + 4 gaps × 20px` wide —
+  // a fixed px quantity independent of viewport/zoom, since card size and
+  // gaps are fixed px (must match the flex row's inline styles below and
+  // ProjectCard's 337px width).
+  const ROW_CARDS = 5;
+  const ROW_CONTENT_WIDTH = 60 + ROW_CARDS * 337 + (ROW_CARDS - 1) * 20; // 1825px
 
   // Cards horizontal slide (row 1 and row 2 at different rates for parallax depth)
-  // Both start off-screen right, slide to off-screen left
+  // Both rows start fully off-screen to the right and slide in as soon as
+  // the section enters (progress 0); row 1 stays a bit ahead of row 2
+  // (shorter travel range = moves faster). Positions are in px (derived
+  // from live vw + the fixed row width) rather than the `vw` CSS unit, so
+  // the enter/exit points don't drift at other browser zoom levels.
   const cardsRow1X = useTransform(
     sectionProgress,
-    [0.05, 0.88],
-    ["38vw", "-125vw"],
+    [0, 0.88],
+    [`${vw + 300}px`, `${-(ROW_CONTENT_WIDTH + 40)}px`],
   );
   const cardsRow2X = useTransform(
     sectionProgress,
-    [0.1, 0.92],
-    ["54vw", "-120vw"],
+    [0, 0.92],
+    [`${vw + 520}px`, `${-(ROW_CONTENT_WIDTH + 20)}px`],
   );
 
   // Halo behind PORTFOLIO word — pulses with letter light-up, dims with cards exit
+  // Kept in sync with the letter cascade timing in AnimatedPortfolioWord.tsx
   const haloOpacity = useTransform(
     sectionProgress,
-    [0.05, 0.35, 0.55, 0.78],
+    [0.02, 0.95, 0.96, 1.0],
     [0, 0.6, 0.6, 0],
   );
 
   // Vertical layout — desktop unchanged, compact path scales rows to fit 100vh
   const vh = useViewportHeight();
-  const layout = computeLayout(vh);
+  const layout = computeLayout(vh, vw);
 
   const { projects } = siteConfig.portfolio;
   const row1 = projects.slice(0, 5);
-  const row2 = projects.slice(3, 8); // intentional overlap for density
+  const row2 = projects.slice(5, 10);
 
   return (
     <>
@@ -355,10 +408,8 @@ export function PortfolioSection() {
               {row1.map((p) => (
                 <ProjectCard
                   key={p.id}
-                  name={p.name}
-                  category={p.category}
-                  accent={p.accent}
-                  bg={p.bg}
+                  image={p.image}
+                  link={p.link}
                 />
               ))}
             </motion.div>
@@ -396,10 +447,8 @@ export function PortfolioSection() {
               {row2.map((p) => (
                 <ProjectCard
                   key={p.id}
-                  name={p.name}
-                  category={p.category}
-                  accent={p.accent}
-                  bg={p.bg}
+                  image={p.image}
+                  link={p.link}
                 />
               ))}
             </motion.div>

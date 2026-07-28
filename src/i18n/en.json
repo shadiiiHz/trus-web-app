@@ -41,17 +41,7 @@
       "A selection of our recent work showcasing creativity,",
       "performance, and attention to detail."
     ],
-    "seeMore": "See More",
-    "projects": [
-      { "name": "Arquivo", "category": "Corporate" },
-      { "name": "Avansi", "category": "SaaS" },
-      { "name": "Slingshot", "category": "Product" },
-      { "name": "Nexora", "category": "E-Commerce" },
-      { "name": "DataFlow", "category": "Dashboard" },
-      { "name": "TechVault", "category": "Web App" },
-      { "name": "Orbis", "category": "Portfolio" },
-      { "name": "Luminary", "category": "Agency" }
-    ]
+    "seeMore": "See More"
   },
 
   "whyUs": {

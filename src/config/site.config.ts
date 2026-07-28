@@ -47,14 +47,16 @@ const navHrefs = [
 ];
 
 const projectMeta = [
-  { id: 1, accent: "#e63946", bg: "#f1f3f5" },
-  { id: 2, accent: "#4361ee", bg: "#0f172a" },
-  { id: 3, accent: "#06d6a0", bg: "#0d1117" },
-  { id: 4, accent: "#9d4edd", bg: "#1a0a2e" },
-  { id: 5, accent: "#f72585", bg: "#10002b" },
-  { id: 6, accent: "#4cc9f0", bg: "#071520" },
-  { id: 7, accent: "#ff6b6b", bg: "#1c1c1c" },
-  { id: 8, accent: "#ffd166", bg: "#1a1a2e" },
+  { id: 1, image: "/portfolio/p1.webp", link: "https://validway.webflow.io/" },
+  { id: 2, image: "/portfolio/p2.webp", link: "https://zesty-template.webflow.io/" },
+  { id: 3, image: "/portfolio/p3.webp", link: "https://inkpierce.webflow.io/" },
+  { id: 4, image: "/portfolio/p4.webp", link: "https://housent.webflow.io/" },
+  { id: 5, image: "/portfolio/p5.webp", link: "https://recover-x.webflow.io/" },
+  { id: 6, image: "/portfolio/p6.webp", link: "https://urbanrestaurant.webflow.io/" },
+  { id: 7, image: "/portfolio/p7.webp", link: "https://figaro-salon.webflow.io/" },
+  { id: 8, image: "/portfolio/p8.webp", link: "https://salonas.webflow.io/" },
+  { id: 9, image: "/portfolio/p9.webp", link: "https://law-office-webflow-template.webflow.io/" },
+  { id: 10, image: "/portfolio/p10.webp", link: "https://epidermis.webflow.io/" },
 ];
 
 const teamMeta = [
@@ -154,7 +156,6 @@ const categoryTemplates = {
   ],
   bar: [
     { image: "/templates/t1.webp", link: "https://glamory.webflow.io/" },
-    { image: "/templates/t2.webp", link: "" },
   ],
   all: [
     { image: "/templates/t7.webp", link: "https://advorus.webflow.io/" },
@@ -260,7 +261,8 @@ function buildSiteConfig(locale: Locale) {
       headline: dict.portfolio.headline,
       description: dict.portfolio.description,
       seeMore: { label: dict.portfolio.seeMore, href: "#" },
-      projects: merge(dict.portfolio.projects, projectMeta),
+      // No per-project text — projectMeta is structural-only (image + link)
+      projects: projectMeta,
     },
 
     whyUs: {
