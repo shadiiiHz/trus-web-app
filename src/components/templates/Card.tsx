@@ -8,6 +8,8 @@ import { DEPTH_MAX_SCALE, DEPTH_MIN_SCALE, integrateUFromLUT, scaleFromRad } fro
 export interface CardProps {
   index: number;
   image: string;
+  /** Live site to open in a new tab on click. Empty/undefined = not clickable. */
+  link?: string;
   cardWidth: number;
   radius: number;
   bulge: number;
@@ -93,6 +95,7 @@ function computeCardPosition(
 function CardImpl({
   index,
   image,
+  link,
   cardWidth,
   radius,
   bulge,
@@ -294,9 +297,14 @@ function CardImpl({
       <mesh
         onPointerEnter={() => {
           hoveredRef.current = true;
+          if (link) document.body.style.cursor = "pointer";
         }}
         onPointerLeave={() => {
           hoveredRef.current = false;
+          if (link) document.body.style.cursor = "auto";
+        }}
+        onClick={() => {
+          if (link) window.open(link, "_blank", "noopener,noreferrer");
         }}
       >
         <primitive object={geo} />

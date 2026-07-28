@@ -200,53 +200,7 @@
       { "id": "clinics", "label": "Клиники" },
       { "id": "restaurant", "label": "Рестораны" },
       { "id": "barbershops", "label": "Барбершопы" }
-    ],
-    "templates": {
-      "lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Юридическая фирма" },
-        { "name": "Statute & Stone", "tag": "Корпоративное право" },
-        { "name": "Justitia Group", "tag": "Семейное право" }
-      ],
-      "fitness": [
-        { "name": "GymCore", "tag": "Тренажёрный зал" },
-        { "name": "FitPulse Studio", "tag": "Йога" }
-      ],
-      "realEstate": [
-        { "name": "Domaine", "tag": "Элитная недвижимость" },
-        { "name": "Meridian Realty", "tag": "Продажа жилой недвижимости" }
-      ],
-      "clinics": [
-        { "name": "MediCore", "tag": "Общая практика" },
-        { "name": "DentaPlus", "tag": "Стоматологическая клиника" }
-      ],
-      "restaurant": [
-        { "name": "Savora", "tag": "Высокая кухня" },
-        { "name": "Bistro & Co.", "tag": "Кафе и бистро" },
-        { "name": "Grillhouse Co.", "tag": "Стейк-хаус" },
-        { "name": "Nomad Kitchen", "tag": "Повседневная кухня" }
-      ],
-      "barbershops": [
-        { "name": "BladeCraft", "tag": "Классический барбершоп" },
-        { "name": "Sharp & Co.", "tag": "Премиум-уход" }
-      ],
-      "all": [
-        { "name": "LegalEdge Pro", "tag": "Юридическая фирма" },
-        { "name": "Statute & Stone", "tag": "Корпоративное право" },
-        { "name": "Justitia Group", "tag": "Семейное право" },
-        { "name": "GymCore", "tag": "Тренажёрный зал" },
-        { "name": "FitPulse Studio", "tag": "Йога" },
-        { "name": "Domaine", "tag": "Элитная недвижимость" },
-        { "name": "Meridian Realty", "tag": "Продажа жилой недвижимости" },
-        { "name": "MediCore", "tag": "Общая практика" },
-        { "name": "DentaPlus", "tag": "Стоматологическая клиника" },
-        { "name": "Savora", "tag": "Высокая кухня" },
-        { "name": "Bistro & Co.", "tag": "Кафе и бистро" },
-        { "name": "Grillhouse Co.", "tag": "Стейк-хаус" },
-        { "name": "Nomad Kitchen", "tag": "Повседневная кухня" },
-        { "name": "BladeCraft", "tag": "Классический барбершоп" },
-        { "name": "Sharp & Co.", "tag": "Премиум-уход" }
-      ]
-    }
+    ]
   },
 
   "contact": {

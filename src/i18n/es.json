@@ -200,53 +200,7 @@
       { "id": "clinics", "label": "Clínicas" },
       { "id": "restaurant", "label": "Restaurante" },
       { "id": "barbershops", "label": "Barberías" }
-    ],
-    "templates": {
-      "lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Bufete de abogados" },
-        { "name": "Statute & Stone", "tag": "Derecho corporativo" },
-        { "name": "Justitia Group", "tag": "Derecho de familia" }
-      ],
-      "fitness": [
-        { "name": "GymCore", "tag": "Gimnasio" },
-        { "name": "FitPulse Studio", "tag": "Yoga" }
-      ],
-      "realEstate": [
-        { "name": "Domaine", "tag": "Viviendas de lujo" },
-        { "name": "Meridian Realty", "tag": "Venta residencial" }
-      ],
-      "clinics": [
-        { "name": "MediCore", "tag": "Medicina general" },
-        { "name": "DentaPlus", "tag": "Clínica dental" }
-      ],
-      "restaurant": [
-        { "name": "Savora", "tag": "Alta cocina" },
-        { "name": "Bistro & Co.", "tag": "Café y bistró" },
-        { "name": "Grillhouse Co.", "tag": "Asador" },
-        { "name": "Nomad Kitchen", "tag": "Comida casual" }
-      ],
-      "barbershops": [
-        { "name": "BladeCraft", "tag": "Barbería clásica" },
-        { "name": "Sharp & Co.", "tag": "Cuidado de lujo" }
-      ],
-      "all": [
-        { "name": "LegalEdge Pro", "tag": "Bufete de abogados" },
-        { "name": "Statute & Stone", "tag": "Derecho corporativo" },
-        { "name": "Justitia Group", "tag": "Derecho de familia" },
-        { "name": "GymCore", "tag": "Gimnasio" },
-        { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "Domaine", "tag": "Viviendas de lujo" },
-        { "name": "Meridian Realty", "tag": "Venta residencial" },
-        { "name": "MediCore", "tag": "Medicina general" },
-        { "name": "DentaPlus", "tag": "Clínica dental" },
-        { "name": "Savora", "tag": "Alta cocina" },
-        { "name": "Bistro & Co.", "tag": "Café y bistró" },
-        { "name": "Grillhouse Co.", "tag": "Asador" },
-        { "name": "Nomad Kitchen", "tag": "Comida casual" },
-        { "name": "BladeCraft", "tag": "Barbería clásica" },
-        { "name": "Sharp & Co.", "tag": "Cuidado de lujo" }
-      ]
-    }
+    ]
   },
 
   "contact": {

@@ -200,53 +200,7 @@
       { "id": "clinics", "label": "Clinics" },
       { "id": "restaurant", "label": "Restaurant" },
       { "id": "barbershops", "label": "Barbershops" }
-    ],
-    "templates": {
-      "lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Law Firm" },
-        { "name": "Statute & Stone", "tag": "Corporate Law" },
-        { "name": "Justitia Group", "tag": "Family Law" }
-      ],
-      "fitness": [
-        { "name": "GymCore", "tag": "Gym" },
-        { "name": "FitPulse Studio", "tag": "Yoga" }
-      ],
-      "realEstate": [
-        { "name": "Domaine", "tag": "Luxury Homes" },
-        { "name": "Meridian Realty", "tag": "Residential Sales" }
-      ],
-      "clinics": [
-        { "name": "MediCore", "tag": "General Practice" },
-        { "name": "DentaPlus", "tag": "Dental Clinic" }
-      ],
-      "restaurant": [
-        { "name": "Savora", "tag": "Fine Dining" },
-        { "name": "Bistro & Co.", "tag": "Café & Bistro" },
-        { "name": "Grillhouse Co.", "tag": "Steakhouse" },
-        { "name": "Nomad Kitchen", "tag": "Casual Dining" }
-      ],
-      "barbershops": [
-        { "name": "BladeCraft", "tag": "Classic Barber" },
-        { "name": "Sharp & Co.", "tag": "Luxury Grooming" }
-      ],
-      "all": [
-        { "name": "LegalEdge Pro", "tag": "Law Firm" },
-        { "name": "Statute & Stone", "tag": "Corporate Law" },
-        { "name": "Justitia Group", "tag": "Family Law" },
-        { "name": "GymCore", "tag": "Gym" },
-        { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "Domaine", "tag": "Luxury Homes" },
-        { "name": "Meridian Realty", "tag": "Residential Sales" },
-        { "name": "MediCore", "tag": "General Practice" },
-        { "name": "DentaPlus", "tag": "Dental Clinic" },
-        { "name": "Savora", "tag": "Fine Dining" },
-        { "name": "Bistro & Co.", "tag": "Café & Bistro" },
-        { "name": "Grillhouse Co.", "tag": "Steakhouse" },
-        { "name": "Nomad Kitchen", "tag": "Casual Dining" },
-        { "name": "BladeCraft", "tag": "Classic Barber" },
-        { "name": "Sharp & Co.", "tag": "Luxury Grooming" }
-      ]
-    }
+    ]
   },
 
   "contact": {

@@ -37,10 +37,13 @@ export default function TemplateGridReveal({
   return (
     <div
       ref={sectionRef}
-      className="w-full h-full flex flex-col items-center justify-center"
+      className="w-full h-screen flex flex-col items-center justify-center"
       style={{
         position: "absolute",
         inset: 0,
+        // Guarantees a gray-background gap below the grid (on top of
+        // whatever margin the vertical centering already leaves), so the
+        // next section never appears to start right where the cards end.
         pointerEvents: "none",
       }}
     >
@@ -71,7 +74,7 @@ export default function TemplateGridReveal({
       </div>
       <div
         ref={tabsWrapRef}
-        className="shrink-0 mb-12"
+        className="shrink-0 mb-4"
         style={{ opacity: 0, transition: "none" }}
       >
         <CategoryTabs
@@ -81,13 +84,12 @@ export default function TemplateGridReveal({
         />
       </div>
 
-      <div
-        className="w-full max-w-6xl min-h-0 z-4"
-        style={{ perspective: "1200px" }}
-      >
+      <div className="min-h-0 z-4" style={{ perspective: "1200px" }}>
         <div
-          className="grid grid-cols-3 grid-rows-2 gap-5 w-full"
+          className="grid gap-5"
           style={{
+            gridTemplateColumns: "repeat(3, 387px)",
+            gridTemplateRows: "repeat(2, 280px)",
             opacity: gridVisible ? 1 : 0,
             transform: gridVisible ? "scale(1)" : "scale(0.98)",
             transition: `opacity ${CATEGORY_SWITCH_DURATION}ms ease, transform ${CATEGORY_SWITCH_DURATION}ms ease`,
@@ -97,7 +99,7 @@ export default function TemplateGridReveal({
             <RevealGridCard
               key={tpl.id}
               image={tpl.image}
-              name={tpl.name}
+              link={tpl.link}
               cardRef={setCardRef(i)}
               onHoverStart={() => setHovered(i)}
               onHoverEnd={() => setHovered(null)}

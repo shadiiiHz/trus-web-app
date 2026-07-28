@@ -99,6 +99,7 @@ function RibbonScene({
           key={tpl.id}
           index={i}
           image={tpl.image}
+          link={tpl.link}
           cardWidth={cardWidth}
           radius={radius}
           bulge={bulge}

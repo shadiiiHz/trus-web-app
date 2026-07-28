@@ -2,7 +2,7 @@ export function SeeMoreLink({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="group absolute text-label text-[#434343] flex items-center justify-center gap-2 right-0 bottom-[10%] -translate-x-1/2 text-left z-50 leading-3.5 uppercase underline decoration-[#434343] underline-offset-6 decoration-0"
+      className="group absolute text-label text-[#434343] flex items-center justify-center gap-2 top-[10%] right-[5.5%] -translate-x-1/2 text-left z-50 leading-3.5 uppercase underline decoration-[#434343] underline-offset-6 decoration-0"
       style={{ zIndex: 2 }}
     >
       <span className="inline-flex">

@@ -253,8 +253,8 @@ function DesignInMotion3D({
   return (
     <section
       ref={localSectionRef}
-      className="relative h-screen w-full"
-      style={{ zIndex: 1 }}
+      className="relative w-full"
+      style={{ zIndex: 1 , height: "110vh"}}
     >
       <SlideText
         ref={designRef}
@@ -292,7 +292,7 @@ function DesignInMotion3D({
       )}
       {sectionDes && (
         <div
-          className="absolute left-[10%] bottom-[10%] -translate-x-1/2 text-left z-0 leading-3.5"
+          className="absolute left-[10%] bottom-[15%] -translate-x-1/2 text-left z-0 leading-3.5"
           style={{ opacity: 1 - gridProgress, transition: "opacity 0.3s ease" }}
         >
           <p className="text-label font-normal tracking-normal text-[#434343]">

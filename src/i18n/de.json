@@ -207,53 +207,7 @@
       { "id": "clinics", "label": "Kliniken" },
       { "id": "restaurant", "label": "Restaurant" },
       { "id": "barbershops", "label": "Barbershops" }
-    ],
-    "templates": {
-      "lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Anwaltskanzlei" },
-        { "name": "Statute & Stone", "tag": "Wirtschaftsrecht" },
-        { "name": "Justitia Group", "tag": "Familienrecht" }
-      ],
-      "fitness": [
-        { "name": "GymCore", "tag": "Fitnessstudio" },
-        { "name": "FitPulse Studio", "tag": "Yoga" }
-      ],
-      "realEstate": [
-        { "name": "Domaine", "tag": "Luxusimmobilien" },
-        { "name": "Meridian Realty", "tag": "Wohnimmobilienverkauf" }
-      ],
-      "clinics": [
-        { "name": "MediCore", "tag": "Allgemeinmedizin" },
-        { "name": "DentaPlus", "tag": "Zahnklinik" }
-      ],
-      "restaurant": [
-        { "name": "Savora", "tag": "Gehobene Küche" },
-        { "name": "Bistro & Co.", "tag": "Café & Bistro" },
-        { "name": "Grillhouse Co.", "tag": "Steakhaus" },
-        { "name": "Nomad Kitchen", "tag": "Zwangloses Restaurant" }
-      ],
-      "barbershops": [
-        { "name": "BladeCraft", "tag": "Klassischer Barbier" },
-        { "name": "Sharp & Co.", "tag": "Luxus-Grooming" }
-      ],
-      "all": [
-        { "name": "LegalEdge Pro", "tag": "Anwaltskanzlei" },
-        { "name": "Statute & Stone", "tag": "Wirtschaftsrecht" },
-        { "name": "Justitia Group", "tag": "Familienrecht" },
-        { "name": "GymCore", "tag": "Fitnessstudio" },
-        { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "Domaine", "tag": "Luxusimmobilien" },
-        { "name": "Meridian Realty", "tag": "Wohnimmobilienverkauf" },
-        { "name": "MediCore", "tag": "Allgemeinmedizin" },
-        { "name": "DentaPlus", "tag": "Zahnklinik" },
-        { "name": "Savora", "tag": "Gehobene Küche" },
-        { "name": "Bistro & Co.", "tag": "Café & Bistro" },
-        { "name": "Grillhouse Co.", "tag": "Steakhaus" },
-        { "name": "Nomad Kitchen", "tag": "Zwangloses Restaurant" },
-        { "name": "BladeCraft", "tag": "Klassischer Barbier" },
-        { "name": "Sharp & Co.", "tag": "Luxus-Grooming" }
-      ]
-    }
+    ]
   },
 
   "contact": {

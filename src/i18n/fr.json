@@ -200,53 +200,7 @@
       { "id": "clinics", "label": "Cliniques" },
       { "id": "restaurant", "label": "Restaurant" },
       { "id": "barbershops", "label": "Barbiers" }
-    ],
-    "templates": {
-      "lawyers": [
-        { "name": "LegalEdge Pro", "tag": "Cabinet d'avocats" },
-        { "name": "Statute & Stone", "tag": "Droit des affaires" },
-        { "name": "Justitia Group", "tag": "Droit de la famille" }
-      ],
-      "fitness": [
-        { "name": "GymCore", "tag": "Salle de sport" },
-        { "name": "FitPulse Studio", "tag": "Yoga" }
-      ],
-      "realEstate": [
-        { "name": "Domaine", "tag": "Résidences de luxe" },
-        { "name": "Meridian Realty", "tag": "Vente résidentielle" }
-      ],
-      "clinics": [
-        { "name": "MediCore", "tag": "Médecine générale" },
-        { "name": "DentaPlus", "tag": "Clinique dentaire" }
-      ],
-      "restaurant": [
-        { "name": "Savora", "tag": "Gastronomie" },
-        { "name": "Bistro & Co.", "tag": "Café & bistrot" },
-        { "name": "Grillhouse Co.", "tag": "Grill" },
-        { "name": "Nomad Kitchen", "tag": "Restauration décontractée" }
-      ],
-      "barbershops": [
-        { "name": "BladeCraft", "tag": "Barbier classique" },
-        { "name": "Sharp & Co.", "tag": "Grooming de luxe" }
-      ],
-      "all": [
-        { "name": "LegalEdge Pro", "tag": "Cabinet d'avocats" },
-        { "name": "Statute & Stone", "tag": "Droit des affaires" },
-        { "name": "Justitia Group", "tag": "Droit de la famille" },
-        { "name": "GymCore", "tag": "Salle de sport" },
-        { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "Domaine", "tag": "Résidences de luxe" },
-        { "name": "Meridian Realty", "tag": "Vente résidentielle" },
-        { "name": "MediCore", "tag": "Médecine générale" },
-        { "name": "DentaPlus", "tag": "Clinique dentaire" },
-        { "name": "Savora", "tag": "Gastronomie" },
-        { "name": "Bistro & Co.", "tag": "Café & bistrot" },
-        { "name": "Grillhouse Co.", "tag": "Grill" },
-        { "name": "Nomad Kitchen", "tag": "Restauration décontractée" },
-        { "name": "BladeCraft", "tag": "Barbier classique" },
-        { "name": "Sharp & Co.", "tag": "Grooming de luxe" }
-      ]
-    }
+    ]
   },
 
   "contact": {

@@ -112,40 +112,78 @@ const serviceMeta = [
   { id: "email-marketing" },
   { id: "analytics" },
 ];
-// Per-category screenshots. `all` is derived below by concatenating these
-// in the same order the locale JSON's `templates.all` text arrays are built
-// in (lawyers, fitness, realEstate, clinics, restaurant, barbershops) — the
-// two must stay index-aligned since `merge()` zips them by position.
-const categoryImages = {
-  law: ["/templates/t7.webp", "/templates/t8.webp", "/templates/t9.webp"],
-  fit: ["/templates/t5.webp", "/templates/t6.webp"],
-  re: ["/templates/t10.webp", "/templates/t11.webp"],
-  cl: ["/templates/t3.webp", "/templates/t4.webp"],
+// Per-category screenshots + the live site each template card links out to
+// (opened in a new tab on click). `all` is derived below by concatenating
+// these in the same order (lawyers, fitness, realEstate, clinics,
+// restaurant, barbershops). A blank `link` means the card isn't clickable.
+const categoryTemplates = {
+  law: [
+    { image: "/templates/t7.webp", link: "https://advorus.webflow.io/" },
+    {
+      image: "/templates/t8.webp",
+      link: "https://inloy-128.webflow.io/home-1",
+    },
+    { image: "/templates/t9.webp", link: "https://trustlegal.webflow.io/" },
+  ],
+  fit: [
+    {
+      image: "/templates/t5.webp",
+      link: "https://flexova-fitness-gym-website-template.webflow.io/",
+    },
+    { image: "/templates/t6.webp", link: "https://fitcore-ttm.webflow.io/" },
+  ],
+  re: [
+    { image: "/templates/t10.webp", link: "https://andalash.webflow.io/" },
+    {
+      image: "/templates/t11.webp",
+      link: "https://hampton-template.webflow.io/",
+    },
+  ],
+  cl: [
+    { image: "/templates/t3.webp", link: "https://oralix.webflow.io/" },
+    {
+      image: "/templates/t4.webp",
+      link: "https://pawfect-webflipin.webflow.io/",
+    },
+  ],
   restaurant: [
-    "/templates/t12.webp",
-    "/templates/t13.webp",
-    "/templates/t14.webp",
-    "/templates/t15.webp",
+    { image: "/templates/t12.webp", link: "https://thyme-965261.webflow.io/" },
+    { image: "/templates/t13.webp", link: "https://airbrick.webflow.io/" },
+    { image: "/templates/t14.webp", link: "https://brixsa.webflow.io/" },
+    { image: "/templates/t15.webp", link: "https://taverna-cms.webflow.io/" },
   ],
-  bar: ["/templates/t1.webp", "/templates/t2.webp"],
-};
-
-const imageMap = {
-  ...categoryImages,
+  bar: [
+    { image: "/templates/t1.webp", link: "https://glamory.webflow.io/" },
+    { image: "/templates/t2.webp", link: "" },
+  ],
   all: [
-    ...categoryImages.law,
-    ...categoryImages.fit,
-    ...categoryImages.re,
-    ...categoryImages.cl,
-    ...categoryImages.restaurant,
-    ...categoryImages.bar,
+    { image: "/templates/t7.webp", link: "https://advorus.webflow.io/" },
+    {
+      image: "/templates/t11.webp",
+      link: "https://hampton-template.webflow.io/",
+    },
+    { image: "/templates/t3.webp", link: "https://oralix.webflow.io/" },
+    { image: "/templates/t1.webp", link: "https://glamory.webflow.io/" },
+    {
+      image: "/templates/t5.webp",
+      link: "https://flexova-fitness-gym-website-template.webflow.io/",
+    },
+    { image: "/templates/t10.webp", link: "https://andalash.webflow.io/" },
+    { image: "/templates/t13.webp", link: "https://airbrick.webflow.io/" },
+    { image: "/templates/t9.webp", link: "https://trustlegal.webflow.io/" },
+    { image: "/templates/t12.webp", link: "https://thyme-965261.webflow.io/" },
   ],
 };
 
-const seedMeta = (prefix: keyof typeof imageMap) =>
-  imageMap[prefix].map((img, i) => ({
+const templateMap = {
+  ...categoryTemplates,
+};
+
+const seedTemplates = (prefix: keyof typeof templateMap) =>
+  templateMap[prefix].map((tpl, i) => ({
     id: i + 1,
-    image: img,
+    image: tpl.image,
+    link: tpl.link,
   }));
 
 const testimonialMeta = [
@@ -255,35 +293,14 @@ function buildSiteConfig(locale: Locale) {
       sectionDes: dict.templateCategories.sectionDes,
       categories: dict.templateCategories.categories,
       templates: {
-        lawyers: merge(
-          dict.templateCategories.templates.lawyers,
-          seedMeta("law"),
-        ),
-        fitness: merge(
-          dict.templateCategories.templates.fitness,
-          seedMeta("fit"),
-        ),
-        realEstate: merge(
-          dict.templateCategories.templates.realEstate,
-          seedMeta("re"),
-        ),
-        clinics: merge(
-          dict.templateCategories.templates.clinics,
-          seedMeta("cl"),
-        ),
-        restaurant: merge(
-          dict.templateCategories.templates.restaurant,
-          seedMeta("restaurant"),
-        ),
-        barbershops: merge(
-          dict.templateCategories.templates.barbershops,
-          seedMeta("bar"),
-        ),
-        all: merge(dict.templateCategories.templates.all, seedMeta("all")),
-      } as Record<
-        string,
-        Array<{ id: number; name: string; tag: string; image: string }>
-      >,
+        lawyers: seedTemplates("law"),
+        fitness: seedTemplates("fit"),
+        realEstate: seedTemplates("re"),
+        clinics: seedTemplates("cl"),
+        restaurant: seedTemplates("restaurant"),
+        barbershops: seedTemplates("bar"),
+        all: seedTemplates("all"),
+      } as Record<string, Array<{ id: number; image: string; link: string }>>,
     },
 
     contact: {
