@@ -1,5 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion'
-
 export interface CategoryTabItem {
   id:    string
   label: string
@@ -14,11 +12,9 @@ export interface CategoryTabsProps {
 /**
  * Horizontal tab row for template categories.
  *
- * Active tab:   white background, black text, layout-animated pill.
- * Inactive tab: transparent background, white text, #FFFFFF4D border.
- *
- * The white active pill is a shared layout element (`layoutId="tab-pill"`)
- * so it slides smoothly between tabs on click.
+ * Plain-text tabs separated by thin vertical dividers.
+ * Active tab:   bold, purple (#5B2BB9).
+ * Inactive tab: regular weight, dark text.
  */
 export function CategoryTabs({ categories, activeCategory, onChange }: CategoryTabsProps) {
   return (
@@ -28,58 +24,48 @@ export function CategoryTabs({ categories, activeCategory, onChange }: CategoryT
       style={{
         display:         'flex',
         flexWrap:        'wrap',
-        gap:             '10px',
+        alignItems:      'center',
         justifyContent:  'center',
       }}
     >
-      {categories.map((cat) => {
+      {categories.map((cat, i) => {
         const isActive = cat.id === activeCategory
         return (
-          <button
-            key={cat.id}
-            role="tab"
-            aria-selected={isActive}
-            onClick={() => onChange(cat.id)}
-            style={{
-              position:        'relative',
-              padding:         '9px 20px',
-              borderRadius:    999,
-              border:          isActive ? '1px solid transparent' : '1px solid rgba(0, 0, 0, 0.3)',
-              background:      'transparent',
-              cursor:          'pointer',
-              fontFamily:      'var(--font-body)',
-              fontSize:        '14px',
-              fontWeight:      isActive ? 600 : 400,
-              color:           isActive ? '#FFFFFF' : '#0D0D0D',
-              transition:      'color 0.22s ease, font-weight 0.22s ease',
-              outline:         'none',
-              WebkitTapHighlightColor: 'transparent',
-              overflow:        'hidden',
-            }}
-          >
-            {/* Animated white pill background */}
-            <AnimatePresence>
-              {isActive && (
-                <motion.span
-                  layoutId="tab-pill"
-                  key="pill"
-                  style={{
-                    position:     'absolute',
-                    inset:        0,
-                    borderRadius: 999,
-                    background:   '#0D0D0D',
-                    zIndex:       0,
-                  }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                />
-              )}
-            </AnimatePresence>
+          <div key={cat.id} style={{ display: 'flex', alignItems: 'center' }}>
+            <button
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => onChange(cat.id)}
+              style={{
+                padding:     0,
+                border:      'none',
+                background:  'transparent',
+                cursor:      'pointer',
+                fontFamily:  'var(--font-body)',
+                fontSize:    '16px',
+                fontWeight:  isActive ? 700 : 400,
+                color:       isActive ? '#5B2BB9' : '#000000',
+                transition:  'color 0.22s ease, font-weight 0.22s ease',
+                outline:     'none',
+                WebkitTapHighlightColor: 'transparent',
+                whiteSpace:  'nowrap',
+              }}
+            >
+              {cat.label}
+            </button>
 
-            <span style={{ position: 'relative', zIndex: 1 }}>{cat.label}</span>
-          </button>
+            {i < categories.length - 1 && (
+              <span
+                aria-hidden="true"
+                style={{
+                  width:      '1px',
+                  height:     '33px',
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  margin:     '0 18px',
+                }}
+              />
+            )}
+          </div>
         )
       })}
     </div>

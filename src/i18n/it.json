@@ -193,24 +193,37 @@
       "del nostro processo creativo."
     ],
     "categories": [
+      { "id": "all", "label": "Tutti i Modelli" },
       { "id": "lawyers", "label": "Avvocati" },
       { "id": "fitness", "label": "Fitness" },
       { "id": "realEstate", "label": "Immobiliare" },
       { "id": "clinics", "label": "Cliniche" },
-      { "id": "barbershops", "label": "Barbieri" },
-      { "id": "all", "label": "Tutti" }
+      { "id": "restaurant", "label": "Ristorante" },
+      { "id": "barbershops", "label": "Barbieri" }
     ],
     "templates": {
-      "lawyers": [{ "name": "LegalEdge Pro", "tag": "Studio Legale" }],
+      "lawyers": [
+        { "name": "LegalEdge Pro", "tag": "Studio Legale" },
+        { "name": "Statute & Stone", "tag": "Diritto Societario" },
+        { "name": "Justitia Group", "tag": "Diritto di Famiglia" }
+      ],
       "fitness": [
         { "name": "GymCore", "tag": "Palestra" },
-        { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "EliteBody Pro", "tag": "Personal Training" }
+        { "name": "FitPulse Studio", "tag": "Yoga" }
       ],
-      "realEstate": [{ "name": "Domaine", "tag": "Case di Lusso" }],
+      "realEstate": [
+        { "name": "Domaine", "tag": "Case di Lusso" },
+        { "name": "Meridian Realty", "tag": "Vendita Residenziale" }
+      ],
       "clinics": [
         { "name": "MediCore", "tag": "Medicina Generale" },
         { "name": "DentaPlus", "tag": "Clinica Dentale" }
+      ],
+      "restaurant": [
+        { "name": "Savora", "tag": "Alta Cucina" },
+        { "name": "Bistro & Co.", "tag": "Caffè e Bistrot" },
+        { "name": "Grillhouse Co.", "tag": "Griglieria" },
+        { "name": "Nomad Kitchen", "tag": "Cucina Informale" }
       ],
       "barbershops": [
         { "name": "BladeCraft", "tag": "Barbiere Classico" },
@@ -218,12 +231,18 @@
       ],
       "all": [
         { "name": "LegalEdge Pro", "tag": "Studio Legale" },
+        { "name": "Statute & Stone", "tag": "Diritto Societario" },
+        { "name": "Justitia Group", "tag": "Diritto di Famiglia" },
         { "name": "GymCore", "tag": "Palestra" },
         { "name": "FitPulse Studio", "tag": "Yoga" },
-        { "name": "EliteBody Pro", "tag": "Personal Training" },
         { "name": "Domaine", "tag": "Case di Lusso" },
+        { "name": "Meridian Realty", "tag": "Vendita Residenziale" },
         { "name": "MediCore", "tag": "Medicina Generale" },
         { "name": "DentaPlus", "tag": "Clinica Dentale" },
+        { "name": "Savora", "tag": "Alta Cucina" },
+        { "name": "Bistro & Co.", "tag": "Caffè e Bistrot" },
+        { "name": "Grillhouse Co.", "tag": "Griglieria" },
+        { "name": "Nomad Kitchen", "tag": "Cucina Informale" },
         { "name": "BladeCraft", "tag": "Barbiere Classico" },
         { "name": "Sharp & Co.", "tag": "Toelettatura di Lusso" }
       ]

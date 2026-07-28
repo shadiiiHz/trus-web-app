@@ -19,7 +19,10 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
   // so the floating menu tab is the only way to reach nav links here.
   const [isActive, setIsActive] = useState(false);
 
-  const ribbonTemplates = templates.all;
+  // The full "all" pool feeds the category grid/tabs, but the 3D ribbon
+  // only ever travels through the first 9 — more than that made the
+  // spiral feel too long/cluttered.
+  const ribbonTemplates = templates.all.slice(0, 9);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -50,7 +53,7 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
         ref={sectionRef}
         className="relative group"
         style={{
-          background: "#C3C3C3",
+          background: "linear-gradient(to bottom, #D9D9D9 0%, #A3A3A3 100%)",
           overflow: "hidden",
         }}
         aria-label="Template Categories"

@@ -13,6 +13,7 @@ import {
   FLUTTER_SPEED,
   HARMONIC_MIX,
   HOVER_EASE_SPEED,
+  HOVER_FLUTTER_RATIO,
   HOVER_SCALE_BOOST,
   MIDDLE_FROM_ABOVE,
   MIDDLE_SIDE,
@@ -194,60 +195,6 @@ export function useCardRevealAnimation({
         const unsettle = 1 - eased;
         const windAmp = Math.pow(unsettle, UNSETTLE_POWER);
 
-        const flutterRotY =
-          wave(elapsed * freq1 + phase, elapsed * freq3 + phase * 1.7, 0.6) *
-          FLUTTER_ROT_Y *
-          windAmp;
-        const flutterRotX =
-          wave(
-            elapsed * freq2 + phase * 1.3,
-            elapsed * freq4 + phase * 0.8,
-            1.1,
-          ) *
-          FLUTTER_ROT_X *
-          windAmp;
-        const flutterRotZ =
-          wave(
-            elapsed * (freq1 * 0.6) + phase * 0.7,
-            elapsed * freq3 * 0.7 + phase,
-            0.4,
-          ) *
-          FLUTTER_ROT_Z *
-          windAmp;
-        const flutterSkewX =
-          wave(
-            elapsed * freq2 * 0.8 + phase,
-            elapsed * freq4 * 0.9 + phase,
-            0.9,
-          ) *
-          FLUTTER_SKEW_X *
-          windAmp;
-        const flutterSkewY =
-          wave(
-            elapsed * freq1 * 0.9 + phase * 1.6,
-            elapsed * freq3 * 0.6 + phase * 1.2,
-            0.3,
-          ) *
-          FLUTTER_SKEW_Y *
-          windAmp;
-
-        const flutterX =
-          wave(
-            elapsed * freq1 * 1.1 + phase,
-            elapsed * freq3 * 0.8 + phase * 1.4,
-            0.5,
-          ) *
-          FLUTTER_POS_X *
-          windAmp;
-        const flutterY =
-          wave(
-            elapsed * freq2 * 1.05 + phase * 0.5,
-            elapsed * freq4 * 0.75 + phase,
-            0.8,
-          ) *
-          FLUTTER_POS_Y *
-          windAmp;
-
         // Smoothly ease the hover amount toward 1 (hovered) or 0 (not),
         // so the reaction doesn't snap instantly.
         const isHovered = hoveredIndexRef.current === i;
@@ -263,6 +210,65 @@ export function useCardRevealAnimation({
         );
         hoverAmountRef.current[i] = hoverAmount;
 
+        // A settled card (windAmp === 0) still gets a faint slice of the
+        // same wind-flutter wave while hovered — a still-settling card's
+        // bigger flutter and the hover flutter simply add together.
+        const flutterAmp = windAmp + hoverAmount * HOVER_FLUTTER_RATIO;
+
+        const flutterRotY =
+          wave(elapsed * freq1 + phase, elapsed * freq3 + phase * 1.7, 0.6) *
+          FLUTTER_ROT_Y *
+          flutterAmp;
+        const flutterRotX =
+          wave(
+            elapsed * freq2 + phase * 1.3,
+            elapsed * freq4 + phase * 0.8,
+            1.1,
+          ) *
+          FLUTTER_ROT_X *
+          flutterAmp;
+        const flutterRotZ =
+          wave(
+            elapsed * (freq1 * 0.6) + phase * 0.7,
+            elapsed * freq3 * 0.7 + phase,
+            0.4,
+          ) *
+          FLUTTER_ROT_Z *
+          flutterAmp;
+        const flutterSkewX =
+          wave(
+            elapsed * freq2 * 0.8 + phase,
+            elapsed * freq4 * 0.9 + phase,
+            0.9,
+          ) *
+          FLUTTER_SKEW_X *
+          flutterAmp;
+        const flutterSkewY =
+          wave(
+            elapsed * freq1 * 0.9 + phase * 1.6,
+            elapsed * freq3 * 0.6 + phase * 1.2,
+            0.3,
+          ) *
+          FLUTTER_SKEW_Y *
+          flutterAmp;
+
+        const flutterX =
+          wave(
+            elapsed * freq1 * 1.1 + phase,
+            elapsed * freq3 * 0.8 + phase * 1.4,
+            0.5,
+          ) *
+          FLUTTER_POS_X *
+          flutterAmp;
+        const flutterY =
+          wave(
+            elapsed * freq2 * 1.05 + phase * 0.5,
+            elapsed * freq4 * 0.75 + phase,
+            0.8,
+          ) *
+          FLUTTER_POS_Y *
+          flutterAmp;
+
         const x = gsap.utils.interpolate(fromX, 0, eased) + flutterX;
         const y = gsap.utils.interpolate(fromY, 0, eased) + flutterY;
 
@@ -271,7 +277,7 @@ export function useCardRevealAnimation({
           (1 +
             Math.sin(elapsed * freq1 + phase) *
               FLUTTER_SCALE_WOBBLE *
-              windAmp) *
+              flutterAmp) *
           (1 + hoverAmount * HOVER_SCALE_BOOST);
 
         const rotate =

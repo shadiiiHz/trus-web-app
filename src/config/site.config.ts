@@ -112,22 +112,33 @@ const serviceMeta = [
   { id: "email-marketing" },
   { id: "analytics" },
 ];
+// Per-category screenshots. `all` is derived below by concatenating these
+// in the same order the locale JSON's `templates.all` text arrays are built
+// in (lawyers, fitness, realEstate, clinics, restaurant, barbershops) — the
+// two must stay index-aligned since `merge()` zips them by position.
+const categoryImages = {
+  law: ["/templates/t7.webp", "/templates/t8.webp", "/templates/t9.webp"],
+  fit: ["/templates/t5.webp", "/templates/t6.webp"],
+  re: ["/templates/t10.webp", "/templates/t11.webp"],
+  cl: ["/templates/t3.webp", "/templates/t4.webp"],
+  restaurant: [
+    "/templates/t12.webp",
+    "/templates/t13.webp",
+    "/templates/t14.webp",
+    "/templates/t15.webp",
+  ],
+  bar: ["/templates/t1.webp", "/templates/t2.webp"],
+};
+
 const imageMap = {
-  law: ["/templates/t1.webp"],
-  fit: ["/templates/t2.webp", "/templates/t3.webp", "/templates/t4.webp"],
-  re: ["/templates/t5.webp"],
-  cl: ["/templates/t6.webp", "/templates/t7.webp"],
-  bar: ["/templates/t8.webp", "/templates/t9.webp"],
+  ...categoryImages,
   all: [
-    "/templates/t1.webp",
-    "/templates/t2.webp",
-    "/templates/t3.webp",
-    "/templates/t4.webp",
-    "/templates/t5.webp",
-    "/templates/t6.webp",
-    "/templates/t7.webp",
-    "/templates/t8.webp",
-    "/templates/t9.webp",
+    ...categoryImages.law,
+    ...categoryImages.fit,
+    ...categoryImages.re,
+    ...categoryImages.cl,
+    ...categoryImages.restaurant,
+    ...categoryImages.bar,
   ],
 };
 
@@ -259,6 +270,10 @@ function buildSiteConfig(locale: Locale) {
         clinics: merge(
           dict.templateCategories.templates.clinics,
           seedMeta("cl"),
+        ),
+        restaurant: merge(
+          dict.templateCategories.templates.restaurant,
+          seedMeta("restaurant"),
         ),
         barbershops: merge(
           dict.templateCategories.templates.barbershops,

@@ -76,6 +76,12 @@ export const TABS_FADE_END = 0.85; // was 0.95
 export const HOVER_SCALE_BOOST = 0.04;
 export const HOVER_EASE_SPEED = 0.12;
 
+// A hovered card keeps riding the same wind-flutter wave used during the
+// settle-in reveal (see FLUTTER_* above), just at a small fraction of its
+// amplitude — reads as a faint paper-in-a-breeze wobble rather than the
+// big settle-in flutter.
+export const HOVER_FLUTTER_RATIO = 0.02;
+
 // How the grid fades/scales out and back in when the user switches
 // category tabs. Duration is in ms and must match the CSS transition
 // duration used on the grid wrapper in TemplateGridReveal.
