@@ -52,6 +52,28 @@ interface PositionParams {
 // instead, which doesn't affect the on-screen gap.
 const DEPTH_PUSH_STRENGTH = 0.35;
 
+// Hover "wave" — the same wind-blown flutter idea used by the
+// TemplateGridReveal cards (see useCardRevealAnimation's `wave` helper),
+// ported to world-space rotation/position so a hovered ribbon card reads
+// as a card caught in a breeze rather than a flat scale bump. Amplitudes
+// are kept small (degrees / a fraction of cardWidth) so it stays a subtle
+// wobble layered on top of the ribbon's own curve, not a shape change.
+const HOVER_FLUTTER_ROT_X = 0.8; // deg
+const HOVER_FLUTTER_ROT_Y = 1; // deg
+const HOVER_FLUTTER_ROT_Z = 0.5; // deg
+const HOVER_FLUTTER_POS_X = 0.008; // world units
+const HOVER_FLUTTER_POS_Y = 0.012; // world units
+const HOVER_FLUTTER_SPEED = 1.6;
+// Weight of the second, higher-frequency harmonic relative to the main
+// wave — keeps the flutter from reading as one mechanical oscillation.
+const HOVER_HARMONIC_MIX = 0.4;
+// Exponential smoothing rate the hover amount eases toward 0/1 at —
+// matches `scaleSmoothing` below so scale and flutter settle together.
+const HOVER_AMOUNT_SMOOTHING_RATE = 8;
+
+const hoverWave = (base: number, harmonic: number, phase: number) =>
+  Math.sin(base) + HOVER_HARMONIC_MIX * Math.sin(harmonic + phase);
+
 /**
  * Pure position function, hoisted to module scope so it (and the
  * `integrateU` lookup it uses) is never re-allocated as a closure inside
@@ -113,8 +135,14 @@ function CardImpl({
   // component) on every pointer enter/leave; the visual feedback is
   // already fully driven by the per-frame scale lerp.
   const hoveredRef = useRef(false);
+  // Eased 0-1 amount (not a plain boolean) so the hover flutter fades in
+  // and out smoothly instead of snapping on/off with the pointer.
+  const hoverAmountRef = useRef(0);
   const scaleRef = useRef(1);
   const tiltRef = useRef(0);
+  // Per-card phase offset so neighboring hovered cards don't flutter in
+  // lockstep — same idea as WIND_SEED in the grid reveal.
+  const hoverPhaseRef = useRef((index * 0.73) % (Math.PI * 2));
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshBasicMaterial>(null);
   const texture = useTexture(image);
@@ -168,10 +196,12 @@ function CardImpl({
     paramsRef.current.arcLengthLUT = arcLengthLUT;
   });
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const group = groupRef.current;
     const mat = materialRef.current;
     if (!group || !mat) return;
+
+    const elapsed = state.clock.elapsedTime;
 
     // Clamp delta so a lagged/minimized tab doesn't cause a visible jump
     // when it comes back.
@@ -290,6 +320,54 @@ function CardImpl({
     );
 
     group.scale.setScalar(scaleRef.current);
+
+    // Ease the hover amount toward 1 (hovered) / 0 (not), same
+    // frame-rate-independent smoothing as the scale above, so the wave
+    // fades in/out instead of snapping with the pointer.
+    const hoverAmountSmoothing = 1 - Math.exp(-HOVER_AMOUNT_SMOOTHING_RATE * dt);
+    hoverAmountRef.current = THREE.MathUtils.lerp(
+      hoverAmountRef.current,
+      hoveredRef.current ? 1 : 0,
+      hoverAmountSmoothing,
+    );
+    const hoverAmount = hoverAmountRef.current;
+
+    if (hoverAmount > 0.001) {
+      const phase = hoverPhaseRef.current;
+      const t = elapsed * HOVER_FLUTTER_SPEED;
+
+      const flutterRotX = THREE.MathUtils.degToRad(
+        hoverWave(t + phase, t * 1.8 + phase * 1.3, 0.6) *
+          HOVER_FLUTTER_ROT_X *
+          hoverAmount,
+      );
+      const flutterRotY = THREE.MathUtils.degToRad(
+        hoverWave(t * 1.3 + phase * 0.7, t * 2.1 + phase, 1.1) *
+          HOVER_FLUTTER_ROT_Y *
+          hoverAmount,
+      );
+      const flutterRotZ = THREE.MathUtils.degToRad(
+        hoverWave(t * 0.8 + phase * 1.6, t * 1.5 + phase * 0.4, 0.3) *
+          HOVER_FLUTTER_ROT_Z *
+          hoverAmount,
+      );
+      const flutterX =
+        hoverWave(t * 1.1 + phase, t * 1.9 + phase * 1.4, 0.5) *
+        HOVER_FLUTTER_POS_X *
+        hoverAmount;
+      const flutterY =
+        hoverWave(t * 0.9 + phase * 0.5, t * 1.6 + phase, 0.8) *
+        HOVER_FLUTTER_POS_Y *
+        hoverAmount;
+
+      group.rotation.x = flutterRotX;
+      group.rotation.y += flutterRotY;
+      group.rotation.z += flutterRotZ;
+      group.position.x += flutterX;
+      group.position.y += flutterY;
+    } else {
+      group.rotation.x = 0;
+    }
   });
 
   return (
