@@ -15,7 +15,7 @@ export function ServiceCard({ icon, title, description }: ServiceCardProps) {
         height:       '220px',
         borderRadius: '16px',
         padding:      '24px',
-        background:   '#FFFFFF',
+        background:   '#E3E3E3',
         display:      'flex',
         flexDirection: 'column',
         gap:          '14px',

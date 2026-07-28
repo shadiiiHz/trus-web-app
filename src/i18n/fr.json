@@ -149,6 +149,14 @@
         "description": "Conception d'interfaces modernes et conviviales qui améliorent l'utilisabilité et l'engagement."
       },
       {
+        "title": "Branding",
+        "description": "Création d'identités de marque distinctives qui laissent une impression durable."
+      },
+      {
+        "title": "Réseaux Sociaux",
+        "description": "Développer votre audience avec un contenu social engageant et fidèle à votre marque."
+      },
+      {
         "title": "Générateur de leads",
         "description": "Création de systèmes axés sur la conversion qui aident à transformer les visiteurs en clients potentiels."
       },
@@ -159,6 +167,14 @@
       {
         "title": "Génération de contenu",
         "description": "Création de contenu numérique engageant qui connecte les marques à leur audience."
+      },
+      {
+        "title": "Email Marketing",
+        "description": "Conception de campagnes d'emails ciblées qui entretiennent les leads et génèrent des ventes récurrentes."
+      },
+      {
+        "title": "Analytique",
+        "description": "Transformer les données en informations claires pour des décisions d'affaires plus avisées."
       }
     ]
   },

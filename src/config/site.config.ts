@@ -104,9 +104,13 @@ const serviceMeta = [
   { id: "seo" },
   { id: "web-dev" },
   { id: "web-design" },
+  { id: "branding" },
+  { id: "social-media" },
   { id: "lead-maker" },
   { id: "ai-agent" },
   { id: "content" },
+  { id: "email-marketing" },
+  { id: "analytics" },
 ];
 const imageMap = {
   law: ["/templates/t1.webp"],

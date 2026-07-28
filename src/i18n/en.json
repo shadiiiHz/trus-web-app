@@ -149,6 +149,14 @@
         "description": "Designing modern, user-friendly interfaces that improve usability and engagement."
       },
       {
+        "title": "Branding",
+        "description": "Crafting distinctive brand identities that leave a lasting impression."
+      },
+      {
+        "title": "Social Media",
+        "description": "Growing your audience with engaging, on-brand social content and strategy."
+      },
+      {
         "title": "Lead Maker",
         "description": "Creating conversion-focused systems that help turn visitors into potential clients."
       },
@@ -159,6 +167,14 @@
       {
         "title": "Content Generation",
         "description": "Creating engaging digital content that connects brands with their audience."
+      },
+      {
+        "title": "Email Marketing",
+        "description": "Designing targeted email campaigns that nurture leads and drive repeat business."
+      },
+      {
+        "title": "Analytics",
+        "description": "Turning data into clear insights that guide smarter business decisions."
       }
     ]
   },

@@ -65,14 +65,79 @@ const IconContent = () => (
   </svg>
 )
 
+const IconBranding = () => (
+  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
+    <path d="M21 6c-8.8 0-16 6.9-16 15.4 0 5 3.2 7.6 6.6 7.6 2.1 0 3.4-1.2 3.4-3 0-1.4-1-2-1-3.4 0-2.6 2.4-4.6 5-4.6 5 0 8-3.4 8-8.6C27 8 24.6 6 21 6z" />
+    <circle cx="14" cy="17" r="1.6" />
+    <circle cx="21" cy="13" r="1.6" />
+    <circle cx="28" cy="17" r="1.6" />
+  </svg>
+)
+
+const IconSocialMedia = () => (
+  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
+    <circle cx="10" cy="21" r="4.5" />
+    <circle cx="31" cy="9" r="4.5" />
+    <circle cx="31" cy="33" r="4.5" />
+    <line x1="14" y1="19" x2="27" y2="11" />
+    <line x1="14" y1="23" x2="27" y2="31" />
+  </svg>
+)
+
+const IconEmailMarketing = () => (
+  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
+    <rect x="5" y="10" width="32" height="22" rx="3" />
+    <polyline points="5,12 21,24 37,12" />
+  </svg>
+)
+
+const IconAnalytics = () => (
+  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
+    <line x1="7" y1="36" x2="7" y2="22" />
+    <line x1="17.5" y1="36" x2="17.5" y2="12" />
+    <line x1="28" y1="36" x2="28" y2="26" />
+    <line x1="38.5" y1="36" x2="38.5" y2="6" />
+    <line x1="4" y1="36" x2="41" y2="36" />
+  </svg>
+)
+
 const ICON_MAP: Record<string, ReactNode> = {
   seo: <IconSEO />,
   'web-dev': <IconWebDev />,
   'web-design': <IconWebDesign />,
+  branding: <IconBranding />,
+  'social-media': <IconSocialMedia />,
   'lead-maker': <IconLeadMaker />,
   'ai-agent': <IconAIAgent />,
   content: <IconContent />,
+  'email-marketing': <IconEmailMarketing />,
+  analytics: <IconAnalytics />,
 }
+
+// Row scroll geometry — desktop cards are a fixed 337px wide with a 24px
+// gap (see ServiceCard.tsx), both rows in natural (unreversed) order. At
+// rest, the top row's 1st card (SEO) and the bottom row's last card
+// (Analytics) meet at the center of the screen; the top row then slides
+// right-to-left and the bottom row slides left-to-right, at the same speed,
+// crossing at the section's midpoint, until the top row's last card
+// (Social Media) and the bottom row's 1st card (Lead Maker) meet at the
+// center of the screen.
+const CARD_WIDTH = 337
+const CARD_GAP = 24
+const ROW_SIZE = 5
+const CARD_PITCH = CARD_WIDTH + CARD_GAP
+const ROW_SIDE_INSET = 40
+const ROW_TOTAL_SHIFT = (ROW_SIZE - 1) * CARD_PITCH
+
+// translateX that puts a row's 1st card (content x = 0) at the screen's
+// horizontal center — recomputed live so centering always matches the
+// current viewport width.
+const getCenteredStartX = () =>
+  window.innerWidth / 2 - CARD_WIDTH / 2 - ROW_SIDE_INSET
 
 // Component
 
@@ -112,15 +177,22 @@ export function ServicesSection() {
     return Math.max(0, Math.min(1, raw))
   }
 
-  const topRowX = useTransform(scrollYMV, (y) => {
-    const vw = window.innerWidth / 70
-    return (40 - computeT(y) * 60) * vw
-  })
+  // Top row: card 1 (SEO) starts centered and slides left by ROW_TOTAL_SHIFT
+  // (exactly 4 card-pitches), ending with card 5 (Social Media) centered.
+  const topRowX = useTransform(
+    scrollYMV,
+    (y) => getCenteredStartX() - computeT(y) * ROW_TOTAL_SHIFT,
+  )
 
-  const bottomRowX = useTransform(scrollYMV, (y) => {
-    const vw = window.innerWidth / 100
-    return (-20 + computeT(y) * 60) * vw
-  })
+  // Bottom row: card 5 (Analytics) starts centered (i.e. the row itself
+  // starts ROW_TOTAL_SHIFT to the left of top's start) and slides right by
+  // the same ROW_TOTAL_SHIFT, ending with card 1 (Lead Maker) centered. Both
+  // rows travel the same distance at the same rate, so they cross exactly
+  // at the section's scroll midpoint.
+  const bottomRowX = useTransform(
+    scrollYMV,
+    (y) => getCenteredStartX() - ROW_TOTAL_SHIFT + computeT(y) * ROW_TOTAL_SHIFT,
+  )
 
   const [starKey, setStarKey] = useState(0)
   const isInView = useInView(sectionRef, { once: false, amount: 0.15 })
@@ -133,8 +205,8 @@ export function ServicesSection() {
     prevInViewRef.current = isInView
   }, [isInView])
 
-  const topRow = items.slice(0, 3)
-  const bottomRow = items.slice(3, 6)
+  const topRow = items.slice(0, 5)
+  const bottomRow = items.slice(5, 10)
 
   return (
     <section
@@ -145,7 +217,7 @@ export function ServicesSection() {
         background: 'var(--color-brand-bg)',
         position: 'relative',
         overflow: 'visible',
-        height: isDesktop ? '190vh' : 'auto',
+        height: isDesktop ? '300vh' : 'auto',
       }}
     >
       <div
@@ -276,86 +348,89 @@ export function ServicesSection() {
           aria-label="Service cards"
         >
           {isDesktop ? (
-            <motion.div
-              style={{
-                x: topRowX,
-                display: 'flex',
-                gap: '24px',
-                padding: '0 100px 0 140px',
-                width: 'max-content',
-              }}
-            >
-              {topRow.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  icon={ICON_MAP[service.id]}
-                  title={service.title}
-                  description={service.description}
-                />
-              ))}
-            </motion.div>
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                gap: '16px',
-                padding: '0 20px',
-                overflowX: 'auto',
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
-              }}
-            >
-              {topRow.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  icon={ICON_MAP[service.id]}
-                  title={service.title}
-                  description={service.description}
-                />
-              ))}
-            </div>
-          )}
+            <>
+              <motion.div
+                style={{
+                  x: topRowX,
+                  display: 'flex',
+                  gap: '24px',
+                  paddingLeft: `${ROW_SIDE_INSET}px`,
+                  width: 'max-content',
+                }}
+              >
+                {topRow.map((service) => (
+                  <ServiceCard
+                    key={service.id}
+                    icon={ICON_MAP[service.id]}
+                    title={service.title}
+                    description={service.description}
+                  />
+                ))}
+              </motion.div>
 
-          {isDesktop ? (
-            <motion.div
-              style={{
-                x: bottomRowX,
-                display: 'flex',
-                gap: '24px',
-                marginTop: '24px',
-                padding: '0 140px 0 100px',
-                width: 'max-content',
-              }}
-            >
-              {bottomRow.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  icon={ICON_MAP[service.id]}
-                  title={service.title}
-                  description={service.description}
-                />
-              ))}
-            </motion.div>
+              <motion.div
+                style={{
+                  x: bottomRowX,
+                  display: 'flex',
+                  gap: '24px',
+                  paddingLeft: `${ROW_SIDE_INSET}px`,
+                  marginTop: '24px',
+                  width: 'max-content',
+                }}
+              >
+                {bottomRow.map((service) => (
+                  <ServiceCard
+                    key={service.id}
+                    icon={ICON_MAP[service.id]}
+                    title={service.title}
+                    description={service.description}
+                  />
+                ))}
+              </motion.div>
+            </>
           ) : (
-            <div
-              style={{
-                display: 'flex',
-                gap: '16px',
-                padding: '16px 20px 0',
-                overflowX: 'auto',
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
-              }}
-            >
-              {bottomRow.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  icon={ICON_MAP[service.id]}
-                  title={service.title}
-                  description={service.description}
-                />
-              ))}
-            </div>
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '16px',
+                  padding: '0 20px',
+                  overflowX: 'auto',
+                  scrollbarWidth: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                }}
+              >
+                {topRow.map((service) => (
+                  <ServiceCard
+                    key={service.id}
+                    icon={ICON_MAP[service.id]}
+                    title={service.title}
+                    description={service.description}
+                  />
+                ))}
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '16px',
+                  padding: '0 20px',
+                  marginTop: '16px',
+                  overflowX: 'auto',
+                  scrollbarWidth: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                }}
+              >
+                {bottomRow.map((service) => (
+                  <ServiceCard
+                    key={service.id}
+                    icon={ICON_MAP[service.id]}
+                    title={service.title}
+                    description={service.description}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
