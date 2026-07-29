@@ -82,10 +82,6 @@ function TeamDesktopGrid({
     setCardsSettled(v < 0.02);
   });
 
-  const cardOpacity = useTransform(smoothTent, (v) =>
-    Math.max(0, Math.min(1, 1 - v)),
-  );
-
   const rightX = useTransform(smoothTent, (v) => v * ENTRANCE_DISTANCE);
   const leftX = useTransform(smoothTent, (v) => v * -ENTRANCE_DISTANCE);
   const panelY = useTransform(smoothTent, (v) => v * 24);
@@ -256,7 +252,6 @@ function TeamDesktopGrid({
           gridColumn: 2,
           gridRow: 1,
           x: shouldReduceMotion ? 0 : rightX,
-          opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
@@ -271,7 +266,6 @@ function TeamDesktopGrid({
           gridColumn: 3,
           gridRow: 1,
           x: shouldReduceMotion ? 0 : rightX,
-          opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
@@ -286,7 +280,6 @@ function TeamDesktopGrid({
           gridColumn: 1,
           gridRow: 2,
           x: shouldReduceMotion ? 0 : leftX,
-          opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
@@ -301,7 +294,6 @@ function TeamDesktopGrid({
           gridColumn: 2,
           gridRow: 2,
           x: shouldReduceMotion ? 0 : leftX,
-          opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamMemberCard
@@ -319,7 +311,6 @@ function TeamDesktopGrid({
           display: "flex",
           alignItems: "center",
           y: shouldReduceMotion ? 0 : panelY,
-          opacity: shouldReduceMotion ? 1 : cardOpacity,
         }}
       >
         <TeamInfoPanel member={activeMember} />
