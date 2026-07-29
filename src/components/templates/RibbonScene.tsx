@@ -84,7 +84,7 @@ function RibbonScene({
   return (
     <Canvas
       style={{ position: "fixed", inset: 0 }}
-      dpr={1}
+      dpr={[1, 2]}
       camera={{ position: [0, 0, cameraDistance], fov }}
       gl={{ antialias: true, alpha: true }}
     >

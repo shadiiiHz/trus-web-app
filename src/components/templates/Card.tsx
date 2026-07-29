@@ -1,4 +1,4 @@
-import { memo, useLayoutEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -149,6 +149,49 @@ function CardImpl({
   const height = (cardWidth * 7) / 9;
   const angleRad = THREE.MathUtils.degToRad(angleStep);
   const curvature = radius * (1 - Math.cos(angleRad / 2));
+
+  // Emulate CSS `object-fit: cover`: the plane's aspect ratio (cardWidth /
+  // height, fixed at 9:7) rarely matches the source screenshot's own
+  // aspect ratio, so mapping the full 0-1 UV range onto it (the default)
+  // non-uniformly stretches the image. Cropping the UV rect to the
+  // plane's aspect instead keeps the image's real proportions intact —
+  // same idea as `RevealGridCard`'s `object-cover`, just done manually
+  // since three.js has no built-in cover mode.
+  //
+  // `texture` itself is the value `useTexture` returned, so it's cloned
+  // rather than mutated in place — react-hooks/immutability (and the
+  // React Compiler) forbid writing to a hook's return value directly.
+  const preparedTexture = useMemo(() => {
+    const cloned = texture.clone();
+    const img = cloned.image as { width?: number; height?: number } | undefined;
+    const planeAspect = cardWidth / height;
+    const imageAspect = img?.width && img?.height ? img.width / img.height : planeAspect;
+
+    if (imageAspect > planeAspect) {
+      const repeatX = planeAspect / imageAspect;
+      cloned.repeat.set(repeatX, 1);
+      cloned.offset.set((1 - repeatX) / 2, 0);
+    } else {
+      const repeatY = imageAspect / planeAspect;
+      cloned.repeat.set(1, repeatY);
+      cloned.offset.set(0, (1 - repeatY) / 2);
+    }
+
+    // Correct sRGB decoding (screenshots are stored as regular sRGB
+    // images) and sharper sampling at the shallow viewing angles the
+    // ribbon's tilted-back cards are seen from.
+    cloned.colorSpace = THREE.SRGBColorSpace;
+    cloned.anisotropy = 8;
+    cloned.needsUpdate = true;
+    return cloned;
+  }, [texture, cardWidth, height]);
+
+  // The clone owns its own GPU upload (unlike the shared `texture` from
+  // `useTexture`, which drei's cache disposes of on its own), so it needs
+  // an explicit dispose whenever a new one is made or the card unmounts.
+  useEffect(() => {
+    return () => preparedTexture.dispose();
+  }, [preparedTexture]);
 
   const geo = useMemo(
     () => createCurvedPlaneGeometry(cardWidth, height, 16, 16, curvature),
@@ -388,7 +431,7 @@ function CardImpl({
         <primitive object={geo} />
         <meshBasicMaterial
           ref={materialRef}
-          map={texture}
+          map={preparedTexture}
           transparent
           side={THREE.DoubleSide}
           toneMapped={false}
