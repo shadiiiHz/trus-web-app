@@ -39,7 +39,7 @@ export function HeroSection({
           paddingBottom: "80px",
         }}
       >
-        <div className="grid w-full grid-cols-1 lg:grid-cols-[60%_80%] 2xl:grid-cols-[67%_80%] items-center xl:gap-4">
+        <div className="grid w-full grid-cols-1 lg:grid-cols-[62%_80%] 2xl:grid-cols-[69%_80%] items-center xl:gap-4">
           {/* LEFT COLUMN — copy */}
           <div
             className="flex flex-col gap-6 lg:gap-7 min-w-0"
