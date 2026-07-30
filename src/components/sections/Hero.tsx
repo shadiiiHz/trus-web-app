@@ -39,18 +39,29 @@ export function HeroSection({
           paddingBottom: "80px",
         }}
       >
-        <div className="grid w-full grid-cols-1 lg:grid-cols-[65%_80%] items-center gap-4">
+        <div className="grid w-full grid-cols-1 lg:grid-cols-[60%_80%] 2xl:grid-cols-[67%_80%] items-center xl:gap-4">
           {/* LEFT COLUMN — copy */}
-          <div className="flex flex-col gap-6 lg:gap-7">
-            <h1 className="flex flex-col gap-1">
+          <div
+            className="flex flex-col gap-6 lg:gap-7 min-w-0"
+          >
+            <h1 className="flex flex-col gap-1 min-w-0">
               {data.headline.map((line, i) => {
                 const segs = parseHeadline(line as string);
                 const isLast = i === data.headline.length - 1;
                 return (
-                  <FadeIn key={line} delay={0.12 + i * 0.16} direction="up">
+                  <FadeIn
+                    key={line}
+                    delay={0.12 + i * 0.16}
+                    direction="up"
+                    className="min-w-0"
+                  >
                     <span
-                      className="block font-hero font-normal leading-[1.12] tracking-tight"
-                      style={{ fontSize: "clamp(2rem, 2.7vw, 3.1rem)" }}
+                      className="block font-hero font-normal leading-[1.12] tracking-tight wrap-break-word"
+                      style={{
+                        fontSize:
+                          "clamp(1.35rem, 0.95rem + 1.4vw, 2.7rem)",
+                        overflowWrap: "break-word",
+                      }}
                     >
                       {segs.map((seg) =>
                         seg.accent ? (
