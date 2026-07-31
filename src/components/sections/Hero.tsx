@@ -35,14 +35,18 @@ export function HeroSection({
         className="relative z-10 mx-auto w-full max-w-300 px-5 flex items-center"
         style={{
           minHeight: "100svh",
-          paddingTop: "88px",
-          paddingBottom: "80px",
+          paddingTop: "clamp(56px, 9vw, 88px)",
+          paddingBottom: "clamp(48px, 8vw, 80px)",
         }}
       >
-        <div className="grid w-full grid-cols-1 lg:grid-cols-[62%_80%] 2xl:grid-cols-[69%_80%] items-center xl:gap-4">
+        <div
+          className="grid w-full grid-cols-1 lg:grid-cols-[62%_80%] 2xl:grid-cols-[69%_80%] items-center"
+          style={{ gap: "clamp(8px, 1.5vw, 16px)" }}
+        >
           {/* LEFT COLUMN — copy */}
           <div
-            className="flex flex-col gap-6 lg:gap-7 min-w-0"
+            className="flex flex-col min-w-0"
+            style={{ gap: "clamp(20px, 2.6vw, 28px)" }}
           >
             <h1 className="flex flex-col gap-1 min-w-0">
               {data.headline.map((line, i) => {
@@ -59,7 +63,7 @@ export function HeroSection({
                       className="block font-hero font-normal leading-[1.12] tracking-tight wrap-break-word"
                       style={{
                         fontSize:
-                          "clamp(1.35rem, 0.95rem + 1.4vw, 2.7rem)",
+                          "clamp(1.35rem, 0.9rem + 1.4vw, 2.26rem)",
                         overflowWrap: "break-word",
                       }}
                     >
@@ -245,14 +249,12 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
         muted
         playsInline
         preload="auto"
+        className="w-[190%] ml-[-33%] 2xl:ml-[-40%]"
         style={{
           position: "relative",
           zIndex: 1,
           display: "block",
           transform: "translateY(-5px)",
-          // 30 % size increase: 130 % width, centred via negative left margin
-          width: "190%",
-          marginLeft: "-33%",
           height: "auto",
           // Screen blend — makes the video's dark background pixels
           // identical to the page background (effectively transparent)
@@ -332,7 +334,10 @@ function BottomLabel({ prefix }: { prefix: string }) {
   const titles = siteConfig.services.items.map((item) => item.title);
 
   return (
-    <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20 pointer-events-none">
+    <div
+      className="absolute left-0 right-0 flex justify-center z-20 pointer-events-none"
+      style={{ bottom: "clamp(20px, 4vw, 32px)" }}
+    >
       <div className="flex items-center gap-3">
         <span
           className="font-body font-medium text-white tracking-[0.22em] uppercase"
