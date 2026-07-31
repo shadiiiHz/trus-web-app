@@ -242,24 +242,24 @@ export function LanguageSwitch({ className = "" }: LanguageSwitchProps) {
   );
 }
 
-/** Navbar trigger flag — the flag graphic itself, cropped to fill a fixed 24×24 square. */
+/** Navbar trigger flag — the flag graphic itself, cropped to fill a fixed 32×22.59 box. */
 function TriggerFlag({ Flag }: { Flag: React.FC<{ fit: FlagFit }> }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-sm"
-      style={{ width: 24, height: 24 }}
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[3.76px]"
+      style={{ width: 32, height: 22.59 }}
     >
       <Flag fit="slice" />
     </span>
   );
 }
 
-/** Menu grid flag — a 24×24 square, cropped to fill, with a solid white border. */
+/** Menu grid flag — a 32×22.59 box, cropped to fill. */
 function MenuFlagBadge({ Flag }: { Flag: React.FC<{ fit: FlagFit }> }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-sm border"
-      style={{ width: 24, height: 24, borderWidth: 0.5, borderColor: "rgba(255, 255, 255, 1)" }}
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[3.76px]"
+      style={{ width: 32, height: 22.59 }}
     >
       <Flag fit="slice" />
     </span>
@@ -271,29 +271,58 @@ function FlagGB({ fit }: { fit: FlagFit }) {
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 20 20"
+      viewBox="0 0 32 23"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M20 0H0V20H20V0Z" fill="#F0F0F0" />
-      <path d="M0 11.875H8.125V20H11.875V11.875H20V8.125H11.875V0H8.125V8.125H0V11.875Z" fill="#D80027" />
-      <path d="M15.8945 13.0435L19.9992 17.1481V13.0435H15.8945Z" fill="#0052B4" />
-      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#0052B4" />
-      <path d="M18.1465 20.0001L13.043 14.896V20.0001H18.1465Z" fill="#0052B4" />
-      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#F0F0F0" />
-      <path d="M13.043 13.0435L19.9995 20V18.0328L15.0102 13.0435H13.043Z" fill="#D80027" />
-      <path d="M3.1368 13.0435L0 16.1803V13.0435H3.1368Z" fill="#0052B4" />
-      <path d="M6.95609 13.9282V20H0.884766L6.95609 13.9282Z" fill="#0052B4" />
-      <path d="M4.98922 13.0435L0 18.0327V19.9999L6.95641 13.0435H4.98922Z" fill="#D80027" />
-      <path d="M4.10469 6.95674L0 2.85205V6.95674H4.10469Z" fill="#0052B4" />
-      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#0052B4" />
-      <path d="M1.85352 0L6.95707 5.10402V0H1.85352Z" fill="#0052B4" />
-      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#F0F0F0" />
-      <path d="M6.95652 6.95652L0 0V1.96719L4.98934 6.95652H6.95652Z" fill="#D80027" />
-      <path d="M16.8633 6.95662L20.0001 3.81982V6.95662H16.8633Z" fill="#0052B4" />
-      <path d="M13.043 6.0718V0H19.1143L13.043 6.0718Z" fill="#0052B4" />
-      <path d="M15.0102 6.9564L19.9994 1.96715V0L13.043 6.9564H15.0102Z" fill="#D80027" />
+      <g clipPath="url(#flagGBClip)">
+        <rect width="32" height="22.5882" rx="3.76471" fill="#002478" />
+        <rect
+          width="32"
+          height="3.33402"
+          transform="matrix(-0.707107 0.707107 0.707107 0.707107 13.21 9.45093)"
+          fill="white"
+        />
+        <rect
+          width="32"
+          height="3.32513"
+          transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 15.0918 11.3333)"
+          fill="white"
+        />
+        <rect
+          width="32"
+          height="1.88235"
+          transform="matrix(-0.707107 0.707107 0.707107 0.707107 13.21 10.3921)"
+          fill="#CF1229"
+        />
+        <rect
+          width="32"
+          height="1.88235"
+          transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 15.0918 12.2744)"
+          fill="#CF1229"
+        />
+        <rect x="17.8828" y="9.45093" width="32" height="3.33402" transform="rotate(45 17.8828 9.45093)" fill="white" />
+        <rect x="16" y="11.3333" width="32" height="3.32513" transform="rotate(-45 16 11.3333)" fill="white" />
+        <rect
+          x="17.8828"
+          y="10.3921"
+          width="32"
+          height="1.88235"
+          transform="rotate(45 17.8828 10.3921)"
+          fill="#CF1229"
+        />
+        <rect x="16" y="12.2744" width="32" height="1.88235" transform="rotate(-45 16 12.2744)" fill="#CF1229" />
+        <rect y="9.41174" width="32" height="4.70588" fill="white" />
+        <rect x="12.7061" width="5.64706" height="22.5882" fill="white" />
+        <rect y="10.3529" width="32" height="2.82353" fill="#CF1229" />
+        <rect x="14.1172" width="2.82353" height="22.5882" fill="#CF1229" />
+      </g>
+      <defs>
+        <clipPath id="flagGBClip">
+          <rect width="32" height="22.5882" rx="3.76471" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 }
