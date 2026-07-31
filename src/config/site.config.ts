@@ -47,7 +47,7 @@ const navHrefs = [
 ];
 
 const projectMeta = [
-  { id: 1, image: "/portfolio/p1.webp", link: "https://validway.webflow.io/" },
+  { id: 1, image: "/portfolio/p0.webp", link: "https://validway.webflow.io/" },
   { id: 2, image: "/portfolio/p2.webp", link: "https://zesty-template.webflow.io/" },
   { id: 3, image: "/portfolio/p3.webp", link: "https://inkpierce.webflow.io/" },
   { id: 4, image: "/portfolio/p4.webp", link: "https://housent.webflow.io/" },
