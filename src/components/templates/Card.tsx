@@ -146,36 +146,33 @@ function CardImpl({
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshBasicMaterial>(null);
   const texture = useTexture(image);
-  const height = (cardWidth * 7) / 9;
+  const frameHeight = (cardWidth * 7) / 9;
   const angleRad = THREE.MathUtils.degToRad(angleStep);
   const curvature = radius * (1 - Math.cos(angleRad / 2));
 
-  // Emulate CSS `object-fit: cover`: the plane's aspect ratio (cardWidth /
-  // height, fixed at 9:7) rarely matches the source screenshot's own
-  // aspect ratio, so mapping the full 0-1 UV range onto it (the default)
-  // non-uniformly stretches the image. Cropping the UV rect to the
-  // plane's aspect instead keeps the image's real proportions intact —
-  // same idea as `RevealGridCard`'s `object-cover`, just done manually
-  // since three.js has no built-in cover mode.
-  //
+  // Emulate CSS `object-fit: contain`: the frame's aspect ratio (cardWidth /
+  // frameHeight, fixed at 9:7) rarely matches the source screenshot's own
+  // aspect ratio. Rather than cropping the image to fill the frame (which
+  // cuts off content at the edges), shrink whichever dimension overflows so
+  // the plane itself takes on the image's true aspect ratio — the full
+  // image is always visible, just at a slightly smaller size than the 9:7
+  // frame when the aspect ratios don't match exactly.
+  const [planeWidth, planeHeight] = useMemo(() => {
+    const img = texture.image as { width?: number; height?: number } | undefined;
+    const planeAspect = cardWidth / frameHeight;
+    const imageAspect = img?.width && img?.height ? img.width / img.height : planeAspect;
+
+    if (imageAspect > planeAspect) {
+      return [cardWidth, cardWidth / imageAspect];
+    }
+    return [frameHeight * imageAspect, frameHeight];
+  }, [texture, cardWidth, frameHeight]);
+
   // `texture` itself is the value `useTexture` returned, so it's cloned
   // rather than mutated in place — react-hooks/immutability (and the
   // React Compiler) forbid writing to a hook's return value directly.
   const preparedTexture = useMemo(() => {
     const cloned = texture.clone();
-    const img = cloned.image as { width?: number; height?: number } | undefined;
-    const planeAspect = cardWidth / height;
-    const imageAspect = img?.width && img?.height ? img.width / img.height : planeAspect;
-
-    if (imageAspect > planeAspect) {
-      const repeatX = planeAspect / imageAspect;
-      cloned.repeat.set(repeatX, 1);
-      cloned.offset.set((1 - repeatX) / 2, 0);
-    } else {
-      const repeatY = imageAspect / planeAspect;
-      cloned.repeat.set(1, repeatY);
-      cloned.offset.set(0, (1 - repeatY) / 2);
-    }
 
     // Correct sRGB decoding (screenshots are stored as regular sRGB
     // images) and sharper sampling at the shallow viewing angles the
@@ -184,7 +181,7 @@ function CardImpl({
     cloned.anisotropy = 8;
     cloned.needsUpdate = true;
     return cloned;
-  }, [texture, cardWidth, height]);
+  }, [texture]);
 
   // The clone owns its own GPU upload (unlike the shared `texture` from
   // `useTexture`, which drei's cache disposes of on its own), so it needs
@@ -194,8 +191,8 @@ function CardImpl({
   }, [preparedTexture]);
 
   const geo = useMemo(
-    () => createCurvedPlaneGeometry(cardWidth, height, 16, 16, curvature),
-    [cardWidth, height, curvature],
+    () => createCurvedPlaneGeometry(planeWidth, planeHeight, 16, 16, curvature),
+    [planeWidth, planeHeight, curvature],
   );
 
   // Pre-allocated scratch vectors, reused every frame instead of being
