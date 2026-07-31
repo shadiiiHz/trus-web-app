@@ -78,15 +78,22 @@ interface DesignInMotion3DProps {
     label: string;
     href: string;
   };
-  /** Where (0-1 of total scroll) the ribbon-exit / grid-enter sequence starts. */
-  gridRevealStart?: number;
   /**
-   * Fraction of the [gridRevealStart, 1] tail dedicated to the ribbon fading
-   * out completely BEFORE the grid starts entering (and vice-versa on
-   * reverse scroll). 0.35 = ribbon uses the first 35% of that tail to fully
-   * disappear, then the grid uses the remaining 65% to fully appear.
+   * Where (0-1 of total scroll) the grid finishes flying out. The grid is
+   * fully shown at scroll start (progress 0) and flies out over
+   * [0, gridExitEnd] — this alone controls how fast/slow that exit reads,
+   * independent of when the ribbon starts entering (see ribbonEnterFrac).
    */
-  ribbonExitFrac?: number;
+  gridExitEnd?: number;
+  /**
+   * How much the ribbon's entrance overlaps with the tail of the grid's
+   * exit, as a fraction of [0, gridExitEnd]. 0 = the ribbon waits for the
+   * grid to be completely gone before it starts entering (fully
+   * sequential). Closer to 1 = the ribbon starts entering earlier, while
+   * the grid is still on its way out — without changing how long the
+   * grid itself takes to exit.
+   */
+  ribbonEnterFrac?: number;
   /**
    * Amplitude (world units) of an optional sinusoidal ripple layered on
    * top of the ribbon's vertical descent. Default 0 keeps the descent
@@ -135,8 +142,8 @@ function DesignInMotion3D({
   tagline,
   sectionDes,
   seeMore,
-  gridRevealStart = 0.8,
-  ribbonExitFrac = 0,
+  gridExitEnd = 0.2,
+  ribbonEnterFrac = 0.5,
   waveAmplitude,
   waveFrequency = 0.4,
   verticalStride = 1,
@@ -153,7 +160,9 @@ function DesignInMotion3D({
   const designRef = useRef<HTMLHeadingElement>(null);
   const templatesRef = useRef<HTMLHeadingElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [gridProgress, setGridProgress] = useState(0);
+  // Starts at 1 (grid fully shown) so the cards are already in place the
+  // instant the section enters, before the first scroll-driven update.
+  const [gridProgress, setGridProgress] = useState(1);
 
   // Built once per `angleStep` and shared by every card — see the LUT
   // note in ribbonMath.ts. `angleStep` essentially never changes at
@@ -210,8 +219,14 @@ function DesignInMotion3D({
     const computedScrollLength = totalShiftRange * scrollPerCard;
     const effectiveScrollLength = scrollLength ?? computedScrollLength;
 
-    const tailRange = 1 - gridRevealStart;
-    const ribbonExitEnd = gridRevealStart + tailRange * ribbonExitFrac;
+    // The grid is fully shown at scroll progress 0 and flies out over
+    // [0, gridExitEnd] — that span alone sets the grid's own exit speed.
+    // The ribbon starts entering at ribbonEnterStart, which can sit
+    // earlier than gridExitEnd (per ribbonEnterFrac) so it overlaps the
+    // tail of the grid's exit instead of waiting for it to fully finish,
+    // without changing how fast the grid itself moves.
+    const ribbonEnterStart = gridExitEnd * (1 - ribbonEnterFrac);
+    const ribbonRange = Math.max(1 - ribbonEnterStart, 1e-6);
 
     const st = ScrollTrigger.create({
       trigger: triggerEl,
@@ -222,16 +237,20 @@ function DesignInMotion3D({
       anticipatePin: 1,
 
       onUpdate: (self) => {
+        const ribbonProgress = clamp01(
+          (self.progress - ribbonEnterStart) / ribbonRange,
+        );
         shiftRef.current = gsap.utils.interpolate(
           shiftStart,
           shiftEnd,
-          self.progress,
+          ribbonProgress,
         );
         setScrollProgress(self.progress);
 
-        const grid = clamp01(
-          (self.progress - ribbonExitEnd) / (1 - ribbonExitEnd),
-        );
+        const grid =
+          gridExitEnd > 0
+            ? clamp01((gridExitEnd - self.progress) / gridExitEnd)
+            : 0;
         setGridProgress(grid);
       },
     });
@@ -245,8 +264,8 @@ function DesignInMotion3D({
     scrollPerCard,
     scrollLength,
     pinTargetRef,
-    gridRevealStart,
-    ribbonExitFrac,
+    gridExitEnd,
+    ribbonEnterFrac,
     angleStep,
   ]);
 
