@@ -23,6 +23,14 @@ const CARD_W = 337;
 const CARD_H = 294;
 const ENTRANCE_DISTANCE = 640;
 
+// Height of the fixed site Navbar (h-18 = 72px + 1px bottom border), plus
+// breathing room. Vertically centering the grid across the full 100vh (the
+// old approach) shrinks the available room on short viewports and can still
+// clip the eyebrow/heading under the navbar — so instead, like
+// ServicesSection, the grid is anchored a flat distance from the sticky
+// panel's own top. That clearance holds regardless of viewport height.
+const NAVBAR_CLEARANCE = 100;
+
 interface TeamDesktopGridProps {
   eyebrow: string;
   heading: string[];
@@ -197,7 +205,7 @@ function TeamDesktopGrid({
         <div
           style={{
             position: "absolute",
-            top: -40,
+            top: 55,
             left: -80,
             width: "300px",
             height: "300px",
@@ -347,12 +355,16 @@ function TeamDesktopGrid({
           height: "100vh",
           overflow: "hidden",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <div
           className="relative mx-auto w-full"
-          style={{ maxWidth: "1200px", padding: "0 20px" }}
+          style={{
+            maxWidth: "1200px",
+            padding: "0 20px",
+            paddingTop: `${NAVBAR_CLEARANCE}px`,
+          }}
         >
           {grid}
         </div>
