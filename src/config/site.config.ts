@@ -55,8 +55,8 @@ const projectMeta = [
   { id: 6, image: "/portfolio/p6.webp", link: "https://glamory.webflow.io/" },
   { id: 7, image: "/portfolio/p7.webp", link: "https://flexova-fitness-gym-website-template.webflow.io/" },
   { id: 8, image: "/portfolio/p8.webp", link: "https://andalash.webflow.io/" },
-  { id: 9, image: "/portfolio/p9.webp", link: "https://airbrick.webflow.io/" },
-  { id: 10, image: "/portfolio/p10.webp", link: "https://epidermis.webflow.io/" },
+  { id: 9, image: "/portfolio/p9.webp", link: "https://pawfect-webflipin.webflow.io/" },
+  { id: 10, image: "/portfolio/p10.webp", link: "https://airbrick.webflow.io/" },
 ];
 
 const teamMeta = [
@@ -253,7 +253,7 @@ function buildSiteConfig(locale: Locale) {
       headline: dict.about.headline,
       body: dict.about.body,
       stats: dict.about.stats,
-      image: "/about-team.jpg",
+      image: "/about-team.webp",
     },
 
     portfolio: {

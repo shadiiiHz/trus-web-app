@@ -208,8 +208,8 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
           <div className="flex justify-center lg:justify-end">
             <motion.div
               style={{
-                width: "min(488px, 100%)",
-                aspectRatio: "488 / 586",
+                width: "min(589px, 100%)",
+                aspectRatio: "589 / 466",
                 borderRadius: "16px",
                 overflow: "hidden",
                 background:
@@ -228,7 +228,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "fill",
                   display: "block",
                 }}
                 loading="lazy"
