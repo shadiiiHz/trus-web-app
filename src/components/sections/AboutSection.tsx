@@ -119,7 +119,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
         <div className="relative z-10 mx-auto w-full max-w-300 px-5 py-32 lg:py-36">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-14 lg:gap-20">
             {/* LEFT COLUMN — copy */}
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col gap-2.5">
               <div className="flex flex-col gap-2">
                 <FadeIn direction="up" delay={0.1}>
                   <span
@@ -220,7 +220,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               <motion.div
                 style={{
                   width: "min(630px, 100%)",
-                  aspectRatio: "630 / 514",
+                  height: "514px",
                   borderRadius: "16px",
                   overflow: "hidden",
                   position: "relative",
