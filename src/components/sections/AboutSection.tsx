@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -171,7 +171,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                   >
                     <p
                       className="font-body text-[#070606] leading-relaxed m-0"
-                      style={{ fontSize: "18px", maxWidth: "510px" }}
+                      style={{ fontSize: "18px", maxWidth: "586px", textAlign: "justify" }}
                     >
                       {para}
                     </p>
@@ -179,49 +179,50 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                 ))}
               </div>
   
-              {/* Stats row — each card cascades in with its own delay */}
-              <div className="flex items-start pt-2">
+              {/* Stats grid — four boxed counters, each cascading in with its own delay */}
+              <div className="grid grid-cols-2 gap-4">
                 {(data.stats as readonly { value: string; label: string }[]).map(
                   (stat, i) => (
-                    <React.Fragment key={stat.value}>
-                      {/* Vertical divider between stats */}
-                      {i > 0 && (
-                        <div
-                          className="shrink-0 self-stretch mx-7"
-                          style={{
-                            width: "1px",
-                          }}
-                        />
-                      )}
-                      <div className="flex flex-col items-center gap-3">
+                    <FadeIn key={stat.value} direction="up" delay={0.5 + i * 0.08}>
+                      <div
+                        className="flex flex-col justify-center gap-2"
+                        style={{
+                          width: "283px",
+                          maxWidth: "100%",
+                          height: "96.45px",
+                          borderRadius: "11.42px",
+                          background: "#F5F5F5",
+                          padding: "16px 20px",
+                        }}
+                      >
                         <StatCounter
                           value={stat.value}
-                          className="font-hero font-bold text-[#070606] leading-none"
-                          style={{ fontSize: "32px" }}
+                          className="font-hero leading-none"
+                          style={{ fontSize: "32px", fontWeight: 700, color: "#141414" }}
                         />
+                        <div style={{ borderTop: "1px dotted #B3B3B3" }} />
                         <span
-                          className="font-body text-[#070606] tracking-wider leading-tight"
-                          style={{ fontSize: "16px" }}
+                          className="font-body leading-tight"
+                          style={{ fontSize: "12px", fontWeight: 400, color: "#494852" }}
                         >
                           {stat.label}
                         </span>
                       </div>
-                    </React.Fragment>
+                    </FadeIn>
                   ),
                 )}
               </div>
             </div>
   
-            {/* RIGHT COLUMN — image card (488x586), unfolds from flat-on-the-ground to facing the viewer as the section scrolls in */}
+            {/* RIGHT COLUMN — image card (630x514), unfolds from flat-on-the-ground to facing
+                the viewer as the section scrolls in. */}
             <div className="flex justify-center lg:justify-end">
               <motion.div
                 style={{
-                  width: "min(589px, 100%)",
-                  aspectRatio: "589 / 466",
+                  width: "min(630px, 100%)",
+                  aspectRatio: "630 / 514",
                   borderRadius: "16px",
                   overflow: "hidden",
-                  background:
-                    "linear-gradient(135deg, #1a0440 0%, #2d0878 48%, #0e0222 100%)",
                   position: "relative",
                   transformPerspective: 900,
                   transformOrigin: "50% 0%",
