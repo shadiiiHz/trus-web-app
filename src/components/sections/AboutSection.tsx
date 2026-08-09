@@ -200,7 +200,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                           className="font-hero leading-none"
                           style={{ fontSize: "32px", fontWeight: 700, color: "#141414" }}
                         />
-                        <div style={{ borderTop: "1px dotted #B3B3B3" }} />
+                        <div style={{ borderTop: "1px dotted #DFDFDF" }} />
                         <span
                           className="font-body leading-tight"
                           style={{ fontSize: "12px", fontWeight: 400, color: "#494852" }}

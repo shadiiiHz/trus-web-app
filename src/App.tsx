@@ -18,8 +18,6 @@ export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
   // per-locale on read) whenever the navbar's language switch fires.
   useLocale();
-
-  const [hideNavbar, setHideNavbar] = useState(false);
   // Raw scrollY (pixels) so Hero / About animations fire at fixed pixel offsets
   // regardless of how many sections are added below.
   //
@@ -42,7 +40,7 @@ export default function App() {
     <div className="bg-brand-bg min-h-screen font-body antialiased">
       <Preloader ready={heroVideoReady && templateReady} />
 
-      <Navbar hidden={hideNavbar} />
+      <Navbar />
 
       <HeroSection
         orbitOpacity={heroOrbitOpacity}
@@ -58,11 +56,7 @@ export default function App() {
       <WhyUsSection />
 
       {/* Template Categories: entrance-triggered card lighting cascade. */}
-      <TemplateSection
-        onEnter={() => setHideNavbar(true)}
-        onLeave={() => setHideNavbar(false)}
-        onReady={() => setTemplateReady(true)}
-      />
+      <TemplateSection onReady={() => setTemplateReady(true)} />
 
       {/* Services: scroll-driven two-row card parallax. */}
       <ServicesSection />

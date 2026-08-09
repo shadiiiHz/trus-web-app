@@ -191,11 +191,11 @@
     "categories": [
       { "id": "all", "label": "Alle Vorlagen" },
       { "id": "lawyers", "label": "Anwälte" },
-      { "id": "fitness", "label": "Fitness" },
-      { "id": "realEstate", "label": "Immobilien" },
-      { "id": "clinics", "label": "Kliniken" },
       { "id": "restaurant", "label": "Restaurant" },
-      { "id": "barbershops", "label": "Barbershops" }
+      { "id": "clinics", "label": "Kliniken" },
+      { "id": "barbershops", "label": "Barbershops" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Immobilien" }
     ]
   },
 

@@ -184,11 +184,11 @@
     "categories": [
       { "id": "all", "label": "Все шаблоны" },
       { "id": "lawyers", "label": "Юристы" },
-      { "id": "fitness", "label": "Фитнес" },
-      { "id": "realEstate", "label": "Недвижимость" },
-      { "id": "clinics", "label": "Клиники" },
       { "id": "restaurant", "label": "Рестораны" },
-      { "id": "barbershops", "label": "Барбершопы" }
+      { "id": "clinics", "label": "Клиники" },
+      { "id": "barbershops", "label": "Барбершопы" },
+      { "id": "fitness", "label": "Фитнес" },
+      { "id": "realEstate", "label": "Недвижимость" }
     ]
   },
 

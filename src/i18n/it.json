@@ -184,11 +184,11 @@
     "categories": [
       { "id": "all", "label": "Tutti i Modelli" },
       { "id": "lawyers", "label": "Avvocati" },
-      { "id": "fitness", "label": "Fitness" },
-      { "id": "realEstate", "label": "Immobiliare" },
-      { "id": "clinics", "label": "Cliniche" },
       { "id": "restaurant", "label": "Ristorante" },
-      { "id": "barbershops", "label": "Barbieri" }
+      { "id": "clinics", "label": "Cliniche" },
+      { "id": "barbershops", "label": "Barbieri" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Immobiliare" }
     ]
   },
 

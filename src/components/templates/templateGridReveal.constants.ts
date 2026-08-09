@@ -66,10 +66,29 @@ export const UNSETTLE_POWER = 1.15; // was 2.2 — flutter stays visible longer 
 // wave (0 = pure single sine, 1 = equally strong second wave).
 export const HARMONIC_MIX = 0.45;
 
-// Tabs bar: fades in on its own, later and slower schedule than the cards.
-// It only starts appearing once the cards are mostly done settling.
+// Heading fade: fades in on its own, later and slower schedule than the
+// cards. It only starts appearing once the cards are mostly done settling.
 export const TABS_FADE_START = 0.72; // was 0.55
 export const TABS_FADE_END = 0.85; // was 0.95
+
+// The category tabs' entrance is deliberately *not* tied to scroll
+// progress like the heading above — it's a one-shot animation triggered
+// by the Template section coming into view (see TemplateSection), so it
+// always plays the same way regardless of scroll speed/direction.
+//
+// How long to wait, after the section itself is on screen, before the
+// tabs start their entrance — was 120 (near-instant), nudged back up so
+// the rail doesn't pop in the moment the section is entered, especially
+// now that the grid itself holds fully settled for longer before its own
+// exit (see DesignInMotion3D's gridHoldEnd).
+export const TABS_ENTER_DELAY_MS = 450;
+// Per-square stagger between one square's entrance starting and the
+// next's, top to bottom.
+export const TABS_ENTER_STAGGER_MS = 90;
+export const TABS_ENTER_DURATION_MS = 550;
+// A CSS cubic-bezier that overshoots past 1 mid-curve before settling —
+// reads as a lively pop rather than a mechanical fade.
+export const TABS_ENTER_EASE = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
 // Hover reaction: how much a card scales up when hovered, and how quickly
 // that reaction eases in and out (0-1 per frame, higher = snappier).
@@ -100,3 +119,9 @@ export const PROGRESS_SMOOTHING_RATE = 8;
 export const POINTER_ENABLE_PROGRESS = 0.85;
 
 export const WIND_SEED = [0.13, 0.71, 0.42, 0.95, 0.24, 0.63, 0.08, 0.86, 0.37];
+
+// Cards actually rendered in the grid at once. Shared between
+// DesignInMotion3D (which drives useCardRevealAnimation's per-card
+// stagger) and TemplateGridReveal (which slices the active category's
+// templates down to this many).
+export const MAX_CARDS = 6;

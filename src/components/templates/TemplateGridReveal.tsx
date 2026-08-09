@@ -1,26 +1,38 @@
-import { useMemo } from "react";
-import CategoryTabs from "@/components/templates/CategoryTabs";
+import { useMemo, type Ref } from "react";
 import RevealGridCard from "@/components/templates/RevealGridCard";
+import { SeeMoreLink } from "@/components/templates/SeeMore";
 import { siteConfig } from "@/config/site.config";
-import { CATEGORY_SWITCH_DURATION } from "@/components/templates/templateGridReveal.constants";
-import { useCategoryCrossfade } from "./useCategoryCrossfade";
-import { useCardRevealAnimation } from "./useCardRevealAnimation";
+import {
+  CATEGORY_SWITCH_DURATION,
+  MAX_CARDS,
+} from "@/components/templates/templateGridReveal.constants";
+
+export type Category = typeof siteConfig.templateCategories.categories[number]["id"];
 
 interface TemplateGridRevealProps {
-  progress: number;
+  seeMore?: {
+    label: string;
+    href: string;
+  };
+  /** Which category's cards to actually show — see useCategoryCrossfade. */
+  displayedCategory: Category;
+  gridVisible: boolean;
+  sectionRef: Ref<HTMLDivElement>;
+  headerWrapRef: Ref<HTMLDivElement>;
+  setCardRef: (i: number) => (el: HTMLDivElement | null) => void;
+  setHovered: (i: number | null) => void;
 }
 
-type Category = typeof siteConfig.templateCategories.categories[number]["id"];
-
-const MAX_CARDS = 6;
-
 export default function TemplateGridReveal({
-  progress,
+  seeMore,
+  displayedCategory,
+  gridVisible,
+  sectionRef,
+  headerWrapRef,
+  setCardRef,
+  setHovered,
 }: TemplateGridRevealProps) {
-  const { categories, templates, heading } = siteConfig.templateCategories;
-
-  const { activeCategory, setActiveCategory, displayedCategory, gridVisible } =
-    useCategoryCrossfade<Category>(templates, "all" as Category);
+  const { templates, heading } = siteConfig.templateCategories;
 
   // The cards to actually render, based on `displayedCategory` (not the
   // just-clicked `activeCategory`) so content only changes while hidden.
@@ -31,13 +43,10 @@ export default function TemplateGridReveal({
     );
   }, [displayedCategory, templates]);
 
-  const { sectionRef, headerWrapRef, tabsWrapRef, setCardRef, setHovered } =
-    useCardRevealAnimation({ progress, cardCount: MAX_CARDS });
-
   return (
     <div
       ref={sectionRef}
-      className="w-full h-screen flex flex-col items-center justify-center"
+      className="w-full h-screen flex flex-col items-center justify-center pt-20"
       style={{
         position: "absolute",
         inset: 0,
@@ -64,7 +73,7 @@ export default function TemplateGridReveal({
               lineHeight: "1.15",
               color: "#070606",
               margin: 0,
-              marginBottom: "20px",
+              marginBottom: "25px",
               letterSpacing: "-0.01em",
             }}
           >
@@ -72,22 +81,36 @@ export default function TemplateGridReveal({
           </h2>
         </div>
       </div>
-      <div
-        ref={tabsWrapRef}
-        className="shrink-0 mb-4"
-        style={{ opacity: 0, transition: "none" }}
-      >
-        <CategoryTabs
-          categories={categories}
-          activeCategory={activeCategory}
-          onChange={(category) => setActiveCategory(category as Category)}
-        />
-      </div>
 
-      <div className="min-h-0 z-4" style={{ perspective: "1200px" }}>
+      <div className="min-h-0 z-4" style={{ perspective: "1200px", position: "relative" }}>
+        {/*
+          Deliberately rendered as a sibling of the crossfading grid below,
+          not inside it — it used to live inside that div and fade out/in
+          on every category switch along with the cards, even though "see
+          more" has nothing to do with which category is showing. Sitting
+          here instead means it stays fully visible across switches, while
+          still anchoring to the same (fixed-size) grid box: this wrapper
+          sizes itself to that box since the grid is its only layout
+          child, so "bottom: calc(100% + 24px)" / "right: 0" land in
+          exactly the same spot as before — flush above the top-right
+          card's right edge, never drifting as the screen gets wider.
+        */}
+        {seeMore && (
+          <SeeMoreLink
+            label={seeMore.label}
+            href={seeMore.href}
+            style={{
+              position: "absolute",
+              right: 0,
+              bottom: "calc(100% + 24px)",
+              zIndex: 2,
+            }}
+          />
+        )}
         <div
           className="grid gap-5"
           style={{
+            position: "relative",
             gridTemplateColumns: "repeat(3, 387px)",
             gridTemplateRows: "repeat(2, 280px)",
             opacity: gridVisible ? 1 : 0,

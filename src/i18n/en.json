@@ -184,11 +184,11 @@
     "categories": [
       { "id": "all", "label": "All Templates" },
       { "id": "lawyers", "label": "Lawyers" },
-      { "id": "fitness", "label": "Fitness" },
-      { "id": "realEstate", "label": "Real Estate" },
-      { "id": "clinics", "label": "Clinics" },
       { "id": "restaurant", "label": "Restaurant" },
-      { "id": "barbershops", "label": "Barbershops" }
+      { "id": "clinics", "label": "Clinics" },
+      { "id": "barbershops", "label": "Barbershops" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Real Estate" }
     ]
   },
 

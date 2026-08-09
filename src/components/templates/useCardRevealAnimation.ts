@@ -301,10 +301,16 @@ export function useCardRevealAnimation({
         });
       });
 
-      // Tabs / heading opacity, driven by the same smoothed progress so
-      // everything settles in perfect sync with the cards. Applied
-      // directly to the DOM instead of through React state to avoid a
-      // re-render every frame.
+      // Heading + tabs-rail opacity, driven by the same smoothed progress
+      // so both settle in sync with the cards, then fade back out as the
+      // grid flies away and the ribbon takes over. Applied directly to
+      // the DOM instead of through React state to avoid a re-render every
+      // frame. This only ever fades the rail as a *group* on the way out
+      // — the cascading pop-in each square plays on its own entrance (see
+      // CategoryTabs' `revealed` prop) is a separate, one-shot effect
+      // layered underneath this; multiplying the two together is exactly
+      // what nesting an inner (per-square) opacity inside this outer
+      // (group) opacity gives you for free.
       const tabsOpacity = gsap.utils.clamp(
         0,
         1,
@@ -321,20 +327,21 @@ export function useCardRevealAnimation({
         });
       }
 
-      // Flip pointer-events on the whole section only when it actually
-      // changes, so we're not touching the DOM every frame for nothing.
-      // Tied to `tabsOpacity` itself (not a separate progress threshold)
-      // so clicking becomes possible exactly when the tabs have finished
-      // fading in.
+      // Flip pointer-events on the section and the tabs rail only when it
+      // actually changes, so we're not touching the DOM every frame for
+      // nothing. The rail needs its own flip (not just the section's)
+      // since it renders outside `sectionRef`'s subtree as a fixed
+      // sibling in TemplateSection.
       const shouldEnablePointerEvents = tabsOpacity >= POINTER_ENABLE_PROGRESS;
-      if (
-        shouldEnablePointerEvents !== pointerEventsEnabledRef.current &&
-        sectionRef.current
-      ) {
+      if (shouldEnablePointerEvents !== pointerEventsEnabledRef.current) {
         pointerEventsEnabledRef.current = shouldEnablePointerEvents;
-        sectionRef.current.style.pointerEvents = shouldEnablePointerEvents
-          ? "auto"
-          : "none";
+        const pointerEvents = shouldEnablePointerEvents ? "auto" : "none";
+        if (sectionRef.current) {
+          sectionRef.current.style.pointerEvents = pointerEvents;
+        }
+        if (tabsWrapRef.current) {
+          tabsWrapRef.current.style.pointerEvents = pointerEvents;
+        }
       }
 
       rafRef.current = requestAnimationFrame(tick);
