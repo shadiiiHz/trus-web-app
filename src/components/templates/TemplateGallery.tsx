@@ -88,7 +88,7 @@ export default function TemplatesGallery() {
   };
 
   return (
-    <section className="bg-[#e3e3e3] px-5 py-12">
+    <section className="bg-gallery-bg px-5 py-12">
       <div className="mx-auto flex max-w-[1260px] items-start gap-8">
         <TemplatesFilterSidebar
           search={search}
@@ -112,7 +112,7 @@ export default function TemplatesGallery() {
         />
 
         <div className="min-w-0 flex-1">
-          <p className="mb-5 font-body text-body text-[#707075]">
+          <p className="mb-5 font-body text-body text-gallery-muted">
             {gallery.resultsFound.replace("{count}", String(results.length))}
           </p>
 
@@ -140,7 +140,7 @@ export default function TemplatesGallery() {
               ))}
             </div>
           ) : (
-            <p className="font-body text-[14px] text-[#9ca3af]">
+            <p className="font-body text-[14px] text-gallery-subtle">
               {gallery.noResults}
             </p>
           )}

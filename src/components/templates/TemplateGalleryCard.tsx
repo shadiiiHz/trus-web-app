@@ -30,7 +30,7 @@ export default function TemplateGalleryCard({
       style={{ width: CARD_WIDTH }}
     >
       <div
-        className="overflow-hidden bg-[#1a1a1a]"
+        className="overflow-hidden bg-gallery-canvas"
         style={{ width: CARD_WIDTH, height: CARD_HEIGHT, borderRadius: 8 }}
       >
         <img
@@ -42,19 +42,18 @@ export default function TemplateGalleryCard({
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-2">
-        <span className="font-hero text-body font-semibold text-[#070606]">
+        <span className="font-hero text-body font-semibold text-gallery-ink">
           {name}
         </span>
         <span
           aria-hidden="true"
-          className="h-2.5 w-2.5 shrink-0 rounded-full"
-          style={{
-            background: isDark ? "#070606" : "#ffffff",
-          }}
+          className={`h-2.5 w-2.5 shrink-0 rounded-full ${
+            isDark ? "bg-gallery-ink" : "bg-white"
+          }`}
         />
       </div>
 
-      <div className="mt-1 flex items-center justify-between gap-2 font-body text-[#707075]">
+      <div className="mt-1 flex items-center justify-between gap-2 font-body text-gallery-muted">
         <span className="text-body-sm font-semibold">{categoryLabel}</span>
         <span className="text-label font-normal">{layoutLabel}</span>
       </div>

@@ -15,6 +15,21 @@
   --color-brand-border: #1a1a2a;
   --color-brand-border-2: #252535;
 
+  /* Templates gallery */
+  --color-gallery-bg: #e3e3e3;
+  --color-gallery-canvas: #1a1a1a;
+  --color-gallery-ink: #070606;
+  --color-gallery-muted: #707075;
+  --color-gallery-subtle: var(--color-brand-muted);
+  --color-gallery-purple: #9f7ee1;
+  --color-gallery-purple-active: #936edd;
+  --color-gallery-purple-focus: var(--color-brand-accent);
+  --color-gallery-border: #e5e7eb;
+  --color-gallery-surface: #f9fafb;
+  --color-gallery-text: #111827;
+  --color-gallery-checkbox-border: #d1d5db;
+  --color-gallery-label: #374151;
+
   /* Typography */
   --font-display: "Syne", sans-serif;
   --font-body: "Inter", sans-serif;
