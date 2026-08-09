@@ -1,77 +1,18 @@
-import { useState } from "react";
-import { useScroll, useTransform } from "framer-motion";
+import { Route, Routes } from "react-router-dom";
 import { useLocale } from "@/i18n";
-import { Preloader } from "@/components/loader/Preloader";
-import { Navbar } from "@/components/layout/Navbar";
-import { HeroSection } from "@/components/sections/Hero";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { PortfolioSection } from "@/components/sections/PortfolioSection";
-import { WhyUsSection } from "@/components/sections/WhyUsSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { TeamSection } from "@/components/sections/TeamSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import { ContactSection } from "@/components/sections/ContactSection";
-import { FooterSection } from "@/components/sections/FooterSection";
-import TemplateSection from "./components/sections/TemplateSection";
+import HomePage from "@/pages/HomePage";
+import TemplatesPage from "@/pages/TemplatesPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
-  // per-locale on read) whenever the navbar's language switch fires.
+  // per-locale on read) whenever the navbar's language switch fires — kept at
+  // this level (above the routes) so it applies no matter which page is active.
   useLocale();
-  // Raw scrollY (pixels) so Hero / About animations fire at fixed pixel offsets
-  // regardless of how many sections are added below.
-  //
-  // Pixel anchors (900 px viewport, Hero = 100 svh = 900 px):
-  //   Galaxy fade-out : 0 → 280 px  (galaxy dims as user scrolls away)
-  //
-  // WhyUsSection and PortfolioSection own their scroll progress internally.
-  const { scrollY } = useScroll();
-
-  // Gate the preloader on real hero-video readiness (canplaythrough), so it
-  // fades out only when the galaxy is actually playing — not a frozen frame.
-  const [heroVideoReady, setHeroVideoReady] = useState(false);
-  const [templateReady, setTemplateReady] = useState(false);
-
-  // Hero galaxy opacity
-  // Fades the entire orbital galaxy out as the user scrolls past the hero.
-  const heroOrbitOpacity = useTransform(scrollY, [0, 280], [1, 0]);
 
   return (
-    <div className="bg-brand-bg min-h-screen font-body antialiased">
-      <Preloader ready={heroVideoReady && templateReady} />
-
-      <Navbar />
-
-      <HeroSection
-        orbitOpacity={heroOrbitOpacity}
-        onVideoReady={() => setHeroVideoReady(true)}
-      />
-
-      <AboutSection />
-
-      {/* Portfolio: self-contained sticky section — horizontal card parallax. */}
-      <PortfolioSection />
-
-      {/* Why Us: self-contained sticky section — scroll-split card grid. */}
-      <WhyUsSection />
-
-      {/* Template Categories: entrance-triggered card lighting cascade. */}
-      <TemplateSection onReady={() => setTemplateReady(true)} />
-
-      {/* Services: scroll-driven two-row card parallax. */}
-      <ServicesSection />
-
-      {/* Team: editorial grid with grayscale→colour hover + animated info panel. */}
-      <TeamSection />
-
-      {/* Testimonials: sticky 350vh section — globe fades out as cards rise. */}
-      <TestimonialsSection />
-
-      {/* Contact Us: white section — info card border lights on scroll entry. */}
-      <ContactSection />
-
-      {/* Footer: TRUS background word fades in on scroll. */}
-      <FooterSection />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/templates" element={<TemplatesPage />} />
+    </Routes>
   );
 }

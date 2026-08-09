@@ -41,7 +41,7 @@ const navHrefs = [
   "#",
   "#about",
   "#portfolio",
-  "#templates",
+  "/templates",
   "#services",
   "#contact",
 ];
@@ -288,7 +288,7 @@ function buildSiteConfig(locale: Locale) {
       eyebrow: dict.templateCategories.eyebrow,
       heading: dict.templateCategories.heading,
       description: dict.templateCategories.description,
-      seeMore: { label: dict.templateCategories.seeMore, href: "#" },
+      seeMore: { label: dict.templateCategories.seeMore, href: "/templates" },
       RightWord: dict.templateCategories.RightWord,
       LeftWord: dict.templateCategories.LeftWord,
       tagline: dict.templateCategories.tagline,

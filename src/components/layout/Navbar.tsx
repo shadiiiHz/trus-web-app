@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
+import { resolveSectionLink } from "@/lib/navigation";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
@@ -107,6 +109,10 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
   // Live active-section ID from scroll position
   const activeSection = useScrollSpy();
 
+  // Whether we're on the home page — hash links only work as plain in-page
+  // anchors there; elsewhere they need to route back to Home first.
+  const isHome = useLocation().pathname === "/";
+
   return (
     <>
       <motion.header
@@ -150,8 +156,8 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           aria-label="Main navigation"
         >
           {/* Logo — same asset as Footer */}
-          <a
-            href="/"
+          <Link
+            to="/"
             className="shrink-0 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             aria-label="TruS — home"
           >
@@ -161,7 +167,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               decoding="async"
               style={{ height: "32px", width: "auto", display: "block" }}
             />
-          </a>
+          </Link>
 
           {/* Desktop nav links */}
           <ul className="hidden lg:flex items-center gap-2.5" role="list">
@@ -170,7 +176,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               // href '#'       → sectionId ''        → active when at top of page
               // href '#about'  → sectionId 'about'   → active when about is in view
               const sectionId = link.href === "#" ? "" : link.href.slice(1);
-              const isActive = activeSection === sectionId;
+              const isActive = isHome && activeSection === sectionId;
 
               return (
                 <li key={link.label}>
@@ -178,6 +184,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
                     href={link.href}
                     label={link.label}
                     active={isActive}
+                    to={resolveSectionLink(link.href, isHome)}
                   />
                 </li>
               );
@@ -237,13 +244,24 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
                     ease: EASE_PREMIUM,
                   }}
                 >
-                  <a
-                    href={link.href}
-                    className="text-display-sm font-display font-semibold text-brand-white hover:text-brand-accent-light transition-colors"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </a>
+                  {(() => {
+                    const to = resolveSectionLink(link.href, isHome);
+                    const className =
+                      "text-display-sm font-display font-semibold text-brand-white hover:text-brand-accent-light transition-colors";
+                    return to ? (
+                      <Link to={to} className={className} onClick={() => setMobileOpen(false)}>
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className={className}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    );
+                  })()}
                 </motion.li>
               ))}
             </ul>
@@ -266,29 +284,42 @@ function NavLink({
   href,
   label,
   active = false,
+  to,
 }: {
   href: string;
   label: string;
   active?: boolean;
+  /** Route to navigate to via react-router; `null` renders a plain in-page anchor. */
+  to: string | null;
 }) {
+  const className =
+    "group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light transition-colors duration-200 px-1.75 py-1";
+
+  const underline = (
+    // Underline — full width when active, animates in on hover otherwise
+    <span
+      className={[
+        "absolute -bottom-0.5 left-1.75 h-px rounded-full transition-all duration-300",
+        active ? "w-[calc(100%-14px)]" : "w-0 group-hover:w-[calc(100%-14px)]",
+      ].join(" ")}
+      style={{ background: "var(--color-brand-accent)" }}
+      aria-hidden="true"
+    />
+  );
+
+  if (to) {
+    return (
+      <Link to={to} className={className} aria-current={active ? "page" : undefined}>
+        {label}
+        {underline}
+      </Link>
+    );
+  }
+
   return (
-    <a
-      href={href}
-      className="group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light transition-colors duration-200 px-1.75 py-1"
-      aria-current={active ? "page" : undefined}
-    >
+    <a href={href} className={className} aria-current={active ? "page" : undefined}>
       {label}
-      {/* Underline — full width when active, animates in on hover otherwise */}
-      <span
-        className={[
-          "absolute -bottom-0.5 left-1.75 h-px rounded-full transition-all duration-300",
-          active
-            ? "w-[calc(100%-14px)]"
-            : "w-0 group-hover:w-[calc(100%-14px)]",
-        ].join(" ")}
-        style={{ background: "var(--color-brand-accent)" }}
-        aria-hidden="true"
-      />
+      {underline}
     </a>
   );
 }

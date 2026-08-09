@@ -27,7 +27,9 @@
  *   never resolved by the bundler and 404s when used as an <img src>.
  */
 
+import { Link, useLocation } from "react-router-dom";
 import { siteConfig } from "@/config/site.config";
+import { resolveSectionLink } from "@/lib/navigation";
 import trusLogo from "@/assets/logo.svg";
 
 // Shared style tokens
@@ -59,37 +61,61 @@ const FOOTER_LINK_COLOR = "rgba(191, 191, 191, 1)";
  * sized to the text width only.
  * Used for every link in the footer.
  */
-function FooterLink({ href, label }: { href: string; label: string }) {
+function FooterLink({
+  href,
+  label,
+  to,
+}: {
+  href: string;
+  label: string;
+  /** Route to navigate to via react-router; `null`/omitted renders a plain anchor. */
+  to?: string | null;
+}) {
+  const sharedProps = {
+    className: "group relative inline-block",
+    style: {
+      ...bodyStyle,
+      color: FOOTER_LINK_COLOR,
+      textDecoration: "none",
+      transition: "color 0.2s ease",
+      alignSelf: "flex-start" as const, // prevents stretching when parent is a flex column
+    },
+    onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.currentTarget.style.color = "#FFFFFF";
+    },
+    onMouseLeave: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.currentTarget.style.color = FOOTER_LINK_COLOR;
+    },
+  };
+
+  const underline = (
+    <span
+      className="absolute -bottom-0.5 left-0 h-px rounded-full w-0 group-hover:w-full transition-all duration-300"
+      style={{ background: "#FFFFFF" }}
+      aria-hidden="true"
+    />
+  );
+
+  if (to) {
+    return (
+      <Link to={to} {...sharedProps}>
+        {label}
+        {underline}
+      </Link>
+    );
+  }
+
   return (
-    <a
-      href={href}
-      className="group relative inline-block"
-      style={{
-        ...bodyStyle,
-        color: FOOTER_LINK_COLOR,
-        textDecoration: "none",
-        transition: "color 0.2s ease",
-        alignSelf: "flex-start", // prevents stretching when parent is a flex column
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.color = "#FFFFFF";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.color = FOOTER_LINK_COLOR;
-      }}
-    >
+    <a href={href} {...sharedProps}>
       {label}
-      <span
-        className="absolute -bottom-0.5 left-0 h-px rounded-full w-0 group-hover:w-full transition-all duration-300"
-        style={{ background: "#FFFFFF" }}
-        aria-hidden="true"
-      />
+      {underline}
     </a>
   );
 }
 
 export function FooterSection() {
   const { footer } = siteConfig;
+  const isHome = useLocation().pathname === "/";
 
   return (
     <footer id="footer" style={{ background: "#000000" }}>
@@ -130,20 +156,27 @@ export function FooterSection() {
               {footer.tagline}
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              {footer.socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  style={{ display: "inline-flex", alignItems: "center" }}
-                >
+              {footer.socials.map((social) => {
+                const icon = (
                   <img
                     src={social.icon}
                     alt={social.label}
                     style={{ width: "30px", height: "30px", display: "block" }}
                   />
-                </a>
-              ))}
+                );
+                const to = resolveSectionLink(social.href, isHome);
+                const style = { display: "inline-flex", alignItems: "center" } as const;
+
+                return to ? (
+                  <Link key={social.label} to={to} aria-label={social.label} style={style}>
+                    {icon}
+                  </Link>
+                ) : (
+                  <a key={social.label} href={social.href} aria-label={social.label} style={style}>
+                    {icon}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -166,7 +199,11 @@ export function FooterSection() {
               >
                 {footer.services.map((link) => (
                   <li key={link.label}>
-                    <FooterLink href={link.href} label={link.label} />
+                    <FooterLink
+                      href={link.href}
+                      label={link.label}
+                      to={resolveSectionLink(link.href, isHome)}
+                    />
                   </li>
                 ))}
               </ul>
@@ -187,7 +224,11 @@ export function FooterSection() {
               >
                 {footer.company.map((link) => (
                   <li key={link.label}>
-                    <FooterLink href={link.href} label={link.label} />
+                    <FooterLink
+                      href={link.href}
+                      label={link.label}
+                      to={resolveSectionLink(link.href, isHome)}
+                    />
                   </li>
                 ))}
               </ul>
@@ -284,7 +325,11 @@ export function FooterSection() {
                     •
                   </span>
                 )}
-                <FooterLink href={link.href} label={link.label} />
+                <FooterLink
+                  href={link.href}
+                  label={link.label}
+                  to={resolveSectionLink(link.href, isHome)}
+                />
               </div>
             ))}
           </div>
