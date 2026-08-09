@@ -11,11 +11,16 @@ export interface StatCounterProps {
 }
 
 interface ParsedStat {
+  /** Full expanded number the tween animates through (e.g. 5000 for "5K+"). */
   target: number;
   decimals: number;
   groupSep: string;
   decimalSep: string;
   suffix: string;
+  /** 1000 for a "K" source suffix, 1e6 for "M", else 1. */
+  magnitudeDivisor: number;
+  /** "K" / "M" echoed back onto the display, or "" when there is none. */
+  magnitudeLabel: string;
 }
 
 /**
@@ -27,14 +32,22 @@ interface ParsedStat {
 function parseStat(raw: string): ParsedStat {
   const match = raw.match(/^([\d.,\s]+)(.*)$/);
   if (!match) {
-    return { target: 0, decimals: 0, groupSep: ",", decimalSep: ".", suffix: raw };
+    return {
+      target: 0,
+      decimals: 0,
+      groupSep: ",",
+      decimalSep: ".",
+      suffix: raw,
+      magnitudeDivisor: 1,
+      magnitudeLabel: "",
+    };
   }
   const [, numPart, suffix] = match;
   const trimmed = numPart.trim();
 
   const lastSepIdx = Math.max(trimmed.lastIndexOf(","), trimmed.lastIndexOf("."));
   if (lastSepIdx === -1) {
-    return { target: parseFloat(trimmed) || 0, decimals: 0, groupSep: ",", decimalSep: ".", suffix };
+    return applyMagnitudeSuffix(parseFloat(trimmed) || 0, 0, suffix, ",", ".");
   }
 
   const sepChar = trimmed[lastSepIdx];
@@ -46,15 +59,55 @@ function parseStat(raw: string): ParsedStat {
 
   const integerStr = (isDecimal ? trimmed.slice(0, lastSepIdx) : trimmed).split(groupSep).join("");
   const decimals = isDecimal ? afterSep.length : 0;
-  const target = parseFloat(decimals > 0 ? `${integerStr}.${afterSep}` : integerStr) || 0;
+  const rawTarget = parseFloat(decimals > 0 ? `${integerStr}.${afterSep}` : integerStr) || 0;
 
-  return { target, decimals, groupSep, decimalSep, suffix };
+  return applyMagnitudeSuffix(rawTarget, decimals, suffix, groupSep, decimalSep);
 }
 
-function formatStat(n: number, { decimals, groupSep, decimalSep }: ParsedStat): string {
-  const [intPart, decPart] = n.toFixed(decimals).split(".");
+/**
+ * A leading K/M letter on the suffix (e.g. "5K+", "1.2M+") is a magnitude
+ * shorthand, not literal display text. Expand it into the real target
+ * (5000, 1200000, ...) so the tween animates through the full number
+ * rather than just 0 → 5 — but keep the K/M label for display, with at
+ * least one decimal of resolution so the compact readout still visibly
+ * counts up instead of jumping in whole-K steps.
+ */
+function applyMagnitudeSuffix(
+  rawTarget: number,
+  decimals: number,
+  suffix: string,
+  groupSep: string,
+  decimalSep: string,
+): ParsedStat {
+  const magnitudeMatch = suffix.match(/^([kKmM])(.*)$/);
+  if (!magnitudeMatch) {
+    return { target: rawTarget, decimals, groupSep, decimalSep, suffix, magnitudeDivisor: 1, magnitudeLabel: "" };
+  }
+  const magnitudeLabel = magnitudeMatch[1].toUpperCase();
+  const magnitudeDivisor = magnitudeLabel === "K" ? 1_000 : 1_000_000;
+  return {
+    target: rawTarget * magnitudeDivisor,
+    decimals: Math.max(decimals, 1),
+    groupSep,
+    decimalSep,
+    suffix: magnitudeMatch[2],
+    magnitudeDivisor,
+    magnitudeLabel,
+  };
+}
+
+function formatStat(
+  n: number,
+  { decimals, groupSep, decimalSep, magnitudeDivisor, magnitudeLabel }: ParsedStat,
+): string {
+  const compact = n / magnitudeDivisor;
+  const [intPart, decPart] = compact.toFixed(decimals).split(".");
   const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, groupSep);
-  return decimals > 0 ? `${grouped}${decimalSep}${decPart}` : grouped;
+  // Drop a trailing ".0"/".00" (e.g. "5.0K" → "5K") but keep genuine
+  // fractions (e.g. "4.9K") so the finished value matches the source text.
+  const hasFraction = decPart !== undefined && /[1-9]/.test(decPart);
+  const withDecimal = hasFraction ? `${grouped}${decimalSep}${decPart}` : grouped;
+  return `${withDecimal}${magnitudeLabel}`;
 }
 
 /** Counts up from 0 to the stat's numeric value once it scrolls into view. */
