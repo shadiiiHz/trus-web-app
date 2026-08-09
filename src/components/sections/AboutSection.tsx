@@ -59,7 +59,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
       aria-label="About TruS"
       style={{ background: "#E3E3E3" }}
     >
-      <div className="overflow-hidden sticky top-0">
+      <div className="overflow-hidden sticky top-0 min-h-screen flex flex-col justify-center">
         {/* Background layer */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           {/* Sparse stars */}
@@ -182,8 +182,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               {/* Stats grid — four boxed counters, each cascading in with its own delay */}
               <div className="grid grid-cols-2 gap-4">
                 {(data.stats as readonly { value: string; label: string }[]).map(
-                  (stat, i) => (
-                    <FadeIn key={stat.value} direction="up" delay={0.5 + i * 0.08}>
+                  (stat) => (
                       <div
                         className="flex flex-col justify-center gap-2"
                         style={{
@@ -208,7 +207,6 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                           {stat.label}
                         </span>
                       </div>
-                    </FadeIn>
                   ),
                 )}
               </div>
