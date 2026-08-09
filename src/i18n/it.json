@@ -249,6 +249,13 @@
     ]
   },
 
+  "templatesPage": {
+    "banner": {
+      "headline": "Template di siti portfolio",
+      "subtitle": "Bellissimi template portfolio per mostrare il tuo lavoro e impressionare i tuoi clienti."
+    }
+  },
+
   "footer": {
     "firstColumn": "Servizi",
     "secondColumn": "Azienda",

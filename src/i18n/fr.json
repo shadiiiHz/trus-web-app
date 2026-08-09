@@ -249,6 +249,13 @@
     ]
   },
 
+  "templatesPage": {
+    "banner": {
+      "headline": "Modèles de sites portfolio",
+      "subtitle": "De beaux modèles de portfolio pour présenter votre travail et impressionner vos clients."
+    }
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Entreprise",

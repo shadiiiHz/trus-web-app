@@ -249,6 +249,13 @@
     ]
   },
 
+  "templatesPage": {
+    "banner": {
+      "headline": "Portfolio Website Templates",
+      "subtitle": "Beautiful portfolio templates to showcase your work and impress your clients."
+    }
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Company",

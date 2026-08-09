@@ -305,6 +305,10 @@ function buildSiteConfig(locale: Locale) {
       } as Record<string, Array<{ id: number; image: string; link: string }>>,
     },
 
+    templatesPage: {
+      banner: dict.templatesPage.banner,
+    },
+
     contact: {
       eyebrow: dict.contact.eyebrow,
       heading: dict.contact.heading,

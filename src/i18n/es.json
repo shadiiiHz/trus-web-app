@@ -249,6 +249,13 @@
     ]
   },
 
+  "templatesPage": {
+    "banner": {
+      "headline": "Plantillas de sitios de portafolio",
+      "subtitle": "Hermosas plantillas de portafolio para mostrar tu trabajo e impresionar a tus clientes."
+    }
+  },
+
   "footer": {
     "firstColumn": "Servicios",
     "secondColumn": "Empresa",

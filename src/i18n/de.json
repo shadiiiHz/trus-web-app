@@ -256,6 +256,13 @@
     ]
   },
 
+  "templatesPage": {
+    "banner": {
+      "headline": "Portfolio-Website-Vorlagen",
+      "subtitle": "Wunderschöne Portfolio-Vorlagen, um deine Arbeit zu präsentieren und deine Kunden zu beeindrucken."
+    }
+  },
+
   "footer": {
     "firstColumn": "Leistungen",
     "secondColumn": "Unternehmen",
