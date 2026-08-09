@@ -52,7 +52,7 @@ export function TemplatesBanner() {
             <h1 className="font-hero text-display-sm md:text-display-md font-bold text-brand-white md:whitespace-nowrap">
               {headline}
             </h1>
-            <p className="mt-3 max-w-md font-body text-body text-brand-muted">
+            <p className="mt-3 max-w-md font-body text-body text-white/70">
               {subtitle}
             </p>
           </div>

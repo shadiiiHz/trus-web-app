@@ -253,6 +253,17 @@
     "banner": {
       "headline": "Portfolio Website Templates",
       "subtitle": "Beautiful portfolio templates to showcase your work and impress your clients."
+    },
+    "gallery": {
+      "categoriesLabel": "CATEGORIES",
+      "searchPlaceholder": "Search templates...",
+      "styleLabel": "STYLE",
+      "featuresLabel": "FEATURES",
+      "clearAllFilters": "Clear all filters",
+      "resultsFound": "{count} templates found",
+      "noResults": "No templates match these filters.",
+      "styleOptions": { "dark": "Dark", "light": "Light" },
+      "layoutOptions": { "onePage": "One Page", "multiPage": "Multi Page" }
     }
   },
 

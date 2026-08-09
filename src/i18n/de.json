@@ -260,6 +260,17 @@
     "banner": {
       "headline": "Portfolio-Website-Vorlagen",
       "subtitle": "Wunderschöne Portfolio-Vorlagen, um deine Arbeit zu präsentieren und deine Kunden zu beeindrucken."
+    },
+    "gallery": {
+      "categoriesLabel": "KATEGORIEN",
+      "searchPlaceholder": "Vorlagen suchen...",
+      "styleLabel": "STIL",
+      "featuresLabel": "FUNKTIONEN",
+      "clearAllFilters": "Alle Filter zurücksetzen",
+      "resultsFound": "{count} Vorlagen gefunden",
+      "noResults": "Keine Vorlagen entsprechen diesen Filtern.",
+      "styleOptions": { "dark": "Dunkel", "light": "Hell" },
+      "layoutOptions": { "onePage": "Einseitig", "multiPage": "Mehrseitig" }
     }
   },
 

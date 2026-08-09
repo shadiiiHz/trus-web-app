@@ -120,64 +120,136 @@ const serviceMeta = [
 // restaurant, barbershops). A blank `link` means the card isn't clickable.
 const categoryTemplates = {
   law: [
-    { image: "/templates/t7.webp", link: "https://advorus.webflow.io/" },
     {
-      image: "/templates/t8.webp",
-      link: "https://inloy-128.webflow.io/home-1",
+      image: "/templates/t7.webp",
+      link: "https://advorus.webflow.io/",
+      name: "Advorus",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
     },
-    { image: "/templates/t9.webp", link: "https://trustlegal.webflow.io/" },
+    {
+      image: "/templates/t9.webp",
+      link: "https://trustlegal.webflow.io/",
+      name: "TrustLegal",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
+    },
   ],
   fit: [
     {
       image: "/templates/t5.webp",
       link: "https://flexova-fitness-gym-website-template.webflow.io/",
+      name: "Flexova",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "fitness",
     },
-    { image: "/templates/t6.webp", link: "https://fitcore-ttm.webflow.io/" },
   ],
   re: [
-    { image: "/templates/t10.webp", link: "https://andalash.webflow.io/" },
+    {
+      image: "/templates/t10.webp",
+      link: "https://andalash.webflow.io/",
+      name: "Andalash",
+      style: "Light",
+      layout: "One Page",
+      categoryId: "realEstate",
+    },
     {
       image: "/templates/t11.webp",
       link: "https://hampton-template.webflow.io/",
+      name: "Hampton",
+      style: "Light",
+      layout: "One Page",
+      categoryId: "realEstate",
     },
   ],
   cl: [
-    { image: "/templates/t3.webp", link: "https://oralix.webflow.io/" },
+    {
+      image: "/templates/t3.webp",
+      link: "https://oralix.webflow.io/",
+      name: "Oralix",
+      style: "Light",
+      layout: "Multi Page",
+      categoryId: "clinics",
+    },
     {
       image: "/templates/t4.webp",
       link: "https://pawfect-webflipin.webflow.io/",
+      name: "Pawfect",
+      style: "Light",
+      layout: "One Page",
+      categoryId: "clinics",
     },
   ],
   restaurant: [
-    { image: "/templates/t12.webp", link: "https://thyme-965261.webflow.io/" },
-    { image: "/templates/t13.webp", link: "https://airbrick.webflow.io/" },
-    { image: "/templates/t14.webp", link: "https://brixsa.webflow.io/" },
-    { image: "/templates/t15.webp", link: "https://taverna-cms.webflow.io/" },
+    {
+      image: "/templates/t12.webp",
+      link: "https://thyme-965261.webflow.io/",
+      name: "Thyme",
+      style: "Light",
+      layout: "One Page",
+      categoryId: "restaurant",
+    },
   ],
   bar: [
-    { image: "/templates/t1.webp", link: "https://glamory.webflow.io/" },
-  ],
-  all: [
-    { image: "/templates/t7.webp", link: "https://advorus.webflow.io/" },
     {
-      image: "/templates/t11.webp",
-      link: "https://hampton-template.webflow.io/",
+      image: "/templates/t1.webp",
+      link: "https://glamory.webflow.io/",
+      name: "Glamory",
+      style: "Light",
+      layout: "One Page",
+      categoryId: "barbershops",
     },
-    { image: "/templates/t3.webp", link: "https://oralix.webflow.io/" },
-    { image: "/templates/t1.webp", link: "https://glamory.webflow.io/" },
-    {
-      image: "/templates/t5.webp",
-      link: "https://flexova-fitness-gym-website-template.webflow.io/",
-    },
-    { image: "/templates/t10.webp", link: "https://andalash.webflow.io/" },
-    { image: "/templates/t13.webp", link: "https://airbrick.webflow.io/" },
-    { image: "/templates/t9.webp", link: "https://trustlegal.webflow.io/" },
-    { image: "/templates/t12.webp", link: "https://thyme-965261.webflow.io/" },
   ],
 };
 
+const allTemplatesByName = new Map(
+  Object.values(categoryTemplates)
+    .flat()
+    .map((tpl) => [tpl.name, tpl] as const),
+);
+
+/** Looks up templates by name so the order lists below stay data-free (no duplicated image/link/etc). */
+function orderByName(names: string[]) {
+  return names.map((name) => {
+    const tpl = allTemplatesByName.get(name);
+    if (!tpl) throw new Error(`orderByName: unknown template "${name}"`);
+    return tpl;
+  });
+}
+
+// The Home page ribbon's original curated order (kept exactly as-is — it
+// never included Pawfect, and that's intentional, not a bug).
+const RIBBON_ORDER = [
+  "Advorus",
+  "Hampton",
+  "Oralix",
+  "Glamory",
+  "Flexova",
+  "Andalash",
+  "TrustLegal",
+  "Thyme",
+];
+
+// The /templates gallery's "All Templates" order, matching the Figma spec exactly.
+const GALLERY_ORDER = [
+  "Advorus",
+  "Hampton",
+  "Oralix",
+  "Glamory",
+  "Flexova",
+  "Andalash",
+  "Pawfect",
+  "Thyme",
+  "TrustLegal",
+];
+
 const templateMap = {
   ...categoryTemplates,
+  all: orderByName(RIBBON_ORDER),
+  galleryAll: orderByName(GALLERY_ORDER),
 };
 
 const seedTemplates = (prefix: keyof typeof templateMap) =>
@@ -185,6 +257,10 @@ const seedTemplates = (prefix: keyof typeof templateMap) =>
     id: i + 1,
     image: tpl.image,
     link: tpl.link,
+    name: tpl.name,
+    style: tpl.style,
+    layout: tpl.layout,
+    categoryId: tpl.categoryId,
   }));
 
 const testimonialMeta = [
@@ -302,11 +378,24 @@ function buildSiteConfig(locale: Locale) {
         restaurant: seedTemplates("restaurant"),
         barbershops: seedTemplates("bar"),
         all: seedTemplates("all"),
-      } as Record<string, Array<{ id: number; image: string; link: string }>>,
+        galleryAll: seedTemplates("galleryAll"),
+      } as Record<
+        string,
+        Array<{
+          id: number;
+          image: string;
+          link: string;
+          name: string;
+          style: "Light" | "Dark";
+          layout: "One Page" | "Multi Page";
+          categoryId: string;
+        }>
+      >,
     },
 
     templatesPage: {
       banner: dict.templatesPage.banner,
+      gallery: dict.templatesPage.gallery,
     },
 
     contact: {

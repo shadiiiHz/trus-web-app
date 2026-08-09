@@ -111,7 +111,8 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
 
   // Whether we're on the home page — hash links only work as plain in-page
   // anchors there; elsewhere they need to route back to Home first.
-  const isHome = useLocation().pathname === "/";
+  const pathname = useLocation().pathname;
+  const isHome = pathname === "/";
 
   return (
     <>
@@ -175,8 +176,15 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               // Derive the section ID from the href.
               // href '#'       → sectionId ''        → active when at top of page
               // href '#about'  → sectionId 'about'   → active when about is in view
+              // href '/templates' is a real route, not a hash, but shares its
+              // section id 'templates' — on Home it still activates via
+              // scroll-spy (the section itself has id="templates"); off Home
+              // it activates by matching the current route directly instead.
+              const isPageLink = link.href.startsWith("/");
               const sectionId = link.href === "#" ? "" : link.href.slice(1);
-              const isActive = isHome && activeSection === sectionId;
+              const isActive = isHome
+                ? activeSection === sectionId
+                : isPageLink && pathname === link.href;
 
               return (
                 <li key={link.label}>

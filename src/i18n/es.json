@@ -253,6 +253,17 @@
     "banner": {
       "headline": "Plantillas de sitios de portafolio",
       "subtitle": "Hermosas plantillas de portafolio para mostrar tu trabajo e impresionar a tus clientes."
+    },
+    "gallery": {
+      "categoriesLabel": "CATEGORÍAS",
+      "searchPlaceholder": "Buscar plantillas...",
+      "styleLabel": "ESTILO",
+      "featuresLabel": "CARACTERÍSTICAS",
+      "clearAllFilters": "Borrar todos los filtros",
+      "resultsFound": "{count} plantillas encontradas",
+      "noResults": "Ninguna plantilla coincide con estos filtros.",
+      "styleOptions": { "dark": "Oscuro", "light": "Claro" },
+      "layoutOptions": { "onePage": "Una página", "multiPage": "Varias páginas" }
     }
   },
 

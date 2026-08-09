@@ -253,6 +253,17 @@
     "banner": {
       "headline": "Modèles de sites portfolio",
       "subtitle": "De beaux modèles de portfolio pour présenter votre travail et impressionner vos clients."
+    },
+    "gallery": {
+      "categoriesLabel": "CATÉGORIES",
+      "searchPlaceholder": "Rechercher des modèles...",
+      "styleLabel": "STYLE",
+      "featuresLabel": "FONCTIONNALITÉS",
+      "clearAllFilters": "Effacer tous les filtres",
+      "resultsFound": "{count} modèles trouvés",
+      "noResults": "Aucun modèle ne correspond à ces filtres.",
+      "styleOptions": { "dark": "Sombre", "light": "Clair" },
+      "layoutOptions": { "onePage": "Une page", "multiPage": "Plusieurs pages" }
     }
   },
 

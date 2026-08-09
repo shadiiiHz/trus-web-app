@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import TemplatesBanner from "@/components/templates/TemplateBanner";
+import TemplatesGallery from "@/components/templates/TemplateGallery";
 
-// Body below the banner is still placeholder — design pending. Header/banner/
-// footer are wired up so the page is reachable and navigable; the rest of
-// the layout will be replaced once specified.
 export default function TemplatesPage() {
   // Client-side navigation keeps whatever scroll position Home was at
   // (e.g. deep in the page) — always land at the top of this page instead.
@@ -23,17 +21,7 @@ export default function TemplatesPage() {
         <TemplatesBanner />
       </div>
 
-      <main className="flex min-h-[60vh] items-center justify-center px-5">
-        <h2
-          className="text-display-md font-display font-semibold bg-clip-text text-transparent"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, #875dd9 0%, #5328a8 100%)",
-          }}
-        >
-          Templates page is under construction
-        </h2>
-      </main>
+      <TemplatesGallery />
 
       <FooterSection />
     </div>

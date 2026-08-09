@@ -253,6 +253,17 @@
     "banner": {
       "headline": "Template di siti portfolio",
       "subtitle": "Bellissimi template portfolio per mostrare il tuo lavoro e impressionare i tuoi clienti."
+    },
+    "gallery": {
+      "categoriesLabel": "CATEGORIE",
+      "searchPlaceholder": "Cerca template...",
+      "styleLabel": "STILE",
+      "featuresLabel": "FUNZIONALITÀ",
+      "clearAllFilters": "Cancella tutti i filtri",
+      "resultsFound": "{count} template trovati",
+      "noResults": "Nessun template corrisponde a questi filtri.",
+      "styleOptions": { "dark": "Scuro", "light": "Chiaro" },
+      "layoutOptions": { "onePage": "Pagina singola", "multiPage": "Multipagina" }
     }
   },
 
