@@ -89,7 +89,7 @@ interface CategoryTabButtonProps {
  */
 function CategoryTabButton({ cat, isActive, onSelect, index, revealed }: CategoryTabButtonProps) {
   const [hovered, setHovered] = useState(false);
-  const Icon = CATEGORY_ICONS[cat.id] ?? AllIcon;
+  const Icon = CATEGORY_ICONS[cat.id] ?? CATEGORY_ICONS.all;
 
   return (
     <button
