@@ -185,7 +185,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               // mount effect instead.
               if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="shrink-0 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="shrink-0 outline-none"
             aria-label="TruS — home"
           >
             <img
