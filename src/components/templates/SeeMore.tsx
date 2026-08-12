@@ -18,8 +18,6 @@ export function SeeMoreLink({ label, href, style }: SeeMoreLinkProps) {
     return (
       <Link
         to={href}
-        target="_blank"
-        rel="noopener noreferrer"
         className={linkClassName}
         style={style}
       >

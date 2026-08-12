@@ -50,6 +50,7 @@ export default function TemplateGalleryCard({
           className={`h-2.5 w-2.5 shrink-0 rounded-full ${
             isDark ? "bg-gallery-ink" : "bg-white"
           }`}
+          style={isDark ? undefined : { border: "0.5px solid rgba(0, 0, 0, 1)" }}
         />
       </div>
 

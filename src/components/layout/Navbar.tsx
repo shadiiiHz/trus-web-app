@@ -114,10 +114,21 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
   const pathname = useLocation().pathname;
   const isHome = pathname === "/";
 
+  // The transparent (unscrolled) backdrop only reads correctly over Home's
+  // black page background — white nav text would vanish on any lighter
+  // page. Non-Home routes therefore always show the solid/blurred backdrop,
+  // same as Home does once scrolled.
+  const solidBackdrop = scrolled || !isHome;
+
   return (
     <>
       <motion.header
-        initial={{ y: -80, opacity: 0 }}
+        // Sliding+fading in from -80/opacity:0 reads fine over Home's
+        // full-bleed hero, but on other pages the banner beneath renders
+        // instantly while the navbar is still arriving, so it briefly looks
+        // unanchored/disconnected. Those routes render the navbar already
+        // fully in place from the very first frame — no entrance animation.
+        initial={{ y: isHome ? -80 : 0, opacity: isHome ? 0 : 1 }}
         animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         style={{
@@ -131,11 +142,19 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
         {/* Backdrop — full-width blur + bg, NO border (border handled separately below) */}
         <motion.div
           className="absolute inset-0"
+          // Without this, framer-motion always animates mount from a
+          // transparent default toward `animate`'s target — on non-Home
+          // routes that target is already solid at mount (solidBackdrop),
+          // so it visibly faded in from transparent every load, reading as
+          // a flicker. initial={false} starts it straight at the animate
+          // value on mount, while still transitioning on later prop changes
+          // (e.g. Home's scroll-triggered solid/transparent toggle).
+          initial={false}
           animate={{
-            backgroundColor: scrolled
+            backgroundColor: solidBackdrop
               ? "rgba(7, 7, 13, 0.92)"
               : "rgba(0,0,0,0)",
-            backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
+            backdropFilter: solidBackdrop ? "blur(20px)" : "blur(0px)",
           }}
           transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
           aria-hidden="true"
@@ -159,6 +178,13 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           {/* Logo — same asset as Footer */}
           <Link
             to="/"
+            onClick={() => {
+              // Already on Home: <Link to="/"> is a no-op (same route, no
+              // remount), so scrolling to top has to happen explicitly here.
+              // Navigating in from elsewhere is handled by HomePage's own
+              // mount effect instead.
+              if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="shrink-0 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             aria-label="TruS — home"
           >

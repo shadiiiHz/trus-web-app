@@ -39,7 +39,13 @@ export default function HomePage() {
   // the lock lifts, then scroll once.
   useEffect(() => {
     const id = window.location.hash.slice(1);
-    if (!id) return;
+    if (!id) {
+      // Client-side navigation here (e.g. the navbar logo from Templates)
+      // doesn't reset scroll the way a full page load would — without
+      // this, landing on Home keeps whatever scrollY the previous page had.
+      window.scrollTo(0, 0);
+      return;
+    }
     let cancelled = false;
     const tryScroll = () => {
       if (cancelled) return;
