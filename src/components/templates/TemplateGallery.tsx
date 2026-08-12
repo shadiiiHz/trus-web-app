@@ -89,7 +89,7 @@ export default function TemplatesGallery() {
 
   return (
     <section className="bg-gallery-bg px-5 py-12">
-      <div className="mx-auto flex max-w-[1260px] items-start gap-8">
+      <div className="mx-auto flex max-w-300 items-start gap-8">
         <TemplatesFilterSidebar
           search={search}
           onSearchChange={setSearch}
