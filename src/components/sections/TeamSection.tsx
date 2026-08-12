@@ -37,6 +37,7 @@ const NAVBAR_CLEARANCE = 100;
 interface TeamDesktopGridProps {
   eyebrow: string;
   heading: string[];
+  description: string;
   /** Full 8-member roster — the grid derives its own visible page from scroll. */
   members: Member[];
   hoveredId: string | null;
@@ -62,6 +63,7 @@ const PIN_VH = 340;
 function TeamDesktopGrid({
   eyebrow,
   heading,
+  description,
   members,
   hoveredId,
   onHoverChange,
@@ -192,6 +194,20 @@ function TeamDesktopGrid({
             >
               {heading.join("\n")}
             </h2>
+          </FadeIn>
+
+          <FadeIn direction="up" delay={0.22}>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "14px",
+                lineHeight: 1.5,
+                color: "#BFBFBF",
+                margin: "16px 0 0 0",
+              }}
+            >
+              {description}
+            </p>
           </FadeIn>
 
           <div
@@ -358,7 +374,7 @@ function TeamDesktopGrid({
             width: 300,
             flexShrink: 0,
             alignSelf: "flex-start",
-            paddingTop: "30px",
+            paddingTop: "24px",
             y: shouldReduceMotion ? 0 : panelY,
           }}
         >
@@ -416,7 +432,7 @@ function TeamDesktopGrid({
 }
 
 export function TeamSection() {
-  const { eyebrow, heading, members } = siteConfig.team;
+  const { eyebrow, heading, description, members } = siteConfig.team;
   const sectionRef = useRef<HTMLElement>(null);
 
   // Interaction state
@@ -473,6 +489,7 @@ export function TeamSection() {
     <TeamDesktopGrid
       eyebrow={eyebrow}
       heading={heading}
+      description={description}
       members={members}
       hoveredId={hoveredId}
       onHoverChange={setHoveredId}
@@ -517,6 +534,19 @@ export function TeamSection() {
           >
             {heading.join("\n")}
           </h2>
+        </FadeIn>
+        <FadeIn direction="up" delay={0.22}>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "16px",
+              lineHeight: 1.5,
+              color: "#BFBFBF",
+              margin: "16px 0 0 0",
+            }}
+          >
+            {description}
+          </p>
         </FadeIn>
       </div>
 

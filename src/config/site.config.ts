@@ -48,15 +48,39 @@ const navHrefs = [
 
 const projectMeta = [
   { id: 1, image: "/portfolio/p1.webp", link: "https://advorus.webflow.io/" },
-  { id: 2, image: "/portfolio/p2.webp", link: "https://hampton-template.webflow.io/" },
+  {
+    id: 2,
+    image: "/portfolio/p2.webp",
+    link: "https://hampton-template.webflow.io/",
+  },
   { id: 3, image: "/portfolio/p3.webp", link: "https://oralix.webflow.io/" },
-  { id: 4, image: "/portfolio/p4.webp", link: "https://thyme-965261.webflow.io/" },
-  { id: 5, image: "/portfolio/p5.webp", link: "https://trustlegal.webflow.io/" },
+  {
+    id: 4,
+    image: "/portfolio/p4.webp",
+    link: "https://thyme-965261.webflow.io/",
+  },
+  {
+    id: 5,
+    image: "/portfolio/p5.webp",
+    link: "https://trustlegal.webflow.io/",
+  },
   { id: 6, image: "/portfolio/p6.webp", link: "https://glamory.webflow.io/" },
-  { id: 7, image: "/portfolio/p7.webp", link: "https://flexova-fitness-gym-website-template.webflow.io/" },
+  {
+    id: 7,
+    image: "/portfolio/p7.webp",
+    link: "https://flexova-fitness-gym-website-template.webflow.io/",
+  },
   { id: 8, image: "/portfolio/p8.webp", link: "https://andalash.webflow.io/" },
-  { id: 9, image: "/portfolio/p9.webp", link: "https://pawfect-webflipin.webflow.io/" },
-  { id: 10, image: "/portfolio/p10.webp", link: "https://airbrick.webflow.io/" },
+  {
+    id: 9,
+    image: "/portfolio/p9.webp",
+    link: "https://pawfect-webflipin.webflow.io/",
+  },
+  {
+    id: 10,
+    image: "/portfolio/p10.webp",
+    link: "https://airbrick.webflow.io/",
+  },
 ];
 
 const teamMeta = [
@@ -350,6 +374,7 @@ function buildSiteConfig(locale: Locale) {
     team: {
       eyebrow: dict.team.eyebrow,
       heading: dict.team.heading,
+      description: dict.team.description,
       members: merge(dict.team.members, teamMeta),
     },
 

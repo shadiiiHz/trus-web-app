@@ -72,10 +72,8 @@
 
   "team": {
     "eyebrow": "MEET OUR TEAM",
-    "heading": [
-      "The Experts Behind",
-      "TruS"
-    ],
+    "heading": ["The Experts Behind", "TruS"],
+    "description": "Designers, developers, and digital specialists working together to create smarter digital experiences.",
     "members": [
       {
         "name": "Sara Ahmadi",
@@ -286,7 +284,11 @@
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
     "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
-    "bottomLinks": ["Privacy Policy", "Terms & Conditions", "Powered by Trust AI"],
+    "bottomLinks": [
+      "Privacy Policy",
+      "Terms & Conditions",
+      "Powered by Trust AI"
+    ],
     "copyright": "© {year} TruS. All rights reserved."
   }
 }

@@ -72,10 +72,8 @@
 
   "team": {
     "eyebrow": "НАША КОМАНДА",
-    "heading": [
-      "Эксперты, стоящие за",
-      "TruS"
-    ],
+    "heading": ["Эксперты, стоящие", "TruS"],
+    "description": "Дизайнеры, разработчики и специалисты создают продуманные цифровые продукты вместе.",
     "members": [
       {
         "name": "Sara Ahmadi",
@@ -206,7 +204,10 @@
       "fields": [
         { "label": "Полное имя", "placeholder": "Введите имя" },
         { "label": "Email", "placeholder": "Введите адрес электронной почты" },
-        { "label": "Название компании", "placeholder": "Введите название компании" },
+        {
+          "label": "Название компании",
+          "placeholder": "Введите название компании"
+        },
         { "label": "Сообщение", "placeholder": "Введите ваше сообщение" }
       ],
       "submit": "Отправить письмо"
@@ -263,7 +264,10 @@
       "resultsFound": "Найдено шаблонов: {count}",
       "noResults": "Нет шаблонов, соответствующих этим фильтрам.",
       "styleOptions": { "dark": "Тёмный", "light": "Светлый" },
-      "layoutOptions": { "onePage": "Одностраничный", "multiPage": "Многостраничный" }
+      "layoutOptions": {
+        "onePage": "Одностраничный",
+        "multiPage": "Многостраничный"
+      }
     }
   },
 
@@ -286,7 +290,11 @@
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
     "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
-    "bottomLinks": ["Политика конфиденциальности", "Условия использования", "Работает на Trust AI"],
+    "bottomLinks": [
+      "Политика конфиденциальности",
+      "Условия использования",
+      "Работает на Trust AI"
+    ],
     "copyright": "© {year} TruS. Все права защищены."
   }
 }

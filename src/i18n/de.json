@@ -79,10 +79,8 @@
 
   "team": {
     "eyebrow": "LERNEN SIE UNSER TEAM KENNEN",
-    "heading": [
-      "Die Experten hinter",
-      "TruS"
-    ],
+    "heading": ["Die Experten hinter", "TruS"],
+    "description": "Designer, Entwickler und digitale Spezialisten, die gemeinsam intelligentere digitale Erlebnisse schaffen.",
     "members": [
       {
         "name": "Sara Ahmadi",

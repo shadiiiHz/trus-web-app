@@ -1,6 +1,13 @@
 {
   "nav": {
-    "links": ["Home", "Chi siamo", "Portfolio", "Modelli", "Servizi", "Contatti"],
+    "links": [
+      "Home",
+      "Chi siamo",
+      "Portfolio",
+      "Modelli",
+      "Servizi",
+      "Contatti"
+    ],
     "cta": "Accedi"
   },
 
@@ -72,10 +79,8 @@
 
   "team": {
     "eyebrow": "IL NOSTRO TEAM",
-    "heading": [
-      "Gli Esperti Dietro",
-      "TruS"
-    ],
+    "heading": ["Gli Esperti Dietro", "TruS"],
+    "description": "Designer, sviluppatori e specialisti digitali che lavorano insieme per creare esperienze digitali più intelligenti.",
     "members": [
       {
         "name": "Sara Ahmadi",
@@ -175,7 +180,10 @@
     "seeMore": "Vedi Altro",
     "RightWord": "Design",
     "LeftWord": "Modelli",
-    "tagline": ["ESPLORARE IDEE ATTRAVERSO", "LA PRATICA QUOTIDIANA DEL DESIGN."],
+    "tagline": [
+      "ESPLORARE IDEE ATTRAVERSO",
+      "LA PRATICA QUOTIDIANA DEL DESIGN."
+    ],
     "sectionDes": [
       "Concetti, esplorazioni ed esperimenti di ",
       "interfaccia condivisi apertamente come parte ",
@@ -206,7 +214,10 @@
       "fields": [
         { "label": "Nome Completo", "placeholder": "Inserisci il nome" },
         { "label": "Email", "placeholder": "Inserisci l'indirizzo email" },
-        { "label": "Nome Azienda", "placeholder": "Inserisci il nome dell'azienda" },
+        {
+          "label": "Nome Azienda",
+          "placeholder": "Inserisci il nome dell'azienda"
+        },
         { "label": "Messaggio", "placeholder": "Inserisci il tuo messaggio" }
       ],
       "submit": "Invia Email"
@@ -263,7 +274,10 @@
       "resultsFound": "{count} template trovati",
       "noResults": "Nessun template corrisponde a questi filtri.",
       "styleOptions": { "dark": "Scuro", "light": "Chiaro" },
-      "layoutOptions": { "onePage": "Pagina singola", "multiPage": "Multipagina" }
+      "layoutOptions": {
+        "onePage": "Pagina singola",
+        "multiPage": "Multipagina"
+      }
     }
   },
 
@@ -286,7 +300,11 @@
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
     "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
-    "bottomLinks": ["Informativa sulla Privacy", "Termini e Condizioni", "Powered by Trust AI"],
+    "bottomLinks": [
+      "Informativa sulla Privacy",
+      "Termini e Condizioni",
+      "Powered by Trust AI"
+    ],
     "copyright": "© {year} TruS. Tutti i diritti riservati."
   }
 }

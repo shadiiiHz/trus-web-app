@@ -1,6 +1,13 @@
 {
   "nav": {
-    "links": ["Accueil", "À propos", "Portfolio", "Modèles", "Services", "Contact"],
+    "links": [
+      "Accueil",
+      "À propos",
+      "Portfolio",
+      "Modèles",
+      "Services",
+      "Contact"
+    ],
     "cta": "Connexion"
   },
 
@@ -72,10 +79,8 @@
 
   "team": {
     "eyebrow": "RENCONTREZ NOTRE ÉQUIPE",
-    "heading": [
-      "Les Experts Derrière",
-      "TruS"
-    ],
+    "heading": ["Les Experts Derrière", "TruS"],
+    "description": "Designers, développeurs et spécialistes du numérique qui collaborent pour créer des expériences digitales plus intelligentes.",
     "members": [
       {
         "name": "Sara Ahmadi",
@@ -206,7 +211,10 @@
       "fields": [
         { "label": "Nom complet", "placeholder": "Entrez votre nom" },
         { "label": "E-mail", "placeholder": "Entrez votre adresse e-mail" },
-        { "label": "Nom de l'entreprise", "placeholder": "Entrez le nom de l'entreprise" },
+        {
+          "label": "Nom de l'entreprise",
+          "placeholder": "Entrez le nom de l'entreprise"
+        },
         { "label": "Message", "placeholder": "Entrez votre message" }
       ],
       "submit": "Envoyer l'e-mail"
@@ -286,7 +294,11 @@
       "address": "2847 Oak Street, San Francisco, CA 94102"
     },
     "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
-    "bottomLinks": ["Politique de confidentialité", "Conditions générales", "Propulsé par Trust AI"],
+    "bottomLinks": [
+      "Politique de confidentialité",
+      "Conditions générales",
+      "Propulsé par Trust AI"
+    ],
     "copyright": "© {year} TruS. Tous droits réservés."
   }
 }
