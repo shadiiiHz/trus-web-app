@@ -52,9 +52,9 @@ export function TemplatesBanner() {
             className="pointer-events-none absolute rounded-full"
             style={{
               top: -160,
-              left: -320,
-              width: 560,
-              height: 320,
+              left: -200,
+              width: 450,
+              height: 300,
               background:
                 "radial-gradient(circle, rgba(159,126,225,0.55) 0%, rgba(159,126,225,0) 70%)",
               filter: "blur(80px)",
