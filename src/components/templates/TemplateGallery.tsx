@@ -124,8 +124,11 @@ export default function TemplatesGallery() {
           {results.length > 0 ? (
             <div
               className="grid gap-x-5 gap-y-8"
-              // Fixed 305px columns, per design spec (see TemplateGalleryCard).
-              style={{ gridTemplateColumns: "repeat(3, 305px)" }}
+              // Fluid columns (not the old fixed 305px) so the 3 cards always
+              // stretch to fill this column's full width — that's what makes
+              // the rightmost card's right edge land exactly on the Login
+              // button's right edge above (see the container comment above).
+              style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
             >
               {results.map((tpl) => (
                 <TemplateGalleryCard
