@@ -38,15 +38,15 @@ export function TemplatesBanner() {
           boxShadow: "inset 0 1px 0 0 rgba(20,20,32,0.06)",
         }}
       >
-        <div className="relative mx-auto flex h-full max-w-300 items-center justify-between gap-8 px-5">
+        <div className="relative mx-auto flex h-full max-w-330 items-center justify-between gap-8 px-5">
           {/* Purple light halos — soft blurred blobs (not a flat gradient
               band), matching the Figma reference: one large one anchored
               top-left, a second behind the template-stack graphic
-              top-right. Anchored to this fixed max-w-300 content column
+              top-right. Anchored to this fixed max-w-330 content column
               (not the full-bleed section) so their position relative to
               the text/image stays identical at any viewport width or
               browser zoom — the section's own edges move with viewport
-              width, this column doesn't (past the 1200px breakpoint). */}
+              width, this column doesn't (past the 1320px breakpoint). */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute rounded-full"
@@ -84,7 +84,7 @@ export function TemplatesBanner() {
           </div>
 
           {/* marginRight = Navbar Login button width (136px, w-34) + the gap-5
-              (20px) to its left = 156px — both sit in the same max-w-300/px-5
+              (20px) to its left = 156px — both sit in the same max-w-330/px-5
               container, so this lines the photo's right edge up with the
               language switch's right edge (i.e. just before that gap). */}
           <img

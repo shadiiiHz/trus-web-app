@@ -116,7 +116,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
         </div>
   
         {/* Main content */}
-        <div className="relative z-10 mx-auto w-full max-w-[1260px] px-5 py-32 lg:py-36">
+        <div className="relative z-10 mx-auto w-full max-w-330 px-5 py-32 lg:py-36">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_630px] items-center gap-8 lg:gap-10">
             {/* LEFT COLUMN — copy */}
             <div className="flex flex-col gap-2.5">

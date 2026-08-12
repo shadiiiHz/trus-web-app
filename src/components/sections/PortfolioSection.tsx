@@ -273,7 +273,7 @@ export function PortfolioSection() {
 
           {/* Top content — z:10 above cards */}
           <div
-            className="relative mx-auto w-full max-w-300 px-5"
+            className="relative mx-auto w-full max-w-330 px-5"
             style={{ zIndex: 10, paddingTop: "130px" }}
           >
             {/* Row: label + heading + description (left) | See More (right) */}
@@ -288,10 +288,11 @@ export function PortfolioSection() {
                   style={{
                     position: "absolute",
                     top: -120,
-                    left: -285,
-                    width: 516,
-                    height: 290,
+                    left: -240,
+                    width: 450,
+                    height: 270,
                     maxWidth: "none",
+                    transform: "scale(0.7)",
                     filter: "brightness(6) grayscale(1)",
                     zIndex: -1,
                     pointerEvents: "none",

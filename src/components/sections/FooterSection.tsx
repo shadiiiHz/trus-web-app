@@ -120,7 +120,7 @@ export function FooterSection() {
   return (
     <footer id="footer" style={{ background: "#000000" }}>
       <div
-        className="mx-auto w-full max-w-300 px-5 relative"
+        className="mx-auto w-full max-w-330 px-5 relative"
         style={{ paddingTop: "60px", paddingBottom: "60px" }}
       >
         {/* Mobile (< lg): 1 column, stacked (logo block → columns block).

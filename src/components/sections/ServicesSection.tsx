@@ -247,7 +247,7 @@ export function ServicesSection() {
 
         <div
           className="relative mx-auto w-full"
-          style={{ maxWidth: '1200px', padding: '0 20px', zIndex: 1 }}
+          style={{ maxWidth: '1320px', padding: '0 20px', zIndex: 1 }}
         >
           <div style={{ paddingTop: '100px' }}>
             <FadeIn direction="up" delay={0.08}>

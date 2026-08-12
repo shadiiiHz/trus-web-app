@@ -111,8 +111,8 @@ export default function TemplateGridReveal({
           className="grid gap-5"
           style={{
             position: "relative",
-            gridTemplateColumns: "repeat(3, 387px)",
-            gridTemplateRows: "repeat(2, 280px)",
+            gridTemplateColumns: "repeat(3, 413px)",
+            gridTemplateRows: "repeat(2, 298px)",
             opacity: gridVisible ? 1 : 0,
             transform: gridVisible ? "scale(1)" : "scale(0.98)",
             transition: `opacity ${CATEGORY_SWITCH_DURATION}ms ease, transform ${CATEGORY_SWITCH_DURATION}ms ease`,

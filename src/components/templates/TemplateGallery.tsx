@@ -89,12 +89,12 @@ export default function TemplatesGallery() {
 
   return (
     <section className="bg-gallery-bg py-12">
-      {/* max-w-300 + px-5 together (not split across section/div) mirrors the
+      {/* max-w-330 + px-5 together (not split across section/div) mirrors the
           Navbar's own `nav` element exactly, so this row's left/right content
           edges land on the same x-coordinates as the logo and the Login
           button — critical for the results grid's rightmost card to line up
           with the Login button's right edge below. */}
-      <div className="mx-auto flex max-w-300 items-start gap-8 px-5">
+      <div className="mx-auto flex max-w-330 items-start gap-8 px-5">
         <TemplatesFilterSidebar
           search={search}
           onSearchChange={setSearch}

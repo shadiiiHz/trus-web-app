@@ -166,13 +166,13 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           aria-hidden="true"
         >
           <div
-            className="w-full max-w-300 h-px"
+            className="w-full max-w-330 h-px"
             style={{ background: "rgba(255,255,255,0.18)" }}
           />
         </div>
 
         <nav
-          className="relative mx-auto flex h-18 max-w-300 items-center justify-between px-5"
+          className="relative mx-auto flex h-18 max-w-330 items-center justify-between px-5"
           aria-label="Main navigation"
         >
           {/* Logo — same asset as Footer */}
@@ -185,7 +185,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               // mount effect instead.
               if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="shrink-0 focus-visible:rounded focus-visible:outline-none"
+            className="shrink-0 focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             aria-label="TruS — home"
           >
             <img

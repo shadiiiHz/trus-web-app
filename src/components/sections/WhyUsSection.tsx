@@ -187,7 +187,7 @@ export function WhyUsSection() {
 
           {/* Main content */}
           <div
-            className="relative z-10 mx-auto w-full max-w-300 px-5"
+            className="relative z-10 mx-auto w-full max-w-330 px-5"
             style={{
               height:         '100%',
               display:        'flex',

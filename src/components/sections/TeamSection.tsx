@@ -332,7 +332,7 @@ function TeamDesktopGrid({
     return (
       <div
         className="relative mx-auto w-full"
-        style={{ maxWidth: "1200px", padding: "0 20px" }}
+        style={{ maxWidth: "1320px", padding: "0 20px" }}
       >
         {grid}
       </div>
@@ -340,10 +340,10 @@ function TeamDesktopGrid({
   }
 
   // The pin wrapper and sticky panel span the full section width (not the
-  // 1200px content column) so overflow:hidden clips at the section's edges
+  // 1320px content column) so overflow:hidden clips at the section's edges
   // instead of a few hundred px in — otherwise the entrance/exit slide hits
   // that inner boundary almost immediately and cards fade out mid-slide
-  // instead of sliding past it. The 1200px column is reproduced just for
+  // instead of sliding past it. The 1320px column is reproduced just for
   // the grid, inside the sticky panel, so its on-screen position is
   // unchanged.
   return (
@@ -361,7 +361,7 @@ function TeamDesktopGrid({
         <div
           className="relative mx-auto w-full"
           style={{
-            maxWidth: "1200px",
+            maxWidth: "1320px",
             padding: "0 20px",
             paddingTop: `${NAVBAR_CLEARANCE}px`,
           }}
@@ -585,7 +585,7 @@ export function TeamSection() {
       ) : (
         <div
           className="relative mx-auto w-full"
-          style={{ maxWidth: "1200px", padding: "0 20px", zIndex: 1 }}
+          style={{ maxWidth: "1320px", padding: "0 20px", zIndex: 1 }}
         >
           {mobileLayout}
         </div>

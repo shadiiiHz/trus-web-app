@@ -32,7 +32,7 @@ export function HeroSection({
 
       {/* Main content grid */}
       <div
-        className="relative z-10 mx-auto w-full max-w-300 px-5 flex items-center"
+        className="relative z-10 mx-auto w-full max-w-330 px-5 flex items-center"
         style={{
           minHeight: "100svh",
           paddingTop: "clamp(56px, 9vw, 88px)",
