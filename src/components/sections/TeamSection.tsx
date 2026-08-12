@@ -374,7 +374,7 @@ function TeamDesktopGrid({
             width: 300,
             flexShrink: 0,
             alignSelf: "flex-start",
-            paddingTop: "24px",
+            paddingTop: "30px",
             y: shouldReduceMotion ? 0 : panelY,
           }}
         >
