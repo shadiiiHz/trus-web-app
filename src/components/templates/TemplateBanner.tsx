@@ -38,37 +38,42 @@ export function TemplatesBanner() {
           boxShadow: "inset 0 1px 0 0 rgba(20,20,32,0.06)",
         }}
       >
-        {/* Purple light halos — soft blurred blobs (not a flat gradient
-            band), matching the Figma reference: one large one anchored
-            top-left, a second behind the template-stack graphic top-right. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            top: -160,
-            left: -200,
-            width: 560,
-            height: 320,
-            background:
-              "radial-gradient(circle, rgba(159,126,225,0.55) 0%, rgba(159,126,225,0) 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            top: -170,
-            right: 0,
-            width: 800,
-            height: 300,
-            background:
-              "radial-gradient(circle, rgba(159,126,225,0.45) 0%, rgba(159,126,225,0) 100%)",
-            filter: "blur(40px)",
-          }}
-        />
-
         <div className="relative mx-auto flex h-full max-w-300 items-center justify-between gap-8 px-5">
+          {/* Purple light halos — soft blurred blobs (not a flat gradient
+              band), matching the Figma reference: one large one anchored
+              top-left, a second behind the template-stack graphic
+              top-right. Anchored to this fixed max-w-300 content column
+              (not the full-bleed section) so their position relative to
+              the text/image stays identical at any viewport width or
+              browser zoom — the section's own edges move with viewport
+              width, this column doesn't (past the 1200px breakpoint). */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute rounded-full"
+            style={{
+              top: -160,
+              left: -320,
+              width: 560,
+              height: 320,
+              background:
+                "radial-gradient(circle, rgba(159,126,225,0.55) 0%, rgba(159,126,225,0) 70%)",
+              filter: "blur(80px)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute rounded-full"
+            style={{
+              top: -170,
+              right: -120,
+              width: 800,
+              height: 300,
+              background:
+                "radial-gradient(circle, rgba(159,126,225,0.45) 0%, rgba(159,126,225,0) 100%)",
+              filter: "blur(40px)",
+            }}
+          />
+
           <div className="min-w-0">
             <h1 className="font-hero text-display-sm md:text-display-md font-bold text-gallery-text md:whitespace-nowrap">
               {headline}
@@ -85,7 +90,7 @@ export function TemplatesBanner() {
           <img
             src={BANNER_GRAPHIC_SRC}
             alt=""
-            className="hidden lg:block h-full w-auto max-h-full shrink-0 object-contain mb-5"
+            className="hidden lg:block h-full w-auto max-h-full shrink-0 object-contain mb-4 z-50"
             style={{ marginRight: 130 }}
           />
         </div>
