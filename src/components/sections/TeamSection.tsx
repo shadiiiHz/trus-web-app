@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { TeamMemberCard, type CardState } from "@/components/team/TeamMemberCard";
+import {
+  TeamMemberCard,
+  type CardState,
+} from "@/components/team/TeamMemberCard";
 import { TeamInfoPanel } from "@/components/team/TeamInfoPanel";
 import { TeamCarouselArrow } from "@/components/team/TeamCarouselArrow";
 import {
@@ -16,9 +19,9 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 // Type helpers
 type Member = (typeof siteConfig.team.members)[number];
 
-// All three columns share one width so the row-1 gap (card0 ↔ card1) and
-// row-2 gap (card2 ↔ card3) read as the same 20px — a card sitting in a
-// wider/narrower column than its neighbour would throw the two off.
+// Shared card width for both the top row (card0, card1) and bottom row
+// (card2, card3), so the two rows' internal card-to-card gaps read as the
+// same 20px even though the rows are laid out independently.
 const CARD_W = 337;
 const CARD_H = 294;
 const ENTRANCE_DISTANCE = 640;
@@ -100,7 +103,8 @@ function TeamDesktopGrid({
   // pinned section never changes it, it just lets the cards settle in view.
   const visibleMembers = members.slice(page * 4, page * 4 + 4);
   const activeId = hoveredId ?? visibleMembers[0].id;
-  const activeMember = members.find((m) => m.id === activeId) ?? visibleMembers[0];
+  const activeMember =
+    members.find((m) => m.id === activeId) ?? visibleMembers[0];
 
   const boundCardProps = (m: Member) => ({
     image: m.image,
@@ -117,212 +121,250 @@ function TeamDesktopGrid({
     onHoverChange(null);
   }
 
-  // Diagonal staircase composition, flush to the left edge of the section:
-  //   col →      [337px]      [337px]        [337px]
-  //   row 0:     heading      card[0]         card[1]
-  //   row 1:     card[2]      card[3]         info panel
+  // Diagonal staircase composition — two independent flex rows, not one
+  // shared grid, so each row's card-to-card gap is 20px on its own terms
+  // instead of inheriting whatever space a shared column happens to leave:
+  //   row 0:  heading  ················  [card 0][card 1]
+  //   row 1:  [card 2][card 3]  ········  info panel
   //
-  // Carousel arrows sit left-aligned beneath the heading (col 0).
+  // Each row is `justify-content: space-between` across the full content
+  // width, so the left item is flush to the content column's left edge
+  // (heading ↔ card[2], matching the Navbar logo) and the right item is
+  // flush to its right edge (card[1] / info panel, matching the Navbar's
+  // login button) — with no shared columns forcing card[0] to sit exactly
+  // above card[3]; they're free to overlap in the middle like the Figma
+  // reference does.
+  //
+  // Carousel arrows sit left-aligned beneath the heading.
   // Top row (card[0], card[1]) slides in from/out to off-screen right;
   // bottom row (card[2], card[3]) slides in from/out to off-screen left.
   const grid = (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: `${CARD_W}px ${CARD_W}px ${CARD_W}px`,
-        gridTemplateRows: `${CARD_H}px ${CARD_H}px`,
-        gap: "20px",
-        width: "fit-content",
-      }}
-    >
-      {/* [row 0, col 0] Eyebrow + heading, with carousel arrows left-aligned beneath */}
+    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      {/* Row 0: heading ↔ card[0]/card[1] */}
       <div
         style={{
-          gridColumn: 1,
-          gridRow: 1,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          paddingTop: "6px",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          height: CARD_H,
         }}
       >
-        <FadeIn direction="up" delay={0.08}>
-          <p
-            className="text-section-label"
-            style={{
-              fontWeight: 400,
-              lineHeight: "20px",
-              color: "#9F7EE1",
-              textTransform: "uppercase",
-              letterSpacing: "0.18em",
-              margin: "0 0 14px 0",
-            }}
-          >
-            {eyebrow}
-          </p>
-        </FadeIn>
-
-        <FadeIn direction="up" delay={0.16}>
-          <h2
-            className="text-section-title"
-            style={{
-              // Section-title system (DM Sans / 700) but capped: this editorial
-              // heading lives in a fixed 337px column, so the full 42px clamp
-              // would overflow. Size stays tuned to fit the column.
-              fontSize: "clamp(24px, 2.3vw, 32px)",
-              lineHeight: 1.18,
-              color: "#FFFFFF",
-              margin: 0,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {heading.join("\n")}
-          </h2>
-        </FadeIn>
-
+        {/* Eyebrow + heading, with carousel arrows left-aligned beneath */}
         <div
           style={{
+            width: CARD_W,
+            flexShrink: 0,
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
             justifyContent: "flex-start",
-            gap: "12px",
-            marginTop: "auto",
-            paddingTop: "40px",
+            paddingTop: "6px",
           }}
         >
-          <TeamCarouselArrow
-            direction="left"
-            onClick={handleArrowClick}
-            disabled={!arrowsEnabled}
-          />
-          <TeamCarouselArrow
-            direction="right"
-            onClick={handleArrowClick}
-            disabled={!arrowsEnabled}
-          />
-        </div>
+          <FadeIn direction="up" delay={0.08}>
+            <p
+              className="text-section-label"
+              style={{
+                fontWeight: 400,
+                lineHeight: "20px",
+                color: "#9F7EE1",
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                margin: "0 0 14px 0",
+              }}
+            >
+              {eyebrow}
+            </p>
+          </FadeIn>
 
-        <div
-          style={{
-            position: "absolute",
-            top: 55,
-            left: -80,
-            width: "300px",
-            height: "300px",
-            zIndex: -1,
-            pointerEvents: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {/* Glow */}
+          <FadeIn direction="up" delay={0.16}>
+            <h2
+              className="text-section-title"
+              style={{
+                // Section-title system (DM Sans / 700) but capped: this editorial
+                // heading lives in a fixed 337px column, so the full 42px clamp
+                // would overflow. Size stays tuned to fit the column.
+                fontSize: "clamp(24px, 2.3vw, 32px)",
+                lineHeight: 1.18,
+                color: "#FFFFFF",
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {heading.join("\n")}
+            </h2>
+          </FadeIn>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: "12px",
+              marginTop: "auto",
+              paddingTop: "40px",
+            }}
+          >
+            <TeamCarouselArrow
+              direction="left"
+              onClick={handleArrowClick}
+              disabled={!arrowsEnabled}
+            />
+            <TeamCarouselArrow
+              direction="right"
+              onClick={handleArrowClick}
+              disabled={!arrowsEnabled}
+            />
+          </div>
+
           <div
             style={{
               position: "absolute",
-              width: "200px",
-              height: "200px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle at 50% 70%, rgba(124,58,237,0.25), transparent 60%)",
-              filter: "blur(30px)",
-              opacity: hoveredId ? 0.9 : 0.2,
-              transform: hoveredId ? "scale(1.5)" : "scale(1)",
-              transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
-              mixBlendMode: "screen",
-              animation: hoveredId
-                ? "glowPulse 2.6s ease-in-out infinite"
-                : "none",
+              top: 55,
+              left: -80,
+              width: "300px",
+              height: "300px",
+              zIndex: -1,
+              pointerEvents: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
-          <motion.video
-            src="T_animation_glass_mood.webm"
-            autoPlay
-            loop
-            muted
-            playsInline
+          >
+            {/* Glow */}
+            <div
+              style={{
+                position: "absolute",
+                width: "200px",
+                height: "200px",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle at 50% 70%, rgba(124,58,237,0.25), transparent 60%)",
+                filter: "blur(30px)",
+                opacity: hoveredId ? 0.9 : 0.2,
+                transform: hoveredId ? "scale(1.5)" : "scale(1)",
+                transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                mixBlendMode: "screen",
+                animation: hoveredId
+                  ? "glowPulse 2.6s ease-in-out infinite"
+                  : "none",
+              }}
+            />
+            <motion.video
+              src="T_animation_glass_mood.webm"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                position: "relative",
+                zIndex: 2,
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                transform: hoveredId ? "scale(2.4) rotate(2deg)" : "scale(2)",
+                transition: "all 0.4s ease",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Card[0] + Card[1] — top row, tracks scroll in from/out to off-screen right */}
+        <div style={{ display: "flex", gap: "20px", flexShrink: 0 }}>
+          <motion.div
             style={{
-              position: "relative",
-              zIndex: 2,
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              transform: hoveredId ? "scale(2.4) rotate(2deg)" : "scale(2)",
-              transition: "all 0.4s ease",
+              width: CARD_W,
+              height: CARD_H,
+              flexShrink: 0,
+              x: shouldReduceMotion ? 0 : rightX,
             }}
-          />
+          >
+            <TeamMemberCard
+              {...boundCardProps(visibleMembers[0])}
+              style={{ width: "100%", height: CARD_H }}
+            />
+          </motion.div>
+
+          <motion.div
+            style={{
+              width: CARD_W,
+              height: CARD_H,
+              flexShrink: 0,
+              x: shouldReduceMotion ? 0 : rightX,
+            }}
+          >
+            <TeamMemberCard
+              {...boundCardProps(visibleMembers[1])}
+              style={{ width: "100%", height: CARD_H }}
+            />
+          </motion.div>
         </div>
       </div>
 
-      {/* [row 0, col 2] Card[0] — top row, tracks scroll in from/out to off-screen right */}
-      <motion.div
+      {/* Row 1: card[2]/card[3], then the info panel close behind them —
+          a fixed gap, not space-between, so the panel sits near card[3]
+          instead of stretching out to the row's right edge. */}
+      <div
         style={{
-          gridColumn: 2,
-          gridRow: 1,
-          x: shouldReduceMotion ? 0 : rightX,
-        }}
-      >
-        <TeamMemberCard
-          {...boundCardProps(visibleMembers[0])}
-          style={{ width: "100%", height: CARD_H }}
-        />
-      </motion.div>
-
-      {/* [row 0, col 3] Card[1] — top row, tracks scroll in from/out to off-screen right */}
-      <motion.div
-        style={{
-          gridColumn: 3,
-          gridRow: 1,
-          x: shouldReduceMotion ? 0 : rightX,
-        }}
-      >
-        <TeamMemberCard
-          {...boundCardProps(visibleMembers[1])}
-          style={{ width: "100%", height: CARD_H }}
-        />
-      </motion.div>
-
-      {/* [row 1, col 1] Card[2] — bottom row, tracks scroll in from/out to off-screen left */}
-      <motion.div
-        style={{
-          gridColumn: 1,
-          gridRow: 2,
-          x: shouldReduceMotion ? 0 : leftX,
-        }}
-      >
-        <TeamMemberCard
-          {...boundCardProps(visibleMembers[2])}
-          style={{ width: "100%", height: CARD_H }}
-        />
-      </motion.div>
-
-      {/* [row 1, col 2] Card[3] — bottom row, tracks scroll in from/out to off-screen left */}
-      <motion.div
-        style={{
-          gridColumn: 2,
-          gridRow: 2,
-          x: shouldReduceMotion ? 0 : leftX,
-        }}
-      >
-        <TeamMemberCard
-          {...boundCardProps(visibleMembers[3])}
-          style={{ width: "100%", height: CARD_H }}
-        />
-      </motion.div>
-
-      {/* [row 1, col 3] Info panel */}
-      <motion.div
-        style={{
-          gridColumn: 3,
-          gridRow: 2,
-          height: CARD_H,
           display: "flex",
-          alignItems: "center",
-          y: shouldReduceMotion ? 0 : panelY,
+          alignItems: "stretch",
+          gap: "50px",
+          height: CARD_H,
+          marginTop: "20px",
         }}
       >
-        <TeamInfoPanel member={activeMember} />
-      </motion.div>
+        {/* Card[2] + Card[3] — bottom row, tracks scroll in from/out to off-screen left */}
+        <div style={{ display: "flex", gap: "20px", flexShrink: 0 }}>
+          <motion.div
+            style={{
+              width: CARD_W,
+              height: CARD_H,
+              flexShrink: 0,
+              x: shouldReduceMotion ? 0 : leftX,
+            }}
+          >
+            <TeamMemberCard
+              {...boundCardProps(visibleMembers[2])}
+              style={{ width: "100%", height: CARD_H }}
+            />
+          </motion.div>
+
+          <motion.div
+            style={{
+              width: CARD_W,
+              height: CARD_H,
+              flexShrink: 0,
+              x: shouldReduceMotion ? 0 : leftX,
+            }}
+          >
+            <TeamMemberCard
+              {...boundCardProps(visibleMembers[3])}
+              style={{ width: "100%", height: CARD_H }}
+            />
+          </motion.div>
+        </div>
+
+        {/* Info panel — fixed width (300px per Figma) right after the card
+            pair via the row's 50px gap, not stretched to fill remaining
+            row space. flexShrink:0 keeps it (and the card pair above)
+            from being squeezed narrower under space pressure.
+            alignSelf: flex-start opts this one item out of the row's
+            stretch-to-CARD_H behavior — TeamInfoPanel's own height:100%
+            would otherwise fill the full row height and its internal
+            justify-content: center would center the text in all of it,
+            reading too low. Shrink-wrapped + a small paddingTop instead
+            nudges the text up near the top of the row. */}
+        <motion.div
+          style={{
+            width: 300,
+            flexShrink: 0,
+            alignSelf: "flex-start",
+            paddingTop: "30px",
+            y: shouldReduceMotion ? 0 : panelY,
+          }}
+        >
+          <TeamInfoPanel member={activeMember} />
+        </motion.div>
+      </div>
     </div>
   );
 
