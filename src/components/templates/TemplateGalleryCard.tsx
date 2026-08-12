@@ -1,5 +1,6 @@
-const CARD_WIDTH = 305;
-const CARD_HEIGHT = 221;
+// 305×221, per design spec — the ratio a card's preview keeps at any width
+// now that it fills its grid column instead of using these as literal px.
+const CARD_ASPECT_RATIO = 305 / 221;
 
 export interface TemplateGalleryCardProps {
   image: string;
@@ -10,7 +11,7 @@ export interface TemplateGalleryCardProps {
   categoryLabel: string;
 }
 
-/** Single result card in the templates gallery grid — fixed 305×221 preview, radius 8px, per design spec. */
+/** Single result card in the templates gallery grid — fills its grid column, radius 8px, per design spec. */
 export default function TemplateGalleryCard({
   image,
   link,
@@ -22,16 +23,10 @@ export default function TemplateGalleryCard({
   const isDark = style === "Dark";
 
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block"
-      style={{ width: CARD_WIDTH }}
-    >
+    <a href={link} target="_blank" rel="noopener noreferrer" className="block">
       <div
         className="overflow-hidden bg-gallery-canvas"
-        style={{ width: CARD_WIDTH, height: CARD_HEIGHT, borderRadius: 8 }}
+        style={{ aspectRatio: CARD_ASPECT_RATIO, borderRadius: 8 }}
       >
         <img
           src={image}

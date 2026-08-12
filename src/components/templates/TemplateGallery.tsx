@@ -88,8 +88,13 @@ export default function TemplatesGallery() {
   };
 
   return (
-    <section className="bg-gallery-bg px-5 py-12">
-      <div className="mx-auto flex max-w-300 items-start gap-8">
+    <section className="bg-gallery-bg py-12">
+      {/* max-w-300 + px-5 together (not split across section/div) mirrors the
+          Navbar's own `nav` element exactly, so this row's left/right content
+          edges land on the same x-coordinates as the logo and the Login
+          button — critical for the results grid's rightmost card to line up
+          with the Login button's right edge below. */}
+      <div className="mx-auto flex max-w-300 items-start gap-8 px-5">
         <TemplatesFilterSidebar
           search={search}
           onSearchChange={setSearch}
@@ -119,7 +124,15 @@ export default function TemplatesGallery() {
           {results.length > 0 ? (
             <div
               className="grid gap-x-5 gap-y-8"
-              style={{ gridTemplateColumns: "repeat(3, 305px)" }}
+              // Columns fill the available width evenly (up to the card's own
+              // 305px cap — see TemplateGalleryCard) instead of a fixed
+              // 305px each: at this container's actual width (sidebar +
+              // gaps leave less than 3 × 305px), a fixed track size pushed
+              // the 3rd column past the section's right edge, beyond where
+              // the Navbar's Login button ends. Filling the space instead
+              // means the last column's right edge always lands exactly on
+              // that same edge.
+              style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
             >
               {results.map((tpl) => (
                 <TemplateGalleryCard
