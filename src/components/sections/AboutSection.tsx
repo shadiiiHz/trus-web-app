@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { StatCounter } from "@/components/motion/StatCounter";
@@ -23,34 +23,28 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // The outer <section> is taller than the viewport (content + a trailing
-  // hold spacer) while the content itself is pinned via `sticky`. That
-  // turns scroll progress across the *whole* outer element into a
-  // three-phase ride: locked in place as the image unhinges into view,
-  // held in place at rest once it's fully upright, then released into
-  // normal scroll for the next section — so the final image always gets
-  // a beat of dedicated screen time before the section lets go.
-  const { scrollYProgress: sectionProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-  // Explicit keyframe at 1 (repeating the resting value) rather than relying
-  // on clamp to extrapolate past 0.7 — Framer's hardware-accelerated
-  // scroll timeline was observed re-interpolating back toward the start
-  // value once progress moved past the last defined keyframe, so the
-  // timeline needs a real "stay here" point at the end of its range.
-  const imageRotateX = useTransform(
-    sectionProgress,
-    [0, 0.7, 1],
-    shouldReduceMotion ? [0, 0, 0] : [-85, 0, 0],
-    { clamp: true },
-  );
-  const imageOpacity = useTransform(
-    sectionProgress,
-    [0, 0.7, 1],
-    shouldReduceMotion ? [1, 1, 1] : [0.12, 1, 1],
-    { clamp: true },
-  );
+  // Split-reveal: the image is cut into a left and right half. The right
+  // half wipes in top → bottom, the left half wipes in bottom → top, so
+  // the two edges converge in the vertical middle before the wipe keeps
+  // going until the whole image is uncovered. Triggered once, purely by
+  // the image entering the viewport — it plays on its own and does not
+  // track scroll position.
+  const imageWrapRef = useRef<HTMLDivElement>(null);
+  const imageInView = useInView(imageWrapRef, { once: true, amount: 0.4 });
+  const playReveal = imageInView || shouldReduceMotion;
+
+  const clipTransition = shouldReduceMotion
+    ? { duration: 0 }
+    : { duration: 1.1, ease: [0.65, 0, 0.35, 1] as const };
+
+  const rightHalfVariants = {
+    hidden: { clipPath: "inset(0% 0% 100% 0%)" },
+    visible: { clipPath: "inset(0% 0% 0% 0%)" },
+  };
+  const leftHalfVariants = {
+    hidden: { clipPath: "inset(100% 0% 0% 0%)" },
+    visible: { clipPath: "inset(0% 0% 0% 0%)" },
+  };
 
   return (
     <section
@@ -212,38 +206,92 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               </div>
             </div>
   
-            {/* RIGHT COLUMN — image card (630x514), unfolds from flat-on-the-ground to facing
-                the viewer as the section scrolls in. */}
+            {/* RIGHT COLUMN — image card (630x514). Splits into a left and right
+                half that wipe in from the bottom and top respectively, meeting
+                in the middle. Plays once on its own as soon as the image
+                enters the viewport. */}
             <div className="flex justify-center lg:justify-end">
-              <motion.div
+              <div
+                ref={imageWrapRef}
                 style={{
                   width: "min(630px, 100%)",
                   height: "514px",
                   borderRadius: "16px",
                   overflow: "hidden",
                   position: "relative",
-                  transformPerspective: 900,
-                  transformOrigin: "50% 0%",
-                  rotateX: imageRotateX,
-                  opacity: imageOpacity,
                 }}
               >
-                {/* Team image — hidden via onError when file is absent */}
-                <img
-                  src={data.image}
-                  alt="TruS team at work"
+                {/* Left half — wipes in bottom → top */}
+                <motion.div
+                  initial="hidden"
+                  animate={playReveal ? "visible" : "hidden"}
+                  variants={leftHalfVariants}
+                  transition={clipTransition}
                   style={{
-                    width: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "50%",
                     height: "100%",
-                    objectFit: "fill",
-                    display: "block",
+                    overflow: "hidden",
                   }}
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
+                >
+                  <img
+                    src={data.image}
+                    alt="TruS team at work"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "200%",
+                      maxWidth: "none",
+                      height: "100%",
+                      objectFit: "fill",
+                      display: "block",
+                    }}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.parentElement!.style.display = "none";
+                    }}
+                  />
+                </motion.div>
+
+                {/* Right half — wipes in top → bottom */}
+                <motion.div
+                  initial="hidden"
+                  animate={playReveal ? "visible" : "hidden"}
+                  variants={rightHalfVariants}
+                  transition={clipTransition}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    width: "50%",
+                    height: "100%",
+                    overflow: "hidden",
                   }}
-                />
-              </motion.div>
+                >
+                  <img
+                    src={data.image}
+                    alt=""
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      width: "200%",
+                      maxWidth: "none",
+                      height: "100%",
+                      objectFit: "fill",
+                      display: "block",
+                    }}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.parentElement!.style.display = "none";
+                    }}
+                  />
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -252,7 +300,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
           scrolled through before it releases, keeping the fully unhinged
           image on screen for a beat rather than letting it scroll straight
           past. */}
-      <div aria-hidden="true" style={{ height: "120vh" }} />
+      <div aria-hidden="true" style={{ height: "100vh" }} />
     </section>
   );
 }
