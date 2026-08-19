@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { VideoModal } from "@/components/services/VideoModal";
 
 /**
  * "TRUS AI Services" list — one row per service. Hovering (or tapping, on
@@ -22,6 +23,8 @@ import { FadeIn } from "@/components/motion/FadeIn";
 export function ServicesListSection() {
   const { eyebrow, heading, items } = siteConfig.servicesPage.list;
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
+  const [playingId, setPlayingId] = useState<string | null>(null);
+  const playingItem = items.find((item) => item.id === playingId);
 
   // While a tree-branch click is smoothly scrolling this list into view,
   // the user's real cursor stays put on screen — but the row underneath it
@@ -154,11 +157,19 @@ export function ServicesListSection() {
               onActivate={() => activateFromHover(item.id)}
               onDeactivate={deactivateFromHover}
               onExitComplete={() => handleRowExitComplete(item.id)}
+              onPlay={() => setPlayingId(item.id)}
               delay={0.05 * i}
             />
           ))}
         </div>
       </div>
+
+      {playingItem?.youtubeId && (
+        <VideoModal
+          videoId={playingItem.youtubeId}
+          onClose={() => setPlayingId(null)}
+        />
+      )}
     </section>
   );
 }
@@ -169,6 +180,7 @@ interface ListItem {
   description: string;
   media: string;
   eyebrow?: string;
+  youtubeId?: string;
 }
 
 function ServiceRow({
@@ -177,12 +189,14 @@ function ServiceRow({
   onActivate,
   onDeactivate,
   onExitComplete,
+  onPlay,
 }: {
   item: ListItem;
   isActive: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
   onExitComplete: () => void;
+  onPlay: () => void;
   delay: number;
 }) {
   return (
@@ -242,19 +256,28 @@ function ServiceRow({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative overflow-hidden rounded-md lg:ml-auto lg:mr-14"
+              className="relative overflow-hidden rounded-md lg:ml-auto lg:mr-14 border border-white/20"
               style={{
                 width: "306.5px",
                 maxWidth: "100%",
                 aspectRatio: "306.5 / 221.15",
               }}
             >
-              <img
-                src={item.media}
-                alt=""
-                className="h-full w-full object-cover"
-                draggable={false}
-              />
+              {item.youtubeId ? (
+                <iframe
+                  className="pointer-events-none h-full w-full"
+                  src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${item.youtubeId}&controls=0&modestbranding=1&rel=0&playsinline=1`}
+                  title={`${item.title} preview`}
+                  allow="autoplay; encrypted-media"
+                />
+              ) : (
+                <img
+                  src={item.media}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  draggable={false}
+                />
+              )}
               <div
                 className="absolute inset-0"
                 style={{
@@ -263,14 +286,23 @@ function ServiceRow({
                 }}
               />
               <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg">
+                <button
+                  type="button"
+                  disabled={!item.youtubeId}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onPlay();
+                  }}
+                  aria-label="Play video"
+                  className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg disabled:cursor-default"
+                >
                   <Play
                     size={21}
                     fill="#0B0C01"
                     color="#0B0C01"
                     style={{ marginLeft: 2 }}
                   />
-                </span>
+                </button>
               </span>
             </motion.div>
           )}

@@ -166,7 +166,10 @@ const servicesTreeMeta = [
 // per-service thumbnails here once available. Order must match
 // `servicesPage.list.items` in the locale JSON files (zipped via `merge()`).
 const servicesListMeta = [
-  { id: "website-design", media: "/services/video.png" },
+  // youtubeId is a temporary test wire-up for the first row only — clicking
+  // its play button opens a YouTube popup. Remove/replace once real
+  // per-service videos are supplied for the rest.
+  { id: "website-design", media: "/services/video.png", youtubeId: "aqz-KE-bpKQ" },
   { id: "landing-page-builder", media: "/services/video.png" },
   { id: "content-studio", media: "/services/video.png" },
   { id: "instagram-autopilot", media: "/services/video.png" },
