@@ -143,7 +143,7 @@ function ServiceRow({
           below) inside a same-size overflow-hidden window. Activating
           slides the stack up by exactly one copy-height to reveal the
           other, instead of fading/spinning between colors. */}
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-end gap-2.5">
         <Bullet active={isActive} />
         <span
           className="relative inline-block overflow-hidden h-[1.3em] lg:h-[1.8em]"
@@ -245,7 +245,7 @@ function ServiceRow({
 function Bullet({ active }: { active: boolean }) {
   return (
     <span
-      className="relative inline-block shrink-0 overflow-hidden rounded-full"
+      className="relative inline-block shrink-0 overflow-hidden rounded-full mb-[4.3px]"
       style={{ width: 15, height: 15 }}
     >
       <motion.span
