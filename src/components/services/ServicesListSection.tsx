@@ -42,26 +42,83 @@ export function ServicesListSection() {
   };
 
   // Cross-component activation: ServiceGrowthTree dispatches this when a
-  // branch label is clicked. Opening the row changes its height (the
-  // thumbnail animates in/out over ~0.4s) and so does closing whichever
-  // row was active before — scrolling immediately, before that layout
-  // shift finishes, was the "sometimes doesn't work" bug: scrollIntoView
-  // landed on a target position that the still-animating rows above it
-  // then invalidated. Deferring the actual scroll until after that
-  // settles fixes it; the row still opens immediately so the response
-  // feels instant.
+  // branch label is clicked. The newly active row's thumbnail reserves its
+  // layout space immediately, but the *previously* active row's thumbnail
+  // stays mounted for its full exit animation (~0.7s) before it actually
+  // leaves the DOM. If that closing row sits above the new target, its
+  // collapse shifts everything below it upward — including the target —
+  // *after* scrollIntoView already landed, which is the "anchor sometimes
+  // doesn't line up with scroll-mt-28" bug: the scroll itself was correct,
+  // the ground just moved under it afterwards. A fixed setTimeout can't
+  // reliably outlast that animation, so instead we scroll only once we
+  // actually know the closing row is gone — via handleRowExitComplete below —
+  // with a timeout fallback in case no row was exiting (or Framer cancels
+  // the exit by re-entering) so the scroll never gets stuck pending.
+  const pendingScrollRef = useRef<{ targetId: string; waitingForId: string } | null>(null);
+  const activeIdRef = useRef(activeId);
+  useEffect(() => {
+    activeIdRef.current = activeId;
+  }, [activeId]);
+
+  const runPendingScroll = (targetId: string) => {
+    pendingScrollRef.current = null;
+
+    // onExitComplete fires as soon as Framer's exit animation finishes, but
+    // the row's actual DOM removal is a React commit that can still land a
+    // frame later — calling scrollIntoView synchronously here can measure
+    // the *stale* (pre-removal) layout and scroll to where the target used
+    // to be. Two rAFs reliably land after that commit and its layout pass.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        // The smooth scroll itself takes several hundred ms, and the cursor
+        // stays put on screen while the page moves under it — so a row can
+        // end up under the mouse mid-scroll and fire a stray hover
+        // activation that undoes the scroll we just started. Keep hover
+        // suppressed until the scroll genuinely finishes (`scrollend`),
+        // with a timeout fallback for browsers without it (or if it never
+        // fires).
+        let released = false;
+        const release = () => {
+          if (released) return;
+          released = true;
+          suppressHoverRef.current = false;
+          window.removeEventListener("scrollend", release);
+        };
+        window.addEventListener("scrollend", release, { once: true });
+        window.setTimeout(release, 1500);
+      });
+    });
+  };
+
+  const handleRowExitComplete = (rowId: string) => {
+    if (pendingScrollRef.current?.waitingForId === rowId) {
+      runPendingScroll(pendingScrollRef.current.targetId);
+    }
+  };
+
   useEffect(() => {
     const onActivate = (e: Event) => {
       const id = (e as CustomEvent<string>).detail;
       if (!items.some((item) => item.id === id)) return;
+      const previousId = activeIdRef.current;
       setActiveId(id);
       suppressHoverRef.current = true;
-      window.setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 500);
-      window.setTimeout(() => {
-        suppressHoverRef.current = false;
-      }, 1000);
+
+      if (previousId && previousId !== id) {
+        pendingScrollRef.current = { targetId: id, waitingForId: previousId };
+        // Safety net: if the closing row's exit callback never fires
+        // (e.g. Framer cancels the exit because the row gets reactivated
+        // before it finishes), don't leave the scroll pending forever.
+        window.setTimeout(() => {
+          if (pendingScrollRef.current?.targetId === id) {
+            runPendingScroll(id);
+          }
+        }, 900);
+      } else {
+        runPendingScroll(id);
+      }
     };
     window.addEventListener("trus:activate-service", onActivate);
     return () => window.removeEventListener("trus:activate-service", onActivate);
@@ -96,6 +153,7 @@ export function ServicesListSection() {
               isActive={item.id === activeId}
               onActivate={() => activateFromHover(item.id)}
               onDeactivate={deactivateFromHover}
+              onExitComplete={() => handleRowExitComplete(item.id)}
               delay={0.05 * i}
             />
           ))}
@@ -118,11 +176,13 @@ function ServiceRow({
   isActive,
   onActivate,
   onDeactivate,
+  onExitComplete,
 }: {
   item: ListItem;
   isActive: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
+  onExitComplete: () => void;
   delay: number;
 }) {
   return (
@@ -174,7 +234,7 @@ function ServiceRow({
           description text next to it rather than in the middle of the gap
           on the left side. */}
       <div className="min-w-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" onExitComplete={onExitComplete}>
           {isActive && (
             <motion.div
               key={item.id}
