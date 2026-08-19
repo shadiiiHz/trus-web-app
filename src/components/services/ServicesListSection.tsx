@@ -12,8 +12,8 @@ import { VideoModal } from "@/components/services/VideoModal";
  * vertical "reel" (see `Bullet` and the title span below) to their active
  * color, and its thumbnail (placeholder media for now, see
  * `servicesListMeta` in site.config.ts) expands into the row. Only one row
- * is active at a time; the first row starts active so the section isn't
- * empty on load.
+ * is active at a time; none are active on load — all rows start "off"
+ * until the user hovers/taps/clicks one.
  *
  * Each row's `id` matches a branch id on the hero tree diagram
  * (`ServiceGrowthTree`) — clicking a branch there dispatches a
@@ -22,7 +22,7 @@ import { VideoModal } from "@/components/services/VideoModal";
  */
 export function ServicesListSection() {
   const { eyebrow, heading, items } = siteConfig.servicesPage.list;
-  const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const playingItem = items.find((item) => item.id === playingId);
 
