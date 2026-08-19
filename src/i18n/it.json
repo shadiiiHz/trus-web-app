@@ -281,6 +281,69 @@
     }
   },
 
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "PENSATO PER LA CRESCITA",
+      "heading": ["Servizi", "pensati per", "la crescita digitale"],
+      "subtitle": "Competenze connesse, create per far crescere il tuo business.",
+      "brandTagline": "Growth AI",
+      "nodes": [
+        { "label": "Web Design" },
+        { "label": "Creatore di Landing Page" },
+        { "label": "Autopilota Instagram" },
+        { "label": "Ricerca Lead" },
+        { "label": "Newsletter Intelligente" },
+        { "label": "FollowUp" },
+        { "label": "Content Studio" },
+        { "label": "Autopilota LinkedIn" },
+        { "label": "Generazione Lead" }
+      ]
+    },
+    "list": {
+      "eyebrow": "COSA FACCIAMO",
+      "heading": "TRUS AI Services",
+      "items": [
+        {
+          "title": "Web Design",
+          "description": "Ottieni un sito web moderno e responsive, progettato attorno al tuo brand, ai tuoi obiettivi di business e ai tuoi clienti, unendo struttura chiara, elementi visivi curati e usabilità fluida."
+        },
+        {
+          "title": "Creatore di Landing Page",
+          "description": "Crea rapidamente landing page responsive orientate alla conversione. Trasforma le tue idee di campagna in pagine curate che catturano l'attenzione e incoraggiano l'azione."
+        },
+        {
+          "title": "Content Studio",
+          "description": "Crea contenuti coinvolgenti e coerenti con il tuo brand per ogni canale. Content Studio trasforma le tue idee in contenuti chiari e persuasivi su misura per il tuo pubblico."
+        },
+        {
+          "title": "Autopilota Instagram",
+          "description": "Crea e pubblica post Instagram coinvolgenti con meno sforzo. Mantieni una presenza visiva coerente tenendo i tuoi contenuti freschi e rilevanti."
+        },
+        {
+          "title": "Autopilota LinkedIn",
+          "description": "Crea e pubblica contenuti LinkedIn professionali che rafforzano il tuo brand, comunicano la tua competenza e mantengono il tuo pubblico costantemente coinvolto."
+        },
+        {
+          "title": "Newsletter Intelligente",
+          "description": "Crea newsletter professionali in meno tempo. Smart Newsletter trasforma i tuoi obiettivi e contenuti in email coinvolgenti pensate per il tuo pubblico."
+        },
+        {
+          "title": "Ricerca Lead",
+          "description": "Trova i prospect giusti più velocemente. Lead Finder analizza i dati aziendali per identificare lead rilevanti e ad alto potenziale in linea con il tuo cliente ideale."
+        },
+        {
+          "title": "Generazione Lead",
+          "description": "Attira e acquisisci nuovi potenziali clienti con campagne mirate ed esperienze ottimizzate, trasformando l'interesse del pubblico in opportunità di business qualificate."
+        },
+        {
+          "title": "Growth AI",
+          "eyebrow": "SCOPRI GROWTH AI IN AZIONE",
+          "description": "Trasforma i dati aziendali in decisioni di crescita più intelligenti. Growth AI analizza le performance, individua le opportunità e ti aiuta a ottimizzare la strategia per risultati duraturi."
+        }
+      ]
+    }
+  },
+
   "footer": {
     "firstColumn": "Servizi",
     "secondColumn": "Azienda",

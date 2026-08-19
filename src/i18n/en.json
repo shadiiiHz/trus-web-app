@@ -265,6 +265,69 @@
     }
   },
 
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "BUILT FOR GROWTH",
+      "heading": ["Services", "Designed for", "Digital Growth"],
+      "subtitle": "Connected expertise, built to move your business forward.",
+      "brandTagline": "Growth AI",
+      "nodes": [
+        { "label": "Website Design" },
+        { "label": "Landing Page Builder" },
+        { "label": "Instagram Autopilot" },
+        { "label": "Lead Finder" },
+        { "label": "Smart Newsletter" },
+        { "label": "FollowUp" },
+        { "label": "Content Studio" },
+        { "label": "LinkedIn Autopilot" },
+        { "label": "Lead Generation" }
+      ]
+    },
+    "list": {
+      "eyebrow": "WHAT WE DO",
+      "heading": "TRUS AI Services",
+      "items": [
+        {
+          "title": "Website Design",
+          "description": "Get a modern, responsive website designed around your brand, business goals, and customers—combining clear structure, thoughtful visuals, and seamless usability."
+        },
+        {
+          "title": "Landing Page Builder",
+          "description": "Build responsive, conversion-focused landing pages quickly. Turn your campaign ideas into polished pages that capture attention and encourage action."
+        },
+        {
+          "title": "Content Studio",
+          "description": "Create engaging, on-brand content for every channel. Content Studio turns your ideas into clear, compelling content tailored to your audience."
+        },
+        {
+          "title": "Instagram Autopilot",
+          "description": "Create and publish engaging Instagram posts with less effort. Maintain a consistent visual presence while keeping your content fresh and relevant."
+        },
+        {
+          "title": "LinkedIn Autopilot",
+          "description": "Create and publish professional LinkedIn content that strengthens your brand, communicates your expertise, and keeps your audience consistently engaged."
+        },
+        {
+          "title": "Smart Newsletter",
+          "description": "Create professional email newsletters in less time. Smart Newsletter transforms your goals and content into engaging emails designed for your audience."
+        },
+        {
+          "title": "Lead Finder",
+          "description": "Find the right prospects faster. Lead Finder analyzes business data to identify relevant, high-potential leads that match your ideal customer profile."
+        },
+        {
+          "title": "Lead Generation",
+          "description": "Attract and capture new potential customers through targeted campaigns and optimized experiences, turning audience interest into qualified business opportunities."
+        },
+        {
+          "title": "Growth AI",
+          "eyebrow": "SEE GROWTH AI IN ACTION",
+          "description": "Turn business data into smarter growth decisions. Growth AI analyzes performance, identifies opportunities, and helps optimize your strategy for sustainable results."
+        }
+      ]
+    }
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Company",

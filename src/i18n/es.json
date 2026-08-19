@@ -284,6 +284,69 @@
     }
   },
 
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "CREADO PARA CRECER",
+      "heading": ["Servicios", "diseñados para", "el crecimiento digital"],
+      "subtitle": "Experiencia conectada, creada para impulsar tu negocio.",
+      "brandTagline": "Growth AI",
+      "nodes": [
+        { "label": "Diseño Web" },
+        { "label": "Creador de Landing Pages" },
+        { "label": "Piloto Automático de Instagram" },
+        { "label": "Buscador de Leads" },
+        { "label": "Newsletter Inteligente" },
+        { "label": "Seguimiento" },
+        { "label": "Estudio de Contenido" },
+        { "label": "Piloto Automático de LinkedIn" },
+        { "label": "Generación de Leads" }
+      ]
+    },
+    "list": {
+      "eyebrow": "QUÉ HACEMOS",
+      "heading": "TRUS AI Services",
+      "items": [
+        {
+          "title": "Diseño Web",
+          "description": "Obtén un sitio web moderno y responsive, diseñado en torno a tu marca, tus objetivos de negocio y tus clientes, combinando una estructura clara, elementos visuales cuidados y una usabilidad fluida."
+        },
+        {
+          "title": "Creador de Landing Pages",
+          "description": "Crea rápidamente landing pages responsive orientadas a la conversión. Convierte tus ideas de campaña en páginas pulidas que captan la atención y fomentan la acción."
+        },
+        {
+          "title": "Content Studio",
+          "description": "Crea contenido atractivo y coherente con tu marca para cada canal. Content Studio convierte tus ideas en contenido claro y persuasivo, adaptado a tu audiencia."
+        },
+        {
+          "title": "Piloto Automático de Instagram",
+          "description": "Crea y publica publicaciones atractivas en Instagram con menos esfuerzo. Mantén una presencia visual consistente mientras tu contenido se mantiene fresco y relevante."
+        },
+        {
+          "title": "Piloto Automático de LinkedIn",
+          "description": "Crea y publica contenido profesional en LinkedIn que fortalezca tu marca, comunique tu experiencia y mantenga a tu audiencia siempre comprometida."
+        },
+        {
+          "title": "Newsletter Inteligente",
+          "description": "Crea newsletters profesionales en menos tiempo. Smart Newsletter convierte tus objetivos y contenidos en correos atractivos diseñados para tu audiencia."
+        },
+        {
+          "title": "Buscador de Leads",
+          "description": "Encuentra a los prospectos correctos más rápido. Lead Finder analiza datos de negocio para identificar leads relevantes y de alto potencial que coincidan con tu cliente ideal."
+        },
+        {
+          "title": "Generación de Leads",
+          "description": "Atrae y capta nuevos clientes potenciales mediante campañas dirigidas y experiencias optimizadas, convirtiendo el interés de la audiencia en oportunidades de negocio cualificadas."
+        },
+        {
+          "title": "Growth AI",
+          "eyebrow": "DESCUBRE GROWTH AI EN ACCIÓN",
+          "description": "Convierte los datos de tu negocio en decisiones de crecimiento más inteligentes. Growth AI analiza el rendimiento, identifica oportunidades y te ayuda a optimizar tu estrategia para resultados sostenibles."
+        }
+      ]
+    }
+  },
+
   "footer": {
     "firstColumn": "Servicios",
     "secondColumn": "Empresa",

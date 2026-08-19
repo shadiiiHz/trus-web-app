@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useLocale } from "@/i18n";
 import HomePage from "@/pages/HomePage";
 import TemplatesPage from "@/pages/TemplatesPage";
+import ServicesPage from "@/pages/ServicesPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -13,6 +14,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/templates" element={<TemplatesPage />} />
+      <Route path="/services" element={<ServicesPage />} />
     </Routes>
   );
 }

@@ -42,7 +42,7 @@ const navHrefs = [
   "#about",
   "#portfolio",
   "/templates",
-  "#services",
+  "/services",
   "#contact",
 ];
 
@@ -138,6 +138,45 @@ const serviceMeta = [
   { id: "email-marketing" },
   { id: "analytics" },
 ];
+
+// Services page hero — the animated circuit-tree diagram. Each node's `id`
+// is both its anchor target (`#id`, section not built yet — wired up ahead
+// of that work per the design brief) and the key ServiceGrowthTree uses to
+// look up that node's on-canvas position/path. Order here must match the
+// order of `servicesPage.hero.nodes` in the locale JSON files (zipped by
+// index via `merge()` below).
+const servicesTreeMeta = [
+  { id: "website-design" },
+  { id: "landing-page-builder" },
+  { id: "instagram-autopilot" },
+  { id: "lead-finder" },
+  { id: "smart-newsletter" },
+  { id: "followup" },
+  { id: "content-studio" },
+  { id: "linkedin-autopilot" },
+  { id: "lead-generation" },
+];
+
+// Services page list section — hover-to-reveal service breakdown below the
+// hero. `id` doubles as the eventual in-page anchor target for the tree
+// diagram's branch links above (matches servicesTreeMeta 1:1 except
+// "followup", which this list swaps for a closing "growth-ai" entry — see
+// the design brief). `media` is a placeholder preview image (no
+// per-service video/screenshot has been supplied yet) — swap in real
+// per-service thumbnails here once available. Order must match
+// `servicesPage.list.items` in the locale JSON files (zipped via `merge()`).
+const servicesListMeta = [
+  { id: "website-design", media: "/services/video.png" },
+  { id: "landing-page-builder", media: "/services/video.png" },
+  { id: "content-studio", media: "/services/video.png" },
+  { id: "instagram-autopilot", media: "/services/video.png" },
+  { id: "linkedin-autopilot", media: "/services/video.png" },
+  { id: "smart-newsletter", media: "/services/video.png" },
+  { id: "lead-finder", media: "/services/video.png" },
+  { id: "lead-generation", media: "/services/video.png" },
+  { id: "growth-ai", media: "/services/video.png" },
+];
+
 // Per-category screenshots + the live site each template card links out to
 // (opened in a new tab on click). `all` is derived below by concatenating
 // these in the same order (lawyers, fitness, realEstate, clinics,
@@ -421,6 +460,21 @@ function buildSiteConfig(locale: Locale) {
     templatesPage: {
       banner: dict.templatesPage.banner,
       gallery: dict.templatesPage.gallery,
+    },
+
+    servicesPage: {
+      hero: {
+        eyebrow: dict.servicesPage.hero.eyebrow,
+        heading: dict.servicesPage.hero.heading,
+        subtitle: dict.servicesPage.hero.subtitle,
+        brandTagline: dict.servicesPage.hero.brandTagline,
+        nodes: merge(dict.servicesPage.hero.nodes, servicesTreeMeta),
+      },
+      list: {
+        eyebrow: dict.servicesPage.list.eyebrow,
+        heading: dict.servicesPage.list.heading,
+        items: merge(dict.servicesPage.list.items, servicesListMeta),
+      },
     },
 
     contact: {

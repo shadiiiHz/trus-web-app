@@ -272,6 +272,69 @@
     }
   },
 
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "FÜR WACHSTUM GEBAUT",
+      "heading": ["Leistungen", "für", "digitales Wachstum"],
+      "subtitle": "Vernetzte Expertise, die dein Unternehmen voranbringt.",
+      "brandTagline": "Growth AI",
+      "nodes": [
+        { "label": "Website-Design" },
+        { "label": "Landing-Page-Builder" },
+        { "label": "Instagram-Autopilot" },
+        { "label": "Lead-Finder" },
+        { "label": "Smart Newsletter" },
+        { "label": "FollowUp" },
+        { "label": "Content Studio" },
+        { "label": "LinkedIn-Autopilot" },
+        { "label": "Lead-Generierung" }
+      ]
+    },
+    "list": {
+      "eyebrow": "WAS WIR TUN",
+      "heading": "TRUS AI Services",
+      "items": [
+        {
+          "title": "Website-Design",
+          "description": "Erhalten Sie eine moderne, responsive Website, die um Ihre Marke, Geschäftsziele und Kunden herum gestaltet ist – mit klarer Struktur, durchdachten Visuals und nahtloser Nutzbarkeit."
+        },
+        {
+          "title": "Landing-Page-Builder",
+          "description": "Erstellen Sie schnell responsive, konversionsstarke Landingpages. Verwandeln Sie Ihre Kampagnenideen in ansprechende Seiten, die Aufmerksamkeit erregen und zum Handeln anregen."
+        },
+        {
+          "title": "Content Studio",
+          "description": "Erstellen Sie ansprechende, markenkonforme Inhalte für jeden Kanal. Content Studio verwandelt Ihre Ideen in klare, überzeugende Inhalte für Ihre Zielgruppe."
+        },
+        {
+          "title": "Instagram-Autopilot",
+          "description": "Erstellen und veröffentlichen Sie ansprechende Instagram-Beiträge mit weniger Aufwand. Bewahren Sie eine konsistente visuelle Präsenz und halten Sie Ihre Inhalte frisch und relevant."
+        },
+        {
+          "title": "LinkedIn-Autopilot",
+          "description": "Erstellen und veröffentlichen Sie professionelle LinkedIn-Inhalte, die Ihre Marke stärken, Ihre Expertise kommunizieren und Ihr Publikum dauerhaft einbinden."
+        },
+        {
+          "title": "Smart Newsletter",
+          "description": "Erstellen Sie professionelle E-Mail-Newsletter in kürzerer Zeit. Smart Newsletter verwandelt Ihre Ziele und Inhalte in ansprechende, auf Ihr Publikum zugeschnittene E-Mails."
+        },
+        {
+          "title": "Lead-Finder",
+          "description": "Finden Sie schneller die richtigen Interessenten. Lead Finder analysiert Geschäftsdaten, um relevante, vielversprechende Leads zu identifizieren, die zu Ihrem idealen Kundenprofil passen."
+        },
+        {
+          "title": "Lead-Generierung",
+          "description": "Gewinnen Sie neue potenzielle Kunden durch gezielte Kampagnen und optimierte Erlebnisse, die Interesse in qualifizierte Geschäftsmöglichkeiten verwandeln."
+        },
+        {
+          "title": "Growth AI",
+          "eyebrow": "GROWTH AI IN AKTION ERLEBEN",
+          "description": "Verwandeln Sie Geschäftsdaten in klügere Wachstumsentscheidungen. Growth AI analysiert die Performance, erkennt Chancen und hilft, Ihre Strategie für nachhaltige Ergebnisse zu optimieren."
+        }
+      ]
+    }
+  },
+
   "footer": {
     "firstColumn": "Leistungen",
     "secondColumn": "Unternehmen",
