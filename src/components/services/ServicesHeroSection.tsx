@@ -7,12 +7,20 @@ import { ServiceGrowthTree } from "@/components/services/ServiceGrowthTree";
  * "Growth AI" circuit-tree diagram on the right. Each branch label is a
  * real in-page anchor (`#node-id`); the sections they'll eventually scroll
  * to don't exist yet, so clicks are inert until those are built.
+ *
+ * Pinned full-screen, matching the Home page hero (Hero.tsx): the section
+ * fills the viewport (100svh) and its content is vertically centered within
+ * that space, instead of sizing to its own content height.
  */
 export function ServicesHeroSection() {
   const { eyebrow, heading, subtitle } = siteConfig.servicesPage.hero;
 
   return (
-    <section aria-label="Services" style={{ background: "#FAFAFB" }}>
+    <section
+      aria-label="Services"
+      className="relative overflow-hidden flex items-center"
+      style={{ background: "#FAFAFB", minHeight: "100svh" }}
+    >
       <div className="mx-auto w-full max-w-330 px-5 py-20 lg:pt-16 lg:pb-9">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[350px_1fr] lg:gap-32">
           {/* LEFT — copy. Fixed width (not `fr`) so it hugs the logo's left
