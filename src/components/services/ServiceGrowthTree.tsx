@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
+import "@/styles/ServiceTreeLabel.css";
 
 /**
  * Circuit-tree diagram for the Services page hero.
@@ -11,10 +12,11 @@ import { siteConfig } from "@/config/site.config";
  * eventually scroll to don't exist yet, so clicks are inert until those
  * are built.
  *
- * The traveling-light animation along each branch is temporarily removed
- * (per request) — the traced branch geometry (NODE_LAYOUT, branchLoopPath,
- * etc.) is left in place so it's cheap to re-enable later; only the SVG
- * overlay that rendered/animated it is gone.
+ * Each node's label pill has an animated light travelling continuously
+ * around its border (`.service-label-light` / `-glow` in globals.css).
+ * The traveling-light animation *along the branch itself* (through
+ * NODE_LAYOUT / branchLoopPath) is still not wired up — that geometry is
+ * left in place so it's cheap to re-enable later.
  *
  * Node coordinates are pure layout (tied to this specific image's pixel
  * grid), not site text — only the translated `label` per id comes from
@@ -53,7 +55,13 @@ const CARD_HALF = 85;
 // 2.5x-scaled render of the actual artwork (screenshot px / 0.4767 ≈ vb
 // units) so the curve hugs the real drawn line instead of approximating it.
 const NODE_LAYOUT: NodeLayout[] = [
-  { id: "website-design", x: 523, y: 140, side: "top", mids: [{ x: 525, y: 230 }] },
+  {
+    id: "website-design",
+    x: 523,
+    y: 140,
+    side: "top",
+    mids: [{ x: 525, y: 230 }],
+  },
   {
     id: "landing-page-builder",
     x: 350,
@@ -74,16 +82,48 @@ const NODE_LAYOUT: NodeLayout[] = [
       { x: 310, y: 291 },
     ],
   },
-  { id: "lead-finder", x: 625, y: 230, side: "right", mids: [{ x: 593, y: 288 }] },
-  { id: "smart-newsletter", x: 800, y: 380, side: "right", mids: [{ x: 691, y: 379 }] },
+  {
+    id: "lead-finder",
+    x: 625,
+    y: 230,
+    side: "right",
+    mids: [{ x: 593, y: 288 }],
+  },
+  {
+    id: "smart-newsletter",
+    x: 800,
+    y: 380,
+    side: "right",
+    mids: [{ x: 691, y: 379 }],
+  },
   { id: "followup", x: 160, y: 530, side: "left", mids: [{ x: 238, y: 520 }] },
-  { id: "content-studio", x: 800, y: 555, side: "right", mids: [{ x: 739, y: 510 }] },
-  { id: "linkedin-autopilot", x: 253, y: 620, side: "left", mids: [{ x: 310, y: 548 }] },
-  { id: "lead-generation", x: 690, y: 664, side: "bottom", mids: [{ x: 634, y: 596 }] },
+  {
+    id: "content-studio",
+    x: 800,
+    y: 555,
+    side: "right",
+    mids: [{ x: 739, y: 510 }],
+  },
+  {
+    id: "linkedin-autopilot",
+    x: 253,
+    y: 620,
+    side: "left",
+    mids: [{ x: 310, y: 548 }],
+  },
+  {
+    id: "lead-generation",
+    x: 690,
+    y: 664,
+    side: "bottom",
+    mids: [{ x: 634, y: 596 }],
+  },
 ];
 
 /** Clamped, uniform Catmull-Rom through `pts`, as cubic-bezier segments (one per consecutive pair). */
-function catmullRomSegments(pts: Point[]): Array<{ c1: Point; c2: Point; p: Point }> {
+function catmullRomSegments(
+  pts: Point[],
+): Array<{ c1: Point; c2: Point; p: Point }> {
   const segs: Array<{ c1: Point; c2: Point; p: Point }> = [];
   for (let i = 0; i < pts.length - 1; i++) {
     const p0 = pts[Math.max(0, i - 1)];
@@ -101,7 +141,10 @@ function catmullRomSegments(pts: Point[]): Array<{ c1: Point; c2: Point; p: Poin
 
 const segsToPath = (segs: Array<{ c1: Point; c2: Point; p: Point }>) =>
   segs
-    .map((s) => `C ${s.c1.x.toFixed(1)} ${s.c1.y.toFixed(1)} ${s.c2.x.toFixed(1)} ${s.c2.y.toFixed(1)} ${s.p.x.toFixed(1)} ${s.p.y.toFixed(1)}`)
+    .map(
+      (s) =>
+        `C ${s.c1.x.toFixed(1)} ${s.c1.y.toFixed(1)} ${s.c2.x.toFixed(1)} ${s.c2.y.toFixed(1)} ${s.p.x.toFixed(1)} ${s.p.y.toFixed(1)}`,
+    )
     .join(" ");
 
 // ServicesListSection's row ids don't perfectly mirror the tree's branch
@@ -128,7 +171,10 @@ function cardEdgePoint(angle: number, inset = 1): Point {
   const flatY = uy * flatT;
 
   // Flat-edge hit (not in a rounded-corner zone) — use it directly.
-  if (Math.abs(flatX) <= s - CARD_CORNER + 0.01 || Math.abs(flatY) <= s - CARD_CORNER + 0.01) {
+  if (
+    Math.abs(flatX) <= s - CARD_CORNER + 0.01 ||
+    Math.abs(flatY) <= s - CARD_CORNER + 0.01
+  ) {
     return { x: CENTER_X + flatX, y: CENTER_Y + flatY };
   }
 
@@ -164,7 +210,10 @@ function branchLoopPath(node: NodeLayout) {
   return { d, labelAnchor: branchStart };
 }
 
-const pct = (x: number, y: number) => ({ left: `${(x / VB_W) * 100}%`, top: `${(y / VB_H) * 100}%` });
+const pct = (x: number, y: number) => ({
+  left: `${(x / VB_W) * 100}%`,
+  top: `${(y / VB_H) * 100}%`,
+});
 
 const sideTransform: Record<Side, string> = {
   top: "translate(-50%, calc(-100% - 2px))",
@@ -174,7 +223,10 @@ const sideTransform: Record<Side, string> = {
 };
 
 export function ServiceGrowthTree() {
-  const nodes = siteConfig.servicesPage.hero.nodes as ReadonlyArray<{ id: string; label: string }>;
+  const nodes = siteConfig.servicesPage.hero.nodes as ReadonlyArray<{
+    id: string;
+    label: string;
+  }>;
   const nodesById = new Map(nodes.map((n) => [n.id, n]));
 
   const [isDesktop, setIsDesktop] = useState(
@@ -203,7 +255,9 @@ export function ServiceGrowthTree() {
       // ServicesListSection owns the actual scroll — it opens the row
       // first (which changes its height as the thumbnail animates in)
       // and only then scrolls, once that layout has settled.
-      window.dispatchEvent(new CustomEvent("trus:activate-service", { detail: targetId }));
+      window.dispatchEvent(
+        new CustomEvent("trus:activate-service", { detail: targetId }),
+      );
     }
   };
 
@@ -228,7 +282,7 @@ export function ServiceGrowthTree() {
               key={b.layout.id}
               href={`#${ANCHOR_TARGET_OVERRIDES[b.layout.id] ?? b.layout.id}`}
               onClick={handleAnchorClick(b.layout.id)}
-              className="absolute whitespace-nowrap rounded-[10.19px] border-[1.02px] bg-white font-body font-semibold text-gallery-text shadow-sm transition-colors duration-200 border-[#C098F2] hover:text-brand-accent hover:shadow-md"
+              className="service-label hover:text-brand-accent absolute whitespace-nowrap rounded-[10.19px] bg-white font-body font-semibold text-gallery-text shadow-sm"
               style={{
                 ...pct(b.layout.x, b.layout.y),
                 transform: sideTransform[b.layout.side],
@@ -236,7 +290,13 @@ export function ServiceGrowthTree() {
                 padding: "5px 8px",
               }}
             >
-              {b.label}
+              {/* Animated border */}
+              <div aria-hidden="true" className="service-label-border">
+                <span className="service-label-sweep" />
+                <span className="service-label-border-mask" />
+              </div>
+
+              <span className="relative z-10">{b.label}</span>
             </a>
           ))}
       </div>

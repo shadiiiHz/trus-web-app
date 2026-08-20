@@ -1,0 +1,137 @@
+/* =========================================
+   Service Label
+   ========================================= */
+
+.service-label {
+  position: absolute;
+  isolation: isolate;
+
+  border: 1.02px solid #c098f2;
+
+  transition:
+    color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+/* =========================================
+   Animated Border Container
+   ========================================= */
+
+.service-label-border {
+  position: absolute;
+
+  inset: -2px;
+
+  padding: 2px;
+
+  border-radius: 10.19px;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  z-index: 1;
+
+  transition: opacity 400ms ease;
+}
+
+/* =========================================
+   Rotating Light Sweep
+   ========================================= */
+
+.service-label-sweep {
+  position: absolute;
+
+  inset: -100%;
+
+  width: 300%;
+  height: 300%;
+
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+
+    /* Empty */ transparent 0deg,
+    transparent 300deg,
+
+    /* Purple glow */ rgba(135, 93, 217, 0.25) 312deg,
+    rgba(135, 93, 217, 0.55) 322deg,
+
+    /* Purple / white transition */ rgba(184, 117, 255, 0.85) 330deg,
+
+    /* Main white light */ rgba(255, 255, 255, 0.75) 337deg,
+    rgba(255, 255, 255, 1) 344deg,
+    rgba(255, 255, 255, 1) 352deg,
+
+    /* Purple tail */ rgba(210, 165, 255, 0.85) 357deg,
+
+    transparent 360deg
+  );
+
+  transform-origin: center;
+
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 16px rgba(184, 117, 255, 1))
+    drop-shadow(0 0 28px rgba(135, 93, 217, 0.9))
+    drop-shadow(0 0 42px rgba(135, 93, 217, 0.45));
+}
+
+/* =========================================
+   Inner Mask
+   Keeps the light ONLY on the border
+   ========================================= */
+
+.service-label-border-mask {
+  position: absolute;
+
+  inset: 2px;
+
+  border-radius: 8.19px;
+
+  background: #ffffff;
+
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 1);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   Hover → Start Animation
+   ========================================= */
+
+.service-label:hover .service-label-border {
+  opacity: 1;
+}
+
+.service-label:hover .service-label-sweep {
+  animation: service-label-border-run 5.5s linear infinite;
+}
+
+/* =========================================
+   Label Hover Glow
+   ========================================= */
+
+.service-label:hover {
+  color: #875dd9;
+
+  box-shadow:
+    0 0 8px rgba(135, 93, 217, 0.14),
+    0 0 20px rgba(135, 93, 217, 0.1),
+    0 0 32px rgba(135, 93, 217, 0.06);
+}
+
+/* =========================================
+   Infinite Rotation
+   ========================================= */
+
+@keyframes service-label-border-run {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
