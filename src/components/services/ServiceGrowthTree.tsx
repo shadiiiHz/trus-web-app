@@ -146,12 +146,11 @@ const segsToPath = (segs: Array<{ c1: Point; c2: Point; p: Point }>) =>
     )
     .join(" ");
 
-// ServicesListSection's row ids don't perfectly mirror the tree's branch
-// ids — it drops "followup" in favor of a closing "growth-ai" entry. Map
-// branch ids with no matching row onto the row they should open instead.
-const ANCHOR_TARGET_OVERRIDES: Record<string, string> = {
-  followup: "growth-ai",
-};
+// ServicesListSection has one extra row beyond the tree's 9 branches: a
+// closing "growth-ai" entry with no matching branch tip. The card at the
+// tree's center links there instead (see the clickable center-square
+// anchor below).
+const CENTER_ANCHOR_TARGET = "growth-ai";
 
 // The card is a rounded square, not a circle — a circular approximation
 // undershoots/overshoots badly near the diagonals, which is exactly where
@@ -244,11 +243,7 @@ export function ServiceGrowthTree() {
     ...branchLoopPath(layout),
   }));
 
-  const handleAnchorClick = (id: string) => (e: React.MouseEvent) => {
-    // The services list below has no "FollowUp" row (it swaps that slot
-    // for a closing "Growth AI" entry) — route that one branch to Growth
-    // AI instead of doing nothing.
-    const targetId = ANCHOR_TARGET_OVERRIDES[id] ?? id;
+  const handleAnchorClick = (targetId: string) => (e: React.MouseEvent) => {
     if (document.getElementById(targetId)) {
       e.preventDefault();
       // ServicesListSection owns the actual scroll — it opens the row
@@ -272,11 +267,26 @@ export function ServiceGrowthTree() {
           style={{ objectFit: "contain" }}
         />
 
+        {/* The tree's center card doubles as an anchor to the closing
+            "Growth AI" row — the one list entry with no branch of its own. */}
+        <a
+          href={`#${CENTER_ANCHOR_TARGET}`}
+          onClick={handleAnchorClick(CENTER_ANCHOR_TARGET)}
+          aria-label="Growth AI"
+          className="absolute rounded-[20px]"
+          style={{
+            ...pct(CENTER_X, CENTER_Y),
+            width: `${((CARD_HALF * 2) / VB_W) * 100}%`,
+            height: `${((CARD_HALF * 2) / VB_H) * 100}%`,
+            transform: "translate(-50%, -50%)",
+          }}
+        />
+
         {isDesktop &&
           branches.map((b) => (
             <a
               key={b.layout.id}
-              href={`#${ANCHOR_TARGET_OVERRIDES[b.layout.id] ?? b.layout.id}`}
+              href={`#${b.layout.id}`}
               onClick={handleAnchorClick(b.layout.id)}
               className="service-label hover:text-brand-accent absolute whitespace-nowrap rounded-[10.19px] bg-white font-body font-semibold text-gallery-text shadow-sm"
               style={{
@@ -305,7 +315,7 @@ export function ServiceGrowthTree() {
           {branches.map((b) => (
             <a
               key={b.layout.id}
-              href={`#${ANCHOR_TARGET_OVERRIDES[b.layout.id] ?? b.layout.id}`}
+              href={`#${b.layout.id}`}
               onClick={handleAnchorClick(b.layout.id)}
               className="whitespace-nowrap rounded-[10.19px] border bg-white px-3.5 py-2 font-body text-body-sm font-medium text-gallery-text shadow-sm transition-colors duration-200 hover:border-brand-accent hover:text-brand-accent"
               style={{ borderColor: "rgba(135,93,217,0.35)" }}

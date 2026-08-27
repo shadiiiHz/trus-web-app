@@ -837,6 +837,29 @@ export default function TrusAiIllustration({
       <g filter="url(#filter44_di_2234_27735)">
         <circle cx="460" cy="382.3" r="3" fill="#D4C4F1" />
       </g>
+      <text
+        x="494.25"
+        y="339"
+        textAnchor="middle"
+        fontFamily="'DM Sans', Arial, sans-serif"
+        fontSize="50"
+        fontWeight="700"
+        fill="#6A48F4"
+      >
+        trus
+      </text>
+      <text
+        x="494.25"
+        y="365"
+        textAnchor="middle"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="16"
+        fontWeight="500"
+        letterSpacing="0.4"
+        fill="#7858F1"
+      >
+        Growth AI
+      </text>
       <g opacity="0.25" filter="url(#filter45_f_2234_27735)">
         <ellipse cx="496" cy="677.8" rx="107" ry="18.5" fill="#8B5CF6" />
       </g>
