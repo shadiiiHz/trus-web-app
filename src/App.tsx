@@ -3,7 +3,6 @@ import { useLocale } from "@/i18n";
 import HomePage from "@/pages/HomePage";
 import TemplatesPage from "@/pages/TemplatesPage";
 import ServicesPage from "@/pages/ServicesPage";
-import TreePage from "@/pages/TreePage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -16,7 +15,6 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/templates" element={<TemplatesPage />} />
       <Route path="/services" element={<ServicesPage />} />
-      <Route path="/test" element={<TreePage />} />
     </Routes>
   );
 }

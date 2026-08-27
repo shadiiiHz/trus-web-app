@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import "@/styles/ServiceTreeLabel.css";
+import TrusAiIllustration from "./TrusAiIllustration";
 
 /**
  * Circuit-tree diagram for the Services page hero.
@@ -41,8 +42,6 @@ interface NodeLayout {
   mids: Point[];
 }
 
-const TREE_SRC = "/services/tree.svg";
-
 // Native canvas of the supplied artwork — every coordinate below was
 // measured directly against a render of that file at this exact size.
 const VB_W = 932;
@@ -57,15 +56,15 @@ const CARD_HALF = 85;
 const NODE_LAYOUT: NodeLayout[] = [
   {
     id: "website-design",
-    x: 523,
-    y: 140,
+    x: 513,
+    y: 94,
     side: "top",
     mids: [{ x: 525, y: 230 }],
   },
   {
     id: "landing-page-builder",
-    x: 350,
-    y: 140,
+    x: 290,
+    y: 94,
     side: "left",
     mids: [
       { x: 377, y: 305 },
@@ -75,7 +74,7 @@ const NODE_LAYOUT: NodeLayout[] = [
   {
     id: "instagram-autopilot",
     x: 270,
-    y: 268,
+    y: 222,
     side: "left",
     mids: [
       { x: 377, y: 334 },
@@ -84,37 +83,37 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "lead-finder",
-    x: 625,
-    y: 230,
+    x: 620,
+    y: 180,
     side: "right",
     mids: [{ x: 593, y: 288 }],
   },
   {
     id: "smart-newsletter",
     x: 800,
-    y: 380,
+    y: 334,
     side: "right",
     mids: [{ x: 691, y: 379 }],
   },
-  { id: "followup", x: 160, y: 530, side: "left", mids: [{ x: 238, y: 520 }] },
+  { id: "followup", x: 160, y: 490, side: "left", mids: [{ x: 238, y: 520 }] },
   {
     id: "content-studio",
-    x: 800,
-    y: 555,
+    x: 790,
+    y: 510,
     side: "right",
     mids: [{ x: 739, y: 510 }],
   },
   {
     id: "linkedin-autopilot",
-    x: 253,
-    y: 620,
+    x: 300,
+    y: 579,
     side: "left",
     mids: [{ x: 310, y: 548 }],
   },
   {
     id: "lead-generation",
-    x: 690,
-    y: 664,
+    x: 680,
+    y: 630,
     side: "bottom",
     mids: [{ x: 634, y: 596 }],
   },
@@ -268,12 +267,9 @@ export function ServiceGrowthTree() {
         style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}` }}
         aria-label="TruS growth services map"
       >
-        <img
-          src={TREE_SRC}
-          alt="TruS Growth AI — connected services"
+        <TrusAiIllustration
           className="absolute inset-0 h-full w-full"
           style={{ objectFit: "contain" }}
-          draggable={false}
         />
 
         {isDesktop &&

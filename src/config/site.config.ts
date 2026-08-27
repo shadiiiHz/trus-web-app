@@ -202,6 +202,36 @@ const categoryTemplates = {
       layout: "Multi Page",
       categoryId: "lawyers",
     },
+    {
+      image: "/templates/t17.webp",
+      link: "https://inloy-128.webflow.io/",
+      name: "Inloy-128",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
+    },
+    {
+      image: "/templates/t18.webp",
+      link: "",
+      name: "",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
+    },{
+      image: "/templates/t19.webp",
+      link: "https://law-office-webflow-template.webflow.io/",
+      name: "Law-office",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
+    },{
+      image: "/templates/t20.webp",
+      link: "https://validway.webflow.io/",
+      name: "Validway",
+      style: "Dark",
+      layout: "Multi Page",
+      categoryId: "lawyers",
+    }
   ],
   fit: [
     {
@@ -209,6 +239,14 @@ const categoryTemplates = {
       link: "https://flexova-fitness-gym-website-template.webflow.io/",
       name: "Flexova",
       style: "Dark",
+      layout: "Multi Page",
+      categoryId: "fitness",
+    },
+    {
+      image: "/templates/t16.webp",
+      link: "https://fitcore-ttm.webflow.io/",
+      name: "Fitcore",
+      style: "Light",
       layout: "Multi Page",
       categoryId: "fitness",
     },

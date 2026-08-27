@@ -21,7 +21,7 @@ export function ServicesHeroSection() {
       className="relative overflow-hidden flex items-center"
       style={{ background: "#FAFAFB", minHeight: "100svh" }}
     >
-      <div className="mx-auto w-full max-w-330 px-5 py-20 lg:pt-16 lg:pb-9">
+      <div className="mx-auto w-full max-w-330 px-5 py-20 lg:pt-28 lg:pb-9">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[350px_1fr] lg:gap-32">
           {/* LEFT — copy. Fixed width (not `fr`) so it hugs the logo's left
               edge and leaves the right column free to run all the way to
