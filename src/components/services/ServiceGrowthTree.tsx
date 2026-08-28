@@ -112,7 +112,7 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "lead-generation",
-    x: 645,
+    x: 656,
     y: 503,
     side: "bottom",
     mids: [{ x: 634, y: 596 }],
