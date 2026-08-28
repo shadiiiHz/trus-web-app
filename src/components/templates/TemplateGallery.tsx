@@ -25,8 +25,8 @@ export default function TemplatesGallery() {
 
   // `templates.all` is the Home page ribbon's own curated order (see
   // site.config.ts) — the gallery's "All Templates" view and facet counts
-  // use `templates.galleryAll` instead, which matches the Figma order and
-  // is the complete 9-template inventory.
+  // use `templates.galleryAll` instead, which is the complete template
+  // inventory across every category.
   const categoryOptions = useMemo(
     () =>
       categories.map((cat) => ({
