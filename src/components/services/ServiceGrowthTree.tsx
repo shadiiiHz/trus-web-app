@@ -45,7 +45,7 @@ interface NodeLayout {
 // Native canvas of the supplied artwork — every coordinate below was
 // measured directly against a render of that file at this exact size.
 const VB_W = 932;
-const VB_H = 817;
+const VB_H = 640;
 const CENTER_X = 510;
 const CENTER_Y = 408;
 const CARD_HALF = 85;
@@ -56,15 +56,15 @@ const CARD_HALF = 85;
 const NODE_LAYOUT: NodeLayout[] = [
   {
     id: "website-design",
-    x: 513,
-    y: 94,
+    x: 507,
+    y: 54,
     side: "top",
     mids: [{ x: 525, y: 230 }],
   },
   {
     id: "landing-page-builder",
-    x: 290,
-    y: 94,
+    x: 329,
+    y: 50,
     side: "left",
     mids: [
       { x: 377, y: 305 },
@@ -73,8 +73,8 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "instagram-autopilot",
-    x: 270,
-    y: 222,
+    x: 288,
+    y: 163,
     side: "left",
     mids: [
       { x: 377, y: 334 },
@@ -83,37 +83,37 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "lead-finder",
-    x: 620,
-    y: 180,
+    x: 590,
+    y: 125,
     side: "right",
     mids: [{ x: 593, y: 288 }],
   },
   {
     id: "smart-newsletter",
-    x: 800,
-    y: 334,
+    x: 750,
+    y: 254,
     side: "right",
     mids: [{ x: 691, y: 379 }],
   },
-  { id: "followup", x: 160, y: 490, side: "left", mids: [{ x: 238, y: 520 }] },
+  { id: "followup", x: 255, y: 388, side: "left", mids: [{ x: 238, y: 520 }] },
   {
     id: "content-studio",
-    x: 790,
-    y: 510,
+    x: 742,
+    y: 409,
     side: "right",
     mids: [{ x: 739, y: 510 }],
   },
   {
     id: "linkedin-autopilot",
-    x: 300,
-    y: 579,
+    x: 330,
+    y: 464,
     side: "left",
     mids: [{ x: 310, y: 548 }],
   },
   {
     id: "lead-generation",
-    x: 680,
-    y: 630,
+    x: 645,
+    y: 503,
     side: "bottom",
     mids: [{ x: 634, y: 596 }],
   },
@@ -292,7 +292,7 @@ export function ServiceGrowthTree() {
               style={{
                 ...pct(b.layout.x, b.layout.y),
                 transform: sideTransform[b.layout.side],
-                fontSize: "14.26px",
+                fontSize: "13.5px",
                 padding: "5px 8px",
               }}
             >
