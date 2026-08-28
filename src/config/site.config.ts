@@ -270,7 +270,7 @@ const categoryTemplates = {
     },
     {
       image: "/templates/t28.webp",
-      link: "httphttps://brixsa.webflow.io/",
+      link: "https://brixsa.webflow.io/",
       name: "Brixsa",
       style: "Dark",
       layout: "Multi Page",
