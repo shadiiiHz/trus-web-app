@@ -46,7 +46,7 @@ interface NodeLayout {
 // measured directly against a render of that file at this exact size.
 const VB_W = 932;
 const VB_H = 640;
-// The artwork's real SVG viewBox is 922x747 (see TrusAiIllustration), which
+// The artwork's real SVG viewBox is 922x847 (see TrusAiIllustration), which
 // isn't the same aspect ratio as this 932x640 frame — so the browser
 // letterboxes it (uniform scale + horizontal offset) to fit, exactly like
 // object-fit: contain. The branch-tip coordinates above were traced against
@@ -56,10 +56,10 @@ const VB_H = 640;
 // y=248.8 w=174 h=170, see TrusAiIllustration) run through the same
 // letterbox transform, so the anchor lines up with the visible card at
 // every size instead of drifting off it as the tree shrinks:
-//   scale = VB_H / 747 (height is always the constraining dimension, since
-//     932/640 > 922/747)
+//   scale = VB_H / 847 (height is always the constraining dimension, since
+//     932/640 > 922/847)
 //   offsetX = (VB_W - 922 * scale) / 2
-const LETTERBOX_SCALE = VB_H / 747;
+const LETTERBOX_SCALE = VB_H / 847;
 const LETTERBOX_OFFSET_X = (VB_W - 922 * LETTERBOX_SCALE) / 2;
 const CENTER_X = LETTERBOX_OFFSET_X + 494.25 * LETTERBOX_SCALE;
 const CENTER_Y = 333.8 * LETTERBOX_SCALE;
