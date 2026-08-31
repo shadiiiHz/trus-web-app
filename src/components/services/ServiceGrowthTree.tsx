@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import "@/styles/ServiceTreeLabel.css";
+import TrusAiIllustration from "./TrusAiIllustration";
 
 /**
  * Circuit-tree diagram for the Services page hero.
@@ -64,23 +65,21 @@ const CENTER_X = LETTERBOX_OFFSET_X + 494.25 * LETTERBOX_SCALE;
 const CENTER_Y = 333.8 * LETTERBOX_SCALE;
 const CARD_HALF = 86 * LETTERBOX_SCALE;
 
-const TREE_SRC = "/services/tree.svg";
-
 // Nine branch tips + one interior waypoint each, both traced against a
 // 2.5x-scaled render of the actual artwork (screenshot px / 0.4767 ≈ vb
 // units) so the curve hugs the real drawn line instead of approximating it.
 const NODE_LAYOUT: NodeLayout[] = [
   {
     id: "website-design",
-    x: 507,
-    y: 54,
+    x: 501.5,
+    y: 48,
     side: "top",
     mids: [{ x: 525, y: 230 }],
   },
   {
     id: "landing-page-builder",
-    x: 329,
-    y: 50,
+    x: 350,
+    y: 45,
     side: "left",
     mids: [
       { x: 377, y: 305 },
@@ -89,8 +88,8 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "instagram-autopilot",
-    x: 288,
-    y: 163,
+    x: 305,
+    y: 145,
     side: "left",
     mids: [
       { x: 377, y: 334 },
@@ -99,37 +98,37 @@ const NODE_LAYOUT: NodeLayout[] = [
   },
   {
     id: "lead-finder",
-    x: 590,
-    y: 125,
+    x: 573,
+    y: 109.5,
     side: "right",
     mids: [{ x: 593, y: 288 }],
   },
   {
     id: "smart-newsletter",
-    x: 750,
-    y: 254,
+    x: 710,
+    y: 225,
     side: "right",
     mids: [{ x: 691, y: 379 }],
   },
-  { id: "followup", x: 255, y: 388, side: "left", mids: [{ x: 238, y: 520 }] },
+  { id: "followup", x: 255, y: 341, side: "left", mids: [{ x: 238, y: 520 }] },
   {
     id: "content-studio",
-    x: 742,
-    y: 409,
+    x: 702,
+    y: 360,
     side: "right",
     mids: [{ x: 739, y: 510 }],
   },
   {
     id: "linkedin-autopilot",
-    x: 330,
-    y: 464,
+    x: 355,
+    y: 408,
     side: "left",
     mids: [{ x: 310, y: 548 }],
   },
   {
     id: "lead-generation",
-    x: 656,
-    y: 503,
+    x: 636,
+    y: 440,
     side: "bottom",
     mids: [{ x: 634, y: 596 }],
   },
@@ -229,12 +228,12 @@ const pct = (x: number, y: number) => ({
   top: `${(y / VB_H) * 100}%`,
 });
 
-// const sideTransform: Record<Side, string> = {
-//   top: "translate(-50%, calc(-100% - 2px))",
-//   bottom: "translate(-50%, 2px)",
-//   left: "translate(calc(-100% - 2px), -50%)",
-//   right: "translate(2px, -50%)",
-// };
+const sideTransform: Record<Side, string> = {
+  top: "translate(-50%, calc(-100% - 2px))",
+  bottom: "translate(-50%, 2px)",
+  left: "translate(calc(-100% - 2px), -50%)",
+  right: "translate(2px, -50%)",
+};
 
 export function ServiceGrowthTree() {
   const nodes = siteConfig.servicesPage.hero.nodes as ReadonlyArray<{
@@ -278,16 +277,9 @@ export function ServiceGrowthTree() {
         style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}` }}
         aria-label="TruS growth services map"
       >
-        {/* <TrusAiIllustration
+        <TrusAiIllustration
           className="absolute inset-0 h-full w-full"
           style={{ objectFit: "contain" }}
-        /> */}
-        <img
-          src={TREE_SRC}
-          alt="TruS Growth AI — connected services"
-          className="absolute inset-0 h-full w-full"
-          style={{ objectFit: "contain" }}
-          draggable={false}
         />
 
         {/* The tree's center card doubles as an anchor to the closing
@@ -305,7 +297,7 @@ export function ServiceGrowthTree() {
           }}
         />
 
-        {/* {isDesktop &&
+        {isDesktop &&
           branches.map((b) => (
             <a
               key={b.layout.id}
@@ -315,8 +307,8 @@ export function ServiceGrowthTree() {
               style={{
                 ...pct(b.layout.x, b.layout.y),
                 transform: sideTransform[b.layout.side],
-                fontSize: "13.5px",
-                padding: "5px 8px",
+                fontSize: "12px",
+                padding: "4px 7px",
               }}
             >
               <div aria-hidden="true" className="service-label-border">
@@ -326,7 +318,7 @@ export function ServiceGrowthTree() {
 
               <span className="relative z-10">{b.label}</span>
             </a>
-          ))} */}
+          ))}
       </div>
 
       {/* Mobile/tablet fallback — the radial pill overlay above only fits
