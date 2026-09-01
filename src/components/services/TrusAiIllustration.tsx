@@ -890,11 +890,11 @@ export default function TrusAiIllustration({
         y="337"
         textAnchor="middle"
         fontFamily="'DM Sans', Arial, sans-serif"
-        fontSize="50"
+        fontSize="43"
         fontWeight="700"
         fill="#6A48F4"
       >
-        trus
+        TRUS
       </text>
       <text
         x="494.25"
