@@ -32,7 +32,7 @@ export default function TemplateGridReveal({
   setCardRef,
   setHovered,
 }: TemplateGridRevealProps) {
-  const { templates, heading } = siteConfig.templateCategories;
+  const { templates, heading, categories } = siteConfig.templateCategories;
 
   // The cards to actually render, based on `displayedCategory` (not the
   // just-clicked `activeCategory`) so content only changes while hidden.
@@ -42,6 +42,17 @@ export default function TemplateGridReveal({
       MAX_CARDS,
     );
   }, [displayedCategory, templates]);
+
+  // Shown only once a real category (not the "all" default) is selected —
+  // mirrors SeeMoreLink on the opposite side of the same row, linking to
+  // the /templates gallery pre-filtered to this category.
+  const categoryLink = useMemo(() => {
+    if (displayedCategory === "all") return null;
+    const label = categories.find((c) => c.id === displayedCategory)?.label;
+    return label
+      ? { label, href: `/templates?category=${displayedCategory}` }
+      : null;
+  }, [categories, displayedCategory]);
 
   return (
     <div
@@ -102,6 +113,23 @@ export default function TemplateGridReveal({
             style={{
               position: "absolute",
               right: 0,
+              bottom: "calc(100% + 24px)",
+              zIndex: 2,
+            }}
+          />
+        )}
+        {/*
+          Symmetric with SeeMoreLink above — same row, opposite (left)
+          edge — so the two read as one aligned header line over the
+          grid instead of the category name floating on its own.
+        */}
+        {categoryLink && (
+          <SeeMoreLink
+            label={categoryLink.label}
+            href={categoryLink.href}
+            style={{
+              position: "absolute",
+              left: 0,
               bottom: "calc(100% + 24px)",
               zIndex: 2,
             }}

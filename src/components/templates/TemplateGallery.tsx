@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { siteConfig } from "@/config/site.config";
 import TemplatesFilterSidebar from "@/components/templates/TemplatesFilterSidebar";
 import TemplateGalleryCard from "@/components/templates/TemplateGalleryCard";
@@ -13,7 +14,13 @@ export default function TemplatesGallery() {
   const { categories, templates } = siteConfig.templateCategories;
   const gallery = siteConfig.templatesPage.gallery;
 
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  // Lets the Home page's per-category link (see TemplateGridReveal) land
+  // here with that category already selected, via "/templates?category=…".
+  const [searchParams] = useSearchParams();
+  const [activeCategory, setActiveCategory] = useState<string>(() => {
+    const fromUrl = searchParams.get("category");
+    return fromUrl && categories.some((c) => c.id === fromUrl) ? fromUrl : "all";
+  });
   const [activeStyles, setActiveStyles] = useState<Set<StyleFilter>>(new Set());
   const [activeLayouts, setActiveLayouts] = useState<Set<LayoutFilter>>(new Set());
   const [search, setSearch] = useState("");

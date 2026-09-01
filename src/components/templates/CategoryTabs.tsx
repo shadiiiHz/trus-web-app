@@ -111,7 +111,7 @@ function CategoryTabButton({ cat, isActive, onSelect, index, revealed }: Categor
         padding:        0,
         cursor:         'pointer',
         overflow:       'hidden',
-        background:     hovered ? PURPLE : '#FFFFFF',
+        background:     hovered || isActive ? PURPLE : '#FFFFFF',
         boxShadow:      '0 4px 14px rgba(0, 0, 0, 0.14)',
         // The one-shot pop-in (opacity/transform) gets its own duration,
         // bouncy ease and a per-index delay so squares cascade in top to
@@ -157,7 +157,7 @@ function CategoryTabButton({ cat, isActive, onSelect, index, revealed }: Categor
         <Icon
           size={20}
           strokeWidth={1.8}
-          color={hovered ? '#FFFFFF' : '#000000'}
+          color={hovered || isActive ? '#FFFFFF' : PURPLE}
           style={{ transition: 'color 0.2s ease' }}
         />
       </span>
