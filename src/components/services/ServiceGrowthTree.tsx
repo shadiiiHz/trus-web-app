@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import "@/styles/ServiceTreeLabel.css";
-import TrusAiIllustration from "./TrusAiIllustration";
+
+// Lazy-loaded: the artwork is a ~260KB Figma-exported SVG (dozens of
+// <filter> blocks for the glow effects), so keeping it out of the main
+// bundle and off the critical render path noticeably helps first load.
+const TrusAiIllustration = lazy(() => import("./TrusAiIllustration"));
 
 /**
  * Circuit-tree diagram for the Services page hero.
@@ -277,10 +281,12 @@ export function ServiceGrowthTree() {
         style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}` }}
         aria-label="TruS growth services map"
       >
-        <TrusAiIllustration
-          className="absolute inset-0 h-full w-full"
-          style={{ objectFit: "contain" }}
-        />
+        <Suspense fallback={null}>
+          <TrusAiIllustration
+            className="absolute inset-0 h-full w-full"
+            style={{ objectFit: "contain" }}
+          />
+        </Suspense>
 
         {/* The tree's center card doubles as an anchor to the closing
             "Growth AI" row — the one list entry with no branch of its own. */}
