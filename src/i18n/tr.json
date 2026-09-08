@@ -1,0 +1,356 @@
+{
+  "nav": {
+    "links": ["Ana Sayfa", "Hakkımızda", "Portfolyo", "Şablonlar", "Hizmetler", "İletişim"],
+    "cta": "Giriş Yap"
+  },
+
+  "hero": {
+    "badge": "Web Geliştirme",
+    "badgePrefix": "Hizmetler",
+    "headline": [
+      "TRUS, işletmenizin büyümesi için",
+      "akıllı web siteleri sunar.",
+      "Güç kaynağı: [GrowthAI]"
+    ],
+    "body": "Web sitenizi; ekstra personel gerektirmeden müşteri kazandıran, satışları artıran ve pazarlamanızı otomatikleştiren 7/24 çalışan bir büyüme sistemine dönüştürür.",
+    "cta": {
+      "primary": "Şablonlara Göz At",
+      "secondary": "Neden TruS"
+    }
+  },
+
+  "about": {
+    "eyebrow": "HAKKIMIZDA",
+    "headline": ["Güvenilir Hostingden Dijital Büyümeye"],
+    "body": [
+      "TruS, SEO, DevOps ve dijital altyapı alanında 20 yılı aşkın deneyim üzerine kuruldu. TRUST HOST ile başlayan yolculuğumuzu; özel web sitesi geliştirme, kurumsal hosting, yapay zeka çözümleri ve performans odaklı dijital pazarlamaya genişlettik. Bugün işletmelerin ölçülebilir sonuçlar sunan teknolojilerle inşa etmesine, hayata geçirmesine ve büyümesine yardımcı oluyoruz."
+    ],
+    "stats": [
+      { "value": "250+", "label": "Teslim Edilen Web Sitesi" },
+      { "value": "10+", "label": "Yıllık SEO Deneyimi" },
+      { "value": "20+", "label": "Kurumsal Müşteri" },
+      { "value": "5K+", "label": "Dünya Genelinde Memnun Müşteri" }
+    ]
+  },
+
+  "portfolio": {
+    "eyebrow": "PORTFOLYO",
+    "headline": "PROJELERİMİZİ KEŞFEDİN",
+    "description": [
+      "Yaratıcılığımızı, performansımızı ve detaylara",
+      "verdiğimiz önemi yansıtan son çalışmalarımızdan bir seçki."
+    ],
+    "seeMore": "Daha Fazla"
+  },
+
+  "whyUs": {
+    "eyebrow": "NEDEN BİZ",
+    "headline": ["İşletmeler Neden TruS'u Seçiyor"],
+    "cards": [
+      {
+        "number": "01",
+        "title": "Üstün Tasarım Kalitesi",
+        "description": "Her şablon büyük bir özenle elle tasarlanır — otomatik üretilmiş veya yeniden kullanılmış değildir."
+      },
+      {
+        "number": "02",
+        "title": "Performans İçin Geliştirildi",
+        "description": "Temiz React kodu, gereksiz yük yok. Siteniz hızlı yüklenir ve her metrikte yüksek puan alır."
+      },
+      {
+        "number": "03",
+        "title": "Tamamen Özelleştirilebilir",
+        "description": "Kapsamlı tasarım belirteçleri ve yapılandırma dosyaları, marka değişikliğini ve içerik uyarlamasını basitleştirir."
+      },
+      {
+        "number": "04",
+        "title": "Her Şey Sizin",
+        "description": "Kaynak kodun tam sahipliği. Abonelik yok, bağımlılık yok, gizli ücret yok."
+      }
+    ]
+  },
+
+  "team": {
+    "eyebrow": "EKİBİMİZLE TANIŞIN",
+    "heading": ["TruS'un Arkasındaki", "Uzmanlar"],
+    "description": "Daha akıllı dijital deneyimler yaratmak için birlikte çalışan tasarımcılar, geliştiriciler ve dijital uzmanlar.",
+    "members": [
+      {
+        "name": "Sara Ahmadi",
+        "role": "UI/UX Tasarımcı",
+        "description": "Netlik, kullanılabilirlik ve modern etkileşime odaklanan sezgisel ve etkileyici deneyimler tasarlıyor."
+      },
+      {
+        "name": "Daniel Weber",
+        "role": "Web Geliştirici",
+        "description": "Temiz mimari ve performans odaklı geliştirmeyle ölçeklenebilir ön yüz sistemleri inşa ediyor."
+      },
+      {
+        "name": "Lina Farhadi",
+        "role": "Marka Stratejisti",
+        "description": "İşletmelerin net iletişim kurmasına ve güvenle büyümesine yardımcı olan dijital kimlikler şekillendiriyor."
+      },
+      {
+        "name": "Nina Roberts",
+        "role": "İçerik Lideri",
+        "description": "Markaları hedef kitleleriyle etkili biçimde buluşturan anlamlı içerik sistemleri oluşturuyor."
+      },
+      {
+        "name": "Omar Haddad",
+        "role": "Backend Mühendisi",
+        "description": "İşletmeyle birlikte ölçeklenen sağlam ve güvenli sunucu tarafı sistemler inşa ediyor."
+      },
+      {
+        "name": "Elena Petrova",
+        "role": "Pazarlama Stratejisti",
+        "description": "Dikkati ölçülebilir büyümeye dönüştüren veri odaklı kampanyalar tasarlıyor."
+      },
+      {
+        "name": "Marcus Chen",
+        "role": "Ürün Yöneticisi",
+        "description": "İnsanların gerçekten kullanmak istediği özellikleri sunmak için ekipleri ve yol haritalarını hizalıyor."
+      },
+      {
+        "name": "Aisha Khan",
+        "role": "SEO Uzmanı",
+        "description": "Teknik ve içerik odaklı SEO ile görünürlüğü ve organik erişimi artırıyor."
+      }
+    ]
+  },
+
+  "services": {
+    "eyebrow": "HİZMETLER",
+    "heading": "HİZMETLERİMİZ",
+    "description": "İşletmelerin büyümesine ve öne çıkmasına yardımcı olan modern web siteleri tasarlıyor ve geliştiriyoruz.",
+    "items": [
+      {
+        "title": "SEO",
+        "description": "Akıllı arama stratejileri ve organik trafik ile görünürlüğü artırma."
+      },
+      {
+        "title": "Web Geliştirme",
+        "description": "Modern teknolojilerle hızlı, duyarlı ve ölçeklenebilir web siteleri inşa etme."
+      },
+      {
+        "title": "Web Tasarımı",
+        "description": "Kullanılabilirliği ve etkileşimi artıran modern, kullanıcı dostu arayüzler tasarlama."
+      },
+      {
+        "title": "Markalaşma",
+        "description": "Kalıcı bir izlenim bırakan özgün marka kimlikleri yaratma."
+      },
+      {
+        "title": "Sosyal Medya",
+        "description": "Markanıza uygun, etkileyici sosyal medya içeriği ve stratejisiyle kitlenizi büyütme."
+      },
+      {
+        "title": "Lead Maker",
+        "description": "Ziyaretçileri potansiyel müşterilere dönüştürmeye yardımcı, dönüşüm odaklı sistemler oluşturma."
+      },
+      {
+        "title": "AI Agent",
+        "description": "İş süreçlerini destekleyen akıllı asistanlar ve otomasyonlar inşa etme."
+      },
+      {
+        "title": "İçerik Üretimi",
+        "description": "Markaları hedef kitleleriyle buluşturan etkileyici dijital içerikler oluşturma."
+      },
+      {
+        "title": "E-posta Pazarlama",
+        "description": "Potansiyel müşterileri besleyen ve tekrar satın almayı artıran hedefli e-posta kampanyaları tasarlama."
+      },
+      {
+        "title": "Analitik",
+        "description": "Verileri daha akıllı iş kararlarına rehberlik eden net içgörülere dönüştürme."
+      }
+    ]
+  },
+
+  "templateCategories": {
+    "eyebrow": "Tasarım Şablonları",
+    "heading": "Şablon Kategorileri",
+    "description": "Modern işletmeler, girişimler ve dijital ürünler için profesyonelce tasarlanmış şablonları keşfedin.",
+    "seeMore": "Daha Fazla",
+    "RightWord": "Tasarımlar",
+    "LeftWord": "Şablon",
+    "tagline": ["GÜNLÜK TASARIM PRATİĞİYLE", "FİKİRLERİ KEŞFETMEK."],
+    "sectionDes": [
+      "Yaratıcı sürecimizin bir parçası olarak açıkça ",
+      "paylaştığımız kavramlar, keşifler ve ",
+      "arayüz denemeleri."
+    ],
+    "categories": [
+      { "id": "all", "label": "Tüm Şablonlar" },
+      { "id": "lawyers", "label": "Avukatlar" },
+      { "id": "restaurant", "label": "Restoran" },
+      { "id": "clinics", "label": "Klinikler" },
+      { "id": "barbershops", "label": "Berber Dükkanları" },
+      { "id": "fitness", "label": "Fitness" },
+      { "id": "realEstate", "label": "Emlak" }
+    ]
+  },
+
+  "contact": {
+    "eyebrow": "BİZE ULAŞIN",
+    "heading": "Bir Sohbet Başlatalım",
+    "card": {
+      "tagline": "Aklınızda bir proje mi var?",
+      "cta": "Hemen görüşme ayarlayın",
+      "office": "2847 Oak Street, San Francisco, CA 94102",
+      "phone": "+98 1223344565",
+      "email": "Info@test100.devops-uni.com"
+    },
+    "form": {
+      "fields": [
+        { "label": "Ad Soyad", "placeholder": "Adınızı girin" },
+        { "label": "E-posta", "placeholder": "E-posta adresinizi girin" },
+        { "label": "Şirket Adı", "placeholder": "Şirket adını girin" },
+        { "label": "Mesaj", "placeholder": "Mesajınızı girin" }
+      ],
+      "submit": "E-posta Gönder"
+    }
+  },
+
+  "testimonials": {
+    "eyebrow": "MÜŞTERİ YORUMLARI",
+    "heading": "MÜŞTERİ BAŞARI HİKAYELERİ",
+    "subtitle": [
+      "Dünya çapında yenilikçi işletmeler tarafından tercih ediliyoruz;",
+      "ekiplerin büyümesini ve kalıcı etki yaratmasını sağladık."
+    ],
+    "items": [
+      {
+        "name": "Sarah Mitchell",
+        "role": "Pazarlama Direktörü, Lumora Health",
+        "quote": "Altero, stratejiye yaklaşımımızı tamamen değiştirdi. İçgörüleri keskin, uygulanabilir ve büyümemizi gerçekten hızlandırdı."
+      },
+      {
+        "name": "Arjun Mehta",
+        "role": "Yazılım Geliştirici",
+        "quote": "Ekip, karmaşık zorluklara netlik getirdi ve ölçülebilir sonuçlar sundu. Onlarla çalışmak, kendi ekibimizin bir uzantısı gibiydi."
+      },
+      {
+        "name": "Emily Zhao",
+        "role": "Operasyon Direktörü, VitaHealth",
+        "quote": "Altero ile iş birliğimiz verimlilikte %35'lik bir artış sağladı. Süreçleri sorunsuz ve tamamen veriye dayalıydı."
+      },
+      {
+        "name": "Daniel Reyes",
+        "role": "CEO, NovaTech Solutions",
+        "quote": "Profesyonel, içgörülü ve sonuç odaklı. Altero, daha akıllıca ölçeklenmemize ve daha verimli çalışmamıza yardımcı oldu."
+      },
+      {
+        "name": "Julie Reed",
+        "role": "Kurucu, Lumora Health",
+        "quote": "Altero ile çalışmak çok kolaydı. Zorluklarımızı hızla anladılar ve işe yarayan uygulanabilir çözümler sundular."
+      }
+    ]
+  },
+
+  "templatesPage": {
+    "banner": {
+      "headline": "Portfolyo Web Sitesi Şablonları",
+      "subtitle": "Çalışmalarınızı sergilemek ve müşterilerinizi etkilemek için şık portfolyo şablonları."
+    },
+    "gallery": {
+      "categoriesLabel": "KATEGORİLER",
+      "searchPlaceholder": "Şablonlarda ara...",
+      "styleLabel": "STİL",
+      "featuresLabel": "ÖZELLİKLER",
+      "clearAllFilters": "Tüm filtreleri temizle",
+      "resultsFound": "{count} şablon bulundu",
+      "noResults": "Bu filtrelere uyan şablon yok.",
+      "styleOptions": { "dark": "Koyu", "light": "Açık" },
+      "layoutOptions": { "onePage": "Tek Sayfa", "multiPage": "Çok Sayfalı" }
+    }
+  },
+
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "BÜYÜME İÇİN İNŞA EDİLDİ",
+      "heading": ["Dijital Büyüme İçin", "Tasarlanmış", "Hizmetler"],
+      "subtitle": "İşletmenizi ileriye taşımak için bağlantılı uzmanlık.",
+      "brandTagline": "Growth AI",
+      "nodes": [
+        { "label": "Web Sitesi Tasarımı" },
+        { "label": "Landing Page Oluşturucu" },
+        { "label": "Instagram Otomasyonu" },
+        { "label": "Lead Finder" },
+        { "label": "Akıllı Bülten" },
+        { "label": "FollowUp" },
+        { "label": "İçerik Stüdyosu" },
+        { "label": "LinkedIn Otomasyonu" },
+        { "label": "Lead Generation" }
+      ]
+    },
+    "list": {
+      "eyebrow": "NE YAPIYORUZ",
+      "heading": "TRUS AI Hizmetleri",
+      "items": [
+        {
+          "title": "Web Sitesi Tasarımı",
+          "description": "Markanız, iş hedefleriniz ve müşterileriniz etrafında tasarlanmış; net yapı, özenli görseller ve sorunsuz kullanılabilirliği bir araya getiren modern, duyarlı bir web sitesine sahip olun."
+        },
+        {
+          "title": "Landing Page Oluşturucu",
+          "description": "Duyarlı, dönüşüm odaklı açılış sayfalarını hızlıca oluşturun. Kampanya fikirlerinizi dikkat çeken ve harekete geçiren özenli sayfalara dönüştürün."
+        },
+        {
+          "title": "İçerik Stüdyosu",
+          "description": "Her kanal için markanıza uygun, etkileyici içerik oluşturun. İçerik Stüdyosu, fikirlerinizi hedef kitlenize özel net ve akıcı içeriklere dönüştürür."
+        },
+        {
+          "title": "Instagram Otomasyonu",
+          "description": "Daha az emekle etkileyici Instagram gönderileri oluşturun ve paylaşın. İçeriğinizi taze ve alakalı tutarken tutarlı bir görsel varlık sürdürün."
+        },
+        {
+          "title": "LinkedIn Otomasyonu",
+          "description": "Markanızı güçlendiren, uzmanlığınızı yansıtan ve hedef kitlenizi sürekli etkileşimde tutan profesyonel LinkedIn içerikleri oluşturun ve paylaşın."
+        },
+        {
+          "title": "Akıllı Bülten",
+          "description": "Profesyonel e-posta bültenlerini daha kısa sürede oluşturun. Akıllı Bülten, hedeflerinizi ve içeriğinizi hedef kitlenize özel etkileyici e-postalara dönüştürür."
+        },
+        {
+          "title": "Lead Finder",
+          "description": "Doğru potansiyel müşterileri daha hızlı bulun. Lead Finder, ideal müşteri profilinize uyan alakalı ve yüksek potansiyelli müşteri adaylarını belirlemek için iş verilerini analiz eder."
+        },
+        {
+          "title": "Lead Generation",
+          "description": "Hedefli kampanyalar ve optimize edilmiş deneyimlerle yeni potansiyel müşteriler çekin ve yakalayın; kitle ilgisini nitelikli iş fırsatlarına dönüştürün."
+        },
+        {
+          "title": "Follow Up",
+          "description": "Kişiselleştirilmiş takip mesajlarını otomatik olarak oluşturun, görüşmeleri canlı tutun ve kaçırılan fırsatları anlamlı müşteri etkileşimlerine dönüştürün."
+        }
+      ]
+    }
+  },
+
+  "footer": {
+    "firstColumn": "Hizmetler",
+    "secondColumn": "Şirket",
+    "thirdColumn": "Bize Ulaşın",
+    "tagline": "Modern İşletmeler İçin Yenilikçi Dijital Deneyimler İnşa Ediyoruz.",
+    "services": [
+      "Web Sitesi Geliştirme",
+      "SEO Hizmetleri",
+      "Dijital Pazarlama",
+      "Sosyal Medya Pazarlaması",
+      "Yapay Zeka Çözümleri (Trust AI)"
+    ],
+    "company": ["Hakkımızda", "Ekibimiz", "Portfolyo", "Bize ulaşın"],
+    "contact": {
+      "email": "Info@test100.devops-uni.com",
+      "phone": "+98 1223344565",
+      "address": "2847 Oak Street, San Francisco, CA 94102"
+    },
+    "socials": ["Telegram", "Whatsapp", "Instagram", "Facebook", "X"],
+    "bottomLinks": [
+      "Gizlilik Politikası",
+      "Şartlar ve Koşullar",
+      "Trust AI Tarafından Desteklenmektedir"
+    ],
+    "copyright": "© {year} TruS. Tüm hakları saklıdır."
+  }
+}

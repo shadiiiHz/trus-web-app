@@ -165,12 +165,6 @@ const segsToPath = (segs: Array<{ c1: Point; c2: Point; p: Point }>) =>
     )
     .join(" ");
 
-// ServicesListSection has one extra row beyond the tree's 9 branches: a
-// closing "growth-ai" entry with no matching branch tip. The card at the
-// tree's center links there instead (see the clickable center-square
-// anchor below).
-const CENTER_ANCHOR_TARGET = "growth-ai";
-
 // The card is a rounded square, not a circle — a circular approximation
 // undershoots/overshoots badly near the diagonals, which is exactly where
 // most branches leave it. CARD_CORNER is the corner radius read off the
@@ -287,21 +281,6 @@ export function ServiceGrowthTree() {
             style={{ objectFit: "contain" }}
           />
         </Suspense>
-
-        {/* The tree's center card doubles as an anchor to the closing
-            "Growth AI" row — the one list entry with no branch of its own. */}
-        <a
-          href={`#${CENTER_ANCHOR_TARGET}`}
-          onClick={handleAnchorClick(CENTER_ANCHOR_TARGET)}
-          aria-label="Growth AI"
-          className="absolute rounded-[20px]"
-          style={{
-            ...pct(CENTER_X, CENTER_Y),
-            width: `${((CARD_HALF * 2) / VB_W) * 100}%`,
-            height: `${((CARD_HALF * 2) / VB_H) * 100}%`,
-            transform: "translate(-50%, -50%)",
-          }}
-        />
 
         {isDesktop &&
           branches.map((b) => (

@@ -175,16 +175,11 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           className="relative mx-auto flex h-18 max-w-330 items-center justify-between px-5"
           aria-label="Main navigation"
         >
-          {/* Logo — same asset as Footer */}
-          <Link
-            to="/"
-            onClick={() => {
-              // Already on Home: <Link to="/"> is a no-op (same route, no
-              // remount), so scrolling to top has to happen explicitly here.
-              // Navigating in from elsewhere is handled by HomePage's own
-              // mount effect instead.
-              if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+          {/* Logo — same asset as Footer. A plain <a> (not <Link>) so the
+              click is a real browser navigation and fully reloads the page,
+              even when already on Home. */}
+          <a
+            href="/"
             className="shrink-0 outline-none"
             aria-label="TruS — home"
           >
@@ -194,7 +189,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               decoding="async"
               style={{ height: "32px", width: "auto", display: "block" }}
             />
-          </Link>
+          </a>
 
           {/* Desktop nav links */}
           <ul className="hidden lg:flex items-center gap-2.5" role="list">

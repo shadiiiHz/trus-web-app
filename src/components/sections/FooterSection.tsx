@@ -274,7 +274,7 @@ export function FooterSection() {
         <hr
           style={{
             border: "none",
-            borderTop: "1px solid #FFFFFF4D",
+            borderTop: "1px solid rgba(255,255,255,0.3)",
             margin: "60px 0 20px",
           }}
         />

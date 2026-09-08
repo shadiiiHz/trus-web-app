@@ -154,6 +154,7 @@ export function ServicesListSection() {
               key={item.id}
               item={item}
               isActive={item.id === activeId}
+              isLast={i === items.length - 1}
               onActivate={() => activateFromHover(item.id)}
               onDeactivate={deactivateFromHover}
               onExitComplete={() => handleRowExitComplete(item.id)}
@@ -186,6 +187,7 @@ interface ListItem {
 function ServiceRow({
   item,
   isActive,
+  isLast,
   onActivate,
   onDeactivate,
   onExitComplete,
@@ -193,6 +195,7 @@ function ServiceRow({
 }: {
   item: ListItem;
   isActive: boolean;
+  isLast: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
   onExitComplete: () => void;
@@ -210,7 +213,7 @@ function ServiceRow({
       tabIndex={0}
       role="button"
       aria-pressed={isActive}
-      className="grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-3 border-b border-white/20 py-6 outline-none lg:grid-cols-[minmax(260px,360px)_1fr_minmax(200px,303px)] lg:gap-8 lg:py-7"
+      className={`grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-3 py-6 outline-none lg:grid-cols-[minmax(260px,360px)_1fr_minmax(200px,303px)] lg:gap-8 lg:py-7 ${isLast ? "" : "border-b border-white/30"}`}
     >
       {/* Title + bullet — both are a vertical "reel" of two stacked
           duplicate copies (idle-gray on top, active-purple/white directly

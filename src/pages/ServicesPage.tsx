@@ -22,6 +22,14 @@ export default function ServicesPage() {
 
       {/* Further sections (one per branch on the tree diagram above) land here. */}
 
+      {/* Divider above the footer — specific to this page (the list section's
+          last row no longer carries its own trailing border-bottom, see
+          ServicesListSection), not part of the shared FooterSection. */}
+      <div
+        aria-hidden="true"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.3)", background: "var(--color-brand-bg)" }}
+      />
+
       <FooterSection />
     </div>
   );

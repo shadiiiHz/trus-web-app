@@ -13,11 +13,11 @@ interface LanguageOption {
 
 const LANGUAGES: LanguageOption[] = [
   { code: "en", label: "EN", name: "English", Flag: FlagGB },
-  { code: "fr", label: "FR", name: "French", Flag: FlagFR },
-  { code: "es", label: "ES", name: "Spanish", Flag: FlagES },
-  { code: "ru", label: "RU", name: "Russian", Flag: FlagRU },
+  { code: "tr", label: "TR", name: "Turkish", Flag: FlagTR },
   { code: "de", label: "DE", name: "German", Flag: FlagDE },
-  { code: "it", label: "IT", name: "Italian", Flag: FlagIT },
+  { code: "ru", label: "RU", name: "Russian", Flag: FlagRU },
+  { code: "es", label: "ES", name: "Spanish", Flag: FlagES },
+  { code: "fr", label: "FR", name: "French", Flag: FlagFR },
 ];
 
 const LANGUAGE_BY_CODE = Object.fromEntries(
@@ -378,19 +378,28 @@ function FlagES({ fit }: { fit: FlagFit }) {
   );
 }
 
-function FlagIT({ fit }: { fit: FlagFit }) {
+function FlagTR({ fit }: { fit: FlagFit }) {
   return (
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 20 20"
+      viewBox="0 0 32 23"
       preserveAspectRatio={`xMidYMid ${fit}`}
       fill="none"
       aria-hidden="true"
     >
-      <path d="M13.3333 0H6.66663H0V20H6.66663H13.3333H20V0H13.3333Z" fill="#F0F0F0" />
-      <path d="M6.66651 0H0V20H6.66651V0Z" fill="#6DA544" />
-      <path d="M20.0005 0H13.334V20H20.0005V0Z" fill="#D80027" />
+      <path
+        d="M29 0H3C1.34315 0 0 1.34314 0 3V19.59C0 21.2469 1.34315 22.59 3 22.59H29C30.6569 22.59 32 21.2469 32 19.59V3C32 1.34315 30.6569 0 29 0Z"
+        fill="#D80027"
+      />
+      <path
+        d="M15.451 8.69983L16.5506 10.3045L18.3314 9.69304L17.2301 11.2963L18.3296 12.9008L16.5494 12.287L15.4481 13.8903L15.4492 11.9078L13.6689 11.2939L15.4498 10.6825L15.451 8.69983Z"
+        fill="#F0F0F0"
+      />
+      <path
+        d="M12.4494 15.3059C10.3576 15.3059 8.66181 13.5101 8.66181 11.295C8.66181 9.07996 10.3576 7.28421 12.4494 7.28421C13.1017 7.28421 13.7153 7.45887 14.2511 7.76629C13.4106 6.89585 12.2611 6.35864 10.9927 6.35864C8.41812 6.35864 6.33105 8.56876 6.33105 11.295C6.33105 14.0212 8.41818 16.2313 10.9927 16.2313C12.2611 16.2313 13.4106 15.6941 14.2511 14.8237C13.7154 15.1312 13.1017 15.3059 12.4494 15.3059Z"
+        fill="#F0F0F0"
+      />
     </svg>
   );
 }

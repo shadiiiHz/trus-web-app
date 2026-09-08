@@ -159,13 +159,15 @@ const servicesTreeMeta = [
 
 // Services page list section — hover-to-reveal service breakdown below the
 // hero. `id` doubles as the eventual in-page anchor target for the tree
-// diagram's branch links above — matches servicesTreeMeta 1:1 plus one
-// extra closing "growth-ai" entry (that one isn't a tree branch; the
-// central square in the hero illustration links to it instead — see the
-// design brief). `media` is a placeholder preview image (no per-service
-// video/screenshot has been supplied yet) — swap in real per-service
-// thumbnails here once available. Order must match
-// `servicesPage.list.items` in the locale JSON files (zipped via `merge()`).
+// diagram's branch links above — matches servicesTreeMeta 1:1. `media` is a
+// placeholder preview image (no per-service video/screenshot has been
+// supplied yet) — swap in real per-service thumbnails here once available.
+// Order must match `servicesPage.list.items` in the locale JSON files
+// (zipped via `merge()`).
+//
+// GrowthAI is intentionally not listed here — it isn't an independent
+// service, so it's excluded from this list (see ServiceGrowthTree's center
+// anchor, which is non-interactive for the same reason).
 const servicesListMeta = [
   // youtubeId is a temporary test wire-up for the first row only — clicking
   // its play button opens a YouTube popup. Remove/replace once real
@@ -183,7 +185,6 @@ const servicesListMeta = [
   { id: "lead-finder", media: "/services/video.png" },
   { id: "lead-generation", media: "/services/video.png" },
   { id: "followup", media: "/services/video.png" },
-  { id: "growth-ai", media: "/services/video.png" },
 ];
 
 // Per-category screenshots + the live site each template card links out to

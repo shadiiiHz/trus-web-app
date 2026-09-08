@@ -87,11 +87,18 @@ export default function TemplatesGallery() {
     return next;
   };
 
+  // Style/layout filters and Clear All can change which templates show while
+  // the user is scrolled deep into the results — snap back to the top of the
+  // page so the (re-filtered) list is visible from the start instead of
+  // leaving them mid-scroll over unrelated cards.
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   const handleClearAll = () => {
     setActiveCategory("all");
     setActiveStyles(new Set());
     setActiveLayouts(new Set());
     setSearch("");
+    scrollToTop();
   };
 
   return (
@@ -110,14 +117,16 @@ export default function TemplatesGallery() {
           onCategoryChange={setActiveCategory}
           styleCounts={styleCounts}
           activeStyles={activeStyles}
-          onToggleStyle={(style) =>
-            setActiveStyles((prev) => toggleInSet(prev, style))
-          }
+          onToggleStyle={(style) => {
+            setActiveStyles((prev) => toggleInSet(prev, style));
+            scrollToTop();
+          }}
           layoutCounts={layoutCounts}
           activeLayouts={activeLayouts}
-          onToggleLayout={(layout) =>
-            setActiveLayouts((prev) => toggleInSet(prev, layout))
-          }
+          onToggleLayout={(layout) => {
+            setActiveLayouts((prev) => toggleInSet(prev, layout));
+            scrollToTop();
+          }}
           onClearAll={handleClearAll}
           stickyTop={SIDEBAR_STICKY_TOP}
           labels={gallery}
