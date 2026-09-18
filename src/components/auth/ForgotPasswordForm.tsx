@@ -32,6 +32,8 @@ export interface ForgotPasswordFormProps {
   copy: SiteConfig["auth"]["forgotPassword"];
 }
 
+type FieldErrorKey = keyof SiteConfig["auth"]["forgotPassword"]["errors"];
+
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
@@ -53,7 +55,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
   const usernameId = useId();
 
   const [username, setUsername] = useState("");
-  const [error, setError] = useState<string | undefined>();
+  const [error, setError] = useState<FieldErrorKey | undefined>();
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle",
   );
@@ -62,7 +64,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
     e.preventDefault();
 
     if (!username.trim()) {
-      setError(copy.errors.usernameRequired);
+      setError("usernameRequired");
       return;
     }
 
@@ -105,7 +107,11 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
             }`}
           />
         </div>
-        {error && <p className="mt-1.5 text-[13px] text-red-500">{error}</p>}
+        {error && (
+          <p className="mt-1.5 text-[13px] text-red-500">
+            {copy.errors[error]}
+          </p>
+        )}
       </div>
 
       <Button
@@ -130,7 +136,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
 
       <Link
         to="/login"
-        className="inline-flex items-center justify-center gap-1.5 text-center text-body-sm font-semibold text-[#525252]"
+        className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-[#525252]"
       >
         <BackIcon />
         {copy.backToLogin}
