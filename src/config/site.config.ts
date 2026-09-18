@@ -846,6 +846,8 @@ function buildSiteConfig(locale: Locale) {
       forgotPassword: dict.auth.forgotPassword,
       changePassword: dict.auth.changePassword,
       resetPassword: dict.auth.resetPassword,
+      register: dict.auth.register,
+      editAccount: dict.auth.editAccount,
     },
 
     contact: {

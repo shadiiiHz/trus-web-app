@@ -344,12 +344,12 @@ export function LoginForm({ copy }: LoginFormProps) {
 
       <p className="text-center text-body-sm font-body font-normal text-[#525252]">
         {copy.noAccount}{" "}
-        <a
-          href="#"
+        <Link
+          to="/register"
           className="font-semibold text-[#5B2BB9] underline underline-offset-2"
         >
           {copy.signUp}
-        </a>
+        </Link>
       </p>
     </form>
   );

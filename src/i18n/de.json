@@ -435,6 +435,111 @@
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein"
       }
+    },
+
+    "register": {
+      "heading": "Erstellen Sie Ihr Konto",
+      "subtitle": "Treten Sie TruS bei und verwalten Sie Ihr Unternehmen an einem Ort.",
+      "business": {
+        "title": "Unternehmensinformationen",
+        "subtitle": "Erzählen Sie uns von Ihrem Unternehmen, damit wir Ihr Erlebnis personalisieren können.",
+        "firstNameLabel": "Vorname",
+        "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+        "lastNameLabel": "Nachname",
+        "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+        "phoneLabel": "Telefon",
+        "phonePlaceholder": "(555) 000-0000",
+        "emailLabel": "E-Mail-Adresse",
+        "emailPlaceholder": "sie@firma.com",
+        "brandNameLabel": "Markenname",
+        "brandNamePlaceholder": "Geben Sie Ihren Markennamen ein",
+        "telegramUsernameLabel": "Telegram-Benutzername",
+        "telegramUsernamePlaceholder": "z. B. @ihrname",
+        "websiteLabel": "Webseite (Optional)",
+        "websitePlaceholder": "ihrewebsite.de",
+        "timezoneLabel": "Zeitzone",
+        "timezonePlaceholder": "Wählen Sie Ihre Zeitzone",
+        "industryLabel": "Beruf / Branche",
+        "industryPlaceholder": "Wählen Sie Ihre Branche",
+        "jobTitleLabel": "Berufsbezeichnung",
+        "jobTitlePlaceholder": "Geben Sie Ihre Berufsbezeichnung ein"
+      },
+      "logo": {
+        "title": "Firmenlogo",
+        "subtitle": "Laden Sie Ihr Markenlogo hoch. Ein Logo ist für die Erstellung von Beiträgen, Newslettern und anderen Materialien erforderlich.",
+        "uploadCta": "Klicken zum Hochladen",
+        "uploadCtaRest": "oder per Drag & Drop",
+        "uploadHint": "PNG, JPG bis zu 2 MB",
+        "uploadButton": "Logo hochladen",
+        "generateButton": "Logo generieren",
+        "removeAria": "Logo entfernen"
+      },
+      "account": {
+        "title": "Kontoinformationen",
+        "subtitle": "Richten Sie Ihr Konto ein und verbinden Sie Ihren Telegram-Account.",
+        "usernameLabel": "Benutzername",
+        "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
+        "passwordLabel": "Passwort",
+        "passwordPlaceholder": "Passwort erstellen",
+        "confirmPasswordLabel": "Passwort bestätigen",
+        "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+        "showPasswordAria": "Passwort anzeigen",
+        "hidePasswordAria": "Passwort verbergen"
+      },
+      "social": {
+        "title": "Social-Media-Konfiguration",
+        "optionalBadge": "(Optional)",
+        "subtitle": "Fügen Sie Ihre Social-Media-Namen oder Handles hinzu. Dies sind nur Namen/Handles, keine Kontoverknüpfungen.",
+        "linkedinLabel": "LinkedIn-Seitenname",
+        "linkedinPlaceholder": "z. B. ihrfirma",
+        "instagramLabel": "Instagram-Handle",
+        "instagramPlaceholder": "z. B. ihrfirma",
+        "xHandleLabel": "X-Handle",
+        "xHandlePlaceholder": "z. B. ihrfirma",
+        "telegramChannelLabel": "Telegram-Kanalname",
+        "telegramChannelPlaceholder": "z. B. ihrkanal"
+      },
+      "captcha": {
+        "title": "Individuelles CAPTCHA",
+        "subtitle": "Geben Sie die im Bild unten angezeigten Zeichen ein.",
+        "inputLabel": "CAPTCHA eingeben",
+        "placeholder": "Zeichen eingeben",
+        "refreshAria": "CAPTCHA aktualisieren"
+      },
+      "requirements": {
+        "minLength": "Mindestens 8 Zeichen",
+        "hasNumber": "Enthält eine Zahl",
+        "hasLetter": "Enthält einen Buchstaben"
+      },
+      "cancel": "Abbrechen",
+      "submit": "Konto erstellen",
+      "submitting": "Konto wird erstellt...",
+      "success": "Konto erfolgreich erstellt!",
+      "errors": {
+        "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
+        "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",
+        "phoneRequired": "Bitte geben Sie Ihre Telefonnummer ein",
+        "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "brandNameRequired": "Bitte geben Sie Ihren Markennamen ein",
+        "telegramUsernameRequired": "Bitte geben Sie Ihren Telegram-Benutzernamen ein",
+        "timezoneRequired": "Bitte wählen Sie Ihre Zeitzone",
+        "industryRequired": "Bitte wählen Sie Ihre Branche",
+        "jobTitleRequired": "Bitte geben Sie Ihre Berufsbezeichnung ein",
+        "logoRequired": "Bitte laden Sie Ihr Firmenlogo hoch",
+        "usernameRequired": "Bitte wählen Sie einen Benutzernamen",
+        "passwordRequired": "Bitte erstellen Sie ein Passwort",
+        "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
+        "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
+        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
+        "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
+        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Bearbeiten Sie Ihr Konto",
+      "subtitle": "Aktualisieren Sie jederzeit Ihre Unternehmensinformationen und Kontoeinstellungen."
     }
   },
 

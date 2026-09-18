@@ -428,6 +428,111 @@
         "confirmPasswordRequired": "Please confirm your new password",
         "confirmPasswordMismatch": "Passwords do not match"
       }
+    },
+
+    "register": {
+      "heading": "Create Your Account",
+      "subtitle": "Join TRUS and start managing your business in one place.",
+      "business": {
+        "title": "Business Information",
+        "subtitle": "Tell us about your business so we can personalize your experience.",
+        "firstNameLabel": "First name",
+        "firstNamePlaceholder": "Enter your first name",
+        "lastNameLabel": "Last name",
+        "lastNamePlaceholder": "Enter your last name",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "(555) 000-0000",
+        "emailLabel": "Email address",
+        "emailPlaceholder": "you@company.com",
+        "brandNameLabel": "Brand name",
+        "brandNamePlaceholder": "Enter your brand name",
+        "telegramUsernameLabel": "Telegram username",
+        "telegramUsernamePlaceholder": "e.g. @yourusername",
+        "websiteLabel": "Website (Optional)",
+        "websitePlaceholder": "yourwebsite.com",
+        "timezoneLabel": "Timezone",
+        "timezonePlaceholder": "Select your timezone",
+        "industryLabel": "Job / Industry",
+        "industryPlaceholder": "Select your industry",
+        "jobTitleLabel": "Job title",
+        "jobTitlePlaceholder": "Enter your job title"
+      },
+      "logo": {
+        "title": "Business Logo",
+        "subtitle": "Upload your brand logo. Having a logo is mandatory for creating posts, newsletters, and all other materials.",
+        "uploadCta": "Click to upload",
+        "uploadCtaRest": "or drag and drop",
+        "uploadHint": "PNG, JPG up to 2 MB",
+        "uploadButton": "Upload Logo",
+        "generateButton": "Generate Logo",
+        "removeAria": "Remove logo"
+      },
+      "account": {
+        "title": "Account Information",
+        "subtitle": "Set up your account and connect your Telegram.",
+        "usernameLabel": "Username",
+        "usernamePlaceholder": "Choose a username",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Create a password",
+        "confirmPasswordLabel": "Confirm password",
+        "confirmPasswordPlaceholder": "Confirm your password",
+        "showPasswordAria": "Show password",
+        "hidePasswordAria": "Hide password"
+      },
+      "social": {
+        "title": "Social Media Config",
+        "optionalBadge": "(Optional)",
+        "subtitle": "Add your social media names or handles. These are just names/handles, not account connections.",
+        "linkedinLabel": "LinkedIn Page Name",
+        "linkedinPlaceholder": "e.g. yourcompany",
+        "instagramLabel": "Instagram Handle",
+        "instagramPlaceholder": "e.g. yourcompany",
+        "xHandleLabel": "X Handle",
+        "xHandlePlaceholder": "e.g. yourcompany",
+        "telegramChannelLabel": "Telegram Channel Name",
+        "telegramChannelPlaceholder": "e.g. yourchannel"
+      },
+      "captcha": {
+        "title": "Custom CAPTCHA",
+        "subtitle": "Enter the characters shown in the image below.",
+        "inputLabel": "Enter CAPTCHA",
+        "placeholder": "Type the characters",
+        "refreshAria": "Refresh CAPTCHA"
+      },
+      "requirements": {
+        "minLength": "At least 8 characters",
+        "hasNumber": "Includes a number",
+        "hasLetter": "Includes a letter"
+      },
+      "cancel": "Cancel",
+      "submit": "Create Account",
+      "submitting": "Creating Account...",
+      "success": "Account created successfully!",
+      "errors": {
+        "firstNameRequired": "Please enter your first name",
+        "lastNameRequired": "Please enter your last name",
+        "phoneRequired": "Please enter your phone number",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
+        "brandNameRequired": "Please enter your brand name",
+        "telegramUsernameRequired": "Please enter your Telegram username",
+        "timezoneRequired": "Please select your timezone",
+        "industryRequired": "Please select your industry",
+        "jobTitleRequired": "Please enter your job title",
+        "logoRequired": "Please upload your business logo",
+        "usernameRequired": "Please choose a username",
+        "passwordRequired": "Please create a password",
+        "passwordInvalid": "Password must meet all the requirements above",
+        "confirmPasswordRequired": "Please confirm your password",
+        "confirmPasswordMismatch": "Passwords do not match",
+        "captchaRequired": "Please enter the CAPTCHA code",
+        "captchaMismatch": "CAPTCHA code doesn't match, please try again"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Edit Your Account",
+      "subtitle": "Update your business information and account settings anytime."
     }
   },
 

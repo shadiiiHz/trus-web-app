@@ -434,6 +434,111 @@
         "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
         "confirmPasswordMismatch": "Пароли не совпадают"
       }
+    },
+
+    "register": {
+      "heading": "Создайте аккаунт",
+      "subtitle": "Присоединяйтесь к TruS и управляйте своим бизнесом в одном месте.",
+      "business": {
+        "title": "Информация о бизнесе",
+        "subtitle": "Расскажите нам о своём бизнесе, чтобы мы могли персонализировать ваш опыт.",
+        "firstNameLabel": "Имя",
+        "firstNamePlaceholder": "Введите ваше имя",
+        "lastNameLabel": "Фамилия",
+        "lastNamePlaceholder": "Введите вашу фамилию",
+        "phoneLabel": "Телефон",
+        "phonePlaceholder": "(555) 000-0000",
+        "emailLabel": "Адрес электронной почты",
+        "emailPlaceholder": "you@company.com",
+        "brandNameLabel": "Название бренда",
+        "brandNamePlaceholder": "Введите название вашего бренда",
+        "telegramUsernameLabel": "Имя пользователя Telegram",
+        "telegramUsernamePlaceholder": "напр. @вашеимя",
+        "websiteLabel": "Веб-сайт (необязательно)",
+        "websitePlaceholder": "вашсайт.com",
+        "timezoneLabel": "Часовой пояс",
+        "timezonePlaceholder": "Выберите часовой пояс",
+        "industryLabel": "Должность / Отрасль",
+        "industryPlaceholder": "Выберите отрасль",
+        "jobTitleLabel": "Должность",
+        "jobTitlePlaceholder": "Введите вашу должность"
+      },
+      "logo": {
+        "title": "Логотип компании",
+        "subtitle": "Загрузите логотип вашего бренда. Логотип обязателен для создания постов, рассылок и других материалов.",
+        "uploadCta": "Нажмите, чтобы загрузить",
+        "uploadCtaRest": "или перетащите файл",
+        "uploadHint": "PNG, JPG до 2 МБ",
+        "uploadButton": "Загрузить логотип",
+        "generateButton": "Сгенерировать логотип",
+        "removeAria": "Удалить логотип"
+      },
+      "account": {
+        "title": "Информация об аккаунте",
+        "subtitle": "Настройте аккаунт и подключите Telegram.",
+        "usernameLabel": "Имя пользователя",
+        "usernamePlaceholder": "Выберите имя пользователя",
+        "passwordLabel": "Пароль",
+        "passwordPlaceholder": "Придумайте пароль",
+        "confirmPasswordLabel": "Подтвердите пароль",
+        "confirmPasswordPlaceholder": "Подтвердите ваш пароль",
+        "showPasswordAria": "Показать пароль",
+        "hidePasswordAria": "Скрыть пароль"
+      },
+      "social": {
+        "title": "Настройка социальных сетей",
+        "optionalBadge": "(необязательно)",
+        "subtitle": "Добавьте названия или имена ваших социальных сетей. Это просто имена/handles, а не подключение аккаунтов.",
+        "linkedinLabel": "Название страницы LinkedIn",
+        "linkedinPlaceholder": "напр. вашакомпания",
+        "instagramLabel": "Имя пользователя Instagram",
+        "instagramPlaceholder": "напр. вашакомпания",
+        "xHandleLabel": "Имя пользователя X",
+        "xHandlePlaceholder": "напр. вашакомпания",
+        "telegramChannelLabel": "Название канала Telegram",
+        "telegramChannelPlaceholder": "напр. вашканал"
+      },
+      "captcha": {
+        "title": "Пользовательская CAPTCHA",
+        "subtitle": "Введите символы, показанные на изображении ниже.",
+        "inputLabel": "Введите CAPTCHA",
+        "placeholder": "Введите символы",
+        "refreshAria": "Обновить CAPTCHA"
+      },
+      "requirements": {
+        "minLength": "Минимум 8 символов",
+        "hasNumber": "Содержит цифру",
+        "hasLetter": "Содержит букву"
+      },
+      "cancel": "Отмена",
+      "submit": "Создать аккаунт",
+      "submitting": "Создание аккаунта...",
+      "success": "Аккаунт успешно создан!",
+      "errors": {
+        "firstNameRequired": "Пожалуйста, введите ваше имя",
+        "lastNameRequired": "Пожалуйста, введите вашу фамилию",
+        "phoneRequired": "Пожалуйста, введите номер телефона",
+        "emailRequired": "Пожалуйста, введите адрес электронной почты",
+        "emailInvalid": "Пожалуйста, введите корректный адрес электронной почты",
+        "brandNameRequired": "Пожалуйста, введите название бренда",
+        "telegramUsernameRequired": "Пожалуйста, введите имя пользователя Telegram",
+        "timezoneRequired": "Пожалуйста, выберите часовой пояс",
+        "industryRequired": "Пожалуйста, выберите отрасль",
+        "jobTitleRequired": "Пожалуйста, введите вашу должность",
+        "logoRequired": "Пожалуйста, загрузите логотип компании",
+        "usernameRequired": "Пожалуйста, выберите имя пользователя",
+        "passwordRequired": "Пожалуйста, придумайте пароль",
+        "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
+        "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
+        "confirmPasswordMismatch": "Пароли не совпадают",
+        "captchaRequired": "Пожалуйста, введите код CAPTCHA",
+        "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Редактировать аккаунт",
+      "subtitle": "Обновляйте информацию о бизнесе и настройки аккаунта в любое время."
     }
   },
 

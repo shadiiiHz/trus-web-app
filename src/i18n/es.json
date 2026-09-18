@@ -447,6 +447,111 @@
         "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
         "confirmPasswordMismatch": "Las contraseñas no coinciden"
       }
+    },
+
+    "register": {
+      "heading": "Crea tu cuenta",
+      "subtitle": "Únete a TruS y comienza a gestionar tu negocio en un solo lugar.",
+      "business": {
+        "title": "Información del negocio",
+        "subtitle": "Cuéntanos sobre tu negocio para que podamos personalizar tu experiencia.",
+        "firstNameLabel": "Nombre",
+        "firstNamePlaceholder": "Introduce tu nombre",
+        "lastNameLabel": "Apellido",
+        "lastNamePlaceholder": "Introduce tu apellido",
+        "phoneLabel": "Teléfono",
+        "phonePlaceholder": "(555) 000-0000",
+        "emailLabel": "Correo electrónico",
+        "emailPlaceholder": "tu@empresa.com",
+        "brandNameLabel": "Nombre de la marca",
+        "brandNamePlaceholder": "Introduce el nombre de tu marca",
+        "telegramUsernameLabel": "Usuario de Telegram",
+        "telegramUsernamePlaceholder": "p. ej. @tuusuario",
+        "websiteLabel": "Sitio web (Opcional)",
+        "websitePlaceholder": "tusitio.com",
+        "timezoneLabel": "Zona horaria",
+        "timezonePlaceholder": "Selecciona tu zona horaria",
+        "industryLabel": "Puesto / Sector",
+        "industryPlaceholder": "Selecciona tu sector",
+        "jobTitleLabel": "Cargo",
+        "jobTitlePlaceholder": "Introduce tu cargo"
+      },
+      "logo": {
+        "title": "Logo del negocio",
+        "subtitle": "Sube el logo de tu marca. Tener un logo es obligatorio para crear publicaciones, newsletters y demás materiales.",
+        "uploadCta": "Haz clic para subir",
+        "uploadCtaRest": "o arrastra y suelta",
+        "uploadHint": "PNG, JPG hasta 2 MB",
+        "uploadButton": "Subir logo",
+        "generateButton": "Generar logo",
+        "removeAria": "Eliminar logo"
+      },
+      "account": {
+        "title": "Información de la cuenta",
+        "subtitle": "Configura tu cuenta y conecta tu Telegram.",
+        "usernameLabel": "Nombre de usuario",
+        "usernamePlaceholder": "Elige un nombre de usuario",
+        "passwordLabel": "Contraseña",
+        "passwordPlaceholder": "Crea una contraseña",
+        "confirmPasswordLabel": "Confirmar contraseña",
+        "confirmPasswordPlaceholder": "Confirma tu contraseña",
+        "showPasswordAria": "Mostrar contraseña",
+        "hidePasswordAria": "Ocultar contraseña"
+      },
+      "social": {
+        "title": "Configuración de redes sociales",
+        "optionalBadge": "(Opcional)",
+        "subtitle": "Añade tus nombres o identificadores de redes sociales. Son solo nombres/identificadores, no conexiones de cuenta.",
+        "linkedinLabel": "Nombre de página de LinkedIn",
+        "linkedinPlaceholder": "p. ej. tuempresa",
+        "instagramLabel": "Usuario de Instagram",
+        "instagramPlaceholder": "p. ej. tuempresa",
+        "xHandleLabel": "Usuario de X",
+        "xHandlePlaceholder": "p. ej. tuempresa",
+        "telegramChannelLabel": "Nombre del canal de Telegram",
+        "telegramChannelPlaceholder": "p. ej. tucanal"
+      },
+      "captcha": {
+        "title": "CAPTCHA personalizado",
+        "subtitle": "Introduce los caracteres que se muestran en la imagen de abajo.",
+        "inputLabel": "Introducir CAPTCHA",
+        "placeholder": "Escribe los caracteres",
+        "refreshAria": "Actualizar CAPTCHA"
+      },
+      "requirements": {
+        "minLength": "Al menos 8 caracteres",
+        "hasNumber": "Incluye un número",
+        "hasLetter": "Incluye una letra"
+      },
+      "cancel": "Cancelar",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta...",
+      "success": "¡Cuenta creada correctamente!",
+      "errors": {
+        "firstNameRequired": "Por favor introduce tu nombre",
+        "lastNameRequired": "Por favor introduce tu apellido",
+        "phoneRequired": "Por favor introduce tu número de teléfono",
+        "emailRequired": "Por favor introduce tu correo electrónico",
+        "emailInvalid": "Por favor introduce un correo electrónico válido",
+        "brandNameRequired": "Por favor introduce el nombre de tu marca",
+        "telegramUsernameRequired": "Por favor introduce tu usuario de Telegram",
+        "timezoneRequired": "Por favor selecciona tu zona horaria",
+        "industryRequired": "Por favor selecciona tu sector",
+        "jobTitleRequired": "Por favor introduce tu cargo",
+        "logoRequired": "Por favor sube el logo de tu negocio",
+        "usernameRequired": "Por favor elige un nombre de usuario",
+        "passwordRequired": "Por favor crea una contraseña",
+        "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
+        "confirmPasswordRequired": "Por favor confirma tu contraseña",
+        "confirmPasswordMismatch": "Las contraseñas no coinciden",
+        "captchaRequired": "Por favor introduce el código CAPTCHA",
+        "captchaMismatch": "El código CAPTCHA no coincide, inténtalo de nuevo"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Edita tu cuenta",
+      "subtitle": "Actualiza la información de tu negocio y los ajustes de tu cuenta cuando quieras."
     }
   },
 
