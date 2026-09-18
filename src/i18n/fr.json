@@ -352,6 +352,8 @@
       "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
       "passwordLabel": "Mot de passe",
       "passwordPlaceholder": "Saisissez votre mot de passe",
+      "showPasswordAria": "Afficher le mot de passe",
+      "hidePasswordAria": "Masquer le mot de passe",
       "rememberMe": "Se souvenir de moi",
       "forgotPassword": "Mot de passe oublié",
       "captchaLabel": "Saisissez le code affiché ci-dessus",

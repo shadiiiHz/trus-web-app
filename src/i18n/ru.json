@@ -348,6 +348,8 @@
       "usernamePlaceholder": "Введите имя пользователя",
       "passwordLabel": "Пароль",
       "passwordPlaceholder": "Введите пароль",
+      "showPasswordAria": "Показать пароль",
+      "hidePasswordAria": "Скрыть пароль",
       "rememberMe": "Запомнить меня",
       "forgotPassword": "Забыли пароль",
       "captchaLabel": "Введите код, показанный выше",

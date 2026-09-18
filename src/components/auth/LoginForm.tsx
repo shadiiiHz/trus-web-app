@@ -21,7 +21,8 @@ function generateCaptcha(): string {
   return code;
 }
 
-type FieldErrors = Partial<Record<"username" | "password" | "captcha", string>>;
+type FieldErrorKey = keyof SiteConfig["auth"]["login"]["errors"];
+type FieldErrors = Partial<Record<"username" | "password" | "captcha", FieldErrorKey>>;
 
 const fieldWrapClass = "relative flex items-center";
 
@@ -124,12 +125,12 @@ export function LoginForm({ copy }: LoginFormProps) {
     e.preventDefault();
 
     const nextErrors: FieldErrors = {};
-    if (!username.trim()) nextErrors.username = copy.errors.usernameRequired;
-    if (!password) nextErrors.password = copy.errors.passwordRequired;
+    if (!username.trim()) nextErrors.username = "usernameRequired";
+    if (!password) nextErrors.password = "passwordRequired";
     if (!captchaInput.trim()) {
-      nextErrors.captcha = copy.errors.captchaRequired;
+      nextErrors.captcha = "captchaRequired";
     } else if (captchaInput.trim().toUpperCase() !== captcha) {
-      nextErrors.captcha = copy.errors.captchaMismatch;
+      nextErrors.captcha = "captchaMismatch";
     }
 
     setErrors(nextErrors);
@@ -179,7 +180,9 @@ export function LoginForm({ copy }: LoginFormProps) {
           />
         </div>
         {errors.username && (
-          <p className="mt-1.5 text-[13px] text-red-500">{errors.username}</p>
+          <p className="mt-1.5 text-[13px] text-red-500">
+            {copy.errors[errors.username]}
+          </p>
         )}
       </div>
 
@@ -217,14 +220,18 @@ export function LoginForm({ copy }: LoginFormProps) {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={
+              showPassword ? copy.hidePasswordAria : copy.showPasswordAria
+            }
             className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-[#9CA3AF] transition-colors hover:text-[#1F2430]"
           >
             {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
         </div>
         {errors.password && (
-          <p className="mt-1.5 text-[13px] text-red-500">{errors.password}</p>
+          <p className="mt-1.5 text-[13px] text-red-500">
+            {copy.errors[errors.password]}
+          </p>
         )}
       </div>
 
@@ -308,7 +315,9 @@ export function LoginForm({ copy }: LoginFormProps) {
           />
         </div>
         {errors.captcha && (
-          <p className="mt-1.5 text-[13px] text-red-500">{errors.captcha}</p>
+          <p className="mt-1.5 text-[13px] text-red-500">
+            {copy.errors[errors.captcha]}
+          </p>
         )}
       </div>
 

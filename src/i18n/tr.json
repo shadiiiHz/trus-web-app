@@ -342,6 +342,8 @@
       "usernamePlaceholder": "Kullanıcı adınızı girin",
       "passwordLabel": "Şifre",
       "passwordPlaceholder": "Şifrenizi girin",
+      "showPasswordAria": "Şifreyi göster",
+      "hidePasswordAria": "Şifreyi gizle",
       "rememberMe": "Beni hatırla",
       "forgotPassword": "Şifremi unuttum",
       "captchaLabel": "Yukarıdaki kodu girin",

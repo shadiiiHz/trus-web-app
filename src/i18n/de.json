@@ -349,6 +349,8 @@
       "usernamePlaceholder": "Benutzername eingeben",
       "passwordLabel": "Passwort",
       "passwordPlaceholder": "Passwort eingeben",
+      "showPasswordAria": "Passwort anzeigen",
+      "hidePasswordAria": "Passwort verbergen",
       "rememberMe": "Angemeldet bleiben",
       "forgotPassword": "Passwort vergessen",
       "captchaLabel": "Geben Sie den oben angezeigten Code ein",

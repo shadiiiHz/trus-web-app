@@ -361,6 +361,8 @@
       "usernamePlaceholder": "Introduce tu nombre de usuario",
       "passwordLabel": "Contraseña",
       "passwordPlaceholder": "Introduce tu contraseña",
+      "showPasswordAria": "Mostrar contraseña",
+      "hidePasswordAria": "Ocultar contraseña",
       "rememberMe": "Recuérdame",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "captchaLabel": "Introduce el código mostrado arriba",

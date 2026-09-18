@@ -342,6 +342,8 @@
       "usernamePlaceholder": "Enter your username",
       "passwordLabel": "Password",
       "passwordPlaceholder": "Enter your password",
+      "showPasswordAria": "Show password",
+      "hidePasswordAria": "Hide password",
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password",
       "captchaLabel": "Enter the code shown above",
