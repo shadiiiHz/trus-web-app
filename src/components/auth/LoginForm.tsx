@@ -29,7 +29,7 @@ const iconClass =
   "pointer-events-none absolute left-4 h-4.5 w-4.5 text-[#A3A3A3]";
 
 const inputBaseClass =
-  "w-full rounded-md border border-[#D4D4D4] bg-white pl-11 pr-11 py-2.5 text-[16px] font-body text-[#737373] outline-none transition-colors duration-200 placeholder:text-[#737373] focus:border-brand-accent";
+  "w-full rounded-md border border-[#D4D4D4] bg-white pl-11 pr-11 py-2.5 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 placeholder:text-[#737373] focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -206,7 +206,10 @@ export function LoginForm({ copy }: LoginFormProps) {
               clearError("password");
             }}
             aria-invalid={Boolean(errors.password)}
-            style={{ color: "#B8B8B8", caretColor: "#737373" }}
+            style={{
+              color: showPassword ? "#000000" : "#B8B8B8",
+              caretColor: "#737373",
+            }}
             className={`${inputBaseClass} ${
               errors.password ? "border-red-400" : "border-[#D4D4D4]"
             }`}
@@ -254,7 +257,7 @@ export function LoginForm({ copy }: LoginFormProps) {
       {/* Captcha code display + refresh */}
       <div className="flex items-center gap-3">
         <div
-          className="flex h-[66px] flex-1 select-none items-center justify-center gap-2.5 rounded-md border border-[#D4D4D4] bg-white"
+          className="flex h-16.5 flex-1 select-none items-center justify-center gap-2.5 rounded-md border border-[#D4D4D4] bg-white"
           aria-hidden="true"
         >
           {captcha.split("").map((char, i) => (
@@ -270,7 +273,7 @@ export function LoginForm({ copy }: LoginFormProps) {
           whileHover={{ rotate: 90 }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-md border border-[#D4D4D4] bg-white text-[#1F2430] transition-colors hover:border-brand-accent hover:text-brand-accent"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[#D4D4D4] bg-white text-[#1F2430] transition-colors hover:border-brand-accent hover:text-brand-accent"
         >
           <RotateCw size={20} />
         </motion.button>
@@ -312,7 +315,7 @@ export function LoginForm({ copy }: LoginFormProps) {
       <Button
         type="submit"
         variant="primary"
-        className="mt-1 w-full rounded-md py-3.5 text-[16px] font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
+        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>

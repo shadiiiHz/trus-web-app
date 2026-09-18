@@ -14,6 +14,12 @@ export interface LoginInfoCardProps {
  * Left-side panel on the login page. Built from scratch (not the shared
  * ContactInfoCard) so this page's card can stay static — no scroll-lit
  * border, no background video — while matching the same look.
+ *
+ * Border is a 1px linear gradient stroke per Figma spec: from the
+ * top-right corner (black, alpha 1) through a near-transparent midpoint
+ * (alpha 0.05) to the bottom-left corner (black, alpha 0.5). Implemented
+ * with the mask-composite "gradient border" trick so the gradient only
+ * paints the 1px ring, not the whole card background.
  */
 export function LoginInfoCard({
   tagline,
@@ -29,16 +35,33 @@ export function LoginInfoCard({
 
   return (
     <div
-      className="relative flex h-full flex-col rounded-2xl border border-[#E4E1EE] bg-[#FAFAFB] p-7"
+      className="relative flex h-full flex-col rounded-2xl bg-[#FAFAFB] p-7"
       style={{ minHeight: "594px", height: "594px" }}
     >
+      {/* Gradient border ring — Figma spec: linear gradient, top-right
+          corner to bottom-left corner, stops rgba(0,0,0,1) → rgba(0,0,0,0.05)
+          → rgba(0,0,0,0.5) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{
+          padding: "1px",
+          background:
+            "linear-gradient(30deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)",
+          WebkitMask:
+            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+      />
+
       <p className="text-[22px] leading-none text-[#707075]">{tagline}</p>
 
       <a
         href={telHref}
         className="group mt-5 inline-flex items-center gap-2.5 self-start"
       >
-        <span className="font-hero text-[16px] font-bold text-[#070606]">
+        <span className="font-hero text-body font-bold text-[#070606]">
           {cta}
         </span>
       </a>
