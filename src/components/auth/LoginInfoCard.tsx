@@ -30,7 +30,7 @@ export function LoginInfoCard({
   return (
     <div
       className="relative flex h-full flex-col rounded-2xl border border-[#E4E1EE] bg-[#FAFAFB] p-7"
-      style={{ minHeight: "594px" }}
+      style={{ minHeight: "594px", height: "594px" }}
     >
       <p className="text-[22px] leading-none text-[#707075]">{tagline}</p>
 

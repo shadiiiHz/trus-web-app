@@ -149,7 +149,7 @@ export function LoginForm({ copy }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       {/* Username */}
       <div>
         <label
