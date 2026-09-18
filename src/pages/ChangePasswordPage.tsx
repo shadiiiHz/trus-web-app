@@ -22,7 +22,7 @@ export default function ChangePasswordPage() {
         <div className="mx-auto w-full max-w-330 px-5 py-16">
           {/* Same left card + right-form layout as the login/forgot-password
               pages, so every auth screen lines up under the navbar identically. */}
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-24 lg:pl-[80px]">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-24 lg:pl-20">
             <FadeIn direction="left" className="lg:w-[414px] lg:shrink-0">
               <LoginInfoCard
                 tagline={card.tagline}
