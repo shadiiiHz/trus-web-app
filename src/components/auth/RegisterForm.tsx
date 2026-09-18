@@ -848,7 +848,11 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   id={passwordId}
                   label={copy.account.passwordLabel}
                   required
-                  error={errors.password && copy.errors[errors.password]}
+                  error={
+                    errors.password === "passwordRequired"
+                      ? copy.errors.passwordRequired
+                      : undefined
+                  }
                 >
                   <div className={fieldWrapClass}>
                     <PasswordIcon className={iconClass} />
@@ -885,6 +889,17 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
                   </div>
+                  {errors.password === "passwordInvalid" && (
+                    <div className="mt-1.5 flex flex-col gap-1">
+                      {passwordRequirements
+                        .filter(({ test }) => !test(password))
+                        .map(({ key }) => (
+                          <p key={key} className="text-[13px] text-red-500">
+                            {copy.requirements[key]}
+                          </p>
+                        ))}
+                    </div>
+                  )}
                 </Field>
 
                 <Field
