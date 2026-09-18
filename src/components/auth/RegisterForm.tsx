@@ -754,11 +754,11 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   {copy.logo.uploadHint}
                 </p>
                 <div className="absolute bottom-3 -right-5 h-14 w-auto">
-                  <div className="relative h-[40] w-auto">
+                  <div className="relative h-auto w-auto">
                     <img
                       src={uploadBadge}
                       alt=""
-                      className="h-[40] w-auto"
+                      className="h-full w-auto"
                       aria-hidden="true"
                     />
                     <img
