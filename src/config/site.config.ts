@@ -732,7 +732,7 @@ function buildSiteConfig(locale: Locale) {
     nav: {
       logo: "TruS",
       links: dict.nav.links.map((label, i) => ({ label, href: navHrefs[i] })),
-      cta: { label: dict.nav.cta, href: "#contact" },
+      cta: { label: dict.nav.cta, href: "/login" },
     },
 
     hero: {
@@ -839,6 +839,10 @@ function buildSiteConfig(locale: Locale) {
         heading: dict.servicesPage.list.heading,
         items: merge(dict.servicesPage.list.items, servicesListMeta),
       },
+    },
+
+    auth: {
+      login: dict.auth.login,
     },
 
     contact: {

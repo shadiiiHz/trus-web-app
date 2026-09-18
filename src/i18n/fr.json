@@ -337,6 +337,40 @@
     }
   },
 
+  "auth": {
+    "login": {
+      "eyebrow": "BON RETOUR",
+      "heading": "Connectez-vous à votre compte",
+      "card": {
+        "cta": "Réserver un appel",
+        "officeLabel": "Bureau",
+        "phoneLabel": "Téléphone",
+        "emailLabel": "E-mail"
+      },
+      "subtitle": "Bon retour ! Veuillez saisir vos identifiants pour continuer.",
+      "usernameLabel": "Nom d'utilisateur",
+      "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "Saisissez votre mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié",
+      "captchaLabel": "Saisissez le code affiché ci-dessus",
+      "captchaPlaceholder": "Saisissez le code captcha",
+      "refreshCaptchaAria": "Actualiser le code captcha",
+      "submit": "Se connecter",
+      "submitting": "Connexion en cours...",
+      "success": "Connexion réussie — bon retour !",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire",
+      "errors": {
+        "usernameRequired": "Veuillez saisir votre nom d'utilisateur",
+        "passwordRequired": "Veuillez saisir votre mot de passe",
+        "captchaRequired": "Veuillez saisir le code captcha",
+        "captchaMismatch": "Le code captcha ne correspond pas, veuillez réessayer"
+      }
+    }
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Entreprise",

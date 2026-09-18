@@ -327,6 +327,40 @@
     }
   },
 
+  "auth": {
+    "login": {
+      "eyebrow": "WELCOME BACK",
+      "heading": "Log In to Your Account",
+      "card": {
+        "cta": "Book a Call",
+        "officeLabel": "Office",
+        "phoneLabel": "Phone",
+        "emailLabel": "Email"
+      },
+      "subtitle": "Welcome back! Please enter your credentials to continue.",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password",
+      "captchaLabel": "Enter the code shown above",
+      "captchaPlaceholder": "Enter captcha code",
+      "refreshCaptchaAria": "Refresh captcha code",
+      "submit": "Log in",
+      "submitting": "Logging in...",
+      "success": "Login successful — welcome back!",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "errors": {
+        "usernameRequired": "Please enter your username",
+        "passwordRequired": "Please enter your password",
+        "captchaRequired": "Please enter the captcha code",
+        "captchaMismatch": "Captcha code doesn't match, please try again"
+      }
+    }
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Company",

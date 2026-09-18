@@ -333,6 +333,40 @@
     }
   },
 
+  "auth": {
+    "login": {
+      "eyebrow": "С ВОЗВРАЩЕНИЕМ",
+      "heading": "Войти в аккаунт",
+      "card": {
+        "cta": "Забронировать звонок",
+        "officeLabel": "Офис",
+        "phoneLabel": "Телефон",
+        "emailLabel": "Эл. почта"
+      },
+      "subtitle": "С возвращением! Пожалуйста, введите свои данные, чтобы продолжить.",
+      "usernameLabel": "Имя пользователя",
+      "usernamePlaceholder": "Введите имя пользователя",
+      "passwordLabel": "Пароль",
+      "passwordPlaceholder": "Введите пароль",
+      "rememberMe": "Запомнить меня",
+      "forgotPassword": "Забыли пароль",
+      "captchaLabel": "Введите код, показанный выше",
+      "captchaPlaceholder": "Введите код с картинки",
+      "refreshCaptchaAria": "Обновить код",
+      "submit": "Войти",
+      "submitting": "Вход...",
+      "success": "Вход выполнен успешно — с возвращением!",
+      "noAccount": "Нет аккаунта?",
+      "signUp": "Зарегистрироваться",
+      "errors": {
+        "usernameRequired": "Пожалуйста, введите имя пользователя",
+        "passwordRequired": "Пожалуйста, введите пароль",
+        "captchaRequired": "Пожалуйста, введите код с картинки",
+        "captchaMismatch": "Код не совпадает, попробуйте снова"
+      }
+    }
+  },
+
   "footer": {
     "firstColumn": "Услуги",
     "secondColumn": "Компания",

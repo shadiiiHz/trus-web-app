@@ -327,6 +327,40 @@
     }
   },
 
+  "auth": {
+    "login": {
+      "eyebrow": "TEKRAR HOŞ GELDİNİZ",
+      "heading": "Hesabınıza Giriş Yapın",
+      "card": {
+        "cta": "Görüşme Ayarla",
+        "officeLabel": "Ofis",
+        "phoneLabel": "Telefon",
+        "emailLabel": "E-posta"
+      },
+      "subtitle": "Tekrar hoş geldiniz! Devam etmek için lütfen bilgilerinizi girin.",
+      "usernameLabel": "Kullanıcı Adı",
+      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "passwordLabel": "Şifre",
+      "passwordPlaceholder": "Şifrenizi girin",
+      "rememberMe": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum",
+      "captchaLabel": "Yukarıdaki kodu girin",
+      "captchaPlaceholder": "Doğrulama kodunu girin",
+      "refreshCaptchaAria": "Doğrulama kodunu yenile",
+      "submit": "Giriş Yap",
+      "submitting": "Giriş yapılıyor...",
+      "success": "Giriş başarılı — tekrar hoş geldiniz!",
+      "noAccount": "Hesabınız yok mu?",
+      "signUp": "Kayıt olun",
+      "errors": {
+        "usernameRequired": "Lütfen kullanıcı adınızı girin",
+        "passwordRequired": "Lütfen şifrenizi girin",
+        "captchaRequired": "Lütfen doğrulama kodunu girin",
+        "captchaMismatch": "Doğrulama kodu eşleşmiyor, lütfen tekrar deneyin"
+      }
+    }
+  },
+
   "footer": {
     "firstColumn": "Hizmetler",
     "secondColumn": "Şirket",
