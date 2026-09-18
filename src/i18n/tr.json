@@ -401,6 +401,33 @@
         "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor"
       }
+    },
+    "resetPassword": {
+      "heading": "Yeni Bir Şifre Oluşturun",
+      "subtitle": "Yeni şifreniz önceki şifrenizden farklı olmalıdır.",
+      "newPasswordLabel": "Yeni şifre",
+      "newPasswordPlaceholder": "Bir şifre oluşturun",
+      "confirmPasswordLabel": "Yeni Şifreyi Onayla",
+      "confirmPasswordPlaceholder": "Yeni şifrenizi onaylayın",
+      "showPasswordAria": "Şifreyi göster",
+      "hidePasswordAria": "Şifreyi gizle",
+      "requirements": {
+        "minLength": "En az 8 karakter",
+        "hasNumber": "Bir rakam içerir",
+        "hasLetter": "Bir harf içerir"
+      },
+      "submit": "Şifreyi Sıfırla",
+      "submitting": "Sıfırlanıyor...",
+      "successHeading": "Şifre Başarıyla Değiştirildi",
+      "successSubtitle": "Şifreniz başarıyla sıfırlandı. Otomatik giriş yapmak için aşağıya tıklayın.",
+      "continue": "Devam Et",
+      "backToLogin": "Girişe dön",
+      "errors": {
+        "newPasswordRequired": "Lütfen yeni bir şifre girin",
+        "newPasswordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
+        "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
+        "confirmPasswordMismatch": "Şifreler eşleşmiyor"
+      }
     }
   },
 

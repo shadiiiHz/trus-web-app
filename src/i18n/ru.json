@@ -407,6 +407,33 @@
         "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
         "confirmPasswordMismatch": "Пароли не совпадают"
       }
+    },
+    "resetPassword": {
+      "heading": "Создайте новый пароль",
+      "subtitle": "Ваш новый пароль должен отличаться от предыдущего.",
+      "newPasswordLabel": "Новый пароль",
+      "newPasswordPlaceholder": "Придумайте пароль",
+      "confirmPasswordLabel": "Подтвердите новый пароль",
+      "confirmPasswordPlaceholder": "Подтвердите новый пароль",
+      "showPasswordAria": "Показать пароль",
+      "hidePasswordAria": "Скрыть пароль",
+      "requirements": {
+        "minLength": "Минимум 8 символов",
+        "hasNumber": "Содержит цифру",
+        "hasLetter": "Содержит букву"
+      },
+      "submit": "Сбросить пароль",
+      "submitting": "Сброс...",
+      "successHeading": "Пароль успешно изменён",
+      "successSubtitle": "Ваш пароль был успешно сброшен. Нажмите ниже, чтобы войти автоматически.",
+      "continue": "Продолжить",
+      "backToLogin": "Назад ко входу",
+      "errors": {
+        "newPasswordRequired": "Пожалуйста, введите новый пароль",
+        "newPasswordInvalid": "Пароль должен соответствовать всем требованиям выше",
+        "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
+        "confirmPasswordMismatch": "Пароли не совпадают"
+      }
     }
   },
 

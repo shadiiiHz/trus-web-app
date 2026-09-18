@@ -401,6 +401,33 @@
         "confirmPasswordRequired": "Please confirm your new password",
         "confirmPasswordMismatch": "Passwords do not match"
       }
+    },
+    "resetPassword": {
+      "heading": "Create a New Password",
+      "subtitle": "Your new password must be different from your previous password.",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Confirm new password",
+      "showPasswordAria": "Show password",
+      "hidePasswordAria": "Hide password",
+      "requirements": {
+        "minLength": "At least 8 characters",
+        "hasNumber": "Includes a number",
+        "hasLetter": "Includes a letter"
+      },
+      "submit": "Reset Password",
+      "submitting": "Resetting...",
+      "successHeading": "Password Change Successfully",
+      "successSubtitle": "Your password has been successfully reset. Click below to log in magically.",
+      "continue": "Continue",
+      "backToLogin": "Back to log in",
+      "errors": {
+        "newPasswordRequired": "Please enter a new password",
+        "newPasswordInvalid": "Password must meet all the requirements above",
+        "confirmPasswordRequired": "Please confirm your new password",
+        "confirmPasswordMismatch": "Passwords do not match"
+      }
     }
   },
 

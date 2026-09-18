@@ -420,6 +420,33 @@
         "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
         "confirmPasswordMismatch": "Las contraseñas no coinciden"
       }
+    },
+    "resetPassword": {
+      "heading": "Crea una nueva contraseña",
+      "subtitle": "Tu nueva contraseña debe ser diferente de tu contraseña anterior.",
+      "newPasswordLabel": "Nueva contraseña",
+      "newPasswordPlaceholder": "Crea una contraseña",
+      "confirmPasswordLabel": "Confirmar nueva contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+      "showPasswordAria": "Mostrar contraseña",
+      "hidePasswordAria": "Ocultar contraseña",
+      "requirements": {
+        "minLength": "Al menos 8 caracteres",
+        "hasNumber": "Incluye un número",
+        "hasLetter": "Incluye una letra"
+      },
+      "submit": "Restablecer contraseña",
+      "submitting": "Restableciendo...",
+      "successHeading": "Contraseña cambiada con éxito",
+      "successSubtitle": "Tu contraseña se ha restablecido correctamente. Haz clic abajo para iniciar sesión automáticamente.",
+      "continue": "Continuar",
+      "backToLogin": "Volver a iniciar sesión",
+      "errors": {
+        "newPasswordRequired": "Por favor introduce una nueva contraseña",
+        "newPasswordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
+        "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
+        "confirmPasswordMismatch": "Las contraseñas no coinciden"
+      }
     }
   },
 

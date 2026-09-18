@@ -408,6 +408,33 @@
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein"
       }
+    },
+    "resetPassword": {
+      "heading": "Neues Passwort erstellen",
+      "subtitle": "Ihr neues Passwort muss sich von Ihrem vorherigen Passwort unterscheiden.",
+      "newPasswordLabel": "Neues Passwort",
+      "newPasswordPlaceholder": "Passwort erstellen",
+      "confirmPasswordLabel": "Neues Passwort bestätigen",
+      "confirmPasswordPlaceholder": "Neues Passwort bestätigen",
+      "showPasswordAria": "Passwort anzeigen",
+      "hidePasswordAria": "Passwort verbergen",
+      "requirements": {
+        "minLength": "Mindestens 8 Zeichen",
+        "hasNumber": "Enthält eine Zahl",
+        "hasLetter": "Enthält einen Buchstaben"
+      },
+      "submit": "Passwort zurücksetzen",
+      "submitting": "Wird zurückgesetzt...",
+      "successHeading": "Passwort erfolgreich geändert",
+      "successSubtitle": "Ihr Passwort wurde erfolgreich zurückgesetzt. Klicken Sie unten, um sich automatisch anzumelden.",
+      "continue": "Weiter",
+      "backToLogin": "Zurück zur Anmeldung",
+      "errors": {
+        "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",
+        "newPasswordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
+        "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
+        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein"
+      }
     }
   },
 
