@@ -843,6 +843,7 @@ function buildSiteConfig(locale: Locale) {
 
     auth: {
       login: dict.auth.login,
+      forgotPassword: dict.auth.forgotPassword,
     },
 
     contact: {

@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Eye, EyeOff, RotateCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -253,12 +254,12 @@ export function LoginForm({ copy }: LoginFormProps) {
           </span>
           {copy.rememberMe}
         </label>
-        <a
-          href="#"
+        <Link
+          to="/forgot-password"
           className="text-body-sm font-medium text-[#5B2BB9] underline underline-offset-2"
         >
           {copy.forgotPassword}
-        </a>
+        </Link>
       </div>
 
       {/* Captcha code display + refresh */}

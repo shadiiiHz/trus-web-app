@@ -4,6 +4,7 @@ import HomePage from "@/pages/HomePage";
 import TemplatesPage from "@/pages/TemplatesPage";
 import ServicesPage from "@/pages/ServicesPage";
 import LoginPage from "./pages/LoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/templates" element={<TemplatesPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
     </Routes>
   );
 }

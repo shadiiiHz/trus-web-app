@@ -360,6 +360,19 @@
         "captchaRequired": "Please enter the captcha code",
         "captchaMismatch": "Captcha code doesn't match, please try again"
       }
+    },
+    "forgotPassword": {
+      "heading": "Forgot Password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "submit": "Send Reset Link",
+      "submitting": "Sending...",
+      "success": "Reset link sent — check your inbox.",
+      "backToLogin": "Back to log in",
+      "errors": {
+        "usernameRequired": "Please enter your username"
+      }
     }
   },
 

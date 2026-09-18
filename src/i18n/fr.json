@@ -370,6 +370,19 @@
         "captchaRequired": "Veuillez saisir le code captcha",
         "captchaMismatch": "Le code captcha ne correspond pas, veuillez réessayer"
       }
+    },
+    "forgotPassword": {
+      "heading": "Mot de passe oublié",
+      "subtitle": "Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+      "usernameLabel": "Nom d'utilisateur",
+      "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
+      "submit": "Envoyer le lien de réinitialisation",
+      "submitting": "Envoi en cours...",
+      "success": "Lien envoyé — vérifiez votre boîte de réception.",
+      "backToLogin": "Retour à la connexion",
+      "errors": {
+        "usernameRequired": "Veuillez saisir votre nom d'utilisateur"
+      }
     }
   },
 

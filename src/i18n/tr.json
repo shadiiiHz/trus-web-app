@@ -360,6 +360,19 @@
         "captchaRequired": "Lütfen doğrulama kodunu girin",
         "captchaMismatch": "Doğrulama kodu eşleşmiyor, lütfen tekrar deneyin"
       }
+    },
+    "forgotPassword": {
+      "heading": "Şifremi Unuttum",
+      "subtitle": "E-posta adresinizi girin, size şifrenizi sıfırlamak için bir bağlantı gönderelim.",
+      "usernameLabel": "Kullanıcı Adı",
+      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "submit": "Sıfırlama Bağlantısı Gönder",
+      "submitting": "Gönderiliyor...",
+      "success": "Bağlantı gönderildi — gelen kutunuzu kontrol edin.",
+      "backToLogin": "Girişe dön",
+      "errors": {
+        "usernameRequired": "Lütfen kullanıcı adınızı girin"
+      }
     }
   },
 

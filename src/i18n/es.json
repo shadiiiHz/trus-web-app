@@ -379,6 +379,19 @@
         "captchaRequired": "Por favor introduce el código captcha",
         "captchaMismatch": "El código captcha no coincide, inténtalo de nuevo"
       }
+    },
+    "forgotPassword": {
+      "heading": "Contraseña olvidada",
+      "subtitle": "Introduce tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+      "usernameLabel": "Nombre de usuario",
+      "usernamePlaceholder": "Introduce tu nombre de usuario",
+      "submit": "Enviar enlace de restablecimiento",
+      "submitting": "Enviando...",
+      "success": "Enlace enviado — revisa tu bandeja de entrada.",
+      "backToLogin": "Volver a iniciar sesión",
+      "errors": {
+        "usernameRequired": "Por favor introduce tu nombre de usuario"
+      }
     }
   },
 

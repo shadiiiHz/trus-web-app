@@ -367,6 +367,19 @@
         "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
         "captchaMismatch": "Der Captcha-Code stimmt nicht überein, bitte versuchen Sie es erneut"
       }
+    },
+    "forgotPassword": {
+      "heading": "Passwort vergessen",
+      "subtitle": "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
+      "usernameLabel": "Benutzername",
+      "usernamePlaceholder": "Benutzername eingeben",
+      "submit": "Link zum Zurücksetzen senden",
+      "submitting": "Wird gesendet...",
+      "success": "Link gesendet — bitte prüfen Sie Ihren Posteingang.",
+      "backToLogin": "Zurück zur Anmeldung",
+      "errors": {
+        "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein"
+      }
     }
   },
 
