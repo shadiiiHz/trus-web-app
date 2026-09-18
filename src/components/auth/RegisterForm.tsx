@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Clock, Eye, EyeOff, Mail, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 import businessLogoPlaceholder from "@/assets/auth/business-logo-placeholder.svg";
@@ -97,13 +98,13 @@ type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
-  "pointer-events-none absolute left-4 h-4.5 w-4.5 text-[#A3A3A3]";
+  "pointer-events-none absolute left-4 z-10 h-4.5 w-4.5 text-[#A3A3A3]";
 
 const inputBaseClass =
   "w-full rounded-md border border-[#D4D4D4] bg-white px-4 py-2.5 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 placeholder:text-[#737373] focus:border-brand-accent";
 
 const selectBaseClass =
-  "w-full appearance-none rounded-md border border-[#D4D4D4] bg-white py-2.5 pr-9 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 focus:border-brand-accent";
+  "w-full appearance-none rounded-md border border-[#D4D4D4] bg-white py-2.5 pr-16 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -117,7 +118,7 @@ function RequiredMark() {
 function ChevronDownIcon() {
   return (
     <svg
-      className="pointer-events-none absolute right-3.5 h-4 w-4 text-[#A3A3A3]"
+      className="pointer-events-none absolute right-3.5 z-10 h-4 w-4 text-[#A3A3A3]"
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -449,25 +450,24 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 error={errors.phone && copy.errors[errors.phone]}
               >
                 <div
-                  className={`flex items-stretch overflow-hidden rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
+                  className={`flex items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
                     errors.phone ? "border-red-400" : "border-[#D4D4D4]"
                   }`}
                 >
                   <div className="relative shrink-0">
-                    <select
-                      aria-label={copy.business.phoneLabel + " country code"}
+                    <Select
+                      ariaLabel={copy.business.phoneLabel + " country code"}
                       value={countryCode}
-                      onChange={(e) => setCountryCode(e.target.value)}
-                      className="h-full appearance-none bg-transparent py-2.5 pl-3 pr-7 text-[16px] text-[#000000] outline-none"
-                    >
-                      {COUNTRY_CODES.map((c) => (
-                        <option key={c.value} value={c.value}>
-                          {c.value}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={setCountryCode}
+                      options={COUNTRY_CODES.map((c) => ({
+                        value: c.value,
+                        label: c.value,
+                      }))}
+                      triggerClassName="h-full bg-transparent py-2.5 pl-3 pr-7 text-[16px] text-[#000000] outline-none"
+                      panelClassName="min-w-[72px]"
+                    />
                     <svg
-                      className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#A3A3A3]"
+                      className="pointer-events-none absolute right-2 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 text-[#A3A3A3]"
                       viewBox="0 0 20 20"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -609,28 +609,23 @@ export function RegisterForm({ copy }: RegisterFormProps) {
               >
                 <div className={fieldWrapClass}>
                   <Clock className={iconClass} />
-                  <select
+                  <Select
                     id={timezoneId}
-                    name="timezone"
                     value={timezone}
-                    onChange={(e) => {
-                      setTimezone(e.target.value);
+                    onChange={(value) => {
+                      setTimezone(value);
                       clearError("timezone");
                     }}
-                    aria-invalid={Boolean(errors.timezone)}
-                    className={`${selectBaseClass} pl-11 ${
+                    options={TIMEZONE_OPTIONS}
+                    placeholder={copy.business.timezonePlaceholder}
+                    ariaInvalid={Boolean(errors.timezone)}
+                    className="w-full"
+                    triggerClassName={`${selectBaseClass} pl-11 ${
                       timezone ? "text-[#000000]" : "text-[#737373]"
                     } ${errors.timezone ? "border-red-400" : "border-[#D4D4D4]"}`}
-                  >
-                    <option value="" disabled>
-                      {copy.business.timezonePlaceholder}
-                    </option>
-                    {TIMEZONE_OPTIONS.map((tz) => (
-                      <option key={tz.value} value={tz.value}>
-                        {tz.label}
-                      </option>
-                    ))}
-                  </select>
+                    clearable
+                    clearAriaLabel={`Clear ${copy.business.timezoneLabel}`}
+                  />
                   <ChevronDownIcon />
                 </div>
               </Field>
@@ -642,28 +637,26 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 error={errors.industry && copy.errors[errors.industry]}
               >
                 <div className={fieldWrapClass}>
-                  <select
+                  <Select
                     id={industryId}
-                    name="industry"
                     value={industry}
-                    onChange={(e) => {
-                      setIndustry(e.target.value);
+                    onChange={(value) => {
+                      setIndustry(value);
                       clearError("industry");
                     }}
-                    aria-invalid={Boolean(errors.industry)}
-                    className={`${selectBaseClass} pl-4 ${
+                    options={INDUSTRY_OPTIONS.map((opt) => ({
+                      value: opt,
+                      label: opt,
+                    }))}
+                    placeholder={copy.business.industryPlaceholder}
+                    ariaInvalid={Boolean(errors.industry)}
+                    className="w-full"
+                    triggerClassName={`${selectBaseClass} pl-4 ${
                       industry ? "text-[#000000]" : "text-[#737373]"
                     } ${errors.industry ? "border-red-400" : "border-[#D4D4D4]"}`}
-                  >
-                    <option value="" disabled>
-                      {copy.business.industryPlaceholder}
-                    </option>
-                    {INDUSTRY_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
+                    clearable
+                    clearAriaLabel={`Clear ${copy.business.industryLabel}`}
+                  />
                   <ChevronDownIcon />
                 </div>
               </Field>
