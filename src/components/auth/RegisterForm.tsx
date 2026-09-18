@@ -701,116 +701,118 @@ export function RegisterForm({ copy }: RegisterFormProps) {
               required
             />
 
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div className="flex flex-col items-center gap-8 sm:flex-row">
               <img
                 src={logoPreview ?? businessLogoPlaceholder}
                 alt=""
-                className="h-[178px] w-[178px] shrink-0 rounded-full border border-[#D4D4D4] object-cover"
+                className="h-[178px] w-[178px] shrink-0 self-center rounded-full object-cover"
               />
 
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => fileInputRef.current?.click()}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
+              <div className="flex w-full flex-1 flex-col gap-5">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => fileInputRef.current?.click()}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      fileInputRef.current?.click();
+                    }
+                  }}
+                  onDragOver={(e) => {
                     e.preventDefault();
-                    fileInputRef.current?.click();
-                  }
-                }}
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setIsDragging(true);
-                }}
-                onDragLeave={() => setIsDragging(false)}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  setIsDragging(false);
-                  applyLogoFile(e.dataTransfer.files?.[0]);
-                }}
-                className={`relative flex flex-1 cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-6 py-6 text-center transition-colors ${
-                  isDragging
-                    ? "border-brand-accent bg-[#F5F1FC]"
-                    : errors.logo
-                      ? "border-red-300"
-                      : "border-[#5328A8]"
-                }`}
-              >
-                <img
-                  src={uploadIcon}
-                  alt=""
-                  className="h-11 w-11"
-                  aria-hidden="true"
-                />
-                <p className="text-[14px]">
-                  <span className="font-semibold text-[#5B2BB9]">
-                    {copy.logo.uploadCta}
-                  </span>{" "}
-                  <span className="text-[#525252]">
-                    {copy.logo.uploadCtaRest}
-                  </span>
-                </p>
-                <p className="text-[12px] text-[#525252]">
-                  {copy.logo.uploadHint}
-                </p>
-                <div className="absolute bottom-3 -right-5 h-14 w-auto">
-                  <div className="relative h-auto w-auto">
-                    <img
-                      src={uploadBadge}
-                      alt=""
-                      className="h-full w-auto"
-                      aria-hidden="true"
-                    />
-                    <img
-                      src={uploadBadgePointer}
-                      alt=""
-                      className="absolute right-8 top-10 h-4 w-4"
-                      aria-hidden="true"
-                    />
+                    setIsDragging(true);
+                  }}
+                  onDragLeave={() => setIsDragging(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDragging(false);
+                    applyLogoFile(e.dataTransfer.files?.[0]);
+                  }}
+                  className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-6 py-6 text-center transition-colors ${
+                    isDragging
+                      ? "border-brand-accent bg-[#F5F1FC]"
+                      : errors.logo
+                        ? "border-red-300"
+                        : "border-[#5328A8]"
+                  }`}
+                >
+                  <img
+                    src={uploadIcon}
+                    alt=""
+                    className="h-11 w-11"
+                    aria-hidden="true"
+                  />
+                  <p className="text-[14px]">
+                    <span className="font-semibold text-[#5B2BB9]">
+                      {copy.logo.uploadCta}
+                    </span>{" "}
+                    <span className="text-[#525252]">
+                      {copy.logo.uploadCtaRest}
+                    </span>
+                  </p>
+                  <p className="text-[12px] text-[#525252]">
+                    {copy.logo.uploadHint}
+                  </p>
+                  <div className="absolute bottom-3 -right-5 h-14 w-auto">
+                    <div className="relative h-auto w-auto">
+                      <img
+                        src={uploadBadge}
+                        alt=""
+                        className="h-full w-auto"
+                        aria-hidden="true"
+                      />
+                      <img
+                        src={uploadBadgePointer}
+                        alt=""
+                        className="absolute right-8 top-10 h-4 w-4"
+                        aria-hidden="true"
+                      />
+                    </div>
                   </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/png,image/jpeg"
+                    className="hidden"
+                    onChange={(e) => applyLogoFile(e.target.files?.[0])}
+                  />
                 </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/png,image/jpeg"
-                  className="hidden"
-                  onChange={(e) => applyLogoFile(e.target.files?.[0])}
-                />
-              </div>
-            </div>
-            {errors.logo && (
-              <p className="mt-2 text-[13px] text-red-500">
-                {copy.errors[errors.logo]}
-              </p>
-            )}
+                {errors.logo && (
+                  <p className="-mt-2 text-[13px] text-red-500">
+                    {copy.errors[errors.logo]}
+                  </p>
+                )}
 
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row justify-end">
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5B2BB9] px-12 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-[#4a2296]"
-              >
-                <img
-                  src={uploadLogo}
-                  alt=""
-                  className="h-[16] w-auto"
-                  aria-hidden="true"
-                />
-                {copy.logo.uploadButton}
-              </button>
-              <button
-                type="button"
-                onClick={handleGenerateLogo}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-[#D4D4D4] bg-white px-12 py-2 text-body-sm font-semibold text-[#404040] transition-colors hover:border-brand-accent hover:text-brand-accent"
-              >
-                <img
-                  src={generateLogo}
-                  alt=""
-                  className="h-[16] w-auto"
-                  aria-hidden="true"
-                />
-                {copy.logo.generateButton}
-              </button>
+                <div className="flex flex-col gap-3 sm:flex-row justify-end">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5B2BB9] px-12 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-[#4a2296]"
+                  >
+                    <img
+                      src={uploadLogo}
+                      alt=""
+                      className="h-[16] w-auto"
+                      aria-hidden="true"
+                    />
+                    {copy.logo.uploadButton}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleGenerateLogo}
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-[#D4D4D4] bg-white px-12 py-2 text-body-sm font-semibold text-[#404040] transition-colors hover:border-brand-accent hover:text-brand-accent"
+                  >
+                    <img
+                      src={generateLogo}
+                      alt=""
+                      className="h-[16] w-auto"
+                      aria-hidden="true"
+                    />
+                    {copy.logo.generateButton}
+                  </button>
+                </div>
+              </div>
             </div>
           </Card>
         </div>
@@ -1121,14 +1123,14 @@ export function RegisterForm({ copy }: RegisterFormProps) {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="rounded-md border border-[#D4D4D4] bg-white px-6 py-3 text-body font-semibold text-[#404040] transition-colors hover:border-[#A3A3A3]"
+          className="rounded-md text-body-sm border border-[#D4D4D4] bg-white px-4 py-2 font-semibold text-[#404040] transition-colors hover:border-[#A3A3A3]"
         >
           {copy.cancel}
         </button>
         <Button
           type="submit"
           variant="primary"
-          className="rounded-md px-8 py-3 text-body font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
+          className="rounded-md !px-4 !py-2 text-body-sm font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
         >
           {status === "submitting" ? copy.submitting : copy.submit}
         </Button>
