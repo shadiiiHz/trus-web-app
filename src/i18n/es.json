@@ -392,6 +392,34 @@
       "errors": {
         "usernameRequired": "Por favor introduce tu nombre de usuario"
       }
+    },
+    "changePassword": {
+      "heading": "Cambiar contraseña",
+      "subtitle": "Introduce tu contraseña actual y establece una nueva.",
+      "currentPasswordLabel": "Contraseña actual",
+      "currentPasswordPlaceholder": "Introduce tu contraseña actual",
+      "newPasswordLabel": "Nueva contraseña",
+      "newPasswordPlaceholder": "Crea una contraseña",
+      "confirmPasswordLabel": "Confirmar nueva contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+      "showPasswordAria": "Mostrar contraseña",
+      "hidePasswordAria": "Ocultar contraseña",
+      "requirements": {
+        "minLength": "Al menos 8 caracteres",
+        "hasNumber": "Incluye un número",
+        "hasLetter": "Incluye una letra"
+      },
+      "submit": "Actualizar contraseña",
+      "submitting": "Actualizando...",
+      "success": "Contraseña actualizada correctamente.",
+      "backToLogin": "Volver a iniciar sesión",
+      "errors": {
+        "currentPasswordRequired": "Por favor introduce tu contraseña actual",
+        "newPasswordRequired": "Por favor introduce una nueva contraseña",
+        "newPasswordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
+        "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
+        "confirmPasswordMismatch": "Las contraseñas no coinciden"
+      }
     }
   },
 

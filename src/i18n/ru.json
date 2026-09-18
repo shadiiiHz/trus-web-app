@@ -379,6 +379,34 @@
       "errors": {
         "usernameRequired": "Пожалуйста, введите имя пользователя"
       }
+    },
+    "changePassword": {
+      "heading": "Изменить пароль",
+      "subtitle": "Введите текущий пароль и задайте новый.",
+      "currentPasswordLabel": "Текущий пароль",
+      "currentPasswordPlaceholder": "Введите текущий пароль",
+      "newPasswordLabel": "Новый пароль",
+      "newPasswordPlaceholder": "Придумайте пароль",
+      "confirmPasswordLabel": "Подтвердите новый пароль",
+      "confirmPasswordPlaceholder": "Подтвердите новый пароль",
+      "showPasswordAria": "Показать пароль",
+      "hidePasswordAria": "Скрыть пароль",
+      "requirements": {
+        "minLength": "Минимум 8 символов",
+        "hasNumber": "Содержит цифру",
+        "hasLetter": "Содержит букву"
+      },
+      "submit": "Обновить пароль",
+      "submitting": "Обновление...",
+      "success": "Пароль успешно обновлён.",
+      "backToLogin": "Назад ко входу",
+      "errors": {
+        "currentPasswordRequired": "Пожалуйста, введите текущий пароль",
+        "newPasswordRequired": "Пожалуйста, введите новый пароль",
+        "newPasswordInvalid": "Пароль должен соответствовать всем требованиям выше",
+        "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
+        "confirmPasswordMismatch": "Пароли не совпадают"
+      }
     }
   },
 

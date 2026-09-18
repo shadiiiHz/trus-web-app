@@ -383,6 +383,34 @@
       "errors": {
         "usernameRequired": "Veuillez saisir votre nom d'utilisateur"
       }
+    },
+    "changePassword": {
+      "heading": "Changer le mot de passe",
+      "subtitle": "Saisissez votre mot de passe actuel et définissez-en un nouveau.",
+      "currentPasswordLabel": "Mot de passe actuel",
+      "currentPasswordPlaceholder": "Saisissez votre mot de passe actuel",
+      "newPasswordLabel": "Nouveau mot de passe",
+      "newPasswordPlaceholder": "Créez un mot de passe",
+      "confirmPasswordLabel": "Confirmer le nouveau mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+      "showPasswordAria": "Afficher le mot de passe",
+      "hidePasswordAria": "Masquer le mot de passe",
+      "requirements": {
+        "minLength": "Au moins 8 caractères",
+        "hasNumber": "Inclut un chiffre",
+        "hasLetter": "Inclut une lettre"
+      },
+      "submit": "Mettre à jour le mot de passe",
+      "submitting": "Mise à jour...",
+      "success": "Mot de passe mis à jour avec succès.",
+      "backToLogin": "Retour à la connexion",
+      "errors": {
+        "currentPasswordRequired": "Veuillez saisir votre mot de passe actuel",
+        "newPasswordRequired": "Veuillez saisir un nouveau mot de passe",
+        "newPasswordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
+        "confirmPasswordRequired": "Veuillez confirmer votre nouveau mot de passe",
+        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas"
+      }
     }
   },
 

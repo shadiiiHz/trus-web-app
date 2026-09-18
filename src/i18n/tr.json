@@ -373,6 +373,34 @@
       "errors": {
         "usernameRequired": "Lütfen kullanıcı adınızı girin"
       }
+    },
+    "changePassword": {
+      "heading": "Şifreyi Değiştir",
+      "subtitle": "Mevcut şifrenizi girin ve yenisini belirleyin.",
+      "currentPasswordLabel": "Mevcut Şifre",
+      "currentPasswordPlaceholder": "Mevcut şifrenizi girin",
+      "newPasswordLabel": "Yeni şifre",
+      "newPasswordPlaceholder": "Bir şifre oluşturun",
+      "confirmPasswordLabel": "Yeni Şifreyi Onayla",
+      "confirmPasswordPlaceholder": "Yeni şifrenizi onaylayın",
+      "showPasswordAria": "Şifreyi göster",
+      "hidePasswordAria": "Şifreyi gizle",
+      "requirements": {
+        "minLength": "En az 8 karakter",
+        "hasNumber": "Bir rakam içerir",
+        "hasLetter": "Bir harf içerir"
+      },
+      "submit": "Şifreyi Güncelle",
+      "submitting": "Güncelleniyor...",
+      "success": "Şifre başarıyla güncellendi.",
+      "backToLogin": "Girişe dön",
+      "errors": {
+        "currentPasswordRequired": "Lütfen mevcut şifrenizi girin",
+        "newPasswordRequired": "Lütfen yeni bir şifre girin",
+        "newPasswordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
+        "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
+        "confirmPasswordMismatch": "Şifreler eşleşmiyor"
+      }
     }
   },
 

@@ -380,6 +380,34 @@
       "errors": {
         "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein"
       }
+    },
+    "changePassword": {
+      "heading": "Passwort ändern",
+      "subtitle": "Geben Sie Ihr aktuelles Passwort ein und legen Sie ein neues fest.",
+      "currentPasswordLabel": "Aktuelles Passwort",
+      "currentPasswordPlaceholder": "Aktuelles Passwort eingeben",
+      "newPasswordLabel": "Neues Passwort",
+      "newPasswordPlaceholder": "Passwort erstellen",
+      "confirmPasswordLabel": "Neues Passwort bestätigen",
+      "confirmPasswordPlaceholder": "Neues Passwort bestätigen",
+      "showPasswordAria": "Passwort anzeigen",
+      "hidePasswordAria": "Passwort verbergen",
+      "requirements": {
+        "minLength": "Mindestens 8 Zeichen",
+        "hasNumber": "Enthält eine Zahl",
+        "hasLetter": "Enthält einen Buchstaben"
+      },
+      "submit": "Passwort aktualisieren",
+      "submitting": "Wird aktualisiert...",
+      "success": "Passwort erfolgreich aktualisiert.",
+      "backToLogin": "Zurück zur Anmeldung",
+      "errors": {
+        "currentPasswordRequired": "Bitte geben Sie Ihr aktuelles Passwort ein",
+        "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",
+        "newPasswordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
+        "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
+        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein"
+      }
     }
   },
 

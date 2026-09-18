@@ -373,6 +373,34 @@
       "errors": {
         "usernameRequired": "Please enter your username"
       }
+    },
+    "changePassword": {
+      "heading": "Change Password",
+      "subtitle": "Enter your current password and set a new one.",
+      "currentPasswordLabel": "Current Password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Confirm new password",
+      "showPasswordAria": "Show password",
+      "hidePasswordAria": "Hide password",
+      "requirements": {
+        "minLength": "At least 8 characters",
+        "hasNumber": "Includes a number",
+        "hasLetter": "Includes a letter"
+      },
+      "submit": "Update Password",
+      "submitting": "Updating...",
+      "success": "Password updated successfully.",
+      "backToLogin": "Back to log in",
+      "errors": {
+        "currentPasswordRequired": "Please enter your current password",
+        "newPasswordRequired": "Please enter a new password",
+        "newPasswordInvalid": "Password must meet all the requirements above",
+        "confirmPasswordRequired": "Please confirm your new password",
+        "confirmPasswordMismatch": "Passwords do not match"
+      }
     }
   },
 
