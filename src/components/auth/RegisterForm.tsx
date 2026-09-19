@@ -98,10 +98,10 @@ type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
-  "pointer-events-none absolute left-4 z-10 h-4.5 w-4.5 text-auth-icon";
+  "pointer-events-none absolute left-3 z-10 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "h-10 w-full rounded-md border border-auth-border bg-white px-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-10 w-full rounded-md border border-auth-border bg-white pl-3 pr-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 const selectBaseClass =
   "flex h-10 w-full items-center appearance-none rounded-md border border-auth-border bg-white pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
@@ -543,7 +543,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       clearError("email");
                     }}
                     aria-invalid={Boolean(errors.email)}
-                    className={`${inputBaseClass} pl-11 ${
+                    className={`${inputBaseClass} pl-9 ${
                       errors.email ? "border-red-400" : "border-auth-border"
                     }`}
                   />
@@ -645,7 +645,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.business.timezonePlaceholder}
                     ariaInvalid={Boolean(errors.timezone)}
                     className="w-full"
-                    triggerClassName={`${selectBaseClass} pl-11 ${
+                    triggerClassName={`${selectBaseClass} pl-9 ${
                       timezone ? "text-auth-ink" : "text-auth-placeholder"
                     } ${errors.timezone ? "border-red-400" : "border-auth-border"}`}
                     clearable
@@ -676,7 +676,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.business.industryPlaceholder}
                     ariaInvalid={Boolean(errors.industry)}
                     className="w-full"
-                    triggerClassName={`${selectBaseClass} pl-4 ${
+                    triggerClassName={`${selectBaseClass} pl-3 ${
                       industry ? "text-auth-ink" : "text-auth-placeholder"
                     } ${errors.industry ? "border-red-400" : "border-auth-border"}`}
                     clearable
@@ -900,7 +900,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                         color: showPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
                         caretColor: "var(--color-auth-placeholder)",
                       }}
-                      className={`${inputBaseClass} pl-11 pr-11 ${
+                      className={`${inputBaseClass} pl-9 pr-11 ${
                         errors.password ? "border-red-400" : "border-auth-border"
                       }`}
                     />
@@ -957,7 +957,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                         color: showConfirmPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
                         caretColor: "var(--color-auth-placeholder)",
                       }}
-                      className={`${inputBaseClass} pl-11 pr-11 ${
+                      className={`${inputBaseClass} pl-9 pr-11 ${
                         errors.confirmPassword
                           ? "border-red-400"
                           : "border-auth-border"
