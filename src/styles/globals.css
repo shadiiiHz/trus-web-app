@@ -15,6 +15,28 @@
   --color-brand-border: #1a1a2a;
   --color-brand-border-2: #252535;
 
+  /* Auth forms — shared across Login, Register, Forgot/Reset/Change Password */
+  --color-auth-page-bg: #fafafa;
+  --color-auth-page-surface: #f5f5f7;
+  --color-auth-heading: #171717;
+  --color-auth-text: #404040;
+  --color-auth-muted: #525252;
+  --color-auth-placeholder: #737373;
+  --color-auth-ink: #000000;
+  --color-auth-masked: #b8b8b8;
+  --color-auth-icon: #a3a3a3;
+  --color-auth-icon-muted: #9ca3af;
+  --color-auth-icon-strong: #1f2430;
+  --color-auth-border: #d4d4d4;
+  --color-auth-border-light: #e5e5e5;
+  --color-auth-divider: #ededed;
+  --color-auth-surface: #f5f5f5;
+  --color-auth-surface-hover: #f5f1fc;
+  --color-auth-primary: #5b2bb9;
+  --color-auth-primary-hover: #4a2296;
+  --color-auth-required: #063060;
+  --color-auth-success: #22c55e;
+
   /* Templates gallery */
   --color-gallery-bg: #ffffff;
   --color-gallery-canvas: #1a1a1a;

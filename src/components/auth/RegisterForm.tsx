@@ -98,17 +98,17 @@ type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
-  "pointer-events-none absolute left-4 z-10 h-4.5 w-4.5 text-[#A3A3A3]";
+  "pointer-events-none absolute left-4 z-10 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-[#D4D4D4] bg-white px-4 py-2.5 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 placeholder:text-[#737373] focus:border-brand-accent";
+  "w-full rounded-md border border-auth-border bg-white px-4 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 const selectBaseClass =
-  "w-full appearance-none rounded-md border border-[#D4D4D4] bg-white py-2.5 pr-16 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 focus:border-brand-accent";
+  "w-full appearance-none rounded-md border border-auth-border bg-white py-2.5 pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
 
 function RequiredMark() {
   return (
-    <span className="text-[#5B2BB9]" aria-hidden="true">
+    <span className="text-auth-primary" aria-hidden="true">
       {" "}
       *
     </span>
@@ -118,7 +118,7 @@ function RequiredMark() {
 function ChevronDownIcon() {
   return (
     <svg
-      className="pointer-events-none absolute right-3.5 z-10 h-4 w-4 text-[#A3A3A3]"
+      className="pointer-events-none absolute right-3.5 z-10 h-4 w-4 text-auth-icon"
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -148,7 +148,7 @@ function PasswordIcon({ className }: { className?: string }) {
     >
       <path
         d="M14.1673 9.16667V6.66667C14.1673 4.36548 12.3018 2.5 10.0007 2.5C7.69946 2.5 5.83398 4.36548 5.83398 6.66667V9.16667M7.33398 17.5H12.6673C14.0674 17.5 14.7675 17.5 15.3023 17.2275C15.7727 16.9878 16.1552 16.6054 16.3948 16.135C16.6673 15.6002 16.6673 14.9001 16.6673 13.5V13.1667C16.6673 11.7665 16.6673 11.0665 16.3948 10.5317C16.1552 10.0613 15.7727 9.67883 15.3023 9.43915C14.7675 9.16667 14.0674 9.16667 12.6673 9.16667H7.33398C5.93385 9.16667 5.23379 9.16667 4.69901 9.43915C4.2286 9.67883 3.84615 10.0613 3.60647 10.5317C3.33398 11.0665 3.33398 11.7665 3.33398 13.1667V13.5C3.33398 14.9001 3.33398 15.6002 3.60647 16.135C3.84615 16.6054 4.2286 16.9878 4.69901 17.2275C5.23379 17.5 5.93385 17.5 7.33398 17.5Z"
-        stroke="#A3A3A3"
+        stroke="var(--color-auth-icon)"
         strokeWidth="1.66667"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -178,7 +178,7 @@ function Field({
     <div className={className}>
       <label
         htmlFor={id}
-        className="mb-2 block text-body-sm font-medium text-[#404040]"
+        className="mb-2 block text-body-sm font-medium text-auth-text"
       >
         {label}
         {required && <RequiredMark />}
@@ -198,7 +198,7 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-[#E5E5E5] bg-white p-6 sm:p-7 ${className}`}
+      className={`rounded-2xl border border-auth-border-light bg-white p-6 sm:p-7 ${className}`}
     >
       {children}
     </div>
@@ -218,17 +218,17 @@ function SectionHeader({
 }) {
   return (
     <div className="mb-6 font-body">
-      <h2 className="text-[16px] font-semibold text-[#171717]">
+      <h2 className="text-[16px] font-semibold text-auth-heading">
         {title}
         {required && <RequiredMark />}
         {badge && (
-          <span className="ml-1 font-normal text-[#171717]">{badge}</span>
+          <span className="ml-1 font-normal text-auth-heading">{badge}</span>
         )}
       </h2>
-      <p className="mt-1 text-[14px] font-normal leading-snug text-[#525252]">
+      <p className="mt-1 text-[14px] font-normal leading-snug text-auth-muted">
         {subtitle}
       </p>
-      <div className="mt-4 h-px bg-[#EDEDED]" />
+      <div className="mt-4 h-px bg-auth-divider" />
     </div>
   );
 }
@@ -416,7 +416,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   aria-invalid={Boolean(errors.firstName)}
                   className={`${inputBaseClass} ${
-                    errors.firstName ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.firstName ? "border-red-400" : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -440,7 +440,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   aria-invalid={Boolean(errors.lastName)}
                   className={`${inputBaseClass} ${
-                    errors.lastName ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.lastName ? "border-red-400" : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -453,7 +453,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
               >
                 <div
                   className={`flex items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
-                    errors.phone ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.phone ? "border-red-400" : "border-auth-border"
                   }`}
                 >
                   <div className="relative shrink-0">
@@ -465,11 +465,11 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                         value: c.value,
                         label: c.value,
                       }))}
-                      triggerClassName="h-full bg-transparent py-2.5 pl-3 pr-7 text-[16px] text-[#000000] outline-none"
+                      triggerClassName="h-full bg-transparent py-2.5 pl-3 pr-7 text-[16px] text-auth-ink outline-none"
                       panelClassName="min-w-[72px]"
                     />
                     <svg
-                      className="pointer-events-none absolute right-2 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 text-[#A3A3A3]"
+                      className="pointer-events-none absolute right-2 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 text-auth-icon"
                       viewBox="0 0 20 20"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +495,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       clearError("phone");
                     }}
                     aria-invalid={Boolean(errors.phone)}
-                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-[#000000] outline-none placeholder:text-[#737373]"
+                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
                 </div>
               </Field>
@@ -521,7 +521,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     }}
                     aria-invalid={Boolean(errors.email)}
                     className={`${inputBaseClass} pl-11 ${
-                      errors.email ? "border-red-400" : "border-[#D4D4D4]"
+                      errors.email ? "border-red-400" : "border-auth-border"
                     }`}
                   />
                 </div>
@@ -546,7 +546,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   aria-invalid={Boolean(errors.brandName)}
                   className={`${inputBaseClass} ${
-                    errors.brandName ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.brandName ? "border-red-400" : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -575,7 +575,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   className={`${inputBaseClass} ${
                     errors.telegramUsername
                       ? "border-red-400"
-                      : "border-[#D4D4D4]"
+                      : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -585,8 +585,8 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 label={copy.business.websiteLabel}
                 className="sm:col-span-2"
               >
-                <div className="flex items-stretch overflow-hidden rounded-md border border-[#D4D4D4] bg-white transition-colors duration-200 focus-within:border-brand-accent">
-                  <span className="flex select-none items-center border-r border-[#D4D4D4] px-3 text-[14px] text-[#737373]">
+                <div className="flex items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
+                  <span className="flex select-none items-center border-r border-auth-border px-3 text-[14px] text-auth-placeholder">
                     https://
                   </span>
                   <input
@@ -597,7 +597,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.business.websitePlaceholder}
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
-                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-[#000000] outline-none placeholder:text-[#737373]"
+                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
                 </div>
               </Field>
@@ -623,8 +623,8 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     ariaInvalid={Boolean(errors.timezone)}
                     className="w-full"
                     triggerClassName={`${selectBaseClass} pl-11 ${
-                      timezone ? "text-[#000000]" : "text-[#737373]"
-                    } ${errors.timezone ? "border-red-400" : "border-[#D4D4D4]"}`}
+                      timezone ? "text-auth-ink" : "text-auth-placeholder"
+                    } ${errors.timezone ? "border-red-400" : "border-auth-border"}`}
                     clearable
                     clearAriaLabel={`Clear ${copy.business.timezoneLabel}`}
                   />
@@ -654,8 +654,8 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     ariaInvalid={Boolean(errors.industry)}
                     className="w-full"
                     triggerClassName={`${selectBaseClass} pl-4 ${
-                      industry ? "text-[#000000]" : "text-[#737373]"
-                    } ${errors.industry ? "border-red-400" : "border-[#D4D4D4]"}`}
+                      industry ? "text-auth-ink" : "text-auth-placeholder"
+                    } ${errors.industry ? "border-red-400" : "border-auth-border"}`}
                     clearable
                     clearAriaLabel={`Clear ${copy.business.industryLabel}`}
                   />
@@ -682,7 +682,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   aria-invalid={Boolean(errors.jobTitle)}
                   className={`${inputBaseClass} ${
-                    errors.jobTitle ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.jobTitle ? "border-red-400" : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -726,13 +726,13 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-4 py-4 text-center transition-colors ${
                     isDragging
-                      ? "border-brand-accent bg-[#F5F1FC]"
+                      ? "border-brand-accent bg-auth-surface-hover"
                       : errors.logo
                         ? "border-red-300"
-                        : "border-[#5328A8]"
+                        : "border-brand-accent-dim"
                   }`}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[#D4D4D4] bg-white">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white">
                     <img
                       src={uploadIcon}
                       alt=""
@@ -742,14 +742,14 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   </div>
 
                   <p className="text-[14px]">
-                    <span className="font-semibold text-[#5B2BB9]">
+                    <span className="font-semibold text-auth-primary">
                       {copy.logo.uploadCta}
                     </span>{" "}
-                    <span className="text-[#525252]">
+                    <span className="text-auth-muted">
                       {copy.logo.uploadCtaRest}
                     </span>
                   </p>
-                  <p className="text-[12px] text-[#525252]">
+                  <p className="text-[12px] text-auth-muted">
                     {copy.logo.uploadHint}
                   </p>
                   <div className="absolute bottom-3 -right-5 h-14 w-auto">
@@ -786,7 +786,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-[#5B2BB9] px-3.5 py-2.5 text-body-sm font-semibold text-white transition-colors hover:bg-[#4a2296]"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-6 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
                   >
                     <img
                       src={uploadLogo}
@@ -799,7 +799,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   <button
                     type="button"
                     onClick={handleGenerateLogo}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-[#D4D4D4] bg-white px-3.5 py-2.5 text-body-sm font-semibold text-[#404040] transition-colors hover:border-brand-accent hover:text-brand-accent"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent"
                   >
                     <img
                       src={generateLogo}
@@ -843,7 +843,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                   }}
                   aria-invalid={Boolean(errors.username)}
                   className={`${inputBaseClass} ${
-                    errors.username ? "border-red-400" : "border-[#D4D4D4]"
+                    errors.username ? "border-red-400" : "border-auth-border"
                   }`}
                 />
               </Field>
@@ -874,11 +874,11 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       }}
                       aria-invalid={Boolean(errors.password)}
                       style={{
-                        color: showPassword ? "#000000" : "#B8B8B8",
-                        caretColor: "#737373",
+                        color: showPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
+                        caretColor: "var(--color-auth-placeholder)",
                       }}
                       className={`${inputBaseClass} pl-11 pr-11 ${
-                        errors.password ? "border-red-400" : "border-[#D4D4D4]"
+                        errors.password ? "border-red-400" : "border-auth-border"
                       }`}
                     />
                     <button
@@ -889,7 +889,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                           ? copy.account.hidePasswordAria
                           : copy.account.showPasswordAria
                       }
-                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-[#9CA3AF] transition-colors hover:text-[#1F2430]"
+                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-auth-icon-muted transition-colors hover:text-auth-icon-strong"
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -931,13 +931,13 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       }}
                       aria-invalid={Boolean(errors.confirmPassword)}
                       style={{
-                        color: showConfirmPassword ? "#000000" : "#B8B8B8",
-                        caretColor: "#737373",
+                        color: showConfirmPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
+                        caretColor: "var(--color-auth-placeholder)",
                       }}
                       className={`${inputBaseClass} pl-11 pr-11 ${
                         errors.confirmPassword
                           ? "border-red-400"
-                          : "border-[#D4D4D4]"
+                          : "border-auth-border"
                       }`}
                     />
                     <button
@@ -948,7 +948,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                           ? copy.account.hidePasswordAria
                           : copy.account.showPasswordAria
                       }
-                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-[#9CA3AF] transition-colors hover:text-[#1F2430]"
+                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-auth-icon-muted transition-colors hover:text-auth-icon-strong"
                     >
                       {showConfirmPassword ? (
                         <EyeOff size={16} />
@@ -1068,13 +1068,13 @@ export function RegisterForm({ copy }: RegisterFormProps) {
 
             <div className="flex items-center gap-3">
               <div
-                className="flex h-20 flex-1 select-none items-center justify-center gap-3 rounded-lg bg-[#F5F5F5]"
+                className="flex h-20 flex-1 select-none items-center justify-center gap-3 rounded-lg bg-auth-surface"
                 aria-hidden="true"
               >
                 {captcha.split("").map((char, i) => (
                   <span
                     key={i}
-                    className="text-[32px] font-bold tracking-wide text-[#171717]"
+                    className="text-[32px] font-bold tracking-wide text-auth-heading"
                   >
                     {char}
                   </span>
@@ -1087,7 +1087,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 whileHover={{ rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[#D4D4D4] bg-white text-[#1F2430] transition-colors hover:border-brand-accent hover:text-brand-accent"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong transition-colors hover:border-brand-accent hover:text-brand-accent"
               >
                 <RotateCw size={20} />
               </motion.button>
@@ -1112,7 +1112,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 }}
                 aria-invalid={Boolean(errors.captcha)}
                 className={`${inputBaseClass} ${
-                  errors.captcha ? "border-red-400" : "border-[#D4D4D4]"
+                  errors.captcha ? "border-red-400" : "border-auth-border"
                 }`}
               />
             </Field>
@@ -1136,14 +1136,14 @@ export function RegisterForm({ copy }: RegisterFormProps) {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="rounded-md text-body-sm border border-[#D4D4D4] bg-white px-6 py-2.5 font-semibold text-[#404040] transition-colors hover:border-[#A3A3A3]"
+          className="rounded-md text-body-sm border border-auth-border bg-white px-4 py-2 font-semibold text-auth-text transition-colors hover:border-auth-icon"
         >
           {copy.cancel}
         </button>
         <Button
           type="submit"
           variant="primary"
-          className="rounded-md !px-6 !py-2.5 text-body-sm font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
+          className="rounded-md !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
         >
           {status === "submitting" ? copy.submitting : copy.submit}
         </Button>

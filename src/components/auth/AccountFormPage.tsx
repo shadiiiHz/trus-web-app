@@ -19,17 +19,17 @@ export function AccountFormPage({ heading, subtitle, copy }: AccountFormPageProp
   }, []);
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen font-body antialiased">
+    <div className="bg-auth-page-bg min-h-screen font-body antialiased">
       <Navbar />
 
-      <main className="pt-18" style={{ background: "#F5F5F7" }}>
+      <main className="pt-18" style={{ background: "var(--color-auth-page-surface)" }}>
         <div className="mx-auto w-full max-w-[1600px] px-6 py-10 sm:px-10">
           <div className="mx-auto max-w-[1344px]">
             <FadeIn direction="up" className="mb-8">
-              <h1 className="mb-2 text-[24px] font-body font-semibold text-[#171717]">
+              <h1 className="mb-2 text-[24px] font-body font-semibold text-auth-heading">
                 {heading}
               </h1>
-              <p className="text-body font-body font-normal text-[#525252]">{subtitle}</p>
+              <p className="text-body font-body font-normal text-auth-muted">{subtitle}</p>
             </FadeIn>
 
             <FadeIn direction="up" delay={0.1}>

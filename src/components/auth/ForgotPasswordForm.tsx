@@ -19,7 +19,7 @@ function BackIcon({ className }: { className?: string }) {
     >
       <path
         d="M15.8327 10H4.16602M9.99935 4.16669L4.16602 10L9.99935 15.8334"
-        stroke="#A3A3A3"
+        stroke="var(--color-auth-icon)"
         stroke-width="1.66667"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -37,14 +37,14 @@ type FieldErrorKey = keyof SiteConfig["auth"]["forgotPassword"]["errors"];
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
-  "pointer-events-none absolute left-4 h-4.5 w-4.5 text-[#A3A3A3]";
+  "pointer-events-none absolute left-4 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-[#D4D4D4] bg-white pl-11 pr-4 py-2.5 text-[16px] font-body text-[#000000] outline-none transition-colors duration-200 placeholder:text-[#737373] focus:border-brand-accent";
+  "w-full rounded-md border border-auth-border bg-white pl-11 pr-4 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 function RequiredMark() {
   return (
-    <span className="text-[#063060]" aria-hidden="true">
+    <span className="text-auth-required" aria-hidden="true">
       {" "}
       *
     </span>
@@ -82,7 +82,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
       <div>
         <label
           htmlFor={usernameId}
-          className="mb-2 block text-body-sm font-medium text-[#404040]"
+          className="mb-2 block text-body-sm font-medium text-auth-text"
         >
           {copy.usernameLabel}
           <RequiredMark />
@@ -103,7 +103,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
             }}
             aria-invalid={Boolean(error)}
             className={`${inputBaseClass} ${
-              error ? "border-red-400" : "border-[#D4D4D4]"
+              error ? "border-red-400" : "border-auth-border"
             }`}
           />
         </div>
@@ -117,7 +117,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
       <Button
         type="submit"
         variant="primary"
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-[#5B2BB9] hover:!bg-[#4a2296]"
+        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>
@@ -136,7 +136,7 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
 
       <Link
         to="/login"
-        className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-[#525252]"
+        className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-auth-muted"
       >
         <BackIcon />
         {copy.backToLogin}
