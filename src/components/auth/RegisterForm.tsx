@@ -1068,13 +1068,13 @@ export function RegisterForm({ copy }: RegisterFormProps) {
 
             <div className="flex items-center gap-3">
               <div
-                className="flex h-20 flex-1 select-none items-center justify-center gap-3 rounded-lg bg-auth-surface"
+                className="flex h-[108px] flex-1 select-none items-center justify-center gap-3 rounded-lg border border-auth-border bg-auth-surface shadow-xs"
                 aria-hidden="true"
               >
                 {captcha.split("").map((char, i) => (
                   <span
                     key={i}
-                    className="text-[32px] font-bold tracking-wide text-auth-heading"
+                    className="text-[40px] font-bold tracking-normal text-auth-heading"
                   >
                     {char}
                   </span>
