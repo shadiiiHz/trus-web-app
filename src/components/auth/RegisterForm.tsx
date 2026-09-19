@@ -101,10 +101,10 @@ const iconClass =
   "pointer-events-none absolute left-4 z-10 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-auth-border bg-white px-4 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-10 w-full rounded-md border border-auth-border bg-white px-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 const selectBaseClass =
-  "w-full appearance-none rounded-md border border-auth-border bg-white py-2.5 pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
+  "flex h-10 w-full items-center appearance-none rounded-md border border-auth-border bg-white pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -474,7 +474,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 error={errors.phone && copy.errors[errors.phone]}
               >
                 <div
-                  className={`flex items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
+                  className={`flex h-10 items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
                     errors.phone ? "border-red-400" : "border-auth-border"
                   }`}
                 >
@@ -487,7 +487,8 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                         value: c.value,
                         label: c.value,
                       }))}
-                      triggerClassName="h-full bg-transparent py-2.5 pl-3 pr-7 text-[16px] text-auth-ink outline-none"
+                      className="h-10"
+                      triggerClassName="flex h-10 items-center bg-transparent pl-3 pr-7 text-[16px] text-auth-ink outline-none"
                       panelClassName="min-w-[72px]"
                     />
                     <svg
@@ -517,7 +518,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                       clearError("phone");
                     }}
                     aria-invalid={Boolean(errors.phone)}
-                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
+                    className="min-w-0 flex-1 bg-transparent pr-3 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
                 </div>
               </Field>
@@ -607,7 +608,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                 label={copy.business.websiteLabel}
                 className="sm:col-span-2"
               >
-                <div className="flex items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
+                <div className="flex h-10 items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
                   <span className="flex select-none items-center border-r border-auth-border px-3 text-[14px] text-auth-placeholder">
                     https://
                   </span>
@@ -619,7 +620,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.business.websitePlaceholder}
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
-                    className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
+                    className="min-w-0 flex-1 bg-transparent px-3 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
                 </div>
               </Field>
@@ -1008,7 +1009,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.linkedinPlaceholder}
                     value={linkedin}
                     onChange={(e) => setLinkedin(e.target.value)}
-                    className={`${inputBaseClass} pl-11 pr-9`}
+                    className={`${inputBaseClass} pl-11 pr-10`}
                   />
                   <SocialFieldInfoIcon />
                 </div>
@@ -1030,7 +1031,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.instagramPlaceholder}
                     value={instagram}
                     onChange={(e) => setInstagram(e.target.value)}
-                    className={`${inputBaseClass} pl-11 pr-9`}
+                    className={`${inputBaseClass} pl-11 pr-10`}
                   />
                   <SocialFieldInfoIcon />
                 </div>
@@ -1052,7 +1053,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.xHandlePlaceholder}
                     value={xHandle}
                     onChange={(e) => setXHandle(e.target.value)}
-                    className={`${inputBaseClass} pl-11 pr-9`}
+                    className={`${inputBaseClass} pl-11 pr-10`}
                   />
                   <SocialFieldInfoIcon />
                 </div>
@@ -1077,7 +1078,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.telegramChannelPlaceholder}
                     value={telegramChannel}
                     onChange={(e) => setTelegramChannel(e.target.value)}
-                    className={`${inputBaseClass} pl-11 pr-9`}
+                    className={`${inputBaseClass} pl-11 pr-10`}
                   />
                   <SocialFieldInfoIcon />
                 </div>
