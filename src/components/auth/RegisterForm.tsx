@@ -157,6 +157,28 @@ function PasswordIcon({ className }: { className?: string }) {
   );
 }
 
+function SocialFieldInfoIcon() {
+  return (
+    <svg
+      className="pointer-events-none absolute right-3.5 z-10 h-4 w-4 text-auth-icon-muted"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M6.06065 5.99998C6.21739 5.55442 6.52675 5.17872 6.93395 4.9394C7.34116 4.70009 7.81991 4.6126 8.28543 4.69245C8.75096 4.7723 9.17319 5.01433 9.47737 5.37566C9.78154 5.737 9.94802 6.19433 9.94732 6.66665C9.94732 7.99998 7.94732 8.66665 7.94732 8.66665M8.00065 11.3333H8.00732M14.6673 7.99998C14.6673 11.6819 11.6825 14.6666 8.00065 14.6666C4.31875 14.6666 1.33398 11.6819 1.33398 7.99998C1.33398 4.31808 4.31875 1.33331 8.00065 1.33331C11.6825 1.33331 14.6673 4.31808 14.6673 7.99998Z"
+        stroke="currentColor"
+        strokeWidth="1.33333"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 interface FieldProps {
   id: string;
   label: string;
@@ -986,8 +1008,9 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.linkedinPlaceholder}
                     value={linkedin}
                     onChange={(e) => setLinkedin(e.target.value)}
-                    className={`${inputBaseClass} pl-11`}
+                    className={`${inputBaseClass} pl-11 pr-9`}
                   />
+                  <SocialFieldInfoIcon />
                 </div>
               </Field>
 
@@ -1007,8 +1030,9 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.instagramPlaceholder}
                     value={instagram}
                     onChange={(e) => setInstagram(e.target.value)}
-                    className={`${inputBaseClass} pl-11`}
+                    className={`${inputBaseClass} pl-11 pr-9`}
                   />
+                  <SocialFieldInfoIcon />
                 </div>
               </Field>
 
@@ -1028,8 +1052,9 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.xHandlePlaceholder}
                     value={xHandle}
                     onChange={(e) => setXHandle(e.target.value)}
-                    className={`${inputBaseClass} pl-11`}
+                    className={`${inputBaseClass} pl-11 pr-9`}
                   />
+                  <SocialFieldInfoIcon />
                 </div>
               </Field>
 
@@ -1052,8 +1077,9 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     placeholder={copy.social.telegramChannelPlaceholder}
                     value={telegramChannel}
                     onChange={(e) => setTelegramChannel(e.target.value)}
-                    className={`${inputBaseClass} pl-11`}
+                    className={`${inputBaseClass} pl-11 pr-9`}
                   />
+                  <SocialFieldInfoIcon />
                 </div>
               </Field>
             </div>
