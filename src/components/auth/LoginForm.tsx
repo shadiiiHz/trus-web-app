@@ -265,11 +265,11 @@ export function LoginForm({ copy }: LoginFormProps) {
       {/* Captcha code display + refresh */}
       <div className="flex items-center gap-3">
         <div
-          className="flex h-16.5 flex-1 select-none items-center justify-center gap-2.5 rounded-md border border-auth-border bg-white"
+          className="flex h-16.5 flex-1 select-none items-center justify-center gap-2.5 rounded-xl border border-auth-border bg-white shadow-xs"
           aria-hidden="true"
         >
           {captcha.split("").map((char, i) => (
-            <span key={i} className="text-[20px] font-bold text-auth-heading">
+            <span key={i} className="text-[40px] font-bold text-auth-heading">
               {char}
             </span>
           ))}
@@ -281,7 +281,7 @@ export function LoginForm({ copy }: LoginFormProps) {
           whileHover={{ rotate: 90 }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong transition-colors hover:border-brand-accent hover:text-brand-accent"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong shadow-[0_1px_2px_0_rgba(0,0,0,0.05),inset_0_-2px_0_0_rgba(0,0,0,0.05)] transition-colors hover:border-brand-accent hover:text-brand-accent"
         >
           <RotateCw size={20} />
         </motion.button>
