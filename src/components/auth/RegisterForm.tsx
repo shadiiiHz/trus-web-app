@@ -225,7 +225,9 @@ function SectionHeader({
           <span className="ml-1 font-normal text-[#171717]">{badge}</span>
         )}
       </h2>
-      <p className="mt-1 text-[14px] font-normal leading-snug text-[#525252]">{subtitle}</p>
+      <p className="mt-1 text-[14px] font-normal leading-snug text-[#525252]">
+        {subtitle}
+      </p>
       <div className="mt-4 h-px bg-[#EDEDED]" />
     </div>
   );
@@ -722,7 +724,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                     setIsDragging(false);
                     applyLogoFile(e.dataTransfer.files?.[0]);
                   }}
-                  className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-6 py-6 text-center transition-colors ${
+                  className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-4 py-4 text-center transition-colors ${
                     isDragging
                       ? "border-brand-accent bg-[#F5F1FC]"
                       : errors.logo
@@ -730,12 +732,15 @@ export function RegisterForm({ copy }: RegisterFormProps) {
                         : "border-[#5328A8]"
                   }`}
                 >
-                  <img
-                    src={uploadIcon}
-                    alt=""
-                    className="h-11 w-11"
-                    aria-hidden="true"
-                  />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[#D4D4D4] bg-white">
+                    <img
+                      src={uploadIcon}
+                      alt=""
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  </div>
+
                   <p className="text-[14px]">
                     <span className="font-semibold text-[#5B2BB9]">
                       {copy.logo.uploadCta}
