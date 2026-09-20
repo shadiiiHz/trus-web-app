@@ -372,6 +372,7 @@
       "checkEmailDescription": "E-posta adresinize bir şifre sıfırlama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin ve şifrenizi sıfırlamak için bağlantıya tıklayın.",
       "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
       "resend": "E-postayı Tekrar Gönder",
+      "resending": "Gönderiliyor...",
       "backToLogin": "Girişe dön",
       "errors": {
         "usernameRequired": "Lütfen kullanıcı adınızı girin"
@@ -461,6 +462,11 @@
       "submit": "Hesap Oluştur",
       "submitting": "Hesap oluşturuluyor...",
       "success": "Hesap başarıyla oluşturuldu!",
+      "checkEmailHeading": "E-postanızı Kontrol Edin",
+      "checkEmailDescription": "E-posta adresinize bir doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin ve hesabınızı doğrulamak için bağlantıya tıklayın.",
+      "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
+      "resend": "E-postayı Tekrar Gönder",
+      "resending": "Gönderiliyor...",
       "errors": {
         "firstNameRequired": "Lütfen adınızı girin",
         "lastNameRequired": "Lütfen soyadınızı girin",

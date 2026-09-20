@@ -94,7 +94,7 @@ export function ForgotPasswordForm({
         onClick={handleResend}
         className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
-        {resending ? copy.submitting : copy.resend}
+        {resending ? copy.resending : copy.resend}
       </Button>
     );
   }

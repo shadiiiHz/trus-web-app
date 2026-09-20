@@ -379,6 +379,7 @@
       "checkEmailDescription": "Wir haben einen Link zum Zurücksetzen des Passworts an Ihre E-Mail-Adresse gesendet. Bitte prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Passwort zurückzusetzen.",
       "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
       "resend": "E-Mail erneut senden",
+      "resending": "Wird erneut gesendet...",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
         "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein"
@@ -468,6 +469,11 @@
       "submit": "Konto erstellen",
       "submitting": "Konto wird erstellt...",
       "success": "Konto erfolgreich erstellt!",
+      "checkEmailHeading": "Überprüfen Sie Ihre E-Mail",
+      "checkEmailDescription": "Wir haben einen Bestätigungslink an Ihre E-Mail-Adresse gesendet. Bitte prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu bestätigen.",
+      "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
+      "resend": "E-Mail erneut senden",
+      "resending": "Wird erneut gesendet...",
       "errors": {
         "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
         "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",

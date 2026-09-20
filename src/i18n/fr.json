@@ -382,6 +382,7 @@
       "checkEmailDescription": "Nous avons envoyé un lien de réinitialisation de mot de passe à votre adresse e-mail. Vérifiez votre boîte de réception et cliquez sur le lien pour réinitialiser votre mot de passe.",
       "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
       "resend": "Renvoyer l'e-mail",
+      "resending": "Envoi en cours...",
       "backToLogin": "Retour à la connexion",
       "errors": {
         "usernameRequired": "Veuillez saisir votre nom d'utilisateur"
@@ -471,6 +472,11 @@
       "submit": "Créer le compte",
       "submitting": "Création du compte...",
       "success": "Compte créé avec succès !",
+      "checkEmailHeading": "Vérifiez votre e-mail",
+      "checkEmailDescription": "Nous avons envoyé un lien de vérification à votre adresse e-mail. Vérifiez votre boîte de réception et cliquez sur le lien pour vérifier votre compte.",
+      "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
+      "resend": "Renvoyer l'e-mail",
+      "resending": "Envoi en cours...",
       "errors": {
         "firstNameRequired": "Veuillez saisir votre prénom",
         "lastNameRequired": "Veuillez saisir votre nom",

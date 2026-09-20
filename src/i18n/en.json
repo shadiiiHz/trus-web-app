@@ -372,6 +372,7 @@
       "checkEmailDescription": "We've sent a password reset link to your email address. Please check your inbox and click the link to reset your password.",
       "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
       "resend": "Resend Email",
+      "resending": "Resending...",
       "backToLogin": "Back to log in",
       "errors": {
         "usernameRequired": "Please enter your username"
@@ -461,6 +462,11 @@
       "submit": "Create Account",
       "submitting": "Creating Account...",
       "success": "Account created successfully!",
+      "checkEmailHeading": "Check Your Email",
+      "checkEmailDescription": "We've sent a verification link to your email address. Please check your inbox and click the link to verify your account.",
+      "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
+      "resend": "Resend Email",
+      "resending": "Resending...",
       "errors": {
         "firstNameRequired": "Please enter your first name",
         "lastNameRequired": "Please enter your last name",

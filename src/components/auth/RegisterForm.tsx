@@ -7,6 +7,8 @@ import type { SiteConfig } from "@/config/site.config";
 
 export interface RegisterFormProps {
   copy: SiteConfig["auth"]["register"];
+  status: "idle" | "submitting" | "success";
+  onStatusChange: (status: "idle" | "submitting" | "success") => void;
 }
 
 // Characters that read unambiguously at small sizes — no 0/O or 1/I.
@@ -91,7 +93,11 @@ function PasswordIcon({ className }: { className?: string }) {
   );
 }
 
-export function RegisterForm({ copy }: RegisterFormProps) {
+export function RegisterForm({
+  copy,
+  status,
+  onStatusChange,
+}: RegisterFormProps) {
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
@@ -113,9 +119,7 @@ export function RegisterForm({ copy }: RegisterFormProps) {
   const [captchaInput, setCaptchaInput] = useState("");
 
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle",
-  );
+  const [resending, setResending] = useState(false);
 
   const passwordRequirements = [
     { key: "minLength" as const, test: (value: string) => value.length >= 8 },
@@ -131,7 +135,6 @@ export function RegisterForm({ copy }: RegisterFormProps) {
 
   const clearError = (field: FieldName) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
-    setStatus((prev) => (prev === "success" ? "idle" : prev));
   };
 
   const refreshCaptcha = () => {
@@ -175,14 +178,34 @@ export function RegisterForm({ copy }: RegisterFormProps) {
 
     // No backend wired up yet — simulate the round trip so the button's
     // loading state reads correctly once a real request lands here.
-    setStatus("submitting");
+    onStatusChange("submitting");
     window.setTimeout(() => {
-      setStatus("success");
+      onStatusChange("success");
       setPassword("");
       setConfirmPassword("");
       refreshCaptcha();
     }, 700);
   };
+
+  const handleResend = () => {
+    setResending(true);
+    window.setTimeout(() => {
+      setResending(false);
+    }, 700);
+  };
+
+  if (status === "success") {
+    return (
+      <Button
+        type="button"
+        variant="primary"
+        onClick={handleResend}
+        className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+      >
+        {resending ? copy.resending : copy.resend}
+      </Button>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
@@ -495,18 +518,6 @@ export function RegisterForm({ copy }: RegisterFormProps) {
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>
-
-      {status === "success" && (
-        <motion.p
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="text-center text-body-sm font-medium text-emerald-600"
-          role="status"
-        >
-          {copy.success}
-        </motion.p>
-      )}
     </form>
   );
 }

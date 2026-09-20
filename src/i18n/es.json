@@ -391,6 +391,7 @@
       "checkEmailDescription": "Hemos enviado un enlace para restablecer la contraseña a tu dirección de correo. Revisa tu bandeja de entrada y haz clic en el enlace para restablecer tu contraseña.",
       "checkEmailHint": "Si no recibiste el correo, revisa tu carpeta de Spam o inténtalo de nuevo.",
       "resend": "Reenviar correo",
+      "resending": "Reenviando...",
       "backToLogin": "Volver a iniciar sesión",
       "errors": {
         "usernameRequired": "Por favor introduce tu nombre de usuario"
@@ -480,6 +481,11 @@
       "submit": "Crear cuenta",
       "submitting": "Creando cuenta...",
       "success": "¡Cuenta creada correctamente!",
+      "checkEmailHeading": "Revisa tu correo",
+      "checkEmailDescription": "Hemos enviado un enlace de verificación a tu dirección de correo electrónico. Revisa tu bandeja de entrada y haz clic en el enlace para verificar tu cuenta.",
+      "checkEmailHint": "Si no recibiste el correo, revisa tu carpeta de Spam o inténtalo de nuevo.",
+      "resend": "Reenviar correo",
+      "resending": "Reenviando...",
       "errors": {
         "firstNameRequired": "Por favor introduce tu nombre",
         "lastNameRequired": "Por favor introduce tu apellido",
