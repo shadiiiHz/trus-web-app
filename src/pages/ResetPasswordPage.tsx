@@ -39,6 +39,7 @@ export default function ResetPasswordPage() {
                 officeLabel={login.card.officeLabel}
                 phoneLabel={login.card.phoneLabel}
                 emailLabel={login.card.emailLabel}
+                height={446}
               />
             </FadeIn>
 

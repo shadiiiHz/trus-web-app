@@ -297,14 +297,6 @@ export function ResetPasswordForm({
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>
-
-      <Link
-        to="/login"
-        className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-auth-muted"
-      >
-        <BackIcon />
-        {copy.backToLogin}
-      </Link>
     </form>
   );
 }
