@@ -8,6 +8,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import RegisterPage from "./pages/RegisterPage";
+import EmailVerifiedPage from "./pages/EmailVerifiedPage";
 import EditAccountPage from "./pages/EditAccountPage";
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/change-password" element={<ChangePasswordPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/email-verified" element={<EmailVerifiedPage />} />
       <Route path="/edit-account" element={<EditAccountPage />} />
     </Routes>
   );

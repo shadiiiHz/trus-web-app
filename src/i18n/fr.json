@@ -492,6 +492,12 @@
       }
     },
 
+    "emailVerified": {
+      "heading": "E-mail vérifié avec succès !",
+      "subtitle": "Votre compte a été vérifié. Vous pouvez maintenant vous connecter.",
+      "login": "Se connecter"
+    },
+
     "editAccount": {
       "heading": "Modifiez votre compte",
       "subtitle": "Mettez à jour les informations de votre entreprise et les paramètres de votre compte à tout moment.",

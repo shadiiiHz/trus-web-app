@@ -482,6 +482,12 @@
       }
     },
 
+    "emailVerified": {
+      "heading": "Email Verified Successfully!",
+      "subtitle": "Your account has been verified. You can now log in.",
+      "login": "Log in"
+    },
+
     "editAccount": {
       "heading": "Edit Your Account",
       "subtitle": "Update your account information and keep your details up to date.",

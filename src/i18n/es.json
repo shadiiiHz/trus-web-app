@@ -501,6 +501,12 @@
       }
     },
 
+    "emailVerified": {
+      "heading": "¡Correo verificado con éxito!",
+      "subtitle": "Tu cuenta ha sido verificada. Ya puedes iniciar sesión.",
+      "login": "Iniciar sesión"
+    },
+
     "editAccount": {
       "heading": "Edita tu cuenta",
       "subtitle": "Actualiza la información de tu negocio y los ajustes de tu cuenta cuando quieras.",

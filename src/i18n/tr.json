@@ -482,6 +482,12 @@
       }
     },
 
+    "emailVerified": {
+      "heading": "E-posta Başarıyla Doğrulandı!",
+      "subtitle": "Hesabınız doğrulandı. Artık giriş yapabilirsiniz.",
+      "login": "Giriş yap"
+    },
+
     "editAccount": {
       "heading": "Hesabınızı Düzenleyin",
       "subtitle": "İşletme bilgilerinizi ve hesap ayarlarınızı istediğiniz zaman güncelleyin.",

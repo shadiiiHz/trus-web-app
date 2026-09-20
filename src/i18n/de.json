@@ -489,6 +489,12 @@
       }
     },
 
+    "emailVerified": {
+      "heading": "E-Mail erfolgreich bestätigt!",
+      "subtitle": "Ihr Konto wurde bestätigt. Sie können sich jetzt anmelden.",
+      "login": "Anmelden"
+    },
+
     "editAccount": {
       "heading": "Bearbeiten Sie Ihr Konto",
       "subtitle": "Aktualisieren Sie jederzeit Ihre Unternehmensinformationen und Kontoeinstellungen.",
