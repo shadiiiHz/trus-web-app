@@ -1,29 +1,8 @@
 import { useId, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
-
-function BackIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15.8327 10H4.16602M9.99935 4.16669L4.16602 10L9.99935 15.8334"
-        stroke="var(--color-auth-icon)"
-        stroke-width="1.66667"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  );
-}
 
 function RequirementIcon({ met }: { met: boolean }) {
   return (
@@ -154,24 +133,14 @@ export function ResetPasswordForm({
 
   if (status === "success") {
     return (
-      <div className="flex flex-col gap-4">
-        <Button
-          type="button"
-          variant="primary"
-          onClick={() => navigate("/login")}
-          className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
-        >
-          {copy.continue}
-        </Button>
-
-        <Link
-          to="/login"
-          className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-auth-muted"
-        >
-          <BackIcon />
-          {copy.backToLogin}
-        </Link>
-      </div>
+      <Button
+        type="button"
+        variant="primary"
+        onClick={() => navigate("/login")}
+        className="mx-auto rounded-md px-3.5 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+      >
+        {copy.continue}
+      </Button>
     );
   }
 

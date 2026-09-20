@@ -378,7 +378,10 @@
       "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
       "submit": "Envoyer le lien de réinitialisation",
       "submitting": "Envoi en cours...",
-      "success": "Lien envoyé — vérifiez votre boîte de réception.",
+      "checkEmailHeading": "Vérifiez votre e-mail",
+      "checkEmailDescription": "Nous avons envoyé un lien de réinitialisation de mot de passe à votre adresse e-mail. Vérifiez votre boîte de réception et cliquez sur le lien pour réinitialiser votre mot de passe.",
+      "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
+      "resend": "Renvoyer l'e-mail",
       "backToLogin": "Retour à la connexion",
       "errors": {
         "usernameRequired": "Veuillez saisir votre nom d'utilisateur"
@@ -429,8 +432,8 @@
       "submit": "Réinitialiser le mot de passe",
       "submitting": "Réinitialisation...",
       "successHeading": "Mot de passe modifié avec succès",
-      "successSubtitle": "Votre mot de passe a été réinitialisé avec succès. Cliquez ci-dessous pour vous connecter automatiquement.",
-      "continue": "Continuer",
+      "successSubtitle": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+      "continue": "Se connecter",
       "backToLogin": "Retour à la connexion",
       "errors": {
         "newPasswordRequired": "Veuillez saisir un nouveau mot de passe",

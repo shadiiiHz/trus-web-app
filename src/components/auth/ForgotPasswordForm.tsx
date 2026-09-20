@@ -1,9 +1,7 @@
 import { useId, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 
 
@@ -30,6 +28,8 @@ function BackIcon({ className }: { className?: string }) {
 
 export interface ForgotPasswordFormProps {
   copy: SiteConfig["auth"]["forgotPassword"];
+  status: "idle" | "submitting" | "success";
+  onStatusChange: (status: "idle" | "submitting" | "success") => void;
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["forgotPassword"]["errors"];
@@ -51,14 +51,16 @@ function RequiredMark() {
   );
 }
 
-export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
+export function ForgotPasswordForm({
+  copy,
+  status,
+  onStatusChange,
+}: ForgotPasswordFormProps) {
   const usernameId = useId();
 
   const [username, setUsername] = useState("");
   const [error, setError] = useState<FieldErrorKey | undefined>();
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle",
-  );
+  const [resending, setResending] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,11 +73,31 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
     setError(undefined);
     // No backend wired up yet — simulate the round trip so the button's
     // loading state reads correctly once a real request lands here.
-    setStatus("submitting");
+    onStatusChange("submitting");
     window.setTimeout(() => {
-      setStatus("success");
+      onStatusChange("success");
     }, 700);
   };
+
+  const handleResend = () => {
+    setResending(true);
+    window.setTimeout(() => {
+      setResending(false);
+    }, 700);
+  };
+
+  if (status === "success") {
+    return (
+      <Button
+        type="button"
+        variant="primary"
+        onClick={handleResend}
+        className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+      >
+        {resending ? copy.submitting : copy.resend}
+      </Button>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
@@ -99,7 +121,6 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
             onChange={(e) => {
               setUsername(e.target.value);
               if (error) setError(undefined);
-              if (status === "success") setStatus("idle");
             }}
             aria-invalid={Boolean(error)}
             className={`${inputBaseClass} ${
@@ -121,18 +142,6 @@ export function ForgotPasswordForm({ copy }: ForgotPasswordFormProps) {
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>
-
-      {status === "success" && (
-        <motion.p
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="text-center text-body-sm font-medium text-emerald-600"
-          role="status"
-        >
-          {copy.success}
-        </motion.p>
-      )}
 
       <Link
         to="/login"

@@ -368,7 +368,10 @@
       "usernamePlaceholder": "Kullanıcı adınızı girin",
       "submit": "Sıfırlama Bağlantısı Gönder",
       "submitting": "Gönderiliyor...",
-      "success": "Bağlantı gönderildi — gelen kutunuzu kontrol edin.",
+      "checkEmailHeading": "E-postanızı Kontrol Edin",
+      "checkEmailDescription": "E-posta adresinize bir şifre sıfırlama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin ve şifrenizi sıfırlamak için bağlantıya tıklayın.",
+      "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
+      "resend": "E-postayı Tekrar Gönder",
       "backToLogin": "Girişe dön",
       "errors": {
         "usernameRequired": "Lütfen kullanıcı adınızı girin"
@@ -419,8 +422,8 @@
       "submit": "Şifreyi Sıfırla",
       "submitting": "Sıfırlanıyor...",
       "successHeading": "Şifre Başarıyla Değiştirildi",
-      "successSubtitle": "Şifreniz başarıyla sıfırlandı. Otomatik giriş yapmak için aşağıya tıklayın.",
-      "continue": "Devam Et",
+      "successSubtitle": "Şifreniz başarıyla sıfırlandı. Artık yeni şifrenizle giriş yapabilirsiniz.",
+      "continue": "Giriş Yap",
       "backToLogin": "Girişe dön",
       "errors": {
         "newPasswordRequired": "Lütfen yeni bir şifre girin",

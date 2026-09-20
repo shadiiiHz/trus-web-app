@@ -48,7 +48,11 @@ export default function ResetPasswordPage() {
               delay={0.1}
               className="lg:flex-1 max-w-[572px]"
             >
-              <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
+              <div
+                className={`mx-auto lg:mx-0 lg:max-w-none font-body ${
+                  isSuccess ? "text-center" : ""
+                }`}
+              >
                 <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
                   {isSuccess ? resetPassword.successHeading : resetPassword.heading}
                 </h1>

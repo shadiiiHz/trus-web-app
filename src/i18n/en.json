@@ -368,7 +368,10 @@
       "usernamePlaceholder": "Enter your username",
       "submit": "Send Reset Link",
       "submitting": "Sending...",
-      "success": "Reset link sent — check your inbox.",
+      "checkEmailHeading": "Check Your Email",
+      "checkEmailDescription": "We've sent a password reset link to your email address. Please check your inbox and click the link to reset your password.",
+      "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
+      "resend": "Resend Email",
       "backToLogin": "Back to log in",
       "errors": {
         "usernameRequired": "Please enter your username"
@@ -418,9 +421,9 @@
       },
       "submit": "Reset Password",
       "submitting": "Resetting...",
-      "successHeading": "Password Change Successfully",
-      "successSubtitle": "Your password has been successfully reset. Click below to log in magically.",
-      "continue": "Continue",
+      "successHeading": "Password Changed Successfully",
+      "successSubtitle": "Your password has been successfully reset. You can now log in with your new password.",
+      "continue": "Log in",
       "backToLogin": "Back to log in",
       "errors": {
         "newPasswordRequired": "Please enter a new password",

@@ -375,7 +375,10 @@
       "usernamePlaceholder": "Benutzername eingeben",
       "submit": "Link zum Zurücksetzen senden",
       "submitting": "Wird gesendet...",
-      "success": "Link gesendet — bitte prüfen Sie Ihren Posteingang.",
+      "checkEmailHeading": "Überprüfen Sie Ihre E-Mail",
+      "checkEmailDescription": "Wir haben einen Link zum Zurücksetzen des Passworts an Ihre E-Mail-Adresse gesendet. Bitte prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Passwort zurückzusetzen.",
+      "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
+      "resend": "E-Mail erneut senden",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
         "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein"
@@ -426,8 +429,8 @@
       "submit": "Passwort zurücksetzen",
       "submitting": "Wird zurückgesetzt...",
       "successHeading": "Passwort erfolgreich geändert",
-      "successSubtitle": "Ihr Passwort wurde erfolgreich zurückgesetzt. Klicken Sie unten, um sich automatisch anzumelden.",
-      "continue": "Weiter",
+      "successSubtitle": "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+      "continue": "Anmelden",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
         "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",

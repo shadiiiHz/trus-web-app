@@ -387,7 +387,10 @@
       "usernamePlaceholder": "Introduce tu nombre de usuario",
       "submit": "Enviar enlace de restablecimiento",
       "submitting": "Enviando...",
-      "success": "Enlace enviado — revisa tu bandeja de entrada.",
+      "checkEmailHeading": "Revisa tu correo",
+      "checkEmailDescription": "Hemos enviado un enlace para restablecer la contraseña a tu dirección de correo. Revisa tu bandeja de entrada y haz clic en el enlace para restablecer tu contraseña.",
+      "checkEmailHint": "Si no recibiste el correo, revisa tu carpeta de Spam o inténtalo de nuevo.",
+      "resend": "Reenviar correo",
       "backToLogin": "Volver a iniciar sesión",
       "errors": {
         "usernameRequired": "Por favor introduce tu nombre de usuario"
@@ -438,8 +441,8 @@
       "submit": "Restablecer contraseña",
       "submitting": "Restableciendo...",
       "successHeading": "Contraseña cambiada con éxito",
-      "successSubtitle": "Tu contraseña se ha restablecido correctamente. Haz clic abajo para iniciar sesión automáticamente.",
-      "continue": "Continuar",
+      "successSubtitle": "Tu contraseña se ha restablecido correctamente. Ahora puedes iniciar sesión con tu nueva contraseña.",
+      "continue": "Iniciar sesión",
       "backToLogin": "Volver a iniciar sesión",
       "errors": {
         "newPasswordRequired": "Por favor introduce una nueva contraseña",
