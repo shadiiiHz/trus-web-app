@@ -372,6 +372,7 @@
         "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
         "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide.",
         "emailNotVerified": "Veuillez vérifier votre e-mail avant de vous connecter.",
+        "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "loginFailed": "Une erreur s'est produite. Veuillez réessayer."
       }
     },

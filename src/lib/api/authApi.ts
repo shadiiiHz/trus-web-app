@@ -33,6 +33,7 @@ export type RegisterErrorCode =
  * message for it, so it falls back to a generic one via `reportApiError`.
  */
 export type LoginErrorCode =
+  | "INVALID_INPUT"
   | "INVALID_CAPTCHA"
   | "INVALID_CREDENTIALS"
   | "EMAIL_NOT_VERIFIED";

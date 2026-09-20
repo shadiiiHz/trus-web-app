@@ -362,6 +362,7 @@
         "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
         "invalidCredentials": "Kullanıcı adı veya şifre hatalı.",
         "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın.",
+        "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "loginFailed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
       }
     },

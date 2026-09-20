@@ -362,6 +362,7 @@
         "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
         "invalidCredentials": "Invalid username or password.",
         "emailNotVerified": "Please verify your email before logging in.",
+        "invalidInput": "Please check the information you entered and try again.",
         "loginFailed": "Something went wrong. Please try again."
       }
     },

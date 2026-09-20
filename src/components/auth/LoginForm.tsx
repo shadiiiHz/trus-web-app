@@ -177,6 +177,7 @@ export function LoginForm({ copy }: LoginFormProps) {
       reportApiError(
         error,
         {
+          INVALID_INPUT: copy.errors.invalidInput,
           INVALID_CAPTCHA: copy.errors.captchaMismatch,
           INVALID_CREDENTIALS: copy.errors.invalidCredentials,
           EMAIL_NOT_VERIFIED: copy.errors.emailNotVerified,
