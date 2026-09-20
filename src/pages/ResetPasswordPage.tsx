@@ -45,7 +45,7 @@ export default function ResetPasswordPage() {
             <FadeIn
               direction="right"
               delay={0.1}
-              className="lg:flex-1 max-w-[435px]"
+              className="lg:flex-1 max-w-[572px]"
             >
               <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
                 <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
