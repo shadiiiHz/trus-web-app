@@ -1,26 +1,21 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, RotateCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
+import {
+  fetchCaptcha,
+  registerUser,
+  reportApiError,
+  verifyCaptcha,
+} from "@/lib/api/authApi";
+import { showToast } from "@/lib/toast";
 
 export interface RegisterFormProps {
   copy: SiteConfig["auth"]["register"];
   status: "idle" | "submitting" | "success";
   onStatusChange: (status: "idle" | "submitting" | "success") => void;
-}
-
-// Characters that read unambiguously at small sizes — no 0/O or 1/I.
-const CAPTCHA_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const CAPTCHA_LENGTH = 5;
-
-function generateCaptcha(): string {
-  let code = "";
-  for (let i = 0; i < CAPTCHA_LENGTH; i++) {
-    code += CAPTCHA_CHARS[Math.floor(Math.random() * CAPTCHA_CHARS.length)];
-  }
-  return code;
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["register"]["errors"];
@@ -115,8 +110,10 @@ export function RegisterForm({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [captcha, setCaptcha] = useState(generateCaptcha);
+  const [captchaImage, setCaptchaImage] = useState<string | null>(null);
+  const [challengeId, setChallengeId] = useState<string | null>(null);
   const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaLoading, setCaptchaLoading] = useState(true);
 
   const [errors, setErrors] = useState<FieldErrors>({});
   const [resending, setResending] = useState(false);
@@ -137,12 +134,36 @@ export function RegisterForm({
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   };
 
-  const refreshCaptcha = () => {
-    setCaptcha(generateCaptcha());
-    setCaptchaInput("");
+  const loadCaptchaChallenge = async () => {
+    try {
+      const challenge = await fetchCaptcha();
+      setCaptchaImage(challenge.image);
+      setChallengeId(challenge.challengeId);
+    } catch {
+      setCaptchaImage(null);
+      setChallengeId(null);
+      showToast(copy.errors.captchaLoadError, "error");
+    } finally {
+      setCaptchaLoading(false);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const refreshCaptcha = () => {
+    setCaptchaLoading(true);
+    setCaptchaInput("");
+    loadCaptchaChallenge();
+  };
+
+  useEffect(() => {
+    // Fetches the initial captcha challenge from the backend on mount;
+    // the resulting setState calls only run after the awaited request
+    // resolves, not synchronously within this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadCaptchaChallenge();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const nextErrors: FieldErrors = {};
@@ -166,25 +187,49 @@ export function RegisterForm({
     }
     if (!captchaInput.trim()) {
       nextErrors.captcha = "captchaRequired";
-    } else if (captchaInput.trim().toUpperCase() !== captcha) {
-      nextErrors.captcha = "captchaMismatch";
     }
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      refreshCaptcha();
+    if (Object.keys(nextErrors).length > 0 || !challengeId) {
       return;
     }
 
-    // No backend wired up yet — simulate the round trip so the button's
-    // loading state reads correctly once a real request lands here.
     onStatusChange("submitting");
-    window.setTimeout(() => {
+
+    try {
+      const { captchaToken } = await verifyCaptcha(
+        challengeId,
+        captchaInput.trim(),
+      );
+
+      await registerUser({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        username: username.trim(),
+        password,
+        confirmPassword,
+        captchaToken,
+      });
+
       onStatusChange("success");
       setPassword("");
       setConfirmPassword("");
+      return;
+    } catch (error) {
+      reportApiError(
+        error,
+        {
+          INVALID_CAPTCHA: copy.errors.captchaMismatch,
+          USERNAME_EXISTS: copy.errors.usernameExists,
+          EMAIL_EXISTS: copy.errors.emailExists,
+          INVALID_INPUT: copy.errors.invalidInput,
+        },
+        copy.errors.genericError,
+      );
+      onStatusChange("idle");
       refreshCaptcha();
-    }, 700);
+    }
   };
 
   const handleResend = () => {
@@ -452,17 +497,25 @@ export function RegisterForm({
         )}
       </div>
 
-      {/* Captcha code display + refresh */}
+      {/* Captcha image display + refresh */}
       <div className="flex items-center gap-3">
         <div
-          className="flex h-16.5 flex-1 select-none items-center justify-center gap-2.5 rounded-xl border border-auth-border bg-white shadow-xs"
+          className="flex h-16.5 flex-1 select-none items-center justify-center overflow-hidden rounded-xl border border-auth-border bg-white shadow-xs"
           aria-hidden="true"
         >
-          {captcha.split("").map((char, i) => (
-            <span key={i} className="text-[40px] font-bold text-auth-heading">
-              {char}
+          {captchaLoading ? (
+            <span className="text-body-sm text-auth-muted">…</span>
+          ) : captchaImage ? (
+            <img
+              src={captchaImage}
+              alt=""
+              className="h-full w-full object-contain"
+            />
+          ) : (
+            <span className="px-2 text-center text-[13px] text-red-500">
+              {copy.errors.captchaLoadError}
             </span>
-          ))}
+          )}
         </div>
         <motion.button
           type="button"
@@ -514,7 +567,8 @@ export function RegisterForm({
       <Button
         type="submit"
         variant="primary"
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+        disabled={status === "submitting" || captchaLoading}
+        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>

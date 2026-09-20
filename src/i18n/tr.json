@@ -358,7 +358,11 @@
         "usernameRequired": "Lütfen kullanıcı adınızı girin",
         "passwordRequired": "Lütfen şifrenizi girin",
         "captchaRequired": "Lütfen doğrulama kodunu girin",
-        "captchaMismatch": "Doğrulama kodu eşleşmiyor, lütfen tekrar deneyin"
+        "captchaMismatch": "Doğrulama kodu eşleşmiyor, lütfen tekrar deneyin",
+        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
+        "invalidCredentials": "Kullanıcı adı veya şifre hatalı.",
+        "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın.",
+        "loginFailed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
       }
     },
     "forgotPassword": {
@@ -478,7 +482,12 @@
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor",
         "captchaRequired": "Lütfen CAPTCHA kodunu girin",
-        "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin"
+        "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin",
+        "usernameExists": "Bu kullanıcı adı zaten kullanılıyor.",
+        "emailExists": "Bu e-posta ile zaten bir hesap mevcut.",
+        "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
+        "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin."
       }
     },
 

@@ -368,7 +368,11 @@
         "usernameRequired": "Veuillez saisir votre nom d'utilisateur",
         "passwordRequired": "Veuillez saisir votre mot de passe",
         "captchaRequired": "Veuillez saisir le code captcha",
-        "captchaMismatch": "Le code captcha ne correspond pas, veuillez réessayer"
+        "captchaMismatch": "Le code captcha ne correspond pas, veuillez réessayer",
+        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
+        "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide.",
+        "emailNotVerified": "Veuillez vérifier votre e-mail avant de vous connecter.",
+        "loginFailed": "Une erreur s'est produite. Veuillez réessayer."
       }
     },
     "forgotPassword": {
@@ -488,7 +492,12 @@
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
         "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
         "captchaRequired": "Veuillez saisir le code CAPTCHA",
-        "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer"
+        "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer",
+        "usernameExists": "Ce nom d'utilisateur est déjà utilisé.",
+        "emailExists": "Un compte avec cet e-mail existe déjà.",
+        "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
+        "genericError": "Une erreur s'est produite. Veuillez réessayer.",
+        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer."
       }
     },
 

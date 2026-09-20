@@ -364,7 +364,11 @@
         "usernameRequired": "Пожалуйста, введите имя пользователя",
         "passwordRequired": "Пожалуйста, введите пароль",
         "captchaRequired": "Пожалуйста, введите код с картинки",
-        "captchaMismatch": "Код не совпадает, попробуйте снова"
+        "captchaMismatch": "Код не совпадает, попробуйте снова",
+        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте снова.",
+        "invalidCredentials": "Неверное имя пользователя или пароль.",
+        "emailNotVerified": "Пожалуйста, подтвердите свой email перед входом.",
+        "loginFailed": "Что-то пошло не так. Попробуйте снова."
       }
     },
     "forgotPassword": {
@@ -484,7 +488,12 @@
         "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
         "confirmPasswordMismatch": "Пароли не совпадают",
         "captchaRequired": "Пожалуйста, введите код CAPTCHA",
-        "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова"
+        "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова",
+        "usernameExists": "Это имя пользователя уже используется.",
+        "emailExists": "Аккаунт с таким email уже существует.",
+        "invalidInput": "Пожалуйста, проверьте введённые данные и попробуйте снова.",
+        "genericError": "Что-то пошло не так. Пожалуйста, попробуйте снова.",
+        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте снова."
       }
     },
 

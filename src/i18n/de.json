@@ -365,7 +365,11 @@
         "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein",
         "passwordRequired": "Bitte geben Sie Ihr Passwort ein",
         "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
-        "captchaMismatch": "Der Captcha-Code stimmt nicht überein, bitte versuchen Sie es erneut"
+        "captchaMismatch": "Der Captcha-Code stimmt nicht überein, bitte versuchen Sie es erneut",
+        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+        "invalidCredentials": "Benutzername oder Passwort ist ungültig.",
+        "emailNotVerified": "Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
+        "loginFailed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
       }
     },
     "forgotPassword": {
@@ -485,7 +489,12 @@
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
         "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
-        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut"
+        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut",
+        "usernameExists": "Dieser Benutzername wird bereits verwendet.",
+        "emailExists": "Für diese E-Mail-Adresse existiert bereits ein Konto.",
+        "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
+        "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut."
       }
     },
 

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useLocale } from "@/i18n";
+import { ToastContainer } from "@/components/ui/Toast";
 import HomePage from "@/pages/HomePage";
 import TemplatesPage from "@/pages/TemplatesPage";
 import ServicesPage from "@/pages/ServicesPage";
@@ -18,17 +19,20 @@ export default function App() {
   useLocale();
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/templates" element={<TemplatesPage />} />
-      <Route path="/services" element={<ServicesPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/change-password" element={<ChangePasswordPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/email-verified" element={<EmailVerifiedPage />} />
-      <Route path="/edit-account" element={<EditAccountPage />} />
-    </Routes>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/templates" element={<TemplatesPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/change-password" element={<ChangePasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/email-verified" element={<EmailVerifiedPage />} />
+        <Route path="/edit-account" element={<EditAccountPage />} />
+      </Routes>
+    </>
   );
 }

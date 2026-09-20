@@ -11,6 +11,7 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   className?: string
   style?: React.CSSProperties
+  disabled?: boolean
   'aria-label'?: string
 }
 
@@ -40,6 +41,7 @@ export function Button({
   type = 'button',
   className = '',
   style,
+  disabled = false,
   'aria-label': ariaLabel,
 }: ButtonProps) {
   const classes = `${base} ${variants[variant]} ${className}`
@@ -50,11 +52,13 @@ export function Button({
       ? { ...gradientBg, ...style }
       : style
 
-  const motionProps = {
-    whileHover: { scale: 1.03 },
-    whileTap:   { scale: 0.97 },
-    transition: { duration: DURATION_SM, ease: EASE_IN_OUT },
-  }
+  const motionProps = disabled
+    ? {}
+    : {
+        whileHover: { scale: 1.03 },
+        whileTap: { scale: 0.97 },
+        transition: { duration: DURATION_SM, ease: EASE_IN_OUT },
+      }
 
   if (href) {
     return (
@@ -76,6 +80,7 @@ export function Button({
       className={classes}
       style={computedStyle}
       onClick={onClick}
+      disabled={disabled}
       aria-label={ariaLabel}
       {...motionProps}
     >
