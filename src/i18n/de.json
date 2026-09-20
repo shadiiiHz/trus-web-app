@@ -439,7 +439,50 @@
 
     "register": {
       "heading": "Erstellen Sie Ihr Konto",
-      "subtitle": "Treten Sie TruS bei und verwalten Sie Ihr Unternehmen an einem Ort.",
+      "subtitle": "Bitte vervollständigen Sie nach der Registrierung Ihr Profil unter „Konto bearbeiten“. Einige Dienste funktionieren erst, wenn Ihr Profil vollständig ausgefüllt ist.",
+      "firstNameLabel": "Vorname",
+      "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+      "lastNameLabel": "Nachname",
+      "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "sie@firma.com",
+      "usernameLabel": "Benutzername",
+      "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
+      "passwordLabel": "Passwort",
+      "passwordPlaceholder": "Passwort erstellen",
+      "confirmPasswordLabel": "Passwort bestätigen",
+      "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+      "showPasswordAria": "Passwort anzeigen",
+      "hidePasswordAria": "Passwort verbergen",
+      "requirements": {
+        "minLength": "Mindestens 8 Zeichen",
+        "hasNumber": "Enthält eine Zahl",
+        "hasLetter": "Enthält einen Buchstaben"
+      },
+      "captchaLabel": "CAPTCHA eingeben",
+      "captchaPlaceholder": "Zeichen eingeben",
+      "refreshCaptchaAria": "CAPTCHA aktualisieren",
+      "submit": "Konto erstellen",
+      "submitting": "Konto wird erstellt...",
+      "success": "Konto erfolgreich erstellt!",
+      "errors": {
+        "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
+        "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",
+        "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "usernameRequired": "Bitte wählen Sie einen Benutzernamen",
+        "passwordRequired": "Bitte erstellen Sie ein Passwort",
+        "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
+        "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
+        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
+        "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
+        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Bearbeiten Sie Ihr Konto",
+      "subtitle": "Aktualisieren Sie jederzeit Ihre Unternehmensinformationen und Kontoeinstellungen.",
       "business": {
         "title": "Unternehmensinformationen",
         "subtitle": "Erzählen Sie uns von Ihrem Unternehmen, damit wir Ihr Erlebnis personalisieren können.",
@@ -512,9 +555,9 @@
         "hasLetter": "Enthält einen Buchstaben"
       },
       "cancel": "Abbrechen",
-      "submit": "Konto erstellen",
-      "submitting": "Konto wird erstellt...",
-      "success": "Konto erfolgreich erstellt!",
+      "submit": "Konto bearbeiten",
+      "submitting": "Änderungen werden gespeichert...",
+      "success": "Konto erfolgreich aktualisiert!",
       "errors": {
         "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
         "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",
@@ -535,11 +578,6 @@
         "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
         "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut"
       }
-    },
-
-    "editAccount": {
-      "heading": "Bearbeiten Sie Ihr Konto",
-      "subtitle": "Aktualisieren Sie jederzeit Ihre Unternehmensinformationen und Kontoeinstellungen."
     }
   },
 

@@ -3,17 +3,15 @@ import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { FadeIn } from "@/components/motion/FadeIn";
 import type { SiteConfig } from "@/config/site.config";
-import RegisterForm from "@/components/auth/RegisterForm";
+import EditAccountForm from "@/components/auth/EditAccountForm";
 
-export interface AccountFormPageProps {
+export interface EditAccountFormPageProps {
   heading: string;
   subtitle: string;
-  copy: SiteConfig["auth"]["register"];
+  copy: SiteConfig["auth"]["editAccount"];
 }
 
-// Shared shell for the Register and Edit Account pages — they render the
-// exact same form, only the heading/subtitle text differs between the two.
-export function AccountFormPage({ heading, subtitle, copy }: AccountFormPageProps) {
+export function EditAccountFormPage({ heading, subtitle, copy }: EditAccountFormPageProps) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -33,7 +31,7 @@ export function AccountFormPage({ heading, subtitle, copy }: AccountFormPageProp
             </FadeIn>
 
             <FadeIn direction="up" delay={0.1}>
-              <RegisterForm copy={copy} />
+              <EditAccountForm copy={copy} />
             </FadeIn>
           </div>
         </div>
@@ -44,4 +42,4 @@ export function AccountFormPage({ heading, subtitle, copy }: AccountFormPageProp
   );
 }
 
-export default AccountFormPage;
+export default EditAccountFormPage;

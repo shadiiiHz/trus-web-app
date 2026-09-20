@@ -432,7 +432,50 @@
 
     "register": {
       "heading": "Create Your Account",
-      "subtitle": "Join TRUS and start managing your business in one place.",
+      "subtitle": "After creating your account, please go to Edit Account to complete your profile. Some services may not function until your profile is fully completed.",
+      "firstNameLabel": "First name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNameLabel": "Last name",
+      "lastNamePlaceholder": "Enter your last name",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@company.com",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm new password",
+      "showPasswordAria": "Show password",
+      "hidePasswordAria": "Hide password",
+      "requirements": {
+        "minLength": "At least 8 characters",
+        "hasNumber": "Includes a number",
+        "hasLetter": "Includes a letter"
+      },
+      "captchaLabel": "Enter the code shown above",
+      "captchaPlaceholder": "Enter captcha code",
+      "refreshCaptchaAria": "Refresh captcha code",
+      "submit": "Create Account",
+      "submitting": "Creating Account...",
+      "success": "Account created successfully!",
+      "errors": {
+        "firstNameRequired": "Please enter your first name",
+        "lastNameRequired": "Please enter your last name",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
+        "usernameRequired": "Please choose a username",
+        "passwordRequired": "Please create a password",
+        "passwordInvalid": "Password must meet all the requirements above",
+        "confirmPasswordRequired": "Please confirm your password",
+        "confirmPasswordMismatch": "Passwords do not match",
+        "captchaRequired": "Please enter the CAPTCHA code",
+        "captchaMismatch": "CAPTCHA code doesn't match, please try again"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Edit Your Account",
+      "subtitle": "Update your account information and keep your details up to date.",
       "business": {
         "title": "Business Information",
         "subtitle": "Tell us about your business so we can personalize your experience.",
@@ -505,9 +548,9 @@
         "hasLetter": "Includes a letter"
       },
       "cancel": "Cancel",
-      "submit": "Create Account",
-      "submitting": "Creating Account...",
-      "success": "Account created successfully!",
+      "submit": "Edit Account",
+      "submitting": "Saving Changes...",
+      "success": "Account updated successfully!",
       "errors": {
         "firstNameRequired": "Please enter your first name",
         "lastNameRequired": "Please enter your last name",
@@ -528,11 +571,6 @@
         "captchaRequired": "Please enter the CAPTCHA code",
         "captchaMismatch": "CAPTCHA code doesn't match, please try again"
       }
-    },
-
-    "editAccount": {
-      "heading": "Edit Your Account",
-      "subtitle": "Update your business information and account settings anytime."
     }
   },
 

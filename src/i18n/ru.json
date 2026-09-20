@@ -438,7 +438,50 @@
 
     "register": {
       "heading": "Создайте аккаунт",
-      "subtitle": "Присоединяйтесь к TruS и управляйте своим бизнесом в одном месте.",
+      "subtitle": "После создания учётной записи перейдите в раздел «Редактировать аккаунт», чтобы заполнить профиль. Некоторые функции могут быть недоступны, пока профиль не заполнен полностью.",
+      "firstNameLabel": "Имя",
+      "firstNamePlaceholder": "Введите ваше имя",
+      "lastNameLabel": "Фамилия",
+      "lastNamePlaceholder": "Введите вашу фамилию",
+      "emailLabel": "Адрес электронной почты",
+      "emailPlaceholder": "you@company.com",
+      "usernameLabel": "Имя пользователя",
+      "usernamePlaceholder": "Выберите имя пользователя",
+      "passwordLabel": "Пароль",
+      "passwordPlaceholder": "Придумайте пароль",
+      "confirmPasswordLabel": "Подтвердите пароль",
+      "confirmPasswordPlaceholder": "Подтвердите ваш пароль",
+      "showPasswordAria": "Показать пароль",
+      "hidePasswordAria": "Скрыть пароль",
+      "requirements": {
+        "minLength": "Минимум 8 символов",
+        "hasNumber": "Содержит цифру",
+        "hasLetter": "Содержит букву"
+      },
+      "captchaLabel": "Введите CAPTCHA",
+      "captchaPlaceholder": "Введите символы",
+      "refreshCaptchaAria": "Обновить CAPTCHA",
+      "submit": "Создать аккаунт",
+      "submitting": "Создание аккаунта...",
+      "success": "Аккаунт успешно создан!",
+      "errors": {
+        "firstNameRequired": "Пожалуйста, введите ваше имя",
+        "lastNameRequired": "Пожалуйста, введите вашу фамилию",
+        "emailRequired": "Пожалуйста, введите адрес электронной почты",
+        "emailInvalid": "Пожалуйста, введите корректный адрес электронной почты",
+        "usernameRequired": "Пожалуйста, выберите имя пользователя",
+        "passwordRequired": "Пожалуйста, придумайте пароль",
+        "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
+        "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
+        "confirmPasswordMismatch": "Пароли не совпадают",
+        "captchaRequired": "Пожалуйста, введите код CAPTCHA",
+        "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Редактировать аккаунт",
+      "subtitle": "Обновляйте информацию о бизнесе и настройки аккаунта в любое время.",
       "business": {
         "title": "Информация о бизнесе",
         "subtitle": "Расскажите нам о своём бизнесе, чтобы мы могли персонализировать ваш опыт.",
@@ -511,9 +554,9 @@
         "hasLetter": "Содержит букву"
       },
       "cancel": "Отмена",
-      "submit": "Создать аккаунт",
-      "submitting": "Создание аккаунта...",
-      "success": "Аккаунт успешно создан!",
+      "submit": "Редактировать аккаунт",
+      "submitting": "Сохранение изменений...",
+      "success": "Аккаунт успешно обновлён!",
       "errors": {
         "firstNameRequired": "Пожалуйста, введите ваше имя",
         "lastNameRequired": "Пожалуйста, введите вашу фамилию",
@@ -534,11 +577,6 @@
         "captchaRequired": "Пожалуйста, введите код CAPTCHA",
         "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова"
       }
-    },
-
-    "editAccount": {
-      "heading": "Редактировать аккаунт",
-      "subtitle": "Обновляйте информацию о бизнесе и настройки аккаунта в любое время."
     }
   },
 

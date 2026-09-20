@@ -451,7 +451,50 @@
 
     "register": {
       "heading": "Crea tu cuenta",
-      "subtitle": "Únete a TruS y comienza a gestionar tu negocio en un solo lugar.",
+      "subtitle": "Después de crear tu cuenta, ve a Editar cuenta para completar tu perfil. Algunos servicios pueden no funcionar hasta que tu perfil esté completo.",
+      "firstNameLabel": "Nombre",
+      "firstNamePlaceholder": "Introduce tu nombre",
+      "lastNameLabel": "Apellido",
+      "lastNamePlaceholder": "Introduce tu apellido",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tu@empresa.com",
+      "usernameLabel": "Nombre de usuario",
+      "usernamePlaceholder": "Elige un nombre de usuario",
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Crea una contraseña",
+      "confirmPasswordLabel": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Confirma tu contraseña",
+      "showPasswordAria": "Mostrar contraseña",
+      "hidePasswordAria": "Ocultar contraseña",
+      "requirements": {
+        "minLength": "Al menos 8 caracteres",
+        "hasNumber": "Incluye un número",
+        "hasLetter": "Incluye una letra"
+      },
+      "captchaLabel": "Introducir CAPTCHA",
+      "captchaPlaceholder": "Escribe los caracteres",
+      "refreshCaptchaAria": "Actualizar CAPTCHA",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta...",
+      "success": "¡Cuenta creada correctamente!",
+      "errors": {
+        "firstNameRequired": "Por favor introduce tu nombre",
+        "lastNameRequired": "Por favor introduce tu apellido",
+        "emailRequired": "Por favor introduce tu correo electrónico",
+        "emailInvalid": "Por favor introduce un correo electrónico válido",
+        "usernameRequired": "Por favor elige un nombre de usuario",
+        "passwordRequired": "Por favor crea una contraseña",
+        "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
+        "confirmPasswordRequired": "Por favor confirma tu contraseña",
+        "confirmPasswordMismatch": "Las contraseñas no coinciden",
+        "captchaRequired": "Por favor introduce el código CAPTCHA",
+        "captchaMismatch": "El código CAPTCHA no coincide, inténtalo de nuevo"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Edita tu cuenta",
+      "subtitle": "Actualiza la información de tu negocio y los ajustes de tu cuenta cuando quieras.",
       "business": {
         "title": "Información del negocio",
         "subtitle": "Cuéntanos sobre tu negocio para que podamos personalizar tu experiencia.",
@@ -524,9 +567,9 @@
         "hasLetter": "Incluye una letra"
       },
       "cancel": "Cancelar",
-      "submit": "Crear cuenta",
-      "submitting": "Creando cuenta...",
-      "success": "¡Cuenta creada correctamente!",
+      "submit": "Editar cuenta",
+      "submitting": "Guardando cambios...",
+      "success": "¡Cuenta actualizada correctamente!",
       "errors": {
         "firstNameRequired": "Por favor introduce tu nombre",
         "lastNameRequired": "Por favor introduce tu apellido",
@@ -547,11 +590,6 @@
         "captchaRequired": "Por favor introduce el código CAPTCHA",
         "captchaMismatch": "El código CAPTCHA no coincide, inténtalo de nuevo"
       }
-    },
-
-    "editAccount": {
-      "heading": "Edita tu cuenta",
-      "subtitle": "Actualiza la información de tu negocio y los ajustes de tu cuenta cuando quieras."
     }
   },
 

@@ -442,7 +442,50 @@
 
     "register": {
       "heading": "Créez votre compte",
-      "subtitle": "Rejoignez TruS et gérez votre entreprise en un seul endroit.",
+      "subtitle": "Après avoir créé votre compte, rendez-vous dans Modifier le compte pour compléter votre profil. Certains services peuvent ne pas fonctionner tant que votre profil n'est pas entièrement complété.",
+      "firstNameLabel": "Prénom",
+      "firstNamePlaceholder": "Saisissez votre prénom",
+      "lastNameLabel": "Nom",
+      "lastNamePlaceholder": "Saisissez votre nom",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "vous@entreprise.com",
+      "usernameLabel": "Nom d'utilisateur",
+      "usernamePlaceholder": "Choisissez un nom d'utilisateur",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "Créez un mot de passe",
+      "confirmPasswordLabel": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+      "showPasswordAria": "Afficher le mot de passe",
+      "hidePasswordAria": "Masquer le mot de passe",
+      "requirements": {
+        "minLength": "Au moins 8 caractères",
+        "hasNumber": "Inclut un chiffre",
+        "hasLetter": "Inclut une lettre"
+      },
+      "captchaLabel": "Saisir le CAPTCHA",
+      "captchaPlaceholder": "Saisissez les caractères",
+      "refreshCaptchaAria": "Actualiser le CAPTCHA",
+      "submit": "Créer le compte",
+      "submitting": "Création du compte...",
+      "success": "Compte créé avec succès !",
+      "errors": {
+        "firstNameRequired": "Veuillez saisir votre prénom",
+        "lastNameRequired": "Veuillez saisir votre nom",
+        "emailRequired": "Veuillez saisir votre adresse e-mail",
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide",
+        "usernameRequired": "Veuillez choisir un nom d'utilisateur",
+        "passwordRequired": "Veuillez créer un mot de passe",
+        "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
+        "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
+        "captchaRequired": "Veuillez saisir le code CAPTCHA",
+        "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Modifiez votre compte",
+      "subtitle": "Mettez à jour les informations de votre entreprise et les paramètres de votre compte à tout moment.",
       "business": {
         "title": "Informations sur l'entreprise",
         "subtitle": "Parlez-nous de votre entreprise afin que nous puissions personnaliser votre expérience.",
@@ -515,9 +558,9 @@
         "hasLetter": "Inclut une lettre"
       },
       "cancel": "Annuler",
-      "submit": "Créer le compte",
-      "submitting": "Création du compte...",
-      "success": "Compte créé avec succès !",
+      "submit": "Modifier le compte",
+      "submitting": "Enregistrement des modifications...",
+      "success": "Compte mis à jour avec succès !",
       "errors": {
         "firstNameRequired": "Veuillez saisir votre prénom",
         "lastNameRequired": "Veuillez saisir votre nom",
@@ -538,11 +581,6 @@
         "captchaRequired": "Veuillez saisir le code CAPTCHA",
         "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer"
       }
-    },
-
-    "editAccount": {
-      "heading": "Modifiez votre compte",
-      "subtitle": "Mettez à jour les informations de votre entreprise et les paramètres de votre compte à tout moment."
     }
   },
 

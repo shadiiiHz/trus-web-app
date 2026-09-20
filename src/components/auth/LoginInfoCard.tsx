@@ -8,6 +8,8 @@ export interface LoginInfoCardProps {
   officeLabel: string;
   phoneLabel: string;
   emailLabel: string;
+  /** Card height in px — pages with a taller form (e.g. register) pass a bigger value. Defaults to the login page's 594px. */
+  height?: number;
 }
 
 /**
@@ -30,13 +32,14 @@ export function LoginInfoCard({
   officeLabel,
   phoneLabel,
   emailLabel,
+  height = 594,
 }: LoginInfoCardProps) {
   const telHref = `tel:${phone.replace(/\s+/g, "")}`;
 
   return (
     <div
       className="relative flex h-full flex-col rounded-2xl bg-[#FAFAFB] p-7"
-      style={{ minHeight: "594px", height: "594px" }}
+      style={{ minHeight: `${height}px`, height: `${height}px` }}
     >
       {/* Gradient border ring — Figma spec: linear gradient, top-right
           corner to bottom-left corner, stops rgba(0,0,0,1) → rgba(0,0,0,0.05)

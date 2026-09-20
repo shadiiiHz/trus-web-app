@@ -432,7 +432,50 @@
 
     "register": {
       "heading": "Hesabınızı Oluşturun",
-      "subtitle": "TruS'a katılın ve işinizi tek bir yerden yönetmeye başlayın.",
+      "subtitle": "Hesabınızı oluşturduktan sonra profilinizi tamamlamak için lütfen Hesabı Düzenle sayfasına gidin. Profiliniz tamamen doldurulana kadar bazı hizmetler çalışmayabilir.",
+      "firstNameLabel": "Ad",
+      "firstNamePlaceholder": "Adınızı girin",
+      "lastNameLabel": "Soyad",
+      "lastNamePlaceholder": "Soyadınızı girin",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "siz@sirket.com",
+      "usernameLabel": "Kullanıcı adı",
+      "usernamePlaceholder": "Bir kullanıcı adı seçin",
+      "passwordLabel": "Şifre",
+      "passwordPlaceholder": "Bir şifre oluşturun",
+      "confirmPasswordLabel": "Şifreyi onayla",
+      "confirmPasswordPlaceholder": "Şifrenizi onaylayın",
+      "showPasswordAria": "Şifreyi göster",
+      "hidePasswordAria": "Şifreyi gizle",
+      "requirements": {
+        "minLength": "En az 8 karakter",
+        "hasNumber": "Bir rakam içerir",
+        "hasLetter": "Bir harf içerir"
+      },
+      "captchaLabel": "CAPTCHA'yı girin",
+      "captchaPlaceholder": "Karakterleri yazın",
+      "refreshCaptchaAria": "CAPTCHA'yı yenile",
+      "submit": "Hesap Oluştur",
+      "submitting": "Hesap oluşturuluyor...",
+      "success": "Hesap başarıyla oluşturuldu!",
+      "errors": {
+        "firstNameRequired": "Lütfen adınızı girin",
+        "lastNameRequired": "Lütfen soyadınızı girin",
+        "emailRequired": "Lütfen e-posta adresinizi girin",
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+        "usernameRequired": "Lütfen bir kullanıcı adı seçin",
+        "passwordRequired": "Lütfen bir şifre oluşturun",
+        "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
+        "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
+        "confirmPasswordMismatch": "Şifreler eşleşmiyor",
+        "captchaRequired": "Lütfen CAPTCHA kodunu girin",
+        "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin"
+      }
+    },
+
+    "editAccount": {
+      "heading": "Hesabınızı Düzenleyin",
+      "subtitle": "İşletme bilgilerinizi ve hesap ayarlarınızı istediğiniz zaman güncelleyin.",
       "business": {
         "title": "İşletme Bilgileri",
         "subtitle": "Deneyiminizi kişiselleştirebilmemiz için işletmeniz hakkında bilgi verin.",
@@ -505,9 +548,9 @@
         "hasLetter": "Bir harf içerir"
       },
       "cancel": "İptal",
-      "submit": "Hesap Oluştur",
-      "submitting": "Hesap oluşturuluyor...",
-      "success": "Hesap başarıyla oluşturuldu!",
+      "submit": "Hesabı Düzenle",
+      "submitting": "Değişiklikler kaydediliyor...",
+      "success": "Hesap başarıyla güncellendi!",
       "errors": {
         "firstNameRequired": "Lütfen adınızı girin",
         "lastNameRequired": "Lütfen soyadınızı girin",
@@ -528,11 +571,6 @@
         "captchaRequired": "Lütfen CAPTCHA kodunu girin",
         "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin"
       }
-    },
-
-    "editAccount": {
-      "heading": "Hesabınızı Düzenleyin",
-      "subtitle": "İşletme bilgilerinizi ve hesap ayarlarınızı istediğiniz zaman güncelleyin."
     }
   },
 
