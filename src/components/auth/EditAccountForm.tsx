@@ -16,6 +16,7 @@ import socialX from "@/assets/auth/social-x.svg";
 import socialTelegram from "@/assets/auth/social-telegram.svg";
 import generateLogo from "@/assets/auth/generate-logo.svg";
 import uploadLogo from "@/assets/auth/upload-logo.svg";
+import { passwordRequirements } from "@/lib/passwordRequirements";
 // Starts as a copy of RegisterForm so the Edit Account page has its own,
 // independently editable component going forward (pre-filling existing
 // data, dropping/adjusting fields, wiring a real update call, etc.).
@@ -320,14 +321,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     "idle",
   );
 
-  const passwordRequirements = [
-    { key: "minLength" as const, test: (value: string) => value.length >= 8 },
-    { key: "hasNumber" as const, test: (value: string) => /\d/.test(value) },
-    {
-      key: "hasLetter" as const,
-      test: (value: string) => /[a-zA-Z]/.test(value),
-    },
-  ];
   const meetsAllRequirements = passwordRequirements.every(({ test }) =>
     test(password),
   );

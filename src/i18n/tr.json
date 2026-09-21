@@ -358,7 +358,10 @@
         "usernameRequired": "Lütfen kullanıcı adınızı girin",
         "passwordRequired": "Lütfen şifrenizi girin",
         "captchaRequired": "Lütfen doğrulama kodunu girin",
-        "captchaMismatch": "Doğrulama kodu eşleşmiyor, lütfen tekrar deneyin",
+        "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
+        "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
+        "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
+        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
         "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
         "invalidCredentials": "Kullanıcı adı veya şifre hatalı.",
         "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın.",
@@ -396,8 +399,10 @@
       "hidePasswordAria": "Şifreyi gizle",
       "requirements": {
         "minLength": "En az 8 karakter",
+        "hasUppercase": "Bir büyük harf içerir",
+        "hasLowercase": "Bir küçük harf içerir",
         "hasNumber": "Bir rakam içerir",
-        "hasLetter": "Bir harf içerir"
+        "hasSpecialChar": "Bir özel karakter içerir"
       },
       "submit": "Şifreyi Güncelle",
       "submitting": "Güncelleniyor...",
@@ -422,8 +427,10 @@
       "hidePasswordAria": "Şifreyi gizle",
       "requirements": {
         "minLength": "En az 8 karakter",
+        "hasUppercase": "Bir büyük harf içerir",
+        "hasLowercase": "Bir küçük harf içerir",
         "hasNumber": "Bir rakam içerir",
-        "hasLetter": "Bir harf içerir"
+        "hasSpecialChar": "Bir özel karakter içerir"
       },
       "submit": "Şifreyi Sıfırla",
       "submitting": "Sıfırlanıyor...",
@@ -458,8 +465,10 @@
       "hidePasswordAria": "Şifreyi gizle",
       "requirements": {
         "minLength": "En az 8 karakter",
+        "hasUppercase": "Bir büyük harf içerir",
+        "hasLowercase": "Bir küçük harf içerir",
         "hasNumber": "Bir rakam içerir",
-        "hasLetter": "Bir harf içerir"
+        "hasSpecialChar": "Bir özel karakter içerir"
       },
       "captchaLabel": "CAPTCHA'yı girin",
       "captchaPlaceholder": "Karakterleri yazın",
@@ -478,12 +487,16 @@
         "emailRequired": "Lütfen e-posta adresinizi girin",
         "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
         "usernameRequired": "Lütfen bir kullanıcı adı seçin",
+        "usernameInvalid": "Kullanıcı adı 3–50 karakter olmalı ve harf, rakam, nokta, alt çizgi veya tire içerebilir.",
         "passwordRequired": "Lütfen bir şifre oluşturun",
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor",
         "captchaRequired": "Lütfen CAPTCHA kodunu girin",
-        "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin",
+        "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
+        "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
+        "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
+        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
         "usernameExists": "Bu kullanıcı adı zaten kullanılıyor.",
         "emailExists": "Bu e-posta ile zaten bir hesap mevcut.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
@@ -569,8 +582,10 @@
       },
       "requirements": {
         "minLength": "En az 8 karakter",
+        "hasUppercase": "Bir büyük harf içerir",
+        "hasLowercase": "Bir küçük harf içerir",
         "hasNumber": "Bir rakam içerir",
-        "hasLetter": "Bir harf içerir"
+        "hasSpecialChar": "Bir özel karakter içerir"
       },
       "cancel": "İptal",
       "submit": "Hesabı Düzenle",

@@ -358,7 +358,10 @@
         "usernameRequired": "Please enter your username",
         "passwordRequired": "Please enter your password",
         "captchaRequired": "Please enter the captcha code",
-        "captchaMismatch": "Captcha code doesn't match, please try again",
+        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
+        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
+        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
+        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
         "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
         "invalidCredentials": "Invalid username or password.",
         "emailNotVerified": "Please verify your email before logging in.",
@@ -396,8 +399,10 @@
       "hidePasswordAria": "Hide password",
       "requirements": {
         "minLength": "At least 8 characters",
+        "hasUppercase": "Includes an uppercase letter",
+        "hasLowercase": "Includes a lowercase letter",
         "hasNumber": "Includes a number",
-        "hasLetter": "Includes a letter"
+        "hasSpecialChar": "Includes a special character"
       },
       "submit": "Update Password",
       "submitting": "Updating...",
@@ -422,8 +427,10 @@
       "hidePasswordAria": "Hide password",
       "requirements": {
         "minLength": "At least 8 characters",
+        "hasUppercase": "Includes an uppercase letter",
+        "hasLowercase": "Includes a lowercase letter",
         "hasNumber": "Includes a number",
-        "hasLetter": "Includes a letter"
+        "hasSpecialChar": "Includes a special character"
       },
       "submit": "Reset Password",
       "submitting": "Resetting...",
@@ -458,8 +465,10 @@
       "hidePasswordAria": "Hide password",
       "requirements": {
         "minLength": "At least 8 characters",
+        "hasUppercase": "Includes an uppercase letter",
+        "hasLowercase": "Includes a lowercase letter",
         "hasNumber": "Includes a number",
-        "hasLetter": "Includes a letter"
+        "hasSpecialChar": "Includes a special character"
       },
       "captchaLabel": "Enter the code shown above",
       "captchaPlaceholder": "Enter captcha code",
@@ -478,12 +487,16 @@
         "emailRequired": "Please enter your email address",
         "emailInvalid": "Please enter a valid email address",
         "usernameRequired": "Please choose a username",
+        "usernameInvalid": "Username must be 3–50 characters and may contain letters, numbers, dots, underscores, or hyphens.",
         "passwordRequired": "Please create a password",
         "passwordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your password",
         "confirmPasswordMismatch": "Passwords do not match",
         "captchaRequired": "Please enter the CAPTCHA code",
-        "captchaMismatch": "CAPTCHA code doesn't match, please try again",
+        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
+        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
+        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
+        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
         "usernameExists": "This username is already in use.",
         "emailExists": "An account with this email already exists.",
         "invalidInput": "Please check the information you entered and try again.",
@@ -569,8 +582,10 @@
       },
       "requirements": {
         "minLength": "At least 8 characters",
+        "hasUppercase": "Includes an uppercase letter",
+        "hasLowercase": "Includes a lowercase letter",
         "hasNumber": "Includes a number",
-        "hasLetter": "Includes a letter"
+        "hasSpecialChar": "Includes a special character"
       },
       "cancel": "Cancel",
       "submit": "Edit Account",

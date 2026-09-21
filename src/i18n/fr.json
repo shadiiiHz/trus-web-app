@@ -368,7 +368,10 @@
         "usernameRequired": "Veuillez saisir votre nom d'utilisateur",
         "passwordRequired": "Veuillez saisir votre mot de passe",
         "captchaRequired": "Veuillez saisir le code captcha",
-        "captchaMismatch": "Le code captcha ne correspond pas, veuillez réessayer",
+        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
+        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
+        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
+        "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
         "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
         "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide.",
         "emailNotVerified": "Veuillez vérifier votre e-mail avant de vous connecter.",
@@ -406,8 +409,10 @@
       "hidePasswordAria": "Masquer le mot de passe",
       "requirements": {
         "minLength": "Au moins 8 caractères",
+        "hasUppercase": "Inclut une lettre majuscule",
+        "hasLowercase": "Inclut une lettre minuscule",
         "hasNumber": "Inclut un chiffre",
-        "hasLetter": "Inclut une lettre"
+        "hasSpecialChar": "Inclut un caractère spécial"
       },
       "submit": "Mettre à jour le mot de passe",
       "submitting": "Mise à jour...",
@@ -432,8 +437,10 @@
       "hidePasswordAria": "Masquer le mot de passe",
       "requirements": {
         "minLength": "Au moins 8 caractères",
+        "hasUppercase": "Inclut une lettre majuscule",
+        "hasLowercase": "Inclut une lettre minuscule",
         "hasNumber": "Inclut un chiffre",
-        "hasLetter": "Inclut une lettre"
+        "hasSpecialChar": "Inclut un caractère spécial"
       },
       "submit": "Réinitialiser le mot de passe",
       "submitting": "Réinitialisation...",
@@ -468,8 +475,10 @@
       "hidePasswordAria": "Masquer le mot de passe",
       "requirements": {
         "minLength": "Au moins 8 caractères",
+        "hasUppercase": "Inclut une lettre majuscule",
+        "hasLowercase": "Inclut une lettre minuscule",
         "hasNumber": "Inclut un chiffre",
-        "hasLetter": "Inclut une lettre"
+        "hasSpecialChar": "Inclut un caractère spécial"
       },
       "captchaLabel": "Saisir le CAPTCHA",
       "captchaPlaceholder": "Saisissez les caractères",
@@ -488,12 +497,16 @@
         "emailRequired": "Veuillez saisir votre adresse e-mail",
         "emailInvalid": "Veuillez saisir une adresse e-mail valide",
         "usernameRequired": "Veuillez choisir un nom d'utilisateur",
+        "usernameInvalid": "Le nom d'utilisateur doit comporter entre 3 et 50 caractères et peut contenir des lettres, des chiffres, des points, des tirets bas ou des tirets.",
         "passwordRequired": "Veuillez créer un mot de passe",
         "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
         "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
         "captchaRequired": "Veuillez saisir le code CAPTCHA",
-        "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer",
+        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
+        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
+        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
+        "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
         "usernameExists": "Ce nom d'utilisateur est déjà utilisé.",
         "emailExists": "Un compte avec cet e-mail existe déjà.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
@@ -579,8 +592,10 @@
       },
       "requirements": {
         "minLength": "Au moins 8 caractères",
+        "hasUppercase": "Inclut une lettre majuscule",
+        "hasLowercase": "Inclut une lettre minuscule",
         "hasNumber": "Inclut un chiffre",
-        "hasLetter": "Inclut une lettre"
+        "hasSpecialChar": "Inclut un caractère spécial"
       },
       "cancel": "Annuler",
       "submit": "Modifier le compte",

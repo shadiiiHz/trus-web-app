@@ -22,9 +22,11 @@ const client = axios.create({
 /** Documented backend codes for the register endpoint (used to build its `messages` map — see `reportApiError`). */
 export type RegisterErrorCode =
   | "INVALID_INPUT"
-  | "INVALID_CAPTCHA"
+  | "INVALID_EMAIL"
+  | "EMAIL_EXISTS"
+  | "INVALID_USERNAME"
   | "USERNAME_EXISTS"
-  | "EMAIL_EXISTS";
+  | "INVALID_CAPTCHA";
 
 /**
  * Confirmed backend codes for the login endpoint. Any other code the
@@ -80,6 +82,30 @@ export function reportApiError(
   const base = messages[code] ?? fallback;
   const text = details?.length ? [base, ...details].join("\n") : base;
   showToast(text, "error", details?.length ? 8000 : undefined);
+}
+
+/**
+ * Backend codes for a rejected/expired/missing CAPTCHA answer, shared by
+ * the register and login endpoints. Mapped to a form's own `errors` copy
+ * key of the same name (e.g. `copy.errors.captchaExpired`) so the message
+ * renders under the CAPTCHA field like any other field-level error,
+ * instead of the generic toast `reportApiError` shows for other codes.
+ */
+const CAPTCHA_ERROR_CODE_KEYS = {
+  CAPTCHA_REQUIRED: "captchaRequired",
+  INVALID_CAPTCHA: "captchaInvalid",
+  INCORRECT_CAPTCHA: "captchaIncorrect",
+  CAPTCHA_EXPIRED: "captchaExpired",
+  CAPTCHA_TOO_MANY_ATTEMPTS: "captchaTooManyAttempts",
+} as const;
+
+export type CaptchaErrorKey =
+  (typeof CAPTCHA_ERROR_CODE_KEYS)[keyof typeof CAPTCHA_ERROR_CODE_KEYS];
+
+/** Returns the `errors` copy key for a CAPTCHA-specific backend code, or `undefined` for any other error. */
+export function getCaptchaErrorKey(error: unknown): CaptchaErrorKey | undefined {
+  if (!(error instanceof AuthApiError)) return undefined;
+  return CAPTCHA_ERROR_CODE_KEYS[error.code as keyof typeof CAPTCHA_ERROR_CODE_KEYS];
 }
 
 interface BackendEnvelope {

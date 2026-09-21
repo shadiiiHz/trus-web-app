@@ -364,7 +364,10 @@
         "usernameRequired": "Пожалуйста, введите имя пользователя",
         "passwordRequired": "Пожалуйста, введите пароль",
         "captchaRequired": "Пожалуйста, введите код с картинки",
-        "captchaMismatch": "Код не совпадает, попробуйте снова",
+        "captchaInvalid": "CAPTCHA недействительна или истек срок ее действия. Попробуйте еще раз.",
+        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте еще раз.",
+        "captchaExpired": "Срок действия CAPTCHA истек. Обновите её.",
+        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
         "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте снова.",
         "invalidCredentials": "Неверное имя пользователя или пароль.",
         "emailNotVerified": "Пожалуйста, подтвердите свой email перед входом.",
@@ -402,8 +405,10 @@
       "hidePasswordAria": "Скрыть пароль",
       "requirements": {
         "minLength": "Минимум 8 символов",
+        "hasUppercase": "Содержит заглавную букву",
+        "hasLowercase": "Содержит строчную букву",
         "hasNumber": "Содержит цифру",
-        "hasLetter": "Содержит букву"
+        "hasSpecialChar": "Содержит специальный символ"
       },
       "submit": "Обновить пароль",
       "submitting": "Обновление...",
@@ -428,8 +433,10 @@
       "hidePasswordAria": "Скрыть пароль",
       "requirements": {
         "minLength": "Минимум 8 символов",
+        "hasUppercase": "Содержит заглавную букву",
+        "hasLowercase": "Содержит строчную букву",
         "hasNumber": "Содержит цифру",
-        "hasLetter": "Содержит букву"
+        "hasSpecialChar": "Содержит специальный символ"
       },
       "submit": "Сбросить пароль",
       "submitting": "Сброс...",
@@ -464,8 +471,10 @@
       "hidePasswordAria": "Скрыть пароль",
       "requirements": {
         "minLength": "Минимум 8 символов",
+        "hasUppercase": "Содержит заглавную букву",
+        "hasLowercase": "Содержит строчную букву",
         "hasNumber": "Содержит цифру",
-        "hasLetter": "Содержит букву"
+        "hasSpecialChar": "Содержит специальный символ"
       },
       "captchaLabel": "Введите CAPTCHA",
       "captchaPlaceholder": "Введите символы",
@@ -484,12 +493,16 @@
         "emailRequired": "Пожалуйста, введите адрес электронной почты",
         "emailInvalid": "Пожалуйста, введите корректный адрес электронной почты",
         "usernameRequired": "Пожалуйста, выберите имя пользователя",
+        "usernameInvalid": "Имя пользователя должно содержать от 3 до 50 символов и может включать буквы, цифры, точки, подчеркивания или дефисы.",
         "passwordRequired": "Пожалуйста, придумайте пароль",
         "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
         "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
         "confirmPasswordMismatch": "Пароли не совпадают",
         "captchaRequired": "Пожалуйста, введите код CAPTCHA",
-        "captchaMismatch": "Код CAPTCHA не совпадает, попробуйте снова",
+        "captchaInvalid": "CAPTCHA недействительна или истек срок ее действия. Попробуйте еще раз.",
+        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте еще раз.",
+        "captchaExpired": "Срок действия CAPTCHA истек. Обновите её.",
+        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
         "usernameExists": "Это имя пользователя уже используется.",
         "emailExists": "Аккаунт с таким email уже существует.",
         "invalidInput": "Пожалуйста, проверьте введённые данные и попробуйте снова.",
@@ -575,8 +588,10 @@
       },
       "requirements": {
         "minLength": "Минимум 8 символов",
+        "hasUppercase": "Содержит заглавную букву",
+        "hasLowercase": "Содержит строчную букву",
         "hasNumber": "Содержит цифру",
-        "hasLetter": "Содержит букву"
+        "hasSpecialChar": "Содержит специальный символ"
       },
       "cancel": "Отмена",
       "submit": "Редактировать аккаунт",

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
+import { passwordRequirements } from "@/lib/passwordRequirements";
 
 function RequirementIcon({ met }: { met: boolean }) {
   return (
@@ -75,12 +76,6 @@ function RequiredMark() {
     </span>
   );
 }
-
-const passwordRequirements = [
-  { key: "minLength", test: (value: string) => value.length >= 8 },
-  { key: "hasNumber", test: (value: string) => /\d/.test(value) },
-  { key: "hasLetter", test: (value: string) => /[a-zA-Z]/.test(value) },
-] as const;
 
 export function ResetPasswordForm({
   copy,

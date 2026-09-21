@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/Button";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 import {
+  AuthApiError,
   fetchCaptcha,
+  getCaptchaErrorKey,
   registerUser,
   reportApiError,
   verifyCaptcha,
 } from "@/lib/api/authApi";
 import { showToast } from "@/lib/toast";
+import { passwordRequirements } from "@/lib/passwordRequirements";
 
 export interface RegisterFormProps {
   copy: SiteConfig["auth"]["register"];
@@ -118,14 +121,6 @@ export function RegisterForm({
   const [errors, setErrors] = useState<FieldErrors>({});
   const [resending, setResending] = useState(false);
 
-  const passwordRequirements = [
-    { key: "minLength" as const, test: (value: string) => value.length >= 8 },
-    { key: "hasNumber" as const, test: (value: string) => /\d/.test(value) },
-    {
-      key: "hasLetter" as const,
-      test: (value: string) => /[a-zA-Z]/.test(value),
-    },
-  ];
   const meetsAllRequirements = passwordRequirements.every(({ test }) =>
     test(password),
   );
@@ -174,7 +169,11 @@ export function RegisterForm({
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = "emailInvalid";
     }
-    if (!username.trim()) nextErrors.username = "usernameRequired";
+    if (!username.trim()) {
+      nextErrors.username = "usernameRequired";
+    } else if (!/^[A-Za-z0-9._-]{3,50}$/.test(username.trim())) {
+      nextErrors.username = "usernameInvalid";
+    }
     if (!password) {
       nextErrors.password = "passwordRequired";
     } else if (!meetsAllRequirements) {
@@ -217,16 +216,24 @@ export function RegisterForm({
       setConfirmPassword("");
       return;
     } catch (error) {
-      reportApiError(
-        error,
-        {
-          INVALID_CAPTCHA: copy.errors.captchaMismatch,
-          USERNAME_EXISTS: copy.errors.usernameExists,
-          EMAIL_EXISTS: copy.errors.emailExists,
-          INVALID_INPUT: copy.errors.invalidInput,
-        },
-        copy.errors.genericError,
-      );
+      const captchaErrorKey = getCaptchaErrorKey(error);
+      if (captchaErrorKey) {
+        setErrors((prev) => ({ ...prev, captcha: captchaErrorKey }));
+      } else if (error instanceof AuthApiError && error.code === "USERNAME_EXISTS") {
+        setErrors((prev) => ({ ...prev, username: "usernameExists" }));
+      } else if (error instanceof AuthApiError && error.code === "INVALID_USERNAME") {
+        setErrors((prev) => ({ ...prev, username: "usernameInvalid" }));
+      } else if (error instanceof AuthApiError && error.code === "EMAIL_EXISTS") {
+        setErrors((prev) => ({ ...prev, email: "emailExists" }));
+      } else if (error instanceof AuthApiError && error.code === "INVALID_EMAIL") {
+        setErrors((prev) => ({ ...prev, email: "emailInvalid" }));
+      } else {
+        reportApiError(
+          error,
+          { INVALID_INPUT: copy.errors.invalidInput },
+          copy.errors.genericError,
+        );
+      }
       onStatusChange("idle");
       refreshCaptcha();
     }

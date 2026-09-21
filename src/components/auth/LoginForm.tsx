@@ -7,6 +7,7 @@ import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 import {
   fetchCaptcha,
+  getCaptchaErrorKey,
   loginUser,
   reportApiError,
   verifyCaptcha,
@@ -174,16 +175,20 @@ export function LoginForm({ copy }: LoginFormProps) {
       setStatus("success");
       setPassword("");
     } catch (error) {
-      reportApiError(
-        error,
-        {
-          INVALID_INPUT: copy.errors.invalidInput,
-          INVALID_CAPTCHA: copy.errors.captchaMismatch,
-          INVALID_CREDENTIALS: copy.errors.invalidCredentials,
-          EMAIL_NOT_VERIFIED: copy.errors.emailNotVerified,
-        },
-        copy.errors.loginFailed,
-      );
+      const captchaErrorKey = getCaptchaErrorKey(error);
+      if (captchaErrorKey) {
+        setErrors((prev) => ({ ...prev, captcha: captchaErrorKey }));
+      } else {
+        reportApiError(
+          error,
+          {
+            INVALID_INPUT: copy.errors.invalidInput,
+            INVALID_CREDENTIALS: copy.errors.invalidCredentials,
+            EMAIL_NOT_VERIFIED: copy.errors.emailNotVerified,
+          },
+          copy.errors.loginFailed,
+        );
+      }
       setStatus("idle");
       refreshCaptcha();
     }

@@ -365,7 +365,10 @@
         "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein",
         "passwordRequired": "Bitte geben Sie Ihr Passwort ein",
         "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
-        "captchaMismatch": "Der Captcha-Code stimmt nicht überein, bitte versuchen Sie es erneut",
+        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
+        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
+        "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
+        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
         "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
         "invalidCredentials": "Benutzername oder Passwort ist ungültig.",
         "emailNotVerified": "Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
@@ -403,8 +406,10 @@
       "hidePasswordAria": "Passwort verbergen",
       "requirements": {
         "minLength": "Mindestens 8 Zeichen",
+        "hasUppercase": "Enthält einen Großbuchstaben",
+        "hasLowercase": "Enthält einen Kleinbuchstaben",
         "hasNumber": "Enthält eine Zahl",
-        "hasLetter": "Enthält einen Buchstaben"
+        "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "submit": "Passwort aktualisieren",
       "submitting": "Wird aktualisiert...",
@@ -429,8 +434,10 @@
       "hidePasswordAria": "Passwort verbergen",
       "requirements": {
         "minLength": "Mindestens 8 Zeichen",
+        "hasUppercase": "Enthält einen Großbuchstaben",
+        "hasLowercase": "Enthält einen Kleinbuchstaben",
         "hasNumber": "Enthält eine Zahl",
-        "hasLetter": "Enthält einen Buchstaben"
+        "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "submit": "Passwort zurücksetzen",
       "submitting": "Wird zurückgesetzt...",
@@ -465,8 +472,10 @@
       "hidePasswordAria": "Passwort verbergen",
       "requirements": {
         "minLength": "Mindestens 8 Zeichen",
+        "hasUppercase": "Enthält einen Großbuchstaben",
+        "hasLowercase": "Enthält einen Kleinbuchstaben",
         "hasNumber": "Enthält eine Zahl",
-        "hasLetter": "Enthält einen Buchstaben"
+        "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "captchaLabel": "CAPTCHA eingeben",
       "captchaPlaceholder": "Zeichen eingeben",
@@ -485,12 +494,16 @@
         "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
         "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "usernameRequired": "Bitte wählen Sie einen Benutzernamen",
+        "usernameInvalid": "Der Benutzername muss 3–50 Zeichen lang sein und darf Buchstaben, Zahlen, Punkte, Unterstriche oder Bindestriche enthalten.",
         "passwordRequired": "Bitte erstellen Sie ein Passwort",
         "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
         "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
-        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut",
+        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
+        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
+        "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
+        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
         "usernameExists": "Dieser Benutzername wird bereits verwendet.",
         "emailExists": "Für diese E-Mail-Adresse existiert bereits ein Konto.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
@@ -576,8 +589,10 @@
       },
       "requirements": {
         "minLength": "Mindestens 8 Zeichen",
+        "hasUppercase": "Enthält einen Großbuchstaben",
+        "hasLowercase": "Enthält einen Kleinbuchstaben",
         "hasNumber": "Enthält eine Zahl",
-        "hasLetter": "Enthält einen Buchstaben"
+        "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "cancel": "Abbrechen",
       "submit": "Konto bearbeiten",
