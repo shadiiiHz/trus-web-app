@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
@@ -28,8 +28,8 @@ function BackIcon({ className }: { className?: string }) {
 
 export interface ForgotPasswordFormProps {
   copy: SiteConfig["auth"]["forgotPassword"];
-  status: "idle" | "submitting" | "success";
-  onStatusChange: (status: "idle" | "submitting" | "success") => void;
+  status: "idle" | "submitting";
+  onStatusChange: (status: "idle" | "submitting") => void;
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["forgotPassword"]["errors"];
@@ -56,11 +56,11 @@ export function ForgotPasswordForm({
   status,
   onStatusChange,
 }: ForgotPasswordFormProps) {
+  const navigate = useNavigate();
   const usernameId = useId();
 
   const [username, setUsername] = useState("");
   const [error, setError] = useState<FieldErrorKey | undefined>();
-  const [resending, setResending] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,29 +75,9 @@ export function ForgotPasswordForm({
     // loading state reads correctly once a real request lands here.
     onStatusChange("submitting");
     window.setTimeout(() => {
-      onStatusChange("success");
+      navigate("/check-your-email", { state: { variant: "forgotPassword" } });
     }, 700);
   };
-
-  const handleResend = () => {
-    setResending(true);
-    window.setTimeout(() => {
-      setResending(false);
-    }, 700);
-  };
-
-  if (status === "success") {
-    return (
-      <Button
-        type="button"
-        variant="primary"
-        onClick={handleResend}
-        className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
-      >
-        {resending ? copy.resending : copy.resend}
-      </Button>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">

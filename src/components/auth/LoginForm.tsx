@@ -1,11 +1,12 @@
 import { useEffect, useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Eye, EyeOff, RotateCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 import {
+  AuthApiError,
   fetchCaptcha,
   getCaptchaErrorKey,
   loginUser,
@@ -93,6 +94,7 @@ function PasswordIcon({ className }: { className?: string }) {
 }
 
 export function LoginForm({ copy }: LoginFormProps) {
+  const navigate = useNavigate();
   const usernameId = useId();
   const passwordId = useId();
   const captchaId = useId();
@@ -178,19 +180,24 @@ export function LoginForm({ copy }: LoginFormProps) {
       const captchaErrorKey = getCaptchaErrorKey(error);
       if (captchaErrorKey) {
         setErrors((prev) => ({ ...prev, captcha: captchaErrorKey }));
+        setStatus("idle");
+        refreshCaptcha();
+      } else if (error instanceof AuthApiError && error.code === "EMAIL_NOT_VERIFIED") {
+        navigate(error.nextPage || "/check-your-email", {
+          state: { variant: "register" },
+        });
       } else {
         reportApiError(
           error,
           {
             INVALID_INPUT: copy.errors.invalidInput,
             INVALID_CREDENTIALS: copy.errors.invalidCredentials,
-            EMAIL_NOT_VERIFIED: copy.errors.emailNotVerified,
           },
           copy.errors.loginFailed,
         );
+        setStatus("idle");
+        refreshCaptcha();
       }
-      setStatus("idle");
-      refreshCaptcha();
     }
   };
 

@@ -5,17 +5,13 @@ import { LoginInfoCard } from "@/components/auth/LoginInfoCard";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { siteConfig } from "@/config/site.config";
 import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm";
-import checkEmailIcon from "@/assets/auth/check-email-icon.svg";
 
 export default function ForgotPasswordPage() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle",
-  );
-  const isSuccess = status === "success";
+  const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
   const { card } = siteConfig.contact;
   const { login, forgotPassword } = siteConfig.auth;
@@ -50,38 +46,13 @@ export default function ForgotPasswordPage() {
               delay={0.1}
               className="lg:flex-1 max-w-[572px]"
             >
-              <div
-                className={`mx-auto lg:mx-0 lg:max-w-none font-body ${
-                  isSuccess ? "text-center" : ""
-                }`}
-              >
-                {isSuccess ? (
-                  <>
-                    <img
-                      src={checkEmailIcon}
-                      alt=""
-                      className="mx-auto mb-5 h-12 w-12"
-                    />
-                    <h1 className="mb-2 text-[28px] font-semibold text-[#171717]">
-                      {forgotPassword.checkEmailHeading}
-                    </h1>
-                    <p className="text-body font-normal text-[#525252]">
-                      {forgotPassword.checkEmailDescription}
-                    </p>
-                    <p className="mt-4 mb-8 text-body-sm text-auth-muted">
-                      {forgotPassword.checkEmailHint}
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
-                      {forgotPassword.heading}
-                    </h1>
-                    <p className="mb-8 text-body font-normal text-[#525252]">
-                      {forgotPassword.subtitle}
-                    </p>
-                  </>
-                )}
+              <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
+                <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
+                  {forgotPassword.heading}
+                </h1>
+                <p className="mb-8 text-body font-normal text-[#525252]">
+                  {forgotPassword.subtitle}
+                </p>
 
                 <ForgotPasswordForm
                   copy={forgotPassword}

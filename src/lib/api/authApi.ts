@@ -51,11 +51,14 @@ export class AuthApiError extends Error {
   code: string;
   /** Per-field validation detail strings the backend sends as-is (e.g. `validation_errors`); shown verbatim, not translated. */
   details?: string[];
+  /** The frontend route the backend says to continue on (e.g. `/check-your-email` for `EMAIL_NOT_VERIFIED`), if it sent one. */
+  nextPage?: string;
 
-  constructor(code: string, message: string, details?: string[]) {
+  constructor(code: string, message: string, details?: string[], nextPage?: string) {
     super(message);
     this.code = code;
     this.details = details;
+    this.nextPage = nextPage;
   }
 }
 
@@ -131,7 +134,8 @@ function toAuthApiError(error: unknown): AuthApiError {
   const details = Array.isArray(payload?.validation_errors)
     ? payload.validation_errors.filter((item): item is string => typeof item === "string")
     : undefined;
-  return new AuthApiError(code, payload?.message ?? "Request failed.", details);
+  const nextPage = typeof payload?.next_page === "string" ? payload.next_page : undefined;
+  return new AuthApiError(code, payload?.message ?? "Request failed.", details, nextPage);
 }
 
 export interface CaptchaChallenge {

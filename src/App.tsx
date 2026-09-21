@@ -11,6 +11,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import RegisterPage from "./pages/RegisterPage";
 import EmailVerifiedPage from "./pages/EmailVerifiedPage";
 import EditAccountPage from "./pages/EditAccountPage";
+import CheckYourEmailPage from "./pages/CheckYourEmailPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/email-verified" element={<EmailVerifiedPage />} />
+        <Route path="/check-your-email" element={<CheckYourEmailPage />} />
         <Route path="/edit-account" element={<EditAccountPage />} />
       </Routes>
     </>

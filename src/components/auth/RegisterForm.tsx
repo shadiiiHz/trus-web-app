@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, RotateCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -17,8 +18,8 @@ import { passwordRequirements } from "@/lib/passwordRequirements";
 
 export interface RegisterFormProps {
   copy: SiteConfig["auth"]["register"];
-  status: "idle" | "submitting" | "success";
-  onStatusChange: (status: "idle" | "submitting" | "success") => void;
+  status: "idle" | "submitting";
+  onStatusChange: (status: "idle" | "submitting") => void;
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["register"]["errors"];
@@ -96,6 +97,7 @@ export function RegisterForm({
   status,
   onStatusChange,
 }: RegisterFormProps) {
+  const navigate = useNavigate();
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
@@ -119,7 +121,6 @@ export function RegisterForm({
   const [captchaLoading, setCaptchaLoading] = useState(true);
 
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [resending, setResending] = useState(false);
 
   const meetsAllRequirements = passwordRequirements.every(({ test }) =>
     test(password),
@@ -211,9 +212,9 @@ export function RegisterForm({
         captchaToken,
       });
 
-      onStatusChange("success");
       setPassword("");
       setConfirmPassword("");
+      navigate("/check-your-email", { state: { variant: "register" } });
       return;
     } catch (error) {
       const captchaErrorKey = getCaptchaErrorKey(error);
@@ -238,26 +239,6 @@ export function RegisterForm({
       refreshCaptcha();
     }
   };
-
-  const handleResend = () => {
-    setResending(true);
-    window.setTimeout(() => {
-      setResending(false);
-    }, 700);
-  };
-
-  if (status === "success") {
-    return (
-      <Button
-        type="button"
-        variant="primary"
-        onClick={handleResend}
-        className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
-      >
-        {resending ? copy.resending : copy.resend}
-      </Button>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
