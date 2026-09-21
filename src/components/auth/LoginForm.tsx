@@ -1,7 +1,8 @@
 import { useEffect, useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Eye, EyeOff, RotateCw, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, RotateCw, ShieldCheck } from "lucide-react";
+// import { Check } from "lucide-react"; // used by the disabled "remember me" checkbox
 import { Button } from "@/components/ui/Button";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
@@ -102,7 +103,7 @@ export function LoginForm({ copy }: LoginFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false); // remember me disabled for now
 
   const [captchaImage, setCaptchaImage] = useState<string | null>(null);
   const [challengeId, setChallengeId] = useState<string | null>(null);
@@ -288,7 +289,8 @@ export function LoginForm({ copy }: LoginFormProps) {
       </div>
 
       {/* Remember me / Forgot password */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-end">
+        {/* Remember me — disabled for now
         <label className="flex cursor-pointer items-center gap-2 text-body-sm font-medium font-body text-auth-text select-none">
           <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
             <input
@@ -305,6 +307,7 @@ export function LoginForm({ copy }: LoginFormProps) {
           </span>
           {copy.rememberMe}
         </label>
+        */}
         <Link
           to="/forgot-password"
           className="text-body-sm font-medium text-auth-primary underline underline-offset-2"
