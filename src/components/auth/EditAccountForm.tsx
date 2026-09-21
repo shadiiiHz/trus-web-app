@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Clock, Eye, EyeOff, Mail, RotateCw } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, Clock, Eye, EyeOff, Mail, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
@@ -307,6 +307,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const [linkedin, setLinkedin] = useState("");
   const [instagram, setInstagram] = useState("");
@@ -873,8 +874,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   label={copy.account.passwordLabel}
                   required
                   error={
-                    errors.password === "passwordRequired"
-                      ? copy.errors.passwordRequired
+                    errors.password
+                      ? copy.errors[errors.password]
                       : undefined
                   }
                 >
@@ -891,6 +892,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                         setPassword(e.target.value);
                         clearError("password");
                       }}
+                      onFocus={() => setPasswordFocused(true)}
+                      onBlur={() => setPasswordFocused(false)}
                       aria-invalid={Boolean(errors.password)}
                       style={{
                         color: showPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
@@ -912,18 +915,74 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
+                    <AnimatePresence>
+                      {passwordFocused && (
+                        <motion.div
+                          role="status"
+                          initial={{ opacity: 0, y: -4, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
+                          className="absolute left-0 top-[calc(100%+10px)] z-30 w-full min-w-[240px] rounded-xl border border-auth-border-light bg-white p-3.5 shadow-[0_12px_24px_-8px_rgba(16,24,40,0.18)]"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="absolute -top-1.5 left-6 h-3 w-3 rotate-45 rounded-[2px] border-l border-t border-auth-border-light bg-white"
+                          />
+
+                          <div className="mb-2.5 h-1 w-full overflow-hidden rounded-full bg-auth-surface">
+                            <motion.div
+                              className="h-full rounded-full bg-emerald-500"
+                              animate={{
+                                width: `${
+                                  (passwordRequirements.filter(({ test }) =>
+                                    test(password),
+                                  ).length /
+                                    passwordRequirements.length) *
+                                  100
+                                }%`,
+                              }}
+                              transition={{
+                                duration: DURATION_SM,
+                                ease: EASE_PREMIUM,
+                              }}
+                            />
+                          </div>
+
+                          <ul className="flex flex-col gap-1.5">
+                            {passwordRequirements.map(({ key, test }) => {
+                              const met = test(password);
+                              return (
+                                <li
+                                  key={key}
+                                  className={`flex items-center gap-2 text-[13px] transition-colors duration-150 ${
+                                    met ? "text-emerald-600" : "text-auth-muted"
+                                  }`}
+                                >
+                                  <span
+                                    className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border transition-colors duration-150 ${
+                                      met
+                                        ? "border-emerald-500 bg-emerald-500"
+                                        : "border-auth-border"
+                                    }`}
+                                  >
+                                    {met && (
+                                      <Check
+                                        size={9}
+                                        strokeWidth={3}
+                                        className="text-white"
+                                      />
+                                    )}
+                                  </span>
+                                  {copy.requirements[key]}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                  {errors.password === "passwordInvalid" && (
-                    <div className="mt-1.5 flex flex-col gap-1">
-                      {passwordRequirements
-                        .filter(({ test }) => !test(password))
-                        .map(({ key }) => (
-                          <p key={key} className="text-[13px] text-red-500">
-                            {copy.requirements[key]}
-                          </p>
-                        ))}
-                    </div>
-                  )}
                 </Field>
 
                 <Field
