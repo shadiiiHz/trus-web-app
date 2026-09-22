@@ -495,6 +495,7 @@
       "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
       "resend": "E-Mail erneut senden",
       "resending": "Wird erneut gesendet...",
+      "resendSuccess": "Bestätigungs-E-Mail wurde erneut gesendet.",
       "errors": {
         "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
         "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",
@@ -515,7 +516,8 @@
         "emailExists": "Für diese E-Mail-Adresse existiert bereits ein Konto.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
         "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
-        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut."
+        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+        "resendFailed": "E-Mail konnte nicht erneut gesendet werden. Bitte versuchen Sie es erneut."
       }
     },
 

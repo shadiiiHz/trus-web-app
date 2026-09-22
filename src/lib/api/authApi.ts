@@ -14,6 +14,8 @@ const CAPTCHA_VERIFY_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/captcha/verify";
 const REGISTER_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/register";
 const LOGIN_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/login";
+const RESEND_VERIFICATION_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/resend-verification";
 
 const client = axios.create({
   headers: { "Content-Type": "application/json" },
@@ -272,6 +274,14 @@ export async function loginUser(payload: LoginPayload): Promise<AuthSessionResul
       captcha_token: payload.captchaToken,
     });
     return toAuthSessionResult(unwrap(data) as RawAuthSessionPayload);
+  } catch (error) {
+    throw toAuthApiError(error);
+  }
+}
+
+export async function resendVerificationEmail(email: string): Promise<void> {
+  try {
+    await client.post(RESEND_VERIFICATION_URL, { email });
   } catch (error) {
     throw toAuthApiError(error);
   }

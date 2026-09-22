@@ -488,6 +488,7 @@
       "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
       "resend": "Resend Email",
       "resending": "Resending...",
+      "resendSuccess": "Verification email sent again.",
       "errors": {
         "firstNameRequired": "Please enter your first name",
         "lastNameRequired": "Please enter your last name",
@@ -508,7 +509,8 @@
         "emailExists": "An account with this email already exists.",
         "invalidInput": "Please check the information you entered and try again.",
         "genericError": "Something went wrong. Please try again.",
-        "captchaLoadError": "Failed to load CAPTCHA. Please try again."
+        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
+        "resendFailed": "Couldn't resend the email. Please try again."
       }
     },
 

@@ -507,6 +507,7 @@
       "checkEmailHint": "Si no recibiste el correo, revisa tu carpeta de Spam o inténtalo de nuevo.",
       "resend": "Reenviar correo",
       "resending": "Reenviando...",
+      "resendSuccess": "Correo de verificación reenviado.",
       "errors": {
         "firstNameRequired": "Por favor introduce tu nombre",
         "lastNameRequired": "Por favor introduce tu apellido",
@@ -527,7 +528,8 @@
         "emailExists": "Ya existe una cuenta con este correo electrónico.",
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
         "genericError": "Algo salió mal. Inténtalo de nuevo.",
-        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo."
+        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
+        "resendFailed": "No se pudo reenviar el correo. Inténtalo de nuevo."
       }
     },
 

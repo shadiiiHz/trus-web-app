@@ -196,7 +196,7 @@ export function LoginForm({ copy }: LoginFormProps) {
         refreshCaptcha();
       } else if (error instanceof AuthApiError && error.code === "EMAIL_NOT_VERIFIED") {
         navigate(error.nextPage ? resolveNextPage(error.nextPage) : "/check-your-email", {
-          state: { variant: "register" },
+          state: { variant: "register", email: username.trim() },
         });
       } else {
         reportApiError(

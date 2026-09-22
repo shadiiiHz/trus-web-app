@@ -228,7 +228,9 @@ export function RegisterForm({
       } else if (!result.ready) {
         navigate("/edit-account");
       } else {
-        navigate("/check-your-email", { state: { variant: "register" } });
+        navigate("/check-your-email", {
+          state: { variant: "register", email: email.trim() },
+        });
       }
       return;
     } catch (error) {

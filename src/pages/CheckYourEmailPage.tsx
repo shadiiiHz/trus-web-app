@@ -7,6 +7,8 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site.config";
 import checkEmailIcon from "@/assets/auth/check-email-icon.svg";
+import { resendVerificationEmail, reportApiError } from "@/lib/api/authApi";
+import { showToast } from "@/lib/toast";
 
 /**
  * Which flow sent the user here — picks the right copy (register's
@@ -18,6 +20,8 @@ type CheckEmailVariant = "register" | "forgotPassword";
 
 interface CheckYourEmailLocationState {
   variant?: CheckEmailVariant;
+  /** The address to resend the verification email to (register / login's EMAIL_NOT_VERIFIED flows). */
+  email?: string;
 }
 
 export default function CheckYourEmailPage() {
@@ -31,16 +35,33 @@ export default function CheckYourEmailPage() {
   const state = location.state as CheckYourEmailLocationState | null;
   const variant: CheckEmailVariant =
     state?.variant === "forgotPassword" ? "forgotPassword" : "register";
+  const email = state?.email;
 
   const { card } = siteConfig.contact;
   const { login, register, forgotPassword } = siteConfig.auth;
   const copy = variant === "forgotPassword" ? forgotPassword : register;
 
-  const handleResend = () => {
+  const handleResend = async () => {
+    if (resending) return;
+
+    // Only the "register" variant (account verification, including login's
+    // EMAIL_NOT_VERIFIED redirect) has a real resend endpoint wired up.
+    // "forgotPassword" has no backend yet — see ForgotPasswordForm.
+    if (variant !== "register" || !email) {
+      setResending(true);
+      window.setTimeout(() => setResending(false), 700);
+      return;
+    }
+
     setResending(true);
-    window.setTimeout(() => {
+    try {
+      await resendVerificationEmail(email);
+      showToast(register.resendSuccess, "success");
+    } catch (error) {
+      reportApiError(error, {}, register.errors.resendFailed);
+    } finally {
       setResending(false);
-    }, 700);
+    }
   };
 
   return (
@@ -89,6 +110,7 @@ export default function CheckYourEmailPage() {
                   type="button"
                   variant="primary"
                   onClick={handleResend}
+                  disabled={resending}
                   className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
                 >
                   {resending ? copy.resending : copy.resend}

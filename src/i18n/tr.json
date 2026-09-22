@@ -488,6 +488,7 @@
       "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
       "resend": "E-postayı Tekrar Gönder",
       "resending": "Gönderiliyor...",
+      "resendSuccess": "Doğrulama e-postası tekrar gönderildi.",
       "errors": {
         "firstNameRequired": "Lütfen adınızı girin",
         "lastNameRequired": "Lütfen soyadınızı girin",
@@ -508,7 +509,8 @@
         "emailExists": "Bu e-posta ile zaten bir hesap mevcut.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin."
+        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
+        "resendFailed": "E-posta tekrar gönderilemedi. Lütfen tekrar deneyin."
       }
     },
 

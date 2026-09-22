@@ -498,6 +498,7 @@
       "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
       "resend": "Renvoyer l'e-mail",
       "resending": "Envoi en cours...",
+      "resendSuccess": "E-mail de vérification renvoyé.",
       "errors": {
         "firstNameRequired": "Veuillez saisir votre prénom",
         "lastNameRequired": "Veuillez saisir votre nom",
@@ -518,7 +519,8 @@
         "emailExists": "Un compte avec cet e-mail existe déjà.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "genericError": "Une erreur s'est produite. Veuillez réessayer.",
-        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer."
+        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
+        "resendFailed": "Impossible de renvoyer l'e-mail. Veuillez réessayer."
       }
     },
 
