@@ -607,7 +607,7 @@
         "hasSpecialChar": "Incluye un carácter especial"
       },
       "cancel": "Cancelar",
-      "submit": "Editar cuenta",
+      "submit": "Enviar",
       "submitting": "Guardando cambios...",
       "success": "¡Cuenta actualizada correctamente!",
       "errors": {

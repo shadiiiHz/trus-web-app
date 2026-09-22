@@ -588,7 +588,7 @@
         "hasSpecialChar": "Includes a special character"
       },
       "cancel": "Cancel",
-      "submit": "Edit Account",
+      "submit": "Submit",
       "submitting": "Saving Changes...",
       "success": "Account updated successfully!",
       "errors": {

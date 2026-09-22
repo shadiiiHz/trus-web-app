@@ -595,7 +595,7 @@
         "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "cancel": "Abbrechen",
-      "submit": "Konto bearbeiten",
+      "submit": "Absenden",
       "submitting": "Änderungen werden gespeichert...",
       "success": "Konto erfolgreich aktualisiert!",
       "errors": {

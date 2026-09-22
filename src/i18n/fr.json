@@ -598,7 +598,7 @@
         "hasSpecialChar": "Inclut un caractère spécial"
       },
       "cancel": "Annuler",
-      "submit": "Modifier le compte",
+      "submit": "Envoyer",
       "submitting": "Enregistrement des modifications...",
       "success": "Compte mis à jour avec succès !",
       "errors": {

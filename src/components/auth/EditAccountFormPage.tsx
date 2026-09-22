@@ -27,7 +27,7 @@ export function EditAccountFormPage({ heading, subtitle, copy }: EditAccountForm
               <h1 className="mb-2 text-[24px] font-body font-semibold text-auth-heading">
                 {heading}
               </h1>
-              <p className="text-body font-body font-normal text-auth-muted">{subtitle}</p>
+              <p className="text-body font-body font-normal text-[#DC2626]">{subtitle}</p>
             </FadeIn>
 
             <FadeIn direction="up" delay={0.1}>

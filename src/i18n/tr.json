@@ -588,7 +588,7 @@
         "hasSpecialChar": "Bir özel karakter içerir"
       },
       "cancel": "İptal",
-      "submit": "Hesabı Düzenle",
+      "submit": "Gönder",
       "submitting": "Değişiklikler kaydediliyor...",
       "success": "Hesap başarıyla güncellendi!",
       "errors": {

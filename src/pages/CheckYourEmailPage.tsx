@@ -81,7 +81,7 @@ export default function CheckYourEmailPage() {
                 <p className="text-body font-normal text-[#525252]">
                   {copy.checkEmailDescription}
                 </p>
-                <p className="mt-4 mb-8 text-body-sm text-auth-muted">
+                <p className="mt-4 mb-8 text-body-sm text-[#DC2626]">
                   {copy.checkEmailHint}
                 </p>
 
