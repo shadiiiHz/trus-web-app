@@ -8,7 +8,14 @@
       "Leistungen",
       "Kontakt"
     ],
-    "cta": "Anmelden"
+    "cta": "Anmelden",
+    "account": {
+      "editAccount": "Konto bearbeiten",
+      "changePassword": "Passwort ändern",
+      "serviceManagement": "Serviceverwaltung",
+      "downloadInvoice": "Rechnung herunterladen",
+      "logOut": "Abmelden"
+    }
   },
 
   "hero": {

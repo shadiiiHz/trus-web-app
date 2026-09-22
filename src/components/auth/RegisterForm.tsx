@@ -9,10 +9,11 @@ import {
   AuthApiError,
   fetchCaptcha,
   getCaptchaErrorKey,
-  registerUser,
   reportApiError,
   verifyCaptcha,
 } from "@/lib/api/authApi";
+import { useRegister } from "@/hooks/auth/useRegister";
+import { resolveNextPage } from "@/lib/api/nextPage";
 import { showToast } from "@/lib/toast";
 import { passwordRequirements } from "@/lib/passwordRequirements";
 
@@ -98,6 +99,7 @@ export function RegisterForm({
   onStatusChange,
 }: RegisterFormProps) {
   const navigate = useNavigate();
+  const { mutate: registerMutate } = useRegister();
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
@@ -203,7 +205,7 @@ export function RegisterForm({
         captchaInput.trim(),
       );
 
-      await registerUser({
+      const result = await registerMutate({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim(),
@@ -215,7 +217,19 @@ export function RegisterForm({
 
       setPassword("");
       setConfirmPassword("");
-      navigate("/check-your-email", { state: { variant: "register" } });
+
+      // The backend tells us explicitly where to go next: `next_page` is
+      // set whenever the account isn't `ready` yet (e.g. "/complete-profile"
+      // for the profile-completion step, resolved to our own /edit-account
+      // route). Fall back to the email-verification screen only when it
+      // sends neither.
+      if (result.nextPage) {
+        navigate(resolveNextPage(result.nextPage));
+      } else if (!result.ready) {
+        navigate("/edit-account");
+      } else {
+        navigate("/check-your-email", { state: { variant: "register" } });
+      }
       return;
     } catch (error) {
       const captchaErrorKey = getCaptchaErrorKey(error);

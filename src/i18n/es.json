@@ -8,7 +8,14 @@
       "Servicios",
       "Contacto"
     ],
-    "cta": "Iniciar sesión"
+    "cta": "Iniciar sesión",
+    "account": {
+      "editAccount": "Editar cuenta",
+      "changePassword": "Cambiar contraseña",
+      "serviceManagement": "Gestión de servicios",
+      "downloadInvoice": "Descargar factura",
+      "logOut": "Cerrar sesión"
+    }
   },
 
   "hero": {

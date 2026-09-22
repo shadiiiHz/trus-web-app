@@ -1,7 +1,14 @@
 {
   "nav": {
     "links": ["Home", "About", "Portfolio", "Templates", "Services", "Contact"],
-    "cta": "Login"
+    "cta": "Login",
+    "account": {
+      "editAccount": "Edit Account",
+      "changePassword": "Change Password",
+      "serviceManagement": "Service Management",
+      "downloadInvoice": "Download Invoice",
+      "logOut": "Log Out"
+    }
   },
 
   "hero": {

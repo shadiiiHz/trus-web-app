@@ -208,9 +208,42 @@ export async function verifyCaptcha(
   }
 }
 
-export async function registerUser(payload: RegisterPayload): Promise<void> {
+/**
+ * Shared shape of a register/login success payload: a short-lived
+ * `session_token` plus a `ready` flag saying whether the account still
+ * needs the complete-profile step, and (when `ready` is false) the
+ * `next_page` route to send the user to for it. `AuthContext.authenticate`
+ * consumes this directly.
+ */
+export interface AuthSessionResult {
+  success: boolean;
+  sessionToken?: string;
+  expiresAt?: string;
+  ready: boolean;
+  nextPage?: string;
+}
+
+interface RawAuthSessionPayload {
+  success?: boolean;
+  session_token?: string;
+  expires_at?: string;
+  ready?: boolean;
+  next_page?: string;
+}
+
+function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
+  return {
+    success: raw.success ?? true,
+    sessionToken: raw.session_token,
+    expiresAt: raw.expires_at,
+    ready: raw.ready ?? true,
+    nextPage: raw.next_page,
+  };
+}
+
+export async function registerUser(payload: RegisterPayload): Promise<AuthSessionResult> {
   try {
-    await client.post(REGISTER_URL, {
+    const { data } = await client.post(REGISTER_URL, {
       first_name: payload.firstName,
       last_name: payload.lastName,
       email: payload.email,
@@ -219,25 +252,26 @@ export async function registerUser(payload: RegisterPayload): Promise<void> {
       confirm_password: payload.confirmPassword,
       captcha_token: payload.captchaToken,
     });
+    return toAuthSessionResult(unwrap(data) as RawAuthSessionPayload);
   } catch (error) {
     throw toAuthApiError(error);
   }
 }
 
 /**
- * The success response shape (session token, user info, ...) hasn't been
- * confirmed yet, so this just resolves the unwrapped payload as-is for the
- * caller to inspect once that's known — LoginForm currently only cares
- * whether this resolves or throws.
+ * The exact fields the login endpoint sends back on success haven't been
+ * confirmed yet, so this is parsed defensively the same way as
+ * `registerUser`'s response — any field the backend doesn't (yet) send just
+ * comes back `undefined`/defaulted, nothing throws over it.
  */
-export async function loginUser(payload: LoginPayload): Promise<unknown> {
+export async function loginUser(payload: LoginPayload): Promise<AuthSessionResult> {
   try {
     const { data } = await client.post(LOGIN_URL, {
       username: payload.username,
       password: payload.password,
       captcha_token: payload.captchaToken,
     });
-    return unwrap(data);
+    return toAuthSessionResult(unwrap(data) as RawAuthSessionPayload);
   } catch (error) {
     throw toAuthApiError(error);
   }

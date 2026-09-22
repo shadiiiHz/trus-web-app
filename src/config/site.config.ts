@@ -733,6 +733,14 @@ function buildSiteConfig(locale: Locale) {
       logo: "TruS",
       links: dict.nav.links.map((label, i) => ({ label, href: navHrefs[i] })),
       cta: { label: dict.nav.cta, href: "/login" },
+      /** Shown instead of the login CTA once a session is authenticated. */
+      account: {
+        editAccount: { label: dict.nav.account.editAccount, href: "/edit-account" },
+        changePassword: { label: dict.nav.account.changePassword, href: "/change-password" },
+        serviceManagement: { label: dict.nav.account.serviceManagement, href: "/select-services" },
+        downloadInvoice: dict.nav.account.downloadInvoice,
+        logOut: dict.nav.account.logOut,
+      },
     },
 
     hero: {

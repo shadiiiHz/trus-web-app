@@ -1,7 +1,14 @@
 {
   "nav": {
     "links": ["Ana Sayfa", "Hakkımızda", "Portfolyo", "Şablonlar", "Hizmetler", "İletişim"],
-    "cta": "Giriş Yap"
+    "cta": "Giriş Yap",
+    "account": {
+      "editAccount": "Hesabı Düzenle",
+      "changePassword": "Şifreyi Değiştir",
+      "serviceManagement": "Hizmet Yönetimi",
+      "downloadInvoice": "Faturayı İndir",
+      "logOut": "Çıkış Yap"
+    }
   },
 
   "hero": {

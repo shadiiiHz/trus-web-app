@@ -8,7 +8,14 @@
       "Services",
       "Contact"
     ],
-    "cta": "Connexion"
+    "cta": "Connexion",
+    "account": {
+      "editAccount": "Modifier le compte",
+      "changePassword": "Changer le mot de passe",
+      "serviceManagement": "Gestion des services",
+      "downloadInvoice": "Télécharger la facture",
+      "logOut": "Déconnexion"
+    }
   },
 
   "hero": {

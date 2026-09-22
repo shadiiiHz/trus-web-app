@@ -12,6 +12,7 @@ import RegisterPage from "./pages/RegisterPage";
 import EmailVerifiedPage from "./pages/EmailVerifiedPage";
 import EditAccountPage from "./pages/EditAccountPage";
 import CheckYourEmailPage from "./pages/CheckYourEmailPage";
+import SelectServicesPage from "./pages/SelectServicesPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -33,7 +34,13 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/email-verified" element={<EmailVerifiedPage />} />
         <Route path="/check-your-email" element={<CheckYourEmailPage />} />
+        {/* Serves the backend's `next_page: "/complete-profile"` — resolved
+            to this route by resolveNextPage() rather than routed directly,
+            so the URL bar always reads /edit-account. */}
         <Route path="/edit-account" element={<EditAccountPage />} />
+        {/* Serves the backend's `next_page: "/service"` (a `ready: true`
+            login response) — resolved to this route by resolveNextPage(). */}
+        <Route path="/select-services" element={<SelectServicesPage />} />
       </Routes>
     </>
   );

@@ -10,10 +10,11 @@ import {
   AuthApiError,
   fetchCaptcha,
   getCaptchaErrorKey,
-  loginUser,
   reportApiError,
   verifyCaptcha,
 } from "@/lib/api/authApi";
+import { useLogin } from "@/hooks/auth/useLogin";
+import { resolveNextPage } from "@/lib/api/nextPage";
 import { showToast } from "@/lib/toast";
 
 export interface LoginFormProps {
@@ -96,6 +97,7 @@ function PasswordIcon({ className }: { className?: string }) {
 
 export function LoginForm({ copy }: LoginFormProps) {
   const navigate = useNavigate();
+  const { mutate: loginMutate } = useLogin();
   const usernameId = useId();
   const passwordId = useId();
   const captchaId = useId();
@@ -169,7 +171,7 @@ export function LoginForm({ copy }: LoginFormProps) {
         captchaInput.trim(),
       );
 
-      await loginUser({
+      const result = await loginMutate({
         username: username.trim(),
         password,
         captchaToken,
@@ -177,6 +179,15 @@ export function LoginForm({ copy }: LoginFormProps) {
 
       setStatus("success");
       setPassword("");
+
+      // The backend always sends `next_page` now: "/service" when the
+      // account is `ready`, "/complete-profile" when it still isn't
+      // (resolved to our own /edit-account route).
+      if (result.nextPage) {
+        navigate(resolveNextPage(result.nextPage));
+      } else if (!result.ready) {
+        navigate("/edit-account");
+      }
     } catch (error) {
       const captchaErrorKey = getCaptchaErrorKey(error);
       if (captchaErrorKey) {
@@ -184,7 +195,7 @@ export function LoginForm({ copy }: LoginFormProps) {
         setStatus("idle");
         refreshCaptcha();
       } else if (error instanceof AuthApiError && error.code === "EMAIL_NOT_VERIFIED") {
-        navigate(error.nextPage || "/check-your-email", {
+        navigate(error.nextPage ? resolveNextPage(error.nextPage) : "/check-your-email", {
           state: { variant: "register" },
         });
       } else {

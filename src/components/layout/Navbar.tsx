@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { resolveSectionLink } from "@/lib/navigation";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
+import { AccountMenu } from "@/components/layout/AccountMenu";
+import { useAuth } from "@/hooks/useAuth";
 import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
 import GradientButton from "../ui/GradientButton";
@@ -89,6 +91,7 @@ export interface NavbarProps {
 export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   // Backdrop blur/bg — triggers after 20 px of scroll
   useEffect(() => {
@@ -223,11 +226,15 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-5 shrink-0">
             <LanguageSwitch />
-            <GradientButton
-              text={data.cta.label}
-              href={data.cta.href}
-              className="w-34 justify-center"
-            />
+            {isAuthenticated ? (
+              <AccountMenu copy={data.account} />
+            ) : (
+              <GradientButton
+                text={data.cta.label}
+                href={data.cta.href}
+                className="w-34 justify-center"
+              />
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -296,11 +303,15 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             </ul>
             <div className="mt-auto flex flex-col gap-4">
               <LanguageSwitch className="self-center" />
-              <GradientButton
-                text={data.cta.label}
-                href={data.cta.href}
-                className="w-full justify-center"
-              />
+              {isAuthenticated ? (
+                <AccountMenu copy={data.account} className="self-center" />
+              ) : (
+                <GradientButton
+                  text={data.cta.label}
+                  href={data.cta.href}
+                  className="w-full justify-center"
+                />
+              )}
             </div>
           </motion.div>
         )}
