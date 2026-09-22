@@ -11,9 +11,9 @@ export default function EditAccountPage() {
   // not-yet-`ready` account to — reachable only with the session token that
   // step issues, not as a standalone URL. Wait for AuthProvider's initial
   // sessionStorage read before deciding, so a hard refresh here doesn't
-  // bounce a valid session back to /register.
+  // bounce a valid session back to /login.
   if (!isInitialized) return null;
-  if (!isAuthenticated) return <Navigate to="/register" replace />;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   return (
     <EditAccountFormPage
