@@ -1,11 +1,26 @@
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { Check, Clock, Eye, EyeOff, Mail, RotateCw } from "lucide-react";
+import { Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Select } from "@/components/ui/Select";
-import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
+import { Select, type SelectOption } from "@/components/ui/Select";
 import type { SiteConfig } from "@/config/site.config";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  AuthApiError,
+  fetchProfile,
+  reportApiError,
+  type UserProfile,
+  updateProfile,
+} from "@/lib/api/authApi";
+import { resolveNextPage } from "@/lib/api/nextPage";
+import { getAuthSession } from "@/lib/api/session";
+import { fetchJobs, fetchTimezones } from "@/lib/api/publicApi";
+import { useLocale } from "@/i18n";
+import {
+  COUNTRY_DIAL_CODES,
+  PRIMARY_DIAL_CODE_COUNTRY,
+} from "@/lib/countryDialCodes";
+import { showToast } from "@/lib/toast";
 import businessLogoPlaceholder from "@/assets/auth/business-logo-placeholder.svg";
 import uploadBadge from "@/assets/auth/upload-badge.svg";
 import uploadBadgePointer from "@/assets/auth/upload-badge-pointer.svg";
@@ -16,7 +31,6 @@ import socialX from "@/assets/auth/social-x.svg";
 import socialTelegram from "@/assets/auth/social-telegram.svg";
 import generateLogo from "@/assets/auth/generate-logo.svg";
 import uploadLogo from "@/assets/auth/upload-logo.svg";
-import { passwordRequirements } from "@/lib/passwordRequirements";
 // Starts as a copy of RegisterForm so the Edit Account page has its own,
 // independently editable component going forward (pre-filling existing
 // data, dropping/adjusting fields, wiring a real update call, etc.).
@@ -24,53 +38,68 @@ export interface EditAccountFormProps {
   copy: SiteConfig["auth"]["editAccount"];
 }
 
-// Characters that read unambiguously at small sizes — no 0/O or 1/I.
-const CAPTCHA_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const CAPTCHA_LENGTH = 5;
+// Structural (non-translated) dropdown/select data — presentation only.
+const COUNTRY_CODES = COUNTRY_DIAL_CODES;
 
-function generateCaptcha(): string {
-  let code = "";
-  for (let i = 0; i < CAPTCHA_LENGTH; i++) {
-    code += CAPTCHA_CHARS[Math.floor(Math.random() * CAPTCHA_CHARS.length)];
+/** Country-code dropdown options: "DE  Germany  +49", searchable by any part. */
+function buildCountryOptions(locale: string): SelectOption[] {
+  let names: Intl.DisplayNames | undefined;
+  try {
+    names = new Intl.DisplayNames([locale, "en"], { type: "region" });
+  } catch {
+    names = undefined;
   }
-  return code;
+  return COUNTRY_CODES.map((c) => {
+    let name: string | undefined;
+    try {
+      name = names?.of(c.value);
+    } catch {
+      name = undefined;
+    }
+    return {
+      value: c.value,
+      label: c.value,
+      description: name && name !== c.value ? name : undefined,
+      hint: c.dial,
+      // Lets "49" or "+49" both find Germany.
+      keywords: `${c.dial} ${c.dial.slice(1)}`,
+    };
+  });
 }
 
-// Structural (non-translated) dropdown/select data — presentation only.
-const COUNTRY_CODES = [
-  { value: "US", dial: "+1" },
-  { value: "UK", dial: "+44" },
-  { value: "DE", dial: "+49" },
-  { value: "FR", dial: "+33" },
-  { value: "AE", dial: "+971" },
-  { value: "TR", dial: "+90" },
-] as const;
+/** True when the number carries its own country code (`+49…` or `0049…`). */
+function isInternational(value: string): boolean {
+  return /^\s*(\+|00)/.test(value);
+}
 
-const TIMEZONE_OPTIONS = [
-  { value: "utc-8", label: "(UTC-08:00) Pacific Time" },
-  { value: "utc-5", label: "(UTC-05:00) Eastern Time" },
-  { value: "utc+0", label: "(UTC+00:00) London" },
-  { value: "utc+1", label: "(UTC+01:00) Berlin, Paris" },
-  { value: "utc+3:30", label: "(UTC+03:30) Tehran" },
-  { value: "utc+4", label: "(UTC+04:00) Dubai" },
-  { value: "utc+5:30", label: "(UTC+05:30) Mumbai" },
-  { value: "utc+8", label: "(UTC+08:00) Singapore, Beijing" },
-  { value: "utc+9", label: "(UTC+09:00) Tokyo" },
-] as const;
+/**
+ * Splits `+49123456789` (or `0049123456789`) into a known dial code's
+ * country and the rest of the number.
+ */
+function splitPhone(full: string): { country?: string; number: string } {
+  const compact = full.replace(/[^\d+]/g, "").replace(/^00/, "+");
+  const match = [...COUNTRY_CODES]
+    .filter((c) => compact.startsWith(c.dial))
+    .sort(
+      (a, b) =>
+        b.dial.length - a.dial.length ||
+        Number(PRIMARY_DIAL_CODE_COUNTRY[b.dial] === b.value) -
+          Number(PRIMARY_DIAL_CODE_COUNTRY[a.dial] === a.value),
+    )[0];
+  return match
+    ? { country: match.value, number: compact.slice(match.dial.length) }
+    : { number: compact.replace(/^\+/, "") };
+}
 
-const INDUSTRY_OPTIONS = [
-  "Technology",
-  "E-commerce & Retail",
-  "Healthcare",
-  "Real Estate",
-  "Education",
-  "Finance & Banking",
-  "Legal",
-  "Restaurant & Food",
-  "Fitness & Wellness",
-  "Marketing & Advertising",
-  "Other",
-] as const;
+/** The website field shows `https://` as a fixed prefix, so only the rest is edited. */
+function stripUrlScheme(url: string): string {
+  return url.trim().replace(/^https?:\/\//i, "");
+}
+
+function withUrlScheme(value: string): string {
+  const rest = stripUrlScheme(value);
+  return rest ? `https://${rest}` : "";
+}
 
 const LOGO_PALETTE = [
   "#875DD9",
@@ -86,18 +115,26 @@ type FieldName =
   | "firstName"
   | "lastName"
   | "phone"
-  | "email"
   | "brandName"
   | "telegramUsername"
   | "timezone"
   | "industry"
   | "jobTitle"
-  | "logo"
-  | "username"
-  | "password"
-  | "confirmPassword"
-  | "captcha";
+  | "logo";
 type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
+
+// Backend field name (profile update `VALIDATION_ERROR`) → form field + the
+// copy key shown when the backend reports it as missing (`*_REQUIRED`).
+const BACKEND_REQUIRED_FIELDS: Record<string, [FieldName, FieldErrorKey]> = {
+  first_name: ["firstName", "firstNameRequired"],
+  last_name: ["lastName", "lastNameRequired"],
+  phone: ["phone", "phoneRequired"],
+  timezone: ["timezone", "timezoneRequired"],
+  telegram_username: ["telegramUsername", "telegramUsernameRequired"],
+  brand_name: ["brandName", "brandNameRequired"],
+  job: ["industry", "industryRequired"],
+  job_title: ["jobTitle", "jobTitleRequired"],
+};
 
 const fieldWrapClass = "relative flex items-center";
 
@@ -106,6 +143,8 @@ const iconClass =
 
 const inputBaseClass =
   "h-10 w-full rounded-md border border-auth-border bg-white pl-3 pr-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+
+const readOnlyClass = "border-auth-border focus:border-auth-border";
 
 const selectBaseClass =
   "flex h-10 w-full items-center appearance-none rounded-md border border-auth-border bg-white pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
@@ -132,27 +171,6 @@ function ChevronDownIcon() {
       <path
         d="M5 7.5L10 12.5L15 7.5"
         stroke="currentColor"
-        strokeWidth="1.66667"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function PasswordIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.1673 9.16667V6.66667C14.1673 4.36548 12.3018 2.5 10.0007 2.5C7.69946 2.5 5.83398 4.36548 5.83398 6.66667V9.16667M7.33398 17.5H12.6673C14.0674 17.5 14.7675 17.5 15.3023 17.2275C15.7727 16.9878 16.1552 16.6054 16.3948 16.135C16.6673 15.6002 16.6673 14.9001 16.6673 13.5V13.1667C16.6673 11.7665 16.6673 11.0665 16.3948 10.5317C16.1552 10.0613 15.7727 9.67883 15.3023 9.43915C14.7675 9.16667 14.0674 9.16667 12.6673 9.16667H7.33398C5.93385 9.16667 5.23379 9.16667 4.69901 9.43915C4.2286 9.67883 3.84615 10.0613 3.60647 10.5317C3.33398 11.0665 3.33398 11.7665 3.33398 13.1667V13.5C3.33398 14.9001 3.33398 15.6002 3.60647 16.135C3.84615 16.6054 4.2286 16.9878 4.69901 17.2275C5.23379 17.5 5.93385 17.5 7.33398 17.5Z"
-        stroke="var(--color-auth-icon)"
         strokeWidth="1.66667"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -236,14 +254,18 @@ function SectionHeader({
   badge,
   subtitle,
   required,
+  divider = true,
+  className = "",
 }: {
   title: string;
   badge?: string;
   subtitle: string;
   required?: boolean;
+  divider?: boolean;
+  className?: string;
 }) {
   return (
-    <div className="mb-6 font-body">
+    <div className={`font-body ${divider ? "mb-6" : ""} ${className}`}>
       <h2 className="text-[16px] font-semibold text-auth-heading">
         {title}
         {required && <RequiredMark />}
@@ -254,13 +276,79 @@ function SectionHeader({
       <p className="mt-1 text-[14px] font-normal leading-snug text-auth-muted">
         {subtitle}
       </p>
-      <div className="mt-4 h-px bg-auth-divider" />
+      {divider && <div className="mt-4 h-px bg-auth-divider" />}
+    </div>
+  );
+}
+
+function SkeletonBlock({ className = "" }: { className?: string }) {
+  return <div className={`skeleton ${className}`} aria-hidden="true" />;
+}
+
+function SkeletonSectionHeader({ divider = true }: { divider?: boolean }) {
+  return (
+    <div className={divider ? "mb-6" : ""}>
+      <SkeletonBlock className="h-5 w-44 rounded-md" />
+      <SkeletonBlock className="mt-2.5 h-3.5 w-4/5 max-w-[420px] rounded-md" />
+      {divider && <div className="mt-4 h-px bg-auth-divider" />}
+    </div>
+  );
+}
+
+function SkeletonField() {
+  return (
+    <div>
+      <SkeletonBlock className="mb-2.5 h-3.5 w-24 rounded-md" />
+      <SkeletonBlock className="h-10 w-full rounded-md" />
+    </div>
+  );
+}
+
+/** Mirrors the two top cards' layout while the profile and dropdown options load. */
+function EditAccountSkeleton() {
+  return (
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2" aria-hidden="true">
+      <Card>
+        <SkeletonSectionHeader />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {Array.from({ length: 10 }, (_, i) => (
+            <SkeletonField key={i} />
+          ))}
+        </div>
+      </Card>
+
+      <Card>
+        <SkeletonSectionHeader />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {Array.from({ length: 4 }, (_, i) => (
+            <SkeletonField key={i} />
+          ))}
+        </div>
+
+        <div className="mt-6">
+          <SkeletonSectionHeader />
+        </div>
+
+        <div className="flex flex-col items-center gap-8 sm:flex-row">
+          <SkeletonBlock className="h-[146px] w-[146px] shrink-0 rounded-full" />
+          <div className="flex w-full flex-1 flex-col gap-5">
+            <SkeletonBlock className="h-[92px] w-full rounded-lg" />
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <SkeletonBlock className="h-10 flex-1 rounded-md" />
+              <SkeletonBlock className="h-10 flex-1 rounded-md" />
+            </div>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
 
 export function EditAccountForm({ copy }: EditAccountFormProps) {
   const navigate = useNavigate();
+  const { logout, authenticate } = useAuth();
+  const locale = useLocale();
+  const countryOptions = useMemo(() => buildCountryOptions(locale), [locale]);
 
   const firstNameId = useId();
   const lastNameId = useId();
@@ -272,14 +360,10 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const timezoneId = useId();
   const industryId = useId();
   const jobTitleId = useId();
-  const usernameId = useId();
-  const passwordId = useId();
-  const confirmPasswordId = useId();
   const linkedinId = useId();
   const instagramId = useId();
   const xHandleId = useId();
   const telegramChannelId = useId();
-  const captchaId = useId();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -291,55 +375,131 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const selectedCountryDial =
     COUNTRY_CODES.find((c) => c.value === countryCode)?.dial ?? "";
   const [phone, setPhone] = useState("");
+  // Email identifies the account and cannot be changed here.
   const [email, setEmail] = useState("");
   const [brandName, setBrandName] = useState("");
   const [telegramUsername, setTelegramUsername] = useState("");
   const [website, setWebsite] = useState("");
   const [timezone, setTimezone] = useState("");
   const [industry, setIndustry] = useState("");
+  const [timezoneOptions, setTimezoneOptions] = useState<SelectOption[]>([]);
+  const [industryOptions, setIndustryOptions] = useState<SelectOption[]>([]);
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [timezonesLoading, setTimezonesLoading] = useState(true);
+  const [jobsLoading, setJobsLoading] = useState(true);
+  const isLoading = profileLoading || timezonesLoading || jobsLoading;
   const [jobTitle, setJobTitle] = useState("");
 
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logoFile, setLogoFile] = useState<Blob | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const [linkedin, setLinkedin] = useState("");
   const [instagram, setInstagram] = useState("");
   const [xHandle, setXHandle] = useState("");
   const [telegramChannel, setTelegramChannel] = useState("");
 
-  const [captcha, setCaptcha] = useState(generateCaptcha);
-  const [captchaInput, setCaptchaInput] = useState("");
-
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle",
   );
 
-  const meetsAllRequirements = passwordRequirements.every(({ test }) =>
-    test(password),
-  );
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchTimezones(controller.signal)
+      .then(setTimezoneOptions)
+      .catch(() => {})
+      .finally(() => {
+        if (!controller.signal.aborted) setTimezonesLoading(false);
+      });
+    fetchJobs(controller.signal)
+      .then(setIndustryOptions)
+      .catch(() => {})
+      .finally(() => {
+        if (!controller.signal.aborted) setJobsLoading(false);
+      });
+    return () => controller.abort();
+  }, []);
+
+  const applyProfile = (profile: UserProfile) => {
+    setEmail(profile.email);
+    setFirstName(profile.firstName);
+    setLastName(profile.lastName);
+    // The backend stores the full international number but may drop the
+    // leading "+" (e.g. "35811111111"), so read it as international either way.
+    const { country, number } = splitPhone(
+      isInternational(profile.phone) ? profile.phone : `+${profile.phone}`,
+    );
+    if (country) setCountryCode(country);
+    setPhone(number);
+    setBrandName(profile.brandName);
+    setTelegramUsername(profile.telegramUsername);
+    setWebsite(stripUrlScheme(profile.website));
+    setTimezone(profile.timezone);
+    setIndustry(profile.job);
+    setJobTitle(profile.jobTitle);
+    setLinkedin(profile.linkedinPageName);
+    setInstagram(profile.instagramHandle);
+    setXHandle(profile.xHandle);
+    setTelegramChannel(profile.telegramChannelName);
+    // The server already has this logo — only a newly picked one is re-sent.
+    setLogoPreview(profile.logoUrl || null);
+    setLogoFile(null);
+  };
+
+  /**
+   * Backend codes (profile get/update) that mean the current session can't
+   * be used any more: sign out and send the user back to log in.
+   */
+  const handleSessionError = (error: unknown): boolean => {
+    const code = error instanceof AuthApiError ? error.code : undefined;
+    const message =
+      code === "INVALID_SESSION" || code === "SESSION_REQUIRED"
+        ? copy.errors.sessionExpired
+        : code === "ACCOUNT_DISABLED"
+          ? copy.errors.accountDisabled
+          : undefined;
+    if (!message) return false;
+    showToast(message, "error");
+    logout();
+    navigate("/login", { replace: true });
+    return true;
+  };
+
+  const loadProfile = async (signal?: AbortSignal) => {
+    try {
+      applyProfile(await fetchProfile(signal));
+    } catch (error) {
+      if (signal?.aborted) return;
+      if (!handleSessionError(error)) {
+        showToast(copy.errors.profileLoadError, "error");
+      }
+    } finally {
+      if (!signal?.aborted) setProfileLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    // Fills the form from the backend on mount; setState only runs after
+    // the awaited request resolves, not synchronously within this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadProfile(controller.signal);
+    return () => controller.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const clearError = (field: FieldName) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
     setStatus((prev) => (prev === "success" ? "idle" : prev));
   };
 
-  const refreshCaptcha = () => {
-    setCaptcha(generateCaptcha());
-    setCaptchaInput("");
-  };
-
   const applyLogoFile = (file: File | undefined | null) => {
     if (!file || !file.type.startsWith("image/")) return;
     const url = URL.createObjectURL(file);
     setLogoPreview(url);
+    setLogoFile(file);
     clearError("logo");
   };
 
@@ -348,21 +508,17 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     const color = LOGO_PALETTE[Math.floor(Math.random() * LOGO_PALETTE.length)];
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" rx="100" fill="${color}"/><text x="50%" y="54%" font-family="Inter, sans-serif" font-size="90" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="central">${initial}</text></svg>`;
     setLogoPreview(`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`);
+    setLogoFile(new Blob([svg], { type: "image/svg+xml" }));
     clearError("logo");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const nextErrors: FieldErrors = {};
     if (!firstName.trim()) nextErrors.firstName = "firstNameRequired";
     if (!lastName.trim()) nextErrors.lastName = "lastNameRequired";
     if (!phone.trim()) nextErrors.phone = "phoneRequired";
-    if (!email.trim()) {
-      nextErrors.email = "emailRequired";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = "emailInvalid";
-    }
     if (!brandName.trim()) nextErrors.brandName = "brandNameRequired";
     if (!telegramUsername.trim())
       nextErrors.telegramUsername = "telegramUsernameRequired";
@@ -370,45 +526,94 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     if (!industry) nextErrors.industry = "industryRequired";
     if (!jobTitle.trim()) nextErrors.jobTitle = "jobTitleRequired";
     if (!logoPreview) nextErrors.logo = "logoRequired";
-    if (!username.trim()) nextErrors.username = "usernameRequired";
-    if (!password) {
-      nextErrors.password = "passwordRequired";
-    } else if (!meetsAllRequirements) {
-      nextErrors.password = "passwordInvalid";
-    }
-    if (!confirmPassword) {
-      nextErrors.confirmPassword = "confirmPasswordRequired";
-    } else if (confirmPassword !== password) {
-      nextErrors.confirmPassword = "confirmPasswordMismatch";
-    }
-    if (!captchaInput.trim()) {
-      nextErrors.captcha = "captchaRequired";
-    } else if (captchaInput.trim().toUpperCase() !== captcha) {
-      nextErrors.captcha = "captchaMismatch";
-    }
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      refreshCaptcha();
-      return;
-    }
+    if (Object.keys(nextErrors).length > 0) return;
 
-    // No backend wired up yet — simulate the round trip so the button's
-    // loading state reads correctly once a real request lands here.
     setStatus("submitting");
-    window.setTimeout(() => {
+
+    try {
+      const result = await updateProfile({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phone: `${selectedCountryDial}${phone.replace(/\D/g, "")}`,
+        brandName: brandName.trim(),
+        telegramUsername: telegramUsername.trim(),
+        website: withUrlScheme(website),
+        timezone,
+        job: industry,
+        jobTitle: jobTitle.trim(),
+        linkedinPageName: linkedin.trim(),
+        instagramHandle: instagram.trim(),
+        xHandle: xHandle.trim(),
+        telegramChannelName: telegramChannel.trim(),
+        logo: logoFile,
+      });
+
+      // Keep the stored session's `ready` flag in step with the backend so
+      // ready-gated pages (e.g. /select-services) let the user through.
+      // An empty/partial response leaves the stored flag as it was.
+      const session = getAuthSession();
+      if (session && result.ready !== undefined) {
+        authenticate({
+          token: session.token,
+          expiresAt: session.expiresAt,
+          ready: result.ready,
+          displayName: session.displayName,
+        });
+      }
+
       setStatus("success");
-      setPassword("");
-      setConfirmPassword("");
-      refreshCaptcha();
-    }, 700);
+      showToast(copy.success, "success");
+      if (result.nextPage) {
+        navigate(resolveNextPage(result.nextPage));
+        return;
+      }
+      // Staying on the page: re-read what the server saved so the form
+      // reflects the stored profile.
+      await loadProfile();
+    } catch (error) {
+      const code = error instanceof AuthApiError ? error.code : undefined;
+      if (handleSessionError(error)) {
+        return;
+      } else if (code === "VALIDATION_ERROR" && error instanceof AuthApiError) {
+        const fieldErrors: FieldErrors = {};
+        const unmapped: string[] = [];
+        for (const item of error.fieldErrors ?? []) {
+          const mapped = BACKEND_REQUIRED_FIELDS[item.field];
+          if (mapped && item.code.endsWith("_REQUIRED")) {
+            fieldErrors[mapped[0]] = mapped[1];
+          } else if (item.message) {
+            unmapped.push(item.message);
+          }
+        }
+        setErrors((prev) => ({ ...prev, ...fieldErrors }));
+        if (unmapped.length || !Object.keys(fieldErrors).length) {
+          showToast(
+            [copy.errors.invalidInput, ...unmapped].join("\n"),
+            "error",
+            unmapped.length ? 8000 : undefined,
+          );
+        }
+      } else if (code === "PROFILE_INCOMPLETE") {
+        showToast(copy.errors.profileIncomplete, "error");
+      } else {
+        reportApiError(
+          error,
+          { INVALID_INPUT: copy.errors.invalidInput },
+          copy.errors.genericError,
+        );
+      }
+      setStatus("idle");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[660px_660px] lg:items-start">
-        {/* Left column */}
-        <div className="flex flex-col gap-6">
+      {isLoading ? (
+        <EditAccountSkeleton />
+      ) : (
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Card>
             <SectionHeader
               title={copy.business.title}
@@ -480,13 +685,13 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       ariaLabel={copy.business.phoneLabel + " country code"}
                       value={countryCode}
                       onChange={setCountryCode}
-                      options={COUNTRY_CODES.map((c) => ({
-                        value: c.value,
-                        label: c.value,
-                      }))}
+                      options={countryOptions}
+                      searchable
+                      searchPlaceholder={copy.business.phoneSearchPlaceholder}
+                      noResultsText={copy.business.phoneNoResults}
                       className="h-10"
                       triggerClassName="flex h-10 items-center bg-transparent pl-3 pr-7 text-[16px] text-auth-ink outline-none"
-                      panelClassName="min-w-[72px]"
+                      panelClassName="right-auto w-[300px]"
                     />
                     <svg
                       className="pointer-events-none absolute right-2 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 text-auth-icon"
@@ -503,20 +708,43 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       />
                     </svg>
                   </div>
+                  <span
+                    aria-hidden="true"
+                    className="flex select-none items-center pr-1.5 text-[16px] font-body text-auth-ink"
+                  >
+                    {selectedCountryDial}
+                  </span>
                   <input
                     id={phoneId}
                     name="phone"
                     type="tel"
-                    autoComplete="tel"
-                    placeholder={`${selectedCountryDial} ${copy.business.phonePlaceholder}`}
+                    inputMode="numeric"
+                    autoComplete="tel-national"
+                    aria-describedby={`${phoneId}-dial`}
+                    placeholder={copy.business.phonePlaceholder}
                     value={phone}
                     onChange={(e) => {
-                      setPhone(e.target.value);
+                      const value = e.target.value;
                       clearError("phone");
+                      // A pasted full number (+49… / 0049…) selects its
+                      // country; only the local digits stay in the field,
+                      // since the code is shown as the fixed prefix.
+                      if (isInternational(value)) {
+                        const { country, number } = splitPhone(value);
+                        if (country) {
+                          setCountryCode(country);
+                          setPhone(number);
+                          return;
+                        }
+                      }
+                      setPhone(value.replace(/\D/g, ""));
                     }}
                     aria-invalid={Boolean(errors.phone)}
                     className="min-w-0 flex-1 bg-transparent pr-3 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
+                  <span id={`${phoneId}-dial`} className="sr-only">
+                    {selectedCountryDial}
+                  </span>
                 </div>
               </Field>
 
@@ -524,7 +752,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 id={emailId}
                 label={copy.business.emailLabel}
                 required
-                error={errors.email && copy.errors[errors.email]}
               >
                 <div className={fieldWrapClass}>
                   <Mail className={iconClass} />
@@ -535,40 +762,40 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     autoComplete="email"
                     placeholder={copy.business.emailPlaceholder}
                     value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      clearError("email");
-                    }}
-                    aria-invalid={Boolean(errors.email)}
-                    className={`${inputBaseClass} pl-9 ${
-                      errors.email ? "border-red-400" : "border-auth-border"
-                    }`}
+                    readOnly
+                    aria-readonly="true"
+                    className={`${inputBaseClass} ${readOnlyClass} pl-9`}
                   />
                 </div>
               </Field>
 
               <Field
-                id={brandNameId}
-                label={copy.business.brandNameLabel}
+                id={timezoneId}
+                label={copy.business.timezoneLabel}
                 required
-                error={errors.brandName && copy.errors[errors.brandName]}
+                error={errors.timezone && copy.errors[errors.timezone]}
               >
-                <input
-                  id={brandNameId}
-                  name="brandName"
-                  type="text"
-                  autoComplete="organization"
-                  placeholder={copy.business.brandNamePlaceholder}
-                  value={brandName}
-                  onChange={(e) => {
-                    setBrandName(e.target.value);
-                    clearError("brandName");
-                  }}
-                  aria-invalid={Boolean(errors.brandName)}
-                  className={`${inputBaseClass} ${
-                    errors.brandName ? "border-red-400" : "border-auth-border"
-                  }`}
-                />
+                <div className={fieldWrapClass}>
+                  <Clock className={iconClass} />
+                  <Select
+                    id={timezoneId}
+                    value={timezone}
+                    onChange={(value) => {
+                      setTimezone(value);
+                      clearError("timezone");
+                    }}
+                    options={timezoneOptions}
+                    placeholder={copy.business.timezonePlaceholder}
+                    ariaInvalid={Boolean(errors.timezone)}
+                    className="w-full"
+                    triggerClassName={`${selectBaseClass} pl-9 ${
+                      timezone ? "text-auth-ink" : "text-auth-placeholder"
+                    } ${errors.timezone ? "border-red-400" : "border-auth-border"}`}
+                    clearable
+                    clearAriaLabel={`Clear ${copy.business.timezoneLabel}`}
+                  />
+                  <ChevronDownIcon />
+                </div>
               </Field>
 
               <Field
@@ -601,9 +828,32 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               </Field>
 
               <Field
+                id={brandNameId}
+                label={copy.business.brandNameLabel}
+                required
+                error={errors.brandName && copy.errors[errors.brandName]}
+              >
+                <input
+                  id={brandNameId}
+                  name="brandName"
+                  type="text"
+                  autoComplete="organization"
+                  placeholder={copy.business.brandNamePlaceholder}
+                  value={brandName}
+                  onChange={(e) => {
+                    setBrandName(e.target.value);
+                    clearError("brandName");
+                  }}
+                  aria-invalid={Boolean(errors.brandName)}
+                  className={`${inputBaseClass} ${
+                    errors.brandName ? "border-red-400" : "border-auth-border"
+                  }`}
+                />
+              </Field>
+
+              <Field
                 id={websiteId}
                 label={copy.business.websiteLabel}
-                className="sm:col-span-2"
               >
                 <div className="flex h-10 items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
                   <span className="flex select-none items-center border-r border-auth-border px-3 text-[14px] text-auth-placeholder">
@@ -617,38 +867,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     placeholder={copy.business.websitePlaceholder}
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
-                    className="min-w-0 flex-1 bg-transparent px-3 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
+                    className="min-w-0 flex-1 text-ellipsis bg-transparent px-3 text-[16px] font-body text-auth-ink outline-none placeholder:text-auth-placeholder"
                   />
-                </div>
-              </Field>
-
-              <Field
-                id={timezoneId}
-                label={copy.business.timezoneLabel}
-                required
-                error={errors.timezone && copy.errors[errors.timezone]}
-                className="sm:col-span-2"
-              >
-                <div className={fieldWrapClass}>
-                  <Clock className={iconClass} />
-                  <Select
-                    id={timezoneId}
-                    value={timezone}
-                    onChange={(value) => {
-                      setTimezone(value);
-                      clearError("timezone");
-                    }}
-                    options={TIMEZONE_OPTIONS}
-                    placeholder={copy.business.timezonePlaceholder}
-                    ariaInvalid={Boolean(errors.timezone)}
-                    className="w-full"
-                    triggerClassName={`${selectBaseClass} pl-9 ${
-                      timezone ? "text-auth-ink" : "text-auth-placeholder"
-                    } ${errors.timezone ? "border-red-400" : "border-auth-border"}`}
-                    clearable
-                    clearAriaLabel={`Clear ${copy.business.timezoneLabel}`}
-                  />
-                  <ChevronDownIcon />
                 </div>
               </Field>
 
@@ -666,10 +886,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       setIndustry(value);
                       clearError("industry");
                     }}
-                    options={INDUSTRY_OPTIONS.map((opt) => ({
-                      value: opt,
-                      label: opt,
-                    }))}
+                    options={industryOptions}
                     placeholder={copy.business.industryPlaceholder}
                     ariaInvalid={Boolean(errors.industry)}
                     className="w-full"
@@ -711,341 +928,10 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
 
           <Card>
             <SectionHeader
-              title={copy.logo.title}
-              subtitle={copy.logo.subtitle}
-              required
+              title={copy.social.title}
+              badge={copy.social.optionalBadge}
+              subtitle={copy.social.subtitle}
             />
-
-            <div className="flex flex-col items-center gap-8 sm:flex-row">
-              <img
-                src={logoPreview ?? businessLogoPlaceholder}
-                alt=""
-                className="h-[178px] w-[178px] shrink-0 self-center rounded-full object-cover"
-              />
-
-              <div className="flex w-full flex-1 flex-col gap-5">
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => fileInputRef.current?.click()}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      fileInputRef.current?.click();
-                    }
-                  }}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setIsDragging(false);
-                    applyLogoFile(e.dataTransfer.files?.[0]);
-                  }}
-                  className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 px-4 py-4 text-center transition-colors ${
-                    isDragging
-                      ? "border-brand-accent bg-auth-surface-hover"
-                      : errors.logo
-                        ? "border-red-300"
-                        : "border-brand-accent-dim"
-                  }`}
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white">
-                    <img
-                      src={uploadIcon}
-                      alt=""
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </div>
-
-                  <p className="text-[14px]">
-                    <span className="font-semibold text-auth-primary">
-                      {copy.logo.uploadCta}
-                    </span>{" "}
-                    <span className="text-auth-muted">
-                      {copy.logo.uploadCtaRest}
-                    </span>
-                  </p>
-                  <p className="text-[12px] text-auth-muted">
-                    {copy.logo.uploadHint}
-                  </p>
-                  <div className="absolute bottom-3 -right-5 h-14 w-auto">
-                    <div className="relative h-auto w-auto">
-                      <img
-                        src={uploadBadge}
-                        alt=""
-                        className="h-full w-auto"
-                        aria-hidden="true"
-                      />
-                      <img
-                        src={uploadBadgePointer}
-                        alt=""
-                        className="absolute right-8 top-10 h-4 w-4"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </div>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/png,image/jpeg"
-                    className="hidden"
-                    onChange={(e) => applyLogoFile(e.target.files?.[0])}
-                  />
-                </div>
-                {errors.logo && (
-                  <p className="-mt-2 text-[13px] text-red-500">
-                    {copy.errors[errors.logo]}
-                  </p>
-                )}
-
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-6 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
-                  >
-                    <img
-                      src={uploadLogo}
-                      alt=""
-                      className="h-[16] w-auto"
-                      aria-hidden="true"
-                    />
-                    {copy.logo.uploadButton}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleGenerateLogo}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent"
-                  >
-                    <img
-                      src={generateLogo}
-                      alt=""
-                      className="h-[16] w-auto"
-                      aria-hidden="true"
-                    />
-                    {copy.logo.generateButton}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Right column */}
-        <div className="flex flex-col gap-6">
-          <Card>
-            <SectionHeader
-              title={copy.account.title}
-              subtitle={copy.account.subtitle}
-            />
-
-            <div className="flex flex-col gap-4">
-              <Field
-                id={usernameId}
-                label={copy.account.usernameLabel}
-                required
-                error={errors.username && copy.errors[errors.username]}
-              >
-                <input
-                  id={usernameId}
-                  name="username"
-                  type="text"
-                  autoComplete="username"
-                  placeholder={copy.account.usernamePlaceholder}
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    clearError("username");
-                  }}
-                  aria-invalid={Boolean(errors.username)}
-                  className={`${inputBaseClass} ${
-                    errors.username ? "border-red-400" : "border-auth-border"
-                  }`}
-                />
-              </Field>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field
-                  id={passwordId}
-                  label={copy.account.passwordLabel}
-                  required
-                  error={
-                    errors.password
-                      ? copy.errors[errors.password]
-                      : undefined
-                  }
-                >
-                  <div className={fieldWrapClass}>
-                    <PasswordIcon className={iconClass} />
-                    <input
-                      id={passwordId}
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder={copy.account.passwordPlaceholder}
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        clearError("password");
-                      }}
-                      onFocus={() => setPasswordFocused(true)}
-                      onBlur={() => setPasswordFocused(false)}
-                      aria-invalid={Boolean(errors.password)}
-                      style={{
-                        color: showPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
-                        caretColor: "var(--color-auth-placeholder)",
-                      }}
-                      className={`${inputBaseClass} pl-9 pr-11 ${
-                        errors.password ? "border-red-400" : "border-auth-border"
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      aria-label={
-                        showPassword
-                          ? copy.account.hidePasswordAria
-                          : copy.account.showPasswordAria
-                      }
-                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-auth-icon-muted transition-colors hover:text-auth-icon-strong"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                    <AnimatePresence>
-                      {passwordFocused && (
-                        <motion.div
-                          role="status"
-                          initial={{ opacity: 0, y: -4, scale: 0.98 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: -4, scale: 0.98 }}
-                          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-                          className="absolute left-0 top-[calc(100%+10px)] z-30 w-full min-w-[240px] rounded-xl border border-auth-border-light bg-white p-3.5 shadow-[0_12px_24px_-8px_rgba(16,24,40,0.18)]"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="absolute -top-1.5 left-6 h-3 w-3 rotate-45 rounded-[2px] border-l border-t border-auth-border-light bg-white"
-                          />
-
-                          <div className="mb-2.5 h-1 w-full overflow-hidden rounded-full bg-auth-surface">
-                            <motion.div
-                              className="h-full rounded-full bg-emerald-500"
-                              animate={{
-                                width: `${
-                                  (passwordRequirements.filter(({ test }) =>
-                                    test(password),
-                                  ).length /
-                                    passwordRequirements.length) *
-                                  100
-                                }%`,
-                              }}
-                              transition={{
-                                duration: DURATION_SM,
-                                ease: EASE_PREMIUM,
-                              }}
-                            />
-                          </div>
-
-                          <ul className="flex flex-col gap-1.5">
-                            {passwordRequirements.map(({ key, test }) => {
-                              const met = test(password);
-                              return (
-                                <li
-                                  key={key}
-                                  className={`flex items-center gap-2 text-[13px] transition-colors duration-150 ${
-                                    met ? "text-emerald-600" : "text-auth-muted"
-                                  }`}
-                                >
-                                  <span
-                                    className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border transition-colors duration-150 ${
-                                      met
-                                        ? "border-emerald-500 bg-emerald-500"
-                                        : "border-auth-border"
-                                    }`}
-                                  >
-                                    {met && (
-                                      <Check
-                                        size={9}
-                                        strokeWidth={3}
-                                        className="text-white"
-                                      />
-                                    )}
-                                  </span>
-                                  {copy.requirements[key]}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </Field>
-
-                <Field
-                  id={confirmPasswordId}
-                  label={copy.account.confirmPasswordLabel}
-                  required
-                  error={
-                    errors.confirmPassword &&
-                    copy.errors[errors.confirmPassword]
-                  }
-                >
-                  <div className={fieldWrapClass}>
-                    <PasswordIcon className={iconClass} />
-                    <input
-                      id={confirmPasswordId}
-                      name="confirmPassword"
-                      type={showConfirmPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder={copy.account.confirmPasswordPlaceholder}
-                      value={confirmPassword}
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                        clearError("confirmPassword");
-                      }}
-                      aria-invalid={Boolean(errors.confirmPassword)}
-                      style={{
-                        color: showConfirmPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
-                        caretColor: "var(--color-auth-placeholder)",
-                      }}
-                      className={`${inputBaseClass} pl-9 pr-11 ${
-                        errors.confirmPassword
-                          ? "border-red-400"
-                          : "border-auth-border"
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowConfirmPassword((v) => !v)}
-                      aria-label={
-                        showConfirmPassword
-                          ? copy.account.hidePasswordAria
-                          : copy.account.showPasswordAria
-                      }
-                      className="absolute right-3.5 flex h-4.5 w-4.5 items-center justify-center text-auth-icon-muted transition-colors hover:text-auth-icon-strong"
-                    >
-                      {showConfirmPassword ? (
-                        <EyeOff size={16} />
-                      ) : (
-                        <Eye size={16} />
-                      )}
-                    </button>
-                  </div>
-                </Field>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <SectionHeader
-                title={copy.social.title}
-                badge={copy.social.optionalBadge}
-                subtitle={copy.social.subtitle}
-              />
-            </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field id={linkedinId} label={copy.social.linkedinLabel}>
@@ -1139,79 +1025,144 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 </div>
               </Field>
             </div>
-          </Card>
 
-          <Card>
-            <SectionHeader
-              title={copy.captcha.title}
-              subtitle={copy.captcha.subtitle}
-              required
-            />
-
-            <div className="flex items-center gap-3">
-              <div
-                className="flex h-[108px] flex-1 select-none items-center justify-center gap-3 rounded-lg border border-auth-border bg-auth-surface shadow-xs"
-                aria-hidden="true"
-              >
-                {captcha.split("").map((char, i) => (
-                  <span
-                    key={i}
-                    className="text-[40px] font-bold tracking-normal text-auth-heading"
-                  >
-                    {char}
-                  </span>
-                ))}
-              </div>
-              <motion.button
-                type="button"
-                onClick={refreshCaptcha}
-                aria-label={copy.captcha.refreshAria}
-                whileHover={{ rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong transition-colors hover:border-brand-accent hover:text-brand-accent"
-              >
-                <RotateCw size={20} />
-              </motion.button>
+            <div className="mt-6">
+              <SectionHeader
+                title={copy.logo.title}
+                subtitle={copy.logo.subtitle}
+                required
+              />
             </div>
 
-            <Field
-              id={captchaId}
-              label={copy.captcha.inputLabel}
-              error={errors.captcha && copy.errors[errors.captcha]}
-              className="mt-4"
-            >
-              <input
-                id={captchaId}
-                name="captcha"
-                type="text"
-                autoComplete="off"
-                placeholder={copy.captcha.placeholder}
-                value={captchaInput}
-                onChange={(e) => {
-                  setCaptchaInput(e.target.value);
-                  clearError("captcha");
+            <div className="flex flex-col items-center gap-8 sm:flex-row">
+              <img
+                src={logoPreview ?? businessLogoPlaceholder}
+                // Google-hosted images can refuse requests carrying a
+                // cross-site Referer; fall back to the placeholder if the
+                // image still can't load.
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== businessLogoPlaceholder) {
+                    e.currentTarget.src = businessLogoPlaceholder;
+                  }
                 }}
-                aria-invalid={Boolean(errors.captcha)}
-                className={`${inputBaseClass} ${
-                  errors.captcha ? "border-red-400" : "border-auth-border"
-                }`}
+                alt=""
+                className="h-[146px] w-[146px] shrink-0 self-center rounded-full object-cover"
               />
-            </Field>
+
+              <div className="flex w-full flex-1 flex-col gap-5">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => fileInputRef.current?.click()}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      fileInputRef.current?.click();
+                    }
+                  }}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDragging(true);
+                  }}
+                  onDragLeave={() => setIsDragging(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDragging(false);
+                    applyLogoFile(e.dataTransfer.files?.[0]);
+                  }}
+                  className={`relative flex cursor-pointer items-center justify-center gap-6 rounded-lg border-2 py-5 pl-4 pr-20 text-left transition-colors ${
+                    isDragging
+                      ? "border-brand-accent bg-auth-surface-hover"
+                      : errors.logo
+                        ? "border-red-300"
+                        : "border-brand-accent-dim"
+                  }`}
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white">
+                    <img
+                      src={uploadIcon}
+                      alt=""
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <p className="whitespace-nowrap text-[14px]">
+                      <span className="font-semibold text-auth-primary">
+                        {copy.logo.uploadCta}
+                      </span>{" "}
+                      <span className="text-auth-muted">
+                        {copy.logo.uploadCtaRest}
+                      </span>
+                    </p>
+                    <p className="text-[12px] text-auth-muted">
+                      {copy.logo.uploadHint}
+                    </p>
+                  </div>
+                  <div className="absolute -right-3 top-1/2 h-14 w-auto -translate-y-[62%]">
+                    <div className="relative h-auto w-auto">
+                      <img
+                        src={uploadBadge}
+                        alt=""
+                        className="h-full w-auto"
+                        aria-hidden="true"
+                      />
+                      <img
+                        src={uploadBadgePointer}
+                        alt=""
+                        className="absolute right-8 top-10 h-4 w-4"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/png,image/jpeg"
+                    className="hidden"
+                    onChange={(e) => applyLogoFile(e.target.files?.[0])}
+                  />
+                </div>
+                {errors.logo && (
+                  <p className="-mt-2 text-[13px] text-red-500">
+                    {copy.errors[errors.logo]}
+                  </p>
+                )}
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <button
+                    type="button"
+                    onClick={handleGenerateLogo}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent"
+                  >
+                    <img
+                      src={generateLogo}
+                      alt=""
+                      className="h-[16] w-auto"
+                      aria-hidden="true"
+                    />
+                    {copy.logo.generateButton}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-6 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
+                  >
+                    <img
+                      src={uploadLogo}
+                      alt=""
+                      className="h-[16] w-auto"
+                      aria-hidden="true"
+                    />
+                    {copy.logo.uploadButton}
+                  </button>
+                </div>
+              </div>
+            </div>
           </Card>
         </div>
-      </div>
-
-      {status === "success" && (
-        <motion.p
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="text-center text-body-sm font-medium text-emerald-600"
-          role="status"
-        >
-          {copy.success}
-        </motion.p>
       )}
 
       <div className="flex items-center justify-end gap-3">
@@ -1225,7 +1176,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         <Button
           type="submit"
           variant="primary"
-          className="rounded-md !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+          disabled={status === "submitting" || isLoading}
+          className="rounded-md disabled:cursor-not-allowed disabled:opacity-60 !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
         >
           {status === "submitting" ? copy.submitting : copy.submit}
         </Button>

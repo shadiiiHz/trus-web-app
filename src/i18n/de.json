@@ -352,8 +352,8 @@
         "emailLabel": "E-Mail"
       },
       "subtitle": "Willkommen zurück! Bitte geben Sie Ihre Anmeldedaten ein, um fortzufahren.",
-      "usernameLabel": "Benutzername",
-      "usernamePlaceholder": "Benutzername eingeben",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
       "passwordLabel": "Passwort",
       "passwordPlaceholder": "Passwort eingeben",
       "showPasswordAria": "Passwort anzeigen",
@@ -369,7 +369,8 @@
       "noAccount": "Sie haben noch kein Konto?",
       "signUp": "Registrieren",
       "errors": {
-        "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein",
+        "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "passwordRequired": "Bitte geben Sie Ihr Passwort ein",
         "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
         "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
@@ -377,7 +378,7 @@
         "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
         "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
         "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
-        "invalidCredentials": "Benutzername oder Passwort ist ungültig.",
+        "invalidCredentials": "Ungültige E-Mail-Adresse oder ungültiges Passwort.",
         "emailNotVerified": "Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
         "loginFailed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
@@ -386,8 +387,8 @@
     "forgotPassword": {
       "heading": "Passwort vergessen",
       "subtitle": "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
-      "usernameLabel": "Benutzername",
-      "usernamePlaceholder": "Benutzername eingeben",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
       "submit": "Link zum Zurücksetzen senden",
       "submitting": "Wird gesendet...",
       "checkEmailHeading": "Überprüfen Sie Ihre E-Mail",
@@ -397,7 +398,8 @@
       "resending": "Wird erneut gesendet...",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
-        "usernameRequired": "Bitte geben Sie Ihren Benutzernamen ein"
+        "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
       }
     },
     "changePassword": {
@@ -427,7 +429,10 @@
         "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",
         "newPasswordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
-        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein"
+        "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
+        "sessionExpired": "Ihre Sitzung ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.",
+        "accountDisabled": "Dieses Konto ist nicht verfügbar.",
+        "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
       }
     },
     "resetPassword": {
@@ -469,8 +474,6 @@
       "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
       "emailLabel": "E-Mail-Adresse",
       "emailPlaceholder": "sie@firma.com",
-      "usernameLabel": "Benutzername",
-      "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
       "passwordLabel": "Passwort",
       "passwordPlaceholder": "Passwort erstellen",
       "confirmPasswordLabel": "Passwort bestätigen",
@@ -501,8 +504,6 @@
         "lastNameRequired": "Bitte geben Sie Ihren Nachnamen ein",
         "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
         "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-        "usernameRequired": "Bitte wählen Sie einen Benutzernamen",
-        "usernameInvalid": "Der Benutzername muss 3–50 Zeichen lang sein und darf Buchstaben, Zahlen, Punkte, Unterstriche oder Bindestriche enthalten.",
         "passwordRequired": "Bitte erstellen Sie ein Passwort",
         "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
@@ -512,7 +513,6 @@
         "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
         "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
         "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
-        "usernameExists": "Dieser Benutzername wird bereits verwendet.",
         "emailExists": "Für diese E-Mail-Adresse existiert bereits ein Konto.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
         "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
@@ -530,7 +530,7 @@
 
     "editAccount": {
       "heading": "Bearbeiten Sie Ihr Konto",
-      "subtitle": "Aktualisieren Sie jederzeit Ihre Unternehmensinformationen und Kontoeinstellungen.",
+      "subtitle": "Wenn Sie die erforderlichen Angaben im Bereich „Konto bearbeiten“ nicht vervollständigen, können Sie keine Dienste kaufen oder nutzen.",
       "business": {
         "title": "Unternehmensinformationen",
         "subtitle": "Erzählen Sie uns von Ihrem Unternehmen, damit wir Ihr Erlebnis personalisieren können.",
@@ -540,6 +540,8 @@
         "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
         "phoneLabel": "Telefon",
         "phonePlaceholder": "(555) 000-0000",
+        "phoneSearchPlaceholder": "Land oder Vorwahl suchen",
+        "phoneNoResults": "Keine Länder gefunden",
         "emailLabel": "E-Mail-Adresse",
         "emailPlaceholder": "sie@firma.com",
         "brandNameLabel": "Markenname",
@@ -557,7 +559,7 @@
       },
       "logo": {
         "title": "Firmenlogo",
-        "subtitle": "Laden Sie Ihr Markenlogo hoch. Ein Logo ist für die Erstellung von Beiträgen, Newslettern und anderen Materialien erforderlich.",
+        "subtitle": "Laden Sie Ihr Markenlogo hoch. Ein Logo ist für alle Beiträge, Newsletter und sonstigen Materialien erforderlich.",
         "uploadCta": "Klicken zum Hochladen",
         "uploadCtaRest": "oder per Drag & Drop",
         "uploadHint": "PNG, JPG bis zu 2 MB",
@@ -580,13 +582,13 @@
       "social": {
         "title": "Social-Media-Konfiguration",
         "optionalBadge": "(Optional)",
-        "subtitle": "Fügen Sie Ihre Social-Media-Namen oder Handles hinzu. Dies sind nur Namen/Handles, keine Kontoverknüpfungen.",
+        "subtitle": "Fügen Sie Ihre Social-Media-Namen oder -Links hinzu. Dies sind keine Kontoverknüpfungen.",
         "linkedinLabel": "LinkedIn-Seitenname",
         "linkedinPlaceholder": "z. B. ihrfirma",
         "instagramLabel": "Instagram-Handle",
-        "instagramPlaceholder": "z. B. ihrfirma",
+        "instagramPlaceholder": "z. B. @ihrunternehmen",
         "xHandleLabel": "X-Handle",
-        "xHandlePlaceholder": "z. B. ihrfirma",
+        "xHandlePlaceholder": "z. B. @ihrunternehmen",
         "telegramChannelLabel": "Telegram-Kanalname",
         "telegramChannelPlaceholder": "z. B. ihrkanal"
       },
@@ -626,7 +628,17 @@
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
         "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
-        "captchaMismatch": "Der CAPTCHA-Code stimmt nicht überein, bitte versuchen Sie es erneut"
+        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
+        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
+        "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
+        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
+        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+        "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
+        "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+        "sessionExpired": "Ihre Sitzung ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.",
+        "profileIncomplete": "Bitte füllen Sie alle Pflichtfelder aus.",
+        "profileLoadError": "Ihr Profil konnte nicht geladen werden. Bitte laden Sie die Seite neu.",
+        "accountDisabled": "Dieses Konto ist nicht verfügbar."
       }
     }
   },

@@ -57,16 +57,20 @@ export function ForgotPasswordForm({
   onStatusChange,
 }: ForgotPasswordFormProps) {
   const navigate = useNavigate();
-  const usernameId = useId();
+  const emailId = useId();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState<FieldErrorKey | undefined>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!username.trim()) {
-      setError("usernameRequired");
+    if (!email.trim()) {
+      setError("emailRequired");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("emailInvalid");
       return;
     }
 
@@ -83,23 +87,23 @@ export function ForgotPasswordForm({
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
         <label
-          htmlFor={usernameId}
+          htmlFor={emailId}
           className="mb-2 block text-body-sm font-medium text-auth-text"
         >
-          {copy.usernameLabel}
+          {copy.emailLabel}
           <RequiredMark />
         </label>
         <div className={fieldWrapClass}>
           <Mail className={iconClass} aria-hidden="true" />
           <input
-            id={usernameId}
-            name="username"
-            type="text"
-            autoComplete="username"
-            placeholder={copy.usernamePlaceholder}
-            value={username}
+            id={emailId}
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder={copy.emailPlaceholder}
+            value={email}
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
               if (error) setError(undefined);
             }}
             aria-invalid={Boolean(error)}

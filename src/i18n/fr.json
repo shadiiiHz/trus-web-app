@@ -355,8 +355,8 @@
         "emailLabel": "E-mail"
       },
       "subtitle": "Bon retour ! Veuillez saisir vos identifiants pour continuer.",
-      "usernameLabel": "Nom d'utilisateur",
-      "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "Saisissez votre adresse e-mail",
       "passwordLabel": "Mot de passe",
       "passwordPlaceholder": "Saisissez votre mot de passe",
       "showPasswordAria": "Afficher le mot de passe",
@@ -372,7 +372,8 @@
       "noAccount": "Vous n'avez pas de compte ?",
       "signUp": "S'inscrire",
       "errors": {
-        "usernameRequired": "Veuillez saisir votre nom d'utilisateur",
+        "emailRequired": "Veuillez saisir votre adresse e-mail",
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide",
         "passwordRequired": "Veuillez saisir votre mot de passe",
         "captchaRequired": "Veuillez saisir le code captcha",
         "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
@@ -380,7 +381,7 @@
         "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
         "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
         "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
-        "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide.",
+        "invalidCredentials": "E-mail ou mot de passe invalide.",
         "emailNotVerified": "Veuillez vérifier votre e-mail avant de vous connecter.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "loginFailed": "Une erreur s'est produite. Veuillez réessayer."
@@ -389,8 +390,8 @@
     "forgotPassword": {
       "heading": "Mot de passe oublié",
       "subtitle": "Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
-      "usernameLabel": "Nom d'utilisateur",
-      "usernamePlaceholder": "Saisissez votre nom d'utilisateur",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "Saisissez votre adresse e-mail",
       "submit": "Envoyer le lien de réinitialisation",
       "submitting": "Envoi en cours...",
       "checkEmailHeading": "Vérifiez votre e-mail",
@@ -400,7 +401,8 @@
       "resending": "Envoi en cours...",
       "backToLogin": "Retour à la connexion",
       "errors": {
-        "usernameRequired": "Veuillez saisir votre nom d'utilisateur"
+        "emailRequired": "Veuillez saisir votre adresse e-mail",
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide"
       }
     },
     "changePassword": {
@@ -430,7 +432,10 @@
         "newPasswordRequired": "Veuillez saisir un nouveau mot de passe",
         "newPasswordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre nouveau mot de passe",
-        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas"
+        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
+        "sessionExpired": "Votre session est invalide ou a expiré. Veuillez vous reconnecter.",
+        "accountDisabled": "Ce compte n'est pas disponible.",
+        "genericError": "Une erreur s'est produite. Veuillez réessayer."
       }
     },
     "resetPassword": {
@@ -472,8 +477,6 @@
       "lastNamePlaceholder": "Saisissez votre nom",
       "emailLabel": "Adresse e-mail",
       "emailPlaceholder": "vous@entreprise.com",
-      "usernameLabel": "Nom d'utilisateur",
-      "usernamePlaceholder": "Choisissez un nom d'utilisateur",
       "passwordLabel": "Mot de passe",
       "passwordPlaceholder": "Créez un mot de passe",
       "confirmPasswordLabel": "Confirmer le mot de passe",
@@ -504,8 +507,6 @@
         "lastNameRequired": "Veuillez saisir votre nom",
         "emailRequired": "Veuillez saisir votre adresse e-mail",
         "emailInvalid": "Veuillez saisir une adresse e-mail valide",
-        "usernameRequired": "Veuillez choisir un nom d'utilisateur",
-        "usernameInvalid": "Le nom d'utilisateur doit comporter entre 3 et 50 caractères et peut contenir des lettres, des chiffres, des points, des tirets bas ou des tirets.",
         "passwordRequired": "Veuillez créer un mot de passe",
         "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
@@ -515,7 +516,6 @@
         "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
         "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
         "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
-        "usernameExists": "Ce nom d'utilisateur est déjà utilisé.",
         "emailExists": "Un compte avec cet e-mail existe déjà.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "genericError": "Une erreur s'est produite. Veuillez réessayer.",
@@ -533,7 +533,7 @@
 
     "editAccount": {
       "heading": "Modifiez votre compte",
-      "subtitle": "Mettez à jour les informations de votre entreprise et les paramètres de votre compte à tout moment.",
+      "subtitle": "Si vous ne complétez pas les informations obligatoires de la section Modifier le compte, vous ne pourrez ni acheter ni utiliser aucun service.",
       "business": {
         "title": "Informations sur l'entreprise",
         "subtitle": "Parlez-nous de votre entreprise afin que nous puissions personnaliser votre expérience.",
@@ -543,6 +543,8 @@
         "lastNamePlaceholder": "Saisissez votre nom",
         "phoneLabel": "Téléphone",
         "phonePlaceholder": "(555) 000-0000",
+        "phoneSearchPlaceholder": "Rechercher un pays ou un indicatif",
+        "phoneNoResults": "Aucun pays trouvé",
         "emailLabel": "Adresse e-mail",
         "emailPlaceholder": "vous@entreprise.com",
         "brandNameLabel": "Nom de la marque",
@@ -560,7 +562,7 @@
       },
       "logo": {
         "title": "Logo de l'entreprise",
-        "subtitle": "Téléversez le logo de votre marque. Un logo est obligatoire pour créer des publications, newsletters et autres supports.",
+        "subtitle": "Téléchargez le logo de votre marque. Un logo est requis pour toutes les publications, newsletters et autres supports.",
         "uploadCta": "Cliquez pour téléverser",
         "uploadCtaRest": "ou glissez-déposez",
         "uploadHint": "PNG, JPG jusqu'à 2 Mo",
@@ -583,13 +585,13 @@
       "social": {
         "title": "Configuration des réseaux sociaux",
         "optionalBadge": "(Facultatif)",
-        "subtitle": "Ajoutez vos noms ou identifiants de réseaux sociaux. Ce sont uniquement des noms/identifiants, pas des connexions de compte.",
+        "subtitle": "Ajoutez les noms ou liens de vos réseaux sociaux. Il ne s'agit pas de connexions de compte.",
         "linkedinLabel": "Nom de la page LinkedIn",
         "linkedinPlaceholder": "ex. votreentreprise",
         "instagramLabel": "Identifiant Instagram",
-        "instagramPlaceholder": "ex. votreentreprise",
+        "instagramPlaceholder": "ex. @votreentreprise",
         "xHandleLabel": "Identifiant X",
-        "xHandlePlaceholder": "ex. votreentreprise",
+        "xHandlePlaceholder": "ex. @votreentreprise",
         "telegramChannelLabel": "Nom de la chaîne Telegram",
         "telegramChannelPlaceholder": "ex. votrechaine"
       },
@@ -629,7 +631,17 @@
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
         "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
         "captchaRequired": "Veuillez saisir le code CAPTCHA",
-        "captchaMismatch": "Le code CAPTCHA ne correspond pas, veuillez réessayer"
+        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
+        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
+        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
+        "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
+        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
+        "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
+        "genericError": "Une erreur s'est produite. Veuillez réessayer.",
+        "sessionExpired": "Votre session est invalide ou a expiré. Veuillez vous reconnecter.",
+        "profileIncomplete": "Veuillez remplir tous les champs obligatoires.",
+        "profileLoadError": "Impossible de charger votre profil. Veuillez actualiser la page.",
+        "accountDisabled": "Ce compte n'est pas disponible."
       }
     }
   },

@@ -345,8 +345,8 @@
         "emailLabel": "Email"
       },
       "subtitle": "Welcome back! Please enter your credentials to continue.",
-      "usernameLabel": "Username",
-      "usernamePlaceholder": "Enter your username",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "Enter your email address",
       "passwordLabel": "Password",
       "passwordPlaceholder": "Enter your password",
       "showPasswordAria": "Show password",
@@ -362,7 +362,8 @@
       "noAccount": "Don't have an account?",
       "signUp": "Sign up",
       "errors": {
-        "usernameRequired": "Please enter your username",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
         "passwordRequired": "Please enter your password",
         "captchaRequired": "Please enter the captcha code",
         "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
@@ -370,7 +371,7 @@
         "captchaExpired": "CAPTCHA has expired. Please refresh it.",
         "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
         "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
-        "invalidCredentials": "Invalid username or password.",
+        "invalidCredentials": "Invalid email or password.",
         "emailNotVerified": "Please verify your email before logging in.",
         "invalidInput": "Please check the information you entered and try again.",
         "loginFailed": "Something went wrong. Please try again."
@@ -379,8 +380,8 @@
     "forgotPassword": {
       "heading": "Forgot Password",
       "subtitle": "Enter your email address and we'll send you a link to reset your password.",
-      "usernameLabel": "Username",
-      "usernamePlaceholder": "Enter your username",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "Enter your email address",
       "submit": "Send Reset Link",
       "submitting": "Sending...",
       "checkEmailHeading": "Check Your Email",
@@ -390,7 +391,8 @@
       "resending": "Resending...",
       "backToLogin": "Back to log in",
       "errors": {
-        "usernameRequired": "Please enter your username"
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address"
       }
     },
     "changePassword": {
@@ -420,7 +422,10 @@
         "newPasswordRequired": "Please enter a new password",
         "newPasswordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your new password",
-        "confirmPasswordMismatch": "Passwords do not match"
+        "confirmPasswordMismatch": "Passwords do not match",
+        "sessionExpired": "Your session is invalid or expired. Please log in again.",
+        "accountDisabled": "This account is not available.",
+        "genericError": "Something went wrong. Please try again."
       }
     },
     "resetPassword": {
@@ -462,8 +467,6 @@
       "lastNamePlaceholder": "Enter your last name",
       "emailLabel": "Email address",
       "emailPlaceholder": "you@company.com",
-      "usernameLabel": "Username",
-      "usernamePlaceholder": "Enter your username",
       "passwordLabel": "Password",
       "passwordPlaceholder": "Create a password",
       "confirmPasswordLabel": "Confirm password",
@@ -494,8 +497,6 @@
         "lastNameRequired": "Please enter your last name",
         "emailRequired": "Please enter your email address",
         "emailInvalid": "Please enter a valid email address",
-        "usernameRequired": "Please choose a username",
-        "usernameInvalid": "Username must be 3–50 characters and may contain letters, numbers, dots, underscores, or hyphens.",
         "passwordRequired": "Please create a password",
         "passwordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your password",
@@ -505,7 +506,6 @@
         "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
         "captchaExpired": "CAPTCHA has expired. Please refresh it.",
         "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
-        "usernameExists": "This username is already in use.",
         "emailExists": "An account with this email already exists.",
         "invalidInput": "Please check the information you entered and try again.",
         "genericError": "Something went wrong. Please try again.",
@@ -523,7 +523,7 @@
 
     "editAccount": {
       "heading": "Edit Your Account",
-      "subtitle": "Update your account information and keep your details up to date.",
+      "subtitle": "If you do not complete the required information in the Edit Account section, you will not be able to purchase or use any services.",
       "business": {
         "title": "Business Information",
         "subtitle": "Tell us about your business so we can personalize your experience.",
@@ -533,6 +533,8 @@
         "lastNamePlaceholder": "Enter your last name",
         "phoneLabel": "Phone",
         "phonePlaceholder": "(555) 000-0000",
+        "phoneSearchPlaceholder": "Search country or code",
+        "phoneNoResults": "No countries found",
         "emailLabel": "Email address",
         "emailPlaceholder": "you@company.com",
         "brandNameLabel": "Brand name",
@@ -550,7 +552,7 @@
       },
       "logo": {
         "title": "Business Logo",
-        "subtitle": "Upload your brand logo. Having a logo is mandatory for creating posts, newsletters, and all other materials.",
+        "subtitle": "Upload your brand logo. A logo is required for all posts, newsletters, and other materials.",
         "uploadCta": "Click to upload",
         "uploadCtaRest": "or drag and drop",
         "uploadHint": "PNG, JPG up to 2 MB",
@@ -573,13 +575,13 @@
       "social": {
         "title": "Social Media Config",
         "optionalBadge": "(Optional)",
-        "subtitle": "Add your social media names or handles. These are just names/handles, not account connections.",
+        "subtitle": "Add your social media names or links. These are not account connections.",
         "linkedinLabel": "LinkedIn Page Name",
         "linkedinPlaceholder": "e.g. yourcompany",
         "instagramLabel": "Instagram Handle",
-        "instagramPlaceholder": "e.g. yourcompany",
+        "instagramPlaceholder": "e.g. @yourcompany",
         "xHandleLabel": "X Handle",
-        "xHandlePlaceholder": "e.g. yourcompany",
+        "xHandlePlaceholder": "e.g. @yourcompany",
         "telegramChannelLabel": "Telegram Channel Name",
         "telegramChannelPlaceholder": "e.g. yourchannel"
       },
@@ -619,7 +621,17 @@
         "confirmPasswordRequired": "Please confirm your password",
         "confirmPasswordMismatch": "Passwords do not match",
         "captchaRequired": "Please enter the CAPTCHA code",
-        "captchaMismatch": "CAPTCHA code doesn't match, please try again"
+        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
+        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
+        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
+        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
+        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
+        "invalidInput": "Please check the information you entered and try again.",
+        "genericError": "Something went wrong. Please try again.",
+        "sessionExpired": "Your session is invalid or expired. Please log in again.",
+        "profileIncomplete": "Please fill in all required fields.",
+        "profileLoadError": "Couldn't load your profile. Please refresh the page.",
+        "accountDisabled": "This account is not available."
       }
     }
   },

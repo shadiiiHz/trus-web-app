@@ -1,15 +1,24 @@
 import { useLayoutEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { LoginInfoCard } from "@/components/auth/LoginInfoCard";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { siteConfig } from "@/config/site.config";
 import ChangePasswordForm from "@/components/auth/ChangePasswordForm";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ChangePasswordPage() {
+  const { isInitialized, isAuthenticated } = useAuth();
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Only for a signed-in user. Wait for AuthProvider's initial
+  // sessionStorage read so a hard refresh doesn't bounce a valid session.
+  if (!isInitialized) return null;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   const { card } = siteConfig.contact;
   const { login, changePassword } = siteConfig.auth;

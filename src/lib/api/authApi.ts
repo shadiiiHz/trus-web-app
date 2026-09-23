@@ -8,6 +8,7 @@
  */
 import axios, { type AxiosError } from "axios";
 import { showToast } from "@/lib/toast";
+import { getAuthSession } from "@/lib/api/session";
 
 const CAPTCHA_IMAGE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth-captcha";
 const CAPTCHA_VERIFY_URL =
@@ -16,6 +17,11 @@ const REGISTER_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/register";
 const LOGIN_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/login";
 const RESEND_VERIFICATION_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/resend-verification";
+const PROFILE_UPDATE_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile/update";
+const PROFILE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile";
+const CHANGE_PASSWORD_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/change-password";
 
 const client = axios.create({
   headers: { "Content-Type": "application/json" },
@@ -26,8 +32,6 @@ export type RegisterErrorCode =
   | "INVALID_INPUT"
   | "INVALID_EMAIL"
   | "EMAIL_EXISTS"
-  | "INVALID_USERNAME"
-  | "USERNAME_EXISTS"
   | "INVALID_CAPTCHA";
 
 /**
@@ -49,8 +53,17 @@ export type LoginErrorCode =
  * auth endpoint added later (login, forgot-password, ...), each with its
  * own set of backend error codes.
  */
+/** One entry of a `VALIDATION_ERROR` response's `errors` list, e.g. `{ field: "first_name", code: "FIRST_NAME_REQUIRED" }`. */
+export interface ApiFieldError {
+  field: string;
+  code: string;
+  message: string;
+}
+
 export class AuthApiError extends Error {
   code: string;
+  /** Per-field errors from a `VALIDATION_ERROR` response, keyed by the backend's snake_case field name. */
+  fieldErrors?: ApiFieldError[];
   /** Per-field validation detail strings the backend sends as-is (e.g. `validation_errors`); shown verbatim, not translated. */
   details?: string[];
   /** The frontend route the backend says to continue on (e.g. `/check-your-email` for `EMAIL_NOT_VERIFIED`), if it sent one. */
@@ -125,19 +138,32 @@ function unwrap(data: unknown): BackendEnvelope {
   return (Array.isArray(data) ? data[0] : data) as BackendEnvelope;
 }
 
-function toAuthApiError(error: unknown): AuthApiError {
-  const axiosError = error as AxiosError<unknown>;
-  if (!axiosError.response) {
-    return new AuthApiError("NETWORK_ERROR", "Network request failed.");
-  }
+function toFieldErrors(value: unknown): ApiFieldError[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+  const list = value.filter(
+    (item): item is ApiFieldError =>
+      typeof item?.field === "string" && typeof item?.code === "string",
+  );
+  return list.length ? list : undefined;
+}
 
-  const payload = unwrap(axiosError.response.data);
+function payloadToAuthApiError(payload: BackendEnvelope | undefined): AuthApiError {
   const code = typeof payload?.code === "string" && payload.code ? payload.code : "NETWORK_ERROR";
   const details = Array.isArray(payload?.validation_errors)
     ? payload.validation_errors.filter((item): item is string => typeof item === "string")
     : undefined;
   const nextPage = typeof payload?.next_page === "string" ? payload.next_page : undefined;
-  return new AuthApiError(code, payload?.message ?? "Request failed.", details, nextPage);
+  const apiError = new AuthApiError(code, payload?.message ?? "Request failed.", details, nextPage);
+  apiError.fieldErrors = toFieldErrors(payload?.errors);
+  return apiError;
+}
+
+function toAuthApiError(error: unknown): AuthApiError {
+  const axiosError = error as AxiosError<unknown>;
+  if (!axiosError.response) {
+    return new AuthApiError("NETWORK_ERROR", "Network request failed.");
+  }
+  return payloadToAuthApiError(unwrap(axiosError.response.data));
 }
 
 export interface CaptchaChallenge {
@@ -155,16 +181,14 @@ export interface RegisterPayload {
   firstName: string;
   lastName: string;
   email: string;
-  username: string;
   password: string;
   confirmPassword: string;
   captchaToken: string;
 }
 
 export interface LoginPayload {
-  username: string;
+  email: string;
   password: string;
-  captchaToken: string;
 }
 
 export async function fetchCaptcha(): Promise<CaptchaChallenge> {
@@ -269,7 +293,6 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthSessio
       first_name: payload.firstName,
       last_name: payload.lastName,
       email: payload.email,
-      username: payload.username,
       password: payload.password,
       confirm_password: payload.confirmPassword,
       captcha_token: payload.captchaToken,
@@ -289,9 +312,8 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthSessio
 export async function loginUser(payload: LoginPayload): Promise<AuthSessionResult> {
   try {
     const { data } = await client.post(LOGIN_URL, {
-      username: payload.username,
+      email: payload.email,
       password: payload.password,
-      captcha_token: payload.captchaToken,
     });
     return toAuthSessionResult(unwrap(data) as RawAuthSessionPayload);
   } catch (error) {
@@ -307,5 +329,206 @@ export async function resendVerificationEmail(email: string): Promise<void> {
     await client.post(RESEND_VERIFICATION_URL, { email });
   } catch (error) {
     throw toAuthApiError(error);
+  }
+}
+
+export interface ProfileUpdatePayload {
+  firstName: string;
+  lastName: string;
+  /** Full international number, dial code included (e.g. `+49123456789`). */
+  phone: string;
+  brandName: string;
+  telegramUsername: string;
+  website: string;
+  timezone: string;
+  job: string;
+  jobTitle: string;
+  linkedinPageName: string;
+  instagramHandle: string;
+  xHandle: string;
+  telegramChannelName: string;
+  /** Logo image, sent as a binary file part. */
+  logo?: Blob | null;
+}
+
+/**
+ * Documented backend codes for the profile update endpoint. `VALIDATION_ERROR`
+ * carries per-field detail in `AuthApiError.fieldErrors`.
+ */
+export type ProfileUpdateErrorCode =
+  | "INVALID_SESSION"
+  | "VALIDATION_ERROR"
+  | "INVALID_CAPTCHA"
+  | "PROFILE_INCOMPLETE";
+
+/** Profile update success: whether the account is now `ready`, and where to go next. */
+export interface ProfileUpdateResult {
+  /** `undefined` when the backend didn't say (e.g. an empty response body). */
+  ready?: boolean;
+  nextPage?: string;
+}
+
+/**
+ * Sent as multipart/form-data so the logo can go up as the raw image binary
+ * alongside the text fields. The session token authenticates the request.
+ */
+export async function updateProfile(
+  payload: ProfileUpdatePayload,
+): Promise<ProfileUpdateResult> {
+  const form = new FormData();
+  const fields: Record<string, string> = {
+    first_name: payload.firstName,
+    last_name: payload.lastName,
+    phone: payload.phone,
+    brand_name: payload.brandName,
+    telegram_username: payload.telegramUsername,
+    website: payload.website,
+    timezone: payload.timezone,
+    job: payload.job,
+    job_title: payload.jobTitle,
+    linkedin_page_name: payload.linkedinPageName,
+    instagram_handle: payload.instagramHandle,
+    x_handle: payload.xHandle,
+    telegram_channel_name: payload.telegramChannelName,
+  };
+  for (const [key, value] of Object.entries(fields)) form.append(key, value);
+  if (payload.logo) {
+    const name = payload.logo instanceof File ? payload.logo.name : "logo.svg";
+    form.append("logo", payload.logo, name);
+  }
+
+  try {
+    const { data } = await axios.post(PROFILE_UPDATE_URL, form, {
+      headers: authHeaders(),
+    });
+    const result = unwrap(data);
+    if (result?.success === false) throw payloadToAuthApiError(result);
+    return {
+      ready: typeof result?.ready === "boolean" ? result.ready : undefined,
+      nextPage: typeof result?.next_page === "string" ? result.next_page : undefined,
+    };
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
+  }
+}
+
+/** `Authorization: Bearer <session token>` for the endpoints that need a signed-in user. */
+function authHeaders(): Record<string, string> | undefined {
+  const token = getAuthSession()?.token;
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
+}
+
+/** The signed-in user's profile, as the Edit Account form shows it. Missing fields come back as "". */
+export interface UserProfile {
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  /** Full international number, dial code included (e.g. `+49123456789`). */
+  phone: string;
+  brandName: string;
+  telegramUsername: string;
+  website: string;
+  timezone: string;
+  job: string;
+  jobTitle: string;
+  linkedinPageName: string;
+  instagramHandle: string;
+  xHandle: string;
+  telegramChannelName: string;
+  /** URL of the current logo image, if one has been uploaded. */
+  logoUrl: string;
+}
+
+/**
+ * Google Drive share/download links (`drive.google.com/uc?export=view&id=…`,
+ * `/file/d/<id>/view`, `open?id=…`) redirect to a download response that
+ * browsers refuse to render in an `<img>`. Drive's thumbnail endpoint serves
+ * the same public file as a plain image, so those links are rewritten to it.
+ * Any other URL is returned unchanged.
+ */
+export function toDisplayableImageUrl(url: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return url;
+  }
+  if (parsed.hostname !== "drive.google.com") return url;
+
+  const id =
+    parsed.searchParams.get("id") ?? parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1];
+  return id ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w512` : url;
+}
+
+function str(value: unknown): string {
+  return typeof value === "string" ? value : typeof value === "number" ? String(value) : "";
+}
+
+/** Documented backend codes for the get-profile endpoint. */
+export type ProfileErrorCode = "SESSION_REQUIRED" | "ACCOUNT_DISABLED";
+
+/**
+ * `GET /auth/profile`. The exact response shape isn't confirmed yet, so the
+ * profile is read from the root or from a nested `profile` / `user` / `data`
+ * object, whichever the backend sends.
+ */
+export async function fetchProfile(signal?: AbortSignal): Promise<UserProfile> {
+  try {
+    const { data } = await axios.get(PROFILE_URL, { headers: authHeaders(), signal });
+    const payload = unwrap(data);
+    if (payload?.success === false) throw payloadToAuthApiError(payload);
+
+    const nested = [payload?.profile, payload?.user, payload?.data].find(
+      (value): value is Record<string, unknown> =>
+        typeof value === "object" && value !== null && !Array.isArray(value),
+    );
+    const raw: Record<string, unknown> = { ...payload, ...nested };
+
+    return {
+      email: str(raw.email),
+      username: str(raw.username),
+      firstName: str(raw.first_name),
+      lastName: str(raw.last_name),
+      phone: str(raw.phone),
+      brandName: str(raw.brand_name),
+      telegramUsername: str(raw.telegram_username),
+      website: str(raw.website),
+      timezone: str(raw.timezone),
+      job: str(raw.job),
+      jobTitle: str(raw.job_title),
+      linkedinPageName: str(raw.linkedin_page_name),
+      instagramHandle: str(raw.instagram_handle),
+      xHandle: str(raw.x_handle),
+      telegramChannelName: str(raw.telegram_channel_name),
+      logoUrl: toDisplayableImageUrl(str(raw.logo_url) || str(raw.logo)),
+    };
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
+  }
+}
+
+export interface ChangePasswordPayload {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+/** `POST /auth/change-password` for the signed-in user. */
+export async function changePassword(payload: ChangePasswordPayload): Promise<void> {
+  try {
+    const { data } = await client.post(
+      CHANGE_PASSWORD_URL,
+      {
+        current_password: payload.currentPassword,
+        new_password: payload.newPassword,
+        confirm_password: payload.confirmPassword,
+      },
+      { headers: authHeaders() },
+    );
+    const result = unwrap(data);
+    if (result?.success === false) throw payloadToAuthApiError(result);
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
   }
 }

@@ -345,8 +345,8 @@
         "emailLabel": "E-posta"
       },
       "subtitle": "Tekrar hoş geldiniz! Devam etmek için lütfen bilgilerinizi girin.",
-      "usernameLabel": "Kullanıcı Adı",
-      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "E-posta adresinizi girin",
       "passwordLabel": "Şifre",
       "passwordPlaceholder": "Şifrenizi girin",
       "showPasswordAria": "Şifreyi göster",
@@ -362,7 +362,8 @@
       "noAccount": "Hesabınız yok mu?",
       "signUp": "Kayıt olun",
       "errors": {
-        "usernameRequired": "Lütfen kullanıcı adınızı girin",
+        "emailRequired": "Lütfen e-posta adresinizi girin",
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
         "passwordRequired": "Lütfen şifrenizi girin",
         "captchaRequired": "Lütfen doğrulama kodunu girin",
         "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
@@ -370,7 +371,7 @@
         "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
         "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
         "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
-        "invalidCredentials": "Kullanıcı adı veya şifre hatalı.",
+        "invalidCredentials": "Geçersiz e-posta veya şifre.",
         "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "loginFailed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
@@ -379,8 +380,8 @@
     "forgotPassword": {
       "heading": "Şifremi Unuttum",
       "subtitle": "E-posta adresinizi girin, size şifrenizi sıfırlamak için bir bağlantı gönderelim.",
-      "usernameLabel": "Kullanıcı Adı",
-      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "E-posta adresinizi girin",
       "submit": "Sıfırlama Bağlantısı Gönder",
       "submitting": "Gönderiliyor...",
       "checkEmailHeading": "E-postanızı Kontrol Edin",
@@ -390,7 +391,8 @@
       "resending": "Gönderiliyor...",
       "backToLogin": "Girişe dön",
       "errors": {
-        "usernameRequired": "Lütfen kullanıcı adınızı girin"
+        "emailRequired": "Lütfen e-posta adresinizi girin",
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin"
       }
     },
     "changePassword": {
@@ -420,7 +422,10 @@
         "newPasswordRequired": "Lütfen yeni bir şifre girin",
         "newPasswordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
-        "confirmPasswordMismatch": "Şifreler eşleşmiyor"
+        "confirmPasswordMismatch": "Şifreler eşleşmiyor",
+        "sessionExpired": "Oturumunuz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.",
+        "accountDisabled": "Bu hesap kullanılamıyor.",
+        "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
       }
     },
     "resetPassword": {
@@ -462,8 +467,6 @@
       "lastNamePlaceholder": "Soyadınızı girin",
       "emailLabel": "E-posta adresi",
       "emailPlaceholder": "siz@sirket.com",
-      "usernameLabel": "Kullanıcı adı",
-      "usernamePlaceholder": "Bir kullanıcı adı seçin",
       "passwordLabel": "Şifre",
       "passwordPlaceholder": "Bir şifre oluşturun",
       "confirmPasswordLabel": "Şifreyi onayla",
@@ -494,8 +497,6 @@
         "lastNameRequired": "Lütfen soyadınızı girin",
         "emailRequired": "Lütfen e-posta adresinizi girin",
         "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
-        "usernameRequired": "Lütfen bir kullanıcı adı seçin",
-        "usernameInvalid": "Kullanıcı adı 3–50 karakter olmalı ve harf, rakam, nokta, alt çizgi veya tire içerebilir.",
         "passwordRequired": "Lütfen bir şifre oluşturun",
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
@@ -505,7 +506,6 @@
         "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
         "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
         "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
-        "usernameExists": "Bu kullanıcı adı zaten kullanılıyor.",
         "emailExists": "Bu e-posta ile zaten bir hesap mevcut.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
@@ -523,7 +523,7 @@
 
     "editAccount": {
       "heading": "Hesabınızı Düzenleyin",
-      "subtitle": "İşletme bilgilerinizi ve hesap ayarlarınızı istediğiniz zaman güncelleyin.",
+      "subtitle": "Hesabı Düzenle bölümündeki zorunlu bilgileri tamamlamazsanız hiçbir hizmeti satın alamaz veya kullanamazsınız.",
       "business": {
         "title": "İşletme Bilgileri",
         "subtitle": "Deneyiminizi kişiselleştirebilmemiz için işletmeniz hakkında bilgi verin.",
@@ -533,6 +533,8 @@
         "lastNamePlaceholder": "Soyadınızı girin",
         "phoneLabel": "Telefon",
         "phonePlaceholder": "(555) 000-0000",
+        "phoneSearchPlaceholder": "Ülke veya kod ara",
+        "phoneNoResults": "Ülke bulunamadı",
         "emailLabel": "E-posta adresi",
         "emailPlaceholder": "siz@sirket.com",
         "brandNameLabel": "Marka adı",
@@ -550,7 +552,7 @@
       },
       "logo": {
         "title": "İşletme Logosu",
-        "subtitle": "Marka logonuzu yükleyin. Gönderiler, bültenler ve diğer materyaller oluşturmak için bir logo gereklidir.",
+        "subtitle": "Marka logonuzu yükleyin. Tüm gönderiler, bültenler ve diğer materyaller için logo gereklidir.",
         "uploadCta": "Yüklemek için tıklayın",
         "uploadCtaRest": "veya sürükleyip bırakın",
         "uploadHint": "PNG, JPG, 2 MB'a kadar",
@@ -573,13 +575,13 @@
       "social": {
         "title": "Sosyal Medya Ayarları",
         "optionalBadge": "(İsteğe bağlı)",
-        "subtitle": "Sosyal medya adlarınızı veya kullanıcı adlarınızı ekleyin. Bunlar sadece isim/kullanıcı adıdır, hesap bağlantısı değildir.",
+        "subtitle": "Sosyal medya adlarınızı veya bağlantılarınızı ekleyin. Bunlar hesap bağlantısı değildir.",
         "linkedinLabel": "LinkedIn Sayfa Adı",
         "linkedinPlaceholder": "örn. sirketiniz",
         "instagramLabel": "Instagram Kullanıcı Adı",
-        "instagramPlaceholder": "örn. sirketiniz",
+        "instagramPlaceholder": "örn. @sirketiniz",
         "xHandleLabel": "X Kullanıcı Adı",
-        "xHandlePlaceholder": "örn. sirketiniz",
+        "xHandlePlaceholder": "örn. @sirketiniz",
         "telegramChannelLabel": "Telegram Kanal Adı",
         "telegramChannelPlaceholder": "örn. kanaliniz"
       },
@@ -619,7 +621,17 @@
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor",
         "captchaRequired": "Lütfen CAPTCHA kodunu girin",
-        "captchaMismatch": "CAPTCHA kodu eşleşmiyor, lütfen tekrar deneyin"
+        "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
+        "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
+        "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
+        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
+        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
+        "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
+        "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+        "sessionExpired": "Oturumunuz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.",
+        "profileIncomplete": "Lütfen tüm zorunlu alanları doldurun.",
+        "profileLoadError": "Profiliniz yüklenemedi. Lütfen sayfayı yenileyin.",
+        "accountDisabled": "Bu hesap kullanılamıyor."
       }
     }
   },

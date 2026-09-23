@@ -27,7 +27,6 @@ type FieldName =
   | "firstName"
   | "lastName"
   | "email"
-  | "username"
   | "password"
   | "confirmPassword"
   | "captcha";
@@ -47,27 +46,6 @@ function RequiredMark() {
       {" "}
       *
     </span>
-  );
-}
-
-function UsernameIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16.6673 17.5C16.6673 16.337 16.6673 15.7555 16.5238 15.2824C16.2006 14.217 15.3669 13.3834 14.3016 13.0602C13.8284 12.9167 13.247 12.9167 12.084 12.9167H7.91732C6.75435 12.9167 6.17286 12.9167 5.6997 13.0602C4.63436 13.3834 3.80068 14.217 3.47752 15.2824C3.33398 15.7555 3.33398 16.337 3.33398 17.5M13.7507 6.25C13.7507 8.32107 12.0717 10 10.0007 10C7.92958 10 6.25065 8.32107 6.25065 6.25C6.25065 4.17893 7.92958 2.5 10.0007 2.5C12.0717 2.5 13.7507 4.17893 13.7507 6.25Z"
-        stroke="var(--color-auth-icon)"
-        strokeWidth="1.66667"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 
@@ -102,7 +80,6 @@ export function RegisterForm({
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
-  const usernameId = useId();
   const passwordId = useId();
   const confirmPasswordId = useId();
   const captchaId = useId();
@@ -110,7 +87,6 @@ export function RegisterForm({
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -172,11 +148,6 @@ export function RegisterForm({
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = "emailInvalid";
     }
-    if (!username.trim()) {
-      nextErrors.username = "usernameRequired";
-    } else if (!/^[A-Za-z0-9._-]{3,50}$/.test(username.trim())) {
-      nextErrors.username = "usernameInvalid";
-    }
     if (!password) {
       nextErrors.password = "passwordRequired";
     } else if (!meetsAllRequirements) {
@@ -208,7 +179,6 @@ export function RegisterForm({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim(),
-        username: username.trim(),
         password,
         confirmPassword,
         captchaToken,
@@ -227,10 +197,6 @@ export function RegisterForm({
       const captchaErrorKey = getCaptchaErrorKey(error);
       if (captchaErrorKey) {
         setErrors((prev) => ({ ...prev, captcha: captchaErrorKey }));
-      } else if (error instanceof AuthApiError && error.code === "USERNAME_EXISTS") {
-        setErrors((prev) => ({ ...prev, username: "usernameExists" }));
-      } else if (error instanceof AuthApiError && error.code === "INVALID_USERNAME") {
-        setErrors((prev) => ({ ...prev, username: "usernameInvalid" }));
       } else if (error instanceof AuthApiError && error.code === "EMAIL_EXISTS") {
         setErrors((prev) => ({ ...prev, email: "emailExists" }));
       } else if (error instanceof AuthApiError && error.code === "INVALID_EMAIL") {
@@ -313,7 +279,7 @@ export function RegisterForm({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div>
         <div>
           <label
             htmlFor={emailId}
@@ -344,40 +310,6 @@ export function RegisterForm({
           {errors.email && (
             <p className="mt-1.5 text-[13px] text-red-500">
               {copy.errors[errors.email]}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label
-            htmlFor={usernameId}
-            className="mb-2 block text-body-sm font-medium text-auth-text"
-          >
-            {copy.usernameLabel}
-            <RequiredMark />
-          </label>
-          <div className={fieldWrapClass}>
-            <UsernameIcon className={iconClass} />
-            <input
-              id={usernameId}
-              name="username"
-              type="text"
-              autoComplete="username"
-              placeholder={copy.usernamePlaceholder}
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-                clearError("username");
-              }}
-              aria-invalid={Boolean(errors.username)}
-              className={`${inputBaseClass} pl-11 pr-4 ${
-                errors.username ? "border-red-400" : "border-auth-border"
-              }`}
-            />
-          </div>
-          {errors.username && (
-            <p className="mt-1.5 text-[13px] text-red-500">
-              {copy.errors[errors.username]}
             </p>
           )}
         </div>

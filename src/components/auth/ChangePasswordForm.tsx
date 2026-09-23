@@ -1,11 +1,12 @@
 import { useId, useState } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
 import { passwordRequirements } from "@/lib/passwordRequirements";
+import { AuthApiError, changePassword, reportApiError } from "@/lib/api/authApi";
+import { useAuth } from "@/hooks/useAuth";
+import { showToast } from "@/lib/toast";
 
 function BackIcon({ className }: { className?: string }) {
   return (
@@ -99,6 +100,8 @@ function RequiredMark() {
 }
 
 export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const currentPasswordId = useId();
   const newPasswordId = useId();
   const confirmPasswordId = useId();
@@ -110,20 +113,17 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
   const clearError = (field: keyof FieldErrors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
-    setStatus((prev) => (prev === "success" ? "idle" : prev));
   };
 
   const meetsAllRequirements = passwordRequirements.every(({ test }) =>
     test(newPassword),
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const nextErrors: FieldErrors = {};
@@ -143,15 +143,46 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    // No backend wired up yet — simulate the round trip so the button's
-    // loading state reads correctly once a real request lands here.
     setStatus("submitting");
-    window.setTimeout(() => {
-      setStatus("success");
+    try {
+      await changePassword({ currentPassword, newPassword, confirmPassword });
+      showToast(copy.success, "success");
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-    }, 700);
+    } catch (error) {
+      const code = error instanceof AuthApiError ? error.code : undefined;
+      if (
+        code === "INVALID_SESSION" ||
+        code === "SESSION_REQUIRED" ||
+        code === "ACCOUNT_DISABLED"
+      ) {
+        showToast(
+          code === "ACCOUNT_DISABLED"
+            ? copy.errors.accountDisabled
+            : copy.errors.sessionExpired,
+          "error",
+        );
+        logout();
+        navigate("/login", { replace: true });
+        return;
+      }
+      // Other backend codes aren't documented yet: show its own message
+      // (e.g. a wrong current password) when it sends one.
+      const backendMessage =
+        error instanceof AuthApiError &&
+        code !== "NETWORK_ERROR" &&
+        error.message !== "Request failed."
+          ? error.message
+          : "";
+      reportApiError(
+        error,
+        backendMessage ? { [code as string]: backendMessage } : {},
+        copy.errors.genericError,
+      );
+    } finally {
+      setStatus("idle");
+    }
   };
 
   return (
@@ -322,22 +353,11 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
       <Button
         type="submit"
         variant="primary"
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+        disabled={status === "submitting"}
+        className="mt-1 w-full rounded-md py-3.5 disabled:cursor-not-allowed disabled:opacity-60 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
         {status === "submitting" ? copy.submitting : copy.submit}
       </Button>
-
-      {status === "success" && (
-        <motion.p
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="text-center text-body-sm font-medium text-emerald-600"
-          role="status"
-        >
-          {copy.success}
-        </motion.p>
-      )}
 
       <Link
         to="/login"

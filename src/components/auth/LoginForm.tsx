@@ -1,28 +1,21 @@
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, RotateCw, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, Mail } from "lucide-react";
 // import { Check } from "lucide-react"; // used by the disabled "remember me" checkbox
 import { Button } from "@/components/ui/Button";
 import { DURATION_SM, EASE_PREMIUM } from "@/motion/variants";
 import type { SiteConfig } from "@/config/site.config";
-import {
-  AuthApiError,
-  fetchCaptcha,
-  getCaptchaErrorKey,
-  reportApiError,
-  verifyCaptcha,
-} from "@/lib/api/authApi";
+import { AuthApiError, reportApiError } from "@/lib/api/authApi";
 import { useLogin } from "@/hooks/auth/useLogin";
 import { resolveNextPage } from "@/lib/api/nextPage";
-import { showToast } from "@/lib/toast";
 
 export interface LoginFormProps {
   copy: SiteConfig["auth"]["login"];
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["login"]["errors"];
-type FieldErrors = Partial<Record<"username" | "password" | "captcha", FieldErrorKey>>;
+type FieldErrors = Partial<Record<"email" | "password", FieldErrorKey>>;
 
 const fieldWrapClass = "relative flex items-center";
 
@@ -38,33 +31,6 @@ function RequiredMark() {
       {" "}
       *
     </span>
-  );
-}
-
-/**
- * Placeholder icon for the username field.
- * Swap the <path>/content inside this <svg> with your own artwork.
- * Keep `className={iconClass}` (or pass it through) so positioning/sizing
- * inside the input stays correct.
- */
-function UsernameIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16.6673 17.5C16.6673 16.337 16.6673 15.7555 16.5238 15.2824C16.2006 14.217 15.3669 13.3834 14.3016 13.0602C13.8284 12.9167 13.247 12.9167 12.084 12.9167H7.91732C6.75435 12.9167 6.17286 12.9167 5.6997 13.0602C4.63436 13.3834 3.80068 14.217 3.47752 15.2824C3.33398 15.7555 3.33398 16.337 3.33398 17.5M13.7507 6.25C13.7507 8.32107 12.0717 10 10.0007 10C7.92958 10 6.25065 8.32107 6.25065 6.25C6.25065 4.17893 7.92958 2.5 10.0007 2.5C12.0717 2.5 13.7507 4.17893 13.7507 6.25Z"
-        stroke="var(--color-auth-icon)"
-        stroke-width="1.66667"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
   );
 }
 
@@ -98,19 +64,13 @@ function PasswordIcon({ className }: { className?: string }) {
 export function LoginForm({ copy }: LoginFormProps) {
   const navigate = useNavigate();
   const { mutate: loginMutate } = useLogin();
-  const usernameId = useId();
+  const emailId = useId();
   const passwordId = useId();
-  const captchaId = useId();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   // const [rememberMe, setRememberMe] = useState(false); // remember me disabled for now
-
-  const [captchaImage, setCaptchaImage] = useState<string | null>(null);
-  const [challengeId, setChallengeId] = useState<string | null>(null);
-  const [captchaInput, setCaptchaInput] = useState("");
-  const [captchaLoading, setCaptchaLoading] = useState(true);
 
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
@@ -122,59 +82,28 @@ export function LoginForm({ copy }: LoginFormProps) {
     setStatus((prev) => (prev === "success" ? "idle" : prev));
   };
 
-  const loadCaptchaChallenge = async () => {
-    try {
-      const challenge = await fetchCaptcha();
-      setCaptchaImage(challenge.image);
-      setChallengeId(challenge.challengeId);
-    } catch {
-      setCaptchaImage(null);
-      setChallengeId(null);
-      showToast(copy.errors.captchaLoadError, "error");
-    } finally {
-      setCaptchaLoading(false);
-    }
-  };
-
-  const refreshCaptcha = () => {
-    setCaptchaLoading(true);
-    setCaptchaInput("");
-    loadCaptchaChallenge();
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadCaptchaChallenge();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const nextErrors: FieldErrors = {};
-    if (!username.trim()) nextErrors.username = "usernameRequired";
-    if (!password) nextErrors.password = "passwordRequired";
-    if (!captchaInput.trim()) {
-      nextErrors.captcha = "captchaRequired";
+    if (!email.trim()) {
+      nextErrors.email = "emailRequired";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      nextErrors.email = "emailInvalid";
     }
+    if (!password) nextErrors.password = "passwordRequired";
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0 || !challengeId) {
+    if (Object.keys(nextErrors).length > 0) {
       return;
     }
 
     setStatus("submitting");
 
     try {
-      const { captchaToken } = await verifyCaptcha(
-        challengeId,
-        captchaInput.trim(),
-      );
-
       const result = await loginMutate({
-        username: username.trim(),
+        email: email.trim(),
         password,
-        captchaToken,
       });
 
       setStatus("success");
@@ -189,14 +118,9 @@ export function LoginForm({ copy }: LoginFormProps) {
         navigate("/edit-account");
       }
     } catch (error) {
-      const captchaErrorKey = getCaptchaErrorKey(error);
-      if (captchaErrorKey) {
-        setErrors((prev) => ({ ...prev, captcha: captchaErrorKey }));
-        setStatus("idle");
-        refreshCaptcha();
-      } else if (error instanceof AuthApiError && error.code === "EMAIL_NOT_VERIFIED") {
+      if (error instanceof AuthApiError && error.code === "EMAIL_NOT_VERIFIED") {
         navigate(error.nextPage ? resolveNextPage(error.nextPage) : "/check-your-email", {
-          state: { variant: "register", email: username.trim() },
+          state: { variant: "register", email: email.trim() },
         });
       } else {
         reportApiError(
@@ -208,44 +132,43 @@ export function LoginForm({ copy }: LoginFormProps) {
           copy.errors.loginFailed,
         );
         setStatus("idle");
-        refreshCaptcha();
       }
     }
   };
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
-      {/* Username */}
+      {/* Email */}
       <div>
         <label
-          htmlFor={usernameId}
+          htmlFor={emailId}
           className="mb-2 block text-body-sm font-medium text-auth-text"
         >
-          {copy.usernameLabel}
+          {copy.emailLabel}
           <RequiredMark />
         </label>
         <div className={fieldWrapClass}>
-          <UsernameIcon className={iconClass} />
+          <Mail className={iconClass} aria-hidden="true" />
           <input
-            id={usernameId}
-            name="username"
-            type="text"
-            autoComplete="username"
-            placeholder={copy.usernamePlaceholder}
-            value={username}
+            id={emailId}
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder={copy.emailPlaceholder}
+            value={email}
             onChange={(e) => {
-              setUsername(e.target.value);
-              clearError("username");
+              setEmail(e.target.value);
+              clearError("email");
             }}
-            aria-invalid={Boolean(errors.username)}
+            aria-invalid={Boolean(errors.email)}
             className={`${inputBaseClass} pr-4 ${
-              errors.username ? "border-red-400" : "border-auth-border"
+              errors.email ? "border-red-400" : "border-auth-border"
             }`}
           />
         </div>
-        {errors.username && (
+        {errors.email && (
           <p className="mt-1.5 text-[13px] text-red-500">
-            {copy.errors[errors.username]}
+            {copy.errors[errors.email]}
           </p>
         )}
       </div>
@@ -327,78 +250,10 @@ export function LoginForm({ copy }: LoginFormProps) {
         </Link>
       </div>
 
-      {/* Captcha image display + refresh */}
-      <div className="flex items-center gap-3">
-        <div
-          className="flex h-16.5 flex-1 select-none items-center justify-center overflow-hidden rounded-xl border border-auth-border bg-white shadow-xs"
-          aria-hidden="true"
-        >
-          {captchaLoading ? (
-            <span className="text-body-sm text-auth-muted">…</span>
-          ) : captchaImage ? (
-            <img
-              src={captchaImage}
-              alt=""
-              className="h-full w-full object-contain"
-            />
-          ) : (
-            <span className="px-2 text-center text-[13px] text-red-500">
-              {copy.errors.captchaLoadError}
-            </span>
-          )}
-        </div>
-        <motion.button
-          type="button"
-          onClick={refreshCaptcha}
-          aria-label={copy.refreshCaptchaAria}
-          whileHover={{ rotate: 90 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong shadow-[0_1px_2px_0_rgba(0,0,0,0.05),inset_0_-2px_0_0_rgba(0,0,0,0.05)] transition-colors hover:border-brand-accent hover:text-brand-accent"
-        >
-          <RotateCw size={20} />
-        </motion.button>
-      </div>
-
-      {/* Captcha input */}
-      <div>
-        <label
-          htmlFor={captchaId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
-        >
-          {copy.captchaLabel}
-          <RequiredMark />
-        </label>
-        <div className={fieldWrapClass}>
-          <ShieldCheck className={iconClass} aria-hidden="true" />
-          <input
-            id={captchaId}
-            name="captcha"
-            type="text"
-            autoComplete="off"
-            placeholder={copy.captchaPlaceholder}
-            value={captchaInput}
-            onChange={(e) => {
-              setCaptchaInput(e.target.value);
-              clearError("captcha");
-            }}
-            aria-invalid={Boolean(errors.captcha)}
-            className={`${inputBaseClass} pr-4 ${
-              errors.captcha ? "border-red-400" : "border-auth-border"
-            }`}
-          />
-        </div>
-        {errors.captcha && (
-          <p className="mt-1.5 text-[13px] text-red-500">
-            {copy.errors[errors.captcha]}
-          </p>
-        )}
-      </div>
-
       <Button
         type="submit"
         variant="primary"
-        disabled={status === "submitting" || captchaLoading}
+        disabled={status === "submitting"}
         className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? copy.submitting : copy.submit}

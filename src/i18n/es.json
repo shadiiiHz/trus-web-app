@@ -364,8 +364,8 @@
         "emailLabel": "Correo electrónico"
       },
       "subtitle": "¡Bienvenido de nuevo! Introduce tus credenciales para continuar.",
-      "usernameLabel": "Nombre de usuario",
-      "usernamePlaceholder": "Introduce tu nombre de usuario",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
       "passwordLabel": "Contraseña",
       "passwordPlaceholder": "Introduce tu contraseña",
       "showPasswordAria": "Mostrar contraseña",
@@ -381,7 +381,8 @@
       "noAccount": "¿No tienes una cuenta?",
       "signUp": "Regístrate",
       "errors": {
-        "usernameRequired": "Por favor introduce tu nombre de usuario",
+        "emailRequired": "Por favor introduce tu correo electrónico",
+        "emailInvalid": "Por favor introduce un correo electrónico válido",
         "passwordRequired": "Por favor introduce tu contraseña",
         "captchaRequired": "Por favor introduce el código captcha",
         "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
@@ -389,7 +390,7 @@
         "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
         "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
         "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
-        "invalidCredentials": "Usuario o contraseña incorrectos.",
+        "invalidCredentials": "Correo electrónico o contraseña no válidos.",
         "emailNotVerified": "Por favor, verifica tu correo electrónico antes de iniciar sesión.",
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
         "loginFailed": "Algo salió mal. Inténtalo de nuevo."
@@ -398,8 +399,8 @@
     "forgotPassword": {
       "heading": "Contraseña olvidada",
       "subtitle": "Introduce tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
-      "usernameLabel": "Nombre de usuario",
-      "usernamePlaceholder": "Introduce tu nombre de usuario",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
       "submit": "Enviar enlace de restablecimiento",
       "submitting": "Enviando...",
       "checkEmailHeading": "Revisa tu correo",
@@ -409,7 +410,8 @@
       "resending": "Reenviando...",
       "backToLogin": "Volver a iniciar sesión",
       "errors": {
-        "usernameRequired": "Por favor introduce tu nombre de usuario"
+        "emailRequired": "Por favor introduce tu correo electrónico",
+        "emailInvalid": "Por favor introduce un correo electrónico válido"
       }
     },
     "changePassword": {
@@ -439,7 +441,10 @@
         "newPasswordRequired": "Por favor introduce una nueva contraseña",
         "newPasswordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
-        "confirmPasswordMismatch": "Las contraseñas no coinciden"
+        "confirmPasswordMismatch": "Las contraseñas no coinciden",
+        "sessionExpired": "Tu sesión no es válida o ha caducado. Vuelve a iniciar sesión.",
+        "accountDisabled": "Esta cuenta no está disponible.",
+        "genericError": "Algo salió mal. Inténtalo de nuevo."
       }
     },
     "resetPassword": {
@@ -481,8 +486,6 @@
       "lastNamePlaceholder": "Introduce tu apellido",
       "emailLabel": "Correo electrónico",
       "emailPlaceholder": "tu@empresa.com",
-      "usernameLabel": "Nombre de usuario",
-      "usernamePlaceholder": "Elige un nombre de usuario",
       "passwordLabel": "Contraseña",
       "passwordPlaceholder": "Crea una contraseña",
       "confirmPasswordLabel": "Confirmar contraseña",
@@ -513,8 +516,6 @@
         "lastNameRequired": "Por favor introduce tu apellido",
         "emailRequired": "Por favor introduce tu correo electrónico",
         "emailInvalid": "Por favor introduce un correo electrónico válido",
-        "usernameRequired": "Por favor elige un nombre de usuario",
-        "usernameInvalid": "El nombre de usuario debe tener entre 3 y 50 caracteres y puede contener letras, números, puntos, guiones bajos o guiones.",
         "passwordRequired": "Por favor crea una contraseña",
         "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu contraseña",
@@ -524,7 +525,6 @@
         "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
         "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
         "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
-        "usernameExists": "Este nombre de usuario ya está en uso.",
         "emailExists": "Ya existe una cuenta con este correo electrónico.",
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
         "genericError": "Algo salió mal. Inténtalo de nuevo.",
@@ -542,7 +542,7 @@
 
     "editAccount": {
       "heading": "Edita tu cuenta",
-      "subtitle": "Actualiza la información de tu negocio y los ajustes de tu cuenta cuando quieras.",
+      "subtitle": "Si no completas la información obligatoria en la sección Editar cuenta, no podrás comprar ni usar ningún servicio.",
       "business": {
         "title": "Información del negocio",
         "subtitle": "Cuéntanos sobre tu negocio para que podamos personalizar tu experiencia.",
@@ -552,6 +552,8 @@
         "lastNamePlaceholder": "Introduce tu apellido",
         "phoneLabel": "Teléfono",
         "phonePlaceholder": "(555) 000-0000",
+        "phoneSearchPlaceholder": "Buscar país o código",
+        "phoneNoResults": "No se encontraron países",
         "emailLabel": "Correo electrónico",
         "emailPlaceholder": "tu@empresa.com",
         "brandNameLabel": "Nombre de la marca",
@@ -569,7 +571,7 @@
       },
       "logo": {
         "title": "Logo del negocio",
-        "subtitle": "Sube el logo de tu marca. Tener un logo es obligatorio para crear publicaciones, newsletters y demás materiales.",
+        "subtitle": "Sube el logotipo de tu marca. Se requiere un logotipo para todas las publicaciones, boletines y demás materiales.",
         "uploadCta": "Haz clic para subir",
         "uploadCtaRest": "o arrastra y suelta",
         "uploadHint": "PNG, JPG hasta 2 MB",
@@ -592,13 +594,13 @@
       "social": {
         "title": "Configuración de redes sociales",
         "optionalBadge": "(Opcional)",
-        "subtitle": "Añade tus nombres o identificadores de redes sociales. Son solo nombres/identificadores, no conexiones de cuenta.",
+        "subtitle": "Añade los nombres o enlaces de tus redes sociales. No son conexiones de cuenta.",
         "linkedinLabel": "Nombre de página de LinkedIn",
         "linkedinPlaceholder": "p. ej. tuempresa",
         "instagramLabel": "Usuario de Instagram",
-        "instagramPlaceholder": "p. ej. tuempresa",
+        "instagramPlaceholder": "p. ej. @tuempresa",
         "xHandleLabel": "Usuario de X",
-        "xHandlePlaceholder": "p. ej. tuempresa",
+        "xHandlePlaceholder": "p. ej. @tuempresa",
         "telegramChannelLabel": "Nombre del canal de Telegram",
         "telegramChannelPlaceholder": "p. ej. tucanal"
       },
@@ -638,7 +640,17 @@
         "confirmPasswordRequired": "Por favor confirma tu contraseña",
         "confirmPasswordMismatch": "Las contraseñas no coinciden",
         "captchaRequired": "Por favor introduce el código CAPTCHA",
-        "captchaMismatch": "El código CAPTCHA no coincide, inténtalo de nuevo"
+        "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
+        "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
+        "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
+        "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
+        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
+        "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
+        "genericError": "Algo salió mal. Inténtalo de nuevo.",
+        "sessionExpired": "Tu sesión no es válida o ha caducado. Vuelve a iniciar sesión.",
+        "profileIncomplete": "Completa todos los campos obligatorios.",
+        "profileLoadError": "No se pudo cargar tu perfil. Actualiza la página.",
+        "accountDisabled": "Esta cuenta no está disponible."
       }
     }
   },

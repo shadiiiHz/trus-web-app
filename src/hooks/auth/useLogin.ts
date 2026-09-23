@@ -20,11 +20,11 @@ export function useLogin(options?: UseLoginOptions) {
         expiresAt: result.expiresAt,
         ready: result.ready,
         // Header shows the login response's `customer` name; the separate
-        // first/last names and then the username are only fallbacks.
+        // first/last names and then the email are only fallbacks.
         displayName:
           result.customerName ||
           [result.firstName, result.lastName].filter(Boolean).join(" ") ||
-          payload.username,
+          payload.email,
       });
       options?.onSuccess?.(result);
       return result;
