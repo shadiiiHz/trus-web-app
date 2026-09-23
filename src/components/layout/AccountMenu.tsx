@@ -122,8 +122,8 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
         />
         <span className="max-w-40 truncate font-medium">{displayName}</span>
         <ChevronDown
-          size={14}
-          strokeWidth={2.5}
+          size={12}
+          strokeWidth={4}
           className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           aria-hidden="true"
         />
