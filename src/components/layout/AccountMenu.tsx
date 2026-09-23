@@ -151,7 +151,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
 // divider + the container's own py-2 add up to Figma's Height: Hug (206px)
 // at this fixed 200px width.
 const rowClass =
-  "flex w-full items-center gap-2 px-4 py-2 text-left text-[13px] font-body font-semibold leading-5 text-auth-heading transition-colors hover:bg-auth-surface";
+  "flex w-full items-center gap-2 px-4 py-2 text-left text-[13px] font-body font-semibold leading-5 text-auth-heading transition-colors hover:bg-auth-surface cursor-pointer";
 
 function MenuLink({
   to,
