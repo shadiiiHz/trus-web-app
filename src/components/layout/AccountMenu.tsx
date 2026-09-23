@@ -27,8 +27,8 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
   // Horizontal nudge (px) that keeps the menu inside the viewport — the
-  // design's -left-10 offset overflows the right edge whenever the trigger
-  // sits close to it (every desktop width below ~1330px).
+  // centred menu is wider than the trigger, so it can overflow the right
+  // edge whenever the trigger sits close to it.
   const [shiftX, setShiftX] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -58,8 +58,10 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
       setOpenUp(up);
 
       // Where the menu would sit un-nudged: right-aligned to the trigger
-      // when opening up, 40px (-left-10) left of it when opening down.
-      const left = up ? rootRect.right - MENU_WIDTH : rootRect.left - 40;
+      // when opening up, centred under it when opening down.
+      const left = up
+        ? rootRect.right - MENU_WIDTH
+        : rootRect.left + (rootRect.width - MENU_WIDTH) / 2;
       const maxLeft =
         document.documentElement.clientWidth - VIEWPORT_GUTTER - MENU_WIDTH;
       setShiftX(
@@ -141,7 +143,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
           className={`absolute z-50 w-[200px] overflow-hidden rounded-lg border border-auth-border-light bg-white py-2 shadow-2xl ${
             openUp
               ? "right-0 bottom-[calc(100%+14px)]"
-              : "top-[calc(100%+14px)] -left-10"
+              : "top-[calc(100%+14px)] left-[calc(50%-100px)]"
           }`}
         >
           <MenuLink
