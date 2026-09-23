@@ -563,8 +563,6 @@
       "account": {
         "title": "Hesap Bilgileri",
         "subtitle": "Hesabınızı oluşturun ve Telegram'ınızı bağlayın.",
-        "usernameLabel": "Kullanıcı adı",
-        "usernamePlaceholder": "Bir kullanıcı adı seçin",
         "passwordLabel": "Şifre",
         "passwordPlaceholder": "Bir şifre oluşturun",
         "confirmPasswordLabel": "Şifreyi onayla",
@@ -615,7 +613,6 @@
         "industryRequired": "Lütfen sektörünüzü seçin",
         "jobTitleRequired": "Lütfen unvanınızı girin",
         "logoRequired": "Lütfen işletme logonuzu yükleyin",
-        "usernameRequired": "Lütfen bir kullanıcı adı seçin",
         "passwordRequired": "Lütfen bir şifre oluşturun",
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",

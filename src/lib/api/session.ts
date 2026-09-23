@@ -18,7 +18,7 @@ export interface StoredAuthSession {
   ready: boolean;
   /** ISO timestamp, when the backend sent one — lets AuthContext schedule an active logout timer, not just a lazy check on next read. */
   expiresAt?: string;
-  /** Name/username entered at register or login, shown in the header's account menu — the backend doesn't send a profile name yet. */
+  /** Name/email entered at register or login, shown in the header's account menu — the backend doesn't send a profile name yet. */
   displayName?: string;
 }
 

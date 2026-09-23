@@ -569,8 +569,6 @@
       "account": {
         "title": "Информация об аккаунте",
         "subtitle": "Настройте аккаунт и подключите Telegram.",
-        "usernameLabel": "Имя пользователя",
-        "usernamePlaceholder": "Выберите имя пользователя",
         "passwordLabel": "Пароль",
         "passwordPlaceholder": "Придумайте пароль",
         "confirmPasswordLabel": "Подтвердите пароль",
@@ -621,7 +619,6 @@
         "industryRequired": "Пожалуйста, выберите отрасль",
         "jobTitleRequired": "Пожалуйста, введите вашу должность",
         "logoRequired": "Пожалуйста, загрузите логотип компании",
-        "usernameRequired": "Пожалуйста, выберите имя пользователя",
         "passwordRequired": "Пожалуйста, придумайте пароль",
         "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
         "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",

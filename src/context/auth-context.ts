@@ -5,7 +5,7 @@ export interface AuthState {
   isInitialized: boolean;
   /** The backend's `ready` flag: false while the complete-profile step is still owed. */
   isReady: boolean;
-  /** Name/username entered at register or login — shown in the header's account menu. Null when signed out. */
+  /** Name/email entered at register or login — shown in the header's account menu. Null when signed out. */
   displayName: string | null;
 }
 

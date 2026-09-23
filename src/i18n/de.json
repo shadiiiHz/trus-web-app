@@ -570,8 +570,6 @@
       "account": {
         "title": "Kontoinformationen",
         "subtitle": "Richten Sie Ihr Konto ein und verbinden Sie Ihren Telegram-Account.",
-        "usernameLabel": "Benutzername",
-        "usernamePlaceholder": "Wählen Sie einen Benutzernamen",
         "passwordLabel": "Passwort",
         "passwordPlaceholder": "Passwort erstellen",
         "confirmPasswordLabel": "Passwort bestätigen",
@@ -622,7 +620,6 @@
         "industryRequired": "Bitte wählen Sie Ihre Branche",
         "jobTitleRequired": "Bitte geben Sie Ihre Berufsbezeichnung ein",
         "logoRequired": "Bitte laden Sie Ihr Firmenlogo hoch",
-        "usernameRequired": "Bitte wählen Sie einen Benutzernamen",
         "passwordRequired": "Bitte erstellen Sie ein Passwort",
         "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",

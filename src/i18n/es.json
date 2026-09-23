@@ -582,8 +582,6 @@
       "account": {
         "title": "Información de la cuenta",
         "subtitle": "Configura tu cuenta y conecta tu Telegram.",
-        "usernameLabel": "Nombre de usuario",
-        "usernamePlaceholder": "Elige un nombre de usuario",
         "passwordLabel": "Contraseña",
         "passwordPlaceholder": "Crea una contraseña",
         "confirmPasswordLabel": "Confirmar contraseña",
@@ -634,7 +632,6 @@
         "industryRequired": "Por favor selecciona tu sector",
         "jobTitleRequired": "Por favor introduce tu cargo",
         "logoRequired": "Por favor sube el logo de tu negocio",
-        "usernameRequired": "Por favor elige un nombre de usuario",
         "passwordRequired": "Por favor crea una contraseña",
         "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu contraseña",

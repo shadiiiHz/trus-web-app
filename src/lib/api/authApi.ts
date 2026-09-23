@@ -10,7 +10,8 @@ import axios, { type AxiosError } from "axios";
 import { showToast } from "@/lib/toast";
 import { getAuthSession } from "@/lib/api/session";
 
-const CAPTCHA_IMAGE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth-captcha";
+const CAPTCHA_IMAGE_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth-captcha";
 const CAPTCHA_VERIFY_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/captcha/verify";
 const REGISTER_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/register";
@@ -69,7 +70,12 @@ export class AuthApiError extends Error {
   /** The frontend route the backend says to continue on (e.g. `/check-your-email` for `EMAIL_NOT_VERIFIED`), if it sent one. */
   nextPage?: string;
 
-  constructor(code: string, message: string, details?: string[], nextPage?: string) {
+  constructor(
+    code: string,
+    message: string,
+    details?: string[],
+    nextPage?: string,
+  ) {
     super(message);
     this.code = code;
     this.details = details;
@@ -121,9 +127,13 @@ export type CaptchaErrorKey =
   (typeof CAPTCHA_ERROR_CODE_KEYS)[keyof typeof CAPTCHA_ERROR_CODE_KEYS];
 
 /** Returns the `errors` copy key for a CAPTCHA-specific backend code, or `undefined` for any other error. */
-export function getCaptchaErrorKey(error: unknown): CaptchaErrorKey | undefined {
+export function getCaptchaErrorKey(
+  error: unknown,
+): CaptchaErrorKey | undefined {
   if (!(error instanceof AuthApiError)) return undefined;
-  return CAPTCHA_ERROR_CODE_KEYS[error.code as keyof typeof CAPTCHA_ERROR_CODE_KEYS];
+  return CAPTCHA_ERROR_CODE_KEYS[
+    error.code as keyof typeof CAPTCHA_ERROR_CODE_KEYS
+  ];
 }
 
 interface BackendEnvelope {
@@ -147,13 +157,26 @@ function toFieldErrors(value: unknown): ApiFieldError[] | undefined {
   return list.length ? list : undefined;
 }
 
-function payloadToAuthApiError(payload: BackendEnvelope | undefined): AuthApiError {
-  const code = typeof payload?.code === "string" && payload.code ? payload.code : "NETWORK_ERROR";
+function payloadToAuthApiError(
+  payload: BackendEnvelope | undefined,
+): AuthApiError {
+  const code =
+    typeof payload?.code === "string" && payload.code
+      ? payload.code
+      : "NETWORK_ERROR";
   const details = Array.isArray(payload?.validation_errors)
-    ? payload.validation_errors.filter((item): item is string => typeof item === "string")
+    ? payload.validation_errors.filter(
+        (item): item is string => typeof item === "string",
+      )
     : undefined;
-  const nextPage = typeof payload?.next_page === "string" ? payload.next_page : undefined;
-  const apiError = new AuthApiError(code, payload?.message ?? "Request failed.", details, nextPage);
+  const nextPage =
+    typeof payload?.next_page === "string" ? payload.next_page : undefined;
+  const apiError = new AuthApiError(
+    code,
+    payload?.message ?? "Request failed.",
+    details,
+    nextPage,
+  );
   apiError.fieldErrors = toFieldErrors(payload?.errors);
   return apiError;
 }
@@ -225,10 +248,16 @@ export async function verifyCaptcha(
     };
 
     if (!payload.verified) {
-      throw new AuthApiError("INVALID_CAPTCHA", "CAPTCHA is invalid or expired.");
+      throw new AuthApiError(
+        "INVALID_CAPTCHA",
+        "CAPTCHA is invalid or expired.",
+      );
     }
 
-    return { captchaToken: payload.captcha_token, expiresIn: payload.expires_in };
+    return {
+      captchaToken: payload.captcha_token,
+      expiresIn: payload.expires_in,
+    };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
   }
@@ -249,13 +278,14 @@ export interface AuthSessionResult {
   nextPage?: string;
   firstName?: string;
   lastName?: string;
-  /** Login's `customer` field — the account's "first last" name, shown in the header. */
-  customerName?: string;
 }
 
 interface RawUserNames {
   first_name?: unknown;
   last_name?: unknown;
+  /** Login sends the names without the underscore. */
+  firstname?: unknown;
+  lastname?: unknown;
 }
 
 interface RawAuthSessionPayload extends RawUserNames {
@@ -265,7 +295,6 @@ interface RawAuthSessionPayload extends RawUserNames {
   ready?: boolean;
   next_page?: string;
   user?: RawUserNames;
-  customer?: unknown;
 }
 
 /** Trimmed string, or undefined for anything missing/empty/non-string. */
@@ -280,14 +309,24 @@ function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
     expiresAt: raw.expires_at,
     ready: raw.ready ?? true,
     nextPage: raw.next_page,
-    // n8n may send the names at the root or nested under `user`.
-    firstName: toName(raw.first_name) ?? toName(raw.user?.first_name),
-    lastName: toName(raw.last_name) ?? toName(raw.user?.last_name),
-    customerName: toName(raw.customer),
+    // Login sends `firstname`/`lastname`; other endpoints may use
+    // `first_name`/`last_name`, at the root or nested under `user`.
+    firstName:
+      toName(raw.firstname) ??
+      toName(raw.first_name) ??
+      toName(raw.user?.firstname) ??
+      toName(raw.user?.first_name),
+    lastName:
+      toName(raw.lastname) ??
+      toName(raw.last_name) ??
+      toName(raw.user?.lastname) ??
+      toName(raw.user?.last_name),
   };
 }
 
-export async function registerUser(payload: RegisterPayload): Promise<AuthSessionResult> {
+export async function registerUser(
+  payload: RegisterPayload,
+): Promise<AuthSessionResult> {
   try {
     const { data } = await client.post(REGISTER_URL, {
       first_name: payload.firstName,
@@ -309,7 +348,9 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthSessio
  * `registerUser`'s response — any field the backend doesn't (yet) send just
  * comes back `undefined`/defaulted, nothing throws over it.
  */
-export async function loginUser(payload: LoginPayload): Promise<AuthSessionResult> {
+export async function loginUser(
+  payload: LoginPayload,
+): Promise<AuthSessionResult> {
   try {
     const { data } = await client.post(LOGIN_URL, {
       email: payload.email,
@@ -405,7 +446,8 @@ export async function updateProfile(
     if (result?.success === false) throw payloadToAuthApiError(result);
     return {
       ready: typeof result?.ready === "boolean" ? result.ready : undefined,
-      nextPage: typeof result?.next_page === "string" ? result.next_page : undefined,
+      nextPage:
+        typeof result?.next_page === "string" ? result.next_page : undefined,
     };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
@@ -421,7 +463,6 @@ function authHeaders(): Record<string, string> | undefined {
 /** The signed-in user's profile, as the Edit Account form shows it. Missing fields come back as "". */
 export interface UserProfile {
   email: string;
-  username: string;
   firstName: string;
   lastName: string;
   /** Full international number, dial code included (e.g. `+49123456789`). */
@@ -457,12 +498,19 @@ export function toDisplayableImageUrl(url: string): string {
   if (parsed.hostname !== "drive.google.com") return url;
 
   const id =
-    parsed.searchParams.get("id") ?? parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1];
-  return id ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w512` : url;
+    parsed.searchParams.get("id") ??
+    parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1];
+  return id
+    ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w512`
+    : url;
 }
 
 function str(value: unknown): string {
-  return typeof value === "string" ? value : typeof value === "number" ? String(value) : "";
+  return typeof value === "string"
+    ? value
+    : typeof value === "number"
+      ? String(value)
+      : "";
 }
 
 /** Documented backend codes for the get-profile endpoint. */
@@ -475,7 +523,10 @@ export type ProfileErrorCode = "SESSION_REQUIRED" | "ACCOUNT_DISABLED";
  */
 export async function fetchProfile(signal?: AbortSignal): Promise<UserProfile> {
   try {
-    const { data } = await axios.get(PROFILE_URL, { headers: authHeaders(), signal });
+    const { data } = await axios.get(PROFILE_URL, {
+      headers: authHeaders(),
+      signal,
+    });
     const payload = unwrap(data);
     if (payload?.success === false) throw payloadToAuthApiError(payload);
 
@@ -487,7 +538,6 @@ export async function fetchProfile(signal?: AbortSignal): Promise<UserProfile> {
 
     return {
       email: str(raw.email),
-      username: str(raw.username),
       firstName: str(raw.first_name),
       lastName: str(raw.last_name),
       phone: str(raw.phone),
@@ -515,7 +565,9 @@ export interface ChangePasswordPayload {
 }
 
 /** `POST /auth/change-password` for the signed-in user. */
-export async function changePassword(payload: ChangePasswordPayload): Promise<void> {
+export async function changePassword(
+  payload: ChangePasswordPayload,
+): Promise<void> {
   try {
     const { data } = await client.post(
       CHANGE_PASSWORD_URL,

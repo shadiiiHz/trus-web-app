@@ -19,10 +19,9 @@ export function useLogin(options?: UseLoginOptions) {
         token: result.sessionToken,
         expiresAt: result.expiresAt,
         ready: result.ready,
-        // Header shows the login response's `customer` name; the separate
-        // first/last names and then the email are only fallbacks.
+        // Header shows the login response's first + last name, falling
+        // back to the email when the backend sends neither.
         displayName:
-          result.customerName ||
           [result.firstName, result.lastName].filter(Boolean).join(" ") ||
           payload.email,
       });

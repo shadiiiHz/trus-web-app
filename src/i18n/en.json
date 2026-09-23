@@ -563,8 +563,6 @@
       "account": {
         "title": "Account Information",
         "subtitle": "Set up your account and connect your Telegram.",
-        "usernameLabel": "Username",
-        "usernamePlaceholder": "Choose a username",
         "passwordLabel": "Password",
         "passwordPlaceholder": "Create a password",
         "confirmPasswordLabel": "Confirm password",
@@ -615,7 +613,6 @@
         "industryRequired": "Please select your industry",
         "jobTitleRequired": "Please enter your job title",
         "logoRequired": "Please upload your business logo",
-        "usernameRequired": "Please choose a username",
         "passwordRequired": "Please create a password",
         "passwordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your password",
