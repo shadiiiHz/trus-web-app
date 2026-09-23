@@ -97,7 +97,7 @@ export default function SelectServicesPage() {
   if (!isReady) return <Navigate to="/edit-account" replace />;
 
   return (
-    <div className="min-h-screen bg-white font-body antialiased">
+    <div className="min-h-screen bg-[#FAFAFA] font-body antialiased">
       <Navbar />
 
       <main className="bg-white pt-18">

@@ -88,7 +88,7 @@ export function ServicesTable({
     setSortDir((d) => (d === "asc" ? "desc" : "asc"));
 
   return (
-    <div className="overflow-x-auto rounded-[12px] border border-auth-border-light bg-white">
+    <div className="overflow-x-auto rounded-[12px] border border-auth-border-light bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
       <table className="w-full min-w-[1100px] table-fixed border-collapse font-body">
         <colgroup>
           <col style={{ width: "26%" }} />

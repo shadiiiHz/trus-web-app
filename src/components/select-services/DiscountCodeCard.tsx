@@ -98,7 +98,7 @@ export function DiscountCodeCard({ copy, onApply }: DiscountCodeCardProps) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body"
+      className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
     >
       <div className="border-b border-auth-divider pb-5">
         <h2 className="text-[16px] leading-6 font-semibold text-auth-heading">{copy.heading}</h2>

@@ -24,7 +24,7 @@ export function OrderSummaryCard({
   const total = Math.max(0, servicesTotal - discount);
 
   return (
-    <section className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body">
+    <section className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
       <h2 className="text-[16px] leading-6 font-semibold text-auth-heading">{copy.heading}</h2>
 
       <dl className="mt-7.5 flex flex-col gap-5 border-b border-auth-divider pb-4.5">
