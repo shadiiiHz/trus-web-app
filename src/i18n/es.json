@@ -644,6 +644,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Seleccionar servicios",
+
+    "subtitle": "Elige los servicios que quieres usar. Puedes ajustar la cantidad de cada servicio.",
+
+    "billing": {
+
+      "monthly": "Mensual",
+
+      "yearly": "Anual",
+
+      "ariaLabel": "Periodo de facturación"
+
+    },
+
+    "table": {
+
+      "service": "Servicio",
+
+      "description": "Descripción / Cantidad incluida",
+
+      "quantity": "Cantidad",
+
+      "unitPrice": "Precio unitario (USD)",
+
+      "total": "Total (USD)",
+
+      "selectAllAria": "Seleccionar todos los servicios",
+
+      "sortAria": "Ordenar por nombre del servicio",
+
+      "decreaseAria": "Disminuir cantidad",
+
+      "increaseAria": "Aumentar cantidad",
+
+      "perMonth": "/mes",
+
+      "perYear": "/año"
+
+    },
+
+    "discount": {
+
+      "heading": "Código de descuento",
+
+      "subtitle": "Introduce tu código de descuento para aplicar tu oferta.",
+
+      "codeLabel": "Código de descuento",
+
+      "codePlaceholder": "Introduce tu código de descuento",
+
+      "captchaLabel": "Introduce el CAPTCHA",
+
+      "captchaPlaceholder": "Escribe los caracteres",
+
+      "refreshCaptchaAria": "Actualizar código captcha",
+
+      "submit": "Aplicar cupón",
+
+      "submitting": "Aplicando...",
+
+      "success": "Cupón aplicado correctamente.",
+
+      "errors": {
+
+        "codeRequired": "Introduce tu código de descuento",
+
+        "codeInvalid": "Este código de descuento no es válido o ha caducado.",
+
+        "captchaRequired": "Introduce el código captcha",
+
+        "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
+
+        "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
+
+        "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
+
+        "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
+
+        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
+
+        "applyFailed": "Algo salió mal. Inténtalo de nuevo."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Resumen del pedido",
+
+      "totalServices": "Total de servicios",
+
+      "discount": "Descuento",
+
+      "total": "Total",
+
+      "autoRenew": "Renovación automática",
+
+      "payNow": "Pagar ahora",
+
+      "noServicesSelected": "Selecciona al menos un servicio.",
+
+      "paymentUnavailable": "El pago en línea estará disponible pronto."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Servicios",
     "secondColumn": "Empresa",

@@ -632,6 +632,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Services auswählen",
+
+    "subtitle": "Wählen Sie die Services, die Sie nutzen möchten. Sie können die Menge jedes Services anpassen.",
+
+    "billing": {
+
+      "monthly": "Monatlich",
+
+      "yearly": "Jährlich",
+
+      "ariaLabel": "Abrechnungszeitraum"
+
+    },
+
+    "table": {
+
+      "service": "Service",
+
+      "description": "Beschreibung / Enthaltene Menge",
+
+      "quantity": "Menge",
+
+      "unitPrice": "Stückpreis (USD)",
+
+      "total": "Gesamt (USD)",
+
+      "selectAllAria": "Alle Services auswählen",
+
+      "sortAria": "Nach Servicename sortieren",
+
+      "decreaseAria": "Menge verringern",
+
+      "increaseAria": "Menge erhöhen",
+
+      "perMonth": "/Monat",
+
+      "perYear": "/Jahr"
+
+    },
+
+    "discount": {
+
+      "heading": "Rabattcode",
+
+      "subtitle": "Geben Sie Ihren Rabattcode ein, um Ihr Angebot einzulösen.",
+
+      "codeLabel": "Rabattcode",
+
+      "codePlaceholder": "Rabattcode eingeben",
+
+      "captchaLabel": "CAPTCHA eingeben",
+
+      "captchaPlaceholder": "Zeichen eingeben",
+
+      "refreshCaptchaAria": "Captcha-Code aktualisieren",
+
+      "submit": "Gutschein einlösen",
+
+      "submitting": "Wird eingelöst...",
+
+      "success": "Gutschein erfolgreich eingelöst.",
+
+      "errors": {
+
+        "codeRequired": "Bitte geben Sie Ihren Rabattcode ein",
+
+        "codeInvalid": "Dieser Rabattcode ist ungültig oder abgelaufen.",
+
+        "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
+
+        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
+
+        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
+
+        "captchaExpired": "CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
+
+        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
+
+        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+
+        "applyFailed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Bestellübersicht",
+
+      "totalServices": "Services gesamt",
+
+      "discount": "Rabatt",
+
+      "total": "Gesamt",
+
+      "autoRenew": "Automatisch verlängern",
+
+      "payNow": "Jetzt bezahlen",
+
+      "noServicesSelected": "Bitte wählen Sie mindestens einen Service aus.",
+
+      "paymentUnavailable": "Online-Zahlung ist bald verfügbar."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Leistungen",
     "secondColumn": "Unternehmen",

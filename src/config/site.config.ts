@@ -861,6 +861,8 @@ function buildSiteConfig(locale: Locale) {
       editAccount: dict.auth.editAccount,
     },
 
+    selectServicesPage: dict.selectServicesPage,
+
     contact: {
       eyebrow: dict.contact.eyebrow,
       heading: dict.contact.heading,

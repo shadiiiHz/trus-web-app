@@ -625,6 +625,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Hizmet Seçimi",
+
+    "subtitle": "Kullanmak istediğiniz hizmetleri seçin. Her hizmetin miktarını ayarlayabilirsiniz.",
+
+    "billing": {
+
+      "monthly": "Aylık",
+
+      "yearly": "Yıllık",
+
+      "ariaLabel": "Faturalama dönemi"
+
+    },
+
+    "table": {
+
+      "service": "Hizmet",
+
+      "description": "Açıklama / Dahil Olan Miktar",
+
+      "quantity": "Miktar",
+
+      "unitPrice": "Birim Fiyat (USD)",
+
+      "total": "Toplam (USD)",
+
+      "selectAllAria": "Tüm hizmetleri seç",
+
+      "sortAria": "Hizmet adına göre sırala",
+
+      "decreaseAria": "Miktarı azalt",
+
+      "increaseAria": "Miktarı artır",
+
+      "perMonth": "/ay",
+
+      "perYear": "/yıl"
+
+    },
+
+    "discount": {
+
+      "heading": "İndirim Kodu",
+
+      "subtitle": "Teklifinizi uygulamak için indirim kodunuzu girin.",
+
+      "codeLabel": "İndirim kodu",
+
+      "codePlaceholder": "İndirim kodunuzu girin",
+
+      "captchaLabel": "CAPTCHA'yı girin",
+
+      "captchaPlaceholder": "Karakterleri yazın",
+
+      "refreshCaptchaAria": "Captcha kodunu yenile",
+
+      "submit": "Kuponu uygula",
+
+      "submitting": "Uygulanıyor...",
+
+      "success": "Kupon başarıyla uygulandı.",
+
+      "errors": {
+
+        "codeRequired": "Lütfen indirim kodunuzu girin",
+
+        "codeInvalid": "Bu indirim kodu geçersiz veya süresi dolmuş.",
+
+        "captchaRequired": "Lütfen captcha kodunu girin",
+
+        "captchaInvalid": "CAPTCHA geçersiz veya süresi dolmuş. Lütfen tekrar deneyin.",
+
+        "captchaIncorrect": "Hatalı CAPTCHA. Lütfen tekrar deneyin.",
+
+        "captchaExpired": "CAPTCHA'nın süresi doldu. Lütfen yenileyin.",
+
+        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
+
+        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
+
+        "applyFailed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Sipariş Özeti",
+
+      "totalServices": "Toplam Hizmetler",
+
+      "discount": "İndirim",
+
+      "total": "Toplam",
+
+      "autoRenew": "Otomatik Yenileme",
+
+      "payNow": "Şimdi öde",
+
+      "noServicesSelected": "Lütfen en az bir hizmet seçin.",
+
+      "paymentUnavailable": "Çevrimiçi ödeme yakında kullanılabilir olacak."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Hizmetler",
     "secondColumn": "Şirket",

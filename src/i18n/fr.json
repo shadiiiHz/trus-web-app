@@ -635,6 +635,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Sélectionner des services",
+
+    "subtitle": "Choisissez les services que vous souhaitez utiliser. Vous pouvez ajuster la quantité de chaque service.",
+
+    "billing": {
+
+      "monthly": "Mensuel",
+
+      "yearly": "Annuel",
+
+      "ariaLabel": "Période de facturation"
+
+    },
+
+    "table": {
+
+      "service": "Service",
+
+      "description": "Description / Quantité incluse",
+
+      "quantity": "Quantité",
+
+      "unitPrice": "Prix unitaire (USD)",
+
+      "total": "Total (USD)",
+
+      "selectAllAria": "Sélectionner tous les services",
+
+      "sortAria": "Trier par nom de service",
+
+      "decreaseAria": "Diminuer la quantité",
+
+      "increaseAria": "Augmenter la quantité",
+
+      "perMonth": "/mois",
+
+      "perYear": "/an"
+
+    },
+
+    "discount": {
+
+      "heading": "Code de réduction",
+
+      "subtitle": "Saisissez votre code de réduction pour appliquer votre offre.",
+
+      "codeLabel": "Code de réduction",
+
+      "codePlaceholder": "Saisissez votre code de réduction",
+
+      "captchaLabel": "Saisissez le CAPTCHA",
+
+      "captchaPlaceholder": "Tapez les caractères",
+
+      "refreshCaptchaAria": "Actualiser le code captcha",
+
+      "submit": "Appliquer le coupon",
+
+      "submitting": "Application...",
+
+      "success": "Coupon appliqué avec succès.",
+
+      "errors": {
+
+        "codeRequired": "Veuillez saisir votre code de réduction",
+
+        "codeInvalid": "Ce code de réduction est invalide ou a expiré.",
+
+        "captchaRequired": "Veuillez saisir le code captcha",
+
+        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
+
+        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
+
+        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
+
+        "captchaTooManyAttempts": "Trop de tentatives CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
+
+        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
+
+        "applyFailed": "Une erreur s'est produite. Veuillez réessayer."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Récapitulatif de la commande",
+
+      "totalServices": "Total des services",
+
+      "discount": "Réduction",
+
+      "total": "Total",
+
+      "autoRenew": "Renouvellement automatique",
+
+      "payNow": "Payer maintenant",
+
+      "noServicesSelected": "Veuillez sélectionner au moins un service.",
+
+      "paymentUnavailable": "Le paiement en ligne sera bientôt disponible."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Entreprise",

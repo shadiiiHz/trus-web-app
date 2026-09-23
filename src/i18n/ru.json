@@ -631,6 +631,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Выбор услуг",
+
+    "subtitle": "Выберите услуги, которыми хотите пользоваться. Вы можете изменить количество каждой услуги.",
+
+    "billing": {
+
+      "monthly": "Ежемесячно",
+
+      "yearly": "Ежегодно",
+
+      "ariaLabel": "Период оплаты"
+
+    },
+
+    "table": {
+
+      "service": "Услуга",
+
+      "description": "Описание / Включённый объём",
+
+      "quantity": "Количество",
+
+      "unitPrice": "Цена за единицу (USD)",
+
+      "total": "Итого (USD)",
+
+      "selectAllAria": "Выбрать все услуги",
+
+      "sortAria": "Сортировать по названию услуги",
+
+      "decreaseAria": "Уменьшить количество",
+
+      "increaseAria": "Увеличить количество",
+
+      "perMonth": "/мес",
+
+      "perYear": "/год"
+
+    },
+
+    "discount": {
+
+      "heading": "Промокод",
+
+      "subtitle": "Введите промокод, чтобы применить предложение.",
+
+      "codeLabel": "Промокод",
+
+      "codePlaceholder": "Введите промокод",
+
+      "captchaLabel": "Введите CAPTCHA",
+
+      "captchaPlaceholder": "Введите символы",
+
+      "refreshCaptchaAria": "Обновить код captcha",
+
+      "submit": "Применить купон",
+
+      "submitting": "Применение...",
+
+      "success": "Купон успешно применён.",
+
+      "errors": {
+
+        "codeRequired": "Пожалуйста, введите промокод",
+
+        "codeInvalid": "Этот промокод недействителен или истёк.",
+
+        "captchaRequired": "Пожалуйста, введите код captcha",
+
+        "captchaInvalid": "CAPTCHA недействительна или истекла. Попробуйте ещё раз.",
+
+        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте ещё раз.",
+
+        "captchaExpired": "Срок действия CAPTCHA истёк. Обновите её.",
+
+        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
+
+        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте ещё раз.",
+
+        "applyFailed": "Что-то пошло не так. Попробуйте ещё раз."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Сводка заказа",
+
+      "totalServices": "Всего за услуги",
+
+      "discount": "Скидка",
+
+      "total": "Итого",
+
+      "autoRenew": "Автопродление",
+
+      "payNow": "Оплатить",
+
+      "noServicesSelected": "Пожалуйста, выберите хотя бы одну услугу.",
+
+      "paymentUnavailable": "Онлайн-оплата скоро станет доступна."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Услуги",
     "secondColumn": "Компания",

@@ -625,6 +625,116 @@
     }
   },
 
+  "selectServicesPage": {
+
+    "heading": "Select Services",
+
+    "subtitle": "Choose the services you want to use. You can adjust the quantity of each service.",
+
+    "billing": {
+
+      "monthly": "Monthly",
+
+      "yearly": "Yearly",
+
+      "ariaLabel": "Billing period"
+
+    },
+
+    "table": {
+
+      "service": "Service",
+
+      "description": "Description / Included Amount",
+
+      "quantity": "Quantity",
+
+      "unitPrice": "Unit Price (USD)",
+
+      "total": "Total (USD)",
+
+      "selectAllAria": "Select all services",
+
+      "sortAria": "Sort by service name",
+
+      "decreaseAria": "Decrease quantity",
+
+      "increaseAria": "Increase quantity",
+
+      "perMonth": "/month",
+
+      "perYear": "/year"
+
+    },
+
+    "discount": {
+
+      "heading": "Discount Code",
+
+      "subtitle": "Enter your discount code to apply your offer.",
+
+      "codeLabel": "Discount code",
+
+      "codePlaceholder": "Enter your discount code",
+
+      "captchaLabel": "Enter CAPTCHA",
+
+      "captchaPlaceholder": "Type the characters",
+
+      "refreshCaptchaAria": "Refresh captcha code",
+
+      "submit": "Apply coupon",
+
+      "submitting": "Applying...",
+
+      "success": "Coupon applied successfully.",
+
+      "errors": {
+
+        "codeRequired": "Please enter your discount code",
+
+        "codeInvalid": "This discount code is invalid or has expired.",
+
+        "captchaRequired": "Please enter the captcha code",
+
+        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
+
+        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
+
+        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
+
+        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
+
+        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
+
+        "applyFailed": "Something went wrong. Please try again."
+
+      }
+
+    },
+
+    "summary": {
+
+      "heading": "Order Summary",
+
+      "totalServices": "Total Services",
+
+      "discount": "Discount",
+
+      "total": "Total",
+
+      "autoRenew": "Auto Renew",
+
+      "payNow": "Pay now",
+
+      "noServicesSelected": "Please select at least one service.",
+
+      "paymentUnavailable": "Online payment will be available soon."
+
+    }
+
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Company",
