@@ -6,6 +6,7 @@
       "editAccount": "Редактировать аккаунт",
       "changePassword": "Изменить пароль",
       "serviceManagement": "Управление услугами",
+      "serviceManagementLocked": "Сначала заполните данные аккаунта, чтобы получить доступ к управлению услугами.",
       "downloadInvoice": "Скачать счёт",
       "logOut": "Выйти"
     }

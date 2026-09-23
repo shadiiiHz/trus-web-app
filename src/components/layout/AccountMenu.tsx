@@ -1,6 +1,11 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronDown, FileDown, Lock, LogOut, Pencil, Settings } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import editAccountIcon from "@/assets/account-menu/edit-account.svg";
+import changePasswordIcon from "@/assets/account-menu/change-password.svg";
+import serviceManagementIcon from "@/assets/account-menu/service-management.svg";
+import downloadInvoiceIcon from "@/assets/account-menu/download-invoice.svg";
+import logOutIcon from "@/assets/account-menu/log-out.svg";
 import type { SiteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
@@ -18,7 +23,7 @@ export interface AccountMenuProps {
  */
 export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   const navigate = useNavigate();
-  const { displayName, logout } = useAuth();
+  const { displayName, isReady, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -34,7 +39,9 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
     if (!open) return;
 
     const rootRect = rootRef.current?.getBoundingClientRect();
-    const spaceBelow = rootRect ? window.innerHeight - rootRect.bottom : Infinity;
+    const spaceBelow = rootRect
+      ? window.innerHeight - rootRect.bottom
+      : Infinity;
     setOpenUp(spaceBelow < MENU_HEIGHT_ESTIMATE);
 
     const onPointerDown = (e: PointerEvent) => {
@@ -55,6 +62,16 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   }, [open]);
 
   const close = () => setOpen(false);
+
+  // /select-services bounces a not-yet-`ready` account back to
+  // /edit-account, so say why instead of letting the click look broken.
+  const handleServiceManagement = (e: React.MouseEvent) => {
+    close();
+    if (isReady) return;
+    e.preventDefault();
+    showToast(copy.serviceManagementLocked, "info");
+    navigate(copy.editAccount.href);
+  };
 
   const handleDownloadInvoice = () => {
     close();
@@ -80,7 +97,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
         {/* Logo placeholder — swapped for the account's uploaded logo once that exists. */}
         <span
           aria-hidden="true"
-          className="h-9 w-9 shrink-0 rounded-lg border border-white/15 bg-white/10"
+          className="h-9 w-9 shrink-0 rounded-md border border-white/15 bg-white/10"
         />
         <span className="max-w-40 truncate font-medium">{displayName}</span>
         <ChevronDown
@@ -103,19 +120,37 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
             openUp ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)] left-0"
           }`}
         >
-          <MenuLink to={copy.editAccount.href} icon={Pencil} label={copy.editAccount.label} onClick={close} />
-          <MenuLink to={copy.changePassword.href} icon={Lock} label={copy.changePassword.label} onClick={close} />
           <MenuLink
-            to={copy.serviceManagement.href}
-            icon={Settings}
-            label={copy.serviceManagement.label}
+            to={copy.editAccount.href}
+            icon={editAccountIcon}
+            label={copy.editAccount.label}
             onClick={close}
           />
-          <MenuButton icon={FileDown} label={copy.downloadInvoice} onClick={handleDownloadInvoice} />
+          <MenuLink
+            to={copy.changePassword.href}
+            icon={changePasswordIcon}
+            label={copy.changePassword.label}
+            onClick={close}
+          />
+          <MenuLink
+            to={copy.serviceManagement.href}
+            icon={serviceManagementIcon}
+            label={copy.serviceManagement.label}
+            onClick={handleServiceManagement}
+          />
+          <MenuButton
+            icon={downloadInvoiceIcon}
+            label={copy.downloadInvoice}
+            onClick={handleDownloadInvoice}
+          />
 
           <div className="my-1 h-px bg-auth-border-light" aria-hidden="true" />
 
-          <MenuButton icon={LogOut} label={copy.logOut} onClick={handleLogOut} />
+          <MenuButton
+            icon={logOutIcon}
+            label={copy.logOut}
+            onClick={handleLogOut}
+          />
         </div>
       )}
     </div>
@@ -130,35 +165,54 @@ const rowClass =
 
 function MenuLink({
   to,
-  icon: Icon,
+  icon,
   label,
   onClick,
 }: {
   to: string;
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>;
+  icon: string;
   label: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
 }) {
   return (
     <Link to={to} role="menuitem" onClick={onClick} className={rowClass}>
-      <Icon size={18} strokeWidth={1.75} className="shrink-0 text-auth-icon" aria-hidden="true" />
+      <img
+        src={icon}
+        alt=""
+        width={20}
+        height={20}
+        className="h-5 w-5 shrink-0"
+        aria-hidden="true"
+      />
       {label}
     </Link>
   );
 }
 
 function MenuButton({
-  icon: Icon,
+  icon,
   label,
   onClick,
 }: {
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>;
+  icon: string;
   label: string;
   onClick: () => void;
 }) {
   return (
-    <button type="button" role="menuitem" onClick={onClick} className={rowClass}>
-      <Icon size={18} strokeWidth={1.75} className="shrink-0 text-auth-icon" aria-hidden="true" />
+    <button
+      type="button"
+      role="menuitem"
+      onClick={onClick}
+      className={rowClass}
+    >
+      <img
+        src={icon}
+        alt=""
+        width={20}
+        height={20}
+        className="h-5 w-5 shrink-0"
+        aria-hidden="true"
+      />
       {label}
     </button>
   );

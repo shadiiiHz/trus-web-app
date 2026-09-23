@@ -6,6 +6,7 @@
       "editAccount": "Edit Account",
       "changePassword": "Change Password",
       "serviceManagement": "Service Management",
+      "serviceManagementLocked": "Please complete your account information first to access Service Management.",
       "downloadInvoice": "Download Invoice",
       "logOut": "Log Out"
     }

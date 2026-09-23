@@ -6,6 +6,7 @@
       "editAccount": "Hesabı Düzenle",
       "changePassword": "Şifreyi Değiştir",
       "serviceManagement": "Hizmet Yönetimi",
+      "serviceManagementLocked": "Hizmet Yönetimi'ne erişmek için lütfen önce hesap bilgilerinizi tamamlayın.",
       "downloadInvoice": "Faturayı İndir",
       "logOut": "Çıkış Yap"
     }

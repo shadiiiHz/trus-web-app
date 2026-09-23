@@ -13,6 +13,7 @@
       "editAccount": "Editar cuenta",
       "changePassword": "Cambiar contraseña",
       "serviceManagement": "Gestión de servicios",
+      "serviceManagementLocked": "Completa primero la información de tu cuenta para acceder a la gestión de servicios.",
       "downloadInvoice": "Descargar factura",
       "logOut": "Cerrar sesión"
     }
