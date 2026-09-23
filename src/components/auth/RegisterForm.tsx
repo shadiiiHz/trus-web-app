@@ -13,7 +13,6 @@ import {
   verifyCaptcha,
 } from "@/lib/api/authApi";
 import { useRegister } from "@/hooks/auth/useRegister";
-import { resolveNextPage } from "@/lib/api/nextPage";
 import { showToast } from "@/lib/toast";
 import { passwordRequirements } from "@/lib/passwordRequirements";
 
@@ -205,7 +204,7 @@ export function RegisterForm({
         captchaInput.trim(),
       );
 
-      const result = await registerMutate({
+      await registerMutate({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim(),
@@ -218,20 +217,11 @@ export function RegisterForm({
       setPassword("");
       setConfirmPassword("");
 
-      // The backend tells us explicitly where to go next: `next_page` is
-      // set whenever the account isn't `ready` yet (e.g. "/complete-profile"
-      // for the profile-completion step, resolved to our own /edit-account
-      // route). Fall back to the email-verification screen only when it
-      // sends neither.
-      if (result.nextPage) {
-        navigate(resolveNextPage(result.nextPage));
-      } else if (!result.ready) {
-        navigate("/edit-account");
-      } else {
-        navigate("/check-your-email", {
-          state: { variant: "register", email: email.trim() },
-        });
-      }
+      // Registering doesn't sign the user in — the account has to be
+      // verified by email first, then the user logs in normally.
+      navigate("/check-your-email", {
+        state: { variant: "register", email: email.trim() },
+      });
       return;
     } catch (error) {
       const captchaErrorKey = getCaptchaErrorKey(error);

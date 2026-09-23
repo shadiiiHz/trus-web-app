@@ -35,7 +35,7 @@ export interface AuthenticateParams {
 }
 
 export interface AuthContextValue extends AuthState {
-  /** Persists the session token (if any) and marks the user authenticated. Called by useLogin/useRegister on success. */
+  /** Persists the session token and marks the user authenticated; a no-op when no token was sent. Called by useLogin on success. */
   authenticate: (params: AuthenticateParams) => void;
   logout: () => void;
 }

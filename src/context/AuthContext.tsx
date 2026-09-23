@@ -88,10 +88,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const authenticate = ({ token, expiresAt, ready, displayName }: AuthenticateParams) => {
-    if (token) {
-      setAuthSession(token, ready, expiresAt, displayName);
-      scheduleAutoLogout(expiresAt);
-    }
+    // No token means there's no session to keep — don't mark the user
+    // signed in on in-memory state alone (it would show in the navbar
+    // while sessionStorage is empty and vanish on reload).
+    if (!token) return;
+    setAuthSession(token, ready, expiresAt, displayName);
+    scheduleAutoLogout(expiresAt);
     dispatch({
       type: AuthActionType.Authenticate,
       payload: { isReady: ready, displayName: displayName ?? null },
