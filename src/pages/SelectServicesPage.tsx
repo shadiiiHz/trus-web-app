@@ -12,7 +12,6 @@ import { BillingToggle } from "@/components/select-services/BillingToggle";
 import { ServicesTable } from "@/components/select-services/ServicesTable";
 import { DiscountCodeCard } from "@/components/select-services/DiscountCodeCard";
 import { OrderSummaryCard } from "@/components/select-services/OrderSummaryCard";
-import { AccountLockedNotice } from "@/components/select-services/AccountLockedNotice";
 
 /**
  * Select Services — the post-login destination the backend's `ready: true`
@@ -101,22 +100,13 @@ export default function SelectServicesPage() {
       <Navbar />
 
       <main className="bg-white pt-18">
-        {!isReady && (
-          <div className="mx-auto w-full max-w-[1380px] px-5 pt-8">
-            <AccountLockedNotice
-              copy={copy.locked}
-              href={siteConfig.nav.account.editAccount.href}
-            />
-          </div>
-        )}
-
         <div className="mx-auto w-full max-w-[1380px] px-5 pt-8 pb-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="text-[24px] leading-8 font-semibold text-auth-heading">
                 {copy.heading}
               </h1>
-              <p className="mt-2 text-[14px] leading-5 text-auth-muted">{copy.subtitle}</p>
+              <p className="mt-2 text-body font-body font-semibold text-[#DC2626]">{copy.notice}</p>
             </div>
             <BillingToggle
               value={billing}

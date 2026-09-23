@@ -635,15 +635,9 @@
 
   "selectServicesPage": {
 
-    "locked": {
-      "title": "Hesabınız henüz hazır değil",
-      "description": "Hizmet seçimini ve ödemeyi açmak için hesap bilgilerinizi tamamlayın. Bu arada hizmetlere göz atabilirsiniz.",
-      "cta": "Hesabı tamamla"
-    },
+    "notice": "Bir hizmet satın almak için önce Hesabı Düzenle bölümündeki tüm zorunlu bilgileri doldurmalısınız.",
 
     "heading": "Hizmet Seçimi",
-
-    "subtitle": "Kullanmak istediğiniz hizmetleri seçin. Her hizmetin miktarını ayarlayabilirsiniz.",
 
     "billing": {
 

@@ -642,15 +642,9 @@
 
   "selectServicesPage": {
 
-    "locked": {
-      "title": "Ihr Konto ist noch nicht bereit",
-      "description": "Vervollständigen Sie Ihre Kontoinformationen, um die Serviceauswahl und den Bezahlvorgang freizuschalten. In der Zwischenzeit können Sie die Services ansehen.",
-      "cta": "Konto vervollständigen"
-    },
+    "notice": "Um einen Service zu kaufen, müssen Sie zunächst alle erforderlichen Angaben im Bereich „Konto bearbeiten“ vervollständigen.",
 
     "heading": "Services auswählen",
-
-    "subtitle": "Wählen Sie die Services, die Sie nutzen möchten. Sie können die Menge jedes Services anpassen.",
 
     "billing": {
 

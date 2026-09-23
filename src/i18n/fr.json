@@ -645,15 +645,9 @@
 
   "selectServicesPage": {
 
-    "locked": {
-      "title": "Votre compte n'est pas encore prêt",
-      "description": "Complétez les informations de votre compte pour débloquer la sélection des services et le paiement. En attendant, vous pouvez parcourir les services.",
-      "cta": "Compléter le compte"
-    },
+    "notice": "Pour acheter un service, vous devez d'abord compléter toutes les informations requises dans la section Modifier le compte.",
 
     "heading": "Sélectionner des services",
-
-    "subtitle": "Choisissez les services que vous souhaitez utiliser. Vous pouvez ajuster la quantité de chaque service.",
 
     "billing": {
 

@@ -635,15 +635,9 @@
 
   "selectServicesPage": {
 
-    "locked": {
-      "title": "Your account isn't ready yet",
-      "description": "Complete your account information to unlock service selection and checkout. You can browse the services in the meantime.",
-      "cta": "Complete account"
-    },
+    "notice": "To purchase a service, you must first complete all required information in the Edit Account section.",
 
     "heading": "Select Services",
-
-    "subtitle": "Choose the services you want to use. You can adjust the quantity of each service.",
 
     "billing": {
 

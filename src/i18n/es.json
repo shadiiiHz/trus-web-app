@@ -654,15 +654,9 @@
 
   "selectServicesPage": {
 
-    "locked": {
-      "title": "Tu cuenta aún no está lista",
-      "description": "Completa la información de tu cuenta para desbloquear la selección de servicios y el pago. Mientras tanto, puedes explorar los servicios.",
-      "cta": "Completar cuenta"
-    },
+    "notice": "Para comprar un servicio, primero debes completar toda la información obligatoria en la sección Editar cuenta.",
 
     "heading": "Seleccionar servicios",
-
-    "subtitle": "Elige los servicios que quieres usar. Puedes ajustar la cantidad de cada servicio.",
 
     "billing": {
 
