@@ -24,8 +24,7 @@ export function useRegister(options?: UseRegisterOptions) {
         token: result.sessionToken,
         expiresAt: result.expiresAt,
         ready: result.ready,
-        // The backend doesn't send a profile name yet — use what the user
-        // just typed in, same as the header will show it.
+        // The user just typed their names in, so show those as "first last".
         displayName: `${payload.firstName} ${payload.lastName}`.trim(),
       });
       options?.onSuccess?.(result);

@@ -223,14 +223,27 @@ export interface AuthSessionResult {
   expiresAt?: string;
   ready: boolean;
   nextPage?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
-interface RawAuthSessionPayload {
+interface RawUserNames {
+  first_name?: unknown;
+  last_name?: unknown;
+}
+
+interface RawAuthSessionPayload extends RawUserNames {
   success?: boolean;
   session_token?: string;
   expires_at?: string;
   ready?: boolean;
   next_page?: string;
+  user?: RawUserNames;
+}
+
+/** Trimmed string, or undefined for anything missing/empty/non-string. */
+function toName(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
 function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
@@ -240,6 +253,9 @@ function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
     expiresAt: raw.expires_at,
     ready: raw.ready ?? true,
     nextPage: raw.next_page,
+    // n8n may send the names at the root or nested under `user`.
+    firstName: toName(raw.first_name) ?? toName(raw.user?.first_name),
+    lastName: toName(raw.last_name) ?? toName(raw.user?.last_name),
   };
 }
 

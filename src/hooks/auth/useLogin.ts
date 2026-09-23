@@ -19,9 +19,10 @@ export function useLogin(options?: UseLoginOptions) {
         token: result.sessionToken,
         expiresAt: result.expiresAt,
         ready: result.ready,
-        // The backend doesn't send a profile name yet — the username is all
-        // login has to show in the header's account menu.
-        displayName: payload.username,
+        // Header shows "first last"; the username is only a fallback for
+        // when the backend sends neither name.
+        displayName:
+          [result.firstName, result.lastName].filter(Boolean).join(" ") || payload.username,
       });
       options?.onSuccess?.(result);
       return result;
