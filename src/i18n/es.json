@@ -13,7 +13,6 @@
       "editAccount": "Editar cuenta",
       "changePassword": "Cambiar contraseña",
       "serviceManagement": "Gestión de servicios",
-      "serviceManagementLocked": "Completa primero la información de tu cuenta para acceder a la gestión de servicios.",
       "downloadInvoice": "Descargar factura",
       "logOut": "Cerrar sesión"
     }
@@ -645,6 +644,12 @@
   },
 
   "selectServicesPage": {
+
+    "locked": {
+      "title": "Tu cuenta aún no está lista",
+      "description": "Completa la información de tu cuenta para desbloquear la selección de servicios y el pago. Mientras tanto, puedes explorar los servicios.",
+      "cta": "Completar cuenta"
+    },
 
     "heading": "Seleccionar servicios",
 

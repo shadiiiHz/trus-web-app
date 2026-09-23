@@ -10,6 +10,8 @@ export interface OrderSummaryCardProps {
   autoRenew: boolean;
   onAutoRenewChange: (value: boolean) => void;
   onPay: () => void;
+  /** Disables the Pay Now button — e.g. while the account isn't `ready`. */
+  disabled?: boolean;
 }
 
 export function OrderSummaryCard({
@@ -19,6 +21,7 @@ export function OrderSummaryCard({
   autoRenew,
   onAutoRenewChange,
   onPay,
+  disabled = false,
 }: OrderSummaryCardProps) {
   const autoRenewId = useId();
   const total = Math.max(0, servicesTotal - discount);
@@ -60,7 +63,8 @@ export function OrderSummaryCard({
       <button
         type="button"
         onClick={onPay}
-        className="mt-7 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-7.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover"
+        disabled={disabled}
+        className="mt-7 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-7.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
       >
         {copy.payNow}
       </button>

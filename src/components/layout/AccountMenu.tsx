@@ -23,7 +23,7 @@ export interface AccountMenuProps {
  */
 export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   const navigate = useNavigate();
-  const { displayName, isReady, logout } = useAuth();
+  const { displayName, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -62,16 +62,6 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   }, [open]);
 
   const close = () => setOpen(false);
-
-  // /select-services bounces a not-yet-`ready` account back to
-  // /edit-account, so say why instead of letting the click look broken.
-  const handleServiceManagement = (e: React.MouseEvent) => {
-    close();
-    if (isReady) return;
-    e.preventDefault();
-    showToast(copy.serviceManagementLocked, "info");
-    navigate(copy.editAccount.href);
-  };
 
   const handleDownloadInvoice = () => {
     close();
@@ -136,7 +126,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
             to={copy.serviceManagement.href}
             icon={serviceManagementIcon}
             label={copy.serviceManagement.label}
-            onClick={handleServiceManagement}
+            onClick={close}
           />
           <MenuButton
             icon={downloadInvoiceIcon}

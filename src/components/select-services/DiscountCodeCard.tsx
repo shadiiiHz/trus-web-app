@@ -10,6 +10,8 @@ import { validateCoupon, type CouponResult } from "@/lib/mock/selectServices";
 export interface DiscountCodeCardProps {
   copy: SiteConfig["selectServicesPage"]["discount"];
   onApply: (coupon: CouponResult) => void;
+  /** Disables the card's buttons (apply, refresh captcha) — e.g. while the account isn't `ready`. */
+  disabled?: boolean;
 }
 
 type ErrorKey = keyof SiteConfig["selectServicesPage"]["discount"]["errors"];
@@ -20,7 +22,7 @@ const labelClass = "mb-2 block text-[14px] font-medium text-auth-text";
 const inputClass =
   "h-10 w-full rounded-md border bg-white px-3 text-[16px] font-body text-auth-ink outline-none shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
-export function DiscountCodeCard({ copy, onApply }: DiscountCodeCardProps) {
+export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCodeCardProps) {
   const codeId = useId();
   const captchaId = useId();
 
@@ -61,6 +63,7 @@ export function DiscountCodeCard({ copy, onApply }: DiscountCodeCardProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (disabled) return;
 
     const nextErrors: FieldErrors = {};
     if (!code.trim()) nextErrors.code = "codeRequired";
@@ -146,11 +149,12 @@ export function DiscountCodeCard({ copy, onApply }: DiscountCodeCardProps) {
         <motion.button
           type="button"
           onClick={refreshCaptcha}
+          disabled={disabled}
           aria-label={copy.refreshCaptchaAria}
-          whileHover={{ rotate: 90 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={disabled ? undefined : { rotate: 90 }}
+          whileTap={disabled ? undefined : { scale: 0.9 }}
           transition={{ duration: DURATION_SM, ease: EASE_PREMIUM }}
-          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong shadow-[0_1px_2px_0_rgba(0,0,0,0.05),inset_0_-2px_0_0_rgba(0,0,0,0.05)] transition-colors hover:border-brand-accent hover:text-brand-accent"
+          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-auth-border bg-white text-auth-icon-strong shadow-[0_1px_2px_0_rgba(0,0,0,0.05),inset_0_-2px_0_0_rgba(0,0,0,0.05)] transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-icon-strong"
         >
           <RotateCw size={18} />
         </motion.button>
@@ -181,8 +185,8 @@ export function DiscountCodeCard({ copy, onApply }: DiscountCodeCardProps) {
 
       <button
         type="submit"
-        disabled={submitting || captchaLoading}
-        className="mt-6 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-8 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+        disabled={disabled || submitting || captchaLoading}
+        className="mt-6 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-8 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
       >
         {submitting ? copy.submitting : copy.submit}
       </button>

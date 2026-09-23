@@ -6,7 +6,6 @@
       "editAccount": "Edit Account",
       "changePassword": "Change Password",
       "serviceManagement": "Service Management",
-      "serviceManagementLocked": "Please complete your account information first to access Service Management.",
       "downloadInvoice": "Download Invoice",
       "logOut": "Log Out"
     }
@@ -626,6 +625,12 @@
   },
 
   "selectServicesPage": {
+
+    "locked": {
+      "title": "Your account isn't ready yet",
+      "description": "Complete your account information to unlock service selection and checkout. You can browse the services in the meantime.",
+      "cta": "Complete account"
+    },
 
     "heading": "Select Services",
 

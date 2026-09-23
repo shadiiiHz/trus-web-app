@@ -13,7 +13,6 @@
       "editAccount": "Konto bearbeiten",
       "changePassword": "Passwort ändern",
       "serviceManagement": "Serviceverwaltung",
-      "serviceManagementLocked": "Bitte vervollständigen Sie zuerst Ihre Kontoinformationen, um auf die Serviceverwaltung zuzugreifen.",
       "downloadInvoice": "Rechnung herunterladen",
       "logOut": "Abmelden"
     }
@@ -633,6 +632,12 @@
   },
 
   "selectServicesPage": {
+
+    "locked": {
+      "title": "Ihr Konto ist noch nicht bereit",
+      "description": "Vervollständigen Sie Ihre Kontoinformationen, um die Serviceauswahl und den Bezahlvorgang freizuschalten. In der Zwischenzeit können Sie die Services ansehen.",
+      "cta": "Konto vervollständigen"
+    },
 
     "heading": "Services auswählen",
 

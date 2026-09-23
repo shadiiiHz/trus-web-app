@@ -12,13 +12,14 @@ import { BillingToggle } from "@/components/select-services/BillingToggle";
 import { ServicesTable } from "@/components/select-services/ServicesTable";
 import { DiscountCodeCard } from "@/components/select-services/DiscountCodeCard";
 import { OrderSummaryCard } from "@/components/select-services/OrderSummaryCard";
+import { AccountLockedNotice } from "@/components/select-services/AccountLockedNotice";
 
 /**
  * Select Services — the post-login destination the backend's `ready: true`
  * login response sends a fully set-up account to (`next_page: "/service"`,
  * resolved to this page's own /select-services route by resolveNextPage()).
- * Keeps the same auth/ready gate as /edit-account so a not-yet-`ready`
- * account can't reach it by URL.
+ * A not-yet-`ready` account can still pick services and see prices, but the
+ * discount and payment buttons stay disabled until the profile is complete.
  *
  * The services list and coupon check are mocked (see `@/lib/mock/selectServices`)
  * until the backend endpoints exist.
@@ -94,13 +95,21 @@ export default function SelectServicesPage() {
 
   if (!isInitialized) return null;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (!isReady) return <Navigate to="/edit-account" replace />;
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-body antialiased">
       <Navbar />
 
       <main className="bg-white pt-18">
+        {!isReady && (
+          <div className="mx-auto w-full max-w-[1380px] px-5 pt-8">
+            <AccountLockedNotice
+              copy={copy.locked}
+              href={siteConfig.nav.account.editAccount.href}
+            />
+          </div>
+        )}
+
         <div className="mx-auto w-full max-w-[1380px] px-5 pt-8 pb-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -128,7 +137,7 @@ export default function SelectServicesPage() {
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <DiscountCodeCard copy={copy.discount} onApply={setCoupon} />
+            <DiscountCodeCard copy={copy.discount} onApply={setCoupon} disabled={!isReady} />
             <OrderSummaryCard
               copy={copy.summary}
               servicesTotal={servicesTotal}
@@ -136,6 +145,7 @@ export default function SelectServicesPage() {
               autoRenew={autoRenew}
               onAutoRenewChange={setAutoRenew}
               onPay={handlePay}
+              disabled={!isReady}
             />
           </div>
         </div>

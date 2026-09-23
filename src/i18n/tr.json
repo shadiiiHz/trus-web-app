@@ -6,7 +6,6 @@
       "editAccount": "Hesabı Düzenle",
       "changePassword": "Şifreyi Değiştir",
       "serviceManagement": "Hizmet Yönetimi",
-      "serviceManagementLocked": "Hizmet Yönetimi'ne erişmek için lütfen önce hesap bilgilerinizi tamamlayın.",
       "downloadInvoice": "Faturayı İndir",
       "logOut": "Çıkış Yap"
     }
@@ -626,6 +625,12 @@
   },
 
   "selectServicesPage": {
+
+    "locked": {
+      "title": "Hesabınız henüz hazır değil",
+      "description": "Hizmet seçimini ve ödemeyi açmak için hesap bilgilerinizi tamamlayın. Bu arada hizmetlere göz atabilirsiniz.",
+      "cta": "Hesabı tamamla"
+    },
 
     "heading": "Hizmet Seçimi",
 

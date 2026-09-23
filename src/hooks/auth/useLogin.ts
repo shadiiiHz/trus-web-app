@@ -19,10 +19,12 @@ export function useLogin(options?: UseLoginOptions) {
         token: result.sessionToken,
         expiresAt: result.expiresAt,
         ready: result.ready,
-        // Header shows "first last"; the username is only a fallback for
-        // when the backend sends neither name.
+        // Header shows the login response's `customer` name; the separate
+        // first/last names and then the username are only fallbacks.
         displayName:
-          [result.firstName, result.lastName].filter(Boolean).join(" ") || payload.username,
+          result.customerName ||
+          [result.firstName, result.lastName].filter(Boolean).join(" ") ||
+          payload.username,
       });
       options?.onSuccess?.(result);
       return result;

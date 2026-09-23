@@ -225,6 +225,8 @@ export interface AuthSessionResult {
   nextPage?: string;
   firstName?: string;
   lastName?: string;
+  /** Login's `customer` field — the account's "first last" name, shown in the header. */
+  customerName?: string;
 }
 
 interface RawUserNames {
@@ -239,6 +241,7 @@ interface RawAuthSessionPayload extends RawUserNames {
   ready?: boolean;
   next_page?: string;
   user?: RawUserNames;
+  customer?: unknown;
 }
 
 /** Trimmed string, or undefined for anything missing/empty/non-string. */
@@ -256,6 +259,7 @@ function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
     // n8n may send the names at the root or nested under `user`.
     firstName: toName(raw.first_name) ?? toName(raw.user?.first_name),
     lastName: toName(raw.last_name) ?? toName(raw.user?.last_name),
+    customerName: toName(raw.customer),
   };
 }
 

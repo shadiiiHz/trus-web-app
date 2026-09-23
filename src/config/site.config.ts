@@ -738,8 +738,6 @@ function buildSiteConfig(locale: Locale) {
         editAccount: { label: dict.nav.account.editAccount, href: "/edit-account" },
         changePassword: { label: dict.nav.account.changePassword, href: "/change-password" },
         serviceManagement: { label: dict.nav.account.serviceManagement, href: "/select-services" },
-        /** Toast shown when Service Management is picked before the profile is complete. */
-        serviceManagementLocked: dict.nav.account.serviceManagementLocked,
         downloadInvoice: dict.nav.account.downloadInvoice,
         logOut: dict.nav.account.logOut,
       },
