@@ -427,6 +427,7 @@
         "currentPasswordRequired": "Пожалуйста, введите текущий пароль",
         "newPasswordRequired": "Пожалуйста, введите новый пароль",
         "newPasswordInvalid": "Пароль должен соответствовать всем требованиям выше",
+        "newPasswordSameAsCurrent": "Новый пароль должен отличаться от текущего пароля",
         "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
         "confirmPasswordMismatch": "Пароли не совпадают",
         "sessionExpired": "Ваш сеанс недействителен или истёк. Пожалуйста, войдите снова.",

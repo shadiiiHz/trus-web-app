@@ -82,6 +82,14 @@ type FieldErrors = Partial<
   Record<"currentPassword" | "newPassword" | "confirmPassword", FieldErrorKey>
 >;
 
+/** Backend `VALIDATION_ERROR` field codes shown under their field, keyed by code. */
+const BACKEND_FIELD_ERRORS: Record<
+  string,
+  [keyof FieldErrors, FieldErrorKey]
+> = {
+  NEW_PASSWORD_SAME_AS_CURRENT: ["newPassword", "newPasswordSameAsCurrent"],
+};
+
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
@@ -165,6 +173,28 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
         );
         logout();
         navigate("/login", { replace: true });
+        return;
+      }
+      if (code === "VALIDATION_ERROR" && error instanceof AuthApiError) {
+        const fieldErrors: FieldErrors = {};
+        const unmapped: string[] = [];
+        for (const item of error.fieldErrors ?? []) {
+          const mapped = BACKEND_FIELD_ERRORS[item.code];
+          if (mapped) {
+            fieldErrors[mapped[0]] = mapped[1];
+          } else if (item.message) {
+            unmapped.push(item.message);
+          }
+        }
+        setErrors((prev) => ({ ...prev, ...fieldErrors }));
+        if (unmapped.length || !Object.keys(fieldErrors).length) {
+          showToast(
+            unmapped.length
+              ? unmapped.join("\n")
+              : error.message || copy.errors.genericError,
+            "error",
+          );
+        }
         return;
       }
       // Other backend codes aren't documented yet: show its own message

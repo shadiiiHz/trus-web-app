@@ -421,6 +421,7 @@
         "currentPasswordRequired": "Please enter your current password",
         "newPasswordRequired": "Please enter a new password",
         "newPasswordInvalid": "Password must meet all the requirements above",
+        "newPasswordSameAsCurrent": "New password must be different from your current password",
         "confirmPasswordRequired": "Please confirm your new password",
         "confirmPasswordMismatch": "Passwords do not match",
         "sessionExpired": "Your session is invalid or expired. Please log in again.",

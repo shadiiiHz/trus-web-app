@@ -440,6 +440,7 @@
         "currentPasswordRequired": "Por favor introduce tu contraseña actual",
         "newPasswordRequired": "Por favor introduce una nueva contraseña",
         "newPasswordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
+        "newPasswordSameAsCurrent": "La nueva contraseña debe ser diferente de tu contraseña actual",
         "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
         "confirmPasswordMismatch": "Las contraseñas no coinciden",
         "sessionExpired": "Tu sesión no es válida o ha caducado. Vuelve a iniciar sesión.",

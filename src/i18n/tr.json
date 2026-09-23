@@ -421,6 +421,7 @@
         "currentPasswordRequired": "Lütfen mevcut şifrenizi girin",
         "newPasswordRequired": "Lütfen yeni bir şifre girin",
         "newPasswordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
+        "newPasswordSameAsCurrent": "Yeni şifre mevcut şifrenizden farklı olmalıdır",
         "confirmPasswordRequired": "Lütfen yeni şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor",
         "sessionExpired": "Oturumunuz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.",

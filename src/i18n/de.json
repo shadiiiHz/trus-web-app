@@ -428,6 +428,7 @@
         "currentPasswordRequired": "Bitte geben Sie Ihr aktuelles Passwort ein",
         "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",
         "newPasswordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
+        "newPasswordSameAsCurrent": "Das neue Passwort muss sich von Ihrem aktuellen Passwort unterscheiden",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr neues Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
         "sessionExpired": "Ihre Sitzung ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.",
