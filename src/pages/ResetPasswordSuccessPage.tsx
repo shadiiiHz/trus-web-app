@@ -1,24 +1,32 @@
 import { useLayoutEffect } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { LoginInfoCard } from "@/components/auth/LoginInfoCard";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site.config";
-import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
-import useAuth from "@/hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
-export default function ResetPasswordPage() {
-  const { isInitialized, isAuthenticated } = useAuth();
-
+export default function ResetPasswordSuccessPage() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isInitialized, isAuthenticated } = useAuth();
 
   // Only for a signed-in user. Wait for AuthProvider's initial
   // sessionStorage read so a hard refresh doesn't bounce a valid session.
   if (!isInitialized) return null;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  // Only reachable right after a successful reset — ResetPasswordForm
+  // navigates here with this flag. A direct visit goes back to the form.
+  if (!(location.state as { passwordReset?: boolean } | null)?.passwordReset) {
+    return <Navigate to="/reset-password" replace />;
+  }
 
   const { card } = siteConfig.contact;
   const { login, resetPassword } = siteConfig.auth;
@@ -29,9 +37,8 @@ export default function ResetPasswordPage() {
 
       <main className="pt-18" style={{ background: "#F5F5F7" }}>
         <div className="mx-auto w-full max-w-330 px-5 py-16">
-          {/* Same left card + right-form layout as the login/forgot-password/
-              change-password pages, so every auth screen lines up under the
-              navbar identically. */}
+          {/* Same left card + right-content layout as the email-verified
+              page, with the shorter card since there's no form here. */}
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-24 lg:pl-20">
             <FadeIn direction="left" className="lg:w-[414px] lg:shrink-0">
               <LoginInfoCard
@@ -43,7 +50,7 @@ export default function ResetPasswordPage() {
                 officeLabel={login.card.officeLabel}
                 phoneLabel={login.card.phoneLabel}
                 emailLabel={login.card.emailLabel}
-                height={490}
+                height={446}
               />
             </FadeIn>
 
@@ -52,15 +59,22 @@ export default function ResetPasswordPage() {
               delay={0.1}
               className="lg:flex-1 max-w-[572px]"
             >
-              <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
+              <div className="mx-auto text-center lg:mx-0 lg:max-w-none font-body">
                 <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
-                  {resetPassword.heading}
+                  {resetPassword.successHeading}
                 </h1>
-                <p className="mb-8 text-body font-normal text-[#525252]">
-                  {resetPassword.subtitle}
+                <p className="mb-6 text-body font-normal text-[#525252]">
+                  {resetPassword.successSubtitle}
                 </p>
 
-                <ResetPasswordForm copy={resetPassword} />
+                <Button
+                  type="button"
+                  variant="primary"
+                  onClick={() => navigate("/login", { replace: true })}
+                  className="mx-auto rounded-md px-4 py-2.5 text-body-sm leading-5 font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+                >
+                  {resetPassword.continue}
+                </Button>
               </div>
             </FadeIn>
           </div>

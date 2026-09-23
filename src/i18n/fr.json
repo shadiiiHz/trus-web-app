@@ -526,6 +526,12 @@
       }
     },
 
+    "changePasswordSuccess": {
+      "heading": "Mot de passe modifié avec succès",
+      "subtitle": "Votre mot de passe a été modifié avec succès.",
+      "continue": "Continuer"
+    },
+
     "emailVerified": {
       "heading": "E-mail vérifié avec succès !",
       "subtitle": "Votre compte a été vérifié. Vous pouvez maintenant vous connecter.",

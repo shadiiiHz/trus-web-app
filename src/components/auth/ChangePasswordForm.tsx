@@ -154,10 +154,10 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
     setStatus("submitting");
     try {
       await changePassword({ currentPassword, newPassword, confirmPassword });
-      showToast(copy.success, "success");
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
+      navigate("/change-password/success", {
+        replace: true,
+        state: { passwordChanged: true },
+      });
     } catch (error) {
       const code = error instanceof AuthApiError ? error.code : undefined;
       if (

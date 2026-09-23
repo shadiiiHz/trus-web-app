@@ -535,6 +535,12 @@
       }
     },
 
+    "changePasswordSuccess": {
+      "heading": "Contraseña cambiada con éxito",
+      "subtitle": "Tu contraseña se ha cambiado correctamente.",
+      "continue": "Continuar"
+    },
+
     "emailVerified": {
       "heading": "¡Correo verificado con éxito!",
       "subtitle": "Tu cuenta ha sido verificada. Ya puedes iniciar sesión.",

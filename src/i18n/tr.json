@@ -516,6 +516,12 @@
       }
     },
 
+    "changePasswordSuccess": {
+      "heading": "Şifre Başarıyla Değiştirildi",
+      "subtitle": "Şifreniz başarıyla değiştirildi.",
+      "continue": "Devam et"
+    },
+
     "emailVerified": {
       "heading": "E-posta Başarıyla Doğrulandı!",
       "subtitle": "Hesabınız doğrulandı. Artık giriş yapabilirsiniz.",

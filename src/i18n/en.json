@@ -516,6 +516,12 @@
       }
     },
 
+    "changePasswordSuccess": {
+      "heading": "Password Changed Successfully",
+      "subtitle": "Your password has been successfully changed.",
+      "continue": "Continue"
+    },
+
     "emailVerified": {
       "heading": "Email Verified Successfully!",
       "subtitle": "Your account has been verified. You can now log in.",

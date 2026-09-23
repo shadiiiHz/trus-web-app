@@ -523,6 +523,12 @@
       }
     },
 
+    "changePasswordSuccess": {
+      "heading": "Passwort erfolgreich geändert",
+      "subtitle": "Ihr Passwort wurde erfolgreich geändert.",
+      "continue": "Weiter"
+    },
+
     "emailVerified": {
       "heading": "E-Mail erfolgreich bestätigt!",
       "subtitle": "Ihr Konto wurde bestätigt. Sie können sich jetzt anmelden.",

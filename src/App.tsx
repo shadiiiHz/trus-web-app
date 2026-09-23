@@ -7,7 +7,9 @@ import ServicesPage from "@/pages/ServicesPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import ChangePasswordSuccessPage from "./pages/ChangePasswordSuccessPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ResetPasswordSuccessPage from "./pages/ResetPasswordSuccessPage";
 import RegisterPage from "./pages/RegisterPage";
 import EmailVerifiedPage from "./pages/EmailVerifiedPage";
 import EditAccountPage from "./pages/EditAccountPage";
@@ -30,7 +32,15 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/change-password" element={<ChangePasswordPage />} />
+        <Route
+          path="/change-password/success"
+          element={<ChangePasswordSuccessPage />}
+        />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route
+          path="/reset-password/success"
+          element={<ResetPasswordSuccessPage />}
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/email-verified" element={<EmailVerifiedPage />} />
         <Route path="/check-your-email" element={<CheckYourEmailPage />} />

@@ -53,8 +53,6 @@ function PasswordIcon({ className }: { className?: string }) {
 
 export interface ResetPasswordFormProps {
   copy: SiteConfig["auth"]["resetPassword"];
-  status: "idle" | "submitting" | "success";
-  onStatusChange: (status: "idle" | "submitting" | "success") => void;
 }
 
 type FieldErrorKey = keyof SiteConfig["auth"]["resetPassword"]["errors"];
@@ -77,11 +75,7 @@ function RequiredMark() {
   );
 }
 
-export function ResetPasswordForm({
-  copy,
-  status,
-  onStatusChange,
-}: ResetPasswordFormProps) {
+export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
   const navigate = useNavigate();
   const newPasswordId = useId();
   const confirmPasswordId = useId();
@@ -91,6 +85,7 @@ export function ResetPasswordForm({
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
   const clearError = (field: keyof FieldErrors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -120,24 +115,14 @@ export function ResetPasswordForm({
 
     // No backend wired up yet — simulate the round trip so the button's
     // loading state reads correctly once a real request lands here.
-    onStatusChange("submitting");
+    setStatus("submitting");
     window.setTimeout(() => {
-      onStatusChange("success");
+      navigate("/reset-password/success", {
+        replace: true,
+        state: { passwordReset: true },
+      });
     }, 700);
   };
-
-  if (status === "success") {
-    return (
-      <Button
-        type="button"
-        variant="primary"
-        onClick={() => navigate("/login")}
-        className="mx-auto rounded-md px-3.5 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
-      >
-        {copy.continue}
-      </Button>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
