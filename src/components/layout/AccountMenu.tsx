@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import editAccountIcon from "@/assets/account-menu/edit-account.svg";
@@ -26,6 +26,10 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   const { displayName, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
+  // Horizontal nudge (px) that keeps the menu inside the viewport — the
+  // design's -left-10 offset overflows the right edge whenever the trigger
+  // sits close to it (every desktop width below ~1330px).
+  const [shiftX, setShiftX] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
 
@@ -34,15 +38,42 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   // space below — e.g. the mobile menu's trigger sits near the bottom of
   // the viewport.
   const MENU_HEIGHT_ESTIMATE = 230;
+  // Matches the menu's fixed w-[200px].
+  const MENU_WIDTH = 200;
+  // Minimum distance kept between the menu and either side of the viewport.
+  const VIEWPORT_GUTTER = 8;
+
+  // Layout effect so the direction/nudge are applied before the menu is
+  // first painted — no one-frame flash in the wrong spot.
+  useLayoutEffect(() => {
+    if (!open) return;
+
+    const place = () => {
+      const rootRect = rootRef.current?.getBoundingClientRect();
+      if (!rootRect) return;
+      const spaceBelow = window.innerHeight - rootRect.bottom;
+      const up = spaceBelow < MENU_HEIGHT_ESTIMATE && rootRect.top > spaceBelow;
+      // Only flip up when there's genuinely more room up there — on a short
+      // viewport neither side may fit, and the bigger side clips less.
+      setOpenUp(up);
+
+      // Where the menu would sit un-nudged: right-aligned to the trigger
+      // when opening up, 40px (-left-10) left of it when opening down.
+      const left = up ? rootRect.right - MENU_WIDTH : rootRect.left - 40;
+      const maxLeft =
+        document.documentElement.clientWidth - VIEWPORT_GUTTER - MENU_WIDTH;
+      setShiftX(
+        Math.max(VIEWPORT_GUTTER, Math.min(left, maxLeft)) - left,
+      );
+    };
+
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
-
-    const rootRect = rootRef.current?.getBoundingClientRect();
-    const spaceBelow = rootRect
-      ? window.innerHeight - rootRect.bottom
-      : Infinity;
-    setOpenUp(spaceBelow < MENU_HEIGHT_ESTIMATE);
 
     const onPointerDown = (e: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
@@ -101,13 +132,16 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
       {open && (
         <div
           id={menuId}
+          style={shiftX ? { transform: `translateX(${shiftX}px)` } : undefined}
           role="menu"
           aria-label="Account menu"
           // Figma: Flow Vertical, Width Hug (200px), Height Hug (206px),
           // Radius 8px, Border 1px — width is fixed, height just hugs the
           // (now-compact) rows below to land at the same ~206px.
-          className={`absolute right-0 z-50 w-[200px] overflow-hidden rounded-lg border border-auth-border-light bg-white py-2 shadow-2xl ${
-            openUp ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)] -left-10"
+          className={`absolute z-50 w-[200px] overflow-hidden rounded-lg border border-auth-border-light bg-white py-2 shadow-2xl ${
+            openUp
+              ? "right-0 bottom-[calc(100%+14px)]"
+              : "top-[calc(100%+14px)] -left-10"
           }`}
         >
           <MenuLink

@@ -258,7 +258,11 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-10"
+            // Scrollable so the language switch + account menu at the
+            // bottom stay reachable on short viewports (e.g. phones in
+            // landscape), where the link list alone fills the screen.
+            data-lenis-prevent
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain pt-20 px-6 pb-10"
             style={{
               background: "rgba(7, 7, 13, 0.97)",
               backdropFilter: "blur(24px)",
