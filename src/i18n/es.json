@@ -530,7 +530,8 @@
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
         "genericError": "Algo salió mal. Inténtalo de nuevo.",
         "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
-        "resendFailed": "No se pudo reenviar el correo. Inténtalo de nuevo."
+        "resendFailed": "No se pudo reenviar el correo. Inténtalo de nuevo.",
+        "emailAlreadyVerified": "Este correo ya está verificado. Ya puedes iniciar sesión."
       }
     },
 

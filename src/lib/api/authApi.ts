@@ -295,6 +295,9 @@ export async function loginUser(payload: LoginPayload): Promise<AuthSessionResul
   }
 }
 
+/** Confirmed backend codes for the resend-verification endpoint. */
+export type ResendVerificationErrorCode = "EMAIL_ALREADY_VERIFIED";
+
 export async function resendVerificationEmail(email: string): Promise<void> {
   try {
     await client.post(RESEND_VERIFICATION_URL, { email });

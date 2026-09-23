@@ -511,7 +511,8 @@
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
         "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
-        "resendFailed": "E-posta tekrar gönderilemedi. Lütfen tekrar deneyin."
+        "resendFailed": "E-posta tekrar gönderilemedi. Lütfen tekrar deneyin.",
+        "emailAlreadyVerified": "Bu e-posta zaten doğrulanmış. Artık giriş yapabilirsiniz."
       }
     },
 

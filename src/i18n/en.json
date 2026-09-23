@@ -511,7 +511,8 @@
         "invalidInput": "Please check the information you entered and try again.",
         "genericError": "Something went wrong. Please try again.",
         "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
-        "resendFailed": "Couldn't resend the email. Please try again."
+        "resendFailed": "Couldn't resend the email. Please try again.",
+        "emailAlreadyVerified": "This email is already verified. You can log in now."
       }
     },
 

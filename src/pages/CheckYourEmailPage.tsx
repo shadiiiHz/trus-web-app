@@ -58,7 +58,11 @@ export default function CheckYourEmailPage() {
       await resendVerificationEmail(email);
       showToast(register.resendSuccess, "success");
     } catch (error) {
-      reportApiError(error, {}, register.errors.resendFailed);
+      reportApiError(
+        error,
+        { EMAIL_ALREADY_VERIFIED: register.errors.emailAlreadyVerified },
+        register.errors.resendFailed,
+      );
     } finally {
       setResending(false);
     }

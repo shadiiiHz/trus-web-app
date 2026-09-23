@@ -521,7 +521,8 @@
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "genericError": "Une erreur s'est produite. Veuillez réessayer.",
         "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
-        "resendFailed": "Impossible de renvoyer l'e-mail. Veuillez réessayer."
+        "resendFailed": "Impossible de renvoyer l'e-mail. Veuillez réessayer.",
+        "emailAlreadyVerified": "Cet e-mail est déjà vérifié. Vous pouvez maintenant vous connecter."
       }
     },
 
