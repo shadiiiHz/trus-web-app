@@ -107,7 +107,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
           // Radius 8px, Border 1px — width is fixed, height just hugs the
           // (now-compact) rows below to land at the same ~206px.
           className={`absolute right-0 z-50 w-[200px] overflow-hidden rounded-lg border border-auth-border-light bg-white py-2 shadow-2xl ${
-            openUp ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)] left-0"
+            openUp ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)] -left-10"
           }`}
         >
           <MenuLink

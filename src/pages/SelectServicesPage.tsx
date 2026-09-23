@@ -65,8 +65,8 @@ export default function SelectServicesPage() {
       Object.fromEntries(Object.entries(prev).map(([id, s]) => [id, { ...s, selected }])),
     );
 
-  // The header toggle switches every row at once; each row's own radio can
-  // still override it afterwards.
+  // The header toggle switches every row at once; the rows' radios for the
+  // other period are disabled, so a row can't diverge from it.
   const changeBilling = (period: BillingPeriod) => {
     setBilling(period);
     setSelections((prev) =>
@@ -132,6 +132,7 @@ export default function SelectServicesPage() {
               selections={selections}
               onChange={updateSelection}
               onToggleAll={toggleAll}
+              billing={billing}
               copy={copy.table}
             />
           </div>

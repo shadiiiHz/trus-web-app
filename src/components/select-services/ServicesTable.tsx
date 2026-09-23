@@ -12,6 +12,8 @@ export interface ServicesTableProps {
   selections: Record<string, ServiceSelection>;
   onChange: (id: string, patch: Partial<ServiceSelection>) => void;
   onToggleAll: (selected: boolean) => void;
+  /** The header billing toggle; rows can't pick the other period. */
+  billing: BillingPeriod;
   copy: SiteConfig["selectServicesPage"]["table"];
 }
 
@@ -37,21 +39,28 @@ function PriceOption({
   label,
   onSelect,
   name,
+  disabled = false,
 }: {
   checked: boolean;
   label: string;
   onSelect: () => void;
   name: string;
+  disabled?: boolean;
 }) {
   return (
-    <label className="flex h-5 cursor-pointer items-center gap-2 select-none">
+    <label
+      className={`flex h-5 items-center gap-2 select-none ${
+        disabled ? "cursor-not-allowed" : "cursor-pointer"
+      }`}
+    >
       <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
         <input
           type="radio"
           name={name}
           checked={checked}
           onChange={onSelect}
-          className="peer h-full w-full cursor-pointer appearance-none rounded-full border border-auth-border bg-white transition-colors duration-150 checked:border-auth-primary checked:bg-auth-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+          disabled={disabled}
+          className="peer h-full w-full cursor-pointer appearance-none disabled:cursor-not-allowed disabled:bg-auth-surface rounded-full border border-auth-border bg-white transition-colors duration-150 checked:border-auth-primary checked:bg-auth-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
         />
         <span className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100" />
       </span>
@@ -71,6 +80,7 @@ export function ServicesTable({
   selections,
   onChange,
   onToggleAll,
+  billing,
   copy,
 }: ServicesTableProps) {
   const [sortDir, setSortDir] = useState<SortDir>("none");
@@ -182,12 +192,14 @@ export function ServicesTable({
                       name={`period-${service.id}`}
                       checked={period === "monthly"}
                       onSelect={() => setPeriod("monthly")}
+                      disabled={billing !== "monthly"}
                       label={`${formatUsd(servicePrice(service, quantity, "monthly"))}${copy.perMonth}`}
                     />
                     <PriceOption
                       name={`period-${service.id}`}
                       checked={period === "yearly"}
                       onSelect={() => setPeriod("yearly")}
+                      disabled={billing !== "yearly"}
                       label={`${formatUsd(servicePrice(service, quantity, "yearly"))}${copy.perYear}`}
                     />
                   </div>
