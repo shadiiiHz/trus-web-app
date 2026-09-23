@@ -1,4 +1,24 @@
-import { Minus, Plus } from "lucide-react";
+function MinusIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M4.16602 10H15.8327" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path
+        d="M9.99935 4.16663V15.8333M4.16602 9.99996H15.8327"
+        stroke="currentColor"
+        strokeWidth="1.66667"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export interface QuantityStepperProps {
   value: number;
@@ -10,7 +30,7 @@ export interface QuantityStepperProps {
 }
 
 const stepButtonClass =
-  "flex h-full w-[34px] cursor-pointer items-center justify-center text-auth-placeholder transition-colors hover:text-auth-heading disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-auth-placeholder";
+  "flex h-full w-[34px] cursor-pointer items-center justify-center text-[#A3A3A3] transition-colors hover:text-auth-heading disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-[#A3A3A3]";
 
 export function QuantityStepper({
   value,
@@ -29,9 +49,9 @@ export function QuantityStepper({
         aria-label={decreaseAria}
         className={stepButtonClass}
       >
-        <Minus size={16} strokeWidth={1.5} />
+        <MinusIcon />
       </button>
-      <span className="flex-1 text-center text-[13px] text-auth-text tabular-nums" aria-live="polite">
+      <span className="flex-1 text-center text-[14px] text-[#737373] tabular-nums" aria-live="polite">
         {value}
       </span>
       <button
@@ -41,7 +61,7 @@ export function QuantityStepper({
         aria-label={increaseAria}
         className={stepButtonClass}
       >
-        <Plus size={16} strokeWidth={1.5} />
+        <PlusIcon />
       </button>
     </div>
   );

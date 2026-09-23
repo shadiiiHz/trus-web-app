@@ -28,8 +28,8 @@ export function BillingToggle({ value, onChange, labels, ariaLabel }: BillingTog
             onClick={() => onChange(period)}
             className={`h-full flex-1 cursor-pointer rounded-md text-[12px] transition-colors duration-150 ${
               active
-                ? "bg-auth-surface font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
-                : "font-medium text-auth-text hover:text-auth-heading"
+                ? "bg-[#FAFAFA] font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
+                : "font-medium text-[#525252] hover:text-auth-heading"
             }`}
           >
             {labels[period]}

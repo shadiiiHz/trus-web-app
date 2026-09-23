@@ -27,7 +27,7 @@ function ServiceIcon({ src }: { src: string | null }) {
   return (
     <span
       aria-hidden="true"
-      className="h-10 w-10 shrink-0 rounded-lg border border-auth-border-light bg-auth-surface"
+      className="h-10 w-10 shrink-0 rounded-md border border-auth-border-light bg-auth-surface"
     />
   );
 }
@@ -98,7 +98,7 @@ export function ServicesTable({
           <col style={{ width: "10.6%" }} />
         </colgroup>
         <thead>
-          <tr className="h-[70px] border-b border-auth-divider">
+          <tr className="h-[70px] border-b border-auth-divider bg-[#FAFAFA]">
             <th className={`${headCellClass} pl-6`} scope="col">
               <div className="flex items-center gap-4">
                 <Checkbox
