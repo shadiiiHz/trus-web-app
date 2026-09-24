@@ -4,6 +4,10 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
 import { passwordRequirements } from "@/lib/passwordRequirements";
+import { AuthApiError, reportApiError, resetPassword } from "@/lib/api/authApi";
+import { resolveNextPage } from "@/lib/api/nextPage";
+import { useAuth } from "@/hooks/useAuth";
+import { showToast } from "@/lib/toast";
 
 function RequirementIcon({ met }: { met: boolean }) {
   return (
@@ -58,6 +62,17 @@ export interface ResetPasswordFormProps {
 type FieldErrorKey = keyof SiteConfig["auth"]["resetPassword"]["errors"];
 type FieldErrors = Partial<Record<"newPassword" | "confirmPassword", FieldErrorKey>>;
 
+/**
+ * Maps a `VALIDATION_ERROR` entry's backend `field` to the form field it
+ * belongs to and the message to show there. Every `new_password` rule code
+ * (PASSWORD_UPPERCASE, ...) shares one message, since the requirements
+ * checklist above already shows which rule is unmet.
+ */
+const BACKEND_FIELD_ERRORS: Record<string, [keyof FieldErrors, FieldErrorKey]> = {
+  new_password: ["newPassword", "newPasswordInvalid"],
+  confirm_password: ["confirmPassword", "confirmPasswordMismatch"],
+};
+
 const fieldWrapClass = "relative flex items-center";
 
 const iconClass =
@@ -77,6 +92,7 @@ function RequiredMark() {
 
 export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const newPasswordId = useId();
   const confirmPasswordId = useId();
 
@@ -95,8 +111,9 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
     test(newPassword),
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "submitting") return;
 
     const nextErrors: FieldErrors = {};
     if (!newPassword) {
@@ -113,15 +130,52 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    // No backend wired up yet — simulate the round trip so the button's
-    // loading state reads correctly once a real request lands here.
     setStatus("submitting");
-    window.setTimeout(() => {
-      navigate("/reset-password/success", {
+    try {
+      const { nextPage } = await resetPassword({ newPassword, confirmPassword });
+      navigate(resolveNextPage(nextPage ?? "/reset-password-success"), {
         replace: true,
         state: { passwordReset: true },
       });
-    }, 700);
+    } catch (error) {
+      const code = error instanceof AuthApiError ? error.code : undefined;
+      if (code === "INVALID_SESSION") {
+        showToast(copy.errors.sessionExpired, "error");
+        logout();
+        navigate("/login", { replace: true });
+        return;
+      }
+      if (code === "PASSWORD_RESET_NOT_REQUIRED") {
+        showToast(copy.errors.resetNotRequired, "error");
+        navigate("/select-services", { replace: true });
+        return;
+      }
+      if (code === "VALIDATION_ERROR" && error instanceof AuthApiError) {
+        const fieldErrors: FieldErrors = {};
+        const unmapped: string[] = [];
+        for (const item of error.fieldErrors ?? []) {
+          const mapped = BACKEND_FIELD_ERRORS[item.field];
+          if (mapped) {
+            fieldErrors[mapped[0]] = mapped[1];
+          } else if (item.message) {
+            unmapped.push(item.message);
+          }
+        }
+        setErrors((prev) => ({ ...prev, ...fieldErrors }));
+        if (unmapped.length || !Object.keys(fieldErrors).length) {
+          showToast(
+            unmapped.length
+              ? unmapped.join("\n")
+              : error.message || copy.errors.genericError,
+            "error",
+          );
+        }
+        return;
+      }
+      reportApiError(error, {}, copy.errors.genericError);
+    } finally {
+      setStatus("idle");
+    }
   };
 
   return (

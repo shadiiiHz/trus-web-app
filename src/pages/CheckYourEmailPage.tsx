@@ -7,7 +7,12 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site.config";
 import checkEmailIcon from "@/assets/auth/check-email-icon.svg";
-import { resendVerificationEmail, reportApiError } from "@/lib/api/authApi";
+import {
+  getForgotPasswordErrorCode,
+  reportApiError,
+  requestPasswordReset,
+  resendVerificationEmail,
+} from "@/lib/api/authApi";
 import { showToast } from "@/lib/toast";
 
 /**
@@ -20,7 +25,7 @@ type CheckEmailVariant = "register" | "forgotPassword";
 
 interface CheckYourEmailLocationState {
   variant?: CheckEmailVariant;
-  /** The address to resend the verification email to (register / login's EMAIL_NOT_VERIFIED flows). */
+  /** The address to resend the verification (register / login's EMAIL_NOT_VERIFIED) or password reset (forgotPassword) email to. */
   email?: string;
 }
 
@@ -44,12 +49,34 @@ export default function CheckYourEmailPage() {
   const handleResend = async () => {
     if (resending) return;
 
-    // Only the "register" variant (account verification, including login's
-    // EMAIL_NOT_VERIFIED redirect) has a real resend endpoint wired up.
-    // "forgotPassword" has no backend yet — see ForgotPasswordForm.
-    if (variant !== "register" || !email) {
+    // Without an address (e.g. the page was opened directly) there's
+    // nothing to resend to — just flash the loading state.
+    if (!email) {
       setResending(true);
       window.setTimeout(() => setResending(false), 700);
+      return;
+    }
+
+    if (variant === "forgotPassword") {
+      setResending(true);
+      try {
+        await requestPasswordReset(email);
+        showToast(forgotPassword.resendSuccess, "success");
+      } catch (error) {
+        const code = getForgotPasswordErrorCode(error);
+        if (code) {
+          showToast(
+            code === "EMAIL_REQUIRED"
+              ? forgotPassword.errors.emailRequired
+              : forgotPassword.errors.emailInvalid,
+            "error",
+          );
+        } else {
+          reportApiError(error, {}, forgotPassword.errors.requestFailed);
+        }
+      } finally {
+        setResending(false);
+      }
       return;
     }
 

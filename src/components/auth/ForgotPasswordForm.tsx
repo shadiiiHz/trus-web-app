@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
+import {
+  getForgotPasswordErrorCode,
+  reportApiError,
+  requestPasswordReset,
+} from "@/lib/api/authApi";
 
 
 function BackIcon({ className }: { className?: string }) {
@@ -62,25 +67,37 @@ export function ForgotPasswordForm({
   const [email, setEmail] = useState("");
   const [error, setError] = useState<FieldErrorKey | undefined>();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "submitting") return;
 
-    if (!email.trim()) {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
       setError("emailRequired");
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setError("emailInvalid");
       return;
     }
 
     setError(undefined);
-    // No backend wired up yet — simulate the round trip so the button's
-    // loading state reads correctly once a real request lands here.
     onStatusChange("submitting");
-    window.setTimeout(() => {
-      navigate("/check-your-email", { state: { variant: "forgotPassword" } });
-    }, 700);
+    try {
+      await requestPasswordReset(trimmedEmail);
+      navigate("/check-your-email", {
+        state: { variant: "forgotPassword", email: trimmedEmail },
+      });
+    } catch (err) {
+      const code = getForgotPasswordErrorCode(err);
+      if (code) {
+        setError(code === "EMAIL_REQUIRED" ? "emailRequired" : "emailInvalid");
+      } else {
+        reportApiError(err, {}, copy.errors.requestFailed);
+      }
+    } finally {
+      onStatusChange("idle");
+    }
   };
 
   return (

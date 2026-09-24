@@ -399,10 +399,12 @@
       "checkEmailHint": "Si no recibiste el correo, revisa tu carpeta de Spam o inténtalo de nuevo.",
       "resend": "Reenviar correo",
       "resending": "Reenviando...",
+      "resendSuccess": "Correo para restablecer la contraseña reenviado.",
       "backToLogin": "Volver a iniciar sesión",
       "errors": {
         "emailRequired": "Por favor introduce tu correo electrónico",
-        "emailInvalid": "Por favor introduce un correo electrónico válido"
+        "emailInvalid": "Por favor introduce un correo electrónico válido",
+        "requestFailed": "No se pudo enviar el correo de restablecimiento. Inténtalo de nuevo."
       }
     },
     "changePassword": {
@@ -465,7 +467,10 @@
         "newPasswordRequired": "Por favor introduce una nueva contraseña",
         "newPasswordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
-        "confirmPasswordMismatch": "Las contraseñas no coinciden"
+        "confirmPasswordMismatch": "Las contraseñas no coinciden",
+        "sessionExpired": "Tu sesión no es válida o ha caducado. Vuelve a iniciar sesión.",
+        "resetNotRequired": "No es necesario restablecer la contraseña de esta cuenta.",
+        "genericError": "Algo salió mal. Inténtalo de nuevo."
       }
     },
 

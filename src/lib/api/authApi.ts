@@ -23,6 +23,10 @@ const PROFILE_UPDATE_URL =
 const PROFILE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile";
 const CHANGE_PASSWORD_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/change-password";
+const FORGOT_PASSWORD_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/forgot-password";
+const RESET_PASSWORD_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/reset-password";
 
 const client = axios.create({
   headers: { "Content-Type": "application/json" },
@@ -579,6 +583,83 @@ export async function changePassword(
     );
     const result = unwrap(data);
     if (result?.success === false) throw payloadToAuthApiError(result);
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
+  }
+}
+
+/** Documented backend codes for the forgot-password endpoint (both are `email` field errors). */
+export type ForgotPasswordErrorCode = "EMAIL_REQUIRED" | "INVALID_EMAIL";
+
+/**
+ * `POST /auth/forgot-password` — sends the password reset email. Used both
+ * by the forgot-password form and by the "Resend Email" button on the
+ * check-your-email page.
+ */
+export async function requestPasswordReset(email: string): Promise<void> {
+  try {
+    const { data } = await client.post(FORGOT_PASSWORD_URL, { email });
+    const result = unwrap(data);
+    if (result?.success === false) throw payloadToAuthApiError(result);
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
+  }
+}
+
+/**
+ * The forgot-password `email` field error code in `error`, whether the
+ * backend sent it as the top-level `code` or inside an `errors` list.
+ */
+export function getForgotPasswordErrorCode(
+  error: unknown,
+): ForgotPasswordErrorCode | undefined {
+  if (!(error instanceof AuthApiError)) return undefined;
+  const codes = [error.code, ...(error.fieldErrors ?? []).map((e) => e.code)];
+  return codes.find(
+    (code): code is ForgotPasswordErrorCode =>
+      code === "EMAIL_REQUIRED" || code === "INVALID_EMAIL",
+  );
+}
+
+export interface ResetPasswordPayload {
+  newPassword: string;
+  confirmPassword: string;
+}
+
+/**
+ * Documented backend codes for the reset-password endpoint.
+ * `VALIDATION_ERROR` carries per-field detail in `AuthApiError.fieldErrors`
+ * (e.g. `PASSWORD_UPPERCASE` on `new_password`, `PASSWORDS_DO_NOT_MATCH` on
+ * `confirm_password`).
+ */
+export type ResetPasswordErrorCode =
+  | "VALIDATION_ERROR"
+  | "INVALID_SESSION"
+  | "PASSWORD_RESET_NOT_REQUIRED";
+
+/**
+ * `POST /auth/reset-password` for a user who signed in with the emailed
+ * temporary password (login's `next_page: "/reset-password"`). Returns the
+ * backend's `next_page`, if it sent one.
+ */
+export async function resetPassword(
+  payload: ResetPasswordPayload,
+): Promise<{ nextPage?: string }> {
+  try {
+    const { data } = await client.post(
+      RESET_PASSWORD_URL,
+      {
+        new_password: payload.newPassword,
+        confirm_password: payload.confirmPassword,
+      },
+      { headers: authHeaders() },
+    );
+    const result = unwrap(data);
+    if (result?.success === false) throw payloadToAuthApiError(result);
+    return {
+      nextPage:
+        typeof result?.next_page === "string" ? result.next_page : undefined,
+    };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
   }

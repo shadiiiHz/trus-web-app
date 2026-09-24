@@ -390,10 +390,12 @@
       "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
       "resend": "Renvoyer l'e-mail",
       "resending": "Envoi en cours...",
+      "resendSuccess": "E-mail de réinitialisation du mot de passe renvoyé.",
       "backToLogin": "Retour à la connexion",
       "errors": {
         "emailRequired": "Veuillez saisir votre adresse e-mail",
-        "emailInvalid": "Veuillez saisir une adresse e-mail valide"
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide",
+        "requestFailed": "Impossible d'envoyer l'e-mail de réinitialisation. Veuillez réessayer."
       }
     },
     "changePassword": {
@@ -456,7 +458,10 @@
         "newPasswordRequired": "Veuillez saisir un nouveau mot de passe",
         "newPasswordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre nouveau mot de passe",
-        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas"
+        "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
+        "sessionExpired": "Votre session est invalide ou a expiré. Veuillez vous reconnecter.",
+        "resetNotRequired": "La réinitialisation du mot de passe n'est pas requise pour ce compte.",
+        "genericError": "Une erreur s'est produite. Veuillez réessayer."
       }
     },
 

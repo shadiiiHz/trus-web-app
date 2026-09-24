@@ -380,10 +380,12 @@
       "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
       "resend": "Resend Email",
       "resending": "Resending...",
+      "resendSuccess": "Password reset email sent again.",
       "backToLogin": "Back to log in",
       "errors": {
         "emailRequired": "Please enter your email address",
-        "emailInvalid": "Please enter a valid email address"
+        "emailInvalid": "Please enter a valid email address",
+        "requestFailed": "Couldn't send the reset email. Please try again."
       }
     },
     "changePassword": {
@@ -446,7 +448,10 @@
         "newPasswordRequired": "Please enter a new password",
         "newPasswordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your new password",
-        "confirmPasswordMismatch": "Passwords do not match"
+        "confirmPasswordMismatch": "Passwords do not match",
+        "sessionExpired": "Your session is invalid or expired. Please log in again.",
+        "resetNotRequired": "Password reset is not required for this account.",
+        "genericError": "Something went wrong. Please try again."
       }
     },
 
