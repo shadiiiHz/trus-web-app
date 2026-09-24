@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -15,17 +15,30 @@ export default function ResetPasswordSuccessPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { isInitialized, isAuthenticated } = useAuth();
+  const { isInitialized, isAuthenticated, logout } = useAuth();
 
-  // Only for a signed-in user. Wait for AuthProvider's initial
-  // sessionStorage read so a hard refresh doesn't bounce a valid session.
+  const passwordReset = Boolean(
+    (location.state as { passwordReset?: boolean } | null)?.passwordReset,
+  );
+
+  // The reset is done — end the session so the "Log in" button starts a
+  // fresh sign-in with the new password.
+  useEffect(() => {
+    if (isInitialized && passwordReset && isAuthenticated) logout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInitialized, passwordReset, isAuthenticated]);
+
+  // Wait for AuthProvider's initial sessionStorage read before deciding.
   if (!isInitialized) return null;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   // Only reachable right after a successful reset — ResetPasswordForm
-  // navigates here with this flag. A direct visit goes back to the form.
-  if (!(location.state as { passwordReset?: boolean } | null)?.passwordReset) {
-    return <Navigate to="/reset-password" replace />;
+  // navigates here with this flag. A direct visit goes back to the form
+  // (or to login, when signed out). The user is logged out on arrival, so
+  // being signed out here is expected and not redirected.
+  if (!passwordReset) {
+    return (
+      <Navigate to={isAuthenticated ? "/reset-password" : "/login"} replace />
+    );
   }
 
   const { card } = siteConfig.contact;
