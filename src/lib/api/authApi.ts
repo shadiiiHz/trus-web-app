@@ -484,9 +484,10 @@ export interface UserProfile {
 /**
  * Google Drive share/download links (`drive.google.com/uc?export=view&id=…`,
  * `/file/d/<id>/view`, `open?id=…`) redirect to a download response that
- * browsers refuse to render in an `<img>`. Drive's thumbnail endpoint serves
- * the same public file as a plain image, so those links are rewritten to it.
- * Any other URL is returned unchanged.
+ * browsers refuse to render in an `<img>`. Those links are rewritten to
+ * `lh3.googleusercontent.com/d/<id>`, which serves the same public file as a
+ * plain image directly — Drive's `/thumbnail` endpoint only redirects there
+ * and can fail for freshly uploaded files. Any other URL is returned unchanged.
  */
 export function toDisplayableImageUrl(url: string): string {
   let parsed: URL;
@@ -501,7 +502,7 @@ export function toDisplayableImageUrl(url: string): string {
     parsed.searchParams.get("id") ??
     parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1];
   return id
-    ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w512`
+    ? `https://lh3.googleusercontent.com/d/${encodeURIComponent(id)}=w512`
     : url;
 }
 

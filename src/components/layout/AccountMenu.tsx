@@ -17,13 +17,16 @@ export interface AccountMenuProps {
 
 /**
  * Replaces the header's Login button once a session is authenticated.
- * The square before the name is a placeholder for the logo the person
- * uploads on the Edit Account page — there's no such image yet, so it just
- * renders empty.
+ * The square before the name shows the logo the person uploads on the
+ * Edit Account page, and stays an empty placeholder until one is set.
  */
 export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
   const navigate = useNavigate();
-  const { displayName, logout } = useAuth();
+  const { displayName, logoUrl, logout } = useAuth();
+  // Remembers a logo URL that failed to load so the placeholder shows instead
+  // of a broken image; a new URL gets a fresh attempt.
+  const [brokenLogoUrl, setBrokenLogoUrl] = useState<string | null>(null);
+  const showLogo = Boolean(logoUrl) && logoUrl !== brokenLogoUrl;
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
   // Horizontal nudge (px) that keeps the menu inside the viewport — the
@@ -117,11 +120,25 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
         aria-controls={menuId}
         className="flex cursor-pointer items-center gap-2.5 rounded-lg px-1 py-1 text-body font-normal text-brand-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
-        {/* Logo placeholder — swapped for the account's uploaded logo once that exists. */}
+        {/* The account's uploaded logo, or an empty placeholder until one is set. */}
         <span
           aria-hidden="true"
-          className="h-9 w-9 shrink-0 rounded-md border border-white/15 bg-white/10"
-        />
+          className="h-9 w-9 shrink-0 overflow-hidden rounded-md border border-white/15 bg-white/10"
+        >
+          {showLogo && (
+            <img
+              src={logoUrl!}
+              alt=""
+              width={36}
+              height={36}
+              // Google-hosted images (Drive thumbnails) can refuse requests
+              // carrying a cross-site Referer — same as the Edit Account form.
+              referrerPolicy="no-referrer"
+              className="h-full w-full object-cover"
+              onError={() => setBrokenLogoUrl(logoUrl)}
+            />
+          )}
+        </span>
         <span className="max-w-40 truncate font-medium">{displayName}</span>
         <ChevronDown
           size={12}

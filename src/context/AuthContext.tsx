@@ -1,4 +1,5 @@
 import { useEffect, useRef, useReducer, type ReactNode } from "react";
+import { fetchProfile } from "@/lib/api/authApi";
 import { clearAuthSession, getAuthSession, setAuthSession } from "@/lib/api/session";
 import { AuthActionType, AuthContext, type AuthAction, type AuthenticateParams, type AuthState } from "./auth-context";
 
@@ -7,6 +8,7 @@ const initialState: AuthState = {
   isInitialized: false,
   isReady: false,
   displayName: null,
+  logoUrl: null,
 };
 
 // setTimeout's delay is a 32-bit signed int internally — anything longer than
@@ -33,7 +35,9 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
         displayName: action.payload.displayName,
       };
     case AuthActionType.Logout:
-      return { ...state, isAuthenticated: false, isReady: false, displayName: null };
+      return { ...state, isAuthenticated: false, isReady: false, displayName: null, logoUrl: null };
+    case AuthActionType.SetLogo:
+      return { ...state, logoUrl: action.payload.logoUrl };
     default:
       return state;
   }
@@ -87,6 +91,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const setLogoUrl = (logoUrl: string | null) => {
+    dispatch({ type: AuthActionType.SetLogo, payload: { logoUrl: logoUrl || null } });
+  };
+
+  const logoRequestRef = useRef<AbortController | null>(null);
+
+  const refreshLogo = () => {
+    logoRequestRef.current?.abort();
+    const controller = new AbortController();
+    logoRequestRef.current = controller;
+    fetchProfile(controller.signal)
+      .then((profile) => {
+        if (!controller.signal.aborted) setLogoUrl(profile.logoUrl);
+      })
+      // The logo is cosmetic — a failed read just leaves the placeholder.
+      .catch(() => {});
+  };
+
+  // Loads the account's logo for the header once a session exists (on
+  // reload, login or register), and drops any in-flight read on sign-out.
+  useEffect(() => {
+    if (!state.isAuthenticated) {
+      logoRequestRef.current?.abort();
+      return;
+    }
+    refreshLogo();
+    return () => logoRequestRef.current?.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.isAuthenticated]);
+
   const authenticate = ({ token, expiresAt, ready, displayName }: AuthenticateParams) => {
     // No token means there's no session to keep — don't mark the user
     // signed in on in-memory state alone (it would show in the navbar
@@ -101,7 +135,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, authenticate, logout }}>
+    <AuthContext.Provider value={{ ...state, authenticate, logout, setLogoUrl, refreshLogo }}>
       {children}
     </AuthContext.Provider>
   );

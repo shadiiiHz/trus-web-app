@@ -346,7 +346,7 @@ function EditAccountSkeleton() {
 
 export function EditAccountForm({ copy }: EditAccountFormProps) {
   const navigate = useNavigate();
-  const { logout, authenticate } = useAuth();
+  const { logout, authenticate, setLogoUrl, refreshLogo } = useAuth();
   const locale = useLocale();
   const countryOptions = useMemo(() => buildCountryOptions(locale), [locale]);
 
@@ -446,6 +446,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     // The server already has this logo — only a newly picked one is re-sent.
     setLogoPreview(profile.logoUrl || null);
     setLogoFile(null);
+    // Keep the header's account menu showing the same logo.
+    setLogoUrl(profile.logoUrl);
   };
 
   /**
@@ -566,6 +568,9 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
       setStatus("success");
       showToast(copy.success, "success");
       if (result.nextPage) {
+        // Leaving without re-reading the profile here, so let the header's
+        // account menu pick up the newly saved logo on its own.
+        refreshLogo();
         navigate(resolveNextPage(result.nextPage));
         return;
       }
