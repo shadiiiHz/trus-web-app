@@ -363,9 +363,6 @@
       "hidePasswordAria": "Masquer le mot de passe",
       "rememberMe": "Se souvenir de moi",
       "forgotPassword": "Mot de passe oublié",
-      "captchaLabel": "Saisissez le code affiché ci-dessus",
-      "captchaPlaceholder": "Saisissez le code captcha",
-      "refreshCaptchaAria": "Actualiser le code captcha",
       "submit": "Se connecter",
       "submitting": "Connexion en cours...",
       "success": "Connexion réussie — bon retour !",
@@ -375,12 +372,6 @@
         "emailRequired": "Veuillez saisir votre adresse e-mail",
         "emailInvalid": "Veuillez saisir une adresse e-mail valide",
         "passwordRequired": "Veuillez saisir votre mot de passe",
-        "captchaRequired": "Veuillez saisir le code captcha",
-        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
-        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
-        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
-        "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
-        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
         "invalidCredentials": "E-mail ou mot de passe invalide.",
         "emailNotVerified": "Veuillez vérifier votre e-mail avant de vous connecter.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
@@ -600,13 +591,6 @@
         "telegramChannelLabel": "Nom de la chaîne Telegram",
         "telegramChannelPlaceholder": "ex. votrechaine"
       },
-      "captcha": {
-        "title": "CAPTCHA personnalisé",
-        "subtitle": "Saisissez les caractères affichés dans l'image ci-dessous.",
-        "inputLabel": "Saisir le CAPTCHA",
-        "placeholder": "Saisissez les caractères",
-        "refreshAria": "Actualiser le CAPTCHA"
-      },
       "requirements": {
         "minLength": "Au moins 8 caractères",
         "hasUppercase": "Inclut une lettre majuscule",
@@ -634,12 +618,6 @@
         "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
         "confirmPasswordMismatch": "Les mots de passe ne correspondent pas",
-        "captchaRequired": "Veuillez saisir le code CAPTCHA",
-        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
-        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
-        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
-        "captchaTooManyAttempts": "Trop de tentatives de CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
-        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
         "invalidInput": "Veuillez vérifier les informations saisies et réessayer.",
         "genericError": "Une erreur s'est produite. Veuillez réessayer.",
         "sessionExpired": "Votre session est invalide ou a expiré. Veuillez vous reconnecter.",
@@ -702,11 +680,8 @@
 
       "codePlaceholder": "Saisissez votre code de réduction",
 
-      "captchaLabel": "Saisissez le CAPTCHA",
 
-      "captchaPlaceholder": "Tapez les caractères",
 
-      "refreshCaptchaAria": "Actualiser le code captcha",
 
       "submit": "Appliquer le coupon",
 
@@ -720,17 +695,11 @@
 
         "codeInvalid": "Ce code de réduction est invalide ou a expiré.",
 
-        "captchaRequired": "Veuillez saisir le code captcha",
 
-        "captchaInvalid": "Le CAPTCHA est invalide ou a expiré. Veuillez réessayer.",
 
-        "captchaIncorrect": "CAPTCHA incorrect. Veuillez réessayer.",
 
-        "captchaExpired": "Le CAPTCHA a expiré. Veuillez l'actualiser.",
 
-        "captchaTooManyAttempts": "Trop de tentatives CAPTCHA. Veuillez demander un nouveau CAPTCHA.",
 
-        "captchaLoadError": "Impossible de charger le CAPTCHA. Veuillez réessayer.",
 
         "applyFailed": "Une erreur s'est produite. Veuillez réessayer."
 

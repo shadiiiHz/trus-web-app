@@ -353,9 +353,6 @@
       "hidePasswordAria": "Hide password",
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password",
-      "captchaLabel": "Enter the code shown above",
-      "captchaPlaceholder": "Enter captcha code",
-      "refreshCaptchaAria": "Refresh captcha code",
       "submit": "Log in",
       "submitting": "Logging in...",
       "success": "Login successful — welcome back!",
@@ -365,12 +362,6 @@
         "emailRequired": "Please enter your email address",
         "emailInvalid": "Please enter a valid email address",
         "passwordRequired": "Please enter your password",
-        "captchaRequired": "Please enter the captcha code",
-        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
-        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
-        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
-        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
-        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
         "invalidCredentials": "Invalid email or password.",
         "emailNotVerified": "Please verify your email before logging in.",
         "invalidInput": "Please check the information you entered and try again.",
@@ -590,13 +581,6 @@
         "telegramChannelLabel": "Telegram Channel Name",
         "telegramChannelPlaceholder": "e.g. yourchannel"
       },
-      "captcha": {
-        "title": "Custom CAPTCHA",
-        "subtitle": "Enter the characters shown in the image below.",
-        "inputLabel": "Enter CAPTCHA",
-        "placeholder": "Type the characters",
-        "refreshAria": "Refresh CAPTCHA"
-      },
       "requirements": {
         "minLength": "At least 8 characters",
         "hasUppercase": "Includes an uppercase letter",
@@ -624,12 +608,6 @@
         "passwordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your password",
         "confirmPasswordMismatch": "Passwords do not match",
-        "captchaRequired": "Please enter the CAPTCHA code",
-        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
-        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
-        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
-        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
-        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
         "invalidInput": "Please check the information you entered and try again.",
         "genericError": "Something went wrong. Please try again.",
         "sessionExpired": "Your session is invalid or expired. Please log in again.",
@@ -692,11 +670,8 @@
 
       "codePlaceholder": "Enter your discount code",
 
-      "captchaLabel": "Enter CAPTCHA",
 
-      "captchaPlaceholder": "Type the characters",
 
-      "refreshCaptchaAria": "Refresh captcha code",
 
       "submit": "Apply coupon",
 
@@ -710,17 +685,11 @@
 
         "codeInvalid": "This discount code is invalid or has expired.",
 
-        "captchaRequired": "Please enter the captcha code",
 
-        "captchaInvalid": "CAPTCHA is invalid or expired. Please try again.",
 
-        "captchaIncorrect": "Incorrect CAPTCHA. Please try again.",
 
-        "captchaExpired": "CAPTCHA has expired. Please refresh it.",
 
-        "captchaTooManyAttempts": "Too many CAPTCHA attempts. Please request a new CAPTCHA.",
 
-        "captchaLoadError": "Failed to load CAPTCHA. Please try again.",
 
         "applyFailed": "Something went wrong. Please try again."
 

@@ -43,7 +43,6 @@ export type RegisterErrorCode =
  */
 export type LoginErrorCode =
   | "INVALID_INPUT"
-  | "INVALID_CAPTCHA"
   | "INVALID_CREDENTIALS"
   | "EMAIL_NOT_VERIFIED";
 
@@ -399,7 +398,6 @@ export interface ProfileUpdatePayload {
 export type ProfileUpdateErrorCode =
   | "INVALID_SESSION"
   | "VALIDATION_ERROR"
-  | "INVALID_CAPTCHA"
   | "PROFILE_INCOMPLETE";
 
 /** Profile update success: whether the account is now `ready`, and where to go next. */

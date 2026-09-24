@@ -359,9 +359,6 @@
       "hidePasswordAria": "Скрыть пароль",
       "rememberMe": "Запомнить меня",
       "forgotPassword": "Забыли пароль",
-      "captchaLabel": "Введите код, показанный выше",
-      "captchaPlaceholder": "Введите код с картинки",
-      "refreshCaptchaAria": "Обновить код",
       "submit": "Войти",
       "submitting": "Вход...",
       "success": "Вход выполнен успешно — с возвращением!",
@@ -371,12 +368,6 @@
         "emailRequired": "Пожалуйста, введите адрес электронной почты",
         "emailInvalid": "Пожалуйста, введите корректный адрес электронной почты",
         "passwordRequired": "Пожалуйста, введите пароль",
-        "captchaRequired": "Пожалуйста, введите код с картинки",
-        "captchaInvalid": "CAPTCHA недействительна или истек срок ее действия. Попробуйте еще раз.",
-        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте еще раз.",
-        "captchaExpired": "Срок действия CAPTCHA истек. Обновите её.",
-        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
-        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте снова.",
         "invalidCredentials": "Неверный адрес электронной почты или пароль.",
         "emailNotVerified": "Пожалуйста, подтвердите свой email перед входом.",
         "invalidInput": "Пожалуйста, проверьте введённые данные и попробуйте снова.",
@@ -596,13 +587,6 @@
         "telegramChannelLabel": "Название канала Telegram",
         "telegramChannelPlaceholder": "напр. вашканал"
       },
-      "captcha": {
-        "title": "Пользовательская CAPTCHA",
-        "subtitle": "Введите символы, показанные на изображении ниже.",
-        "inputLabel": "Введите CAPTCHA",
-        "placeholder": "Введите символы",
-        "refreshAria": "Обновить CAPTCHA"
-      },
       "requirements": {
         "minLength": "Минимум 8 символов",
         "hasUppercase": "Содержит заглавную букву",
@@ -630,12 +614,6 @@
         "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
         "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",
         "confirmPasswordMismatch": "Пароли не совпадают",
-        "captchaRequired": "Пожалуйста, введите код CAPTCHA",
-        "captchaInvalid": "CAPTCHA недействительна или истек срок ее действия. Попробуйте еще раз.",
-        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте еще раз.",
-        "captchaExpired": "Срок действия CAPTCHA истек. Обновите её.",
-        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
-        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте снова.",
         "invalidInput": "Пожалуйста, проверьте введённые данные и попробуйте снова.",
         "genericError": "Что-то пошло не так. Пожалуйста, попробуйте снова.",
         "sessionExpired": "Ваш сеанс недействителен или истёк. Пожалуйста, войдите снова.",
@@ -698,11 +676,8 @@
 
       "codePlaceholder": "Введите промокод",
 
-      "captchaLabel": "Введите CAPTCHA",
 
-      "captchaPlaceholder": "Введите символы",
 
-      "refreshCaptchaAria": "Обновить код captcha",
 
       "submit": "Применить купон",
 
@@ -716,17 +691,11 @@
 
         "codeInvalid": "Этот промокод недействителен или истёк.",
 
-        "captchaRequired": "Пожалуйста, введите код captcha",
 
-        "captchaInvalid": "CAPTCHA недействительна или истекла. Попробуйте ещё раз.",
 
-        "captchaIncorrect": "Неверная CAPTCHA. Попробуйте ещё раз.",
 
-        "captchaExpired": "Срок действия CAPTCHA истёк. Обновите её.",
 
-        "captchaTooManyAttempts": "Слишком много попыток ввода CAPTCHA. Запросите новую CAPTCHA.",
 
-        "captchaLoadError": "Не удалось загрузить CAPTCHA. Попробуйте ещё раз.",
 
         "applyFailed": "Что-то пошло не так. Попробуйте ещё раз."
 

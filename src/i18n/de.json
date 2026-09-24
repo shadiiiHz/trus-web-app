@@ -360,9 +360,6 @@
       "hidePasswordAria": "Passwort verbergen",
       "rememberMe": "Angemeldet bleiben",
       "forgotPassword": "Passwort vergessen",
-      "captchaLabel": "Geben Sie den oben angezeigten Code ein",
-      "captchaPlaceholder": "Captcha-Code eingeben",
-      "refreshCaptchaAria": "Captcha-Code aktualisieren",
       "submit": "Anmelden",
       "submitting": "Anmeldung läuft...",
       "success": "Anmeldung erfolgreich — willkommen zurück!",
@@ -372,12 +369,6 @@
         "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
         "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "passwordRequired": "Bitte geben Sie Ihr Passwort ein",
-        "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
-        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
-        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
-        "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
-        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
-        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
         "invalidCredentials": "Ungültige E-Mail-Adresse oder ungültiges Passwort.",
         "emailNotVerified": "Bitte bestätigen Sie Ihre E-Mail-Adresse, bevor Sie sich anmelden.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
@@ -597,13 +588,6 @@
         "telegramChannelLabel": "Telegram-Kanalname",
         "telegramChannelPlaceholder": "z. B. ihrkanal"
       },
-      "captcha": {
-        "title": "Individuelles CAPTCHA",
-        "subtitle": "Geben Sie die im Bild unten angezeigten Zeichen ein.",
-        "inputLabel": "CAPTCHA eingeben",
-        "placeholder": "Zeichen eingeben",
-        "refreshAria": "CAPTCHA aktualisieren"
-      },
       "requirements": {
         "minLength": "Mindestens 8 Zeichen",
         "hasUppercase": "Enthält einen Großbuchstaben",
@@ -631,12 +615,6 @@
         "passwordInvalid": "Das Passwort muss alle oben genannten Anforderungen erfüllen",
         "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
         "confirmPasswordMismatch": "Die Passwörter stimmen nicht überein",
-        "captchaRequired": "Bitte geben Sie den CAPTCHA-Code ein",
-        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
-        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
-        "captchaExpired": "Das CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
-        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
-        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
         "invalidInput": "Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
         "genericError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
         "sessionExpired": "Ihre Sitzung ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.",
@@ -699,11 +677,8 @@
 
       "codePlaceholder": "Rabattcode eingeben",
 
-      "captchaLabel": "CAPTCHA eingeben",
 
-      "captchaPlaceholder": "Zeichen eingeben",
 
-      "refreshCaptchaAria": "Captcha-Code aktualisieren",
 
       "submit": "Gutschein einlösen",
 
@@ -717,17 +692,11 @@
 
         "codeInvalid": "Dieser Rabattcode ist ungültig oder abgelaufen.",
 
-        "captchaRequired": "Bitte geben Sie den Captcha-Code ein",
 
-        "captchaInvalid": "CAPTCHA ist ungültig oder abgelaufen. Bitte versuchen Sie es erneut.",
 
-        "captchaIncorrect": "Falsches CAPTCHA. Bitte versuchen Sie es erneut.",
 
-        "captchaExpired": "CAPTCHA ist abgelaufen. Bitte aktualisieren Sie es.",
 
-        "captchaTooManyAttempts": "Zu viele CAPTCHA-Versuche. Bitte fordern Sie ein neues CAPTCHA an.",
 
-        "captchaLoadError": "CAPTCHA konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
 
         "applyFailed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
 

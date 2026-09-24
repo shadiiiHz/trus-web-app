@@ -353,9 +353,6 @@
       "hidePasswordAria": "Şifreyi gizle",
       "rememberMe": "Beni hatırla",
       "forgotPassword": "Şifremi unuttum",
-      "captchaLabel": "Yukarıdaki kodu girin",
-      "captchaPlaceholder": "Doğrulama kodunu girin",
-      "refreshCaptchaAria": "Doğrulama kodunu yenile",
       "submit": "Giriş Yap",
       "submitting": "Giriş yapılıyor...",
       "success": "Giriş başarılı — tekrar hoş geldiniz!",
@@ -365,12 +362,6 @@
         "emailRequired": "Lütfen e-posta adresinizi girin",
         "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
         "passwordRequired": "Lütfen şifrenizi girin",
-        "captchaRequired": "Lütfen doğrulama kodunu girin",
-        "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
-        "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
-        "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
-        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
-        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
         "invalidCredentials": "Geçersiz e-posta veya şifre.",
         "emailNotVerified": "Giriş yapmadan önce lütfen e-postanızı doğrulayın.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
@@ -590,13 +581,6 @@
         "telegramChannelLabel": "Telegram Kanal Adı",
         "telegramChannelPlaceholder": "örn. kanaliniz"
       },
-      "captcha": {
-        "title": "Özel CAPTCHA",
-        "subtitle": "Aşağıdaki görselde gösterilen karakterleri girin.",
-        "inputLabel": "CAPTCHA'yı girin",
-        "placeholder": "Karakterleri yazın",
-        "refreshAria": "CAPTCHA'yı yenile"
-      },
       "requirements": {
         "minLength": "En az 8 karakter",
         "hasUppercase": "Bir büyük harf içerir",
@@ -624,12 +608,6 @@
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",
         "confirmPasswordMismatch": "Şifreler eşleşmiyor",
-        "captchaRequired": "Lütfen CAPTCHA kodunu girin",
-        "captchaInvalid": "CAPTCHA geçersiz veya süresi doldu. Lütfen tekrar deneyin.",
-        "captchaIncorrect": "Yanlış CAPTCHA. Lütfen tekrar deneyin.",
-        "captchaExpired": "CAPTCHA süresi doldu. Lütfen yenileyin.",
-        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
-        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
         "invalidInput": "Lütfen girdiğiniz bilgileri kontrol edip tekrar deneyin.",
         "genericError": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
         "sessionExpired": "Oturumunuz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.",
@@ -692,11 +670,8 @@
 
       "codePlaceholder": "İndirim kodunuzu girin",
 
-      "captchaLabel": "CAPTCHA'yı girin",
 
-      "captchaPlaceholder": "Karakterleri yazın",
 
-      "refreshCaptchaAria": "Captcha kodunu yenile",
 
       "submit": "Kuponu uygula",
 
@@ -710,17 +685,11 @@
 
         "codeInvalid": "Bu indirim kodu geçersiz veya süresi dolmuş.",
 
-        "captchaRequired": "Lütfen captcha kodunu girin",
 
-        "captchaInvalid": "CAPTCHA geçersiz veya süresi dolmuş. Lütfen tekrar deneyin.",
 
-        "captchaIncorrect": "Hatalı CAPTCHA. Lütfen tekrar deneyin.",
 
-        "captchaExpired": "CAPTCHA'nın süresi doldu. Lütfen yenileyin.",
 
-        "captchaTooManyAttempts": "Çok fazla CAPTCHA denemesi. Lütfen yeni bir CAPTCHA isteyin.",
 
-        "captchaLoadError": "CAPTCHA yüklenemedi. Lütfen tekrar deneyin.",
 
         "applyFailed": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
 

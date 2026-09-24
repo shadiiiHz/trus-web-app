@@ -123,14 +123,14 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
         {/* The account's uploaded logo, or an empty placeholder until one is set. */}
         <span
           aria-hidden="true"
-          className="h-9 w-9 shrink-0 overflow-hidden rounded-md border border-white/15 bg-white/10"
+          className="h-8 w-8 shrink-0 overflow-hidden rounded-md border border-white/15 bg-white/10"
         >
           {showLogo && (
             <img
               src={logoUrl!}
               alt=""
-              width={36}
-              height={36}
+              width={32}
+              height={32}
               // Google-hosted images (Drive thumbnails) can refuse requests
               // carrying a cross-site Referer — same as the Edit Account form.
               referrerPolicy="no-referrer"

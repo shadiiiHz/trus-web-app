@@ -372,9 +372,6 @@
       "hidePasswordAria": "Ocultar contraseña",
       "rememberMe": "Recuérdame",
       "forgotPassword": "¿Olvidaste tu contraseña?",
-      "captchaLabel": "Introduce el código mostrado arriba",
-      "captchaPlaceholder": "Introduce el código captcha",
-      "refreshCaptchaAria": "Actualizar código captcha",
       "submit": "Iniciar sesión",
       "submitting": "Iniciando sesión...",
       "success": "Inicio de sesión correcto — ¡bienvenido de nuevo!",
@@ -384,12 +381,6 @@
         "emailRequired": "Por favor introduce tu correo electrónico",
         "emailInvalid": "Por favor introduce un correo electrónico válido",
         "passwordRequired": "Por favor introduce tu contraseña",
-        "captchaRequired": "Por favor introduce el código captcha",
-        "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
-        "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
-        "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
-        "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
-        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
         "invalidCredentials": "Correo electrónico o contraseña no válidos.",
         "emailNotVerified": "Por favor, verifica tu correo electrónico antes de iniciar sesión.",
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
@@ -609,13 +600,6 @@
         "telegramChannelLabel": "Nombre del canal de Telegram",
         "telegramChannelPlaceholder": "p. ej. tucanal"
       },
-      "captcha": {
-        "title": "CAPTCHA personalizado",
-        "subtitle": "Introduce los caracteres que se muestran en la imagen de abajo.",
-        "inputLabel": "Introducir CAPTCHA",
-        "placeholder": "Escribe los caracteres",
-        "refreshAria": "Actualizar CAPTCHA"
-      },
       "requirements": {
         "minLength": "Al menos 8 caracteres",
         "hasUppercase": "Incluye una letra mayúscula",
@@ -643,12 +627,6 @@
         "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu contraseña",
         "confirmPasswordMismatch": "Las contraseñas no coinciden",
-        "captchaRequired": "Por favor introduce el código CAPTCHA",
-        "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
-        "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
-        "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
-        "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
-        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
         "invalidInput": "Revisa la información introducida e inténtalo de nuevo.",
         "genericError": "Algo salió mal. Inténtalo de nuevo.",
         "sessionExpired": "Tu sesión no es válida o ha caducado. Vuelve a iniciar sesión.",
@@ -711,11 +689,8 @@
 
       "codePlaceholder": "Introduce tu código de descuento",
 
-      "captchaLabel": "Introduce el CAPTCHA",
 
-      "captchaPlaceholder": "Escribe los caracteres",
 
-      "refreshCaptchaAria": "Actualizar código captcha",
 
       "submit": "Aplicar cupón",
 
@@ -729,17 +704,11 @@
 
         "codeInvalid": "Este código de descuento no es válido o ha caducado.",
 
-        "captchaRequired": "Introduce el código captcha",
 
-        "captchaInvalid": "El CAPTCHA no es válido o ha caducado. Inténtalo de nuevo.",
 
-        "captchaIncorrect": "CAPTCHA incorrecto. Inténtalo de nuevo.",
 
-        "captchaExpired": "El CAPTCHA ha caducado. Actualízalo.",
 
-        "captchaTooManyAttempts": "Demasiados intentos de CAPTCHA. Solicita un nuevo CAPTCHA.",
 
-        "captchaLoadError": "No se pudo cargar el CAPTCHA. Inténtalo de nuevo.",
 
         "applyFailed": "Algo salió mal. Inténtalo de nuevo."
 
