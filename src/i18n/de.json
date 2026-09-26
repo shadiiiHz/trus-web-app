@@ -615,6 +615,7 @@
         "telegramUsernameRequired": "Bitte geben Sie Ihren Telegram-Benutzernamen ein",
         "timezoneRequired": "Bitte wählen Sie Ihre Zeitzone",
         "industryRequired": "Bitte wählen Sie Ihre Branche",
+        "jobTitleRequired": "Die Berufsbezeichnung ist erforderlich, wenn die Branche „Sonstiges“ ist",
         "logoRequired": "Bitte laden Sie Ihr Firmenlogo hoch",
         "logoDailyLimitReached": "Sie können ein Logo pro Tag generieren.",
         "logoGenerationFailed": "Die Logo-Generierung ist fehlgeschlagen. Bitte versuchen Sie es später erneut.",

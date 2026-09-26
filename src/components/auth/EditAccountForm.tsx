@@ -111,6 +111,7 @@ type FieldName =
   | "telegramUsername"
   | "timezone"
   | "industry"
+  | "jobTitle"
   | "logo";
 type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 
@@ -124,7 +125,15 @@ const BACKEND_REQUIRED_FIELDS: Record<string, [FieldName, FieldErrorKey]> = {
   telegram_username: ["telegramUsername", "telegramUsernameRequired"],
   brand_name: ["brandName", "brandNameRequired"],
   job: ["industry", "industryRequired"],
+  job_title: ["jobTitle", "jobTitleRequired"],
 };
+
+/** Job / Industry option that makes Job Title mandatory (matched by value or label). */
+function isOtherJob(job: string, options: SelectOption[]): boolean {
+  if (!job) return false;
+  const label = options.find((o) => o.value === job)?.label ?? "";
+  return [job, label].some((v) => v.trim().toLowerCase() === "other");
+}
 
 const fieldWrapClass = "relative flex items-center";
 
@@ -379,6 +388,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const [jobsLoading, setJobsLoading] = useState(true);
   const isLoading = profileLoading || timezonesLoading || jobsLoading;
   const [jobTitle, setJobTitle] = useState("");
+  const jobTitleRequired = isOtherJob(industry, industryOptions);
 
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoFile, setLogoFile] = useState<Blob | null>(null);
@@ -526,6 +536,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     const missing: FieldErrors = {};
     if (!brandName.trim()) missing.brandName = "brandNameRequired";
     if (!industry) missing.industry = "industryRequired";
+    if (jobTitleRequired && !jobTitle.trim())
+      missing.jobTitle = "jobTitleRequired";
     if (Object.keys(missing).length > 0) {
       setErrors((prev) => ({ ...prev, ...missing }));
       return;
@@ -578,6 +590,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
       nextErrors.telegramUsername = "telegramUsernameRequired";
     if (!timezone) nextErrors.timezone = "timezoneRequired";
     if (!industry) nextErrors.industry = "industryRequired";
+    if (jobTitleRequired && !jobTitle.trim())
+      nextErrors.jobTitle = "jobTitleRequired";
     if (!logoPreview) nextErrors.logo = "logoRequired";
 
     setErrors(nextErrors);
@@ -924,6 +938,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     onChange={(value) => {
                       setIndustry(value);
                       clearError("industry");
+                      clearError("jobTitle");
                     }}
                     options={industryOptions}
                     placeholder={copy.business.industryPlaceholder}
@@ -942,6 +957,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               <Field
                 id={jobTitleId}
                 label={copy.business.jobTitleLabel}
+                required={jobTitleRequired}
+                error={errors.jobTitle && copy.errors[errors.jobTitle]}
               >
                 <input
                   id={jobTitleId}
@@ -950,8 +967,14 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   autoComplete="organization-title"
                   placeholder={copy.business.jobTitlePlaceholder}
                   value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                  className={`${inputBaseClass} border-auth-border`}
+                  onChange={(e) => {
+                    setJobTitle(e.target.value);
+                    clearError("jobTitle");
+                  }}
+                  aria-invalid={Boolean(errors.jobTitle)}
+                  className={`${inputBaseClass} ${
+                    errors.jobTitle ? "border-red-400" : "border-auth-border"
+                  }`}
                 />
               </Field>
             </div>

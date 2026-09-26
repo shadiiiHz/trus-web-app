@@ -608,6 +608,7 @@
         "telegramUsernameRequired": "Lütfen Telegram kullanıcı adınızı girin",
         "timezoneRequired": "Lütfen saat diliminizi seçin",
         "industryRequired": "Lütfen sektörünüzü seçin",
+        "jobTitleRequired": "Sektör “Diğer” olduğunda iş unvanı zorunludur",
         "logoRequired": "Lütfen işletme logonuzu yükleyin",
         "logoDailyLimitReached": "Günde bir logo oluşturabilirsiniz.",
         "logoGenerationFailed": "Logo oluşturulamadı. Lütfen daha sonra tekrar deneyin.",

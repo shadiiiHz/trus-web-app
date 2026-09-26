@@ -618,6 +618,7 @@
         "telegramUsernameRequired": "Veuillez saisir votre nom d'utilisateur Telegram",
         "timezoneRequired": "Veuillez sélectionner votre fuseau horaire",
         "industryRequired": "Veuillez sélectionner votre secteur",
+        "jobTitleRequired": "L’intitulé du poste est obligatoire lorsque le secteur est « Autre »",
         "logoRequired": "Veuillez téléverser le logo de votre entreprise",
         "logoDailyLimitReached": "Vous pouvez générer un logo par jour.",
         "logoGenerationFailed": "La génération du logo a échoué. Veuillez réessayer plus tard.",
