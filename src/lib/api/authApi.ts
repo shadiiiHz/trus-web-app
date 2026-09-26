@@ -400,11 +400,6 @@ export interface ProfileUpdatePayload {
   telegramChannelName: string;
   /** Logo image, sent as a binary file part. */
   logo?: Blob | null;
-  /**
-   * Link to a generated logo that couldn't be downloaded as a file; sent as
-   * `logo_url` so the backend saves it instead. Ignored when `logo` is set.
-   */
-  logoUrl?: string | null;
 }
 
 /**
@@ -452,8 +447,6 @@ export async function updateProfile(
     const name =
       payload.logo instanceof File ? payload.logo.name : `logo.${extension}`;
     form.append("logo", payload.logo, name);
-  } else if (payload.logoUrl) {
-    form.append("logo_url", payload.logoUrl);
   }
 
   try {
@@ -700,28 +693,12 @@ export type GenerateLogoErrorCode =
   | "LOGO_GENERATION_FAILED";
 
 /**
- * The generated logo — only a preview until the profile form is submitted.
- * `file` is the image itself whenever it could be obtained (inline base64, or
- * a link the browser was allowed to download); otherwise `sourceUrl` is the
- * backend's link, to be sent with the profile update instead.
+ * The generated logo. The backend saves it as the account's logo as soon as
+ * it is generated, so it doesn't need to be sent with the profile update.
  */
 export interface GeneratedLogo {
-  /** Displayable URL for the preview. */
+  /** Displayable URL of the new logo. */
   logoUrl: string;
-  file?: Blob;
-  sourceUrl?: string;
-}
-
-/** Downloads an image link as a Blob, or `undefined` if the browser can't (CORS, network, non-image). */
-async function downloadImage(url: string): Promise<Blob | undefined> {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return undefined;
-    const blob = await response.blob();
-    return blob.type.startsWith("image/") ? blob : undefined;
-  } catch {
-    return undefined;
-  }
 }
 
 /** Decodes a `data:` URL, or bare base64 of the given type, into a Blob. */
@@ -743,7 +720,8 @@ function base64ToBlob(value: string, fallbackType: string): Blob | undefined {
 }
 
 /**
- * `POST /auth/profile/generate-logo` for the signed-in user. The success
+ * `POST /auth/profile/generate-logo` for the signed-in user, which also saves
+ * the result as the account's logo. The success
  * shape isn't confirmed yet, so the image is read from the root or from a
  * nested `data` / `logo` object, as a URL (`logo_url` / `url` / `logo` /
  * `image_url`) or inline base64 (`image` / `logo_base64` / `base64`).
@@ -774,11 +752,7 @@ export async function generateLogo(
     const url =
       str(raw.logo_url) || str(raw.url) || str(raw.image_url) || str(raw.logo);
     if (url && !url.startsWith("data:")) {
-      const displayUrl = toDisplayableImageUrl(url);
-      const downloaded = await downloadImage(displayUrl);
-      return downloaded
-        ? { logoUrl: URL.createObjectURL(downloaded), file: downloaded }
-        : { logoUrl: displayUrl, sourceUrl: url };
+      return { logoUrl: toDisplayableImageUrl(url) };
     }
 
     const inline =
@@ -791,7 +765,7 @@ export async function generateLogo(
         "Logo generation failed. Please try again later.",
       );
     }
-    return { logoUrl: URL.createObjectURL(file), file };
+    return { logoUrl: URL.createObjectURL(file) };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
   }

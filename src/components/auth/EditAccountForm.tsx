@@ -382,11 +382,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
 
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoFile, setLogoFile] = useState<Blob | null>(null);
-  // Link to a generated logo that couldn't be downloaded as a file; saved
-  // with the profile on submit, like a picked file.
-  const [generatedLogoUrl, setGeneratedLogoUrl] = useState<string | null>(
-    null,
-  );
   const [isDragging, setIsDragging] = useState(false);
   const [isGeneratingLogo, setIsGeneratingLogo] = useState(false);
 
@@ -441,7 +436,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     // The server already has this logo — only a newly picked one is re-sent.
     setLogoPreview(profile.logoUrl || null);
     setLogoFile(null);
-    setGeneratedLogoUrl(null);
     // Keep the header's account menu showing the same logo.
     setLogoUrl(profile.logoUrl);
   };
@@ -523,7 +517,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     const url = URL.createObjectURL(file);
     setLogoPreview(url);
     setLogoFile(file);
-    setGeneratedLogoUrl(null);
     clearError("logo");
   };
 
@@ -546,11 +539,11 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         jobTitle: jobTitle.trim(),
         logoDescription: "",
       });
-      // Only a preview: the account keeps its current logo (header included)
-      // until the form is submitted.
+      // The backend has already saved it as the account's logo, so show it
+      // in the header right away and don't re-send it on submit.
       setLogoPreview(logo.logoUrl);
-      setLogoFile(logo.file ?? null);
-      setGeneratedLogoUrl(logo.file ? null : (logo.sourceUrl ?? null));
+      setLogoFile(null);
+      setLogoUrl(logo.logoUrl);
       clearError("logo");
     } catch (error) {
       const code = error instanceof AuthApiError ? error.code : undefined;
@@ -608,7 +601,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         xHandle: xHandle.trim(),
         telegramChannelName: telegramChannel.trim(),
         logo: logoFile,
-        logoUrl: generatedLogoUrl,
       });
 
       // Keep the stored session's `ready` flag in step with the backend so
