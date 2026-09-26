@@ -561,6 +561,7 @@
         "uploadHint": "PNG, JPG, 2 MB'a kadar",
         "uploadButton": "Logoyu Yükle",
         "generateButton": "Logo Oluştur",
+        "generating": "Oluşturuluyor...",
         "removeAria": "Logoyu kaldır"
       },
       "account": {
@@ -608,6 +609,8 @@
         "timezoneRequired": "Lütfen saat diliminizi seçin",
         "industryRequired": "Lütfen sektörünüzü seçin",
         "logoRequired": "Lütfen işletme logonuzu yükleyin",
+        "logoDailyLimitReached": "Günde bir logo oluşturabilirsiniz.",
+        "logoGenerationFailed": "Logo oluşturulamadı. Lütfen daha sonra tekrar deneyin.",
         "passwordRequired": "Lütfen bir şifre oluşturun",
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",
         "confirmPasswordRequired": "Lütfen şifrenizi onaylayın",

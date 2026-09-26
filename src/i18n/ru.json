@@ -567,6 +567,7 @@
         "uploadHint": "PNG, JPG до 2 МБ",
         "uploadButton": "Загрузить логотип",
         "generateButton": "Сгенерировать логотип",
+        "generating": "Генерация...",
         "removeAria": "Удалить логотип"
       },
       "account": {
@@ -614,6 +615,8 @@
         "timezoneRequired": "Пожалуйста, выберите часовой пояс",
         "industryRequired": "Пожалуйста, выберите отрасль",
         "logoRequired": "Пожалуйста, загрузите логотип компании",
+        "logoDailyLimitReached": "Вы можете сгенерировать один логотип в день.",
+        "logoGenerationFailed": "Не удалось сгенерировать логотип. Пожалуйста, попробуйте позже.",
         "passwordRequired": "Пожалуйста, придумайте пароль",
         "passwordInvalid": "Пароль должен соответствовать всем требованиям выше",
         "confirmPasswordRequired": "Пожалуйста, подтвердите пароль",

@@ -571,6 +571,7 @@
         "uploadHint": "PNG, JPG jusqu'à 2 Mo",
         "uploadButton": "Téléverser le logo",
         "generateButton": "Générer un logo",
+        "generating": "Génération...",
         "removeAria": "Supprimer le logo"
       },
       "account": {
@@ -618,6 +619,8 @@
         "timezoneRequired": "Veuillez sélectionner votre fuseau horaire",
         "industryRequired": "Veuillez sélectionner votre secteur",
         "logoRequired": "Veuillez téléverser le logo de votre entreprise",
+        "logoDailyLimitReached": "Vous pouvez générer un logo par jour.",
+        "logoGenerationFailed": "La génération du logo a échoué. Veuillez réessayer plus tard.",
         "passwordRequired": "Veuillez créer un mot de passe",
         "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",
         "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",

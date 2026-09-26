@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import {
   AuthApiError,
   fetchProfile,
+  generateLogo as requestGeneratedLogo,
   reportApiError,
   type UserProfile,
   updateProfile,
@@ -100,15 +101,6 @@ function withUrlScheme(value: string): string {
   const rest = stripUrlScheme(value);
   return rest ? `https://${rest}` : "";
 }
-
-const LOGO_PALETTE = [
-  "#875DD9",
-  "#2563EB",
-  "#059669",
-  "#DB2777",
-  "#EA580C",
-  "#0EA5E9",
-];
 
 type FieldErrorKey = keyof SiteConfig["auth"]["editAccount"]["errors"];
 type FieldName =
@@ -390,8 +382,13 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
 
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoFile, setLogoFile] = useState<Blob | null>(null);
+  // Link to a generated logo that couldn't be downloaded as a file; saved
+  // with the profile on submit, like a picked file.
+  const [generatedLogoUrl, setGeneratedLogoUrl] = useState<string | null>(
+    null,
+  );
   const [isDragging, setIsDragging] = useState(false);
-
+  const [isGeneratingLogo, setIsGeneratingLogo] = useState(false);
 
   const [linkedin, setLinkedin] = useState("");
   const [instagram, setInstagram] = useState("");
@@ -444,6 +441,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     // The server already has this logo — only a newly picked one is re-sent.
     setLogoPreview(profile.logoUrl || null);
     setLogoFile(null);
+    setGeneratedLogoUrl(null);
     // Keep the header's account menu showing the same logo.
     setLogoUrl(profile.logoUrl);
   };
@@ -465,6 +463,31 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     logout();
     navigate("/login", { replace: true });
     return true;
+  };
+
+  /**
+   * `VALIDATION_ERROR` (profile update / generate logo): marks the fields
+   * the backend reports as missing and toasts anything it can't map.
+   */
+  const showValidationErrors = (error: AuthApiError) => {
+    const fieldErrors: FieldErrors = {};
+    const unmapped: string[] = [];
+    for (const item of error.fieldErrors ?? []) {
+      const mapped = BACKEND_REQUIRED_FIELDS[item.field];
+      if (mapped && item.code.endsWith("_REQUIRED")) {
+        fieldErrors[mapped[0]] = mapped[1];
+      } else if (item.message) {
+        unmapped.push(item.message);
+      }
+    }
+    setErrors((prev) => ({ ...prev, ...fieldErrors }));
+    if (unmapped.length || !Object.keys(fieldErrors).length) {
+      showToast(
+        [copy.errors.invalidInput, ...unmapped].join("\n"),
+        "error",
+        unmapped.length ? 8000 : undefined,
+      );
+    }
   };
 
   const loadProfile = async (signal?: AbortSignal) => {
@@ -500,16 +523,54 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     const url = URL.createObjectURL(file);
     setLogoPreview(url);
     setLogoFile(file);
+    setGeneratedLogoUrl(null);
     clearError("logo");
   };
 
-  const handleGenerateLogo = () => {
-    const initial = (brandName.trim()[0] ?? "T").toUpperCase();
-    const color = LOGO_PALETTE[Math.floor(Math.random() * LOGO_PALETTE.length)];
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" rx="100" fill="${color}"/><text x="50%" y="54%" font-family="Inter, sans-serif" font-size="90" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="central">${initial}</text></svg>`;
-    setLogoPreview(`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`);
-    setLogoFile(new Blob([svg], { type: "image/svg+xml" }));
-    clearError("logo");
+  const handleGenerateLogo = async () => {
+    if (isGeneratingLogo) return;
+    // The logo is built from these, so both are checked together up front.
+    const missing: FieldErrors = {};
+    if (!brandName.trim()) missing.brandName = "brandNameRequired";
+    if (!industry) missing.industry = "industryRequired";
+    if (Object.keys(missing).length > 0) {
+      setErrors((prev) => ({ ...prev, ...missing }));
+      return;
+    }
+
+    setIsGeneratingLogo(true);
+    try {
+      const logo = await requestGeneratedLogo({
+        brandName: brandName.trim(),
+        job: industry,
+        jobTitle: jobTitle.trim(),
+        logoDescription: "",
+      });
+      // Only a preview: the account keeps its current logo (header included)
+      // until the form is submitted.
+      setLogoPreview(logo.logoUrl);
+      setLogoFile(logo.file ?? null);
+      setGeneratedLogoUrl(logo.file ? null : (logo.sourceUrl ?? null));
+      clearError("logo");
+    } catch (error) {
+      const code = error instanceof AuthApiError ? error.code : undefined;
+      if (handleSessionError(error)) {
+        return;
+      } else if (code === "VALIDATION_ERROR" && error instanceof AuthApiError) {
+        showValidationErrors(error);
+      } else {
+        reportApiError(
+          error,
+          {
+            LOGO_DAILY_LIMIT_REACHED: copy.errors.logoDailyLimitReached,
+            LOGO_GENERATION_FAILED: copy.errors.logoGenerationFailed,
+          },
+          copy.errors.logoGenerationFailed,
+        );
+      }
+    } finally {
+      setIsGeneratingLogo(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -547,6 +608,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         xHandle: xHandle.trim(),
         telegramChannelName: telegramChannel.trim(),
         logo: logoFile,
+        logoUrl: generatedLogoUrl,
       });
 
       // Keep the stored session's `ready` flag in step with the backend so
@@ -579,24 +641,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
       if (handleSessionError(error)) {
         return;
       } else if (code === "VALIDATION_ERROR" && error instanceof AuthApiError) {
-        const fieldErrors: FieldErrors = {};
-        const unmapped: string[] = [];
-        for (const item of error.fieldErrors ?? []) {
-          const mapped = BACKEND_REQUIRED_FIELDS[item.field];
-          if (mapped && item.code.endsWith("_REQUIRED")) {
-            fieldErrors[mapped[0]] = mapped[1];
-          } else if (item.message) {
-            unmapped.push(item.message);
-          }
-        }
-        setErrors((prev) => ({ ...prev, ...fieldErrors }));
-        if (unmapped.length || !Object.keys(fieldErrors).length) {
-          showToast(
-            [copy.errors.invalidInput, ...unmapped].join("\n"),
-            "error",
-            unmapped.length ? 8000 : undefined,
-          );
-        }
+        showValidationErrors(error);
       } else if (code === "PROFILE_INCOMPLETE") {
         showToast(copy.errors.profileIncomplete, "error");
       } else {
@@ -1129,7 +1174,11 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   <button
                     type="button"
                     onClick={handleGenerateLogo}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent"
+                    // Stays clickable after a backend error (e.g. the daily
+                    // limit), so each click re-asks and shows the error again.
+                    disabled={isGeneratingLogo}
+                    aria-busy={isGeneratingLogo}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text"
                   >
                     <img
                       src={generateLogo}
@@ -1137,7 +1186,9 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       className="h-[16] w-auto"
                       aria-hidden="true"
                     />
-                    {copy.logo.generateButton}
+                    {isGeneratingLogo
+                      ? copy.logo.generating
+                      : copy.logo.generateButton}
                   </button>
                   <button
                     type="button"
@@ -1170,7 +1221,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         <Button
           type="submit"
           variant="primary"
-          disabled={status === "submitting" || isLoading}
+          disabled={status === "submitting" || isLoading || isGeneratingLogo}
           className="rounded-md disabled:cursor-not-allowed disabled:opacity-60 !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
         >
           {status === "submitting" ? copy.submitting : copy.submit}

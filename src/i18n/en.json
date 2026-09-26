@@ -561,6 +561,7 @@
         "uploadHint": "PNG, JPG up to 2 MB",
         "uploadButton": "Upload Logo",
         "generateButton": "Generate Logo",
+        "generating": "Generating...",
         "removeAria": "Remove logo"
       },
       "account": {
@@ -608,6 +609,8 @@
         "timezoneRequired": "Please select your timezone",
         "industryRequired": "Please select your industry",
         "logoRequired": "Please upload your business logo",
+        "logoDailyLimitReached": "You can generate one logo per day.",
+        "logoGenerationFailed": "Logo generation failed. Please try again later.",
         "passwordRequired": "Please create a password",
         "passwordInvalid": "Password must meet all the requirements above",
         "confirmPasswordRequired": "Please confirm your password",

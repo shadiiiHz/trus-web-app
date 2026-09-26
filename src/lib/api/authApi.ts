@@ -21,6 +21,8 @@ const RESEND_VERIFICATION_URL =
 const PROFILE_UPDATE_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile/update";
 const PROFILE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile";
+const GENERATE_LOGO_URL =
+  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile/generate-logo";
 const CHANGE_PASSWORD_URL =
   "https://n8n.srv1879006.hstgr.cloud/webhook/auth/change-password";
 const FORGOT_PASSWORD_URL =
@@ -398,6 +400,11 @@ export interface ProfileUpdatePayload {
   telegramChannelName: string;
   /** Logo image, sent as a binary file part. */
   logo?: Blob | null;
+  /**
+   * Link to a generated logo that couldn't be downloaded as a file; sent as
+   * `logo_url` so the backend saves it instead. Ignored when `logo` is set.
+   */
+  logoUrl?: string | null;
 }
 
 /**
@@ -441,8 +448,12 @@ export async function updateProfile(
   };
   for (const [key, value] of Object.entries(fields)) form.append(key, value);
   if (payload.logo) {
-    const name = payload.logo instanceof File ? payload.logo.name : "logo.svg";
+    const extension = payload.logo.type.split("/")[1]?.split("+")[0] || "png";
+    const name =
+      payload.logo instanceof File ? payload.logo.name : `logo.${extension}`;
     form.append("logo", payload.logo, name);
+  } else if (payload.logoUrl) {
+    form.append("logo_url", payload.logoUrl);
   }
 
   try {
@@ -665,6 +676,122 @@ export async function resetPassword(
       nextPage:
         typeof result?.next_page === "string" ? result.next_page : undefined,
     };
+  } catch (error) {
+    throw error instanceof AuthApiError ? error : toAuthApiError(error);
+  }
+}
+
+export interface GenerateLogoPayload {
+  brandName: string;
+  job: string;
+  jobTitle: string;
+  logoDescription: string;
+}
+
+/**
+ * Documented backend codes for the generate-logo endpoint. `VALIDATION_ERROR`
+ * carries per-field detail in `AuthApiError.fieldErrors` (e.g.
+ * `BRAND_NAME_REQUIRED` on `brand_name`).
+ */
+export type GenerateLogoErrorCode =
+  | "VALIDATION_ERROR"
+  | "INVALID_SESSION"
+  | "LOGO_DAILY_LIMIT_REACHED"
+  | "LOGO_GENERATION_FAILED";
+
+/**
+ * The generated logo — only a preview until the profile form is submitted.
+ * `file` is the image itself whenever it could be obtained (inline base64, or
+ * a link the browser was allowed to download); otherwise `sourceUrl` is the
+ * backend's link, to be sent with the profile update instead.
+ */
+export interface GeneratedLogo {
+  /** Displayable URL for the preview. */
+  logoUrl: string;
+  file?: Blob;
+  sourceUrl?: string;
+}
+
+/** Downloads an image link as a Blob, or `undefined` if the browser can't (CORS, network, non-image). */
+async function downloadImage(url: string): Promise<Blob | undefined> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return undefined;
+    const blob = await response.blob();
+    return blob.type.startsWith("image/") ? blob : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Decodes a `data:` URL, or bare base64 of the given type, into a Blob. */
+function base64ToBlob(value: string, fallbackType: string): Blob | undefined {
+  const match = value.match(/^data:([^;,]+)?(;base64)?,(.*)$/s);
+  const type = match?.[1] || fallbackType;
+  const data = match ? match[3] : value;
+  try {
+    if (match && !match[2]) {
+      return new Blob([decodeURIComponent(data)], { type });
+    }
+    const bytes = Uint8Array.from(atob(data.replace(/\s/g, "")), (c) =>
+      c.charCodeAt(0),
+    );
+    return new Blob([bytes], { type });
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * `POST /auth/profile/generate-logo` for the signed-in user. The success
+ * shape isn't confirmed yet, so the image is read from the root or from a
+ * nested `data` / `logo` object, as a URL (`logo_url` / `url` / `logo` /
+ * `image_url`) or inline base64 (`image` / `logo_base64` / `base64`).
+ */
+export async function generateLogo(
+  payload: GenerateLogoPayload,
+): Promise<GeneratedLogo> {
+  try {
+    const { data } = await client.post(
+      GENERATE_LOGO_URL,
+      {
+        brand_name: payload.brandName,
+        job: payload.job,
+        job_title: payload.jobTitle,
+        logo_description: payload.logoDescription,
+      },
+      { headers: authHeaders() },
+    );
+    const result = unwrap(data);
+    if (result?.success === false) throw payloadToAuthApiError(result);
+
+    const nested = [result?.data, result?.logo].find(
+      (value): value is Record<string, unknown> =>
+        typeof value === "object" && value !== null && !Array.isArray(value),
+    );
+    const raw: Record<string, unknown> = { ...result, ...nested };
+
+    const url =
+      str(raw.logo_url) || str(raw.url) || str(raw.image_url) || str(raw.logo);
+    if (url && !url.startsWith("data:")) {
+      const displayUrl = toDisplayableImageUrl(url);
+      const downloaded = await downloadImage(displayUrl);
+      return downloaded
+        ? { logoUrl: URL.createObjectURL(downloaded), file: downloaded }
+        : { logoUrl: displayUrl, sourceUrl: url };
+    }
+
+    const inline =
+      url || str(raw.image) || str(raw.logo_base64) || str(raw.base64);
+    const mimeType = str(raw.mime_type) || str(raw.mimeType) || "image/png";
+    const file = inline ? base64ToBlob(inline, mimeType) : undefined;
+    if (!file) {
+      throw new AuthApiError(
+        "LOGO_GENERATION_FAILED",
+        "Logo generation failed. Please try again later.",
+      );
+    }
+    return { logoUrl: URL.createObjectURL(file), file };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
   }

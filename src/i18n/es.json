@@ -580,6 +580,7 @@
         "uploadHint": "PNG, JPG hasta 2 MB",
         "uploadButton": "Subir logo",
         "generateButton": "Generar logo",
+        "generating": "Generando...",
         "removeAria": "Eliminar logo"
       },
       "account": {
@@ -627,6 +628,8 @@
         "timezoneRequired": "Por favor selecciona tu zona horaria",
         "industryRequired": "Por favor selecciona tu sector",
         "logoRequired": "Por favor sube el logo de tu negocio",
+        "logoDailyLimitReached": "Puedes generar un logo por día.",
+        "logoGenerationFailed": "No se pudo generar el logo. Inténtalo de nuevo más tarde.",
         "passwordRequired": "Por favor crea una contraseña",
         "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",
         "confirmPasswordRequired": "Por favor confirma tu contraseña",
