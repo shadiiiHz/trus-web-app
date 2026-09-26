@@ -281,6 +281,8 @@ export interface AuthSessionResult {
   nextPage?: string;
   firstName?: string;
   lastName?: string;
+  /** Full display name; login sends this as `customer` instead of first/last names. */
+  customer?: string;
 }
 
 interface RawUserNames {
@@ -289,6 +291,8 @@ interface RawUserNames {
   /** Login sends the names without the underscore. */
   firstname?: unknown;
   lastname?: unknown;
+  /** Login may send the full name as a single `customer` string. */
+  customer?: unknown;
 }
 
 interface RawAuthSessionPayload extends RawUserNames {
@@ -324,6 +328,7 @@ function toAuthSessionResult(raw: RawAuthSessionPayload): AuthSessionResult {
       toName(raw.last_name) ??
       toName(raw.user?.lastname) ??
       toName(raw.user?.last_name),
+    customer: toName(raw.customer) ?? toName(raw.user?.customer),
   };
 }
 

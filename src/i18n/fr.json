@@ -617,7 +617,6 @@
         "telegramUsernameRequired": "Veuillez saisir votre nom d'utilisateur Telegram",
         "timezoneRequired": "Veuillez sélectionner votre fuseau horaire",
         "industryRequired": "Veuillez sélectionner votre secteur",
-        "jobTitleRequired": "Veuillez saisir votre intitulé de poste",
         "logoRequired": "Veuillez téléverser le logo de votre entreprise",
         "passwordRequired": "Veuillez créer un mot de passe",
         "passwordInvalid": "Le mot de passe doit répondre à toutes les exigences ci-dessus",

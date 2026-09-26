@@ -626,7 +626,6 @@
         "telegramUsernameRequired": "Por favor introduce tu usuario de Telegram",
         "timezoneRequired": "Por favor selecciona tu zona horaria",
         "industryRequired": "Por favor selecciona tu sector",
-        "jobTitleRequired": "Por favor introduce tu cargo",
         "logoRequired": "Por favor sube el logo de tu negocio",
         "passwordRequired": "Por favor crea una contraseña",
         "passwordInvalid": "La contraseña debe cumplir todos los requisitos anteriores",

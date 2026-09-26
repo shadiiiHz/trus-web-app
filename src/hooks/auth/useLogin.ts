@@ -19,10 +19,11 @@ export function useLogin(options?: UseLoginOptions) {
         token: result.sessionToken,
         expiresAt: result.expiresAt,
         ready: result.ready,
-        // Header shows the login response's first + last name, falling
-        // back to the email when the backend sends neither.
+        // Header shows the login response's first + last name, then its
+        // `customer` full name, falling back to the email when neither is sent.
         displayName:
           [result.firstName, result.lastName].filter(Boolean).join(" ") ||
+          result.customer ||
           payload.email,
       });
       options?.onSuccess?.(result);

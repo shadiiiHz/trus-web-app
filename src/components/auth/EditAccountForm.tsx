@@ -119,7 +119,6 @@ type FieldName =
   | "telegramUsername"
   | "timezone"
   | "industry"
-  | "jobTitle"
   | "logo";
 type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 
@@ -133,7 +132,6 @@ const BACKEND_REQUIRED_FIELDS: Record<string, [FieldName, FieldErrorKey]> = {
   telegram_username: ["telegramUsername", "telegramUsernameRequired"],
   brand_name: ["brandName", "brandNameRequired"],
   job: ["industry", "industryRequired"],
-  job_title: ["jobTitle", "jobTitleRequired"],
 };
 
 const fieldWrapClass = "relative flex items-center";
@@ -526,7 +524,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
       nextErrors.telegramUsername = "telegramUsernameRequired";
     if (!timezone) nextErrors.timezone = "timezoneRequired";
     if (!industry) nextErrors.industry = "industryRequired";
-    if (!jobTitle.trim()) nextErrors.jobTitle = "jobTitleRequired";
     if (!logoPreview) nextErrors.logo = "logoRequired";
 
     setErrors(nextErrors);
@@ -908,8 +905,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               <Field
                 id={jobTitleId}
                 label={copy.business.jobTitleLabel}
-                required
-                error={errors.jobTitle && copy.errors[errors.jobTitle]}
               >
                 <input
                   id={jobTitleId}
@@ -918,14 +913,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   autoComplete="organization-title"
                   placeholder={copy.business.jobTitlePlaceholder}
                   value={jobTitle}
-                  onChange={(e) => {
-                    setJobTitle(e.target.value);
-                    clearError("jobTitle");
-                  }}
-                  aria-invalid={Boolean(errors.jobTitle)}
-                  className={`${inputBaseClass} ${
-                    errors.jobTitle ? "border-red-400" : "border-auth-border"
-                  }`}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                  className={`${inputBaseClass} border-auth-border`}
                 />
               </Field>
             </div>

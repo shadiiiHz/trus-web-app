@@ -607,7 +607,6 @@
         "telegramUsernameRequired": "Lütfen Telegram kullanıcı adınızı girin",
         "timezoneRequired": "Lütfen saat diliminizi seçin",
         "industryRequired": "Lütfen sektörünüzü seçin",
-        "jobTitleRequired": "Lütfen unvanınızı girin",
         "logoRequired": "Lütfen işletme logonuzu yükleyin",
         "passwordRequired": "Lütfen bir şifre oluşturun",
         "passwordInvalid": "Şifre yukarıdaki tüm gereksinimleri karşılamalıdır",

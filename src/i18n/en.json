@@ -607,7 +607,6 @@
         "telegramUsernameRequired": "Please enter your Telegram username",
         "timezoneRequired": "Please select your timezone",
         "industryRequired": "Please select your industry",
-        "jobTitleRequired": "Please enter your job title",
         "logoRequired": "Please upload your business logo",
         "passwordRequired": "Please create a password",
         "passwordInvalid": "Password must meet all the requirements above",
