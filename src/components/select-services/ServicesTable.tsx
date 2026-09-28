@@ -23,12 +23,19 @@ export interface ServicesTableProps {
 
 type SortDir = "none" | "asc" | "desc";
 
-const headCellClass = "px-0 font-body text-left text-[14px] font-semibold text-[#737373]";
+const headCellClass =
+  "px-0 font-body text-left text-[14px] font-semibold text-[#737373]";
 
 /** Placeholder until the backend serves real service icons. */
 function ServiceIcon({ src }: { src: string | null }) {
   if (src) {
-    return <img src={src} alt="" className="h-10 w-10 shrink-0 rounded-lg object-cover" />;
+    return (
+      <img
+        src={src}
+        alt=""
+        className="h-10 w-10 shrink-0 rounded-lg object-cover"
+      />
+    );
   }
   return (
     <span
@@ -38,7 +45,13 @@ function ServiceIcon({ src }: { src: string | null }) {
   );
 }
 
-function StatusBadge({ purchased, label }: { purchased: boolean; label: string }) {
+function StatusBadge({
+  purchased,
+  label,
+}: {
+  purchased: boolean;
+  label: string;
+}) {
   return (
     <span className="inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-[6px] border border-[#D4D4D4] bg-white px-2 text-[12px] font-medium text-[#404040]">
       <span
@@ -118,8 +131,7 @@ export function ServicesTable({
 
   const closeInvoice = useCallback(() => setInvoiceFor(null), []);
 
-  const cycleSort = () =>
-    setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+  const cycleSort = () => setSortDir((d) => (d === "asc" ? "desc" : "asc"));
 
   return (
     <>
@@ -140,6 +152,7 @@ export function ServicesTable({
               <th className={`${headCellClass} pl-6`} scope="col">
                 <div className="flex items-center gap-4">
                   <Checkbox
+                    size={20}
                     checked={allSelected}
                     onChange={onToggleAll}
                     aria-label={copy.selectAllAria}
@@ -161,13 +174,27 @@ export function ServicesTable({
                   </button>
                 </div>
               </th>
-              <th className={headCellClass} scope="col">{copy.description}</th>
-              <th className={headCellClass} scope="col">{copy.quantity}</th>
-              <th className={headCellClass} scope="col">{copy.unitPrice}</th>
-              <th className={headCellClass} scope="col">{copy.total}</th>
-              <th className={headCellClass} scope="col">{copy.status}</th>
-              <th className={headCellClass} scope="col">{copy.billing}</th>
-              <th className={`${headCellClass} pr-6 text-center`} scope="col">{copy.invoice}</th>
+              <th className={headCellClass} scope="col">
+                {copy.description}
+              </th>
+              <th className={headCellClass} scope="col">
+                {copy.quantity}
+              </th>
+              <th className={headCellClass} scope="col">
+                {copy.unitPrice}
+              </th>
+              <th className={headCellClass} scope="col">
+                {copy.total}
+              </th>
+              <th className={headCellClass} scope="col">
+                {copy.status}
+              </th>
+              <th className={headCellClass} scope="col">
+                {copy.billing}
+              </th>
+              <th className={`${headCellClass} pr-6 text-center`} scope="col">
+                {copy.invoice}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -175,7 +202,8 @@ export function ServicesTable({
               const selection = selections[service.id];
               if (!selection) return null;
               const { selected, quantity, period } = selection;
-              const setPeriod = (p: BillingPeriod) => onChange(service.id, { period: p });
+              const setPeriod = (p: BillingPeriod) =>
+                onChange(service.id, { period: p });
 
               return (
                 <tr
@@ -185,8 +213,11 @@ export function ServicesTable({
                   <td className="pl-6">
                     <div className="flex items-center gap-4">
                       <Checkbox
+                        size={20}
                         checked={selected}
-                        onChange={(checked) => onChange(service.id, { selected: checked })}
+                        onChange={(checked) =>
+                          onChange(service.id, { selected: checked })
+                        }
                         aria-label={service.name}
                       />
                       <div className="flex min-w-0 items-center gap-3">
@@ -215,7 +246,9 @@ export function ServicesTable({
                     <p className="text-[14px] font-medium text-auth-heading tabular-nums">
                       {formatUsd(service.unitPrice)}
                     </p>
-                    <p className="text-[14px] font-normal text-auth-muted">{localize(service.unitLabel)}</p>
+                    <p className="text-[14px] font-normal text-auth-muted">
+                      {localize(service.unitLabel)}
+                    </p>
                   </td>
                   <td className="pr-4">
                     <div className="flex flex-col gap-0.5">
@@ -238,11 +271,15 @@ export function ServicesTable({
                   <td className="pr-4">
                     <StatusBadge
                       purchased={service.purchased}
-                      label={service.purchased ? copy.purchased : copy.notPurchased}
+                      label={
+                        service.purchased ? copy.purchased : copy.notPurchased
+                      }
                     />
                   </td>
                   <td className="pr-4 text-[14px] text-[#525252] font-body">
-                    {service.purchasedBilling ? billingLabels[service.purchasedBilling] : emptyCell}
+                    {service.purchasedBilling
+                      ? billingLabels[service.purchasedBilling]
+                      : emptyCell}
                   </td>
                   <td className="pr-6 text-center">
                     {service.invoiceId ? (
