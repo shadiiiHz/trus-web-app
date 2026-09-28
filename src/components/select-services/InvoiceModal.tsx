@@ -170,7 +170,7 @@ function InvoiceRow({
                 {label}
               </span>
               {currentLabel && (
-                <span className="inline-flex h-[22px] shrink-0 items-center rounded-md bg-auth-surface-hover px-2 text-[12px] font-medium text-auth-primary">
+                <span className="inline-flex h-[22px] shrink-0 items-center rounded-[6px] bg-[#F5F3FF] px-2 text-[12px] font-medium text-[#6E43C1]">
                   {currentLabel}
                 </span>
               )}
