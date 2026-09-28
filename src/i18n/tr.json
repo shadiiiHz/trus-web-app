@@ -682,11 +682,45 @@
 
       "invoiceModal": {
 
-        "title": "Fatura",
+        "title": "Faturayı indir",
 
-        "body": "Fatura ayrıntıları yakında burada olacak.",
+        "close": "Kapat",
 
-        "close": "Kapat"
+        "serviceLabel": "Hizmet",
+
+        "monthlyTitle": "Aylık faturalar",
+
+        "monthlySubtitle": "1. aydan {count}. aya",
+
+        "annualTitle": "Yıllık fatura",
+
+        "annualSubtitle": "Tüm yıl için fatura belgesi",
+
+        "countOne": "{count} fatura",
+
+        "countOther": "{count} fatura",
+
+        "colInvoice": "Fatura",
+
+        "colPeriod": "Fatura dönemi",
+
+        "colAmount": "Tutar",
+
+        "monthLabel": "{n}. ay",
+
+        "yearLabel": "{n}. yıl",
+
+        "monthlyPeriod": "Aylık fatura dönemi",
+
+        "annualPeriod": "Yıllık fatura dönemi",
+
+        "selectAllAria": "Tüm aylık faturaları seç",
+
+        "empty": "Henüz fatura yok.",
+
+        "cancel": "İptal",
+
+        "download": "Faturayı indir"
 
       }
 

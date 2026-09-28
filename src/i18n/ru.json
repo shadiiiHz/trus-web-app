@@ -688,11 +688,45 @@
 
       "invoiceModal": {
 
-        "title": "Счёт",
+        "title": "Скачать счёт",
 
-        "body": "Детали счёта скоро будут доступны здесь.",
+        "close": "Закрыть",
 
-        "close": "Закрыть"
+        "serviceLabel": "Услуга",
+
+        "monthlyTitle": "Ежемесячные счета",
+
+        "monthlySubtitle": "С 1-го по {count}-й месяц",
+
+        "annualTitle": "Годовой счёт",
+
+        "annualSubtitle": "Платёжный документ за весь год",
+
+        "countOne": "Счетов: {count}",
+
+        "countOther": "Счетов: {count}",
+
+        "colInvoice": "Счёт",
+
+        "colPeriod": "Расчётный период",
+
+        "colAmount": "Сумма",
+
+        "monthLabel": "Месяц {n}",
+
+        "yearLabel": "Год {n}",
+
+        "monthlyPeriod": "Ежемесячный расчётный период",
+
+        "annualPeriod": "Годовой расчётный период",
+
+        "selectAllAria": "Выбрать все ежемесячные счета",
+
+        "empty": "Счетов пока нет.",
+
+        "cancel": "Отмена",
+
+        "download": "Скачать счёт"
 
       }
 

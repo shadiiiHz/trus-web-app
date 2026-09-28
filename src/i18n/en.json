@@ -682,11 +682,45 @@
 
       "invoiceModal": {
 
-        "title": "Invoice",
+        "title": "Download invoice",
 
-        "body": "The invoice details will be available here soon.",
+        "close": "Close",
 
-        "close": "Close"
+        "serviceLabel": "Service",
+
+        "monthlyTitle": "Monthly invoices",
+
+        "monthlySubtitle": "Month 1 through Month {count}",
+
+        "annualTitle": "Annual invoice",
+
+        "annualSubtitle": "Full-year billing document",
+
+        "countOne": "{count} invoice",
+
+        "countOther": "{count} invoices",
+
+        "colInvoice": "Invoice",
+
+        "colPeriod": "Billing period",
+
+        "colAmount": "Amount",
+
+        "monthLabel": "Month {n}",
+
+        "yearLabel": "Year {n}",
+
+        "monthlyPeriod": "Monthly billing period",
+
+        "annualPeriod": "Annual billing period",
+
+        "selectAllAria": "Select all monthly invoices",
+
+        "empty": "No invoices yet.",
+
+        "cancel": "Cancel",
+
+        "download": "Download invoice"
 
       }
 

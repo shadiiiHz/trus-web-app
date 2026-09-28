@@ -266,8 +266,8 @@ export function ServicesTable({
       </div>
       {invoiceFor?.invoiceId && (
         <InvoiceModal
-          serviceName={invoiceFor.name}
-          invoiceId={invoiceFor.invoiceId}
+          service={invoiceFor}
+          purchasedLabel={copy.purchased}
           onClose={closeInvoice}
           copy={copy.invoiceModal}
         />

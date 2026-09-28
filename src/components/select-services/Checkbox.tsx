@@ -28,7 +28,7 @@ export function Checkbox({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         aria-label={ariaLabel}
-        className="peer h-full w-full cursor-pointer appearance-none rounded-[4px] border border-auth-border bg-white transition-colors duration-150 checked:border-auth-primary checked:bg-auth-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+        className="peer h-full w-full cursor-pointer appearance-none rounded-[6px] border border-auth-border bg-white transition-colors duration-150 checked:border-auth-primary checked:bg-auth-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
       />
       <Check
         size={size - 4}

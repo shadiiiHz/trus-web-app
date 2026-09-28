@@ -689,11 +689,45 @@
 
       "invoiceModal": {
 
-        "title": "Rechnung",
+        "title": "Rechnung herunterladen",
 
-        "body": "Die Rechnungsdetails sind hier bald verfügbar.",
+        "close": "Schließen",
 
-        "close": "Schließen"
+        "serviceLabel": "Dienst",
+
+        "monthlyTitle": "Monatliche Rechnungen",
+
+        "monthlySubtitle": "Monat 1 bis Monat {count}",
+
+        "annualTitle": "Jahresrechnung",
+
+        "annualSubtitle": "Abrechnungsdokument für das ganze Jahr",
+
+        "countOne": "{count} Rechnung",
+
+        "countOther": "{count} Rechnungen",
+
+        "colInvoice": "Rechnung",
+
+        "colPeriod": "Abrechnungszeitraum",
+
+        "colAmount": "Betrag",
+
+        "monthLabel": "Monat {n}",
+
+        "yearLabel": "Jahr {n}",
+
+        "monthlyPeriod": "Monatlicher Abrechnungszeitraum",
+
+        "annualPeriod": "Jährlicher Abrechnungszeitraum",
+
+        "selectAllAria": "Alle monatlichen Rechnungen auswählen",
+
+        "empty": "Noch keine Rechnungen.",
+
+        "cancel": "Abbrechen",
+
+        "download": "Rechnung herunterladen"
 
       }
 

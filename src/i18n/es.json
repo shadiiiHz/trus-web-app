@@ -701,11 +701,45 @@
 
       "invoiceModal": {
 
-        "title": "Factura",
+        "title": "Descargar factura",
 
-        "body": "Los detalles de la factura estarán disponibles aquí pronto.",
+        "close": "Cerrar",
 
-        "close": "Cerrar"
+        "serviceLabel": "Servicio",
+
+        "monthlyTitle": "Facturas mensuales",
+
+        "monthlySubtitle": "Del mes 1 al mes {count}",
+
+        "annualTitle": "Factura anual",
+
+        "annualSubtitle": "Documento de facturación del año completo",
+
+        "countOne": "{count} factura",
+
+        "countOther": "{count} facturas",
+
+        "colInvoice": "Factura",
+
+        "colPeriod": "Periodo de facturación",
+
+        "colAmount": "Importe",
+
+        "monthLabel": "Mes {n}",
+
+        "yearLabel": "Año {n}",
+
+        "monthlyPeriod": "Periodo de facturación mensual",
+
+        "annualPeriod": "Periodo de facturación anual",
+
+        "selectAllAria": "Seleccionar todas las facturas mensuales",
+
+        "empty": "Aún no hay facturas.",
+
+        "cancel": "Cancelar",
+
+        "download": "Descargar factura"
 
       }
 
