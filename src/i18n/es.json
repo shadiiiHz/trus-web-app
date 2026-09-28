@@ -843,7 +843,81 @@
 
     "per additional run/month": "por ejecución adicional/mes",
 
-    "per extra publish/month": "por publicación extra/mes"
+    "per extra publish/month": "por publicación extra/mes",
+
+    "Accountant": "Contador",
+
+    "Architect": "Arquitecto",
+
+    "Beauty Salon": "Salón de belleza",
+
+    "Business Consultant": "Consultor empresarial",
+
+    "Cafe": "Cafetería",
+
+    "Car Dealer": "Concesionario de automóviles",
+
+    "Chiropractor": "Quiropráctico",
+
+    "Construction Company": "Empresa constructora",
+
+    "Dentist": "Dentista",
+
+    "Digital Marketing Agency": "Agencia de marketing digital",
+
+    "Doctor": "Médico",
+
+    "Electrician": "Electricista",
+
+    "Financial Advisor": "Asesor financiero",
+
+    "Fitness Center": "Centro de fitness",
+
+    "Graphic Designer": "Diseñador gráfico",
+
+    "Gym": "Gimnasio",
+
+    "Hair Salon": "Peluquería",
+
+    "Insurance Agency": "Agencia de seguros",
+
+    "Interior Designer": "Diseñador de interiores",
+
+    "IT Company": "Empresa de TI",
+
+    "Law Firm": "Bufete de abogados",
+
+    "Lawyer": "Abogado",
+
+    "Marketing Agency": "Agencia de marketing",
+
+    "Medical Clinic": "Clínica médica",
+
+    "Mortgage Broker": "Corredor hipotecario",
+
+    "Photographer": "Fotógrafo",
+
+    "Physiotherapist": "Fisioterapeuta",
+
+    "Plumber": "Fontanero",
+
+    "Real Estate Agency": "Agencia inmobiliaria",
+
+    "Real Estate Agent": "Agente inmobiliario",
+
+    "Restaurant": "Restaurante",
+
+    "Retail Store": "Tienda minorista",
+
+    "Software Company": "Empresa de software",
+
+    "Spa": "Spa",
+
+    "Travel Agency": "Agencia de viajes",
+
+    "Web Design Agency": "Agencia de diseño web",
+
+    "Other": "Otro"
 
   }
 }

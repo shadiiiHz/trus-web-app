@@ -824,7 +824,81 @@
 
     "per additional run/month": "ek çalıştırma başına/ay",
 
-    "per extra publish/month": "ek yayın başına/ay"
+    "per extra publish/month": "ek yayın başına/ay",
+
+    "Accountant": "Muhasebeci",
+
+    "Architect": "Mimar",
+
+    "Beauty Salon": "Güzellik Salonu",
+
+    "Business Consultant": "İşletme Danışmanı",
+
+    "Cafe": "Kafe",
+
+    "Car Dealer": "Otomobil Bayisi",
+
+    "Chiropractor": "Kayropraktör",
+
+    "Construction Company": "İnşaat Şirketi",
+
+    "Dentist": "Diş Hekimi",
+
+    "Digital Marketing Agency": "Dijital Pazarlama Ajansı",
+
+    "Doctor": "Doktor",
+
+    "Electrician": "Elektrikçi",
+
+    "Financial Advisor": "Finans Danışmanı",
+
+    "Fitness Center": "Fitness Merkezi",
+
+    "Graphic Designer": "Grafik Tasarımcı",
+
+    "Gym": "Spor Salonu",
+
+    "Hair Salon": "Kuaför",
+
+    "Insurance Agency": "Sigorta Acentesi",
+
+    "Interior Designer": "İç Mimar",
+
+    "IT Company": "BT Şirketi",
+
+    "Law Firm": "Hukuk Bürosu",
+
+    "Lawyer": "Avukat",
+
+    "Marketing Agency": "Pazarlama Ajansı",
+
+    "Medical Clinic": "Tıp Kliniği",
+
+    "Mortgage Broker": "Mortgage Komisyoncusu",
+
+    "Photographer": "Fotoğrafçı",
+
+    "Physiotherapist": "Fizyoterapist",
+
+    "Plumber": "Tesisatçı",
+
+    "Real Estate Agency": "Emlak Ajansı",
+
+    "Real Estate Agent": "Emlak Danışmanı",
+
+    "Restaurant": "Restoran",
+
+    "Retail Store": "Perakende Mağaza",
+
+    "Software Company": "Yazılım Şirketi",
+
+    "Spa": "Spa",
+
+    "Travel Agency": "Seyahat Acentesi",
+
+    "Web Design Agency": "Web Tasarım Ajansı",
+
+    "Other": "Diğer"
 
   }
 }

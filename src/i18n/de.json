@@ -831,7 +831,81 @@
 
     "per additional run/month": "pro zusätzlichem Durchlauf/Monat",
 
-    "per extra publish/month": "pro zusätzlicher Veröffentlichung/Monat"
+    "per extra publish/month": "pro zusätzlicher Veröffentlichung/Monat",
+
+    "Accountant": "Steuerberater",
+
+    "Architect": "Architekt",
+
+    "Beauty Salon": "Kosmetikstudio",
+
+    "Business Consultant": "Unternehmensberater",
+
+    "Cafe": "Café",
+
+    "Car Dealer": "Autohändler",
+
+    "Chiropractor": "Chiropraktiker",
+
+    "Construction Company": "Bauunternehmen",
+
+    "Dentist": "Zahnarzt",
+
+    "Digital Marketing Agency": "Digitalmarketing-Agentur",
+
+    "Doctor": "Arzt",
+
+    "Electrician": "Elektriker",
+
+    "Financial Advisor": "Finanzberater",
+
+    "Fitness Center": "Fitnesscenter",
+
+    "Graphic Designer": "Grafikdesigner",
+
+    "Gym": "Fitnessstudio",
+
+    "Hair Salon": "Friseursalon",
+
+    "Insurance Agency": "Versicherungsagentur",
+
+    "Interior Designer": "Innenarchitekt",
+
+    "IT Company": "IT-Unternehmen",
+
+    "Law Firm": "Anwaltskanzlei",
+
+    "Lawyer": "Rechtsanwalt",
+
+    "Marketing Agency": "Marketingagentur",
+
+    "Medical Clinic": "Arztpraxis",
+
+    "Mortgage Broker": "Hypothekenmakler",
+
+    "Photographer": "Fotograf",
+
+    "Physiotherapist": "Physiotherapeut",
+
+    "Plumber": "Klempner",
+
+    "Real Estate Agency": "Immobilienagentur",
+
+    "Real Estate Agent": "Immobilienmakler",
+
+    "Restaurant": "Restaurant",
+
+    "Retail Store": "Einzelhandelsgeschäft",
+
+    "Software Company": "Softwareunternehmen",
+
+    "Spa": "Spa",
+
+    "Travel Agency": "Reisebüro",
+
+    "Web Design Agency": "Webdesign-Agentur",
+
+    "Other": "Sonstiges"
 
   }
 }

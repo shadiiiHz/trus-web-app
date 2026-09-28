@@ -830,7 +830,81 @@
 
     "per additional run/month": "за доп. запуск/месяц",
 
-    "per extra publish/month": "за доп. публикацию/месяц"
+    "per extra publish/month": "за доп. публикацию/месяц",
+
+    "Accountant": "Бухгалтер",
+
+    "Architect": "Архитектор",
+
+    "Beauty Salon": "Салон красоты",
+
+    "Business Consultant": "Бизнес-консультант",
+
+    "Cafe": "Кафе",
+
+    "Car Dealer": "Автосалон",
+
+    "Chiropractor": "Хиропрактик",
+
+    "Construction Company": "Строительная компания",
+
+    "Dentist": "Стоматолог",
+
+    "Digital Marketing Agency": "Агентство цифрового маркетинга",
+
+    "Doctor": "Врач",
+
+    "Electrician": "Электрик",
+
+    "Financial Advisor": "Финансовый консультант",
+
+    "Fitness Center": "Фитнес-центр",
+
+    "Graphic Designer": "Графический дизайнер",
+
+    "Gym": "Спортзал",
+
+    "Hair Salon": "Парикмахерская",
+
+    "Insurance Agency": "Страховое агентство",
+
+    "Interior Designer": "Дизайнер интерьера",
+
+    "IT Company": "IT-компания",
+
+    "Law Firm": "Юридическая фирма",
+
+    "Lawyer": "Юрист",
+
+    "Marketing Agency": "Маркетинговое агентство",
+
+    "Medical Clinic": "Медицинская клиника",
+
+    "Mortgage Broker": "Ипотечный брокер",
+
+    "Photographer": "Фотограф",
+
+    "Physiotherapist": "Физиотерапевт",
+
+    "Plumber": "Сантехник",
+
+    "Real Estate Agency": "Агентство недвижимости",
+
+    "Real Estate Agent": "Риелтор",
+
+    "Restaurant": "Ресторан",
+
+    "Retail Store": "Розничный магазин",
+
+    "Software Company": "Компания-разработчик ПО",
+
+    "Spa": "Спа",
+
+    "Travel Agency": "Туристическое агентство",
+
+    "Web Design Agency": "Агентство веб-дизайна",
+
+    "Other": "Другое"
 
   }
 }

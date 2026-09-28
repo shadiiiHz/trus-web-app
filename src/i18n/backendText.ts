@@ -13,6 +13,7 @@
  * Usage — anywhere, for any backend field:
  *   localizeBackendText(service.description)
  *   localizeBackendFields(service, ["description", "unitLabel"])
+ *   localizeBackendOptions(jobOptions, locale)   // dropdown labels; values stay English
  */
 import { getLocale, locales, useLocale, type Locale } from "./index";
 
@@ -80,6 +81,14 @@ export function localizeBackendFields<T extends object, K extends keyof T>(
     }
   }
   return copy;
+}
+
+/** Translates the `label` of each dropdown option; `value` (sent back to the API) is untouched. */
+export function localizeBackendOptions<T extends { label: string }>(
+  options: readonly T[],
+  locale: Locale = getLocale(),
+): T[] {
+  return options.map((option) => localizeBackendFields(option, ["label"], locale));
 }
 
 /**

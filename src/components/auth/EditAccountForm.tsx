@@ -17,6 +17,7 @@ import { resolveNextPage } from "@/lib/api/nextPage";
 import { getAuthSession } from "@/lib/api/session";
 import { fetchJobs, fetchTimezones } from "@/lib/api/publicApi";
 import { useLocale } from "@/i18n";
+import { localizeBackendOptions } from "@/i18n/backendText";
 import {
   COUNTRY_DIAL_CODES,
   PRIMARY_DIAL_CODE_COUNTRY,
@@ -389,6 +390,10 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const isLoading = profileLoading || timezonesLoading || jobsLoading;
   const [jobTitle, setJobTitle] = useState("");
   const jobTitleRequired = isOtherJob(industry, industryOptions);
+  const localizedIndustryOptions = useMemo(
+    () => localizeBackendOptions(industryOptions, locale),
+    [industryOptions, locale],
+  );
 
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoFile, setLogoFile] = useState<Blob | null>(null);
@@ -940,7 +945,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       clearError("industry");
                       clearError("jobTitle");
                     }}
-                    options={industryOptions}
+                    options={localizedIndustryOptions}
                     placeholder={copy.business.industryPlaceholder}
                     ariaInvalid={Boolean(errors.industry)}
                     className="w-full"
