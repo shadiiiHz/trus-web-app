@@ -4,9 +4,10 @@
  */
 import axios from "axios";
 import type { SelectOption } from "@/components/ui/Select";
+import { apiUrl } from "@/lib/api/config";
 
-const TIMEZONES_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/public/timezones";
-const JOBS_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/public/jobs";
+const TIMEZONES_URL = apiUrl("/public/timezones");
+const JOBS_URL = apiUrl("/public/jobs");
 
 /** n8n webhook nodes sometimes wrap a single item in an array — unwrap it. */
 function unwrap(data: unknown): Record<string, unknown> | undefined {

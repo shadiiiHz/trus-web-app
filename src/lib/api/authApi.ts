@@ -9,26 +9,19 @@
 import axios, { type AxiosError } from "axios";
 import { showToast } from "@/lib/toast";
 import { getAuthSession } from "@/lib/api/session";
+import { apiUrl } from "@/lib/api/config";
 
-const CAPTCHA_IMAGE_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth-captcha";
-const CAPTCHA_VERIFY_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/captcha/verify";
-const REGISTER_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/register";
-const LOGIN_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/login";
-const RESEND_VERIFICATION_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/resend-verification";
-const PROFILE_UPDATE_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile/update";
-const PROFILE_URL = "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile";
-const GENERATE_LOGO_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/profile/generate-logo";
-const CHANGE_PASSWORD_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/change-password";
-const FORGOT_PASSWORD_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/forgot-password";
-const RESET_PASSWORD_URL =
-  "https://n8n.srv1879006.hstgr.cloud/webhook/auth/reset-password";
+const CAPTCHA_IMAGE_URL = apiUrl("/auth-captcha");
+const CAPTCHA_VERIFY_URL = apiUrl("/auth/captcha/verify");
+const REGISTER_URL = apiUrl("/auth/register");
+const LOGIN_URL = apiUrl("/auth/login");
+const RESEND_VERIFICATION_URL = apiUrl("/auth/resend-verification");
+const PROFILE_UPDATE_URL = apiUrl("/auth/profile/update");
+const PROFILE_URL = apiUrl("/auth/profile");
+const GENERATE_LOGO_URL = apiUrl("/auth/profile/generate-logo");
+const CHANGE_PASSWORD_URL = apiUrl("/auth/change-password");
+const FORGOT_PASSWORD_URL = apiUrl("/auth/forgot-password");
+const RESET_PASSWORD_URL = apiUrl("/auth/reset-password");
 
 const client = axios.create({
   headers: { "Content-Type": "application/json" },
