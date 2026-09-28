@@ -20,7 +20,7 @@ export function ButtonSpinner({ size = 18, className = '' }: ButtonSpinnerProps)
       aria-hidden="true"
     >
       <circle className="btn-spinner-track" cx="12" cy="12" r="9.5" />
-      <circle className="btn-spinner-arc" cx="12" cy="12" r="9.5" />
+      <circle className="btn-spinner-arc" cx="12" cy="12" r="9.5" pathLength={100} />
     </svg>
   )
 }

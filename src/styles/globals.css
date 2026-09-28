@@ -205,6 +205,11 @@
    .btn-loading  → a soft light sweep across the button while it's busy. */
 .btn-spinner {
   flex-shrink: 0;
+  /* Own compositor layer so the rotation never falls back to re-painting the
+     SVG each frame (that re-rasterisation is what made the arc shimmer). */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-origin: 50% 50%;
   animation: btn-spinner-rotate 0.9s linear infinite;
 }
 
@@ -214,14 +219,14 @@
   opacity: 0.22;
 }
 
+/* The arc uses pathLength="100", so the dash values below are percentages of
+   the ring and each cycle ends exactly where the next one starts (no jump). */
 .btn-spinner-arc {
   stroke: currentColor;
   stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 1 60;
+  stroke-dasharray: 1 150;
   stroke-dashoffset: 0;
-  transform-origin: center;
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.55));
   animation: btn-spinner-dash 1.4s ease-in-out infinite;
 }
 
@@ -262,16 +267,16 @@
 
 @keyframes btn-spinner-dash {
   0% {
-    stroke-dasharray: 1 60;
+    stroke-dasharray: 1 150;
     stroke-dashoffset: 0;
   }
   50% {
-    stroke-dasharray: 34 60;
-    stroke-dashoffset: -12;
+    stroke-dasharray: 60 150;
+    stroke-dashoffset: -20;
   }
   100% {
-    stroke-dasharray: 34 60;
-    stroke-dashoffset: -58;
+    stroke-dasharray: 60 150;
+    stroke-dashoffset: -99;
   }
 }
 
@@ -287,7 +292,7 @@
   }
   .btn-spinner-arc {
     animation: none;
-    stroke-dasharray: 22 60;
+    stroke-dasharray: 37 150;
   }
   .btn-loading::after {
     animation: none;
