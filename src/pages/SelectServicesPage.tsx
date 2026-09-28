@@ -34,7 +34,7 @@ export default function SelectServicesPage() {
 
   const [services, setServices] = useState<SelectableService[]>([]);
   const [selections, setSelections] = useState<Record<string, ServiceSelection>>({});
-  const [billing, setBilling] = useState<BillingPeriod>("monthly");
+  const [billing, setBilling] = useState<BillingPeriod>("yearly");
   const [coupon, setCoupon] = useState<CouponResult | null>(null);
   const [autoRenew, setAutoRenew] = useState(true);
   const [yearlySavePercent, setYearlySavePercent] = useState<number | null>(null);
@@ -52,7 +52,7 @@ export default function SelectServicesPage() {
         Object.fromEntries(
           list.map((s) => [
             s.id,
-            { selected: s.defaultSelected, quantity: s.defaultQuantity, period: "monthly" },
+            { selected: s.defaultSelected, quantity: s.defaultQuantity, period: "yearly" },
           ]),
         ),
       );
