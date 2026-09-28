@@ -368,7 +368,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
           <button
             type="button"
             onClick={onClose}
-            className="h-[38px] cursor-pointer rounded-lg border border-auth-border bg-white px-4 text-[14px] font-semibold text-auth-text transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            className="h-[40px] cursor-pointer rounded-md border border-auth-border bg-white px-3.5 text-[14px] font-semibold text-auth-text transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
           >
             {copy.cancel}
           </button>
@@ -376,7 +376,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
             type="button"
             onClick={handleDownload}
             disabled={selected.size === 0 || downloading}
-            className="h-[38px] cursor-pointer rounded-lg bg-auth-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-[40px] cursor-pointer rounded-md bg-auth-primary px-3.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50"
           >
             {copy.download}
           </button>
