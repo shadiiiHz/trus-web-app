@@ -782,5 +782,55 @@
       "Работает на Trust AI"
     ],
     "copyright": "© {year} TruS. Все права защищены."
+  },
+
+  "backendText": {
+
+    "Create image or video manually": "Создавайте изображения или видео вручную",
+
+    "Create posts automatically": "Автоматическое создание публикаций",
+
+    "Create and send newsletters": "Создание и отправка рассылок",
+
+    "Manage your target audiences": "Управляйте целевыми аудиториями",
+
+    "Automatically find and collect leads": "Автоматический поиск и сбор лидов",
+
+    "Publish to your Telegram group": "Публикация в вашей группе Telegram",
+
+    "Publish to your X account": "Публикация в вашем аккаунте X",
+
+    "Publish to Instagram": "Публикация в Instagram",
+
+    "LinkedIn publishing": "Публикация в LinkedIn",
+
+    "({n} post per day included)": "(включено публикаций в день: {n})",
+
+    "({n} posts per day included)": "(включено публикаций в день: {n})",
+
+    "({n} newsletter per day included)": "(включено рассылок в день: {n})",
+
+    "({n} newsletters per day included)": "(включено рассылок в день: {n})",
+
+    "(up to {n} audiences included)": "(включено аудиторий: до {n})",
+
+    "every night (included)": "каждую ночь (включено)",
+
+    "({n} time per day included)": "(включено раз в день: {n})",
+
+    "({n} times per day included)": "(включено раз в день: {n})",
+
+    "({n}/day)": "({n}/день)",
+
+    "per extra post/month": "за доп. публикацию/месяц",
+
+    "per extra newsletter/month": "за доп. рассылку/месяц",
+
+    "per extra audience": "за доп. аудиторию",
+
+    "per additional run/month": "за доп. запуск/месяц",
+
+    "per extra publish/month": "за доп. публикацию/месяц"
+
   }
 }

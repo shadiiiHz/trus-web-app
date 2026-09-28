@@ -776,5 +776,7 @@
       "Powered by Trust AI"
     ],
     "copyright": "© {year} TruS. All rights reserved."
-  }
+  },
+
+  "backendText": {}
 }

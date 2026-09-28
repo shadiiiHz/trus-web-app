@@ -783,5 +783,55 @@
       "Powered by Trust AI"
     ],
     "copyright": "© {year} TruS. Alle Rechte vorbehalten."
+  },
+
+  "backendText": {
+
+    "Create image or video manually": "Bilder oder Videos manuell erstellen",
+
+    "Create posts automatically": "Beiträge automatisch erstellen",
+
+    "Create and send newsletters": "Newsletter erstellen und versenden",
+
+    "Manage your target audiences": "Zielgruppen verwalten",
+
+    "Automatically find and collect leads": "Leads automatisch finden und sammeln",
+
+    "Publish to your Telegram group": "In Ihrer Telegram-Gruppe veröffentlichen",
+
+    "Publish to your X account": "Auf Ihrem X-Konto veröffentlichen",
+
+    "Publish to Instagram": "Auf Instagram veröffentlichen",
+
+    "LinkedIn publishing": "Veröffentlichung auf LinkedIn",
+
+    "({n} post per day included)": "({n} Beitrag pro Tag inklusive)",
+
+    "({n} posts per day included)": "({n} Beiträge pro Tag inklusive)",
+
+    "({n} newsletter per day included)": "({n} Newsletter pro Tag inklusive)",
+
+    "({n} newsletters per day included)": "({n} Newsletter pro Tag inklusive)",
+
+    "(up to {n} audiences included)": "(bis zu {n} Zielgruppen inklusive)",
+
+    "every night (included)": "jede Nacht (inklusive)",
+
+    "({n} time per day included)": "({n}-mal pro Tag inklusive)",
+
+    "({n} times per day included)": "({n}-mal pro Tag inklusive)",
+
+    "({n}/day)": "({n}/Tag)",
+
+    "per extra post/month": "pro zusätzlichem Beitrag/Monat",
+
+    "per extra newsletter/month": "pro zusätzlichem Newsletter/Monat",
+
+    "per extra audience": "pro zusätzlicher Zielgruppe",
+
+    "per additional run/month": "pro zusätzlichem Durchlauf/Monat",
+
+    "per extra publish/month": "pro zusätzlicher Veröffentlichung/Monat"
+
   }
 }

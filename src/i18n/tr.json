@@ -776,5 +776,55 @@
       "Trust AI Tarafından Desteklenmektedir"
     ],
     "copyright": "© {year} TruS. Tüm hakları saklıdır."
+  },
+
+  "backendText": {
+
+    "Create image or video manually": "Görsel veya videoyu manuel olarak oluşturun",
+
+    "Create posts automatically": "Gönderileri otomatik olarak oluşturun",
+
+    "Create and send newsletters": "Bülten oluşturun ve gönderin",
+
+    "Manage your target audiences": "Hedef kitlelerinizi yönetin",
+
+    "Automatically find and collect leads": "Potansiyel müşterileri otomatik olarak bulun ve toplayın",
+
+    "Publish to your Telegram group": "Telegram grubunuzda yayınlayın",
+
+    "Publish to your X account": "X hesabınızda yayınlayın",
+
+    "Publish to Instagram": "Instagram'da yayınlayın",
+
+    "LinkedIn publishing": "LinkedIn yayını",
+
+    "({n} post per day included)": "(günde {n} gönderi dahil)",
+
+    "({n} posts per day included)": "(günde {n} gönderi dahil)",
+
+    "({n} newsletter per day included)": "(günde {n} bülten dahil)",
+
+    "({n} newsletters per day included)": "(günde {n} bülten dahil)",
+
+    "(up to {n} audiences included)": "({n} hedef kitleye kadar dahil)",
+
+    "every night (included)": "her gece (dahil)",
+
+    "({n} time per day included)": "(günde {n} kez dahil)",
+
+    "({n} times per day included)": "(günde {n} kez dahil)",
+
+    "({n}/day)": "({n}/gün)",
+
+    "per extra post/month": "ek gönderi başına/ay",
+
+    "per extra newsletter/month": "ek bülten başına/ay",
+
+    "per extra audience": "ek hedef kitle başına",
+
+    "per additional run/month": "ek çalıştırma başına/ay",
+
+    "per extra publish/month": "ek yayın başına/ay"
+
   }
 }

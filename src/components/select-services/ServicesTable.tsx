@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
+import { useBackendText } from "@/i18n/backendText";
 import type { SelectableService } from "@/lib/mock/selectServices";
 import type { BillingPeriod, ServiceSelection } from "./types";
 import { Checkbox } from "./Checkbox";
@@ -113,6 +114,8 @@ export function ServicesTable({
   const allSelected =
     services.length > 0 && services.every((s) => selections[s.id]?.selected);
 
+  const localize = useBackendText();
+
   const closeInvoice = useCallback(() => setInvoiceFor(null), []);
 
   const cycleSort = () =>
@@ -188,15 +191,15 @@ export function ServicesTable({
                       />
                       <div className="flex min-w-0 items-center gap-3">
                         <ServiceIcon src={service.icon} />
-                        <span className="truncate text-[14px] font-medium text-auth-heading">
+                        <span className="min-w-0 break-words text-[14px] leading-5.5 font-medium text-auth-heading">
                           {service.name}
                         </span>
                       </div>
                     </div>
                   </td>
                   <td className="pr-4 text-[14px] leading-5.5 text-auth-muted">
-                    <p>{service.description}</p>
-                    <p>{service.includedAmount}</p>
+                    <p>{localize(service.description)}</p>
+                    <p>{localize(service.includedAmount)}</p>
                   </td>
                   <td>
                     <QuantityStepper
@@ -212,7 +215,7 @@ export function ServicesTable({
                     <p className="text-[14px] font-medium text-auth-heading tabular-nums">
                       {formatUsd(service.unitPrice)}
                     </p>
-                    <p className="text-[14px] font-normal text-auth-muted">{service.unitLabel}</p>
+                    <p className="text-[14px] font-normal text-auth-muted">{localize(service.unitLabel)}</p>
                   </td>
                   <td className="pr-4">
                     <div className="flex flex-col gap-0.5">
