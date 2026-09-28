@@ -637,6 +637,16 @@
 
     "notice": "Um einen Service zu kaufen, müssen Sie zunächst alle erforderlichen Angaben im Bereich „Konto bearbeiten“ vervollständigen.",
 
+    "locked": {
+
+      "title": "Ihr Konto ist noch nicht bereit",
+
+      "description": "Um einen Service zu kaufen, müssen Sie zunächst alle erforderlichen Angaben im Bereich „Konto bearbeiten“ vervollständigen.",
+
+      "cta": "Profil vervollständigen"
+
+    },
+
     "heading": "Services auswählen",
 
     "billing": {

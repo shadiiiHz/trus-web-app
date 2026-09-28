@@ -630,6 +630,16 @@
 
     "notice": "Bir hizmet satın almak için önce Hesabı Düzenle bölümündeki tüm zorunlu bilgileri doldurmalısınız.",
 
+    "locked": {
+
+      "title": "Hesabınız henüz hazır değil",
+
+      "description": "Bir hizmet satın almak için önce Hesabı Düzenle bölümündeki tüm zorunlu bilgileri doldurmalısınız.",
+
+      "cta": "Profili tamamla"
+
+    },
+
     "heading": "Hizmet Seçimi",
 
     "billing": {

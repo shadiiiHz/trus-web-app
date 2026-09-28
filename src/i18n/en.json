@@ -630,6 +630,16 @@
 
     "notice": "To purchase a service, you must first complete all required information in the Edit Account section.",
 
+    "locked": {
+
+      "title": "Your account isn't ready yet",
+
+      "description": "To purchase a service, you must first complete all required information in the Edit Account section.",
+
+      "cta": "Complete your profile"
+
+    },
+
     "heading": "Select Services",
 
     "billing": {

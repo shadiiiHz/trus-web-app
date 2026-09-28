@@ -640,6 +640,16 @@
 
     "notice": "Pour acheter un service, vous devez d'abord compléter toutes les informations requises dans la section Modifier le compte.",
 
+    "locked": {
+
+      "title": "Votre compte n'est pas encore prêt",
+
+      "description": "Pour acheter un service, vous devez d'abord compléter toutes les informations requises dans la section Modifier le compte.",
+
+      "cta": "Compléter le profil"
+
+    },
+
     "heading": "Sélectionner des services",
 
     "billing": {

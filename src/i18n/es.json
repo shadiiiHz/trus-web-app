@@ -649,6 +649,16 @@
 
     "notice": "Para comprar un servicio, primero debes completar toda la información obligatoria en la sección Editar cuenta.",
 
+    "locked": {
+
+      "title": "Tu cuenta aún no está lista",
+
+      "description": "Para comprar un servicio, primero debes completar toda la información obligatoria en la sección Editar cuenta.",
+
+      "cta": "Completar perfil"
+
+    },
+
     "heading": "Seleccionar servicios",
 
     "billing": {

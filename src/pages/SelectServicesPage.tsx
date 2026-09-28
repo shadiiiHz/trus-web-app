@@ -17,6 +17,7 @@ import { BillingToggle } from "@/components/select-services/BillingToggle";
 import { ServicesTable } from "@/components/select-services/ServicesTable";
 import { DiscountCodeCard } from "@/components/select-services/DiscountCodeCard";
 import { OrderSummaryCard } from "@/components/select-services/OrderSummaryCard";
+import { AccountLockedNotice } from "@/components/select-services/AccountLockedNotice";
 
 /**
  * Select Services — the post-login destination the backend's `ready: true`
@@ -110,6 +111,12 @@ export default function SelectServicesPage() {
 
       <main className="bg-white pt-18">
         <div className="mx-auto w-full max-w-[1380px] px-5 pt-8 pb-8">
+          {!isReady && (
+            <div className="mb-8">
+              <AccountLockedNotice copy={copy.locked} href="/edit-account" />
+            </div>
+          )}
+
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="text-[24px] leading-8 font-semibold text-auth-heading">
