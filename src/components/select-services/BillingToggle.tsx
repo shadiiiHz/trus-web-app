@@ -39,7 +39,7 @@ export function BillingToggle({
             onClick={() => onChange(period)}
             className={`flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-4 text-[12px] transition-colors duration-150 ${
               active
-                ? "bg-[#FAFAFA] font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
+                ? "bg-[#F5F5F5] font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
                 : "font-medium text-[#525252] hover:text-auth-heading"
             }`}
           >
