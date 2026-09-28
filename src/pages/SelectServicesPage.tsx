@@ -5,7 +5,12 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { siteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
-import { fetchSelectableServices, type CouponResult, type SelectableService } from "@/lib/mock/selectServices";
+import {
+  fetchBillingOptions,
+  fetchSelectableServices,
+  type CouponResult,
+  type SelectableService,
+} from "@/lib/mock/selectServices";
 import type { BillingPeriod, ServiceSelection } from "@/components/select-services/types";
 import { servicePrice } from "@/components/select-services/pricing";
 import { BillingToggle } from "@/components/select-services/BillingToggle";
@@ -32,6 +37,7 @@ export default function SelectServicesPage() {
   const [billing, setBilling] = useState<BillingPeriod>("monthly");
   const [coupon, setCoupon] = useState<CouponResult | null>(null);
   const [autoRenew, setAutoRenew] = useState(true);
+  const [yearlySavePercent, setYearlySavePercent] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -50,6 +56,9 @@ export default function SelectServicesPage() {
           ]),
         ),
       );
+    });
+    fetchBillingOptions().then((options) => {
+      if (!cancelled) setYearlySavePercent(options.yearlySavePercent);
     });
     return () => {
       cancelled = true;
@@ -113,6 +122,8 @@ export default function SelectServicesPage() {
               onChange={changeBilling}
               labels={copy.billing}
               ariaLabel={copy.billing.ariaLabel}
+              yearlySavePercent={yearlySavePercent}
+              saveLabel={copy.billing.savePercent}
             />
           </div>
 
@@ -123,6 +134,7 @@ export default function SelectServicesPage() {
               onChange={updateSelection}
               onToggleAll={toggleAll}
               billing={billing}
+              billingLabels={copy.billing}
               copy={copy.table}
             />
           </div>

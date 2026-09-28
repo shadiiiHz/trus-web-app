@@ -645,7 +645,9 @@
 
       "yearly": "Jährlich",
 
-      "ariaLabel": "Abrechnungszeitraum"
+      "ariaLabel": "Abrechnungszeitraum",
+
+      "savePercent": "{percent}% sparen"
 
     },
 
@@ -671,7 +673,29 @@
 
       "perMonth": "/Monat",
 
-      "perYear": "/Jahr"
+      "perYear": "/Jahr",
+
+      "status": "Status / Tarif",
+
+      "billing": "Abrechnung",
+
+      "invoice": "Rechnung",
+
+      "purchased": "Gekauft",
+
+      "notPurchased": "Nicht gekauft",
+
+      "invoiceAria": "Rechnung anzeigen",
+
+      "invoiceModal": {
+
+        "title": "Rechnung",
+
+        "body": "Die Rechnungsdetails sind hier bald verfügbar.",
+
+        "close": "Schließen"
+
+      }
 
     },
 

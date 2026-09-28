@@ -41,7 +41,7 @@ export function QuantityStepper({
   increaseAria,
 }: QuantityStepperProps) {
   return (
-    <div className="flex h-[34px] w-[142px] items-center justify-between rounded-md border border-auth-border bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+    <div className="flex h-[36px] w-[110px] items-center justify-between rounded-md border border-auth-border bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}

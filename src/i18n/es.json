@@ -657,7 +657,9 @@
 
       "yearly": "Anual",
 
-      "ariaLabel": "Periodo de facturación"
+      "ariaLabel": "Periodo de facturación",
+
+      "savePercent": "Ahorra {percent}%"
 
     },
 
@@ -683,7 +685,29 @@
 
       "perMonth": "/mes",
 
-      "perYear": "/año"
+      "perYear": "/año",
+
+      "status": "Estado / Plan",
+
+      "billing": "Facturación",
+
+      "invoice": "Factura",
+
+      "purchased": "Comprado",
+
+      "notPurchased": "No comprado",
+
+      "invoiceAria": "Ver factura",
+
+      "invoiceModal": {
+
+        "title": "Factura",
+
+        "body": "Los detalles de la factura estarán disponibles aquí pronto.",
+
+        "close": "Cerrar"
+
+      }
 
     },
 

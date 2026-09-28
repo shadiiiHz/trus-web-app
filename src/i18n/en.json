@@ -638,7 +638,9 @@
 
       "yearly": "Yearly",
 
-      "ariaLabel": "Billing period"
+      "ariaLabel": "Billing period",
+
+      "savePercent": "Save {percent}%"
 
     },
 
@@ -664,7 +666,29 @@
 
       "perMonth": "/month",
 
-      "perYear": "/year"
+      "perYear": "/year",
+
+      "status": "Status / Plan",
+
+      "billing": "Billing",
+
+      "invoice": "Invoice",
+
+      "purchased": "Purchased",
+
+      "notPurchased": "Not Purchased",
+
+      "invoiceAria": "View invoice",
+
+      "invoiceModal": {
+
+        "title": "Invoice",
+
+        "body": "The invoice details will be available here soon.",
+
+        "close": "Close"
+
+      }
 
     },
 

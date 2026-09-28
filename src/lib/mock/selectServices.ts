@@ -26,6 +26,12 @@ export interface SelectableService {
   maxQuantity: number;
   /** Whether the service starts checked. */
   defaultSelected: boolean;
+  /** Whether the account already has an active subscription to this service. */
+  purchased: boolean;
+  /** Billing period of the active subscription; `null` when not purchased. */
+  purchasedBilling: "monthly" | "yearly" | null;
+  /** Invoice of the active subscription; `null` when there's none to show. */
+  invoiceId: string | null;
 }
 
 /** Yearly billing = this many months of the monthly price (i.e. two months free). */
@@ -44,6 +50,9 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: true,
+    purchased: true,
+    purchasedBilling: "monthly",
+    invoiceId: "inv-1001",
   },
   {
     id: "auto-post-creation",
@@ -57,6 +66,9 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: true,
+    purchased: true,
+    purchasedBilling: "yearly",
+    invoiceId: "inv-1002",
   },
   {
     id: "newsletter-creation",
@@ -70,6 +82,9 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: false,
+    purchased: false,
+    purchasedBilling: null,
+    invoiceId: null,
   },
   {
     id: "audience-selection",
@@ -83,6 +98,9 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: false,
+    purchased: false,
+    purchasedBilling: null,
+    invoiceId: null,
   },
   {
     id: "lead-finder",
@@ -96,6 +114,9 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: true,
+    purchased: true,
+    purchasedBilling: "monthly",
+    invoiceId: "inv-1003",
   },
   {
     id: "telegram-daily-publishing",
@@ -109,11 +130,14 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: true,
+    purchased: true,
+    purchasedBilling: "yearly",
+    invoiceId: "inv-1004",
   },
   {
     id: "x-daily-publishing",
     name: "X Daily Publishing",
-    description: "Publish to your X (Twitter) account",
+    description: "Publish to your X account",
     includedAmount: "(1 time per day included)",
     icon: null,
     unitPrice: 235,
@@ -122,11 +146,14 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: false,
+    purchased: false,
+    purchasedBilling: null,
+    invoiceId: null,
   },
   {
     id: "instagram-daily-publishing",
     name: "Instagram Daily Publishing",
-    description: "Publish to your Instagram account",
+    description: "Publish to Instagram",
     includedAmount: "(1 time per day included)",
     icon: null,
     unitPrice: 126,
@@ -135,12 +162,15 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: true,
+    purchased: true,
+    purchasedBilling: "monthly",
+    invoiceId: "inv-1005",
   },
   {
     id: "linkedin-daily-publishing",
     name: "LinkedIn Daily Publishing",
-    description: "Publish to your LinkedIn account",
-    includedAmount: "(1 time per day included)",
+    description: "LinkedIn publishing",
+    includedAmount: "(1/day)",
     icon: null,
     unitPrice: 80,
     unitLabel: "per extra publish/month",
@@ -148,12 +178,25 @@ const MOCK_SERVICES: SelectableService[] = [
     minQuantity: 1,
     maxQuantity: 99,
     defaultSelected: false,
+    purchased: false,
+    purchasedBilling: null,
+    invoiceId: null,
   },
 ];
 
 /** TODO: replace with the real services endpoint once the backend ships it. */
 export async function fetchSelectableServices(): Promise<SelectableService[]> {
   return MOCK_SERVICES;
+}
+
+export interface BillingOptions {
+  /** Discount shown on the "Yearly" toggle ("Save 20%"). */
+  yearlySavePercent: number;
+}
+
+/** TODO: replace with the real billing-options endpoint once the backend ships it. */
+export async function fetchBillingOptions(): Promise<BillingOptions> {
+  return { yearlySavePercent: 20 };
 }
 
 export interface CouponResult {

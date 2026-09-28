@@ -644,7 +644,9 @@
 
       "yearly": "Ежегодно",
 
-      "ariaLabel": "Период оплаты"
+      "ariaLabel": "Период оплаты",
+
+      "savePercent": "Экономия {percent}%"
 
     },
 
@@ -670,7 +672,29 @@
 
       "perMonth": "/мес",
 
-      "perYear": "/год"
+      "perYear": "/год",
+
+      "status": "Статус / План",
+
+      "billing": "Оплата",
+
+      "invoice": "Счёт",
+
+      "purchased": "Куплено",
+
+      "notPurchased": "Не куплено",
+
+      "invoiceAria": "Просмотреть счёт",
+
+      "invoiceModal": {
+
+        "title": "Счёт",
+
+        "body": "Детали счёта скоро будут доступны здесь.",
+
+        "close": "Закрыть"
+
+      }
 
     },
 

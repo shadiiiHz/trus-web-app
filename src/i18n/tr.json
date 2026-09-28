@@ -638,7 +638,9 @@
 
       "yearly": "Yıllık",
 
-      "ariaLabel": "Faturalama dönemi"
+      "ariaLabel": "Faturalama dönemi",
+
+      "savePercent": "%{percent} tasarruf"
 
     },
 
@@ -664,7 +666,29 @@
 
       "perMonth": "/ay",
 
-      "perYear": "/yıl"
+      "perYear": "/yıl",
+
+      "status": "Durum / Plan",
+
+      "billing": "Faturalama",
+
+      "invoice": "Fatura",
+
+      "purchased": "Satın alındı",
+
+      "notPurchased": "Satın alınmadı",
+
+      "invoiceAria": "Faturayı görüntüle",
+
+      "invoiceModal": {
+
+        "title": "Fatura",
+
+        "body": "Fatura ayrıntıları yakında burada olacak.",
+
+        "close": "Kapat"
+
+      }
 
     },
 
