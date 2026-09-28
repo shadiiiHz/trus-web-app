@@ -725,6 +725,9 @@
 
         "annualPeriod": "Période de facturation annuelle",
 
+
+        "currentTag": "en cours",
+
         "selectAllAria": "Sélectionner toutes les factures mensuelles",
 
         "empty": "Aucune facture pour le moment.",

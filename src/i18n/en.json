@@ -715,6 +715,9 @@
 
         "annualPeriod": "Annual billing period",
 
+
+        "currentTag": "current",
+
         "selectAllAria": "Select all monthly invoices",
 
         "empty": "No invoices yet.",

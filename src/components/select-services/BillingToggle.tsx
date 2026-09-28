@@ -37,10 +37,12 @@ export function BillingToggle({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(period)}
-            className={`flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-4 text-[12px] transition-colors duration-150 ${
-              active
-                ? "bg-[#F5F5F5] font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
-                : "font-medium text-[#525252] hover:text-auth-heading"
+            className={`flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md border px-4 text-[12px] transition-colors duration-150 ${
+              !active
+                ? "border-transparent font-medium text-[#525252] hover:text-auth-heading"
+                : period === "yearly"
+                  ? "border-[#16A34A]/80 bg-[#F0FDF4] font-semibold text-auth-heading"
+                  : "border-transparent bg-[#F5F5F5] font-semibold text-auth-heading shadow-[0_1px_2px_0_rgba(0,0,0,0.06)]"
             }`}
           >
             {labels[period]}

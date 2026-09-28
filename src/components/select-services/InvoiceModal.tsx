@@ -127,6 +127,7 @@ function InvoiceRow({
   selected,
   onToggle,
   tall = false,
+  currentLabel,
 }: {
   invoice: ServiceInvoice;
   label: string;
@@ -135,6 +136,8 @@ function InvoiceRow({
   selected: boolean;
   onToggle: (checked: boolean) => void;
   tall?: boolean;
+  /** Set on the service's latest invoice (per its Billing column): shows the "current" pill and border. */
+  currentLabel?: string;
 }) {
   return (
     <label
@@ -143,7 +146,9 @@ function InvoiceRow({
       } ${
         selected
           ? "border-auth-primary bg-auth-surface-hover"
-          : "border-auth-border-light bg-white hover:bg-auth-page-bg"
+          : currentLabel
+            ? "border-auth-primary bg-white hover:bg-auth-page-bg"
+            : "border-auth-border-light bg-white hover:bg-auth-page-bg"
       }`}
     >
       <Checkbox checked={selected} onChange={onToggle} size={20} aria-label={label} />
@@ -160,8 +165,15 @@ function InvoiceRow({
             <FileText size={18} strokeWidth={2} />
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-[16px] leading-6 font-semibold text-auth-heading">
-              {label}
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="truncate text-[16px] leading-6 font-semibold text-auth-heading">
+                {label}
+              </span>
+              {currentLabel && (
+                <span className="inline-flex h-[22px] shrink-0 items-center rounded-md bg-auth-surface-hover px-2 text-[12px] font-medium text-auth-primary">
+                  {currentLabel}
+                </span>
+              )}
             </span>
             <span className="block truncate text-[14px] leading-5 text-auth-placeholder">
               {invoice.number}
@@ -222,6 +234,13 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
 
   const monthly = invoices?.monthly ?? [];
   const annual = invoices?.annual ?? [];
+  // The latest invoice of the kind the Billing column shows is the current one.
+  const currentId =
+    service.purchasedBilling === "yearly"
+      ? annual.at(-1)?.id
+      : service.purchasedBilling === "monthly"
+        ? monthly.at(-1)?.id
+        : undefined;
   const allMonthlySelected = monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
 
   const toggleAllMonthly = (checked: boolean) =>
@@ -332,6 +351,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                       locale={locale}
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
+                      currentLabel={invoice.id === currentId ? copy.currentTag : undefined}
                     />
                   </li>
                 ))}
@@ -356,6 +376,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                       locale={locale}
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
+                      currentLabel={invoice.id === currentId ? copy.currentTag : undefined}
                       tall
                     />
                   </li>

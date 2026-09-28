@@ -722,6 +722,9 @@
 
         "annualPeriod": "Jährlicher Abrechnungszeitraum",
 
+
+        "currentTag": "aktuell",
+
         "selectAllAria": "Alle monatlichen Rechnungen auswählen",
 
         "empty": "Noch keine Rechnungen.",

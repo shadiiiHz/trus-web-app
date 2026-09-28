@@ -715,6 +715,9 @@
 
         "annualPeriod": "Yıllık fatura dönemi",
 
+
+        "currentTag": "güncel",
+
         "selectAllAria": "Tüm aylık faturaları seç",
 
         "empty": "Henüz fatura yok.",
