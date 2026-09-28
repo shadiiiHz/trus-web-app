@@ -199,3 +199,97 @@
     transform: translateX(100%);
   }
 }
+
+/* Button loading state
+   .btn-spinner  → rotating arc (ButtonSpinner.tsx), follows currentColor.
+   .btn-loading  → a soft light sweep across the button while it's busy. */
+.btn-spinner {
+  flex-shrink: 0;
+  animation: btn-spinner-rotate 0.9s linear infinite;
+}
+
+.btn-spinner-track {
+  stroke: currentColor;
+  stroke-width: 2.5;
+  opacity: 0.22;
+}
+
+.btn-spinner-arc {
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.55));
+  animation: btn-spinner-dash 1.4s ease-in-out infinite;
+}
+
+.btn-loading {
+  position: relative;
+  overflow: hidden;
+  cursor: progress !important;
+}
+
+/* A busy button is disabled, but shouldn't look greyed-out like an unusable
+   one — keep it at full strength so the spinner reads as progress. */
+.btn-loading:disabled {
+  opacity: 1 !important;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: btn-loading-sweep 1.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes btn-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes btn-spinner-dash {
+  0% {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 34 60;
+    stroke-dashoffset: -12;
+  }
+  100% {
+    stroke-dasharray: 34 60;
+    stroke-dashoffset: -58;
+  }
+}
+
+@keyframes btn-loading-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-spinner {
+    animation-duration: 1.6s;
+  }
+  .btn-spinner-arc {
+    animation: none;
+    stroke-dasharray: 22 60;
+  }
+  .btn-loading::after {
+    animation: none;
+  }
+}

@@ -354,7 +354,6 @@
       "rememberMe": "Beni hatırla",
       "forgotPassword": "Şifremi unuttum",
       "submit": "Giriş Yap",
-      "submitting": "Giriş yapılıyor...",
       "success": "Giriş başarılı — tekrar hoş geldiniz!",
       "noAccount": "Hesabınız yok mu?",
       "signUp": "Kayıt olun",
@@ -374,12 +373,10 @@
       "emailLabel": "E-posta adresi",
       "emailPlaceholder": "E-posta adresinizi girin",
       "submit": "Sıfırlama Bağlantısı Gönder",
-      "submitting": "Gönderiliyor...",
       "checkEmailHeading": "E-postanızı Kontrol Edin",
       "checkEmailDescription": "E-posta adresinize bir şifre sıfırlama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin ve şifrenizi sıfırlamak için bağlantıya tıklayın.",
       "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
       "resend": "E-postayı Tekrar Gönder",
-      "resending": "Gönderiliyor...",
       "resendSuccess": "Şifre sıfırlama e-postası tekrar gönderildi.",
       "backToLogin": "Girişe dön",
       "errors": {
@@ -407,7 +404,6 @@
         "hasSpecialChar": "Bir özel karakter içerir"
       },
       "submit": "Şifreyi Güncelle",
-      "submitting": "Güncelleniyor...",
       "success": "Şifre başarıyla güncellendi.",
       "backToLogin": "Girişe dön",
       "errors": {
@@ -439,7 +435,6 @@
         "hasSpecialChar": "Bir özel karakter içerir"
       },
       "submit": "Şifreyi Sıfırla",
-      "submitting": "Sıfırlanıyor...",
       "successHeading": "Şifre Başarıyla Değiştirildi",
       "successSubtitle": "Şifreniz başarıyla sıfırlandı. Artık yeni şifrenizle giriş yapabilirsiniz.",
       "continue": "Giriş Yap",
@@ -481,13 +476,11 @@
       "captchaPlaceholder": "Karakterleri yazın",
       "refreshCaptchaAria": "CAPTCHA'yı yenile",
       "submit": "Hesap Oluştur",
-      "submitting": "Hesap oluşturuluyor...",
       "success": "Hesap başarıyla oluşturuldu!",
       "checkEmailHeading": "E-postanızı Kontrol Edin",
       "checkEmailDescription": "E-posta adresinize bir doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin ve hesabınızı doğrulamak için bağlantıya tıklayın.",
       "checkEmailHint": "E-postayı almadıysanız Spam klasörünüzü kontrol edin veya tekrar deneyin.",
       "resend": "E-postayı Tekrar Gönder",
-      "resending": "Gönderiliyor...",
       "resendSuccess": "Doğrulama e-postası tekrar gönderildi.",
       "errors": {
         "firstNameRequired": "Lütfen adınızı girin",
@@ -561,7 +554,6 @@
         "uploadHint": "PNG, JPG, 2 MB'a kadar",
         "uploadButton": "Logoyu Yükle",
         "generateButton": "Logo Oluştur",
-        "generating": "Oluşturuluyor...",
         "removeAria": "Logoyu kaldır"
       },
       "account": {
@@ -596,7 +588,6 @@
       },
       "cancel": "İptal",
       "submit": "Gönder",
-      "submitting": "Değişiklikler kaydediliyor...",
       "success": "Hesap başarıyla güncellendi!",
       "errors": {
         "firstNameRequired": "Lütfen adınızı girin",
@@ -750,8 +741,6 @@
 
 
       "submit": "Kuponu uygula",
-
-      "submitting": "Uygulanıyor...",
 
       "success": "Kupon başarıyla uygulandı.",
 

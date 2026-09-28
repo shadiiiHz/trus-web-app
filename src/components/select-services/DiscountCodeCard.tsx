@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import type { SiteConfig } from "@/config/site.config";
 import { showToast } from "@/lib/toast";
+import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 import { validateCoupon, type CouponResult } from "@/lib/mock/selectServices";
 
 export interface DiscountCodeCardProps {
@@ -90,9 +91,17 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
       <button
         type="submit"
         disabled={disabled || submitting}
-        className="mt-6 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-8 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
+        aria-busy={submitting || undefined}
+        className={`${submitting ? "btn-loading" : ""} relative mt-6 inline-flex h-10 cursor-pointer items-center gap-2 self-end rounded-md bg-auth-primary px-8 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary`}
       >
-        {submitting ? copy.submitting : copy.submit}
+        <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${submitting ? "opacity-0" : ""}`}>
+          {copy.submit}
+        </span>
+        {submitting && (
+          <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <ButtonSpinner size={18} />
+          </span>
+        )}
       </button>
     </form>
   );

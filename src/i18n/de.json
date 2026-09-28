@@ -361,7 +361,6 @@
       "rememberMe": "Angemeldet bleiben",
       "forgotPassword": "Passwort vergessen",
       "submit": "Anmelden",
-      "submitting": "Anmeldung läuft...",
       "success": "Anmeldung erfolgreich — willkommen zurück!",
       "noAccount": "Sie haben noch kein Konto?",
       "signUp": "Registrieren",
@@ -381,12 +380,10 @@
       "emailLabel": "E-Mail-Adresse",
       "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
       "submit": "Link zum Zurücksetzen senden",
-      "submitting": "Wird gesendet...",
       "checkEmailHeading": "Überprüfen Sie Ihre E-Mail",
       "checkEmailDescription": "Wir haben einen Link zum Zurücksetzen des Passworts an Ihre E-Mail-Adresse gesendet. Bitte prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Passwort zurückzusetzen.",
       "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
       "resend": "E-Mail erneut senden",
-      "resending": "Wird erneut gesendet...",
       "resendSuccess": "E-Mail zum Zurücksetzen des Passworts wurde erneut gesendet.",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
@@ -414,7 +411,6 @@
         "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "submit": "Passwort aktualisieren",
-      "submitting": "Wird aktualisiert...",
       "success": "Passwort erfolgreich aktualisiert.",
       "backToLogin": "Zurück zur Anmeldung",
       "errors": {
@@ -446,7 +442,6 @@
         "hasSpecialChar": "Enthält ein Sonderzeichen"
       },
       "submit": "Passwort zurücksetzen",
-      "submitting": "Wird zurückgesetzt...",
       "successHeading": "Passwort erfolgreich geändert",
       "successSubtitle": "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
       "continue": "Anmelden",
@@ -488,13 +483,11 @@
       "captchaPlaceholder": "Zeichen eingeben",
       "refreshCaptchaAria": "CAPTCHA aktualisieren",
       "submit": "Konto erstellen",
-      "submitting": "Konto wird erstellt...",
       "success": "Konto erfolgreich erstellt!",
       "checkEmailHeading": "Überprüfen Sie Ihre E-Mail",
       "checkEmailDescription": "Wir haben einen Bestätigungslink an Ihre E-Mail-Adresse gesendet. Bitte prüfen Sie Ihren Posteingang und klicken Sie auf den Link, um Ihr Konto zu bestätigen.",
       "checkEmailHint": "Falls Sie die E-Mail nicht erhalten haben, prüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.",
       "resend": "E-Mail erneut senden",
-      "resending": "Wird erneut gesendet...",
       "resendSuccess": "Bestätigungs-E-Mail wurde erneut gesendet.",
       "errors": {
         "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
@@ -568,7 +561,6 @@
         "uploadHint": "PNG, JPG bis zu 2 MB",
         "uploadButton": "Logo hochladen",
         "generateButton": "Logo generieren",
-        "generating": "Wird generiert...",
         "removeAria": "Logo entfernen"
       },
       "account": {
@@ -603,7 +595,6 @@
       },
       "cancel": "Abbrechen",
       "submit": "Absenden",
-      "submitting": "Änderungen werden gespeichert...",
       "success": "Konto erfolgreich aktualisiert!",
       "errors": {
         "firstNameRequired": "Bitte geben Sie Ihren Vornamen ein",
@@ -757,8 +748,6 @@
 
 
       "submit": "Gutschein einlösen",
-
-      "submitting": "Wird eingelöst...",
 
       "success": "Gutschein erfolgreich eingelöst.",
 

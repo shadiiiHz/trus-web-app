@@ -383,10 +383,11 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
       <Button
         type="submit"
         variant="primary"
+        loading={status === "submitting"}
         disabled={status === "submitting"}
         className="mt-1 w-full rounded-md py-3.5 disabled:cursor-not-allowed disabled:opacity-60 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
-        {status === "submitting" ? copy.submitting : copy.submit}
+        {copy.submit}
       </Button>
 
       <Link

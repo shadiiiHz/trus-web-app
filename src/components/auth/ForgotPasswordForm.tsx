@@ -139,9 +139,10 @@ export function ForgotPasswordForm({
       <Button
         type="submit"
         variant="primary"
+        loading={status === "submitting"}
         className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
-        {status === "submitting" ? copy.submitting : copy.submit}
+        {copy.submit}
       </Button>
 
       <Link

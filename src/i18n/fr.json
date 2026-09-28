@@ -364,7 +364,6 @@
       "rememberMe": "Se souvenir de moi",
       "forgotPassword": "Mot de passe oublié",
       "submit": "Se connecter",
-      "submitting": "Connexion en cours...",
       "success": "Connexion réussie — bon retour !",
       "noAccount": "Vous n'avez pas de compte ?",
       "signUp": "S'inscrire",
@@ -384,12 +383,10 @@
       "emailLabel": "Adresse e-mail",
       "emailPlaceholder": "Saisissez votre adresse e-mail",
       "submit": "Envoyer le lien de réinitialisation",
-      "submitting": "Envoi en cours...",
       "checkEmailHeading": "Vérifiez votre e-mail",
       "checkEmailDescription": "Nous avons envoyé un lien de réinitialisation de mot de passe à votre adresse e-mail. Vérifiez votre boîte de réception et cliquez sur le lien pour réinitialiser votre mot de passe.",
       "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
       "resend": "Renvoyer l'e-mail",
-      "resending": "Envoi en cours...",
       "resendSuccess": "E-mail de réinitialisation du mot de passe renvoyé.",
       "backToLogin": "Retour à la connexion",
       "errors": {
@@ -417,7 +414,6 @@
         "hasSpecialChar": "Inclut un caractère spécial"
       },
       "submit": "Mettre à jour le mot de passe",
-      "submitting": "Mise à jour...",
       "success": "Mot de passe mis à jour avec succès.",
       "backToLogin": "Retour à la connexion",
       "errors": {
@@ -449,7 +445,6 @@
         "hasSpecialChar": "Inclut un caractère spécial"
       },
       "submit": "Réinitialiser le mot de passe",
-      "submitting": "Réinitialisation...",
       "successHeading": "Mot de passe modifié avec succès",
       "successSubtitle": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
       "continue": "Se connecter",
@@ -491,13 +486,11 @@
       "captchaPlaceholder": "Saisissez les caractères",
       "refreshCaptchaAria": "Actualiser le CAPTCHA",
       "submit": "Créer le compte",
-      "submitting": "Création du compte...",
       "success": "Compte créé avec succès !",
       "checkEmailHeading": "Vérifiez votre e-mail",
       "checkEmailDescription": "Nous avons envoyé un lien de vérification à votre adresse e-mail. Vérifiez votre boîte de réception et cliquez sur le lien pour vérifier votre compte.",
       "checkEmailHint": "Si vous n'avez pas reçu l'e-mail, vérifiez votre dossier Spam ou réessayez.",
       "resend": "Renvoyer l'e-mail",
-      "resending": "Envoi en cours...",
       "resendSuccess": "E-mail de vérification renvoyé.",
       "errors": {
         "firstNameRequired": "Veuillez saisir votre prénom",
@@ -571,7 +564,6 @@
         "uploadHint": "PNG, JPG jusqu'à 2 Mo",
         "uploadButton": "Téléverser le logo",
         "generateButton": "Générer un logo",
-        "generating": "Génération...",
         "removeAria": "Supprimer le logo"
       },
       "account": {
@@ -606,7 +598,6 @@
       },
       "cancel": "Annuler",
       "submit": "Envoyer",
-      "submitting": "Enregistrement des modifications...",
       "success": "Compte mis à jour avec succès !",
       "errors": {
         "firstNameRequired": "Veuillez saisir votre prénom",
@@ -760,8 +751,6 @@
 
 
       "submit": "Appliquer le coupon",
-
-      "submitting": "Application...",
 
       "success": "Coupon appliqué avec succès.",
 

@@ -1,11 +1,14 @@
 import React from "react";
 import "@/styles/GradientButton.css";
+import { ButtonSpinner } from "./ButtonSpinner";
 
 type CommonProps = {
   text?: string;
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  /** Replaces the label with a centred spinner and blocks clicks until cleared. */
+  loading?: boolean;
 };
 
 type AsLink = CommonProps &
@@ -25,8 +28,10 @@ export default function GradientButton({
   className = "",
   style,
   children,
+  loading = false,
   ...rest
 }: GradientButtonProps) {
+  const classes = `framer-btn ${loading ? "btn-loading is-loading" : ""} ${className}`;
   const content = (
     <>
       <div className="border"></div>
@@ -36,6 +41,9 @@ export default function GradientButton({
       <div className="color2-glow"></div>
       <div className="fill"></div>
       <span className="btn-text">{children ?? text}</span>
+      <span className="btn-spinner-slot">
+        <ButtonSpinner size={20} />
+      </span>
     </>
   );
 
@@ -46,9 +54,10 @@ export default function GradientButton({
         href={href}
         target={target}
         rel={target === "_blank" ? "noopener noreferrer" : undefined}
-        className={`framer-btn ${className}`}
+        className={classes}
         style={style}
         aria-label={typeof text === "string" ? text : undefined}
+        aria-busy={loading || undefined}
         {...anchorRest}
       >
         {content}
@@ -56,13 +65,15 @@ export default function GradientButton({
     );
   }
 
-  const { type = "button", ...buttonRest } = rest as AsButton;
+  const { type = "button", disabled, ...buttonRest } = rest as AsButton;
   return (
     <button
       type={type}
-      className={`framer-btn ${className}`}
+      className={classes}
       style={style}
       aria-label={typeof text === "string" ? text : undefined}
+      aria-busy={loading || undefined}
+      disabled={disabled || loading}
       {...buttonRest}
     >
       {content}

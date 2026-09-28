@@ -545,10 +545,11 @@ export function RegisterForm({
       <Button
         type="submit"
         variant="primary"
+        loading={status === "submitting"}
         disabled={status === "submitting" || captchaLoading}
         className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {status === "submitting" ? copy.submitting : copy.submit}
+        {copy.submit}
       </Button>
     </form>
   );

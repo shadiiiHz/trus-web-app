@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Clock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 import { Select, type SelectOption } from "@/components/ui/Select";
 import type { SiteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
@@ -1198,17 +1199,17 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     // limit), so each click re-asks and shows the error again.
                     disabled={isGeneratingLogo}
                     aria-busy={isGeneratingLogo}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text"
+                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
                   >
-                    <img
-                      src={generateLogo}
-                      alt=""
-                      className="h-[16] w-auto"
-                      aria-hidden="true"
-                    />
-                    {isGeneratingLogo
-                      ? copy.logo.generating
-                      : copy.logo.generateButton}
+                    <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${isGeneratingLogo ? "opacity-0" : ""}`}>
+                      <img src={generateLogo} alt="" className="h-[16] w-auto" aria-hidden="true" />
+                      {copy.logo.generateButton}
+                    </span>
+                    {isGeneratingLogo && (
+                      <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                        <ButtonSpinner size={18} className="text-brand-accent" />
+                      </span>
+                    )}
                   </button>
                   <button
                     type="button"
@@ -1241,10 +1242,11 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         <Button
           type="submit"
           variant="primary"
+          loading={status === "submitting"}
           disabled={status === "submitting" || isLoading || isGeneratingLogo}
           className="rounded-md disabled:cursor-not-allowed disabled:opacity-60 !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
         >
-          {status === "submitting" ? copy.submitting : copy.submit}
+          {copy.submit}
         </Button>
       </div>
     </form>

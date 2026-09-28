@@ -354,7 +354,6 @@
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password",
       "submit": "Log in",
-      "submitting": "Logging in...",
       "success": "Login successful — welcome back!",
       "noAccount": "Don't have an account?",
       "signUp": "Sign up",
@@ -374,12 +373,10 @@
       "emailLabel": "Email address",
       "emailPlaceholder": "Enter your email address",
       "submit": "Send Reset Link",
-      "submitting": "Sending...",
       "checkEmailHeading": "Check Your Email",
       "checkEmailDescription": "We've sent a password reset link to your email address. Please check your inbox and click the link to reset your password.",
       "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
       "resend": "Resend Email",
-      "resending": "Resending...",
       "resendSuccess": "Password reset email sent again.",
       "backToLogin": "Back to log in",
       "errors": {
@@ -407,7 +404,6 @@
         "hasSpecialChar": "Includes a special character"
       },
       "submit": "Update Password",
-      "submitting": "Updating...",
       "success": "Password updated successfully.",
       "backToLogin": "Back to log in",
       "errors": {
@@ -439,7 +435,6 @@
         "hasSpecialChar": "Includes a special character"
       },
       "submit": "Reset Password",
-      "submitting": "Resetting...",
       "successHeading": "Password Changed Successfully",
       "successSubtitle": "Your password has been successfully reset. You can now log in with your new password.",
       "continue": "Log in",
@@ -481,13 +476,11 @@
       "captchaPlaceholder": "Enter captcha code",
       "refreshCaptchaAria": "Refresh captcha code",
       "submit": "Create Account",
-      "submitting": "Creating Account...",
       "success": "Account created successfully!",
       "checkEmailHeading": "Check Your Email",
       "checkEmailDescription": "We've sent a verification link to your email address. Please check your inbox and click the link to verify your account.",
       "checkEmailHint": "If you didn't receive the email, check your Spam folder or try again.",
       "resend": "Resend Email",
-      "resending": "Resending...",
       "resendSuccess": "Verification email sent again.",
       "errors": {
         "firstNameRequired": "Please enter your first name",
@@ -561,7 +554,6 @@
         "uploadHint": "PNG, JPG up to 2 MB",
         "uploadButton": "Upload Logo",
         "generateButton": "Generate Logo",
-        "generating": "Generating...",
         "removeAria": "Remove logo"
       },
       "account": {
@@ -596,7 +588,6 @@
       },
       "cancel": "Cancel",
       "submit": "Submit",
-      "submitting": "Saving Changes...",
       "success": "Account updated successfully!",
       "errors": {
         "firstNameRequired": "Please enter your first name",
@@ -750,8 +741,6 @@
 
 
       "submit": "Apply coupon",
-
-      "submitting": "Applying...",
 
       "success": "Coupon applied successfully.",
 

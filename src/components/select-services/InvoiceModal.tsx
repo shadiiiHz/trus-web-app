@@ -12,6 +12,7 @@ import {
   type ServiceInvoices,
 } from "@/lib/mock/selectServices";
 import { Checkbox } from "./Checkbox";
+import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 
 /** Receipt-with-download icon used by the table's Invoice column. */
 export function InvoiceIcon({ className = "" }: { className?: string }) {
@@ -376,9 +377,17 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
             type="button"
             onClick={handleDownload}
             disabled={selected.size === 0 || downloading}
-            className="h-[40px] cursor-pointer rounded-md bg-auth-primary px-3.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50"
+            aria-busy={downloading || undefined}
+            className={`${downloading ? "btn-loading" : ""} relative inline-flex h-[40px] cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-3.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50`}
           >
-            {copy.download}
+            <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${downloading ? "opacity-0" : ""}`}>
+              {copy.download}
+            </span>
+            {downloading && (
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <ButtonSpinner size={18} />
+              </span>
+            )}
           </button>
         </div>
       </motion.div>

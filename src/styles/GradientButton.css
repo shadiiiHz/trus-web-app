@@ -85,6 +85,58 @@
   white-space: nowrap;
 }
 
+/* Loading: the label fades out (keeping its width) and the spinner fades in
+   centred on top of it. */
+.framer-btn .btn-text {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.framer-btn.is-loading .btn-text {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+.framer-btn .btn-spinner-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.framer-btn.is-loading .btn-spinner-slot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* While loading, keep the conic border glow circling on its own so the whole
+   button reads as busy, not just the spinner. */
+.framer-btn.is-loading .color1,
+.framer-btn.is-loading .color1-glow {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  animation: framer-btn-orbit 1.6s linear infinite;
+}
+
+@keyframes framer-btn-orbit {
+  from {
+    transform: rotate(0deg) scale(2);
+  }
+  to {
+    transform: rotate(360deg) scale(2);
+  }
+}
+
 .framer-btn:hover {
   --from-angle: 224deg;
 }
@@ -107,5 +159,9 @@
   .framer-btn .color2,
   .framer-btn .color2-glow {
     transition: none !important;
+  }
+  .framer-btn.is-loading .color1,
+  .framer-btn.is-loading .color1-glow {
+    animation: none;
   }
 }

@@ -141,10 +141,10 @@ export default function CheckYourEmailPage() {
                   type="button"
                   variant="primary"
                   onClick={handleResend}
-                  disabled={resending}
+                  loading={resending}
                   className="mx-auto rounded-md px-6 py-2.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
                 >
-                  {resending ? copy.resending : copy.resend}
+                  {copy.resend}
                 </Button>
               </div>
             </FadeIn>
