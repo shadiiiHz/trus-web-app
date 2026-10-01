@@ -16,11 +16,22 @@ export default function TemplatesGallery() {
 
   // Lets the Home page's per-category link (see TemplateGridReveal) land
   // here with that category already selected, via "/templates?category=…".
-  const [searchParams] = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState<string>(() => {
-    const fromUrl = searchParams.get("category");
-    return fromUrl && categories.some((c) => c.id === fromUrl) ? fromUrl : "all";
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const fromUrl = searchParams.get("category");
+  const activeCategory =
+    fromUrl && categories.some((c) => c.id === fromUrl) ? fromUrl : "all";
+  // Keep the URL in sync with the selected category ("all" drops the param).
+  const setActiveCategory = (id: string) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (id === "all") next.delete("category");
+        else next.set("category", id);
+        return next;
+      },
+      { replace: true },
+    );
+  };
   const [activeStyles, setActiveStyles] = useState<Set<StyleFilter>>(new Set());
   const [activeLayouts, setActiveLayouts] = useState<Set<LayoutFilter>>(new Set());
   const [search, setSearch] = useState("");
