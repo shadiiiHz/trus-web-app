@@ -10,9 +10,8 @@ import checkEmailIcon from "@/assets/auth/check-email-icon.svg";
 import {
   getForgotPasswordErrorCode,
   reportApiError,
-  requestPasswordReset,
-  resendVerificationEmail,
 } from "@/lib/api/authApi";
+import { useRequestPasswordReset, useResendVerification } from "@/hooks/auth/useAuthMutations";
 import { showToast } from "@/lib/toast";
 
 /**
@@ -35,6 +34,8 @@ export default function CheckYourEmailPage() {
   }, []);
 
   const location = useLocation();
+  const { mutate: requestReset } = useRequestPasswordReset();
+  const { mutate: resendVerification } = useResendVerification();
   const [resending, setResending] = useState(false);
 
   const state = location.state as CheckYourEmailLocationState | null;
@@ -60,7 +61,7 @@ export default function CheckYourEmailPage() {
     if (variant === "forgotPassword") {
       setResending(true);
       try {
-        await requestPasswordReset(email);
+        await requestReset(email);
         showToast(forgotPassword.resendSuccess, "success");
       } catch (error) {
         const code = getForgotPasswordErrorCode(error);
@@ -82,7 +83,7 @@ export default function CheckYourEmailPage() {
 
     setResending(true);
     try {
-      await resendVerificationEmail(email);
+      await resendVerification(email);
       showToast(register.resendSuccess, "success");
     } catch (error) {
       reportApiError(

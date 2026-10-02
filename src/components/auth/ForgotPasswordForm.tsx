@@ -6,8 +6,8 @@ import type { SiteConfig } from "@/config/site.config";
 import {
   getForgotPasswordErrorCode,
   reportApiError,
-  requestPasswordReset,
 } from "@/lib/api/authApi";
+import { useRequestPasswordReset } from "@/hooks/auth/useAuthMutations";
 
 
 function BackIcon({ className }: { className?: string }) {
@@ -63,6 +63,7 @@ export function ForgotPasswordForm({
 }: ForgotPasswordFormProps) {
   const navigate = useNavigate();
   const emailId = useId();
+  const { mutate: requestReset } = useRequestPasswordReset();
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState<FieldErrorKey | undefined>();
@@ -84,7 +85,7 @@ export function ForgotPasswordForm({
     setError(undefined);
     onStatusChange("submitting");
     try {
-      await requestPasswordReset(trimmedEmail);
+      await requestReset(trimmedEmail);
       navigate("/check-your-email", {
         state: { variant: "forgotPassword", email: trimmedEmail },
       });

@@ -4,7 +4,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
 import { passwordRequirements } from "@/lib/passwordRequirements";
-import { AuthApiError, changePassword, reportApiError } from "@/lib/api/authApi";
+import { AuthApiError, reportApiError } from "@/lib/api/authApi";
+import { useChangePassword } from "@/hooks/auth/useAuthMutations";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
 
@@ -121,6 +122,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const { mutate: changePasswordMutate } = useChangePassword();
   const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
   const clearError = (field: keyof FieldErrors) => {
@@ -153,7 +155,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
 
     setStatus("submitting");
     try {
-      await changePassword({ currentPassword, newPassword, confirmPassword });
+      await changePasswordMutate({ currentPassword, newPassword, confirmPassword });
       navigate("/change-password/success", {
         replace: true,
         state: { passwordChanged: true },

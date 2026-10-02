@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { loginUser, type AuthSessionResult, type LoginPayload } from "@/lib/api/authApi";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -6,15 +6,12 @@ interface UseLoginOptions {
   onSuccess?: (result: AuthSessionResult) => void;
 }
 
-/** Same shape as useRegister — see its comment for why this isn't a react-query hook. */
+/** `mutate` resolves with the result (or rejects with the API error); `isLoading` mirrors the pending state. */
 export function useLogin(options?: UseLoginOptions) {
   const { authenticate } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const mutate = async (payload: LoginPayload): Promise<AuthSessionResult> => {
-    setIsLoading(true);
-    try {
-      const result = await loginUser(payload);
+  const mutation = useMutation({
+    mutationFn: (payload: LoginPayload) => loginUser(payload),
+    onSuccess: (result, payload) => {
       authenticate({
         token: result.sessionToken,
         expiresAt: result.expiresAt,
@@ -27,13 +24,10 @@ export function useLogin(options?: UseLoginOptions) {
           payload.email,
       });
       options?.onSuccess?.(result);
-      return result;
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    },
+  });
 
-  return { mutate, isLoading };
+  return { mutate: mutation.mutateAsync, isLoading: mutation.isPending };
 }
 
 export default useLogin;

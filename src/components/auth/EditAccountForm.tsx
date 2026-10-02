@@ -8,15 +8,15 @@ import type { SiteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import {
   AuthApiError,
-  fetchProfile,
-  generateLogo as requestGeneratedLogo,
   reportApiError,
   type UserProfile,
-  updateProfile,
 } from "@/lib/api/authApi";
 import { resolveNextPage } from "@/lib/api/nextPage";
 import { getAuthSession } from "@/lib/api/session";
-import { fetchJobs, fetchTimezones } from "@/lib/api/publicApi";
+import { useGenerateLogo, useUpdateProfile } from "@/hooks/auth/useAuthMutations";
+import { useQueryClient } from "@tanstack/react-query";
+import { useJobs, useTimezones } from "@/hooks/queries/usePublicOptions";
+import { profileQuery } from "@/lib/api/profileQuery";
 import { useLocale } from "@/i18n";
 import { localizeBackendOptions } from "@/i18n/backendText";
 import {
@@ -383,12 +383,19 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const [website, setWebsite] = useState("");
   const [timezone, setTimezone] = useState("");
   const [industry, setIndustry] = useState("");
-  const [timezoneOptions, setTimezoneOptions] = useState<SelectOption[]>([]);
-  const [industryOptions, setIndustryOptions] = useState<SelectOption[]>([]);
+  const queryClient = useQueryClient();
+  const { mutate: generateLogoMutate } = useGenerateLogo();
+  const { mutate: updateProfileMutate } = useUpdateProfile();
+  const timezonesQuery = useTimezones();
+  const jobsQuery = useJobs();
+  const timezoneOptions = useMemo(
+    () => timezonesQuery.data ?? [],
+    [timezonesQuery.data],
+  );
+  const industryOptions = useMemo(() => jobsQuery.data ?? [], [jobsQuery.data]);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [timezonesLoading, setTimezonesLoading] = useState(true);
-  const [jobsLoading, setJobsLoading] = useState(true);
-  const isLoading = profileLoading || timezonesLoading || jobsLoading;
+  const isLoading =
+    profileLoading || timezonesQuery.isPending || jobsQuery.isPending;
   const [jobTitle, setJobTitle] = useState("");
   const jobTitleRequired = isOtherJob(industry, industryOptions);
   const localizedIndustryOptions = useMemo(
@@ -410,23 +417,6 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle",
   );
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchTimezones(controller.signal)
-      .then(setTimezoneOptions)
-      .catch(() => {})
-      .finally(() => {
-        if (!controller.signal.aborted) setTimezonesLoading(false);
-      });
-    fetchJobs(controller.signal)
-      .then(setIndustryOptions)
-      .catch(() => {})
-      .finally(() => {
-        if (!controller.signal.aborted) setJobsLoading(false);
-      });
-    return () => controller.abort();
-  }, []);
 
   const applyProfile = (profile: UserProfile) => {
     setEmail(profile.email);
@@ -502,7 +492,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
 
   const loadProfile = async (signal?: AbortSignal) => {
     try {
-      applyProfile(await fetchProfile(signal));
+      applyProfile(await queryClient.fetchQuery(profileQuery));
     } catch (error) {
       if (signal?.aborted) return;
       if (!handleSessionError(error)) {
@@ -551,7 +541,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
 
     setIsGeneratingLogo(true);
     try {
-      const logo = await requestGeneratedLogo({
+      const logo = await generateLogoMutate({
         brandName: brandName.trim(),
         job: industry,
         jobTitle: jobTitle.trim(),
@@ -606,7 +596,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     setStatus("submitting");
 
     try {
-      const result = await updateProfile({
+      const result = await updateProfileMutate({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         phone: `${selectedCountryDial}${phone.replace(/\D/g, "")}`,
@@ -1110,7 +1100,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 className="h-[146px] w-[146px] shrink-0 self-center rounded-full object-cover"
               />
 
-              <div className="flex w-full flex-1 flex-col gap-5">
+              <div className="flex w-full min-w-0 flex-1 flex-col gap-5">
                 <div
                   role="button"
                   tabIndex={0}
@@ -1148,8 +1138,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     />
                   </div>
 
-                  <div className="flex flex-col gap-1.5">
-                    <p className="whitespace-nowrap text-[14px]">
+                  <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                    <p className="text-[14px] leading-snug">
                       <span className="font-semibold text-auth-primary">
                         {copy.logo.uploadCta}
                       </span>{" "}
@@ -1157,7 +1147,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                         {copy.logo.uploadCtaRest}
                       </span>
                     </p>
-                    <p className="text-[12px] text-auth-muted">
+                    <p className="text-[12px] leading-snug text-auth-muted">
                       {copy.logo.uploadHint}
                     </p>
                   </div>
@@ -1199,10 +1189,10 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     // limit), so each click re-asks and shows the error again.
                     disabled={isGeneratingLogo}
                     aria-busy={isGeneratingLogo}
-                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-6 py-2 text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
+                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-4 py-2 text-center text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
                   >
-                    <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${isGeneratingLogo ? "opacity-0" : ""}`}>
-                      <img src={generateLogo} alt="" className="h-[16] w-auto" aria-hidden="true" />
+                    <span className={`inline-flex items-center justify-center gap-2 transition-opacity duration-200 ${isGeneratingLogo ? "opacity-0" : ""}`}>
+                      <img src={generateLogo} alt="" className="h-4 w-auto shrink-0" aria-hidden="true" />
                       {copy.logo.generateButton}
                     </span>
                     {isGeneratingLogo && (
@@ -1214,12 +1204,12 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-6 py-2 text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
+                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-4 py-2 text-center text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
                   >
                     <img
                       src={uploadLogo}
                       alt=""
-                      className="h-[16] w-auto"
+                      className="h-4 w-auto shrink-0"
                       aria-hidden="true"
                     />
                     {copy.logo.uploadButton}

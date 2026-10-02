@@ -4,7 +4,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/config/site.config";
 import { passwordRequirements } from "@/lib/passwordRequirements";
-import { AuthApiError, reportApiError, resetPassword } from "@/lib/api/authApi";
+import { AuthApiError, reportApiError } from "@/lib/api/authApi";
+import { useResetPassword } from "@/hooks/auth/useAuthMutations";
 import { resolveNextPage } from "@/lib/api/nextPage";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
@@ -101,6 +102,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const { mutate: resetPasswordMutate } = useResetPassword();
   const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
   const clearError = (field: keyof FieldErrors) => {
@@ -132,7 +134,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
 
     setStatus("submitting");
     try {
-      const { nextPage } = await resetPassword({ newPassword, confirmPassword });
+      const { nextPage } = await resetPasswordMutate({ newPassword, confirmPassword });
       navigate(resolveNextPage(nextPage ?? "/reset-password-success"), {
         replace: true,
         state: { passwordReset: true },

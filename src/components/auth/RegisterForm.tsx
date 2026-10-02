@@ -10,8 +10,8 @@ import {
   fetchCaptcha,
   getCaptchaErrorKey,
   reportApiError,
-  verifyCaptcha,
 } from "@/lib/api/authApi";
+import { useVerifyCaptcha } from "@/hooks/auth/useAuthMutations";
 import { useRegister } from "@/hooks/auth/useRegister";
 import { showToast } from "@/lib/toast";
 import { passwordRequirements } from "@/lib/passwordRequirements";
@@ -77,6 +77,7 @@ export function RegisterForm({
 }: RegisterFormProps) {
   const navigate = useNavigate();
   const { mutate: registerMutate } = useRegister();
+  const { mutate: verifyCaptchaMutate } = useVerifyCaptcha();
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
@@ -170,10 +171,10 @@ export function RegisterForm({
     onStatusChange("submitting");
 
     try {
-      const { captchaToken } = await verifyCaptcha(
+      const { captchaToken } = await verifyCaptchaMutate({
         challengeId,
-        captchaInput.trim(),
-      );
+        answer: captchaInput.trim(),
+      });
 
       await registerMutate({
         firstName: firstName.trim(),

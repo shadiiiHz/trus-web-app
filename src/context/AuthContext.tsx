@@ -1,5 +1,6 @@
 import { useEffect, useRef, useReducer, type ReactNode } from "react";
-import { fetchProfile } from "@/lib/api/authApi";
+import { useQueryClient } from "@tanstack/react-query";
+import { profileQuery } from "@/lib/api/profileQuery";
 import { clearAuthSession, getAuthSession, setAuthSession } from "@/lib/api/session";
 import { AuthActionType, AuthContext, type AuthAction, type AuthenticateParams, type AuthState } from "./auth-context";
 
@@ -45,6 +46,7 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const queryClient = useQueryClient();
   const logoutTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearLogoutTimer = () => {
@@ -57,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     clearLogoutTimer();
     clearAuthSession();
+    queryClient.removeQueries({ queryKey: profileQuery.queryKey });
     dispatch({ type: AuthActionType.Logout });
   };
 
@@ -101,7 +104,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     logoRequestRef.current?.abort();
     const controller = new AbortController();
     logoRequestRef.current = controller;
-    fetchProfile(controller.signal)
+    queryClient
+      .fetchQuery(profileQuery)
       .then((profile) => {
         if (!controller.signal.aborted) setLogoUrl(profile.logoUrl);
       })
