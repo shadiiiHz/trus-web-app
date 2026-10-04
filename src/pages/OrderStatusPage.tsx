@@ -78,16 +78,16 @@ export default function OrderStatusPage() {
             </div>
           </FadeIn>
 
-          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_calc(50%-60px)] lg:gap-14">
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px] lg:gap-14">
             <div>
               <h2 className="text-[16px] leading-7 font-semibold text-auth-heading">
                 {name ? fill(copy.greeting, { name }) : copy.greetingNoName}
               </h2>
-              <p className="mt-4 text-[16px] leading-8 text-[#525252]">
+              <p className="mt-3 text-[16px] leading-8 text-[#525252]">
                 {copy.intro}
               </p>
 
-              <div className="mt-8 flex items-start gap-3 rounded-lg bg-[#F4F0FC] px-5 py-4">
+              <div className="mt-6 flex items-start gap-3 rounded-lg bg-[#F4F0FC] px-5 py-4">
                 <span className="mt-0.5 shrink-0">
                   <EmailNoticeIcon />
                 </span>
@@ -101,7 +101,7 @@ export default function OrderStatusPage() {
                 </div>
               </div>
 
-              <h3 className="mt-10 text-[16px] leading-7 font-semibold text-auth-heading">
+              <h3 className="mt-6 text-[16px] leading-7 font-semibold text-auth-heading">
                 {copy.whatsNext}
               </h3>
               <ol className="mt-5 flex flex-col gap-5">
@@ -121,12 +121,12 @@ export default function OrderStatusPage() {
               </ol>
             </div>
 
-            <section className="self-start rounded-[16px] border border-auth-border-light bg-white p-8 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+            <section className="h-[511px] w-full max-w-[400px] self-start justify-self-end rounded-[16px] border border-auth-border-light bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
               <h2 className="text-[16px] leading-7 font-semibold text-auth-heading">
                 {copy.summary.heading}
               </h2>
 
-              <ul className="mt-6 flex flex-col gap-3 rounded-lg border border-auth-border-light bg-[#FAFAFA] p-5">
+              <ul className="mt-4 flex flex-col gap-2 rounded-lg border border-auth-border-light bg-[#FAFAFA] p-4">
                 {order.services.map((service) => (
                   <li key={service.id}>
                     <p className="text-[16px] leading-7 font-semibold text-auth-heading">
@@ -143,21 +143,21 @@ export default function OrderStatusPage() {
                 ))}
               </ul>
 
-              <dl className="mt-6 text-[14px] text-[#525252]">
-                <div className="flex items-center justify-between border-b border-auth-divider pb-5">
+              <dl className="mt-4 text-[14px] text-[#525252]">
+                <div className="flex items-center justify-between border-b border-auth-divider pb-3">
                   <dt>{copy.summary.orderId}</dt>
                   <dd className="font-medium text-auth-heading">
                     {order.orderId}
                   </dd>
                 </div>
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-3 flex items-center justify-between">
                   <dt>{copy.summary.amount}</dt>
                   <dd className="font-medium text-auth-heading tabular-nums">
                     {money(order.amount)}
                   </dd>
                 </div>
                 {order.discount > 0 && (
-                  <div className="mt-3 flex items-center justify-between">
+                  <div className="mt-2 flex items-center justify-between">
                     <dt>{copy.summary.discount}</dt>
                     <dd className="font-medium text-auth-heading tabular-nums">
                       -{money(order.discount)}
@@ -167,7 +167,7 @@ export default function OrderStatusPage() {
                     </dd>
                   </div>
                 )}
-                <div className="mt-4 flex items-center justify-between border-t border-auth-divider pt-4">
+                <div className="mt-3 flex items-center justify-between border-t border-auth-divider pt-3">
                   <dt className="text-[16px] font-semibold text-auth-heading">
                     {copy.summary.finalAmount}
                   </dt>
@@ -179,7 +179,7 @@ export default function OrderStatusPage() {
 
               <Link
                 to="/"
-                className="mt-6 flex h-12 w-full items-center justify-center rounded-md bg-auth-primary text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+                className="mt-6 flex h-10 w-full items-center justify-center rounded-md bg-auth-primary text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
               >
                 {copy.summary.viewOrderStatus}
               </Link>
@@ -190,11 +190,11 @@ export default function OrderStatusPage() {
                     order.invoiceId ? [order.invoiceId] : [],
                   )
                 }
-                className="mx-auto mt-4 block cursor-pointer text-[14px] font-medium text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover"
+                className="mx-auto mt-5 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover"
               >
                 {copy.summary.downloadInvoice}
               </button>
-              <p className="mt-5 text-center text-[14px] leading-6 text-[#525252]">
+              <p className="mt-6 text-center text-[12px] leading-4 text-[#525252]">
                 {copy.summary.invoiceNote}
               </p>
             </section>
