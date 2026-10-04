@@ -1,16 +1,24 @@
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { siteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
+import { fetchBillingOptions } from "@/lib/mock/selectServices";
 import {
-  fetchBillingOptions,
-  fetchSelectableServices,
+  applyCoupon,
+  couponDiscount,
+  couponErrorKind,
   type CouponResult,
+} from "@/lib/api/couponApi";
+import { createOrder } from "@/lib/mock/orders";
+import {
+  fetchSelectableServices,
+  isSessionError,
   type SelectableService,
-} from "@/lib/mock/selectServices";
+} from "@/lib/api/servicesApi";
+import { AuthApiError } from "@/lib/api/authApi";
 import type { BillingPeriod, ServiceSelection } from "@/components/select-services/types";
 import { servicePrice } from "@/components/select-services/pricing";
 import { BillingToggle } from "@/components/select-services/BillingToggle";
@@ -26,17 +34,21 @@ import { AccountLockedNotice } from "@/components/select-services/AccountLockedN
  * A not-yet-`ready` account can still pick services and see prices, but the
  * discount and payment buttons stay disabled until the profile is complete.
  *
- * The services list and coupon check are mocked (see `@/lib/mock/selectServices`)
- * until the backend endpoints exist.
+ * The services list comes from `GET /billing/services`; the coupon check is
+ * still mocked (see `@/lib/mock/selectServices`) until that endpoint exists.
  */
 export default function SelectServicesPage() {
-  const { isInitialized, isAuthenticated, isReady } = useAuth();
+  const { isInitialized, isAuthenticated, isReady, logout } = useAuth();
+  const navigate = useNavigate();
   const copy = siteConfig.selectServicesPage;
 
   const [services, setServices] = useState<SelectableService[]>([]);
+  const [currency, setCurrency] = useState("USD");
+  const [loading, setLoading] = useState(true);
+  const [paying, setPaying] = useState(false);
   const [selections, setSelections] = useState<Record<string, ServiceSelection>>({});
   const [billing, setBilling] = useState<BillingPeriod>("yearly");
-  const [coupon, setCoupon] = useState<CouponResult | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<{ result: CouponResult; cartKey: string } | null>(null);
   const [autoRenew, setAutoRenew] = useState(true);
   const [yearlySavePercent, setYearlySavePercent] = useState<number | null>(null);
 
@@ -45,26 +57,49 @@ export default function SelectServicesPage() {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
-    fetchSelectableServices().then((list) => {
-      if (cancelled) return;
-      setServices(list);
-      setSelections(
-        Object.fromEntries(
-          list.map((s) => [
-            s.id,
-            { selected: s.defaultSelected, quantity: s.defaultQuantity, period: "yearly" },
-          ]),
-        ),
-      );
-    });
+    if (!isInitialized || !isAuthenticated) return;
+    const controller = new AbortController();
+    fetchSelectableServices(controller.signal)
+      .then(({ services: list, currency }) => {
+        setServices(list);
+        setCurrency(currency);
+        setLoading(false);
+        setSelections(
+          Object.fromEntries(
+            list.map((s) => [
+              s.id,
+              { selected: s.purchased, quantity: s.baseQuantity, period: "yearly" },
+            ]),
+          ),
+        );
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        setLoading(false);
+        if (isSessionError(error)) {
+          showToast(
+            error.code === "ACCOUNT_DISABLED"
+              ? copy.errors.accountDisabled
+              : copy.errors.sessionExpired,
+            "error",
+          );
+          logout();
+          navigate("/login", { replace: true });
+          return;
+        }
+        showToast(
+          error instanceof AuthApiError && error.code !== "NETWORK_ERROR"
+            ? error.message
+            : copy.errors.loadFailed,
+          "error",
+        );
+      });
     fetchBillingOptions().then((options) => {
-      if (!cancelled) setYearlySavePercent(options.yearlySavePercent);
+      if (!controller.signal.aborted) setYearlySavePercent(options.yearlySavePercent);
     });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    return () => controller.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInitialized, isAuthenticated]);
 
   const updateSelection = (id: string, patch: Partial<ServiceSelection>) =>
     setSelections((prev) => ({ ...prev, [id]: { ...prev[id], ...patch } }));
@@ -91,15 +126,89 @@ export default function SelectServicesPage() {
       }, 0),
     [services, selections],
   );
-  const discount = coupon ? (servicesTotal * coupon.percentOff) / 100 : 0;
+  // The backend calculates a coupon for exactly the cart it was applied to,
+  // so any change to the selection, quantities or billing period drops it:
+  // the code has to be applied again.
+  const cartKey = useMemo(
+    () =>
+      `${billing}|${services
+        .filter((s) => selections[s.id]?.selected)
+        .map((s) => `${s.id}:${selections[s.id].quantity}`)
+        .join(",")}`,
+    [billing, services, selections],
+  );
+  const coupon = appliedCoupon?.cartKey === cartKey ? appliedCoupon.result : null;
+  const discount = couponDiscount(coupon, servicesTotal);
 
-  const handlePay = () => {
-    if (servicesTotal === 0) {
+  const handleSessionError = (error: unknown): boolean => {
+    if (!isSessionError(error)) return false;
+    showToast(
+      error.code === "ACCOUNT_DISABLED" ? copy.errors.accountDisabled : copy.errors.sessionExpired,
+      "error",
+    );
+    logout();
+    navigate("/login", { replace: true });
+    return true;
+  };
+
+  const handleApplyCoupon = async (
+    code: string,
+  ): Promise<"applied" | "handled" | { error: keyof typeof copy.discount.errors }> => {
+    const chosen = services.filter((s) => selections[s.id]?.selected);
+    if (chosen.length === 0) {
+      showToast(copy.summary.noServicesSelected, "error");
+      return "handled";
+    }
+    try {
+      const result = await applyCoupon(
+        code,
+        billing,
+        chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+      );
+      setAppliedCoupon({ result, cartKey });
+      return "applied";
+    } catch (error) {
+      if (handleSessionError(error)) return "handled";
+      if (error instanceof AuthApiError && error.code !== "NETWORK_ERROR") {
+        const kind = couponErrorKind(error);
+        if (kind === "noServices") {
+          showToast(copy.summary.noServicesSelected, "error");
+          return "handled";
+        }
+        return { error: kind === "other" ? "applyFailed" : kind };
+      }
+      throw error;
+    }
+  };
+
+  const handlePay = async () => {
+    if (paying) return;
+    const chosen = services.filter((s) => selections[s.id]?.selected);
+    if (chosen.length === 0) {
       showToast(copy.summary.noServicesSelected, "error");
       return;
     }
-    // TODO: hand off to the payment endpoint once the backend ships it.
-    showToast(copy.summary.paymentUnavailable, "info");
+    setPaying(true);
+    try {
+      // TODO: the real pay-now endpoint replaces this mock once the backend ships it.
+      const order = await createOrder({
+        services: chosen.map((s) => ({
+          id: s.id,
+          name: s.name,
+          quantity: selections[s.id].quantity,
+          period: selections[s.id].period,
+        })),
+        couponCode: coupon?.code ?? null,
+        autoRenew,
+        currency,
+        amount: servicesTotal,
+        discount,
+      });
+      navigate("/order-status", { state: { order } });
+    } catch {
+      showToast(copy.summary.paymentFailed, "error");
+      setPaying(false);
+    }
   };
 
   if (!isInitialized) return null;
@@ -137,6 +246,8 @@ export default function SelectServicesPage() {
           <div className="mt-8">
             <ServicesTable
               services={services}
+              currency={currency}
+              loading={loading}
               selections={selections}
               onChange={updateSelection}
               onToggleAll={toggleAll}
@@ -147,14 +258,16 @@ export default function SelectServicesPage() {
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <DiscountCodeCard copy={copy.discount} onApply={setCoupon} disabled={!isReady} />
+            <DiscountCodeCard copy={copy.discount} onApply={handleApplyCoupon} disabled={!isReady} />
             <OrderSummaryCard
               copy={copy.summary}
               servicesTotal={servicesTotal}
+              currency={currency}
               discount={discount}
               autoRenew={autoRenew}
               onAutoRenewChange={setAutoRenew}
               onPay={handlePay}
+              loading={paying}
               disabled={!isReady}
             />
           </div>

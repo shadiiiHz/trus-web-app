@@ -2,15 +2,19 @@ import { useCallback, useMemo, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { useBackendText } from "@/i18n/backendText";
-import type { SelectableService } from "@/lib/mock/selectServices";
+import type { SelectableService } from "@/lib/api/servicesApi";
 import type { BillingPeriod, ServiceSelection } from "./types";
 import { Checkbox } from "./Checkbox";
-import { formatUsd, servicePrice } from "./pricing";
+import { formatMoney, servicePrice } from "./pricing";
 import { QuantityStepper } from "./QuantityStepper";
 import { InvoiceIcon, InvoiceModal } from "./InvoiceModal";
 
 export interface ServicesTableProps {
   services: SelectableService[];
+  /** True until the first services response arrives — rows render as skeletons. */
+  loading?: boolean;
+  /** ISO currency code from the backend. */
+  currency: string;
   selections: Record<string, ServiceSelection>;
   onChange: (id: string, patch: Partial<ServiceSelection>) => void;
   onToggleAll: (selected: boolean) => void;
@@ -63,6 +67,50 @@ function StatusBadge({
   );
 }
 
+const SKELETON_ROWS = 9;
+
+function SkeletonBar({ className = "" }: { className?: string }) {
+  return <div className={`skeleton rounded-md ${className}`} />;
+}
+
+function SkeletonRow() {
+  return (
+    <tr className="h-18 border-b border-auth-divider last:border-b-0" aria-hidden="true">
+      <td className="pl-6">
+        <div className="flex items-center gap-4">
+          <SkeletonBar className="h-5 w-5 shrink-0" />
+          <SkeletonBar className="h-8 w-8 shrink-0" />
+          <SkeletonBar className="h-4 w-32" />
+        </div>
+      </td>
+      <td className="pr-4">
+        <SkeletonBar className="h-4 w-4/5" />
+        <SkeletonBar className="mt-1.5 h-4 w-3/5" />
+      </td>
+      <td>
+        <SkeletonBar className="h-9 w-28" />
+      </td>
+      <td className="pr-4">
+        <SkeletonBar className="h-4 w-12" />
+        <SkeletonBar className="mt-1.5 h-4 w-24" />
+      </td>
+      <td className="pr-4">
+        <SkeletonBar className="h-4 w-20" />
+        <SkeletonBar className="mt-1.5 h-4 w-20" />
+      </td>
+      <td className="pr-4">
+        <SkeletonBar className="h-6 w-20 rounded-full" />
+      </td>
+      <td className="pr-4">
+        <SkeletonBar className="h-4 w-14" />
+      </td>
+      <td className="pr-6">
+        <SkeletonBar className="mx-auto h-6 w-6" />
+      </td>
+    </tr>
+  );
+}
+
 const emptyCell = <span className="text-[14px] text-auth-muted">–</span>;
 
 function PriceOption({
@@ -108,6 +156,8 @@ function PriceOption({
 
 export function ServicesTable({
   services,
+  loading = false,
+  currency,
   selections,
   onChange,
   onToggleAll,
@@ -197,7 +247,9 @@ export function ServicesTable({
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody aria-busy={loading}>
+            {loading &&
+              Array.from({ length: SKELETON_ROWS }, (_, i) => <SkeletonRow key={i} />)}
             {rows.map((service) => {
               const selection = selections[service.id];
               if (!selection) return null;
@@ -218,12 +270,12 @@ export function ServicesTable({
                         onChange={(checked) =>
                           onChange(service.id, { selected: checked })
                         }
-                        aria-label={service.name}
+                        aria-label={localize(service.name)}
                       />
                       <div className="flex min-w-0 items-center gap-3">
                         <ServiceIcon src={service.icon} />
                         <span className="min-w-0 break-words text-[14px] leading-5.5 font-medium text-auth-heading">
-                          {service.name}
+                          {localize(service.name)}
                         </span>
                       </div>
                     </div>
@@ -235,7 +287,7 @@ export function ServicesTable({
                   <td>
                     <QuantityStepper
                       value={quantity}
-                      min={service.minQuantity}
+                      min={service.baseQuantity}
                       max={service.maxQuantity}
                       onChange={(q) => onChange(service.id, { quantity: q })}
                       decreaseAria={copy.decreaseAria}
@@ -244,10 +296,10 @@ export function ServicesTable({
                   </td>
                   <td className="pr-4 leading-5.5">
                     <p className="text-[14px] font-medium text-auth-heading tabular-nums">
-                      {formatUsd(service.unitPrice)}
+                      {formatMoney(service.monthlyExtraUnitPriceUsd, currency)}
                     </p>
                     <p className="text-[14px] font-normal text-auth-muted">
-                      {localize(service.unitLabel)}
+                      {service.unitLabel ? localize(service.unitLabel) : emptyCell}
                     </p>
                   </td>
                   <td className="pr-4">
@@ -257,14 +309,14 @@ export function ServicesTable({
                         checked={period === "monthly"}
                         onSelect={() => setPeriod("monthly")}
                         disabled={billing !== "monthly"}
-                        label={`${formatUsd(servicePrice(service, quantity, "monthly"))}${copy.perMonth}`}
+                        label={`${formatMoney(servicePrice(service, quantity, "monthly"), currency)}${copy.perMonth}`}
                       />
                       <PriceOption
                         name={`period-${service.id}`}
                         checked={period === "yearly"}
                         onSelect={() => setPeriod("yearly")}
                         disabled={billing !== "yearly"}
-                        label={`${formatUsd(servicePrice(service, quantity, "yearly"))}${copy.perYear}`}
+                        label={`${formatMoney(servicePrice(service, quantity, "yearly"), currency)}${copy.perYear}`}
                       />
                     </div>
                   </td>
@@ -286,7 +338,7 @@ export function ServicesTable({
                       <button
                         type="button"
                         onClick={() => setInvoiceFor(service)}
-                        aria-label={`${copy.invoiceAria}: ${service.name}`}
+                        aria-label={`${copy.invoiceAria}: ${localize(service.name)}`}
                         className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
                       >
                         <InvoiceIcon />

@@ -1,27 +1,34 @@
 import { useId } from "react";
 import type { SiteConfig } from "@/config/site.config";
-import { formatUsd } from "./pricing";
+import { formatMoney } from "./pricing";
 import { Checkbox } from "./Checkbox";
+import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 
 export interface OrderSummaryCardProps {
   copy: SiteConfig["selectServicesPage"]["summary"];
   servicesTotal: number;
+  /** ISO currency code from the backend. */
+  currency: string;
   discount: number;
   autoRenew: boolean;
   onAutoRenewChange: (value: boolean) => void;
   onPay: () => void;
   /** Disables the Pay Now button — e.g. while the account isn't `ready`. */
   disabled?: boolean;
+  /** A payment request is in flight — shows a spinner and blocks a second click. */
+  loading?: boolean;
 }
 
 export function OrderSummaryCard({
   copy,
   servicesTotal,
+  currency,
   discount,
   autoRenew,
   onAutoRenewChange,
   onPay,
   disabled = false,
+  loading = false,
 }: OrderSummaryCardProps) {
   const autoRenewId = useId();
   const total = Math.max(0, servicesTotal - discount);
@@ -34,13 +41,13 @@ export function OrderSummaryCard({
         <div className="flex h-7 items-center justify-between">
           <dt className="text-[14px] text-[#525252] font-medium">{copy.totalServices}</dt>
           <dd className="text-[20px] font-semibold text-auth-heading tabular-nums">
-            {formatUsd(servicesTotal)}
+            {formatMoney(servicesTotal, currency)}
           </dd>
         </div>
         <div className="flex h-7 items-center justify-between">
           <dt className="text-[14px] text-[#525252] font-medium">{copy.discount}</dt>
           <dd className="text-[20px] font-semibold text-auth-heading tabular-nums">
-            -{formatUsd(discount)}
+            -{formatMoney(discount, currency)}
           </dd>
         </div>
       </dl>
@@ -48,7 +55,7 @@ export function OrderSummaryCard({
       <div className="mt-4.5 flex h-8 items-center justify-between">
         <span className="text-[24px] font-semibold text-auth-heading">{copy.total}</span>
         <span className="text-[24px] font-semibold text-auth-heading tabular-nums">
-          {formatUsd(total)}
+          {formatMoney(total, currency)}
         </span>
       </div>
 
@@ -63,9 +70,10 @@ export function OrderSummaryCard({
       <button
         type="button"
         onClick={onPay}
-        disabled={disabled}
-        className="mt-7 h-10 cursor-pointer self-end rounded-md bg-auth-primary px-7.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
+        disabled={disabled || loading}
+        className="mt-7 inline-flex h-10 cursor-pointer items-center justify-center gap-2 self-end rounded-md bg-auth-primary px-7.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
       >
+        {loading && <ButtonSpinner size={16} />}
         {copy.payNow}
       </button>
     </section>

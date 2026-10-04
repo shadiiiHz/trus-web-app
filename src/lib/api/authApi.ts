@@ -155,7 +155,7 @@ function toFieldErrors(value: unknown): ApiFieldError[] | undefined {
   return list.length ? list : undefined;
 }
 
-function payloadToAuthApiError(
+export function payloadToAuthApiError(
   payload: BackendEnvelope | undefined,
 ): AuthApiError {
   const code =
@@ -179,7 +179,8 @@ function payloadToAuthApiError(
   return apiError;
 }
 
-function toAuthApiError(error: unknown): AuthApiError {
+/** Converts any thrown value (axios error, backend envelope) to an `AuthApiError`; shared by the other authenticated API clients. */
+export function toAuthApiError(error: unknown): AuthApiError {
   const axiosError = error as AxiosError<unknown>;
   if (!axiosError.response) {
     return new AuthApiError("NETWORK_ERROR", "Network request failed.");
@@ -459,7 +460,7 @@ export async function updateProfile(
 }
 
 /** `Authorization: Bearer <session token>` for the endpoints that need a signed-in user. */
-function authHeaders(): Record<string, string> | undefined {
+export function authHeaders(): Record<string, string> | undefined {
   const token = getAuthSession()?.token;
   return token ? { Authorization: `Bearer ${token}` } : undefined;
 }

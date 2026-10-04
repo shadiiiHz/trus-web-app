@@ -2,17 +2,25 @@ import { useId, useState } from "react";
 import type { SiteConfig } from "@/config/site.config";
 import { showToast } from "@/lib/toast";
 import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
-import { validateCoupon, type CouponResult } from "@/lib/mock/selectServices";
 
 export interface DiscountCodeCardProps {
   copy: SiteConfig["selectServicesPage"]["discount"];
-  onApply: (coupon: CouponResult) => void;
+  /**
+   * Applies the code to the current cart. "applied" and a rejection reason
+   * are shown here (toast / field error); "handled" means the page already
+   * reported it (e.g. nothing selected, expired session). Throws on any
+   * other failure.
+   */
+  onApply: (code: string) => Promise<"applied" | "handled" | { error: ErrorKey }>;
   /** Disables the apply button — e.g. while the account isn't `ready`. */
   disabled?: boolean;
 }
 
 type ErrorKey = keyof SiteConfig["selectServicesPage"]["discount"]["errors"];
 type FieldErrors = Partial<Record<"code", ErrorKey>>;
+
+/** Rejections about the code itself show under the input; the rest are toasts. */
+const FIELD_ERRORS: ErrorKey[] = ["codeRequired", "codeInvalid", "codeNotApplicable"];
 
 const labelClass = "mb-2 block text-[14px] font-medium text-auth-text";
 
@@ -40,13 +48,13 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
 
     setSubmitting(true);
     try {
-      const coupon = await validateCoupon(code);
-      if (!coupon) {
-        setErrors({ code: "codeInvalid" });
-        return;
+      const outcome = await onApply(code);
+      if (outcome === "applied") {
+        showToast(copy.success, "success");
+      } else if (outcome !== "handled") {
+        if (FIELD_ERRORS.includes(outcome.error)) setErrors({ code: outcome.error });
+        else showToast(copy.errors[outcome.error], "error");
       }
-      onApply(coupon);
-      showToast(copy.success, "success");
     } catch {
       showToast(copy.errors.applyFailed, "error");
     } finally {

@@ -625,6 +625,11 @@
 
   "selectServicesPage": {
 
+    "errors": {
+      "sessionExpired": "Ваш сеанс недействителен или истёк. Пожалуйста, войдите снова.",
+      "accountDisabled": "Этот аккаунт недоступен.",
+      "loadFailed": "Не удалось загрузить услуги. Попробуйте ещё раз."
+    },
     "notice": "Чтобы приобрести услугу, сначала заполните все обязательные данные в разделе «Редактировать аккаунт».",
 
     "locked": {
@@ -758,6 +763,9 @@
         "codeRequired": "Пожалуйста, введите промокод",
 
         "codeInvalid": "Этот промокод недействителен или истёк.",
+        "codeNotApplicable": "Этот купон не применим к выбранным услугам.",
+        "serviceUnavailable": "Одна из выбранных услуг больше недоступна. Перезагрузите страницу.",
+        "quantityBelowBase": "Количество меньше минимального для базового пакета.",
 
 
 
@@ -787,12 +795,53 @@
 
       "noServicesSelected": "Пожалуйста, выберите хотя бы одну услугу.",
 
-      "paymentUnavailable": "Онлайн-оплата скоро станет доступна."
+      "paymentUnavailable": "Онлайн-оплата скоро станет доступна.",
+      "paymentFailed": "Не удалось начать оплату. Попробуйте ещё раз."
 
     }
 
   },
 
+  "orderStatusPage": {
+    "heading": "Ваша услуга создаётся",
+    "subheading": "Спасибо за заказ. Мы получили его и создаём вашу услугу.",
+    "greeting": "Здравствуйте, {name}!",
+    "greetingNoName": "Здравствуйте!",
+    "intro": "Мы готовим вашу услугу. Вы можете спокойно покинуть эту страницу и следить за ходом работы в личном кабинете.",
+    "emailNotice": {
+      "title": "Мы напишем вам, когда всё будет готово",
+      "description": "Как только услуга будет готова, данные для доступа и руководство по использованию придут вам на почту."
+    },
+    "whatsNext": "Что дальше",
+    "steps": {
+      "received": {
+        "title": "Заказ получен",
+        "description": "Ваш заказ подтверждён."
+      },
+      "creating": {
+        "title": "Создаём вашу услугу",
+        "description": "Мы готовим вашу услугу: {services}."
+      },
+      "access": {
+        "title": "Данные для доступа по почте",
+        "description": "Данные для доступа и руководство по использованию скоро придут."
+      }
+    },
+    "summary": {
+      "heading": "Сводка заказа",
+      "orderId": "Номер заказа",
+      "amount": "Сумма",
+      "discount": "Скидка",
+      "couponSuffix": "Купон",
+      "finalAmount": "Итого к оплате",
+      "viewOrderStatus": "Посмотреть статус заказа",
+      "downloadInvoice": "Скачать счёт (PDF)",
+      "invoiceNote": "Ваш счёт можно скачать здесь, а также в личном кабинете."
+    },
+    "status": {
+      "being_created": "Создаётся"
+    }
+  },
   "footer": {
     "firstColumn": "Услуги",
     "secondColumn": "Компания",
@@ -821,52 +870,48 @@
   },
 
   "backendText": {
+    "Manual Post Creation": "Ручное создание постов",
+    "Auto Post Creation": "Автоматическое создание постов",
+    "Newsletter Creation": "Создание рассылок",
+    "Audience Selection": "Выбор аудиторий",
+    "Lead Finder": "Поиск лидов",
+    "Telegram Daily Publishing": "Ежедневная публикация в Telegram",
+    "X Daily Publishing": "Ежедневная публикация в X",
+    "Instagram Daily Publishing": "Ежедневная публикация в Instagram",
+    "LinkedIn Daily Publishing": "Ежедневная публикация в LinkedIn",
+    "({n} per day included)": "({n} в день включено)",
+    "({n} per night included)": "({n} за ночь включено)",
+    "({n} per account included)": "({n} на аккаунт включено)",
+    "({n} per month included)": "({n} в месяц включено)",
+    "({n} included)": "({n} включено)",
+    "per extra unit per day": "за дополнительную единицу в день",
+    "per extra unit per night": "за дополнительную единицу за ночь",
+    "per extra unit per account": "за дополнительную единицу на аккаунт",
+    "per extra unit per month": "за дополнительную единицу в месяц",
+    "per extra unit": "за дополнительную единицу",
 
-    "Create image or video manually": "Создавайте изображения или видео вручную",
 
-    "Create posts automatically": "Автоматическое создание публикаций",
 
-    "Create and send newsletters": "Создание и отправка рассылок",
 
-    "Manage your target audiences": "Управляйте целевыми аудиториями",
 
-    "Automatically find and collect leads": "Автоматический поиск и сбор лидов",
 
-    "Publish to your Telegram group": "Публикация в вашей группе Telegram",
 
-    "Publish to your X account": "Публикация в вашем аккаунте X",
 
-    "Publish to Instagram": "Публикация в Instagram",
 
-    "LinkedIn publishing": "Публикация в LinkedIn",
 
-    "({n} post per day included)": "(включено публикаций в день: {n})",
 
-    "({n} posts per day included)": "(включено публикаций в день: {n})",
 
-    "({n} newsletter per day included)": "(включено рассылок в день: {n})",
 
-    "({n} newsletters per day included)": "(включено рассылок в день: {n})",
 
-    "(up to {n} audiences included)": "(включено аудиторий: до {n})",
 
-    "every night (included)": "каждую ночь (включено)",
 
-    "({n} time per day included)": "(включено раз в день: {n})",
 
-    "({n} times per day included)": "(включено раз в день: {n})",
 
-    "({n}/day)": "({n}/день)",
 
-    "per extra post/month": "за доп. публикацию/месяц",
 
-    "per extra newsletter/month": "за доп. рассылку/месяц",
 
-    "per extra audience": "за доп. аудиторию",
 
-    "per additional run/month": "за доп. запуск/месяц",
 
-    "per extra publish/month": "за доп. публикацию/месяц",
 
     "Accountant": "Бухгалтер",
 

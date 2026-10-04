@@ -861,6 +861,7 @@ function buildSiteConfig(locale: Locale) {
     },
 
     selectServicesPage: dict.selectServicesPage,
+    orderStatusPage: dict.orderStatusPage,
 
     contact: {
       eyebrow: dict.contact.eyebrow,

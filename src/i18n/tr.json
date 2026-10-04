@@ -619,6 +619,11 @@
 
   "selectServicesPage": {
 
+    "errors": {
+      "sessionExpired": "Oturumunuz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.",
+      "accountDisabled": "Bu hesap kullanılamıyor.",
+      "loadFailed": "Hizmetler yüklenemedi. Lütfen tekrar deneyin."
+    },
     "notice": "Bir hizmet satın almak için önce Hesabı Düzenle bölümündeki tüm zorunlu bilgileri doldurmalısınız.",
 
     "locked": {
@@ -752,6 +757,9 @@
         "codeRequired": "Lütfen indirim kodunuzu girin",
 
         "codeInvalid": "Bu indirim kodu geçersiz veya süresi dolmuş.",
+        "codeNotApplicable": "Bu kupon seçilen hizmetler için geçerli değil.",
+        "serviceUnavailable": "Seçilen hizmetlerden biri artık mevcut değil. Lütfen sayfayı yenileyin.",
+        "quantityBelowBase": "Miktar, temel paketin minimum miktarının altında.",
 
 
 
@@ -781,12 +789,53 @@
 
       "noServicesSelected": "Lütfen en az bir hizmet seçin.",
 
-      "paymentUnavailable": "Çevrimiçi ödeme yakında kullanılabilir olacak."
+      "paymentUnavailable": "Çevrimiçi ödeme yakında kullanılabilir olacak.",
+      "paymentFailed": "Ödeme başlatılamadı. Lütfen tekrar deneyin."
 
     }
 
   },
 
+  "orderStatusPage": {
+    "heading": "Hizmetiniz oluşturuluyor",
+    "subheading": "Siparişiniz için teşekkürler. Siparişinizi aldık ve hizmetinizi oluşturuyoruz.",
+    "greeting": "Merhaba {name},",
+    "greetingNoName": "Merhaba,",
+    "intro": "Hizmetinizi hazırlıyoruz. Bu sayfadan rahatça ayrılabilir, ilerlemeyi kontrol panelinizden takip edebilirsiniz.",
+    "emailNotice": {
+      "title": "Hazır olduğunda size e-posta göndereceğiz",
+      "description": "Hizmetiniz hazır olduğunda erişim bilgileri ve kullanım kılavuzu e-posta ile gönderilecek."
+    },
+    "whatsNext": "Sırada ne var",
+    "steps": {
+      "received": {
+        "title": "Sipariş alındı",
+        "description": "Siparişiniz onaylandı."
+      },
+      "creating": {
+        "title": "Hizmetiniz oluşturuluyor",
+        "description": "{services} hizmetinizi hazırlıyoruz."
+      },
+      "access": {
+        "title": "Erişim bilgileri e-postayla",
+        "description": "Erişim bilgileriniz ve kullanım kılavuzu gönderilecek."
+      }
+    },
+    "summary": {
+      "heading": "Sipariş özeti",
+      "orderId": "Sipariş no",
+      "amount": "Tutar",
+      "discount": "İndirim",
+      "couponSuffix": "Kupon",
+      "finalAmount": "Ödenecek tutar",
+      "viewOrderStatus": "Sipariş durumunu görüntüle",
+      "downloadInvoice": "Faturayı indir (PDF)",
+      "invoiceNote": "Faturanız burada indirilmeye hazır ve kontrol panelinizde de mevcut."
+    },
+    "status": {
+      "being_created": "Oluşturuluyor"
+    }
+  },
   "footer": {
     "firstColumn": "Hizmetler",
     "secondColumn": "Şirket",
@@ -815,52 +864,48 @@
   },
 
   "backendText": {
+    "Manual Post Creation": "Manuel Gönderi Oluşturma",
+    "Auto Post Creation": "Otomatik Gönderi Oluşturma",
+    "Newsletter Creation": "Bülten Oluşturma",
+    "Audience Selection": "Hedef Kitle Seçimi",
+    "Lead Finder": "Potansiyel Müşteri Bulucu",
+    "Telegram Daily Publishing": "Günlük Telegram Yayını",
+    "X Daily Publishing": "Günlük X Yayını",
+    "Instagram Daily Publishing": "Günlük Instagram Yayını",
+    "LinkedIn Daily Publishing": "Günlük LinkedIn Yayını",
+    "({n} per day included)": "(günde {n} dahil)",
+    "({n} per night included)": "(gecede {n} dahil)",
+    "({n} per account included)": "(hesap başına {n} dahil)",
+    "({n} per month included)": "(ayda {n} dahil)",
+    "({n} included)": "({n} dahil)",
+    "per extra unit per day": "ekstra birim başına günlük",
+    "per extra unit per night": "ekstra birim başına gecelik",
+    "per extra unit per account": "ekstra birim başına hesap bazında",
+    "per extra unit per month": "ekstra birim başına aylık",
+    "per extra unit": "ekstra birim başına",
 
-    "Create image or video manually": "Görsel veya videoyu manuel olarak oluşturun",
 
-    "Create posts automatically": "Gönderileri otomatik olarak oluşturun",
 
-    "Create and send newsletters": "Bülten oluşturun ve gönderin",
 
-    "Manage your target audiences": "Hedef kitlelerinizi yönetin",
 
-    "Automatically find and collect leads": "Potansiyel müşterileri otomatik olarak bulun ve toplayın",
 
-    "Publish to your Telegram group": "Telegram grubunuzda yayınlayın",
 
-    "Publish to your X account": "X hesabınızda yayınlayın",
 
-    "Publish to Instagram": "Instagram'da yayınlayın",
 
-    "LinkedIn publishing": "LinkedIn yayını",
 
-    "({n} post per day included)": "(günde {n} gönderi dahil)",
 
-    "({n} posts per day included)": "(günde {n} gönderi dahil)",
 
-    "({n} newsletter per day included)": "(günde {n} bülten dahil)",
 
-    "({n} newsletters per day included)": "(günde {n} bülten dahil)",
 
-    "(up to {n} audiences included)": "({n} hedef kitleye kadar dahil)",
 
-    "every night (included)": "her gece (dahil)",
 
-    "({n} time per day included)": "(günde {n} kez dahil)",
 
-    "({n} times per day included)": "(günde {n} kez dahil)",
 
-    "({n}/day)": "({n}/gün)",
 
-    "per extra post/month": "ek gönderi başına/ay",
 
-    "per extra newsletter/month": "ek bülten başına/ay",
 
-    "per extra audience": "ek hedef kitle başına",
 
-    "per additional run/month": "ek çalıştırma başına/ay",
 
-    "per extra publish/month": "ek yayın başına/ay",
 
     "Accountant": "Muhasebeci",
 

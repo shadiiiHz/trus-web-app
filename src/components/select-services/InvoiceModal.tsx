@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { FileText, X } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { useLocale, type Locale } from "@/i18n";
+import { localizeBackendText } from "@/i18n/backendText";
 import {
   downloadInvoices,
   fetchServiceInvoices,
-  type SelectableService,
   type ServiceInvoice,
   type ServiceInvoices,
 } from "@/lib/mock/selectServices";
+import type { SelectableService } from "@/lib/api/servicesApi";
 import { Checkbox } from "./Checkbox";
 import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 
@@ -304,7 +305,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                 {copy.serviceLabel}
               </p>
               <p className="mt-1 truncate text-[16px] leading-6 font-semibold text-auth-heading">
-                {service.name}
+                {localizeBackendText(service.name, locale)}
               </p>
             </div>
             <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647]">

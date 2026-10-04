@@ -619,6 +619,11 @@
 
   "selectServicesPage": {
 
+    "errors": {
+      "sessionExpired": "Your session is invalid or expired. Please log in again.",
+      "accountDisabled": "This account is not available.",
+      "loadFailed": "Couldn't load the services. Please try again."
+    },
     "notice": "To purchase a service, you must first complete all required information in the Edit Account section.",
 
     "locked": {
@@ -752,6 +757,9 @@
         "codeRequired": "Please enter your discount code",
 
         "codeInvalid": "This discount code is invalid or has expired.",
+        "codeNotApplicable": "This coupon doesn't apply to the selected services.",
+        "serviceUnavailable": "A selected service is no longer available. Please reload the page.",
+        "quantityBelowBase": "The quantity is below the minimum of the base package.",
 
 
 
@@ -781,12 +789,53 @@
 
       "noServicesSelected": "Please select at least one service.",
 
-      "paymentUnavailable": "Online payment will be available soon."
+      "paymentUnavailable": "Online payment will be available soon.",
+      "paymentFailed": "Payment couldn't be started. Please try again."
 
     }
 
   },
 
+  "orderStatusPage": {
+    "heading": "Your Service is Being Created",
+    "subheading": "Thank you for your order. We've received it and are creating your service.",
+    "greeting": "Hello {name},",
+    "greetingNoName": "Hello,",
+    "intro": "We're preparing your service now. You can safely leave this page and track progress from your dashboard.",
+    "emailNotice": {
+      "title": "We'll email you when it's ready",
+      "description": "Once your service is ready, access information and the usage guide will be sent to you via email."
+    },
+    "whatsNext": "What happens next",
+    "steps": {
+      "received": {
+        "title": "Order received",
+        "description": "Your order has been confirmed."
+      },
+      "creating": {
+        "title": "Creating your service",
+        "description": "We're preparing your {services} service."
+      },
+      "access": {
+        "title": "Access details by email",
+        "description": "Your access information and usage guide will follow."
+      }
+    },
+    "summary": {
+      "heading": "Order Summary",
+      "orderId": "Order ID",
+      "amount": "Amount",
+      "discount": "Discount",
+      "couponSuffix": "Coupon",
+      "finalAmount": "Final Amount",
+      "viewOrderStatus": "View Order Status",
+      "downloadInvoice": "Download Invoice (PDF)",
+      "invoiceNote": "Your invoice is ready to download here and is also available from your dashboard."
+    },
+    "status": {
+      "being_created": "Being created"
+    }
+  },
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Company",

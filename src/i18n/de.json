@@ -626,6 +626,11 @@
 
   "selectServicesPage": {
 
+    "errors": {
+      "sessionExpired": "Ihre Sitzung ist ungültig oder abgelaufen. Bitte melden Sie sich erneut an.",
+      "accountDisabled": "Dieses Konto ist nicht verfügbar.",
+      "loadFailed": "Die Services konnten nicht geladen werden. Bitte versuche es erneut."
+    },
     "notice": "Um einen Service zu kaufen, müssen Sie zunächst alle erforderlichen Angaben im Bereich „Konto bearbeiten“ vervollständigen.",
 
     "locked": {
@@ -759,6 +764,9 @@
         "codeRequired": "Bitte geben Sie Ihren Rabattcode ein",
 
         "codeInvalid": "Dieser Rabattcode ist ungültig oder abgelaufen.",
+        "codeNotApplicable": "Dieser Gutschein gilt nicht für die ausgewählten Services.",
+        "serviceUnavailable": "Ein ausgewählter Service ist nicht mehr verfügbar. Bitte lade die Seite neu.",
+        "quantityBelowBase": "Die Menge liegt unter der Mindestmenge des Basispakets.",
 
 
 
@@ -788,12 +796,53 @@
 
       "noServicesSelected": "Bitte wählen Sie mindestens einen Service aus.",
 
-      "paymentUnavailable": "Online-Zahlung ist bald verfügbar."
+      "paymentUnavailable": "Online-Zahlung ist bald verfügbar.",
+      "paymentFailed": "Die Zahlung konnte nicht gestartet werden. Bitte versuche es erneut."
 
     }
 
   },
 
+  "orderStatusPage": {
+    "heading": "Dein Service wird erstellt",
+    "subheading": "Danke für deine Bestellung. Wir haben sie erhalten und erstellen deinen Service.",
+    "greeting": "Hallo {name},",
+    "greetingNoName": "Hallo,",
+    "intro": "Wir bereiten deinen Service gerade vor. Du kannst diese Seite problemlos verlassen und den Fortschritt in deinem Dashboard verfolgen.",
+    "emailNotice": {
+      "title": "Wir benachrichtigen dich per E-Mail, sobald er bereit ist",
+      "description": "Sobald dein Service bereit ist, senden wir dir die Zugangsdaten und die Anleitung per E-Mail."
+    },
+    "whatsNext": "Wie es weitergeht",
+    "steps": {
+      "received": {
+        "title": "Bestellung erhalten",
+        "description": "Deine Bestellung wurde bestätigt."
+      },
+      "creating": {
+        "title": "Dein Service wird erstellt",
+        "description": "Wir bereiten deinen Service {services} vor."
+      },
+      "access": {
+        "title": "Zugangsdaten per E-Mail",
+        "description": "Deine Zugangsdaten und die Anleitung folgen."
+      }
+    },
+    "summary": {
+      "heading": "Bestellübersicht",
+      "orderId": "Bestell-ID",
+      "amount": "Betrag",
+      "discount": "Rabatt",
+      "couponSuffix": "Gutschein",
+      "finalAmount": "Endbetrag",
+      "viewOrderStatus": "Bestellstatus ansehen",
+      "downloadInvoice": "Rechnung herunterladen (PDF)",
+      "invoiceNote": "Deine Rechnung steht hier zum Download bereit und ist auch in deinem Dashboard verfügbar."
+    },
+    "status": {
+      "being_created": "Wird erstellt"
+    }
+  },
   "footer": {
     "firstColumn": "Leistungen",
     "secondColumn": "Unternehmen",
@@ -822,52 +871,48 @@
   },
 
   "backendText": {
+    "Manual Post Creation": "Manuelle Beitragserstellung",
+    "Auto Post Creation": "Automatische Beitragserstellung",
+    "Newsletter Creation": "Newsletter-Erstellung",
+    "Audience Selection": "Zielgruppenauswahl",
+    "Lead Finder": "Lead-Finder",
+    "Telegram Daily Publishing": "Tägliche Telegram-Veröffentlichung",
+    "X Daily Publishing": "Tägliche X-Veröffentlichung",
+    "Instagram Daily Publishing": "Tägliche Instagram-Veröffentlichung",
+    "LinkedIn Daily Publishing": "Tägliche LinkedIn-Veröffentlichung",
+    "({n} per day included)": "({n} pro Tag inklusive)",
+    "({n} per night included)": "({n} pro Nacht inklusive)",
+    "({n} per account included)": "({n} pro Konto inklusive)",
+    "({n} per month included)": "({n} pro Monat inklusive)",
+    "({n} included)": "({n} inklusive)",
+    "per extra unit per day": "pro zusätzlicher Einheit pro Tag",
+    "per extra unit per night": "pro zusätzlicher Einheit pro Nacht",
+    "per extra unit per account": "pro zusätzlicher Einheit pro Konto",
+    "per extra unit per month": "pro zusätzlicher Einheit pro Monat",
+    "per extra unit": "pro zusätzlicher Einheit",
 
-    "Create image or video manually": "Bilder oder Videos manuell erstellen",
 
-    "Create posts automatically": "Beiträge automatisch erstellen",
 
-    "Create and send newsletters": "Newsletter erstellen und versenden",
 
-    "Manage your target audiences": "Zielgruppen verwalten",
 
-    "Automatically find and collect leads": "Leads automatisch finden und sammeln",
 
-    "Publish to your Telegram group": "In Ihrer Telegram-Gruppe veröffentlichen",
 
-    "Publish to your X account": "Auf Ihrem X-Konto veröffentlichen",
 
-    "Publish to Instagram": "Auf Instagram veröffentlichen",
 
-    "LinkedIn publishing": "Veröffentlichung auf LinkedIn",
 
-    "({n} post per day included)": "({n} Beitrag pro Tag inklusive)",
 
-    "({n} posts per day included)": "({n} Beiträge pro Tag inklusive)",
 
-    "({n} newsletter per day included)": "({n} Newsletter pro Tag inklusive)",
 
-    "({n} newsletters per day included)": "({n} Newsletter pro Tag inklusive)",
 
-    "(up to {n} audiences included)": "(bis zu {n} Zielgruppen inklusive)",
 
-    "every night (included)": "jede Nacht (inklusive)",
 
-    "({n} time per day included)": "({n}-mal pro Tag inklusive)",
 
-    "({n} times per day included)": "({n}-mal pro Tag inklusive)",
 
-    "({n}/day)": "({n}/Tag)",
 
-    "per extra post/month": "pro zusätzlichem Beitrag/Monat",
 
-    "per extra newsletter/month": "pro zusätzlichem Newsletter/Monat",
 
-    "per extra audience": "pro zusätzlicher Zielgruppe",
 
-    "per additional run/month": "pro zusätzlichem Durchlauf/Monat",
 
-    "per extra publish/month": "pro zusätzlicher Veröffentlichung/Monat",
 
     "Accountant": "Steuerberater",
 

@@ -15,6 +15,7 @@ import EmailVerifiedPage from "./pages/EmailVerifiedPage";
 import EditAccountPage from "./pages/EditAccountPage";
 import CheckYourEmailPage from "./pages/CheckYourEmailPage";
 import SelectServicesPage from "./pages/SelectServicesPage";
+import OrderStatusPage from "./pages/OrderStatusPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -51,6 +52,8 @@ export default function App() {
         {/* Serves the backend's `next_page: "/service"` (a `ready: true`
             login response) — resolved to this route by resolveNextPage(). */}
         <Route path="/select-services" element={<SelectServicesPage />} />
+        {/* Shown after a successful "Pay now"; the order arrives in router state. */}
+        <Route path="/order-status" element={<OrderStatusPage />} />
       </Routes>
     </>
   );
