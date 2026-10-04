@@ -13,6 +13,8 @@ export interface ServicesTableProps {
   services: SelectableService[];
   /** True until the first services response arrives — rows render as skeletons. */
   loading?: boolean;
+  /** How many skeleton rows to show while loading (e.g. last known service count). */
+  skeletonRows?: number;
   /** ISO currency code from the backend. */
   currency: string;
   selections: Record<string, ServiceSelection>;
@@ -157,6 +159,7 @@ function PriceOption({
 export function ServicesTable({
   services,
   loading = false,
+  skeletonRows = SKELETON_ROWS,
   currency,
   selections,
   onChange,
@@ -249,7 +252,7 @@ export function ServicesTable({
           </thead>
           <tbody aria-busy={loading}>
             {loading &&
-              Array.from({ length: SKELETON_ROWS }, (_, i) => <SkeletonRow key={i} />)}
+              Array.from({ length: skeletonRows }, (_, i) => <SkeletonRow key={i} />)}
             {rows.map((service) => {
               const selection = selections[service.id];
               if (!selection) return null;

@@ -4,7 +4,7 @@
  */
 import axios from "axios";
 import { apiUrl } from "@/lib/api/config";
-import { authHeaders, AuthApiError, toAuthApiError } from "@/lib/api/authApi";
+import { authHeaders, AuthApiError, toAuthApiError, toDisplayableImageUrl } from "@/lib/api/authApi";
 
 const SERVICES_URL = apiUrl("/billing/services");
 
@@ -138,6 +138,7 @@ function toService(raw: Record<string, unknown>): SelectableService | null {
   const name = str(raw.display_name) || str(raw.name) || str(raw.title);
   if (!id || !name) return null;
 
+  const iconUrl = str(raw.icon_url) || str(raw.icon_key) || str(raw.icon);
   const billing = (str(raw.billing_cycle) || str(raw.purchased_billing)).toLowerCase();
   const baseQuantity = num(raw.base_quantity);
   const period = PERIOD_LABELS[str(raw.quantity_period).toUpperCase()];
@@ -148,7 +149,7 @@ function toService(raw: Record<string, unknown>): SelectableService | null {
     includedAmount:
       str(raw.included_amount) ||
       (period ? `(${baseQuantity} ${period.included} included)` : `(${baseQuantity} included)`),
-    icon: str(raw.icon_url) || str(raw.icon) || null,
+    icon: iconUrl ? toDisplayableImageUrl(iconUrl) : null,
     baseQuantity,
     maxQuantity: Math.max(baseQuantity, num(raw.max_quantity, DEFAULT_MAX_QUANTITY)),
     monthlyBasePriceUsd: num(raw.monthly_base_price_usd),

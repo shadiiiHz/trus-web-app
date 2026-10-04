@@ -27,6 +27,18 @@ import { DiscountCodeCard } from "@/components/select-services/DiscountCodeCard"
 import { OrderSummaryCard } from "@/components/select-services/OrderSummaryCard";
 import { AccountLockedNotice } from "@/components/select-services/AccountLockedNotice";
 
+const SERVICE_COUNT_KEY = "trus:services-count";
+
+/** Last known number of services, so the skeleton matches the real table. */
+function readCachedServiceCount(): number | undefined {
+  try {
+    const n = Number(localStorage.getItem(SERVICE_COUNT_KEY));
+    return Number.isInteger(n) && n > 0 ? Math.min(n, 30) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 /**
  * Select Services — the post-login destination the backend's `ready: true`
  * login response sends a fully set-up account to (`next_page: "/service"`,
@@ -45,6 +57,7 @@ export default function SelectServicesPage() {
   const [services, setServices] = useState<SelectableService[]>([]);
   const [currency, setCurrency] = useState("USD");
   const [loading, setLoading] = useState(true);
+  const [skeletonRows] = useState(readCachedServiceCount);
   const [paying, setPaying] = useState(false);
   const [selections, setSelections] = useState<Record<string, ServiceSelection>>({});
   const [billing, setBilling] = useState<BillingPeriod>("yearly");
@@ -61,6 +74,11 @@ export default function SelectServicesPage() {
     const controller = new AbortController();
     fetchSelectableServices(controller.signal)
       .then(({ services: list, currency }) => {
+        try {
+          localStorage.setItem(SERVICE_COUNT_KEY, String(list.length));
+        } catch {
+          /* storage unavailable — skeleton falls back to the default count */
+        }
         setServices(list);
         setCurrency(currency);
         setLoading(false);
@@ -248,6 +266,7 @@ export default function SelectServicesPage() {
               services={services}
               currency={currency}
               loading={loading}
+              skeletonRows={skeletonRows}
               selections={selections}
               onChange={updateSelection}
               onToggleAll={toggleAll}
