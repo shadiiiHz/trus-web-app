@@ -87,7 +87,7 @@ export default function OrderStatusPage() {
                 {copy.intro}
               </p>
 
-              <div className="mt-6 flex items-start gap-3 rounded-lg bg-[#F4F0FC] px-5 py-4">
+              <div className="mt-6 flex items-start gap-3 rounded-md bg-[#F4F0FC] px-5 py-4">
                 <span className="mt-0.5 shrink-0">
                   <EmailNoticeIcon />
                 </span>
@@ -126,7 +126,7 @@ export default function OrderStatusPage() {
                 {copy.summary.heading}
               </h2>
 
-              <ul className="mt-4 flex flex-col gap-2 rounded-lg border border-auth-border-light bg-[#FAFAFA] p-4">
+              <ul className="mt-4 flex flex-col gap-2 rounded-md border border-auth-border-light bg-[#FAFAFA] p-4">
                 {order.services.map((service) => (
                   <li key={service.id}>
                     <p className="text-[16px] leading-7 font-semibold text-auth-heading">
