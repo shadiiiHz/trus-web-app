@@ -7,17 +7,14 @@ import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
 import { fetchBillingOptions } from "@/lib/mock/selectServices";
 import {
-  applyCoupon,
   couponDiscount,
   couponErrorKind,
   type CouponResult,
 } from "@/lib/api/couponApi";
 import { createOrder } from "@/lib/mock/orders";
-import {
-  fetchSelectableServices,
-  isSessionError,
-  type SelectableService,
-} from "@/lib/api/servicesApi";
+import { isSessionError } from "@/lib/api/servicesApi";
+import { useSelectableServices } from "@/hooks/queries/useSelectableServices";
+import { useApplyCoupon } from "@/hooks/billing/useApplyCoupon";
 import { AuthApiError } from "@/lib/api/authApi";
 import type { BillingPeriod, ServiceSelection } from "@/components/select-services/types";
 import { servicePrice } from "@/components/select-services/pricing";
@@ -54,9 +51,11 @@ export default function SelectServicesPage() {
   const navigate = useNavigate();
   const copy = siteConfig.selectServicesPage;
 
-  const [services, setServices] = useState<SelectableService[]>([]);
-  const [currency, setCurrency] = useState("USD");
-  const [loading, setLoading] = useState(true);
+  const servicesQuery = useSelectableServices(isInitialized && isAuthenticated);
+  const { mutate: applyCouponCode } = useApplyCoupon();
+  const services = useMemo(() => servicesQuery.data?.services ?? [], [servicesQuery.data]);
+  const currency = servicesQuery.data?.currency ?? "USD";
+  const loading = servicesQuery.isPending;
   const [skeletonRows] = useState(readCachedServiceCount);
   const [paying, setPaying] = useState(false);
   const [selections, setSelections] = useState<Record<string, ServiceSelection>>({});
@@ -69,54 +68,60 @@ export default function SelectServicesPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Reset the per-row selections whenever a fresh list arrives (adjusting
+  // state during render rather than in an effect).
+  const [selectionsFor, setSelectionsFor] = useState<typeof servicesQuery.data>();
+  if (servicesQuery.data && servicesQuery.data !== selectionsFor) {
+    setSelectionsFor(servicesQuery.data);
+    setSelections(
+      Object.fromEntries(
+        servicesQuery.data.services.map((s) => [
+          s.id,
+          { selected: s.purchased, quantity: s.baseQuantity, period: "yearly" },
+        ]),
+      ),
+    );
+  }
+
+  useEffect(() => {
+    if (!servicesQuery.data) return;
+    try {
+      localStorage.setItem(SERVICE_COUNT_KEY, String(servicesQuery.data.services.length));
+    } catch {
+      /* storage unavailable — skeleton falls back to the default count */
+    }
+  }, [servicesQuery.data]);
+
+  useEffect(() => {
+    const error = servicesQuery.error;
+    if (!error) return;
+    if (isSessionError(error)) {
+      showToast(
+        error.code === "ACCOUNT_DISABLED" ? copy.errors.accountDisabled : copy.errors.sessionExpired,
+        "error",
+      );
+      logout();
+      navigate("/login", { replace: true });
+      return;
+    }
+    showToast(
+      error instanceof AuthApiError && error.code !== "NETWORK_ERROR"
+        ? error.message
+        : copy.errors.loadFailed,
+      "error",
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [servicesQuery.error]);
+
   useEffect(() => {
     if (!isInitialized || !isAuthenticated) return;
-    const controller = new AbortController();
-    fetchSelectableServices(controller.signal)
-      .then(({ services: list, currency }) => {
-        try {
-          localStorage.setItem(SERVICE_COUNT_KEY, String(list.length));
-        } catch {
-          /* storage unavailable — skeleton falls back to the default count */
-        }
-        setServices(list);
-        setCurrency(currency);
-        setLoading(false);
-        setSelections(
-          Object.fromEntries(
-            list.map((s) => [
-              s.id,
-              { selected: s.purchased, quantity: s.baseQuantity, period: "yearly" },
-            ]),
-          ),
-        );
-      })
-      .catch((error: unknown) => {
-        if (controller.signal.aborted) return;
-        setLoading(false);
-        if (isSessionError(error)) {
-          showToast(
-            error.code === "ACCOUNT_DISABLED"
-              ? copy.errors.accountDisabled
-              : copy.errors.sessionExpired,
-            "error",
-          );
-          logout();
-          navigate("/login", { replace: true });
-          return;
-        }
-        showToast(
-          error instanceof AuthApiError && error.code !== "NETWORK_ERROR"
-            ? error.message
-            : copy.errors.loadFailed,
-          "error",
-        );
-      });
+    let cancelled = false;
     fetchBillingOptions().then((options) => {
-      if (!controller.signal.aborted) setYearlySavePercent(options.yearlySavePercent);
+      if (!cancelled) setYearlySavePercent(options.yearlySavePercent);
     });
-    return () => controller.abort();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      cancelled = true;
+    };
   }, [isInitialized, isAuthenticated]);
 
   const updateSelection = (id: string, patch: Partial<ServiceSelection>) =>
@@ -178,11 +183,11 @@ export default function SelectServicesPage() {
       return "handled";
     }
     try {
-      const result = await applyCoupon(
+      const result = await applyCouponCode({
         code,
         billing,
-        chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
-      );
+        items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+      });
       setAppliedCoupon({ result, cartKey });
       return "applied";
     } catch (error) {
