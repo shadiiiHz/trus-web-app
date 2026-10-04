@@ -11,10 +11,11 @@ import {
   couponErrorKind,
   type CouponResult,
 } from "@/lib/api/couponApi";
-import { createOrder } from "@/lib/mock/orders";
+import { checkoutErrorKind } from "@/lib/api/checkoutApi";
 import { isSessionError } from "@/lib/api/servicesApi";
 import { useSelectableServices } from "@/hooks/queries/useSelectableServices";
 import { useApplyCoupon } from "@/hooks/billing/useApplyCoupon";
+import { useCheckout } from "@/hooks/billing/useCheckout";
 import { AuthApiError } from "@/lib/api/authApi";
 import type { BillingPeriod, ServiceSelection } from "@/components/select-services/types";
 import { servicePrice } from "@/components/select-services/pricing";
@@ -53,6 +54,7 @@ export default function SelectServicesPage() {
 
   const servicesQuery = useSelectableServices(isInitialized && isAuthenticated);
   const { mutate: applyCouponCode } = useApplyCoupon();
+  const { mutate: submitCheckout } = useCheckout();
   const services = useMemo(() => servicesQuery.data?.services ?? [], [servicesQuery.data]);
   const currency = servicesQuery.data?.currency ?? "USD";
   const loading = servicesQuery.isPending;
@@ -77,7 +79,7 @@ export default function SelectServicesPage() {
       Object.fromEntries(
         servicesQuery.data.services.map((s) => [
           s.id,
-          { selected: s.purchased, quantity: s.baseQuantity, period: "yearly" },
+          { selected: false, quantity: s.baseQuantity, period: "yearly" },
         ]),
       ),
     );
@@ -213,24 +215,36 @@ export default function SelectServicesPage() {
     }
     setPaying(true);
     try {
-      // TODO: the real pay-now endpoint replaces this mock once the backend ships it.
-      const order = await createOrder({
-        services: chosen.map((s) => ({
-          id: s.id,
-          name: s.name,
-          quantity: selections[s.id].quantity,
-          period: selections[s.id].period,
-        })),
-        couponCode: coupon?.code ?? null,
-        autoRenew,
-        currency,
-        amount: servicesTotal,
-        discount,
+      const order = await submitCheckout({
+        request: {
+          billing,
+          items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+          couponCode: coupon?.code ?? null,
+        },
+        fallback: {
+          serviceNames: Object.fromEntries(chosen.map((s) => [s.id, s.name])),
+          currency,
+          amount: servicesTotal,
+          discount,
+          couponCode: coupon?.code ?? null,
+        },
       });
       navigate("/order-status", { state: { order } });
-    } catch {
-      showToast(copy.summary.paymentFailed, "error");
+    } catch (error) {
       setPaying(false);
+      if (handleSessionError(error)) return;
+      const kind =
+        error instanceof AuthApiError && error.code !== "NETWORK_ERROR" ? checkoutErrorKind(error) : "other";
+      if (kind !== "other") {
+        showToast(copy.summary.errors[kind], "error");
+        return;
+      }
+      // An undocumented backend code: show the backend's own message rather than a blind retry hint.
+      console.error("Checkout failed", error);
+      showToast(
+        error instanceof AuthApiError && error.code !== "NETWORK_ERROR" ? error.message : copy.summary.paymentFailed,
+        "error",
+      );
     }
   };
 

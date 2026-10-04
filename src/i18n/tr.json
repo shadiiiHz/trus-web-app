@@ -790,7 +790,22 @@
       "noServicesSelected": "Lütfen en az bir hizmet seçin.",
 
       "paymentUnavailable": "Çevrimiçi ödeme yakında kullanılabilir olacak.",
-      "paymentFailed": "Ödeme başlatılamadı. Lütfen tekrar deneyin."
+      "paymentFailed": "Ödeme başlatılamadı. Lütfen tekrar deneyin.",
+      "errors": {
+        "accountNotReady": "Hizmet satın almadan önce lütfen hesap bilgilerinizi tamamlayın.",
+        "noServices": "Lütfen en az bir hizmet seçin.",
+        "serviceUnavailable": "Seçilen hizmetlerden biri artık mevcut değil. Lütfen sayfayı yenileyin.",
+        "serviceAlreadyPurchased": "Seçilen hizmetlerden biri zaten satın alınmış.",
+        "quantityBelowBase": "Miktar, temel paketin minimumunun altında.",
+        "couponInvalid": "Bu indirim kodu geçersiz veya süresi dolmuş.",
+        "couponNotApplicable": "Bu kupon seçilen hizmetler için geçerli değil.",
+        "paymentRequired": "Çevrimiçi ödeme yakında kullanılabilir olacak.",
+        "pdfFailed": "Fatura PDF'i oluşturulamadı. Lütfen tekrar deneyin.",
+        "invoiceNotFound": "Fatura bulunamadı.",
+        "invoiceNotReady": "Fatura PDF'i henüz hazır değil. Lütfen kısa süre sonra tekrar deneyin.",
+        "invoiceServiceNotFound": "Seçilen hizmet bulunamadı.",
+        "invoiceFailed": "Fatura indirilemedi. Lütfen tekrar deneyin."
+      }
 
     }
 

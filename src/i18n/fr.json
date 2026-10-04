@@ -800,7 +800,22 @@
       "noServicesSelected": "Veuillez sélectionner au moins un service.",
 
       "paymentUnavailable": "Le paiement en ligne sera bientôt disponible.",
-      "paymentFailed": "Le paiement n'a pas pu être lancé. Veuillez réessayer."
+      "paymentFailed": "Le paiement n'a pas pu être lancé. Veuillez réessayer.",
+      "errors": {
+        "accountNotReady": "Veuillez compléter les informations de votre compte avant d'acheter des services.",
+        "noServices": "Veuillez sélectionner au moins un service.",
+        "serviceUnavailable": "Un service sélectionné n'est plus disponible. Veuillez recharger la page.",
+        "serviceAlreadyPurchased": "L'un des services sélectionnés a déjà été acheté.",
+        "quantityBelowBase": "La quantité est inférieure au minimum du forfait de base.",
+        "couponInvalid": "Ce code de réduction est invalide ou a expiré.",
+        "couponNotApplicable": "Ce coupon ne s'applique pas aux services sélectionnés.",
+        "paymentRequired": "Le paiement en ligne sera bientôt disponible.",
+        "pdfFailed": "Le PDF de la facture n'a pas pu être généré. Veuillez réessayer.",
+        "invoiceNotFound": "La facture est introuvable.",
+        "invoiceNotReady": "Le PDF de la facture n'est pas encore disponible. Veuillez réessayer dans un instant.",
+        "invoiceServiceNotFound": "Le service sélectionné est introuvable.",
+        "invoiceFailed": "La facture n'a pas pu être téléchargée. Veuillez réessayer."
+      }
 
     }
 

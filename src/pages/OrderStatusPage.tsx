@@ -6,7 +6,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { siteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import { useBackendText } from "@/i18n/backendText";
-import { downloadInvoices } from "@/lib/mock/selectServices";
+import { useDownloadInvoices } from "@/hooks/billing/useDownloadInvoices";
 import type { OrderResult } from "@/lib/mock/orders";
 import { formatMoney } from "@/components/select-services/pricing";
 import {
@@ -33,6 +33,7 @@ export default function OrderStatusPage() {
   const { isInitialized, isAuthenticated, displayName } = useAuth();
   const location = useLocation();
   const localize = useBackendText();
+  const { download, isLoading: downloading } = useDownloadInvoices();
   const copy = siteConfig.orderStatusPage;
   const order = (location.state as OrderStatusLocationState | null)?.order;
 
@@ -185,12 +186,9 @@ export default function OrderStatusPage() {
               </Link>
               <button
                 type="button"
-                onClick={() =>
-                  void downloadInvoices(
-                    order.invoiceId ? [order.invoiceId] : [],
-                  )
-                }
-                className="mx-auto mt-5 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover"
+                disabled={downloading || !order.invoiceId}
+                onClick={() => order.invoiceId && void download([order.invoiceId])}
+                className="mx-auto mt-5 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {copy.summary.downloadInvoice}
               </button>

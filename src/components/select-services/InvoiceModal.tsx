@@ -5,13 +5,11 @@ import { FileText, X } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { useLocale, type Locale } from "@/i18n";
 import { localizeBackendText } from "@/i18n/backendText";
-import {
-  downloadInvoices,
-  fetchServiceInvoices,
-  type ServiceInvoice,
-  type ServiceInvoices,
-} from "@/lib/mock/selectServices";
+import type { ServiceInvoice } from "@/lib/api/invoiceApi";
 import type { SelectableService } from "@/lib/api/servicesApi";
+import { useDownloadInvoices } from "@/hooks/billing/useDownloadInvoices";
+import { useInvoiceErrorHandler } from "@/hooks/billing/useInvoiceErrorHandler";
+import { useServiceInvoices } from "@/hooks/queries/useServiceInvoices";
 import { Checkbox } from "./Checkbox";
 import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 
@@ -83,6 +81,19 @@ function formatPeriod(startIso: string, endIso: string, locale: Locale): string 
   return `${from}–${to}, ${end.getUTCFullYear()}`;
 }
 
+/** The billing period, or the issue date while the backend hasn't set one ("—" if neither). */
+function describePeriod(invoice: ServiceInvoice, locale: Locale): string {
+  if (invoice.periodStart && invoice.periodEnd) {
+    return formatPeriod(invoice.periodStart, invoice.periodEnd, locale);
+  }
+  if (invoice.issuedAt) {
+    return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(
+      parseIsoDate(invoice.issuedAt),
+    );
+  }
+  return "—";
+}
+
 /** Shared column template of the header row and invoice rows. */
 const gridClass =
   "grid grid-cols-[repeat(3,minmax(0,1fr))] sm:grid-cols-[236px_236px_minmax(0,1fr)] items-center";
@@ -98,6 +109,29 @@ function ServiceBadgeIcon({ src }: { src: string | null }) {
     />
   );
 }
+/** Placeholder shaped like an `InvoiceRow`, shown while the invoices load. */
+function InvoiceRowSkeleton() {
+  return (
+    <div aria-hidden="true" className="flex h-16 items-center rounded-md border border-auth-border-light bg-white pl-3">
+      <div className="skeleton h-5 w-5 shrink-0 rounded-md" />
+      <div className={`ml-4 min-w-0 flex-1 ${gridClass}`}>
+        <div className="flex items-center gap-2">
+          <div className="skeleton h-[34px] w-[34px] shrink-0 rounded-md" />
+          <div className="flex flex-col gap-1.5">
+            <div className="skeleton h-4 w-20 rounded-md" />
+            <div className="skeleton h-3.5 w-28 rounded-md" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1.5 pr-2">
+          <div className="skeleton h-3.5 w-24 rounded-md" />
+          <div className="skeleton h-3.5 w-32 rounded-md" />
+        </div>
+        <div className="skeleton h-4 w-14 rounded-md" />
+      </div>
+    </div>
+  );
+}
+
 function SectionHeader({
   title,
   subtitle,
@@ -183,7 +217,7 @@ function InvoiceRow({
         </div>
         <div className="min-w-0 pr-2 text-[14px] leading-5">
           <p className="truncate font-medium text-auth-heading">
-            {formatPeriod(invoice.periodStart, invoice.periodEnd, locale)}
+            {describePeriod(invoice, locale)}
           </p>
           <p className="truncate text-auth-muted">{periodLabel}</p>
         </div>
@@ -198,19 +232,20 @@ function InvoiceRow({
 /** "Download invoice" popup opened from a purchased row's invoice icon. */
 export function InvoiceModal({ service, purchasedLabel, onClose, copy }: InvoiceModalProps) {
   const locale = useLocale();
-  const [invoices, setInvoices] = useState<ServiceInvoices | null>(null);
+  const invoicesQuery = useServiceInvoices(service.id);
+  const invoices = invoicesQuery.data;
+  const handleError = useInvoiceErrorHandler();
   const [selected, setSelected] = useState<ReadonlySet<string>>(() => new Set());
-  const [downloading, setDownloading] = useState(false);
+  const { download, isLoading: downloading } = useDownloadInvoices();
 
+  // A failed load is reported once (toast, or login redirect) and closes the modal.
+  const loadError = invoicesQuery.error;
   useEffect(() => {
-    let cancelled = false;
-    fetchServiceInvoices(service.id).then((result) => {
-      if (!cancelled) setInvoices(result);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [service.id]);
+    if (!loadError) return;
+    handleError(loadError);
+    onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadError]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -235,13 +270,8 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
 
   const monthly = invoices?.monthly ?? [];
   const annual = invoices?.annual ?? [];
-  // The latest invoice of the kind the Billing column shows is the current one.
-  const currentId =
-    service.purchasedBilling === "yearly"
-      ? annual.at(-1)?.id
-      : service.purchasedBilling === "monthly"
-        ? monthly.at(-1)?.id
-        : undefined;
+  // Only the invoice the backend flags with `is_current` gets the "current" pill and border.
+  const currentId = [...monthly, ...annual].find((inv) => inv.isCurrent)?.id;
   const allMonthlySelected = monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
 
   const toggleAllMonthly = (checked: boolean) =>
@@ -253,13 +283,7 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
 
   const handleDownload = async () => {
     if (selected.size === 0 || downloading) return;
-    setDownloading(true);
-    try {
-      await downloadInvoices([...selected]);
-      onClose();
-    } finally {
-      setDownloading(false);
-    }
+    if (await download([...selected])) onClose();
   };
 
   return createPortal(
@@ -308,11 +332,21 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                 {localizeBackendText(service.name, locale)}
               </p>
             </div>
-            <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647]">
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#17B26A]" />
-              {purchasedLabel}
-            </span>
+            {(invoices?.purchased ?? service.purchased) && (
+              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647]">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#17B26A]" />
+                {purchasedLabel}
+              </span>
+            )}
           </div>
+
+          {invoicesQuery.isPending && (
+            <div role="status" aria-busy="true" className="mt-5 flex flex-col gap-2">
+              <InvoiceRowSkeleton />
+              <InvoiceRowSkeleton />
+              <InvoiceRowSkeleton />
+            </div>
+          )}
 
           {invoices && monthly.length === 0 && annual.length === 0 && (
             <p className="mt-5 text-[14px] leading-5 text-auth-muted">{copy.empty}</p>

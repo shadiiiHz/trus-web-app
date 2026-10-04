@@ -797,7 +797,22 @@
       "noServicesSelected": "Bitte wählen Sie mindestens einen Service aus.",
 
       "paymentUnavailable": "Online-Zahlung ist bald verfügbar.",
-      "paymentFailed": "Die Zahlung konnte nicht gestartet werden. Bitte versuche es erneut."
+      "paymentFailed": "Die Zahlung konnte nicht gestartet werden. Bitte versuche es erneut.",
+      "errors": {
+        "accountNotReady": "Bitte vervollständige deine Kontoinformationen, bevor du Services kaufst.",
+        "noServices": "Bitte wählen Sie mindestens einen Service aus.",
+        "serviceUnavailable": "Ein ausgewählter Service ist nicht mehr verfügbar. Bitte lade die Seite neu.",
+        "serviceAlreadyPurchased": "Einer der ausgewählten Services wurde bereits gekauft.",
+        "quantityBelowBase": "Die Menge liegt unter dem Minimum des Basispakets.",
+        "couponInvalid": "Dieser Rabattcode ist ungültig oder abgelaufen.",
+        "couponNotApplicable": "Dieser Gutschein gilt nicht für die ausgewählten Services.",
+        "paymentRequired": "Online-Zahlung ist bald verfügbar.",
+        "pdfFailed": "Die Rechnungs-PDF konnte nicht erstellt werden. Bitte versuche es erneut.",
+        "invoiceNotFound": "Die Rechnung wurde nicht gefunden.",
+        "invoiceNotReady": "Die Rechnungs-PDF ist noch nicht verfügbar. Bitte versuche es gleich noch einmal.",
+        "invoiceServiceNotFound": "Der ausgewählte Service wurde nicht gefunden.",
+        "invoiceFailed": "Die Rechnung konnte nicht heruntergeladen werden. Bitte versuche es erneut."
+      }
 
     }
 

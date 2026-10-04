@@ -809,7 +809,22 @@
       "noServicesSelected": "Selecciona al menos un servicio.",
 
       "paymentUnavailable": "El pago en línea estará disponible pronto.",
-      "paymentFailed": "No se pudo iniciar el pago. Inténtalo de nuevo."
+      "paymentFailed": "No se pudo iniciar el pago. Inténtalo de nuevo.",
+      "errors": {
+        "accountNotReady": "Completa la información de tu cuenta antes de comprar servicios.",
+        "noServices": "Selecciona al menos un servicio.",
+        "serviceUnavailable": "Un servicio seleccionado ya no está disponible. Recarga la página.",
+        "serviceAlreadyPurchased": "Uno de los servicios seleccionados ya fue comprado.",
+        "quantityBelowBase": "La cantidad es inferior al mínimo del paquete base.",
+        "couponInvalid": "Este código de descuento no es válido o ha caducado.",
+        "couponNotApplicable": "Este cupón no se aplica a los servicios seleccionados.",
+        "paymentRequired": "El pago en línea estará disponible pronto.",
+        "pdfFailed": "No se pudo generar el PDF de la factura. Inténtalo de nuevo.",
+        "invoiceNotFound": "No se encontró la factura.",
+        "invoiceNotReady": "El PDF de la factura aún no está disponible. Inténtalo de nuevo en breve.",
+        "invoiceServiceNotFound": "No se encontró el servicio seleccionado.",
+        "invoiceFailed": "No se pudo descargar la factura. Inténtalo de nuevo."
+      }
 
     }
 

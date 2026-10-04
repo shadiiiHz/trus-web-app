@@ -790,7 +790,22 @@
       "noServicesSelected": "Please select at least one service.",
 
       "paymentUnavailable": "Online payment will be available soon.",
-      "paymentFailed": "Payment couldn't be started. Please try again."
+      "paymentFailed": "Payment couldn't be started. Please try again.",
+      "errors": {
+        "accountNotReady": "Please complete your account information before purchasing services.",
+        "noServices": "Please select at least one service.",
+        "serviceUnavailable": "A selected service is no longer available. Please reload the page.",
+        "serviceAlreadyPurchased": "One of the selected services has already been purchased.",
+        "quantityBelowBase": "The quantity is below the minimum of the base package.",
+        "couponInvalid": "This discount code is invalid or has expired.",
+        "couponNotApplicable": "This coupon doesn't apply to the selected services.",
+        "paymentRequired": "Online payment will be available soon.",
+        "pdfFailed": "Invoice PDF couldn't be generated. Please try again.",
+        "invoiceNotFound": "Invoice was not found.",
+        "invoiceNotReady": "The invoice PDF isn't available yet. Please try again shortly.",
+        "invoiceServiceNotFound": "The selected service was not found.",
+        "invoiceFailed": "The invoice couldn't be downloaded. Please try again."
+      }
 
     }
 
