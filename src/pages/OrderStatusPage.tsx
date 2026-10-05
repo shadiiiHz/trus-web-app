@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
 import { useBackendText } from "@/i18n/backendText";
 import { useDownloadInvoices } from "@/hooks/billing/useDownloadInvoices";
-import type { OrderResult } from "@/lib/mock/orders";
+import type { OrderResult } from "@/lib/api/checkoutApi";
 import { formatMoney } from "@/components/select-services/pricing";
 import {
   AccessDetailsIcon,
@@ -47,7 +47,23 @@ export default function OrderStatusPage() {
 
   const name = order.userName || displayName;
   const serviceNames = order.services.map((s) => localize(s.name)).join(", ");
+  const statusLabels: Record<string, string> = copy.status;
   const money = (amount: number) => formatMoney(amount, order.currency);
+
+  // The checkout response carries a direct-download link (served as an
+  // attachment, so navigating to it downloads without leaving the page).
+  const handleDownloadInvoice = () => {
+    if (order.invoicePdfUrl) {
+      const link = document.createElement("a");
+      link.href = order.invoicePdfUrl;
+      link.rel = "noopener";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } else if (order.invoiceId) {
+      void download([order.invoiceId]);
+    }
+  };
 
   const steps = [
     { icon: <OrderReceivedIcon />, ...copy.steps.received },
@@ -138,7 +154,7 @@ export default function OrderStatusPage() {
                         aria-hidden="true"
                         className="h-1.5 w-1.5 rounded-full bg-auth-primary"
                       />
-                      {copy.status[service.status]}
+                      {statusLabels[service.status] ?? service.status}
                     </span>
                   </li>
                 ))}
@@ -186,8 +202,8 @@ export default function OrderStatusPage() {
               </Link>
               <button
                 type="button"
-                disabled={downloading || !order.invoiceId}
-                onClick={() => order.invoiceId && void download([order.invoiceId])}
+                disabled={downloading || !(order.invoicePdfUrl || order.invoiceId)}
+                onClick={handleDownloadInvoice}
                 className="mx-auto mt-5 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {copy.summary.downloadInvoice}

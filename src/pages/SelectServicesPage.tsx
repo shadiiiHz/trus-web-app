@@ -216,18 +216,9 @@ export default function SelectServicesPage() {
     setPaying(true);
     try {
       const order = await submitCheckout({
-        request: {
-          billing,
-          items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
-          couponCode: coupon?.code ?? null,
-        },
-        fallback: {
-          serviceNames: Object.fromEntries(chosen.map((s) => [s.id, s.name])),
-          currency,
-          amount: servicesTotal,
-          discount,
-          couponCode: coupon?.code ?? null,
-        },
+        billing,
+        items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+        couponCode: coupon?.code ?? null,
       });
       navigate("/order-status", { state: { order } });
     } catch (error) {

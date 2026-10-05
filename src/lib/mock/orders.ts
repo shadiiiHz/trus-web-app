@@ -36,6 +36,8 @@ export interface OrderResult {
   couponCode: string | null;
   finalAmount: number;
   invoiceId: string | null;
+  /** Direct-download link to the invoice PDF, as returned by checkout. */
+  invoicePdfUrl: string | null;
 }
 
 /** TODO: replace with the real pay-now endpoint once the backend ships it. */
@@ -50,5 +52,6 @@ export async function createOrder(request: OrderRequest): Promise<OrderResult> {
     couponCode: request.couponCode,
     finalAmount: Math.max(0, request.amount - request.discount),
     invoiceId: null,
+    invoicePdfUrl: null,
   };
 }

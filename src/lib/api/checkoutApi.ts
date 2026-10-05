@@ -12,7 +12,6 @@ import {
   toAuthApiError,
 } from "@/lib/api/authApi";
 import type { CouponCartItem } from "@/lib/api/couponApi";
-import type { OrderResult } from "@/lib/mock/orders";
 import type { BillingPeriod } from "@/components/select-services/types";
 
 const CHECKOUT_URL = apiUrl("/billing/checkout");
@@ -23,13 +22,29 @@ export interface CheckoutRequest {
   couponCode?: string | null;
 }
 
-/** What the page already knows about the cart, used where the response leaves a field out. */
-export interface CheckoutFallback {
-  serviceNames: Record<string, string>;
+/** Lower-cased `order_status` from the response, e.g. `being_created`. */
+export type OrderStatus = string;
+
+export interface OrderServiceItem {
+  id: string;
+  name: string;
+  status: OrderStatus;
+}
+
+/** The order exactly as the checkout response describes it. */
+export interface OrderResult {
+  orderId: string;
+  /** Name to greet the customer with; the page falls back to the account's display name. */
+  userName: string | null;
+  services: OrderServiceItem[];
   currency: string;
   amount: number;
   discount: number;
   couponCode: string | null;
+  finalAmount: number;
+  invoiceId: string | null;
+  /** Direct-download link to the invoice PDF. */
+  invoicePdfUrl: string | null;
 }
 
 const str = (value: unknown): string | null =>
@@ -41,23 +56,14 @@ const num = (value: unknown): number | undefined => {
   return Number.isNaN(n) ? undefined : n;
 };
 
-const firstNumber = (raw: Record<string, unknown>, keys: string[]): number | undefined => {
-  for (const key of keys) {
-    const n = num(raw[key]);
-    if (n !== undefined) return n;
-  }
-  return undefined;
-};
-
 /**
- * `POST /billing/checkout`. The success response shape isn't confirmed yet,
- * so the order is read from whichever usual fields the backend sends (at the
- * root or in an `order` / `data` object) and filled in from the cart where
- * one is missing. Rejects with an `AuthApiError` on any documented failure.
+ * `POST /billing/checkout`. Everything shown afterwards comes from the
+ * response (`order_id`, `order_status`, `services[]`, `subtotal_usd`,
+ * `discount_usd`, `total_usd`, `invoice_pdf_url`); nothing is filled in from
+ * the cart. Rejects with an `AuthApiError` on any documented failure.
  */
 export async function checkout(
   request: CheckoutRequest,
-  fallback: CheckoutFallback,
   signal?: AbortSignal,
 ): Promise<OrderResult> {
   try {
@@ -73,31 +79,29 @@ export async function checkout(
     const payload = (Array.isArray(data) ? data[0] : data) as Record<string, unknown> | undefined;
     if (!payload || payload.success === false) throw payloadToAuthApiError(payload);
 
-    const nested = [payload.order, payload.data].find(
-      (v): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v),
-    );
-    const raw = { ...payload, ...nested };
+    const orderStatus: OrderStatus = (str(payload.order_status) ?? "").toLowerCase();
+    const services = Array.isArray(payload.services) ? payload.services : [];
 
-    const amount = firstNumber(raw, ["amount", "subtotal", "subtotal_usd", "amount_usd"]) ?? fallback.amount;
-    const discount =
-      firstNumber(raw, ["discount", "discount_usd", "discount_amount", "discount_amount_usd"]) ?? fallback.discount;
-    const finalAmount =
-      firstNumber(raw, ["final_amount", "final_amount_usd", "total", "total_usd"]) ?? Math.max(0, amount - discount);
+    // Amounts are USD (`*_usd` fields).
+    const amount = num(payload.subtotal_usd) ?? 0;
+    const discount = num(payload.discount_usd) ?? 0;
+    const finalAmount = num(payload.total_usd) ?? Math.max(0, amount - discount);
 
     return {
-      orderId: str(raw.order_id) ?? str(raw.order_number) ?? str(raw.id) ?? "",
-      userName: str(raw.user_name),
-      services: request.items.map((item) => ({
-        id: item.workflowId,
-        name: fallback.serviceNames[item.workflowId] ?? item.workflowId,
-        status: "being_created" as const,
-      })),
-      currency: str(raw.currency) ?? fallback.currency,
+      orderId: str(payload.order_id) ?? "",
+      userName: null,
+      services: services.map((item) => {
+        const service = (item ?? {}) as Record<string, unknown>;
+        const id = str(service.workflow_id) ?? "";
+        return { id, name: str(service.display_name) ?? id, status: orderStatus };
+      }),
+      currency: "USD",
       amount,
       discount,
-      couponCode: str(raw.coupon_code) ?? fallback.couponCode,
+      couponCode: str(payload.coupon_code) ?? request.couponCode ?? null,
       finalAmount,
-      invoiceId: str(raw.invoice_id),
+      invoiceId: str(payload.invoice_id),
+      invoicePdfUrl: str(payload.invoice_pdf_url),
     };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
