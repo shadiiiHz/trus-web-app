@@ -59,27 +59,55 @@
 
   "whyUs": {
     "eyebrow": "WARUM WIR",
-    "headline": ["Warum Unternehmen sich für TruS entscheiden"],
+    "headline": [
+      "So liefern wir Ergebnisse"
+    ],
+    "description": "Von der Identifizierung von Wachstumsbarrieren über die Umsetzung von Lösungen mit KI-Agenten bis zur Umwandlung von Leads in Kunden – TRUS deckt den gesamten Wachstumszyklus Ihres Unternehmens in einem integrierten, kontinuierlichen Prozess ab.",
     "cards": [
       {
         "number": "01",
-        "title": "Erstklassige Designqualität",
-        "description": "Jede Vorlage wird von Hand gefertigt und mit größter Sorgfalt gestaltet – nicht automatisch generiert oder wiederverwendet."
+        "label": "ENTDECKEN & DIAGNOSTIZIEREN",
+        "title": "Chancen finden. Wachstumsbarrieren aufdecken.",
+        "bullets": [
+          "Zielunternehmen automatisch entdecken",
+          "Websites und soziale Medien scannen",
+          "Wachstumsprobleme erkennen",
+          "Lücken und verpasste Chancen identifizieren"
+        ]
       },
       {
         "number": "02",
-        "title": "Für Performance gebaut",
-        "description": "Sauberer React-Code, kein unnötiger Ballast. Ihre Website lädt schnell und überzeugt bei jeder Kennzahl."
+        "label": "ANALYSIEREN & PLANEN",
+        "title": "Probleme in einen klaren Wachstumsplan verwandeln.",
+        "bullets": [
+          "Erkannte Geschäftsprobleme analysieren",
+          "Mit Business- und Marketingstandards vergleichen",
+          "Eine maßgeschneiderte Wachstumsstrategie entwickeln",
+          "Einen Wachstumsempfehlungsbericht liefern"
+        ]
       },
       {
         "number": "03",
-        "title": "Vollständig anpassbar",
-        "description": "Umfassende Design-Tokens und Konfigurationsdateien machen Rebranding und Inhaltsanpassung zum Kinderspiel."
+        "label": "AUTOMATISIEREN & KONVERTIEREN",
+        "title": "Strategie mit KI-Agenten in Aktion umsetzen.",
+        "bullets": [
+          "Lösungen mit TRUS KI-Agenten automatisieren",
+          "Leads zu verkaufsbereiten Interessenten entwickeln",
+          "Leads nachfassen und in Kunden umwandeln",
+          "Sofortige Online-Terminbuchung ermöglichen"
+        ]
       },
       {
         "number": "04",
-        "title": "Ihnen gehört alles",
-        "description": "Vollständiges Eigentum am Quellcode. Keine Abos, keine Bindung, niemals versteckte Kosten."
+        "label": "ÜBERWACHEN, OPTIMIEREN & WACHSEN",
+        "title": "Kontinuierlich verbessern. Intelligenter wachsen.",
+        "bullets": [
+          "Geschäftsleistung kontinuierlich überwachen",
+          "Regelmäßige Berichte und Einblicke liefern",
+          "Neue Wachstums- und Betriebsprobleme erkennen",
+          "Bestehende KI-Agenten optimieren",
+          "Individuelle KI-Agenten für jedes Unternehmen erstellen"
+        ]
       }
     ]
   },

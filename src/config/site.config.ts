@@ -779,6 +779,7 @@ function buildSiteConfig(locale: Locale) {
     whyUs: {
       eyebrow: dict.whyUs.eyebrow,
       headline: dict.whyUs.headline,
+      description: dict.whyUs.description,
       cards: dict.whyUs.cards,
     },
 

@@ -51,28 +51,56 @@
   },
 
   "whyUs": {
-    "eyebrow": "WHY US",
-    "headline": ["Why Businesses Choose TruS"],
+    "eyebrow": "WHY CHOOSE US",
+    "headline": [
+      "How We Deliver Results"
+    ],
+    "description": "From identifying growth barriers to executing solutions with AI agents and converting leads into customers, TRUS covers the entire business growth cycle through one integrated, continuous process.",
     "cards": [
       {
         "number": "01",
-        "title": "Premium Design Quality",
-        "description": "Every template is handcrafted with meticulous attention to detail — not auto-generated or recycled."
+        "label": "DISCOVER & DIAGNOSE",
+        "title": "Find Opportunities. Reveal Growth Barriers.",
+        "bullets": [
+          "Automatically discover target businesses",
+          "Scan websites and social media",
+          "Detect business growth issues",
+          "Identify gaps and missed opportunities"
+        ]
       },
       {
         "number": "02",
-        "title": "Built for Performance",
-        "description": "Clean React code, zero bloat. Your site loads fast and scores well on every metric."
+        "label": "ANALYZE & STRATEGIZE",
+        "title": "Turn Problems into a Clear Growth Plan.",
+        "bullets": [
+          "Analyze detected business problems",
+          "Compare with business & marketing standards",
+          "Build a tailored growth strategy",
+          "Deliver a Growth Recommendation Report"
+        ]
       },
       {
         "number": "03",
-        "title": "Fully Customisable",
-        "description": "Comprehensive design tokens and config files make rebranding and adapting content trivial."
+        "label": "AUTOMATE & CONVERT",
+        "title": "Turn Strategy into Action with AI Agents.",
+        "bullets": [
+          "Automate solutions with TRUS AI Agents",
+          "Nurture leads into proactive, sales-ready prospects",
+          "Follow up and convert leads into customers",
+          "Enable instant online meeting booking"
+        ]
       },
       {
         "number": "04",
-        "title": "You Own Everything",
-        "description": "Full source code ownership. No subscriptions, no lock-in, no hidden fees ever."
+        "label": "MONITOR, OPTIMIZE & GROW",
+        "title": "Improve Continuously. Grow Smarter.",
+        "bullets": [
+          "Continuously monitor business performance",
+          "Deliver regular reports and insights",
+          "Identify new growth and operational issues",
+          "Optimize existing AI Agents",
+          "Produce customized AI Agents for each business"
+        ]
       }
     ]
   },

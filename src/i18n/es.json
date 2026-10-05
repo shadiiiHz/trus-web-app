@@ -58,28 +58,56 @@
   },
 
   "whyUs": {
-    "eyebrow": "POR QUÉ NOSOTROS",
-    "headline": ["Por qué las empresas eligen TruS"],
+    "eyebrow": "POR QUÉ ELEGIRNOS",
+    "headline": [
+      "Cómo logramos resultados"
+    ],
+    "description": "Desde identificar barreras de crecimiento hasta ejecutar soluciones con agentes de IA y convertir leads en clientes, TRUS cubre todo el ciclo de crecimiento empresarial en un proceso integrado y continuo.",
     "cards": [
       {
         "number": "01",
-        "title": "Calidad de diseño premium",
-        "description": "Cada plantilla está hecha a mano con atención meticulosa al detalle, no generada automáticamente ni reciclada."
+        "label": "DESCUBRIR Y DIAGNOSTICAR",
+        "title": "Encuentra oportunidades. Revela las barreras de crecimiento.",
+        "bullets": [
+          "Descubrir automáticamente negocios objetivo",
+          "Analizar sitios web y redes sociales",
+          "Detectar problemas de crecimiento",
+          "Identificar brechas y oportunidades perdidas"
+        ]
       },
       {
         "number": "02",
-        "title": "Diseñado para el rendimiento",
-        "description": "Código React limpio, sin excesos. Tu sitio carga rápido y destaca en cada métrica."
+        "label": "ANALIZAR Y PLANIFICAR",
+        "title": "Convierte los problemas en un plan de crecimiento claro.",
+        "bullets": [
+          "Analizar los problemas detectados",
+          "Comparar con estándares de negocio y marketing",
+          "Crear una estrategia de crecimiento a medida",
+          "Entregar un informe de recomendaciones de crecimiento"
+        ]
       },
       {
         "number": "03",
-        "title": "Totalmente personalizable",
-        "description": "Tokens de diseño completos y archivos de configuración hacen que el rebranding y la adaptación del contenido sean triviales."
+        "label": "AUTOMATIZAR Y CONVERTIR",
+        "title": "Convierte la estrategia en acción con agentes de IA.",
+        "bullets": [
+          "Automatizar soluciones con agentes de IA de TRUS",
+          "Nutrir leads hasta que estén listos para comprar",
+          "Dar seguimiento y convertir leads en clientes",
+          "Permitir reservar reuniones en línea al instante"
+        ]
       },
       {
         "number": "04",
-        "title": "Tú eres dueño de todo",
-        "description": "Propiedad completa del código fuente. Sin suscripciones, sin dependencia, sin costos ocultos jamás."
+        "label": "MONITOREAR, OPTIMIZAR Y CRECER",
+        "title": "Mejora continuamente. Crece de forma más inteligente.",
+        "bullets": [
+          "Monitorear continuamente el rendimiento del negocio",
+          "Entregar informes y análisis periódicos",
+          "Identificar nuevos problemas de crecimiento y operación",
+          "Optimizar los agentes de IA existentes",
+          "Crear agentes de IA personalizados para cada negocio"
+        ]
       }
     ]
   },

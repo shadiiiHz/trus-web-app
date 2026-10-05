@@ -27,7 +27,7 @@ const WHY_STARS = Array.from({ length: 30 }, (_, i) => ({
  *  [0.74, 0.93]  Card 04 border pulse
  *
  * Tuning quick-reference
- *   card vertical movement amount  → cardsYOdd / cardsYEven output range (±60 px)
+ *   card vertical movement amount  → cardsYOdd / cardsYEven output range (±80 px)
  *   each card border glow timing   → card[N]Progress useTransform stops below
  *   background grid cell size      → backgroundSize in grid <div> (~120 px)
  */
@@ -44,7 +44,7 @@ export function WhyUsSection() {
   // Card vertical split
   // Spreads over 65 % of section scroll so the movement feels gradual.
   // TUNING: card vertical movement amount
-  //   Change the last value (currently ±60). Negative = up, positive = down.
+  //   Change the last value (currently ±80). Negative = up, positive = down.
   const cardsYOdd  = useTransform(sectionProgress, [0.05, 0.70], [0, -60])
   const cardsYEven = useTransform(sectionProgress, [0.05, 0.70], [0,  60])
 
@@ -68,7 +68,7 @@ export function WhyUsSection() {
     [0,    0.60, 0.60, 0],
   )
 
-  const { cards, eyebrow, headline } = siteConfig.whyUs
+  const { cards, eyebrow, headline, description } = siteConfig.whyUs
 
   const cardProgressMap = [card1Progress, card2Progress, card3Progress, card4Progress]
 
@@ -221,7 +221,7 @@ export function WhyUsSection() {
                     lineHeight:    1.12,
                     letterSpacing: '-0.01em',
                     color:         '#FFFFFF',
-                    margin:        20,
+                    marginBottom:        3,
                     textAlign:     'center',
                   }}
                 >
@@ -229,6 +229,21 @@ export function WhyUsSection() {
                     <span key={i} className="block">{line}</span>
                   ))}
                 </h2>
+              </FadeIn>
+
+              <FadeIn direction="up" delay={0.34}>
+                <p
+                  className="mx-auto"
+                  style={{
+                    maxWidth:   '780px',
+                    fontSize:   '16px',
+                    lineHeight: 1.3,
+                    color:      '#BFBFBF',
+                    marginBottom:     20,
+                  }}
+                >
+                  {description}
+                </p>
               </FadeIn>
             </div>
 
@@ -255,8 +270,9 @@ export function WhyUsSection() {
                   >
                     <WhyUsCard
                       number={card.number}
+                      label={card.label}
                       title={card.title}
-                      description={card.description}
+                      bullets={card.bullets}
                       borderProgress={borderProg}
                     />
                   </motion.div>
@@ -268,8 +284,9 @@ export function WhyUsSection() {
                 <div key={`m-${card.number}`} className="block lg:hidden">
                   <WhyUsCard
                     number={card.number}
+                    label={card.label}
                     title={card.title}
-                    description={card.description}
+                    bullets={card.bullets}
                     borderProgress={cardProgressMap[i]}
                   />
                 </div>

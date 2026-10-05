@@ -52,27 +52,55 @@
 
   "whyUs": {
     "eyebrow": "NEDEN BİZ",
-    "headline": ["İşletmeler Neden TruS'u Seçiyor"],
+    "headline": [
+      "Sonuçları Nasıl Sağlıyoruz"
+    ],
+    "description": "Büyüme engellerini belirlemekten yapay zekâ ajanlarıyla çözümler uygulamaya ve potansiyel müşterileri müşteriye dönüştürmeye kadar TRUS, tüm iş büyüme döngüsünü tek, entegre ve sürekli bir süreçle kapsar.",
     "cards": [
       {
         "number": "01",
-        "title": "Üstün Tasarım Kalitesi",
-        "description": "Her şablon büyük bir özenle elle tasarlanır — otomatik üretilmiş veya yeniden kullanılmış değildir."
+        "label": "KEŞFET & TEŞHİS ET",
+        "title": "Fırsatları Bul. Büyüme Engellerini Ortaya Çıkar.",
+        "bullets": [
+          "Hedef işletmeleri otomatik olarak keşfedin",
+          "Web sitelerini ve sosyal medyayı tarayın",
+          "İş büyümesi sorunlarını tespit edin",
+          "Boşlukları ve kaçan fırsatları belirleyin"
+        ]
       },
       {
         "number": "02",
-        "title": "Performans İçin Geliştirildi",
-        "description": "Temiz React kodu, gereksiz yük yok. Siteniz hızlı yüklenir ve her metrikte yüksek puan alır."
+        "label": "ANALİZ ET & STRATEJİ KUR",
+        "title": "Sorunları Net Bir Büyüme Planına Dönüştür.",
+        "bullets": [
+          "Tespit edilen iş sorunlarını analiz edin",
+          "İş ve pazarlama standartlarıyla karşılaştırın",
+          "Size özel bir büyüme stratejisi oluşturun",
+          "Büyüme Öneri Raporu sunun"
+        ]
       },
       {
         "number": "03",
-        "title": "Tamamen Özelleştirilebilir",
-        "description": "Kapsamlı tasarım belirteçleri ve yapılandırma dosyaları, marka değişikliğini ve içerik uyarlamasını basitleştirir."
+        "label": "OTOMATİKLEŞTİR & DÖNÜŞTÜR",
+        "title": "Stratejiyi Yapay Zekâ Ajanlarıyla Eyleme Dönüştür.",
+        "bullets": [
+          "Çözümleri TRUS Yapay Zekâ Ajanlarıyla otomatikleştirin",
+          "Potansiyel müşterileri satışa hazır adaylara dönüştürün",
+          "Takip edin ve potansiyel müşterileri müşteriye çevirin",
+          "Anında online toplantı rezervasyonu sağlayın"
+        ]
       },
       {
         "number": "04",
-        "title": "Her Şey Sizin",
-        "description": "Kaynak kodun tam sahipliği. Abonelik yok, bağımlılık yok, gizli ücret yok."
+        "label": "İZLE, OPTİMİZE ET & BÜYÜ",
+        "title": "Sürekli Gelişin. Daha Akıllı Büyüyün.",
+        "bullets": [
+          "İş performansını sürekli izleyin",
+          "Düzenli raporlar ve içgörüler sunun",
+          "Yeni büyüme ve operasyon sorunlarını belirleyin",
+          "Mevcut Yapay Zekâ Ajanlarını optimize edin",
+          "Her işletme için özel Yapay Zekâ Ajanları üretin"
+        ]
       }
     ]
   },
