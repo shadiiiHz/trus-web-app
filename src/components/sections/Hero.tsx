@@ -60,12 +60,8 @@ export function HeroSection({
                     className="min-w-0"
                   >
                     <span
-                      className="block font-hero font-normal leading-[1.12] tracking-tight wrap-break-word"
-                      style={{
-                        fontSize:
-                          "clamp(1.35rem, 0.9rem + 1.4vw, 2.26rem)",
-                        overflowWrap: "break-word",
-                      }}
+                      className="block font-hero font-normal lg:font-bold text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] lg:text-[40px] leading-[1.12] tracking-tight wrap-break-word"
+                      style={{ overflowWrap: "break-word" }}
                     >
                       {segs.map((seg) =>
                         seg.accent ? (
@@ -95,7 +91,11 @@ export function HeroSection({
             <FadeIn delay={0.52} direction="up">
               <p
                 className="font-body font-normal color-brand-white leading-relaxed"
-                style={{ fontSize: "16px", maxWidth: "440px" }}
+                style={{
+                  fontSize: "16px",
+                  maxWidth: "525px",
+                  textAlign: "justify",
+                }}
               >
                 {data.body}
               </p>
@@ -402,7 +402,7 @@ function RotatingServiceTitle({
   // this side animates.
   const longestTitle = titles.reduce(
     (longest, title) => (title.length > longest.length ? title : longest),
-    ""
+    "",
   );
 
   return (
