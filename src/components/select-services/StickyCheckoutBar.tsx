@@ -112,7 +112,7 @@ export function StickyCheckoutBar({
                   {formatMoney(total, currency)}
                 </span>
                 {discount > 0 && (
-                  <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[12px] font-semibold text-emerald-700 tabular-nums">
+                  <span className="rounded-full bg-[#F0FDF4] px-2 py-0.5 text-[12px] font-semibold text-[#16A34A] tabular-nums">
                     -{formatMoney(discount, currency)}
                   </span>
                 )}
