@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -100,11 +100,11 @@ export default function OrderStatusPage() {
               <h2 className="text-[16px] leading-7 font-semibold text-auth-heading">
                 {name ? fill(copy.greeting, { name }) : copy.greetingNoName}
               </h2>
-              <p className="mt-3 text-[16px] leading-8 text-[#525252]">
+              <p className="mt-1 text-[16px] leading-8 text-[#525252]">
                 {copy.intro}
               </p>
 
-              <div className="mt-6 flex items-start gap-3 rounded-md bg-[#F4F0FC] px-5 py-4">
+              <div className="mt-4 flex items-start gap-3 rounded-md bg-[#F4F0FC] px-5 py-4">
                 <span className="mt-0.5 shrink-0">
                   <EmailNoticeIcon />
                 </span>
@@ -118,10 +118,10 @@ export default function OrderStatusPage() {
                 </div>
               </div>
 
-              <h3 className="mt-6 text-[16px] leading-7 font-semibold text-auth-heading">
+              <h3 className="mt-4 text-[16px] leading-7 font-semibold text-auth-heading">
                 {copy.whatsNext}
               </h3>
-              <ol className="mt-5 flex flex-col gap-5">
+              <ol className="mt-4 flex flex-col gap-4">
                 {steps.map((step) => (
                   <li key={step.title} className="flex items-start gap-3">
                     <span className="shrink-0">{step.icon}</span>
@@ -138,7 +138,7 @@ export default function OrderStatusPage() {
               </ol>
             </div>
 
-            <section className="h-[511px] w-full max-w-[400px] self-start justify-self-end rounded-[16px] border border-auth-border-light bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+            <section className="h-[459px] w-full max-w-[400px] self-start justify-self-end rounded-[16px] border border-auth-border-light bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
               <h2 className="text-[16px] leading-7 font-semibold text-auth-heading">
                 {copy.summary.heading}
               </h2>
@@ -178,9 +178,7 @@ export default function OrderStatusPage() {
                     <dt>{copy.summary.discount}</dt>
                     <dd className="font-medium text-auth-heading tabular-nums">
                       -{money(order.discount)}
-                      {order.couponCode
-                        ? ` (${copy.summary.couponSuffix})`
-                        : ""}
+                      {order.couponCode ? ` (${order.couponCode})` : ""}
                     </dd>
                   </div>
                 )}
@@ -194,21 +192,15 @@ export default function OrderStatusPage() {
                 </div>
               </dl>
 
-              <Link
-                to="/"
-                className="mt-6 flex h-10 w-full items-center justify-center rounded-md bg-auth-primary text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
-              >
-                {copy.summary.viewOrderStatus}
-              </Link>
               <button
                 type="button"
                 disabled={downloading || !(order.invoicePdfUrl || order.invoiceId)}
                 onClick={handleDownloadInvoice}
-                className="mx-auto mt-5 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+                className="mx-auto mt-6 block cursor-pointer text-[14px] font-semibold text-auth-primary underline underline-offset-4 transition-colors hover:text-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {copy.summary.downloadInvoice}
               </button>
-              <p className="mt-6 text-center text-[12px] leading-4 text-[#525252]">
+              <p className="mt-7 text-center text-[12px] leading-4 text-[#525252]">
                 {copy.summary.invoiceNote}
               </p>
             </section>

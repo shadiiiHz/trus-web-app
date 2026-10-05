@@ -845,9 +845,7 @@
       "orderId": "Sipariş no",
       "amount": "Tutar",
       "discount": "İndirim",
-      "couponSuffix": "Kupon",
       "finalAmount": "Ödenecek tutar",
-      "viewOrderStatus": "Sipariş durumunu görüntüle",
       "downloadInvoice": "Faturayı indir (PDF)",
       "invoiceNote": "Faturanız burada indirilmeye hazır ve kontrol panelinizde de mevcut."
     },

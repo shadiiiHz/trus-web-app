@@ -851,9 +851,7 @@
       "orderId": "Номер заказа",
       "amount": "Сумма",
       "discount": "Скидка",
-      "couponSuffix": "Купон",
       "finalAmount": "Итого к оплате",
-      "viewOrderStatus": "Посмотреть статус заказа",
       "downloadInvoice": "Скачать счёт (PDF)",
       "invoiceNote": "Ваш счёт можно скачать здесь, а также в личном кабинете."
     },

@@ -855,9 +855,7 @@
       "orderId": "N° de commande",
       "amount": "Montant",
       "discount": "Remise",
-      "couponSuffix": "Coupon",
       "finalAmount": "Montant final",
-      "viewOrderStatus": "Voir l'état de la commande",
       "downloadInvoice": "Télécharger la facture (PDF)",
       "invoiceNote": "Votre facture est prête à être téléchargée ici et disponible aussi depuis votre tableau de bord."
     },

@@ -845,9 +845,7 @@
       "orderId": "Order ID",
       "amount": "Amount",
       "discount": "Discount",
-      "couponSuffix": "Coupon",
       "finalAmount": "Final Amount",
-      "viewOrderStatus": "View Order Status",
       "downloadInvoice": "Download Invoice (PDF)",
       "invoiceNote": "Your invoice is ready to download here and is also available from your dashboard."
     },

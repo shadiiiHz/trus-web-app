@@ -864,9 +864,7 @@
       "orderId": "ID del pedido",
       "amount": "Importe",
       "discount": "Descuento",
-      "couponSuffix": "Cupón",
       "finalAmount": "Importe final",
-      "viewOrderStatus": "Ver estado del pedido",
       "downloadInvoice": "Descargar factura (PDF)",
       "invoiceNote": "Tu factura está lista para descargar aquí y también está disponible en tu panel."
     },

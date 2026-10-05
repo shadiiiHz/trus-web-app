@@ -852,9 +852,7 @@
       "orderId": "Bestell-ID",
       "amount": "Betrag",
       "discount": "Rabatt",
-      "couponSuffix": "Gutschein",
       "finalAmount": "Endbetrag",
-      "viewOrderStatus": "Bestellstatus ansehen",
       "downloadInvoice": "Rechnung herunterladen (PDF)",
       "invoiceNote": "Deine Rechnung steht hier zum Download bereit und ist auch in deinem Dashboard verfügbar."
     },

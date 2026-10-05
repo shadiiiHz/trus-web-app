@@ -83,9 +83,17 @@ export async function checkout(
     const services = Array.isArray(payload.services) ? payload.services : [];
 
     // Amounts are USD (`*_usd` fields).
-    const amount = num(payload.subtotal_usd) ?? 0;
-    const discount = num(payload.discount_usd) ?? 0;
-    const finalAmount = num(payload.total_usd) ?? Math.max(0, amount - discount);
+    const invoiceTotals = (payload.invoice ?? {}) as Record<string, unknown>;
+    const couponTotals = (payload.coupon ?? {}) as Record<string, unknown>;
+    const amount = num(payload.subtotal_usd) ?? num(invoiceTotals.subtotal_usd) ?? 0;
+    const discount =
+      num(payload.discount_usd) ?? num(invoiceTotals.discount_usd) ?? num(couponTotals.discount_usd) ?? 0;
+    const finalAmount =
+      num(payload.total_usd) ?? num(invoiceTotals.total_usd) ?? Math.max(0, amount - discount);
+
+    // `coupon` / `invoice` are nested objects; the flat fields are kept as a fallback.
+    const coupon = (payload.coupon ?? {}) as Record<string, unknown>;
+    const invoice = (payload.invoice ?? {}) as Record<string, unknown>;
 
     return {
       orderId: str(payload.order_id) ?? "",
@@ -98,10 +106,10 @@ export async function checkout(
       currency: "USD",
       amount,
       discount,
-      couponCode: str(payload.coupon_code) ?? request.couponCode ?? null,
+      couponCode: str(coupon.code) ?? str(payload.coupon_code) ?? null,
       finalAmount,
-      invoiceId: str(payload.invoice_id),
-      invoicePdfUrl: str(payload.invoice_pdf_url),
+      invoiceId: str(invoice.invoice_id) ?? str(payload.invoice_id),
+      invoicePdfUrl: str(invoice.pdf_url) ?? str(payload.invoice_pdf_url),
     };
   } catch (error) {
     throw error instanceof AuthApiError ? error : toAuthApiError(error);
