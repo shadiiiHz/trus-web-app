@@ -309,8 +309,7 @@ export function InvoiceModal({
 
   const monthly = invoices?.monthly ?? [];
   const annual = invoices?.annual ?? [];
-  // Only the invoice the backend flags with `is_current` gets the "current" pill and border.
-  const currentId = [...monthly, ...annual].find((inv) => inv.isCurrent)?.id;
+  // Every invoice the backend flags with `is_current` gets the "current" pill and border.
   const allMonthlySelected =
     monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
 
@@ -446,7 +445,7 @@ export function InvoiceModal({
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
                       currentLabel={
-                        invoice.id === currentId ? copy.currentTag : undefined
+                        invoice.isCurrent ? copy.currentTag : undefined
                       }
                     />
                   </li>
@@ -473,7 +472,7 @@ export function InvoiceModal({
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
                       currentLabel={
-                        invoice.id === currentId ? copy.currentTag : undefined
+                        invoice.isCurrent ? copy.currentTag : undefined
                       }
                       tall
                     />
