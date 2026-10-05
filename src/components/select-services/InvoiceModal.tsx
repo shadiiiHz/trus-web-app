@@ -36,13 +36,16 @@ export function InvoiceIcon({ className = "" }: { className?: string }) {
   );
 }
 
-type InvoiceModalCopy = SiteConfig["selectServicesPage"]["table"]["invoiceModal"];
+type InvoiceModalCopy =
+  SiteConfig["selectServicesPage"]["table"]["invoiceModal"];
 
 export interface InvoiceModalProps {
   /** Purchased service whose invoices are listed. */
   service: SelectableService;
   /** "Purchased" badge wording, shared with the table's Status column. */
   purchasedLabel: string;
+  /** "Not Purchased" badge wording, shared with the table's Status column. */
+  notPurchasedLabel: string;
   onClose: () => void;
   copy: InvoiceModalCopy;
 }
@@ -61,7 +64,11 @@ const parseIsoDate = (iso: string) => {
 };
 
 /** "Jan 1–31, 2026" / "Jan 1–Dec 31, 2026" (locale-aware outside English). */
-function formatPeriod(startIso: string, endIso: string, locale: Locale): string {
+function formatPeriod(
+  startIso: string,
+  endIso: string,
+  locale: Locale,
+): string {
   const start = parseIsoDate(startIso);
   const end = parseIsoDate(endIso);
   if (locale !== "en") {
@@ -72,7 +79,10 @@ function formatPeriod(startIso: string, endIso: string, locale: Locale): string 
       timeZone: "UTC",
     }).formatRange(start, end);
   }
-  const month = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
+  const month = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    timeZone: "UTC",
+  });
   const from = `${month.format(start)} ${start.getUTCDate()}`;
   const to =
     start.getUTCMonth() === end.getUTCMonth()
@@ -87,9 +97,12 @@ function describePeriod(invoice: ServiceInvoice, locale: Locale): string {
     return formatPeriod(invoice.periodStart, invoice.periodEnd, locale);
   }
   if (invoice.issuedAt) {
-    return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(
-      parseIsoDate(invoice.issuedAt),
-    );
+    return new Intl.DateTimeFormat(locale, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(parseIsoDate(invoice.issuedAt));
   }
   return "—";
 }
@@ -100,7 +113,13 @@ const gridClass =
 
 function ServiceBadgeIcon({ src }: { src: string | null }) {
   if (src) {
-    return <img src={src} alt="" className="h-10 w-10 shrink-0 rounded-lg object-cover" />;
+    return (
+      <img
+        src={src}
+        alt=""
+        className="h-10 w-10 shrink-0 rounded-lg object-cover"
+      />
+    );
   }
   return (
     <span
@@ -112,7 +131,10 @@ function ServiceBadgeIcon({ src }: { src: string | null }) {
 /** Placeholder shaped like an `InvoiceRow`, shown while the invoices load. */
 function InvoiceRowSkeleton() {
   return (
-    <div aria-hidden="true" className="flex h-16 items-center rounded-md border border-auth-border-light bg-white pl-3">
+    <div
+      aria-hidden="true"
+      className="flex h-16 items-center rounded-md border border-auth-border-light bg-white pl-3"
+    >
       <div className="skeleton h-5 w-5 shrink-0 rounded-md" />
       <div className={`ml-4 min-w-0 flex-1 ${gridClass}`}>
         <div className="flex items-center gap-2">
@@ -144,8 +166,12 @@ function SectionHeader({
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="min-w-0">
-        <h3 className="text-[16px] leading-6 font-semibold text-auth-heading">{title}</h3>
-        <p className="mt-0.5 text-[14px] leading-5 text-auth-muted">{subtitle}</p>
+        <h3 className="text-[16px] leading-6 font-semibold text-auth-heading">
+          {title}
+        </h3>
+        <p className="mt-0.5 text-[14px] leading-5 text-auth-muted">
+          {subtitle}
+        </p>
       </div>
       <span className="inline-flex h-[22px] shrink-0 items-center rounded-[999px] border border-auth-border-light bg-auth-page-bg px-2 text-[12px] text-auth-text font-medium">
         {count}
@@ -186,7 +212,12 @@ function InvoiceRow({
             : "border-auth-border-light bg-white hover:bg-auth-page-bg"
       }`}
     >
-      <Checkbox checked={selected} onChange={onToggle} size={20} aria-label={label} />
+      <Checkbox
+        checked={selected}
+        onChange={onToggle}
+        size={20}
+        aria-label={label}
+      />
       <div className={`ml-4 min-w-0 flex-1 ${gridClass}`}>
         <div className="flex min-w-0 items-center gap-2">
           <span
@@ -230,12 +261,20 @@ function InvoiceRow({
 }
 
 /** "Download invoice" popup opened from a purchased row's invoice icon. */
-export function InvoiceModal({ service, purchasedLabel, onClose, copy }: InvoiceModalProps) {
+export function InvoiceModal({
+  service,
+  purchasedLabel,
+  notPurchasedLabel,
+  onClose,
+  copy,
+}: InvoiceModalProps) {
   const locale = useLocale();
   const invoicesQuery = useServiceInvoices(service.id);
   const invoices = invoicesQuery.data;
   const handleError = useInvoiceErrorHandler();
-  const [selected, setSelected] = useState<ReadonlySet<string>>(() => new Set());
+  const [selected, setSelected] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
   const { download, isLoading: downloading } = useDownloadInvoices();
 
   // A failed load is reported once (toast, or login redirect) and closes the modal.
@@ -272,12 +311,15 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
   const annual = invoices?.annual ?? [];
   // Only the invoice the backend flags with `is_current` gets the "current" pill and border.
   const currentId = [...monthly, ...annual].find((inv) => inv.isCurrent)?.id;
-  const allMonthlySelected = monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
+  const allMonthlySelected =
+    monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
 
   const toggleAllMonthly = (checked: boolean) =>
     setSelected((prev) => {
       const next = new Set(prev);
-      monthly.forEach((inv) => (checked ? next.add(inv.id) : next.delete(inv.id)));
+      monthly.forEach((inv) =>
+        checked ? next.add(inv.id) : next.delete(inv.id),
+      );
       return next;
     });
 
@@ -332,16 +374,31 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                 {localizeBackendText(service.name, locale)}
               </p>
             </div>
-            {(invoices?.purchased ?? service.purchased) && (
+            {service.purchased ? (
               <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647]">
-                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#17B26A]" />
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 rounded-full bg-[#17B26A]"
+                />
                 {purchasedLabel}
+              </span>
+            ) : (
+              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#D4D4D4] bg-white px-[11px] text-[12px] font-medium text-[#404040]">
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 rounded-full bg-[#737373]"
+                />
+                {notPurchasedLabel}
               </span>
             )}
           </div>
 
           {invoicesQuery.isPending && (
-            <div role="status" aria-busy="true" className="mt-5 flex flex-col gap-2">
+            <div
+              role="status"
+              aria-busy="true"
+              className="mt-5 flex flex-col gap-2"
+            >
               <InvoiceRowSkeleton />
               <InvoiceRowSkeleton />
               <InvoiceRowSkeleton />
@@ -349,7 +406,9 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
           )}
 
           {invoices && monthly.length === 0 && annual.length === 0 && (
-            <p className="mt-5 text-[14px] leading-5 text-auth-muted">{copy.empty}</p>
+            <p className="mt-5 text-[14px] leading-5 text-auth-muted">
+              {copy.empty}
+            </p>
           )}
 
           {monthly.length > 0 && (
@@ -386,7 +445,9 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                       locale={locale}
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
-                      currentLabel={invoice.id === currentId ? copy.currentTag : undefined}
+                      currentLabel={
+                        invoice.id === currentId ? copy.currentTag : undefined
+                      }
                     />
                   </li>
                 ))}
@@ -411,7 +472,9 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
                       locale={locale}
                       selected={selected.has(invoice.id)}
                       onToggle={(checked) => toggle(invoice.id, checked)}
-                      currentLabel={invoice.id === currentId ? copy.currentTag : undefined}
+                      currentLabel={
+                        invoice.id === currentId ? copy.currentTag : undefined
+                      }
                       tall
                     />
                   </li>
@@ -436,7 +499,9 @@ export function InvoiceModal({ service, purchasedLabel, onClose, copy }: Invoice
             aria-busy={downloading || undefined}
             className={`${downloading ? "btn-loading" : ""} relative inline-flex h-[40px] cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-3.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50`}
           >
-            <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${downloading ? "opacity-0" : ""}`}>
+            <span
+              className={`inline-flex items-center gap-2 transition-opacity duration-200 ${downloading ? "opacity-0" : ""}`}
+            >
               {copy.download}
             </span>
             {downloading && (

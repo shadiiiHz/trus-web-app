@@ -77,7 +77,10 @@ function SkeletonBar({ className = "" }: { className?: string }) {
 
 function SkeletonRow() {
   return (
-    <tr className="h-18 border-b border-auth-divider last:border-b-0" aria-hidden="true">
+    <tr
+      className="h-18 border-b border-auth-divider last:border-b-0"
+      aria-hidden="true"
+    >
       <td className="pl-6">
         <div className="flex items-center gap-4">
           <SkeletonBar className="h-5 w-5 shrink-0" />
@@ -252,7 +255,9 @@ export function ServicesTable({
           </thead>
           <tbody aria-busy={loading}>
             {loading &&
-              Array.from({ length: skeletonRows }, (_, i) => <SkeletonRow key={i} />)}
+              Array.from({ length: skeletonRows }, (_, i) => (
+                <SkeletonRow key={i} />
+              ))}
             {rows.map((service) => {
               const selection = selections[service.id];
               if (!selection) return null;
@@ -302,7 +307,9 @@ export function ServicesTable({
                       {formatMoney(service.monthlyExtraUnitPriceUsd, currency)}
                     </p>
                     <p className="text-[14px] font-normal text-auth-muted">
-                      {service.unitLabel ? localize(service.unitLabel) : emptyCell}
+                      {service.unitLabel
+                        ? localize(service.unitLabel)
+                        : emptyCell}
                     </p>
                   </td>
                   <td className="pr-4">
@@ -360,6 +367,7 @@ export function ServicesTable({
         <InvoiceModal
           service={invoiceFor}
           purchasedLabel={copy.purchased}
+          notPurchasedLabel={copy.notPurchased}
           onClose={closeInvoice}
           copy={copy.invoiceModal}
         />
