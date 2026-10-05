@@ -4,11 +4,10 @@ import { ChevronDown } from "lucide-react";
 import editAccountIcon from "@/assets/account-menu/edit-account.svg";
 import changePasswordIcon from "@/assets/account-menu/change-password.svg";
 import serviceManagementIcon from "@/assets/account-menu/service-management.svg";
-import downloadInvoiceIcon from "@/assets/account-menu/download-invoice.svg";
+// import downloadInvoiceIcon from "@/assets/account-menu/download-invoice.svg";
 import logOutIcon from "@/assets/account-menu/log-out.svg";
 import type { SiteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
-import { showToast } from "@/lib/toast";
 
 export interface AccountMenuProps {
   copy: SiteConfig["nav"]["account"];
@@ -99,10 +98,10 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
 
   const close = () => setOpen(false);
 
-  const handleDownloadInvoice = () => {
-    close();
-    showToast("Coming soon", "info");
-  };
+  // const handleDownloadInvoice = () => {
+  //   close();
+  //   showToast("Coming soon", "info");
+  // };
 
   const handleLogOut = () => {
     close();
@@ -181,11 +180,11 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
             label={copy.serviceManagement.label}
             onClick={close}
           />
-          <MenuButton
+          {/* <MenuButton
             icon={downloadInvoiceIcon}
             label={copy.downloadInvoice}
             onClick={handleDownloadInvoice}
-          />
+          /> */}
 
           <div className="my-1 h-px bg-auth-border-light" aria-hidden="true" />
 
