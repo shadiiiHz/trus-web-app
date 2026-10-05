@@ -61,7 +61,10 @@ export function HeroSection({
                   >
                     <span
                       className="block font-hero font-normal lg:font-bold text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] lg:text-[40px] leading-[1.12] tracking-tight wrap-break-word"
-                      style={{ overflowWrap: "break-word" }}
+                      style={{
+                        overflowWrap: "break-word",
+                        maxWidth: "525px",
+                      }}
                     >
                       {segs.map((seg) =>
                         seg.accent ? (

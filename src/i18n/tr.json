@@ -15,9 +15,9 @@
     "badge": "Web Geliştirme",
     "badgePrefix": "Hizmetler",
     "headline": [
-      "İşletmenizi Geride Tutan Şeyi Keşfedin;",
-      "Bırakın [GrowthAI]",
-      "Çözsün"
+      "İşinizi Neyin Geri",
+      "Tuttuğunu Keşfedin;",
+      "[GrowthAI] Çözsün"
     ],
     "body": "İşletme keşfi, tarama ve analiz, büyümeyi engelleyen sorunların tespiti, size özel strateji, yapay zekâ ajanlarıyla otomatik uygulama, proaktif potansiyel müşterileri müşteriye dönüştürme, sürekli izleme, raporlama, takip ve optimizasyon için 7/24 çalışan yapay zekâ destekli bir büyüme ekosistemi.",
     "cta": {
@@ -303,7 +303,7 @@
   "servicesPage": {
     "hero": {
       "eyebrow": "BÜYÜME İÇİN İNŞA EDİLDİ",
-      "heading": ["Dijital Büyüme İçin", "Tasarlanmış", "Hizmetler"],
+      "heading": ["Dijital", "Büyüme İçin", "Hizmetler"],
       "subtitle": "İşletmenizi ileriye taşımak için bağlantılı uzmanlık.",
       "brandTagline": "Growth AI",
       "nodes": [
