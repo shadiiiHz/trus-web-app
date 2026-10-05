@@ -22,10 +22,10 @@ type FieldErrors = Partial<Record<"code", ErrorKey>>;
 /** Rejections about the code itself show under the input; the rest are toasts. */
 const FIELD_ERRORS: ErrorKey[] = ["codeRequired", "codeInvalid", "codeNotApplicable"];
 
-const labelClass = "mb-2 block text-[14px] font-medium text-auth-text";
+const labelClass = "sr-only";
 
 const inputClass =
-  "h-10 w-full rounded-md border bg-white px-3 text-[16px] font-body text-auth-ink outline-none shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-9 min-w-0 flex-1 rounded-md border bg-white px-3 text-[14px] font-body text-auth-ink outline-none shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCodeCardProps) {
   const codeId = useId();
@@ -66,17 +66,15 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
+      className="flex flex-col rounded-xl border border-auth-border-light bg-white p-4 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
     >
-      <div className="border-b border-auth-divider pb-5">
-        <h2 className="text-[16px] leading-6 font-semibold text-auth-heading">{copy.heading}</h2>
-        <p className="mt-0.5 text-[14px] leading-5 text-auth-muted">{copy.subtitle}</p>
-      </div>
+      <h2 className="text-[14px] leading-5 font-semibold text-auth-heading">{copy.heading}</h2>
+      <p className="mt-0.5 text-[13px] leading-4 text-auth-muted">{copy.subtitle}</p>
 
-      <div className="mt-6">
-        <label htmlFor={codeId} className={labelClass}>
-          {copy.codeLabel}
-        </label>
+      <label htmlFor={codeId} className={labelClass}>
+        {copy.codeLabel}
+      </label>
+      <div className="mt-3 flex items-center gap-2">
         <input
           id={codeId}
           name="discountCode"
@@ -91,26 +89,23 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
           aria-invalid={Boolean(errors.code)}
           className={`${inputClass} ${errors.code ? "border-red-400" : "border-auth-border"}`}
         />
-        {errors.code && (
-          <p className="mt-1.5 text-[13px] text-red-500">{copy.errors[errors.code]}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        disabled={disabled || submitting}
-        aria-busy={submitting || undefined}
-        className={`${submitting ? "btn-loading" : ""} relative mt-6 inline-flex h-10 cursor-pointer items-center gap-2 self-end rounded-md bg-auth-primary px-8 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary`}
-      >
-        <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${submitting ? "opacity-0" : ""}`}>
-          {copy.submit}
-        </span>
-        {submitting && (
-          <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <ButtonSpinner size={18} />
+        <button
+          type="submit"
+          disabled={disabled || submitting}
+          aria-busy={submitting || undefined}
+          className={`${submitting ? "btn-loading" : ""} relative inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-5 text-[13px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary`}
+        >
+          <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${submitting ? "opacity-0" : ""}`}>
+            {copy.submit}
           </span>
-        )}
-      </button>
+          {submitting && (
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <ButtonSpinner size={16} />
+            </span>
+          )}
+        </button>
+      </div>
+      {errors.code && <p className="mt-1.5 text-[12px] text-red-500">{copy.errors[errors.code]}</p>}
     </form>
   );
 }

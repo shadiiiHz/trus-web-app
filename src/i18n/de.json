@@ -794,6 +794,10 @@
 
       "payNow": "Jetzt bezahlen",
 
+      "expandDetails": "Details anzeigen",
+
+      "collapseDetails": "Details ausblenden",
+
       "noServicesSelected": "Bitte wählen Sie mindestens einen Service aus.",
 
       "paymentUnavailable": "Online-Zahlung ist bald verfügbar.",

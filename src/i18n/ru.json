@@ -793,6 +793,10 @@
 
       "payNow": "Оплатить",
 
+      "expandDetails": "Показать детали",
+
+      "collapseDetails": "Скрыть детали",
+
       "noServicesSelected": "Пожалуйста, выберите хотя бы одну услугу.",
 
       "paymentUnavailable": "Онлайн-оплата скоро станет доступна.",

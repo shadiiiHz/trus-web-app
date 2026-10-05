@@ -806,6 +806,10 @@
 
       "payNow": "Pagar ahora",
 
+      "expandDetails": "Mostrar detalles",
+
+      "collapseDetails": "Ocultar detalles",
+
       "noServicesSelected": "Selecciona al menos un servicio.",
 
       "paymentUnavailable": "El pago en línea estará disponible pronto.",

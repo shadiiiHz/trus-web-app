@@ -787,6 +787,10 @@
 
       "payNow": "Şimdi öde",
 
+      "expandDetails": "Ayrıntıları göster",
+
+      "collapseDetails": "Ayrıntıları gizle",
+
       "noServicesSelected": "Lütfen en az bir hizmet seçin.",
 
       "paymentUnavailable": "Çevrimiçi ödeme yakında kullanılabilir olacak.",

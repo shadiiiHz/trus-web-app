@@ -797,6 +797,10 @@
 
       "payNow": "Payer maintenant",
 
+      "expandDetails": "Afficher les détails",
+
+      "collapseDetails": "Masquer les détails",
+
       "noServicesSelected": "Veuillez sélectionner au moins un service.",
 
       "paymentUnavailable": "Le paiement en ligne sera bientôt disponible.",

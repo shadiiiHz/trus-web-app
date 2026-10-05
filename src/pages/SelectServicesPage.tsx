@@ -23,6 +23,7 @@ import { BillingToggle } from "@/components/select-services/BillingToggle";
 import { ServicesTable } from "@/components/select-services/ServicesTable";
 import { DiscountCodeCard } from "@/components/select-services/DiscountCodeCard";
 import { OrderSummaryCard } from "@/components/select-services/OrderSummaryCard";
+import { StickyCheckoutBar } from "@/components/select-services/StickyCheckoutBar";
 import { AccountLockedNotice } from "@/components/select-services/AccountLockedNotice";
 
 const SERVICE_COUNT_KEY = "trus:services-count";
@@ -285,22 +286,27 @@ export default function SelectServicesPage() {
               copy={copy.table}
             />
           </div>
-
-          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <DiscountCodeCard copy={copy.discount} onApply={handleApplyCoupon} disabled={!isReady} />
-            <OrderSummaryCard
-              copy={copy.summary}
-              servicesTotal={servicesTotal}
-              currency={currency}
-              discount={discount}
-              autoRenew={autoRenew}
-              onAutoRenewChange={setAutoRenew}
-              onPay={handlePay}
-              loading={paying}
-              disabled={!isReady}
-            />
-          </div>
         </div>
+
+        <StickyCheckoutBar
+          copy={copy.summary}
+          servicesTotal={servicesTotal}
+          currency={currency}
+          discount={discount}
+          onPay={handlePay}
+          loading={paying}
+          disabled={!isReady}
+        >
+          <DiscountCodeCard copy={copy.discount} onApply={handleApplyCoupon} disabled={!isReady} />
+          <OrderSummaryCard
+            copy={copy.summary}
+            servicesTotal={servicesTotal}
+            currency={currency}
+            discount={discount}
+            autoRenew={autoRenew}
+            onAutoRenewChange={setAutoRenew}
+          />
+        </StickyCheckoutBar>
       </main>
 
       <FooterSection />

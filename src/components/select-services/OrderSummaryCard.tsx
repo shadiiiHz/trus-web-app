@@ -2,7 +2,6 @@ import { useId } from "react";
 import type { SiteConfig } from "@/config/site.config";
 import { formatMoney } from "./pricing";
 import { Checkbox } from "./Checkbox";
-import { ButtonSpinner } from "@/components/ui/ButtonSpinner";
 
 export interface OrderSummaryCardProps {
   copy: SiteConfig["selectServicesPage"]["summary"];
@@ -12,11 +11,6 @@ export interface OrderSummaryCardProps {
   discount: number;
   autoRenew: boolean;
   onAutoRenewChange: (value: boolean) => void;
-  onPay: () => void;
-  /** Disables the Pay Now button — e.g. while the account isn't `ready`. */
-  disabled?: boolean;
-  /** A payment request is in flight — shows a spinner and blocks a second click. */
-  loading?: boolean;
 }
 
 export function OrderSummaryCard({
@@ -26,56 +20,43 @@ export function OrderSummaryCard({
   discount,
   autoRenew,
   onAutoRenewChange,
-  onPay,
-  disabled = false,
-  loading = false,
 }: OrderSummaryCardProps) {
   const autoRenewId = useId();
   const total = Math.max(0, servicesTotal - discount);
 
   return (
-    <section className="flex flex-col rounded-[12px] border border-auth-border-light bg-white p-6 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
-      <h2 className="text-[16px] leading-6 font-semibold text-auth-heading">{copy.heading}</h2>
+    <section className="flex flex-col rounded-xl border border-auth-border-light bg-white p-4 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+      <h2 className="text-[14px] leading-5 font-semibold text-auth-heading">{copy.heading}</h2>
 
-      <dl className="mt-7.5 flex flex-col gap-5 border-b border-auth-divider pb-4.5">
-        <div className="flex h-7 items-center justify-between">
-          <dt className="text-[14px] text-[#525252] font-medium">{copy.totalServices}</dt>
-          <dd className="text-[20px] font-semibold text-auth-heading tabular-nums">
+      <dl className="mt-3 flex flex-col gap-1.5 border-b border-auth-divider pb-3">
+        <div className="flex items-center justify-between">
+          <dt className="text-[13px] font-medium text-[#525252]">{copy.totalServices}</dt>
+          <dd className="text-[14px] font-semibold text-auth-heading tabular-nums">
             {formatMoney(servicesTotal, currency)}
           </dd>
         </div>
-        <div className="flex h-7 items-center justify-between">
-          <dt className="text-[14px] text-[#525252] font-medium">{copy.discount}</dt>
-          <dd className="text-[20px] font-semibold text-auth-heading tabular-nums">
+        <div className="flex items-center justify-between">
+          <dt className="text-[13px] font-medium text-[#525252]">{copy.discount}</dt>
+          <dd className="text-[14px] font-semibold text-auth-heading tabular-nums">
             -{formatMoney(discount, currency)}
           </dd>
         </div>
       </dl>
 
-      <div className="mt-4.5 flex h-8 items-center justify-between">
-        <span className="text-[24px] font-semibold text-auth-heading">{copy.total}</span>
-        <span className="text-[24px] font-semibold text-auth-heading tabular-nums">
+      <div className="mt-3 flex items-center justify-between">
+        <span className="text-[16px] font-semibold text-auth-heading">{copy.total}</span>
+        <span className="text-[18px] font-semibold text-auth-heading tabular-nums">
           {formatMoney(total, currency)}
         </span>
       </div>
 
       <label
         htmlFor={autoRenewId}
-        className="mt-4 flex w-fit cursor-pointer items-center gap-3 text-[16px] font-medium text-auth-text select-none"
+        className="mt-3 flex w-fit cursor-pointer items-center gap-2.5 text-[13px] font-medium text-auth-text select-none"
       >
-        <Checkbox id={autoRenewId} checked={autoRenew} onChange={onAutoRenewChange} size={18} />
+        <Checkbox id={autoRenewId} checked={autoRenew} onChange={onAutoRenewChange} size={16} />
         {copy.autoRenew}
       </label>
-
-      <button
-        type="button"
-        onClick={onPay}
-        disabled={disabled || loading}
-        className="mt-7 inline-flex h-10 cursor-pointer items-center justify-center gap-2 self-end rounded-md bg-auth-primary px-7.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
-      >
-        {loading && <ButtonSpinner size={16} />}
-        {copy.payNow}
-      </button>
     </section>
   );
 }

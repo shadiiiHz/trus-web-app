@@ -787,6 +787,10 @@
 
       "payNow": "Pay now",
 
+      "expandDetails": "Show details",
+
+      "collapseDetails": "Hide details",
+
       "noServicesSelected": "Please select at least one service.",
 
       "paymentUnavailable": "Online payment will be available soon.",
