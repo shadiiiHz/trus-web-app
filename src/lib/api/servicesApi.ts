@@ -4,6 +4,7 @@
  */
 import axios from "axios";
 import { apiUrl } from "@/lib/api/config";
+import { defaultLocale, type Locale } from "@/i18n";
 import { authHeaders, AuthApiError, toAuthApiError, toDisplayableImageUrl } from "@/lib/api/authApi";
 
 const SERVICES_URL = apiUrl("/billing/services");
@@ -27,10 +28,11 @@ export function isSessionError(error: unknown): error is AuthApiError {
 export interface SelectableService {
   id: string;
   name: string;
-  /** Short description, first line of the "Description" column. */
+  /**
+   * Translated description plus the included amount, separated by a newline
+   * ("Description\n(2 posts per day included)"); the table shows it on two lines.
+   */
   description: string;
-  /** What the base plan includes, second (muted) line of the "Description" column. */
-  includedAmount: string;
   /** Icon URL from the backend. `null` renders the empty placeholder square. */
   icon: string | null;
   /** Quantity included in the base price — also the minimum the user can pick. */
@@ -126,11 +128,11 @@ function extractList(data: unknown): { list: unknown[]; envelope?: Record<string
 }
 
 /** Wording for the backend's `quantity_period` (what `base_quantity` is counted per). */
-const PERIOD_LABELS: Record<string, { included: string; unit: string }> = {
-  DAY: { included: "per day", unit: "per day" },
-  NIGHT: { included: "per night", unit: "per night" },
-  MONTH: { included: "per month", unit: "per month" },
-  ACCOUNT: { included: "per account", unit: "per account" },
+const PERIOD_LABELS: Record<string, { unit: string }> = {
+  DAY: { unit: "per day" },
+  NIGHT: { unit: "per night" },
+  MONTH: { unit: "per month" },
+  ACCOUNT: { unit: "per account" },
 };
 
 function toService(raw: Record<string, unknown>): SelectableService | null {
@@ -146,9 +148,6 @@ function toService(raw: Record<string, unknown>): SelectableService | null {
     id,
     name,
     description: str(raw.description),
-    includedAmount:
-      str(raw.included_amount) ||
-      (period ? `(${baseQuantity} ${period.included} included)` : `(${baseQuantity} included)`),
     icon: iconUrl ? toDisplayableImageUrl(iconUrl) : null,
     baseQuantity,
     maxQuantity: Math.max(baseQuantity, num(raw.max_quantity, DEFAULT_MAX_QUANTITY)),
@@ -169,12 +168,22 @@ export interface ServicesResult {
   currency: string;
 }
 
-/** `GET /billing/services` — needs the session token; rejects with an `AuthApiError` (see `ServicesErrorCode`). */
+/**
+ * `GET /billing/services?lang=…` — needs the session token; rejects with an
+ * `AuthApiError` (see `ServicesErrorCode`). The backend translates the
+ * description for `lang` (tr/de/ru/es/fr); English is the default, so no
+ * `lang` is sent for it.
+ */
 export async function fetchSelectableServices(
+  locale: Locale = defaultLocale,
   signal?: AbortSignal,
 ): Promise<ServicesResult> {
   try {
-    const { data } = await axios.get(SERVICES_URL, { headers: authHeaders(), signal });
+    const { data } = await axios.get(SERVICES_URL, {
+      headers: authHeaders(),
+      params: locale === defaultLocale ? undefined : { lang: locale },
+      signal,
+    });
     const { list, envelope } = extractList(data);
     if (envelope?.success === false) {
       throw new AuthApiError(

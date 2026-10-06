@@ -32,6 +32,17 @@ type SortDir = "none" | "asc" | "desc";
 const headCellClass =
   "px-0 font-body text-left text-[14px] font-semibold text-[#737373]";
 
+/**
+ * The description arrives as "Description\n(N included)". When the backend
+ * leaves the "(…)" part on the same line, it is still moved to its own line.
+ */
+function splitDescription(description: string): string[] {
+  const lines = description.split(/\r?\n|\\n/).map((line) => line.trim()).filter(Boolean);
+  if (lines.length > 1) return lines;
+  const match = (lines[0] ?? "").match(/^(.*?)\s*(\([^()]*\))$/);
+  return match && match[1] ? [match[1], match[2]] : lines;
+}
+
 /** Placeholder until the backend serves real service icons. */
 function ServiceIcon({ src }: { src: string | null }) {
   if (src) {
@@ -278,19 +289,20 @@ export function ServicesTable({
                         onChange={(checked) =>
                           onChange(service.id, { selected: checked })
                         }
-                        aria-label={localize(service.name)}
+                        aria-label={service.name}
                       />
                       <div className="flex min-w-0 items-center gap-3">
                         <ServiceIcon src={service.icon} />
                         <span className="min-w-0 break-words text-[14px] leading-5.5 font-medium text-auth-heading">
-                          {localize(service.name)}
+                          {service.name}
                         </span>
                       </div>
                     </div>
                   </td>
                   <td className="pr-4 text-[14px] leading-5.5 text-auth-muted">
-                    <p>{localize(service.description)}</p>
-                    <p>{localize(service.includedAmount)}</p>
+                    {splitDescription(service.description).map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
                   </td>
                   <td>
                     <QuantityStepper
@@ -348,7 +360,7 @@ export function ServicesTable({
                       <button
                         type="button"
                         onClick={() => setInvoiceFor(service)}
-                        aria-label={`${copy.invoiceAria}: ${localize(service.name)}`}
+                        aria-label={`${copy.invoiceAria}: ${service.name}`}
                         className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
                       >
                         <InvoiceIcon />

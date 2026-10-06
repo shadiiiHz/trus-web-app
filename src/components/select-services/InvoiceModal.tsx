@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { FileText, X } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { useLocale, type Locale } from "@/i18n";
-import { localizeBackendText } from "@/i18n/backendText";
 import type { ServiceInvoice } from "@/lib/api/invoiceApi";
 import type { SelectableService } from "@/lib/api/servicesApi";
 import { useDownloadInvoices } from "@/hooks/billing/useDownloadInvoices";
@@ -370,7 +369,7 @@ export function InvoiceModal({
                 {copy.serviceLabel}
               </p>
               <p className="mt-1 truncate text-[16px] leading-6 font-semibold text-auth-heading">
-                {localizeBackendText(service.name, locale)}
+                {service.name}
               </p>
             </div>
             {service.purchased ? (
