@@ -60,7 +60,7 @@ export function HeroSection({
                     className="min-w-0"
                   >
                     <span
-                      className="block font-hero font-normal lg:font-bold text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] lg:text-[40px] leading-[1.12] tracking-tight wrap-break-word"
+                      className="block font-hero font-normal text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] leading-[1.12] tracking-tight wrap-break-word"
                       style={{
                         overflowWrap: "break-word",
                         maxWidth: "525px",
@@ -95,7 +95,7 @@ export function HeroSection({
               <p
                 className="font-body font-normal color-brand-white leading-relaxed"
                 style={{
-                  fontSize: "16px",
+                  fontSize: "15px",
                   maxWidth: "525px",
                   textAlign: "justify",
                 }}
