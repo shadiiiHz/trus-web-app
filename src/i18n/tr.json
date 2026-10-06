@@ -881,6 +881,14 @@
       "being_created": "Oluşturuluyor"
     }
   },
+  "notFoundPage": {
+    "eyebrow": "Sayfa bulunamadı",
+    "heading": "Hay aksi! Bu sayfa mevcut değil",
+    "subtitle": "Aradığınız sayfa taşınmış, adı değiştirilmiş ya da hiç var olmamış olabilir. Sizi tekrar yola koyalım.",
+    "home": "Ana sayfaya dön",
+    "services": "Hizmetlere göz at"
+  },
+
   "footer": {
     "firstColumn": "Hizmetler",
     "secondColumn": "Şirket",

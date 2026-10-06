@@ -891,6 +891,14 @@
       "being_created": "En cours de création"
     }
   },
+  "notFoundPage": {
+    "eyebrow": "Page introuvable",
+    "heading": "Oups ! Cette page n'existe pas",
+    "subtitle": "La page que vous recherchez a peut-être été déplacée, renommée ou n'a jamais existé. Remettons-vous sur la bonne voie.",
+    "home": "Retour à l'accueil",
+    "services": "Voir les services"
+  },
+
   "footer": {
     "firstColumn": "Services",
     "secondColumn": "Entreprise",

@@ -888,6 +888,14 @@
       "being_created": "Wird erstellt"
     }
   },
+  "notFoundPage": {
+    "eyebrow": "Seite nicht gefunden",
+    "heading": "Hoppla! Diese Seite existiert nicht",
+    "subtitle": "Die gesuchte Seite wurde möglicherweise verschoben, umbenannt oder hat nie existiert. Lassen Sie uns Sie zurück auf Kurs bringen.",
+    "home": "Zur Startseite",
+    "services": "Leistungen ansehen"
+  },
+
   "footer": {
     "firstColumn": "Leistungen",
     "secondColumn": "Unternehmen",

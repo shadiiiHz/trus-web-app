@@ -900,6 +900,14 @@
       "being_created": "En creación"
     }
   },
+  "notFoundPage": {
+    "eyebrow": "Página no encontrada",
+    "heading": "¡Vaya! Esta página no existe",
+    "subtitle": "Es posible que la página que buscas se haya movido, cambiado de nombre o nunca haya existido. Volvamos al camino.",
+    "home": "Volver al inicio",
+    "services": "Ver servicios"
+  },
+
   "footer": {
     "firstColumn": "Servicios",
     "secondColumn": "Empresa",

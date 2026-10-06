@@ -16,6 +16,7 @@ import EditAccountPage from "./pages/EditAccountPage";
 import CheckYourEmailPage from "./pages/CheckYourEmailPage";
 import SelectServicesPage from "./pages/SelectServicesPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   // Subscribing here re-renders the whole tree (siteConfig re-derives itself
@@ -54,6 +55,8 @@ export default function App() {
         <Route path="/select-services" element={<SelectServicesPage />} />
         {/* Shown after a successful "Pay now"; the order arrives in router state. */}
         <Route path="/order-status" element={<OrderStatusPage />} />
+        {/* Catch-all: any unmatched URL (vercel.json rewrites everything to index.html). */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
