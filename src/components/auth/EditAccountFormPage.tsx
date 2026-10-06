@@ -9,9 +9,15 @@ export interface EditAccountFormPageProps {
   heading: string;
   subtitle: string;
   copy: SiteConfig["auth"]["editAccount"];
+  isReady: boolean;
 }
 
-export function EditAccountFormPage({ heading, subtitle, copy }: EditAccountFormPageProps) {
+export function EditAccountFormPage({
+  heading,
+  subtitle,
+  copy,
+  isReady
+}: EditAccountFormPageProps) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -20,14 +26,21 @@ export function EditAccountFormPage({ heading, subtitle, copy }: EditAccountForm
     <div className="bg-auth-page-bg min-h-screen font-body antialiased">
       <Navbar />
 
-      <main className="pt-18" style={{ background: "var(--color-auth-page-surface)" }}>
+      <main
+        className="pt-18"
+        style={{ background: "var(--color-auth-page-surface)" }}
+      >
         <div className="mx-auto w-full max-w-[1600px] px-6 py-10 sm:px-10">
           <div className="mx-auto max-w-[1344px]">
             <FadeIn direction="up" className="mb-8">
               <h1 className="mb-2 text-[24px] font-body font-semibold text-auth-heading">
                 {heading}
               </h1>
-              <p className="text-body font-body font-semibold text-[#DC2626]">{subtitle}</p>
+              {!isReady && (
+                <p className="text-body font-body font-semibold text-[#DC2626]">
+                  {subtitle}
+                </p>
+              )}
             </FadeIn>
 
             <FadeIn direction="up" delay={0.1}>

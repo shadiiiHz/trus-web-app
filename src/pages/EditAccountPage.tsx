@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 export default function EditAccountPage() {
   const { editAccount } = siteConfig.auth;
-  const { isInitialized, isAuthenticated } = useAuth();
+  const { isInitialized, isAuthenticated, isReady } = useAuth();
 
   // This page is the complete-profile step the register/login flow sends a
   // not-yet-`ready` account to — reachable only with the session token that
@@ -20,6 +20,7 @@ export default function EditAccountPage() {
       heading={editAccount.heading}
       subtitle={editAccount.subtitle}
       copy={editAccount}
+      isReady={isReady}
     />
   );
 }

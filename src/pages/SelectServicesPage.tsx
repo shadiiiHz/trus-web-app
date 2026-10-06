@@ -17,7 +17,10 @@ import { useSelectableServices } from "@/hooks/queries/useSelectableServices";
 import { useApplyCoupon } from "@/hooks/billing/useApplyCoupon";
 import { useCheckout } from "@/hooks/billing/useCheckout";
 import { AuthApiError } from "@/lib/api/authApi";
-import type { BillingPeriod, ServiceSelection } from "@/components/select-services/types";
+import type {
+  BillingPeriod,
+  ServiceSelection,
+} from "@/components/select-services/types";
 import { servicePrice } from "@/components/select-services/pricing";
 import { BillingToggle } from "@/components/select-services/BillingToggle";
 import { ServicesTable } from "@/components/select-services/ServicesTable";
@@ -56,16 +59,26 @@ export default function SelectServicesPage() {
   const servicesQuery = useSelectableServices(isInitialized && isAuthenticated);
   const { mutate: applyCouponCode } = useApplyCoupon();
   const { mutate: submitCheckout } = useCheckout();
-  const services = useMemo(() => servicesQuery.data?.services ?? [], [servicesQuery.data]);
+  const services = useMemo(
+    () => servicesQuery.data?.services ?? [],
+    [servicesQuery.data],
+  );
   const currency = servicesQuery.data?.currency ?? "USD";
   const loading = servicesQuery.isPending;
   const [skeletonRows] = useState(readCachedServiceCount);
   const [paying, setPaying] = useState(false);
-  const [selections, setSelections] = useState<Record<string, ServiceSelection>>({});
+  const [selections, setSelections] = useState<
+    Record<string, ServiceSelection>
+  >({});
   const [billing, setBilling] = useState<BillingPeriod>("yearly");
-  const [appliedCoupon, setAppliedCoupon] = useState<{ result: CouponResult; cartKey: string } | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    result: CouponResult;
+    cartKey: string;
+  } | null>(null);
   const [autoRenew, setAutoRenew] = useState(true);
-  const [yearlySavePercent, setYearlySavePercent] = useState<number | null>(null);
+  const [yearlySavePercent, setYearlySavePercent] = useState<number | null>(
+    null,
+  );
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -73,7 +86,8 @@ export default function SelectServicesPage() {
 
   // Reset the per-row selections whenever a fresh list arrives (adjusting
   // state during render rather than in an effect).
-  const [selectionsFor, setSelectionsFor] = useState<typeof servicesQuery.data>();
+  const [selectionsFor, setSelectionsFor] =
+    useState<typeof servicesQuery.data>();
   if (servicesQuery.data && servicesQuery.data !== selectionsFor) {
     setSelectionsFor(servicesQuery.data);
     setSelections(
@@ -89,7 +103,10 @@ export default function SelectServicesPage() {
   useEffect(() => {
     if (!servicesQuery.data) return;
     try {
-      localStorage.setItem(SERVICE_COUNT_KEY, String(servicesQuery.data.services.length));
+      localStorage.setItem(
+        SERVICE_COUNT_KEY,
+        String(servicesQuery.data.services.length),
+      );
     } catch {
       /* storage unavailable — skeleton falls back to the default count */
     }
@@ -100,7 +117,9 @@ export default function SelectServicesPage() {
     if (!error) return;
     if (isSessionError(error)) {
       showToast(
-        error.code === "ACCOUNT_DISABLED" ? copy.errors.accountDisabled : copy.errors.sessionExpired,
+        error.code === "ACCOUNT_DISABLED"
+          ? copy.errors.accountDisabled
+          : copy.errors.sessionExpired,
         "error",
       );
       logout();
@@ -132,7 +151,9 @@ export default function SelectServicesPage() {
 
   const toggleAll = (selected: boolean) =>
     setSelections((prev) =>
-      Object.fromEntries(Object.entries(prev).map(([id, s]) => [id, { ...s, selected }])),
+      Object.fromEntries(
+        Object.entries(prev).map(([id, s]) => [id, { ...s, selected }]),
+      ),
     );
 
   // The header toggle switches every row at once; the rows' radios for the
@@ -140,7 +161,9 @@ export default function SelectServicesPage() {
   const changeBilling = (period: BillingPeriod) => {
     setBilling(period);
     setSelections((prev) =>
-      Object.fromEntries(Object.entries(prev).map(([id, s]) => [id, { ...s, period }])),
+      Object.fromEntries(
+        Object.entries(prev).map(([id, s]) => [id, { ...s, period }]),
+      ),
     );
   };
 
@@ -148,7 +171,9 @@ export default function SelectServicesPage() {
     () =>
       services.reduce((sum, service) => {
         const s = selections[service.id];
-        return s?.selected ? sum + servicePrice(service, s.quantity, s.period) : sum;
+        return s?.selected
+          ? sum + servicePrice(service, s.quantity, s.period)
+          : sum;
       }, 0),
     [services, selections],
   );
@@ -163,13 +188,16 @@ export default function SelectServicesPage() {
         .join(",")}`,
     [billing, services, selections],
   );
-  const coupon = appliedCoupon?.cartKey === cartKey ? appliedCoupon.result : null;
+  const coupon =
+    appliedCoupon?.cartKey === cartKey ? appliedCoupon.result : null;
   const discount = couponDiscount(coupon, servicesTotal);
 
   const handleSessionError = (error: unknown): boolean => {
     if (!isSessionError(error)) return false;
     showToast(
-      error.code === "ACCOUNT_DISABLED" ? copy.errors.accountDisabled : copy.errors.sessionExpired,
+      error.code === "ACCOUNT_DISABLED"
+        ? copy.errors.accountDisabled
+        : copy.errors.sessionExpired,
       "error",
     );
     logout();
@@ -179,7 +207,9 @@ export default function SelectServicesPage() {
 
   const handleApplyCoupon = async (
     code: string,
-  ): Promise<"applied" | "handled" | { error: keyof typeof copy.discount.errors }> => {
+  ): Promise<
+    "applied" | "handled" | { error: keyof typeof copy.discount.errors }
+  > => {
     const chosen = services.filter((s) => selections[s.id]?.selected);
     if (chosen.length === 0) {
       showToast(copy.summary.noServicesSelected, "error");
@@ -189,7 +219,10 @@ export default function SelectServicesPage() {
       const result = await applyCouponCode({
         code,
         billing,
-        items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+        items: chosen.map((s) => ({
+          workflowId: s.id,
+          quantity: selections[s.id].quantity,
+        })),
       });
       setAppliedCoupon({ result, cartKey });
       return "applied";
@@ -218,7 +251,10 @@ export default function SelectServicesPage() {
     try {
       const order = await submitCheckout({
         billing,
-        items: chosen.map((s) => ({ workflowId: s.id, quantity: selections[s.id].quantity })),
+        items: chosen.map((s) => ({
+          workflowId: s.id,
+          quantity: selections[s.id].quantity,
+        })),
         couponCode: coupon?.code ?? null,
       });
       navigate("/order-status", { state: { order } });
@@ -226,7 +262,9 @@ export default function SelectServicesPage() {
       setPaying(false);
       if (handleSessionError(error)) return;
       const kind =
-        error instanceof AuthApiError && error.code !== "NETWORK_ERROR" ? checkoutErrorKind(error) : "other";
+        error instanceof AuthApiError && error.code !== "NETWORK_ERROR"
+          ? checkoutErrorKind(error)
+          : "other";
       if (kind !== "other") {
         showToast(copy.summary.errors[kind], "error");
         return;
@@ -234,7 +272,9 @@ export default function SelectServicesPage() {
       // An undocumented backend code: show the backend's own message rather than a blind retry hint.
       console.error("Checkout failed", error);
       showToast(
-        error instanceof AuthApiError && error.code !== "NETWORK_ERROR" ? error.message : copy.summary.paymentFailed,
+        error instanceof AuthApiError && error.code !== "NETWORK_ERROR"
+          ? error.message
+          : copy.summary.paymentFailed,
         "error",
       );
     }
@@ -260,7 +300,11 @@ export default function SelectServicesPage() {
               <h1 className="text-[24px] leading-8 font-semibold text-auth-heading">
                 {copy.heading}
               </h1>
-              <p className="mt-2 text-body font-body font-semibold text-[#DC2626]">{copy.notice}</p>
+              {!isReady && (
+                <p className="mt-2 text-body font-body font-semibold text-[#DC2626]">
+                  {copy.notice}
+                </p>
+              )}
             </div>
             <BillingToggle
               value={billing}
@@ -297,7 +341,11 @@ export default function SelectServicesPage() {
           loading={paying}
           disabled={!isReady}
         >
-          <DiscountCodeCard copy={copy.discount} onApply={handleApplyCoupon} disabled={!isReady} />
+          <DiscountCodeCard
+            copy={copy.discount}
+            onApply={handleApplyCoupon}
+            disabled={!isReady}
+          />
           <OrderSummaryCard
             copy={copy.summary}
             servicesTotal={servicesTotal}
