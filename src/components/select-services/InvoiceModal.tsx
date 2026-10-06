@@ -309,15 +309,14 @@ export function InvoiceModal({
   const monthly = invoices?.monthly ?? [];
   const annual = invoices?.annual ?? [];
   // Every invoice the backend flags with `is_current` gets the "current" pill and border.
-  const allMonthlySelected =
-    monthly.length > 0 && monthly.every((inv) => selected.has(inv.id));
+  const all = [...monthly, ...annual];
+  const allSelected =
+    all.length > 0 && all.every((inv) => selected.has(inv.id));
 
-  const toggleAllMonthly = (checked: boolean) =>
+  const toggleAll = (checked: boolean) =>
     setSelected((prev) => {
       const next = new Set(prev);
-      monthly.forEach((inv) =>
-        checked ? next.add(inv.id) : next.delete(inv.id),
-      );
+      all.forEach((inv) => (checked ? next.add(inv.id) : next.delete(inv.id)));
       return next;
     });
 
@@ -416,12 +415,10 @@ export function InvoiceModal({
                 subtitle={fill(copy.monthlySubtitle, { count: monthly.length })}
                 count={countLabel(copy, monthly.length)}
               />
-              <div
-                className={`mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3`}
-              >
+              <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3">
                 <Checkbox
-                  checked={allMonthlySelected}
-                  onChange={toggleAllMonthly}
+                  checked={allSelected}
+                  onChange={toggleAll}
                   size={20}
                   aria-label={copy.selectAllAria}
                 />
@@ -460,6 +457,23 @@ export function InvoiceModal({
                 subtitle={copy.annualSubtitle}
                 count={countLabel(copy, annual.length)}
               />
+              {monthly.length === 0 && (
+                <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3">
+                  <Checkbox
+                    checked={allSelected}
+                    onChange={toggleAll}
+                    size={20}
+                    aria-label={copy.selectAllAria}
+                  />
+                  <div
+                    className={`ml-4 min-w-0 flex-1 text-[12px] leading-4 font-semibold text-auth-text ${gridClass}`}
+                  >
+                    <span>{copy.colInvoice}</span>
+                    <span>{copy.colPeriod}</span>
+                    <span>{copy.colAmount}</span>
+                  </div>
+                </div>
+              )}
               <ul className="mt-2 flex flex-col gap-2">
                 {annual.map((invoice) => (
                   <li key={invoice.id}>
