@@ -848,7 +848,7 @@
     "subheading": "Thank you for your order. We've received it and are creating your service.",
     "greeting": "Hello {name},",
     "greetingNoName": "Hello,",
-    "intro": "We're preparing your service now. You can safely leave this page and track progress from your dashboard.",
+    "intro": "We're preparing your service now. You can safely leave this page.",
     "emailNotice": {
       "title": "We'll email you when it's ready",
       "description": "Once your service is ready, access information and the usage guide will be sent to you via email."

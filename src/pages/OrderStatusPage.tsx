@@ -5,7 +5,6 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { siteConfig } from "@/config/site.config";
 import { useAuth } from "@/hooks/useAuth";
-import { useBackendText } from "@/i18n/backendText";
 import { useDownloadInvoices } from "@/hooks/billing/useDownloadInvoices";
 import type { OrderResult } from "@/lib/api/checkoutApi";
 import { formatMoney } from "@/components/select-services/pricing";
@@ -32,7 +31,6 @@ const fill = (template: string, values: Record<string, string>) =>
 export default function OrderStatusPage() {
   const { isInitialized, isAuthenticated, displayName } = useAuth();
   const location = useLocation();
-  const localize = useBackendText();
   const { download, isLoading: downloading } = useDownloadInvoices();
   const copy = siteConfig.orderStatusPage;
   const order = (location.state as OrderStatusLocationState | null)?.order;
@@ -46,7 +44,7 @@ export default function OrderStatusPage() {
   if (!order) return <Navigate to="/select-services" replace />;
 
   const name = order.userName || displayName;
-  const serviceNames = order.services.map((s) => localize(s.name)).join(", ");
+  const serviceNames = order.services.map((s) => s.name).join(", ");
   const statusLabels: Record<string, string> = copy.status;
   const money = (amount: number) => formatMoney(amount, order.currency);
 
@@ -147,7 +145,7 @@ export default function OrderStatusPage() {
                 {order.services.map((service) => (
                   <li key={service.id}>
                     <p className="text-[16px] leading-7 font-semibold text-auth-heading">
-                      {localize(service.name)}
+                      {service.name}
                     </p>
                     <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[#DDD3F5] bg-[#FAF5FF] px-2.5 py-0.5 text-[12px] font-medium text-auth-primary">
                       <span

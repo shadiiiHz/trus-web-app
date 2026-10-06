@@ -858,7 +858,7 @@
     "subheading": "Merci pour votre commande. Nous l'avons reçue et créons votre service.",
     "greeting": "Bonjour {name},",
     "greetingNoName": "Bonjour,",
-    "intro": "Nous préparons votre service. Vous pouvez quitter cette page sans souci et suivre l'avancement depuis votre tableau de bord.",
+    "intro": "Nous préparons votre service. Vous pouvez quitter cette page sans souci.",
     "emailNotice": {
       "title": "Nous vous préviendrons par e-mail dès qu'il sera prêt",
       "description": "Une fois votre service prêt, les informations d'accès et le guide d'utilisation vous seront envoyés par e-mail."

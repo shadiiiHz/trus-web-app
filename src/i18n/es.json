@@ -867,7 +867,7 @@
     "subheading": "Gracias por tu pedido. Lo hemos recibido y estamos creando tu servicio.",
     "greeting": "Hola {name},",
     "greetingNoName": "Hola,",
-    "intro": "Estamos preparando tu servicio. Puedes salir de esta página con tranquilidad y seguir el progreso desde tu panel.",
+    "intro": "Estamos preparando tu servicio. Puedes salir de esta página con tranquilidad.",
     "emailNotice": {
       "title": "Te avisaremos por correo cuando esté listo",
       "description": "Cuando tu servicio esté listo, te enviaremos por correo los datos de acceso y la guía de uso."

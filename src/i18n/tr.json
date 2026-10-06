@@ -848,7 +848,7 @@
     "subheading": "Siparişiniz için teşekkürler. Siparişinizi aldık ve hizmetinizi oluşturuyoruz.",
     "greeting": "Merhaba {name},",
     "greetingNoName": "Merhaba,",
-    "intro": "Hizmetinizi hazırlıyoruz. Bu sayfadan rahatça ayrılabilir, ilerlemeyi kontrol panelinizden takip edebilirsiniz.",
+    "intro": "Hizmetinizi hazırlıyoruz. Bu sayfadan rahatça ayrılabilirsiniz.",
     "emailNotice": {
       "title": "Hazır olduğunda size e-posta göndereceğiz",
       "description": "Hizmetiniz hazır olduğunda erişim bilgileri ve kullanım kılavuzu e-posta ile gönderilecek."

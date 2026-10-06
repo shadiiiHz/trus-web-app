@@ -855,7 +855,7 @@
     "subheading": "Danke für deine Bestellung. Wir haben sie erhalten und erstellen deinen Service.",
     "greeting": "Hallo {name},",
     "greetingNoName": "Hallo,",
-    "intro": "Wir bereiten deinen Service gerade vor. Du kannst diese Seite problemlos verlassen und den Fortschritt in deinem Dashboard verfolgen.",
+    "intro": "Wir bereiten deinen Service gerade vor. Du kannst diese Seite problemlos verlassen.",
     "emailNotice": {
       "title": "Wir benachrichtigen dich per E-Mail, sobald er bereit ist",
       "description": "Sobald dein Service bereit ist, senden wir dir die Zugangsdaten und die Anleitung per E-Mail."
