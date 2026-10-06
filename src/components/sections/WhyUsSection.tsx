@@ -207,7 +207,7 @@ export function WhyUsSection() {
                     fontWeight:    400,
                     letterSpacing: '0.22em',
                     textTransform: 'uppercase',
-                    color:         'var(--color-brand-accent-light)',
+                    color:         '#9F7EE1',
                   }}
                 >
                   {eyebrow}
