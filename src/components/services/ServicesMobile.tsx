@@ -167,7 +167,7 @@ export function ServicesMobile({
                   width: i === active ? 23 : 8,
                   height: 8,
                   borderRadius: 4,
-                  background: "#E3E3E3",
+                  background: "#E5E5E5",
                   transition: "width 0.25s ease",
                 }}
               />
