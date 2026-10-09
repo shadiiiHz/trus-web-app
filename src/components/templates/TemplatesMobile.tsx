@@ -26,6 +26,10 @@ export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
       ? seeMore.href
       : `${seeMore.href}?category=${encodeURIComponent(activeCategory)}`;
 
+  const activeLabel =
+    categories.find((c) => c.id === activeCategory)?.label ?? "";
+  const categoryHref = activeCategory === "all" ? seeMore.href : moreHref;
+
   const cards = (templates[displayedCategory] ?? templates.all ?? []).slice(
     0,
     CARD_COUNT,
@@ -103,6 +107,19 @@ export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
               </button>
             );
           })}
+        </div>
+
+        {/* Active category name, left-aligned under the tabs. "All Templates"
+            always links to the unfiltered gallery; other categories link to
+            the gallery pre-filtered to that category. */}
+        <div style={{ marginTop: "clamp(8px, 2.5vw, 12px)" }}>
+          <Link
+            to={categoryHref}
+            className="font-body font-semibold"
+            style={{ fontSize: "clamp(15px, 3.7vw, 19px)", color: PURPLE }}
+          >
+            {activeLabel}
+          </Link>
         </div>
 
         {/* Template grid */}
