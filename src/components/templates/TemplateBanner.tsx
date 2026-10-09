@@ -7,7 +7,7 @@ const BANNER_HEIGHT = 250;
  * Right-side illustration. Drop the exported graphic in at this path
  * (public/templates/banner-graphic.png) — served as-is, no build step needed.
  */
-const BANNER_GRAPHIC_SRC = "/templates/Image-template.webp";
+const BANNER_GRAPHIC_SRC = "/templates/Image-template.svg";
 
 /**
  * Full-bleed banner below the Navbar. Height is fixed per design spec — not
@@ -90,7 +90,7 @@ export function TemplatesBanner() {
           <img
             src={BANNER_GRAPHIC_SRC}
             alt=""
-            className="hidden lg:block h-full w-auto max-h-full shrink-0 object-contain mb-4 z-50"
+            className="hidden lg:block h-full w-auto max-h-full shrink-0 object-contain z-50"
             style={{ marginRight: 130 }}
           />
         </div>
