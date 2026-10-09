@@ -6,8 +6,10 @@ import { WhyUsCard } from "@/components/whyus/WhyUsCard";
 /** One stacked card — its border pulses as it travels through the viewport. */
 function MobileCard({
   card,
+  light,
 }: {
   card: (typeof siteConfig.whyUs.cards)[number];
+  light?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -25,6 +27,7 @@ function MobileCard({
         bullets={card.bullets}
         borderProgress={borderProgress}
         fluid
+        light={light}
       />
     </div>
   );
@@ -98,8 +101,8 @@ export function WhyUsMobile() {
           className="flex flex-col"
           style={{ gap: "clamp(20px, 6vw, 28px)", marginTop: "clamp(28px, 8vw, 40px)" }}
         >
-          {cards.map((card) => (
-            <MobileCard key={card.number} card={card} />
+          {cards.map((card, i) => (
+            <MobileCard key={card.number} card={card} light={i % 2 === 0} />
           ))}
         </div>
       </div>

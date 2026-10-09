@@ -14,21 +14,17 @@ const CARD_COUNT = 6;
  * desktop's pinned 3D ribbon and docked side rail.
  */
 export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
-  const { heading, categories, templates, moreTemplates, seeMore } =
+  const { heading, categories, templates, seeMore } =
     siteConfig.templateCategories;
   const { activeCategory, setActiveCategory, displayedCategory, gridVisible } =
     useCategoryCrossfade<string>(templates, "all");
 
-  // Always lands on the selected category in the full gallery ("all" has no
-  // query param) — mirrors the /templates?category=… links used on desktop.
-  const moreHref =
+  const activeLabel =
+    categories.find((c) => c.id === activeCategory)?.label ?? "";
+  const categoryHref =
     activeCategory === "all"
       ? seeMore.href
       : `${seeMore.href}?category=${encodeURIComponent(activeCategory)}`;
-
-  const activeLabel =
-    categories.find((c) => c.id === activeCategory)?.label ?? "";
-  const categoryHref = activeCategory === "all" ? seeMore.href : moreHref;
 
   const cards = (templates[displayedCategory] ?? templates.all ?? []).slice(
     0,
@@ -54,7 +50,7 @@ export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
         className="mx-auto w-full max-w-330 px-5"
         style={{
           paddingTop: "clamp(48px, 14vw, 88px)",
-          paddingBottom: "clamp(40px, 12vw, 72px)",
+          paddingBottom: "clamp(48px, 14.6vw, 80px)",
         }}
       >
         <h2
@@ -112,13 +108,24 @@ export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
         {/* Active category name, left-aligned under the tabs. "All Templates"
             always links to the unfiltered gallery; other categories link to
             the gallery pre-filtered to that category. */}
-        <div style={{ marginTop: "clamp(8px, 2.5vw, 12px)" }}>
+        <div
+          className="flex items-center justify-between"
+          style={{ marginTop: "clamp(8px, 2.5vw, 12px)" }}
+        >
           <Link
             to={categoryHref}
             className="font-body font-semibold"
             style={{ fontSize: "clamp(15px, 3.7vw, 19px)", color: PURPLE }}
           >
             {activeLabel}
+          </Link>
+          {/* Always the unfiltered gallery, whatever category is active. */}
+          <Link
+            to={seeMore.href}
+            className="font-body font-semibold underline underline-offset-4"
+            style={{ fontSize: "clamp(15px, 3.7vw, 19px)", color: PURPLE }}
+          >
+            {seeMore.label}
           </Link>
         </div>
 
@@ -165,19 +172,6 @@ export default function TemplatesMobile({ onReady }: { onReady?: () => void }) {
             </a>
             ),
           )}
-        </div>
-
-        <div
-          className="flex justify-center"
-          style={{ marginTop: "clamp(24px, 8vw, 40px)" }}
-        >
-          <Link
-            to={moreHref}
-            className="font-body font-semibold underline underline-offset-4"
-            style={{ fontSize: "clamp(16px, 4.4vw, 20px)", color: PURPLE }}
-          >
-            {moreTemplates}
-          </Link>
         </div>
       </div>
     </section>

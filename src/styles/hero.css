@@ -41,12 +41,13 @@
   }
   .hero-container {
     flex: 1;
-    align-items: flex-start;
+    align-items: stretch;
     padding-top: clamp(122px, 31.3vw, 154px);
-    /* Room below the map now that the mobile services label is hidden. */
-    padding-bottom: clamp(32px, 9vw, 64px);
+    /* No bottom gap: the map fills whatever screen height is left. */
+    padding-bottom: 0;
   }
   .hero-grid {
+    grid-template-rows: auto 1fr;
     gap: clamp(28px, 9vw, 56px);
   }
   .hero-copy {
@@ -98,11 +99,19 @@
   /* Visual: full-bleed map under the CTAs, no desktop offset/scale */
   .hero-visual {
     transform: none !important;
-    margin-block: -8% -14%;
+    margin-block: -8% 0;
     margin-inline: -20px;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .hero-visual > div {
+    height: 100%;
   }
   .hero-video {
     width: 140%;
+    height: 100% !important;
+    min-height: 240px;
+    object-fit: cover;
     max-width: none;
     margin-left: -20%;
     transform: none !important;

@@ -85,9 +85,9 @@ export function PortfolioMobile() {
 
         <a
           href={moreProjects.href}
-          className="inline-block font-body font-normal underline underline-offset-2"
+          className="block font-body font-medium underline underline-offset-4"
           style={{
-            fontSize: "clamp(15px, 4.2vw, 19px)",
+            fontSize: "clamp(15px, 3.7vw, 19px)",
             lineHeight: 1.3,
             color: "#9F7EE1",
             marginTop: "clamp(24px, 7.4vw, 36px)",

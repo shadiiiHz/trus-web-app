@@ -99,10 +99,11 @@ export function ServicesMobile({ iconMap }: { iconMap: Record<string, ReactNode>
             alignItems: "stretch",
           }}
         >
-          {items.map((service) => (
+          {items.map((service, i) => (
             <div key={service.id} className="snap-center shrink-0 basis-full flex">
               <ServiceCard
                 fluid
+                dark={i % 2 === 1}
                 icon={iconMap[service.id]}
                 title={service.title}
                 description={service.description}

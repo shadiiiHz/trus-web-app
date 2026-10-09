@@ -13,6 +13,8 @@ export interface WhyUsCardProps {
   borderProgress: MotionValue<number>;
   /** Fill the parent's width instead of the fixed 320 px (mobile stack). */
   fluid?: boolean;
+  /** White card variant (mobile stack, alternating). */
+  light?: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export function WhyUsCard({
   bullets,
   borderProgress,
   fluid = false,
+  light = false,
 }: WhyUsCardProps) {
   // Derived motion values
   // Active gradient border — fades in/out linearly with the pulse
@@ -133,7 +136,7 @@ export function WhyUsCard({
             zIndex: 2,
             minHeight: fluid ? undefined : "257px",
             borderRadius: "16px",
-            background: "#0D0D0D",
+            background: light ? "#FFFFFF" : "#0D0D0D",
             padding: "20px",
             display: "flex",
             flexDirection: "column",
@@ -166,7 +169,7 @@ export function WhyUsCard({
               lineHeight: 1.3,
               letterSpacing: "0.01em",
               textTransform: "uppercase",
-              color: "#9F7EE1",
+              color: light ? "#5B2BB9" : "#9F7EE1",
             }}
           >
             {number} — {label}
@@ -178,7 +181,7 @@ export function WhyUsCard({
               fontWeight: 700,
               fontSize: "20px",
               lineHeight: 1.25,
-              color: "#FFFFFF",
+              color: light ? "#0D0D0D" : "#FFFFFF",
               margin: 0,
             }}
           >
@@ -191,7 +194,7 @@ export function WhyUsCard({
               fontWeight: 400,
               fontSize: "14px",
               lineHeight: 1.3,
-              color: "#BFBFBF",
+              color: light ? "#4D4D4D" : "#BFBFBF",
               margin: 0,
               paddingLeft: "18px",
               listStyle: "disc",

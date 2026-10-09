@@ -18,7 +18,7 @@ export function ServicesHeroSection() {
   return (
     <section
       aria-label="Services"
-      className="relative overflow-hidden flex items-center lg:min-h-svh"
+      className="relative overflow-hidden flex items-center min-h-svh"
       style={{ background: "#FAFAFB" }}
     >
       <div className="mx-auto w-full max-w-330 px-5 pt-[122px] pb-14 lg:pt-28 lg:pb-9">
