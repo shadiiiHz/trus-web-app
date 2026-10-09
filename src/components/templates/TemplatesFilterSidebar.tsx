@@ -159,7 +159,7 @@ export default function TemplatesFilterSidebar({
               aria-pressed={isActive}
               className={`flex items-center justify-between rounded-md px-3 py-2 text-left transition-colors text-body-sm ${
                 isActive
-                  ? "bg-gallery-purple/20 text-gallery-purple"
+                  ? "bg-gallery-purple/20 text-gallery-purple-active"
                   : "text-gallery-label"
               }`}
             >
