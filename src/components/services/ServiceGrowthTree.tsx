@@ -221,6 +221,20 @@ function branchLoopPath(node: NodeLayout) {
   return { d, labelAnchor: branchStart };
 }
 
+// Mobile layout — label centers as a percent of the artwork's own 922×847 box.
+const MOBILE_VB_W = 922;
+const MOBILE_VB_H = 847;
+const MOBILE_LABELS: ReadonlyArray<{ id: string; x: number; y: number }> = [
+  { id: "website-design", x: 61, y: 2 },
+  { id: "landing-page-builder", x: 20.2, y: 5 },
+  { id: "lead-finder", x: 69, y: 16 },
+  { id: "smart-newsletter", x: 84.8, y: 36.8 },
+  { id: "followup", x: 5, y: 47 },
+  { id: "linkedin-autopilot", x: 24.1, y: 67 },
+  { id: "content-studio", x: 81.8, y: 66 },
+  { id: "lead-generation", x: 73, y: 75 },
+];
+
 const pct = (x: number, y: number) => ({
   left: `${(x / VB_W) * 100}%`,
   top: `${(y / VB_H) * 100}%`,
@@ -268,6 +282,56 @@ export function ServiceGrowthTree() {
     }
   };
 
+  if (!isDesktop) {
+    // Mobile / tablet — the artwork at its native 922×847 aspect, with the
+    // label pills pinned to hand-placed spots (percent of the artwork box,
+    // read off the Figma mobile frame). Instagram Autopilot has no spot in
+    // that design, so it's omitted here; it stays reachable in the list.
+    return (
+      <div className="w-full">
+        <div
+          className="relative mx-auto w-full select-none"
+          style={{ maxWidth: 480, aspectRatio: `${MOBILE_VB_W} / ${MOBILE_VB_H}` }}
+          aria-label="TruS growth services map"
+        >
+          <Suspense fallback={null}>
+            {/* The artwork's own content (card + rings) sits right of its
+                canvas center, so nudge it left to center it in the column. */}
+            <TrusAiIllustration
+              className="absolute inset-0 h-full w-full"
+              style={{ objectFit: "contain", transform: "translateX(-3.6%)" }}
+            />
+          </Suspense>
+
+          {MOBILE_LABELS.map((m) => (
+            <a
+              key={m.id}
+              href={`#${m.id}`}
+              onClick={handleAnchorClick(m.id)}
+              className="service-label absolute whitespace-nowrap rounded-md bg-white font-body font-semibold text-gallery-text shadow-sm"
+              style={{
+                left: `${m.x}%`,
+                top: `${m.y}%`,
+                transform: "translate(-50%, -50%)",
+                fontSize: "12px",
+                lineHeight: "16px",
+                padding: "5px 8px",
+              }}
+            >
+              <div aria-hidden="true" className="service-label-border">
+                <span className="service-label-sweep" />
+                <span className="service-label-border-mask" />
+              </div>
+              <span className="relative z-10">
+                {nodesById.get(m.id)?.label ?? m.id}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <div
@@ -282,8 +346,7 @@ export function ServiceGrowthTree() {
           />
         </Suspense>
 
-        {isDesktop &&
-          branches.map((b) => (
+        {branches.map((b) => (
             <a
               key={b.layout.id}
               href={`#${b.layout.id}`}
@@ -306,24 +369,6 @@ export function ServiceGrowthTree() {
           ))}
       </div>
 
-      {/* Mobile/tablet fallback — the radial pill overlay above only fits
-          comfortably at desktop widths; below that, list the same 9
-          anchors as a plain wrapping row so nothing spills off-screen. */}
-      {!isDesktop && (
-        <div className="mt-6 flex flex-wrap justify-center gap-2.5 px-2">
-          {branches.map((b) => (
-            <a
-              key={b.layout.id}
-              href={`#${b.layout.id}`}
-              onClick={handleAnchorClick(b.layout.id)}
-              className="whitespace-nowrap rounded-[10.19px] border bg-white px-3.5 py-2 font-body text-body-sm font-medium text-gallery-text shadow-sm transition-colors duration-200 hover:border-brand-accent hover:text-brand-accent"
-              style={{ borderColor: "rgba(135,93,217,0.35)" }}
-            >
-              {b.label}
-            </a>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

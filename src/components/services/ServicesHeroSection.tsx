@@ -18,21 +18,21 @@ export function ServicesHeroSection() {
   return (
     <section
       aria-label="Services"
-      className="relative overflow-hidden flex items-center"
-      style={{ background: "#FAFAFB", minHeight: "100svh" }}
+      className="relative overflow-hidden flex items-center lg:min-h-svh"
+      style={{ background: "#FAFAFB" }}
     >
-      <div className="mx-auto w-full max-w-330 px-5 py-20 lg:pt-28 lg:pb-9">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[350px_1fr] lg:gap-36">
+      <div className="mx-auto w-full max-w-330 px-5 pt-[122px] pb-14 lg:pt-28 lg:pb-9">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[350px_1fr] lg:gap-36">
           {/* LEFT — copy. Fixed width (not `fr`) so it hugs the logo's left
               edge and leaves the right column free to run all the way to
               the container's right edge (same edge the Login button sits
               on), rather than splitting the row by a flexible ratio. Wide
               enough (500px) that the subtitle fits on one line at its
               natural width (~463px measured) instead of wrapping. */}
-          <div className="flex flex-col gap-4 lg:max-w-[515px]">
+          <div className="flex flex-col gap-2 lg:gap-4 lg:max-w-[515px]">
             <FadeIn direction="up" delay={0.06}>
               <span
-                className="text-section-label font-normal uppercase tracking-[0.22em]"
+                className="text-[11px] font-normal uppercase tracking-[0.12em] lg:text-section-label lg:tracking-[0.22em]"
                 style={{ color: "#5D3AE1" }}
               >
                 {eyebrow}
@@ -40,17 +40,23 @@ export function ServicesHeroSection() {
             </FadeIn>
 
             <FadeIn direction="up" delay={0.16}>
-              <h1 className="font-hero text-[48px] font-bold leading-[1.12] tracking-tight text-[#0B0B0F]">
-                {(heading as readonly string[]).map((line) => (
-                  <span key={line} className="block">
+              <h1 className="font-hero text-[28px] font-bold leading-[1.15] tracking-[-0.02em] lg:text-[48px] lg:leading-[1.12] lg:tracking-tight text-[#0B0B0F]">
+                {/* Mobile joins all but the last line ("Services Designed
+                    for / Digital Growth"); desktop keeps one line each. */}
+                {(heading as readonly string[]).map((line, i, lines) => (
+                  <span
+                    key={line}
+                    className={i === lines.length - 1 ? "block" : "inline lg:block"}
+                  >
                     {line}
+                    {i < lines.length - 1 && <span className="lg:hidden"> </span>}
                   </span>
                 ))}
               </h1>
             </FadeIn>
 
             <FadeIn direction="up" delay={0.26}>
-              <p className="font-body text-body leading-relaxed text-[#6B6A78] lg:whitespace-nowrap">
+              <p className="mt-2 font-body text-body leading-normal text-[#6B6A78] lg:leading-relaxed lg:mt-0 lg:whitespace-nowrap">
                 {subtitle}
               </p>
             </FadeIn>

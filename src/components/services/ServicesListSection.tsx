@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { VideoModal } from "@/components/services/VideoModal";
 
 /**
@@ -22,7 +23,14 @@ import { VideoModal } from "@/components/services/VideoModal";
  */
 export function ServicesListSection() {
   const { eyebrow, heading, items } = siteConfig.servicesPage.list;
-  const [activeId, setActiveId] = useState<string | null>(null);
+  // Touch layouts have no hover, so the first service starts open (per the
+  // mobile design) and only changes on tap; desktop starts with none open.
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [activeId, setActiveId] = useState<string | null>(() =>
+    typeof window !== "undefined" && window.innerWidth < 1024
+      ? (items[0]?.id ?? null)
+      : null,
+  );
   const [playingId, setPlayingId] = useState<string | null>(null);
   const playingItem = items.find((item) => item.id === playingId);
 
@@ -40,7 +48,7 @@ export function ServicesListSection() {
     setActiveId(id);
   };
   const deactivateFromHover = () => {
-    if (suppressHoverRef.current) return;
+    if (!isDesktop || suppressHoverRef.current) return;
     setActiveId(null);
   };
 
@@ -132,10 +140,10 @@ export function ServicesListSection() {
       aria-label="TruS AI Services"
       style={{ background: "var(--color-brand-bg)" }}
     >
-      <div className="mx-auto w-full max-w-330 px-5 py-24 lg:py-28">
+      <div className="mx-auto w-full max-w-330 px-5 pt-14 pb-12 lg:py-28">
         <FadeIn direction="up" delay={0.05}>
           <span
-            className="font-body text-body font-normal uppercase tracking-[0.22em]"
+            className="font-body text-[11px] font-normal uppercase tracking-[0.12em] lg:text-body lg:tracking-[0.22em]"
             style={{ color: "#9F7EE1" }}
           >
             {eyebrow}
@@ -143,12 +151,12 @@ export function ServicesListSection() {
         </FadeIn>
 
         <FadeIn direction="up" delay={0.14}>
-          <h2 className="font-hero font-bold text-[58px] mt-1 text-brand-white">
+          <h2 className="font-hero font-bold text-[24px] leading-[1.2] mt-2 text-brand-white lg:text-[58px] lg:leading-normal lg:mt-1">
             {heading}
           </h2>
         </FadeIn>
 
-        <div className="mt-10">
+        <div className="mt-8 lg:mt-10">
           {items.map((item, i) => (
             <ServiceRow
               key={item.id}
@@ -231,13 +239,13 @@ function ServiceRow({
             className="flex flex-col"
           >
             <span
-              className="font-body text-lg leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
+              className="font-body text-[19px] leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
               style={{ color: "#707075" }}
             >
               {item.title}
             </span>
             <span
-              className="font-body text-lg leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
+              className="font-body text-[19px] leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
               style={{ color: "#FFFFFF" }}
             >
               {item.title}
@@ -250,7 +258,7 @@ function ServiceRow({
           (not centered) within its column so it sits close to the
           description text next to it rather than in the middle of the gap
           on the left side. */}
-      <div className="min-w-0">
+      <div className="min-w-0 empty:hidden lg:empty:block">
         <AnimatePresence mode="wait" onExitComplete={onExitComplete}>
           {isActive && (
             <motion.div
@@ -259,10 +267,8 @@ function ServiceRow({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative overflow-hidden rounded-md lg:ml-auto lg:mr-14 border border-white/20"
+              className="relative my-2 w-full overflow-hidden rounded-md border border-white/20 lg:my-0 lg:ml-auto lg:mr-14 lg:w-[306.5px]"
               style={{
-                width: "306.5px",
-                maxWidth: "100%",
                 aspectRatio: "306.5 / 221.15",
               }}
             >
@@ -314,7 +320,7 @@ function ServiceRow({
 
       {/* Description */}
       <div
-        className="transition-opacity duration-300 text-justify leading-[18.75px]"
+        className="transition-opacity duration-300 text-left leading-5 lg:text-justify lg:leading-[18.75px]"
         style={{ color: isActive ? "#FFFFFF" : "#707075" }}
       >
         {item.eyebrow && (
