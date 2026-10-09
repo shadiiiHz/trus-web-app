@@ -1,6 +1,8 @@
 {
   "nav": {
     "links": ["Ana Sayfa", "Hakkımızda", "Portfolyo", "Şablonlar", "Hizmetler", "İletişim"],
+    "mainMenu": "Ana Menü",
+    "language": "Dil",
     "cta": "Giriş Yap",
     "account": {
       "editAccount": "Hesabı Düzenle",

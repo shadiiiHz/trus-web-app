@@ -1,6 +1,8 @@
 {
   "nav": {
     "links": ["Home", "About", "Portfolio", "Templates", "Services", "Contact"],
+    "mainMenu": "Main Menu",
+    "language": "Language",
     "cta": "Login",
     "account": {
       "editAccount": "Edit Account",

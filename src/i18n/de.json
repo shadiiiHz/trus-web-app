@@ -8,6 +8,8 @@
       "Leistungen",
       "Kontakt"
     ],
+    "mainMenu": "Hauptmenü",
+    "language": "Sprache",
     "cta": "Anmelden",
     "account": {
       "editAccount": "Konto bearbeiten",

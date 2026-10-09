@@ -8,6 +8,8 @@
       "Services",
       "Contact"
     ],
+    "mainMenu": "Menu principal",
+    "language": "Langue",
     "cta": "Connexion",
     "account": {
       "editAccount": "Modifier le compte",

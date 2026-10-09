@@ -4,14 +4,15 @@ import { useLocale, setLocale, type Locale } from "@/i18n";
 
 type FlagFit = "slice" | "meet";
 
-interface LanguageOption {
+export interface LanguageOption {
   code: Locale;
   label: string;
   name: string;
   Flag: React.FC<{ fit: FlagFit }>;
 }
 
-const LANGUAGES: LanguageOption[] = [
+// eslint-disable-next-line react-refresh/only-export-components -- shared with MobileMenu
+export const LANGUAGES: LanguageOption[] = [
   { code: "en", label: "EN", name: "English", Flag: FlagGB },
   { code: "tr", label: "TR", name: "Turkish", Flag: FlagTR },
   { code: "de", label: "DE", name: "German", Flag: FlagDE },
@@ -71,7 +72,8 @@ function findScrollAnchorSection(): HTMLElement | null {
 // later — so one correction isn't always enough.
 const REPIN_WINDOW_MS = 500;
 
-function selectLocale(code: Locale) {
+// eslint-disable-next-line react-refresh/only-export-components -- shared with MobileMenu
+export function selectLocale(code: Locale) {
   const anchor = typeof document !== "undefined" ? findScrollAnchorSection() : null;
   const targetTop = anchor?.getBoundingClientRect().top;
 

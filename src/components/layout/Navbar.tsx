@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { resolveSectionLink } from "@/lib/navigation";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { AccountMenu } from "@/components/layout/AccountMenu";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import { useAuth } from "@/hooks/useAuth";
-import { EASE_PREMIUM, DURATION_MD, DURATION_SM } from "@/motion/variants";
+import { EASE_PREMIUM, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
 import GradientButton from "../ui/GradientButton";
 
@@ -266,75 +267,14 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
       </motion.header>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-            // Scrollable so the language switch + account menu at the
-            // bottom stay reachable on short viewports (e.g. phones in
-            // landscape), where the link list alone fills the screen.
-            data-lenis-prevent
-            className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain pt-20 px-6 pb-10"
-            style={{
-              background: "rgba(7, 7, 13, 0.97)",
-              backdropFilter: "blur(24px)",
-            }}
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: DURATION_MD, ease: EASE_PREMIUM }}
-          >
-            <ul className="flex flex-col gap-6 mt-8" role="list">
-              {data.links.map((link, i) => (
-                <motion.li
-                  key={link.label}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: i * 0.06,
-                    duration: DURATION_MD,
-                    ease: EASE_PREMIUM,
-                  }}
-                >
-                  {(() => {
-                    const to = resolveSectionLink(link.href, isHome);
-                    const className =
-                      "text-display-sm font-display font-semibold text-brand-white hover:text-brand-accent-light transition-colors";
-                    return to ? (
-                      <Link to={to} className={className} onClick={() => setMobileOpen(false)}>
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className={className}
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {link.label}
-                      </a>
-                    );
-                  })()}
-                </motion.li>
-              ))}
-            </ul>
-            <div className="mt-auto flex flex-col gap-4">
-              <LanguageSwitch className="self-center" />
-              {isAuthenticated ? (
-                <AccountMenu copy={data.account} className="self-center" />
-              ) : (
-                <GradientButton
-                  text={data.cta.label}
-                  href={data.cta.href}
-                  className="w-full justify-center"
-                />
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        data={data}
+        isHome={isHome}
+        activeSection={activeSection}
+        pathname={pathname}
+      />
     </>
   );
 }
