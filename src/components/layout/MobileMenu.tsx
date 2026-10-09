@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { resolveSectionLink } from "@/lib/navigation";
-import { showToast } from "@/lib/toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocale } from "@/i18n";
 import { LANGUAGES, selectLocale } from "@/components/layout/LanguageSwitch";
@@ -14,7 +13,6 @@ import trusLogo from "@/assets/logo.png";
 import editAccountIcon from "@/assets/account-menu/edit-account.svg";
 import changePasswordIcon from "@/assets/account-menu/change-password.svg";
 import serviceManagementIcon from "@/assets/account-menu/service-management.svg";
-import downloadInvoiceIcon from "@/assets/account-menu/download-invoice.svg";
 
 type Nav = SiteConfig["nav"];
 
@@ -29,7 +27,7 @@ export interface MobileMenuProps {
 }
 
 const rowBase =
-  "flex w-full items-center rounded-lg text-left font-body text-[17px] leading-6 text-white transition-colors hover:bg-[rgba(159,126,225,0.1)] hover:text-[#936EDD]";
+  "flex w-full items-center rounded-lg text-left font-body text-[16px] font-normal leading-6 text-white transition-colors hover:bg-[rgba(159,126,225,0.1)] hover:text-[#936EDD]";
 
 const rowActive = "bg-[rgba(159,126,225,0.1)] !text-[#936EDD]";
 
@@ -133,7 +131,7 @@ export function MobileMenu({
                   const to = resolveSectionLink(link.href, isHome);
                   const className = `${rowBase} px-4.5 ${
                     isAuthenticated ? "h-11" : "h-12"
-                  } ${active ? `font-semibold ${rowActive}` : "font-normal"}`;
+                  } ${active ? rowActive : ""}`;
                   return (
                     <li key={link.label}>
                       {to ? (
@@ -217,7 +215,7 @@ function LanguageTrigger({ onClick }: { onClick: () => void }) {
         <FlagBox Flag={current.Flag} width={36} height={26} />
       </span>
       <ChevronRight
-        size={20}
+        size={24}
         strokeWidth={2}
         className="ml-auto mr-1.5"
         aria-hidden="true"
@@ -244,7 +242,7 @@ function LanguagePanel({
         aria-label="Back"
         className="mt-12.5 flex w-full cursor-pointer items-center gap-3.5 border-b border-white/15 px-3.5 pb-2.5 text-left"
       >
-        <ChevronLeft size={20} strokeWidth={2} className="text-white" aria-hidden="true" />
+        <ChevronLeft size={24} strokeWidth={2} className="text-white" aria-hidden="true" />
         <span className="font-body text-[14px] leading-5 text-[#BFBFBF]">{title}</span>
       </button>
       <ul role="listbox" aria-label={title} className="mt-3.5 flex flex-col gap-4.5">
@@ -292,10 +290,10 @@ function AccountCard({
   const showLogo = Boolean(logoUrl) && logoUrl !== brokenLogoUrl;
 
   const itemClass =
-    "flex h-12 w-full cursor-pointer items-center gap-3.5 px-4.5 text-left font-body text-[14px] leading-5 font-medium text-white";
+    "flex h-12 w-full cursor-pointer items-center gap-3.5 rounded-lg px-4.5 text-left font-body text-[14px] leading-5 font-medium text-white transition-colors hover:bg-[rgba(159,126,225,0.1)]";
 
   return (
-    <div className="mt-12 overflow-hidden rounded-xl border border-white/6 bg-[rgba(159,126,225,0.1)]">
+    <div className="mt-12 overflow-hidden rounded-lg border border-white/6 bg-[rgba(159,126,225,0.1)]">
       <button
         type="button"
         onClick={onToggle}
@@ -322,7 +320,7 @@ function AccountCard({
           {displayName}
         </span>
         <ChevronDown
-          size={20}
+          size={24}
           strokeWidth={2}
           className={`mr-1.5 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           aria-hidden="true"
@@ -340,17 +338,6 @@ function AccountCard({
           <AccountLink to={copy.serviceManagement.href} icon={serviceManagementIcon} onClick={onClose} className={itemClass}>
             {copy.serviceManagement.label}
           </AccountLink>
-          <button
-            type="button"
-            className={itemClass}
-            onClick={() => {
-              onClose();
-              showToast("Coming soon", "info");
-            }}
-          >
-            <img src={downloadInvoiceIcon} alt="" width={20} height={20} className="h-5 w-5 shrink-0" />
-            {copy.downloadInvoice}
-          </button>
           <button
             type="button"
             className={`${itemClass} !text-[#DC2626]`}
