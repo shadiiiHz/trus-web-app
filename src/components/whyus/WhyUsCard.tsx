@@ -11,6 +11,8 @@ export interface WhyUsCardProps {
    * 0 = fully inactive, 1 = peak activation.
    */
   borderProgress: MotionValue<number>;
+  /** Fill the parent's width instead of the fixed 320 px (mobile stack). */
+  fluid?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ export function WhyUsCard({
   title,
   bullets,
   borderProgress,
+  fluid = false,
 }: WhyUsCardProps) {
   // Derived motion values
   // Active gradient border — fades in/out linearly with the pulse
@@ -52,7 +55,7 @@ export function WhyUsCard({
     <div
       style={{
         position: "relative",
-        width: "320px",
+        width: fluid ? "100%" : "320px",
         flexShrink: 0,
       }}
     >
@@ -128,7 +131,7 @@ export function WhyUsCard({
           style={{
             position: "relative",
             zIndex: 2,
-            minHeight: "257px",
+            minHeight: fluid ? undefined : "257px",
             borderRadius: "16px",
             background: "#0D0D0D",
             padding: "20px",

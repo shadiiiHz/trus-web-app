@@ -54,7 +54,7 @@
       "Una selección de nuestros trabajos recientes que muestra creatividad,",
       "rendimiento y atención al detalle."
     ],
-    "seeMore": "Ver más"
+    "moreProjects": "Más proyectos"
   },
 
   "whyUs": {
@@ -161,9 +161,9 @@
   },
 
   "services": {
-    "eyebrow": "SERVICIOS",
-    "heading": "NUESTROS SERVICIOS",
-    "description": "Diseñamos y construimos sitios web modernos que ayudan a las empresas a crecer y destacar.",
+    "eyebrow": "QUÉ HACEMOS",
+    "heading": "Nuestros servicios principales",
+    "description": "Soluciones digitales integrales que incluyen desarrollo web a medida, hosting empresarial, SEO, automatización con IA y marketing orientado al rendimiento, todo diseñado para ayudar a que tu negocio crezca.",
     "items": [
       {
         "title": "SEO",
@@ -213,6 +213,7 @@
     "heading": "Categorías de plantillas",
     "description": "Explora plantillas diseñadas profesionalmente para empresas modernas, startups y productos digitales.",
     "seeMore": "Ver más",
+    "moreTemplates": "Más plantillas",
     "RightWord": "Diseños",
     "LeftWord": "Plantillas",
     "tagline": [

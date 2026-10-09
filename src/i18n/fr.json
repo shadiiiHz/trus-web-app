@@ -54,7 +54,7 @@
       "Une sélection de nos travaux récents mettant en valeur créativité,",
       "performance et souci du détail."
     ],
-    "seeMore": "Voir plus"
+    "moreProjects": "Plus de projets"
   },
 
   "whyUs": {
@@ -161,9 +161,9 @@
   },
 
   "services": {
-    "eyebrow": "SERVICES",
-    "heading": "NOS SERVICES",
-    "description": "Nous concevons et développons des sites web modernes qui aident les entreprises à croître et à se démarquer.",
+    "eyebrow": "CE QUE NOUS FAISONS",
+    "heading": "Nos services principaux",
+    "description": "Des solutions numériques de bout en bout, dont le développement web sur mesure, l'hébergement d'entreprise, le SEO, l'automatisation par IA et un marketing axé sur la performance, conçues pour aider votre entreprise à se développer.",
     "items": [
       {
         "title": "SEO",
@@ -213,6 +213,7 @@
     "heading": "Catégories de modèles",
     "description": "Découvrez des modèles conçus par des professionnels pour les entreprises modernes, les startups et les produits numériques.",
     "seeMore": "Voir plus",
+    "moreTemplates": "Plus de modèles",
     "RightWord": "Designs",
     "LeftWord": "Modèles",
     "tagline": ["EXPLORER DES IDÉES PAR", "LA PRATIQUE QUOTIDIENNE DU DESIGN."],

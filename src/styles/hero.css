@@ -1,0 +1,134 @@
+/* Hero section — responsive layout.
+   Mobile (< lg) follows the Figma mobile frame (448px artboard); desktop
+   values are the original ones, kept here so inline styles aren't needed. */
+
+/* ---------- desktop (lg+) ---------- */
+@media (min-width: 1024px) {
+  .hero-container {
+    min-height: 100svh;
+    padding-top: clamp(56px, 9vw, 88px);
+    padding-bottom: clamp(48px, 8vw, 80px);
+  }
+  .hero-grid {
+    gap: clamp(8px, 1.5vw, 16px);
+  }
+  .hero-copy {
+    gap: clamp(20px, 2.6vw, 28px);
+  }
+  .hero-body {
+    font-size: 15px;
+    text-align: justify;
+  }
+  .hero-bottom-label {
+    bottom: clamp(20px, 4vw, 32px);
+  }
+  .hero-video {
+    width: 190%;
+    margin-left: -33%;
+  }
+}
+@media (min-width: 1536px) {
+  .hero-video {
+    margin-left: -40%;
+  }
+}
+
+/* ---------- mobile / tablet (< lg) ---------- */
+@media (max-width: 1023.98px) {
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-container {
+    flex: 1;
+    align-items: flex-start;
+    padding-top: clamp(122px, 31.3vw, 154px);
+    /* Room below the map now that the mobile services label is hidden. */
+    padding-bottom: clamp(32px, 9vw, 64px);
+  }
+  .hero-grid {
+    gap: clamp(28px, 9vw, 56px);
+  }
+  .hero-copy {
+    gap: clamp(20px, 6vw, 36px);
+  }
+  .hero-copy h1 {
+    gap: 0;
+  }
+
+  .hero-headline {
+    font-size: clamp(26px, 7.4vw, 46px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    max-width: none !important;
+  }
+  .hero-body {
+    font-size: clamp(15px, 4.15vw, 21px);
+    line-height: 1.52;
+    text-align: left;
+  }
+
+  .hero-ctas {
+    flex-wrap: nowrap;
+  }
+  .hero-cta {
+    flex: 1 1 0;
+    min-width: 0;
+    height: clamp(46px, 11.4vw, 56px) !important;
+    padding: 0 12px !important;
+    border-radius: 10px !important;
+    font-size: clamp(15px, 3.8vw, 18px) !important;
+    font-weight: 600 !important;
+  }
+  .hero-cta .btn-text {
+    font-size: clamp(15px, 3.8vw, 18px);
+    font-weight: 600;
+  }
+  .hero-cta.framer-btn,
+  .hero-cta.framer-btn .color1,
+  .hero-cta.framer-btn .color1-glow,
+  .hero-cta.framer-btn .color2,
+  .hero-cta.framer-btn .color2-glow {
+    border-radius: 10px;
+  }
+  .hero-cta.framer-btn .fill {
+    border-radius: 9px;
+  }
+
+  /* Visual: full-bleed map under the CTAs, no desktop offset/scale */
+  .hero-visual {
+    transform: none !important;
+    margin-block: -8% -14%;
+    margin-inline: -20px;
+  }
+  .hero-video {
+    width: 140%;
+    max-width: none;
+    margin-left: -20%;
+    transform: none !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%) !important;
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%) !important;
+  }
+
+  .hero-bottom-label {
+    padding: clamp(8px, 2vw, 16px) 20px clamp(32px, 8vw, 56px);
+  }
+  .hero-rotating {
+    font-size: clamp(13px, 3.3vw, 16px) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.06em !important;
+  }
+  .hero-ticker-text {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 3.3vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+}

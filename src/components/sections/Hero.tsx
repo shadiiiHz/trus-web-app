@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import GradientButton from "../ui/GradientButton";
+import "@/styles/hero.css";
 // import { BackgroundStars } from '@/components/hero/BackgroundStars'
 
 export interface HeroSectionProps {
@@ -23,7 +24,7 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
-      className="relative overflow-hidden"
+      className="hero-section relative overflow-hidden"
       style={{ minHeight: "100svh" }}
       aria-label="Hero"
     >
@@ -32,21 +33,14 @@ export function HeroSection({
 
       {/* Main content grid */}
       <div
-        className="relative z-10 mx-auto w-full max-w-330 px-5 flex items-center"
-        style={{
-          minHeight: "100svh",
-          paddingTop: "clamp(56px, 9vw, 88px)",
-          paddingBottom: "clamp(48px, 8vw, 80px)",
-        }}
+        className="hero-container relative z-10 mx-auto w-full max-w-330 px-5 flex items-center"
       >
         <div
-          className="grid w-full grid-cols-1 lg:grid-cols-[62%_80%] 2xl:grid-cols-[69%_80%] items-center"
-          style={{ gap: "clamp(8px, 1.5vw, 16px)" }}
+          className="hero-grid grid w-full grid-cols-1 lg:grid-cols-[62%_80%] 2xl:grid-cols-[69%_80%] items-center"
         >
           {/* LEFT COLUMN — copy */}
           <div
-            className="flex flex-col min-w-0"
-            style={{ gap: "clamp(20px, 2.6vw, 28px)" }}
+            className="hero-copy flex flex-col min-w-0"
           >
             <h1 className="flex flex-col gap-1 min-w-0">
               {data.headline.map((line, i) => {
@@ -60,7 +54,7 @@ export function HeroSection({
                     className="min-w-0"
                   >
                     <span
-                      className="block font-hero font-normal text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] leading-[1.12] tracking-tight wrap-break-word"
+                      className="hero-headline block font-hero font-bold lg:font-normal text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] leading-[1.12] tracking-tight wrap-break-word"
                       style={{
                         overflowWrap: "break-word",
                         maxWidth: "525px",
@@ -93,12 +87,8 @@ export function HeroSection({
 
             <FadeIn delay={0.52} direction="up">
               <p
-                className="font-body font-normal color-brand-white leading-relaxed"
-                style={{
-                  fontSize: "15px",
-                  maxWidth: "525px",
-                  textAlign: "justify",
-                }}
+                className="hero-body font-body font-normal color-brand-white leading-relaxed"
+                style={{ maxWidth: "525px" }}
               >
                 {data.body}
               </p>
@@ -108,25 +98,26 @@ export function HeroSection({
             <FadeIn
               delay={0.68}
               direction="up"
-              className="flex flex-wrap gap-3"
+              className="hero-ctas flex gap-3.5 lg:flex-wrap lg:gap-3"
             >
               <Button
                 variant="ghost"
                 href={data.cta.secondary.href}
-                className="h-11"
+                className="hero-cta h-11"
               >
                 {data.cta.secondary.label}
               </Button>
               <GradientButton
+                className="hero-cta"
                 text={data.cta.primary.label}
                 href={data.cta.primary.href}
               />
             </FadeIn>
           </div>
 
-          {/* RIGHT COLUMN — video placeholder (hidden on mobile, lg+ only) */}
+          {/* RIGHT COLUMN — world-map video (below the copy on mobile) */}
           <motion.div
-            className="hidden lg:flex items-center justify-center"
+            className="hero-visual flex items-center justify-center"
             style={{
               opacity: orbitOpacity,
               x: 20,
@@ -252,7 +243,7 @@ function HeroVideo({ onReady }: { onReady?: () => void }) {
         muted
         playsInline
         preload="auto"
-        className="w-[190%] ml-[-33%] 2xl:ml-[-40%]"
+        className="hero-video"
         style={{
           position: "relative",
           zIndex: 1,
@@ -335,70 +326,88 @@ function CursorBlink() {
 
 function BottomLabel({ prefix }: { prefix: string }) {
   const titles = siteConfig.services.items.map((item) => item.title);
+  const index = useCycleIndex(titles.length);
+  // Mobile only (currently disabled, see below):
+  // const prev = titles[(index - 1 + titles.length) % titles.length];
 
   return (
-    <div
-      className="absolute left-0 right-0 flex justify-center z-20 pointer-events-none"
-      style={{ bottom: "clamp(20px, 4vw, 32px)" }}
-    >
-      <div className="flex items-center gap-3">
+    // Mobile: the rotating services label is commented out — `hidden lg:flex`
+    // hides the whole block below lg. To bring it back, change this to
+    // `flex` (or `relative lg:absolute flex`) and restore the `prev` line above
+    // plus the mobile-only <span> below.
+    <div className="hero-bottom-label hidden lg:flex lg:absolute left-0 right-0 justify-center z-20 pointer-events-none">
+      <div className="flex flex-col items-start gap-3.5 lg:flex-row lg:items-center lg:gap-3">
+        {/* Mobile only: previous title stacked above the active one (disabled on mobile)
         <span
-          className="font-body font-medium text-white tracking-[0.22em] uppercase"
-          style={{ fontSize: "14px" }}
+          aria-hidden="true"
+          className="lg:hidden hero-ticker-text ml-7"
         >
-          {prefix}
+          {prev}
         </span>
+        */}
 
-        {/* Glowing dot */}
-        <span
-          className="relative flex items-center justify-center"
-          style={{ width: "14px", height: "14px" }}
-        >
+        <div className="flex items-center gap-2.5 lg:gap-3">
           <span
-            className="absolute rounded-full"
-            style={{
-              inset: "-4px",
-              background:
-                "radial-gradient(circle, rgba(255,60,60,0.55) 0%, transparent 70%)",
-              filter: "blur(3px)",
-            }}
-          />
-          <span
-            className="relative rounded-full"
-            style={{
-              width: "9px",
-              height: "9px",
-              background: "#ff3333",
-              boxShadow:
-                "0 0 8px rgba(255,60,60,0.9), 0 0 16px rgba(255,60,60,0.5)",
-            }}
-          />
-        </span>
+            className="hidden lg:inline font-body font-medium text-white tracking-[0.22em] uppercase"
+            style={{ fontSize: "14px" }}
+          >
+            {prefix}
+          </span>
 
-        <RotatingServiceTitle titles={titles} />
+          {/* Glowing dot — same on mobile and desktop */}
+          <span
+            className="relative flex items-center justify-center"
+            style={{ width: "13.39px", height: "13.39px" }}
+          >
+            <span
+              className="absolute inset-0 rounded-full"
+              style={{
+                border: "1px solid rgba(135,93,217,0.7)",
+                boxShadow: "0 0 10px rgba(135,93,217,0.45)",
+              }}
+            />
+            <span
+              className="relative rounded-full"
+              style={{
+                width: "5px",
+                height: "5px",
+                background: "var(--color-brand-accent)",
+                boxShadow: "0 0 8px var(--color-brand-accent)",
+              }}
+            />
+          </span>
+
+          <RotatingServiceTitle titles={titles} index={index} />
+        </div>
       </div>
     </div>
   );
 }
 
+/** Index that advances through `count` items on a fixed interval. */
+function useCycleIndex(count: number, interval = 2200) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (count <= 1) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % count);
+    }, interval);
+    return () => window.clearInterval(id);
+  }, [count, interval]);
+
+  return index;
+}
+
 /** Cycles through service titles, crossfading/sliding one into the next. */
 function RotatingServiceTitle({
   titles,
-  interval = 2200,
+  index,
 }: {
   titles: string[];
-  interval?: number;
+  index: number;
 }) {
-  const [index, setIndex] = useState(0);
   const shouldReduce = useReducedMotion();
-
-  useEffect(() => {
-    if (titles.length <= 1) return;
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % titles.length);
-    }, interval);
-    return () => window.clearInterval(id);
-  }, [titles.length, interval]);
 
   // Reserve width for the longest title so the box never shrinks/grows —
   // that keeps the prefix + dot to its left perfectly still while only
@@ -412,7 +421,7 @@ function RotatingServiceTitle({
     <span className="relative inline-grid" style={{ height: "1.3em" }}>
       <span
         aria-hidden
-        className="invisible col-start-1 row-start-1 font-body font-medium tracking-[0.22em] uppercase whitespace-nowrap"
+        className="hero-rotating invisible col-start-1 row-start-1 font-body font-medium tracking-[0.22em] uppercase whitespace-nowrap"
         style={{ fontSize: "14px" }}
       >
         {longestTitle}
@@ -424,7 +433,7 @@ function RotatingServiceTitle({
           animate={{ opacity: 1, y: 0 }}
           exit={shouldReduce ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: shouldReduce ? 0 : 0.35, ease: "easeOut" }}
-          className="col-start-1 row-start-1 text-left font-body font-medium text-white tracking-[0.22em] uppercase whitespace-nowrap"
+          className="hero-rotating col-start-1 row-start-1 text-left font-body font-medium text-white tracking-[0.22em] uppercase whitespace-nowrap"
           style={{ fontSize: "14px" }}
         >
           {titles[index]}

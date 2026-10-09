@@ -3,6 +3,8 @@ import { motion, useMotionValue, useTransform, useInView } from 'framer-motion'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { ServiceCard } from '@/components/services/ServiceCard'
+import { ServicesMobile } from '@/components/services/ServicesMobile'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 // Inline SVG icons — purple outline style
 
@@ -141,7 +143,13 @@ const getCenteredStartX = () =>
 
 // Component
 
+/** Below `lg` the pinned two-row parallax is replaced by a swipeable carousel. */
 export function ServicesSection() {
+  const isWide = useMediaQuery('(min-width: 1024px)')
+  return isWide ? <ServicesDesktop /> : <ServicesMobile iconMap={ICON_MAP} />
+}
+
+function ServicesDesktop() {
   const { eyebrow, heading, description, items } = siteConfig.services
 
   const [isDesktop, setIsDesktop] = useState(false)

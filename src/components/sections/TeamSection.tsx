@@ -500,21 +500,32 @@ export function TeamSection() {
     />
   );
 
-  // Mobile layout
+  // Mobile layout — header, page arrows, a 2×2 grid of the current page's
+  // members, then the selected member's details (no card-box around them).
+  function handleMobileArrow() {
+    setPage((p) => (p === 0 ? 1 : 0));
+    setMobileId(null);
+  }
+
   const mobileLayout = (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-      {/* Eyebrow + heading */}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "clamp(22px, 6.6vw, 32px)",
+      }}
+    >
       <div>
         <FadeIn direction="up" delay={0.08}>
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "13px",
+              fontSize: "clamp(12px, 3.3vw, 15px)",
               fontWeight: 400,
               color: "#9F7EE1",
               textTransform: "uppercase",
-              letterSpacing: "0.18em",
-              margin: "0 0 12px 0",
+              letterSpacing: "0.02em",
+              margin: "0 0 clamp(8px, 2.4vw, 12px) 0",
             }}
           >
             {eyebrow}
@@ -524,25 +535,25 @@ export function TeamSection() {
           <h2
             style={{
               fontFamily: "var(--font-hero)",
-              fontSize: "28px",
+              fontSize: "clamp(24px, 6.6vw, 34px)",
               fontWeight: 700,
-              lineHeight: 1.2,
+              lineHeight: 1.18,
+              letterSpacing: "-0.01em",
               color: "#FFFFFF",
               margin: 0,
-              whiteSpace: "pre-line",
             }}
           >
-            {heading.join("\n")}
+            {heading.join(" ")}
           </h2>
         </FadeIn>
         <FadeIn direction="up" delay={0.22}>
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "16px",
+              fontSize: "clamp(14px, 3.75vw, 17px)",
               lineHeight: 1.5,
               color: "#BFBFBF",
-              margin: "16px 0 0 0",
+              margin: "clamp(12px, 3.6vw, 16px) 0 0 0",
             }}
           >
             {description}
@@ -550,41 +561,38 @@ export function TeamSection() {
         </FadeIn>
       </div>
 
-      {/* Horizontal scroll card row */}
+      <div style={{ display: "flex", gap: 14 }}>
+        <TeamCarouselArrow
+          direction="left"
+          onClick={handleMobileArrow}
+          size={48}
+        />
+        <TeamCarouselArrow
+          direction="right"
+          onClick={handleMobileArrow}
+          size={48}
+        />
+      </div>
+
       <FadeIn direction="up" delay={0.26}>
         <div
           style={{
-            display: "flex",
-            gap: "14px",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            WebkitOverflowScrolling: "touch",
-            paddingBottom: "4px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "clamp(10px, 3vw, 14px)",
           }}
         >
-          {members.map((m) => (
+          {visibleMembers.map((m) => (
             <TeamMemberCard
               key={m.id}
               {...cardProps(m)}
-              style={{ width: 220, height: 260, flexShrink: 0 }}
+              style={{ width: "100%", aspectRatio: "184 / 158" }}
             />
           ))}
         </div>
       </FadeIn>
 
-      {/* Info panel below cards */}
-      <FadeIn direction="up" delay={0.36}>
-        <div
-          style={{
-            background: "rgba(255,255,255,0.04)",
-            borderRadius: 16,
-            padding: "24px",
-            border: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <TeamInfoPanel member={activeMember} />
-        </div>
-      </FadeIn>
+      <TeamInfoPanel member={activeMember} large />
     </div>
   );
 
@@ -596,8 +604,8 @@ export function TeamSection() {
       style={{
         background: "var(--color-brand-bg)",
         position: "relative",
-        paddingTop: "180px",
-        paddingBottom: "180px",
+        paddingTop: isDesktop ? "180px" : "clamp(56px, 15vw, 96px)",
+        paddingBottom: isDesktop ? "180px" : "clamp(48px, 14vw, 88px)",
       }}
     >
       {/*

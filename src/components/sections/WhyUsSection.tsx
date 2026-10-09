@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { WhyUsCard } from '@/components/whyus/WhyUsCard'
+import { WhyUsMobile } from '@/components/whyus/WhyUsMobile'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 // Sparse background stars — generated once at module level, no re-render churn
 const WHY_STARS = Array.from({ length: 30 }, (_, i) => ({
@@ -31,7 +33,13 @@ const WHY_STARS = Array.from({ length: 30 }, (_, i) => ({
  *   each card border glow timing   → card[N]Progress useTransform stops below
  *   background grid cell size      → backgroundSize in grid <div> (~120 px)
  */
+/** Below `lg` the pinned, scroll-split card row is replaced by a stacked layout. */
 export function WhyUsSection() {
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
+  return isDesktop ? <WhyUsDesktop /> : <WhyUsMobile />
+}
+
+function WhyUsDesktop() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Section-scoped progress: 0 when section top hits viewport top,

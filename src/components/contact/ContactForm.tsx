@@ -58,6 +58,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
         {fields.map((field) => (
           <div key={field.id}>
             <label
+              className="contact-field-label"
               htmlFor={`contact-${field.id}`}
               style={{
                 display:      'block',
@@ -80,6 +81,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
                 value={values[field.id]}
                 rows={3}
                 onChange={(e) => set(field.id, e.target.value)}
+                className="contact-textarea"
                 style={inputBase}
               />
             ) : (
@@ -90,6 +92,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
                 placeholder={field.placeholder}
                 value={values[field.id]}
                 onChange={(e) => set(field.id, e.target.value)}
+                className="contact-input"
                 style={inputBase}
               />
             )}
@@ -100,7 +103,7 @@ export function ContactForm({ fields, submit }: ContactFormProps) {
           <GradientButton
             type="submit"
             text={submit}
-            className="justify-center"
+            className="contact-submit justify-center"
             style={{
               // Overrides the default purple gradient just for this button
               ['--fill-gradient' as string]: 'linear-gradient(135deg, #875DD9 0%, #5328A8 100%)',

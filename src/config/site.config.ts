@@ -771,7 +771,7 @@ function buildSiteConfig(locale: Locale) {
       eyebrow: dict.portfolio.eyebrow,
       headline: dict.portfolio.headline,
       description: dict.portfolio.description,
-      seeMore: { label: dict.portfolio.seeMore, href: "#" },
+      moreProjects: { label: dict.portfolio.moreProjects, href: "#" },
       // No per-project text — projectMeta is structural-only (image + link)
       projects: projectMeta,
     },
@@ -802,6 +802,8 @@ function buildSiteConfig(locale: Locale) {
       heading: dict.templateCategories.heading,
       description: dict.templateCategories.description,
       seeMore: { label: dict.templateCategories.seeMore, href: "/templates" },
+      /** Label used by the mobile layout's link (same /templates target). */
+      moreTemplates: dict.templateCategories.moreTemplates,
       RightWord: dict.templateCategories.RightWord,
       LeftWord: dict.templateCategories.LeftWord,
       tagline: dict.templateCategories.tagline,

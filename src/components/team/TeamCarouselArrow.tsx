@@ -6,9 +6,11 @@ export interface TeamCarouselArrowProps {
   onClick: () => void
   /** Disabled while the entrance animation is still moving the cards into place. */
   disabled?: boolean
+  /** Button diameter in px (default 44; the mobile layout uses a larger tap target). */
+  size?: number
 }
 
-export function TeamCarouselArrow({ direction, onClick, disabled = false }: TeamCarouselArrowProps) {
+export function TeamCarouselArrow({ direction, onClick, disabled = false, size = 44 }: TeamCarouselArrowProps) {
   const [hovered, setHovered] = useState(false)
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight
 
@@ -21,8 +23,8 @@ export function TeamCarouselArrow({ direction, onClick, disabled = false }: Team
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        width: 44,
-        height: 44,
+        width: size,
+        height: size,
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
@@ -37,7 +39,7 @@ export function TeamCarouselArrow({ direction, onClick, disabled = false }: Team
         transition: 'box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.3s ease',
       }}
     >
-      <Icon size={18} strokeWidth={1.75} />
+      <Icon size={Math.round(size * 0.41)} strokeWidth={1.75} />
     </button>
   )
 }

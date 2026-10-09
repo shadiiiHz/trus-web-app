@@ -24,3 +24,8 @@ export function parseHeadline(line: string): Array<{ text: string; accent: boole
   if (last < line.length) parts.push({ text: line.slice(last), accent: false })
   return parts
 }
+
+/** "CUSTOMER SUCCESS STORIES" → "Customer Success Stories" (word-initial capitals). */
+export function toTitleCase(text: string): string {
+  return text.toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase())
+}

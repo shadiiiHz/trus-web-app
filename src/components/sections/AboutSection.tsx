@@ -5,6 +5,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { StatCounter } from "@/components/motion/StatCounter";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { parseHeadline } from "@/utils/text";
+import "@/styles/about.css";
 
 // Sparse background stars generated once at module level — no re-render churn
 const ABOUT_STARS = Array.from({ length: 35 }, (_, i) => ({
@@ -53,7 +54,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
       aria-label="About TruS"
       style={{ background: "#E3E3E3" }}
     >
-      <div className="overflow-hidden sticky top-0 min-h-screen flex flex-col justify-center">
+      <div className="about-pin overflow-hidden sticky top-0 min-h-screen flex flex-col justify-center">
         {/* Background layer */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           {/* Sparse stars */}
@@ -110,11 +111,11 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
         </div>
   
         {/* Main content */}
-        <div className="relative z-10 mx-auto w-full max-w-330 px-5 py-32 lg:py-36">
+        <div className="about-content relative z-10 mx-auto w-full max-w-330 px-5 py-32 lg:py-36">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_630px] items-center gap-8 lg:gap-10">
             {/* LEFT COLUMN — copy */}
-            <div className="flex flex-col gap-2.5">
-              <div className="flex flex-col gap-2">
+            <div className="about-copy flex flex-col gap-2.5">
+              <div className="about-heading flex flex-col gap-2">
                 <FadeIn direction="up" delay={0.1}>
                   <span
                     className="text-section-label font-normal uppercase tracking-[0.22em]"
@@ -131,7 +132,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                       return (
                         <span
                           key={line}
-                          className="block text-section-title leading-[1.14] tracking-tight text-[#070606]"
+                          className="about-title block text-section-title leading-[1.14] tracking-tight text-[#070606]"
                         >
                           {segs.map((seg) =>
                             seg.accent ? (
@@ -156,7 +157,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               </div>
   
               {/* Body paragraphs */}
-              <div className="flex flex-col gap-4">
+              <div className="about-body flex flex-col gap-4">
                 {(data.body as readonly string[]).map((para, i) => (
                   <FadeIn
                     key={para.slice(0, 20)}
@@ -164,7 +165,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                     delay={0.34 + i * 0.1}
                   >
                     <p
-                      className="font-body text-[#070606] leading-relaxed m-0"
+                      className="about-para font-body text-[#070606] leading-relaxed m-0"
                       style={{ fontSize: "18px", maxWidth: "586px", textAlign: "justify" }}
                     >
                       {para}
@@ -174,11 +175,12 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
               </div>
   
               {/* Stats grid — four boxed counters, each cascading in with its own delay */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="about-stats grid grid-cols-2 gap-4">
                 {(data.stats as readonly { value: string; label: string }[]).map(
                   (stat) => (
                       <div
-                        className="flex flex-col justify-center gap-2"
+                        key={stat.label}
+                        className="about-stat flex flex-col justify-center gap-2"
                         style={{
                           width: "283px",
                           maxWidth: "100%",
@@ -190,12 +192,12 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
                       >
                         <StatCounter
                           value={stat.value}
-                          className="font-hero leading-none"
+                          className="about-stat-value font-hero leading-none"
                           style={{ fontSize: "32px", fontWeight: 700, color: "#141414" }}
                         />
-                        <div style={{ borderTop: "1px dotted #DFDFDF" }} />
+                        <div className="about-stat-rule" style={{ borderTop: "1px dotted #DFDFDF" }} />
                         <span
-                          className="font-body leading-tight"
+                          className="about-stat-label font-body leading-tight"
                           style={{ fontSize: "12px", fontWeight: 400, color: "#494852" }}
                         >
                           {stat.label}
@@ -213,6 +215,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
             <div className="flex justify-center lg:justify-end">
               <div
                 ref={imageWrapRef}
+                className="about-image"
                 style={{
                   width: "min(630px, 100%)",
                   height: "514px",
@@ -300,7 +303,7 @@ export function AboutSection({ data = siteConfig.about }: AboutSectionProps) {
           scrolled through before it releases, keeping the fully unhinged
           image on screen for a beat rather than letting it scroll straight
           past. */}
-      <div aria-hidden="true" style={{ height: "100vh" }} />
+      <div className="about-hold" aria-hidden="true" style={{ height: "100vh" }} />
     </section>
   );
 }

@@ -4,6 +4,7 @@ import { ContactInfoCard } from '@/components/contact/ContactInfoCard'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
+import '@/styles/contact.css'
 
 // Extra scroll runway (on top of the pinned 100vh) the user has to scroll
 // through before the section releases — same sticky-panel technique as
@@ -43,7 +44,7 @@ export function ContactSection() {
 
   const content = (
     <div
-      className="relative mx-auto w-full max-w-330 px-5"
+      className="contact-content relative mx-auto w-full max-w-330 px-5"
       style={{
         paddingTop:    '100px',
         paddingBottom: '120px',
@@ -54,7 +55,7 @@ export function ContactSection() {
 
       <FadeIn direction="up" delay={0.08}>
         <p
-          className="text-section-label"
+          className="contact-eyebrow text-section-label"
           style={{
             fontWeight:    400,
             lineHeight:    '100%',
@@ -70,7 +71,7 @@ export function ContactSection() {
 
       <FadeIn direction="up" delay={0.16}>
         <h2
-          className="text-section-title"
+          className="contact-title text-section-title"
           style={{
             lineHeight: '100%',
             color:      '#070606',
@@ -83,7 +84,7 @@ export function ContactSection() {
 
       {/* Two-column layout */}
       <div
-        className="flex flex-col lg:flex-row"
+        className="contact-columns flex flex-col lg:flex-row"
         style={{ gap: '48px', alignItems: 'stretch' }}
       >
         {/* Left — info card */}
@@ -99,7 +100,7 @@ export function ContactSection() {
         </div>
 
         {/* Right — contact form */}
-        <div style={{ flex: 1, minWidth: 0, paddingTop: '8px' }}>
+        <div className="contact-form-wrap" style={{ flex: 1, minWidth: 0, paddingTop: '8px' }}>
           <ContactForm fields={form.fields} submit={form.submit} />
         </div>
       </div>

@@ -31,6 +31,7 @@ import { Link, useLocation } from "react-router-dom";
 import { siteConfig } from "@/config/site.config";
 import { resolveSectionLink } from "@/lib/navigation";
 import trusLogo from "@/assets/logo.svg";
+import "@/styles/footer.css";
 
 // Shared style tokens
 
@@ -72,7 +73,7 @@ function FooterLink({
   to?: string | null;
 }) {
   const sharedProps = {
-    className: "group relative inline-block",
+    className: "footer-text group relative inline-block",
     style: {
       ...bodyStyle,
       color: FOOTER_LINK_COLOR,
@@ -120,7 +121,7 @@ export function FooterSection() {
   return (
     <footer id="footer" style={{ background: "#000000" }}>
       <div
-        className="mx-auto w-full max-w-330 px-5 relative"
+        className="footer-inner mx-auto w-full max-w-330 px-5 relative"
         style={{ paddingTop: "60px", paddingBottom: "60px" }}
       >
         {/* Mobile (< lg): 1 column, stacked (logo block → columns block).
@@ -132,6 +133,7 @@ export function FooterSection() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-16">
           {/* Left: logo + tagline + social icons */}
           <div
+            className="footer-brand"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -139,6 +141,7 @@ export function FooterSection() {
             }}
           >
             <img
+              className="footer-logo"
               src={trusLogo}
               alt={siteConfig.name}
               width={134}
@@ -146,6 +149,7 @@ export function FooterSection() {
               style={{ width: "134px", height: "53px", marginBottom: "20px" }}
             />
             <p
+              className="footer-text footer-tagline"
               style={{
                 ...bodyStyle,
                 color: FOOTER_LINK_COLOR,
@@ -155,7 +159,7 @@ export function FooterSection() {
             >
               {footer.tagline}
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div className="footer-social" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               {footer.socials.map((social) => {
                 const icon = (
                   <img
@@ -183,11 +187,12 @@ export function FooterSection() {
           {/* Right: Services | Company | Contact Us — mobile stacks,
               sm and up: a row that hugs its own content width (~616px in
               Figma) with a tight, fixed gap between the 3 columns. */}
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
+          <div className="footer-columns flex flex-col sm:flex-row gap-8 sm:gap-16">
             {/* Services */}
             <div>
-              <h4 style={titleStyle}>{footer.firstColumn}</h4>
+              <h4 className="footer-title" style={titleStyle}>{footer.firstColumn}</h4>
               <ul
+                className="footer-list"
                 style={{
                   listStyle: "none",
                   padding: 0,
@@ -211,8 +216,9 @@ export function FooterSection() {
 
             {/* Company */}
             <div>
-              <h4 style={titleStyle}>{footer.secondColumn}</h4>
+              <h4 className="footer-title" style={titleStyle}>{footer.secondColumn}</h4>
               <ul
+                className="footer-list"
                 style={{
                   listStyle: "none",
                   padding: 0,
@@ -235,11 +241,12 @@ export function FooterSection() {
             </div>
 
             {/* Contact Us */}
-            <div>
-              <h4 style={{ ...titleStyle, marginBottom: 20 }}>
+            <div className="footer-col-contact">
+              <h4 className="footer-title" style={{ ...titleStyle, marginBottom: 20 }}>
                 {footer.thirdColumn}
               </h4>
               <div
+                className="footer-list"
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -255,6 +262,7 @@ export function FooterSection() {
                   label={footer.contact.phone}
                 />
                 <p
+                  className="footer-text footer-address"
                   style={{
                     ...bodyStyle,
                     color: FOOTER_LINK_COLOR,
@@ -272,6 +280,7 @@ export function FooterSection() {
 
         {/* 2. Divider */}
         <hr
+          className="footer-divider"
           style={{
             border: "none",
             borderTop: "1px solid rgba(255,255,255,0.3)",
@@ -281,6 +290,7 @@ export function FooterSection() {
 
         {/* 3. Bottom bar */}
         <div
+          className="footer-bottom"
           style={{
             display: "flex",
             alignItems: "center",
@@ -291,6 +301,7 @@ export function FooterSection() {
         >
           {/* Copyright — year is dynamic, never hardcoded */}
           <p
+            className="footer-text"
             style={{
               ...bodyStyle,
               color: FOOTER_LINK_COLOR,
@@ -305,6 +316,7 @@ export function FooterSection() {
 
           {/* Privacy Policy • Terms & Conditions • Powered by Trust AI */}
           <div
+            className="footer-bottom-links"
             style={{
               display: "flex",
               alignItems: "center",
@@ -319,6 +331,7 @@ export function FooterSection() {
               >
                 {i > 0 && (
                   <span
+                    className="footer-text"
                     style={{ ...bodyStyle, color: FOOTER_LINK_COLOR }}
                     aria-hidden="true"
                   >

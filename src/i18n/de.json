@@ -54,7 +54,7 @@
       "Eine Auswahl unserer aktuellen Arbeiten – Kreativität,",
       "Leistung und Liebe zum Detail."
     ],
-    "seeMore": "Mehr anzeigen"
+    "moreProjects": "Weitere Projekte"
   },
 
   "whyUs": {
@@ -161,9 +161,9 @@
   },
 
   "services": {
-    "eyebrow": "LEISTUNGEN",
-    "heading": "UNSERE LEISTUNGEN",
-    "description": "Wir gestalten und entwickeln moderne Websites, die Unternehmen wachsen lassen und hervorstechen.",
+    "eyebrow": "WAS WIR TUN",
+    "heading": "Unsere Kernleistungen",
+    "description": "Ganzheitliche digitale Lösungen – von individueller Webentwicklung und Enterprise-Hosting über SEO und KI-Automatisierung bis zu performanceorientiertem Marketing – entwickelt, damit Ihr Unternehmen wächst.",
     "items": [
       {
         "title": "SEO",
@@ -213,6 +213,7 @@
     "heading": "Vorlagenkategorien",
     "description": "Entdecken Sie professionell gestaltete Vorlagen für moderne Unternehmen, Start-ups und digitale Produkte.",
     "seeMore": "Mehr anzeigen",
+    "moreTemplates": "Weitere Vorlagen",
     "RightWord": "Designs",
     "LeftWord": "Vorlagen",
     "tagline": ["IDEEN ERKUNDEN DURCH", "TÄGLICHE DESIGNPRAXIS."],

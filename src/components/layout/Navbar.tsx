@@ -175,7 +175,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
         </div>
 
         <nav
-          className="relative mx-auto flex h-18 max-w-330 items-center justify-between px-5"
+          className="relative mx-auto flex h-21 lg:h-18 max-w-330 items-center justify-between px-5"
           aria-label="Main navigation"
         >
           {/* Logo — same asset as Footer. A plain <a> (not <Link>) so the
@@ -190,7 +190,8 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
               src={trusLogo}
               alt="TruS"
               decoding="async"
-              style={{ height: "32px", width: "auto", display: "block" }}
+              className="h-9 lg:h-8"
+              style={{ width: "auto", display: "block" }}
             />
           </a>
 
@@ -237,16 +238,30 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
             )}
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden relative z-10 flex flex-col gap-1.5 p-2"
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            <HamburgerIcon open={mobileOpen} />
-          </button>
+          {/* Mobile: Log in + hamburger */}
+          <div className="lg:hidden relative z-10 flex items-center gap-2.5 min-[360px]:gap-3.5">
+            {!isAuthenticated && (
+              <GradientButton
+                text={data.cta.label}
+                href={data.cta.href}
+                className="justify-center"
+                style={{
+                  height: 40,
+                  borderRadius: 10,
+                  padding: "0 clamp(12px, 5.6vw, 22px)",
+                }}
+              />
+            )}
+            <button
+              className="flex flex-col gap-1.5 p-2"
+              onClick={() => setMobileOpen((o) => !o)}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              <HamburgerIcon open={mobileOpen} />
+            </button>
+          </div>
         </nav>
       </motion.header>
 

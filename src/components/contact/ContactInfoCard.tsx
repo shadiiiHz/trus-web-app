@@ -135,6 +135,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
 
           {/* Inner card */}
           <div
+            className="contact-card-inner"
             style={{
               position: "relative",
               zIndex: 2,
@@ -151,6 +152,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
           >
             {/* Tagline */}
             <p
+              className="contact-tagline"
               style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: 400,
@@ -165,6 +167,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
 
             {/* Book a call CTA — tel: href built dynamically from the phone prop */}
             <a
+              className="contact-cta"
               href={telHref}
               style={{
                 display: "inline-flex",
@@ -245,14 +248,16 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
             </a>
 
             {/* Spacer pushes contact info to bottom */}
-            <div style={{ flexGrow: 1, minHeight: "60px" }} />
+            <div className="contact-spacer" style={{ flexGrow: 1, minHeight: "60px" }} />
 
             {/* Contact info rows */}
             <div
+              className="contact-rows"
               style={{ display: "flex", flexDirection: "column", gap: "22px" }}
             >
               <div>
                 <p
+                  className="contact-label"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,
@@ -265,6 +270,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
                   Office
                 </p>
                 <p
+                  className="contact-value"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,
@@ -280,6 +286,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
 
               <div>
                 <p
+                  className="contact-label"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,
@@ -292,6 +299,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
                   Phone
                 </p>
                 <p
+                  className="contact-value"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,
@@ -307,6 +315,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
 
               <div>
                 <p
+                  className="contact-label"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,
@@ -319,6 +328,7 @@ export const ContactInfoCard = forwardRef<HTMLDivElement, ContactInfoCardProps>(
                   Email
                 </p>
                 <p
+                  className="contact-value"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 400,

@@ -47,7 +47,7 @@
       "A selection of our recent work showcasing creativity,",
       "performance, and attention to detail."
     ],
-    "seeMore": "See More"
+    "moreProjects": "More projects"
   },
 
   "whyUs": {
@@ -154,9 +154,9 @@
   },
 
   "services": {
-    "eyebrow": "SERVICES",
-    "heading": "OUR SERVICES",
-    "description": "We design and build modern websites that help businesses grow and stand out.",
+    "eyebrow": "WHAT WE DO",
+    "heading": "Our Core Services",
+    "description": "End-to-end digital solutions including custom web development, enterprise hosting, SEO, AI automation, and performance-driven marketing—all designed to help your business grow.",
     "items": [
       {
         "title": "SEO",
@@ -206,6 +206,7 @@
     "heading": "Template Categories",
     "description": "Explore professionally designed templates built for modern businesses, startups, and digital products.",
     "seeMore": "See More",
+    "moreTemplates": "More templates",
     "RightWord": "Designs",
     "LeftWord": "Template",
     "tagline": ["EXPLORING IDEAS THROUGH", "DAILY DESIGN PRACTICE."],

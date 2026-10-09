@@ -3,6 +3,8 @@ import { motion, useMotionValue, useTransform } from 'framer-motion'
 import type { MotionValue } from 'framer-motion'
 import { siteConfig } from '@/config/site.config'
 import { TestimonialCard } from '@/components/testimonials/TestimonialCard'
+import { TestimonialsMobile } from '@/components/testimonials/TestimonialsMobile'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 // Card layout config (desktop)
 // Composition: UL | UR | Center | LL | LR
@@ -148,7 +150,13 @@ function MobileStack({ items, scrollYMV, containerRef }: MobileStackProps) {
 }
 
 // Main section
+/** Below `lg` the pinned card choreography is replaced by a swipeable carousel. */
 export function TestimonialsSection() {
+  const isWide = useMediaQuery('(min-width: 1024px)')
+  return isWide ? <TestimonialsDesktop /> : <TestimonialsMobile />
+}
+
+function TestimonialsDesktop() {
   const { eyebrow, heading, subtitle, items } = siteConfig.testimonials
 
   const containerRef  = useRef<HTMLDivElement>(null)

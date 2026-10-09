@@ -47,7 +47,7 @@
       "Yaratıcılığımızı, performansımızı ve detaylara",
       "verdiğimiz önemi yansıtan son çalışmalarımızdan bir seçki."
     ],
-    "seeMore": "Daha Fazla"
+    "moreProjects": "Daha fazla proje"
   },
 
   "whyUs": {
@@ -154,9 +154,9 @@
   },
 
   "services": {
-    "eyebrow": "HİZMETLER",
-    "heading": "HİZMETLERİMİZ",
-    "description": "İşletmelerin büyümesine ve öne çıkmasına yardımcı olan modern web siteleri tasarlıyor ve geliştiriyoruz.",
+    "eyebrow": "NE YAPIYORUZ",
+    "heading": "Temel Hizmetlerimiz",
+    "description": "Özel web geliştirme, kurumsal barındırma, SEO, yapay zekâ otomasyonu ve performans odaklı pazarlamayı içeren uçtan uca dijital çözümler; hepsi işletmenizin büyümesine yardımcı olmak için tasarlandı.",
     "items": [
       {
         "title": "SEO",
@@ -206,6 +206,7 @@
     "heading": "Şablon Kategorileri",
     "description": "Modern işletmeler, girişimler ve dijital ürünler için profesyonelce tasarlanmış şablonları keşfedin.",
     "seeMore": "Daha Fazla",
+    "moreTemplates": "Daha fazla şablon",
     "RightWord": "Tasarımlar",
     "LeftWord": "Şablon",
     "tagline": ["GÜNLÜK TASARIM PRATİĞİYLE", "FİKİRLERİ KEŞFETMEK."],

@@ -5,6 +5,8 @@ import CategoryTabs from "../templates/CategoryTabs";
 import type { Category } from "../templates/TemplateGridReveal";
 import { useCategoryCrossfade } from "../templates/useCategoryCrossfade";
 import { useCardRevealAnimation } from "../templates/useCardRevealAnimation";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import TemplatesMobile from "../templates/TemplatesMobile";
 import { MAX_CARDS, TABS_ENTER_DELAY_MS } from "../templates/templateGridReveal.constants";
 
 type TemplateSectionProps = {
@@ -13,7 +15,7 @@ type TemplateSectionProps = {
   onReady?: () => void;
 };
 
-function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
+function TemplateDesktop({ onEnter, onLeave, onReady }: TemplateSectionProps) {
   const {
     LeftWord,
     RightWord,
@@ -157,6 +159,16 @@ function TemplateSection({ onEnter, onLeave, onReady }: TemplateSectionProps) {
         revealed={tabsRevealed}
       />
     </>
+  );
+}
+
+/** Below `lg` the pinned 3D ribbon + side rail is replaced by a simple grid. */
+function TemplateSection(props: TemplateSectionProps) {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  return isDesktop ? (
+    <TemplateDesktop {...props} />
+  ) : (
+    <TemplatesMobile onReady={props.onReady} />
   );
 }
 

@@ -5,6 +5,8 @@ interface ProjectCardProps {
   image: string
   /** Project URL — the card links out to the live site */
   link: string
+  /** Fill the parent's width at the card's aspect ratio (mobile carousel). */
+  fluid?: boolean
 }
 
 /**
@@ -20,15 +22,16 @@ interface ProjectCardProps {
  */
 // memo: props are all static strings (no callbacks/MotionValues), so the card
 // skips re-render during the parent's scroll-driven horizontal parallax updates.
-export const ProjectCard = memo(function ProjectCard({ image, link }: ProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({ image, link, fluid = false }: ProjectCardProps) {
   return (
     <a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        width:        '337px',
-        height:       '240px',
+        width:        fluid ? '100%' : '337px',
+        height:       fluid ? 'auto' : '240px',
+        aspectRatio:  fluid ? '337 / 240' : undefined,
         borderRadius: '16px',
         overflow:     'hidden',
         flexShrink:   0,

@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import { AnimatedPortfolioWord } from "@/components/portfolio/AnimatedPortfolioWord";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { PortfolioMobile } from "@/components/portfolio/PortfolioMobile";
 
 // Sparse stars — module-level so they never re-generate on re-render
 const PORT_STARS = Array.from({ length: 28 }, (_, i) => ({
@@ -118,7 +120,13 @@ function useViewportWidth() {
   return vw;
 }
 
+/** Below `lg` the pinned ribbon is replaced by a swipeable carousel. */
 export function PortfolioSection() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  return isDesktop ? <PortfolioDesktop /> : <PortfolioMobile />;
+}
+
+function PortfolioDesktop() {
   // Scroll tracking scoped to THIS container
   // progress 0 = container top at viewport top
   // progress 1 = container bottom at viewport bottom
@@ -335,7 +343,7 @@ export function PortfolioSection() {
 
               {/* See More — top-right, aligned ~141px from section top */}
               <a
-                href={siteConfig.portfolio.seeMore.href}
+                href={siteConfig.portfolio.moreProjects.href}
                 className="font-body font-normal shrink-0"
                 style={{
                   fontSize: "16.35px",
@@ -345,11 +353,13 @@ export function PortfolioSection() {
                     "41px" /* 141px from section top − 100px paddingTop = 41px offset */,
                   textDecoration: "none",
                   transition: "opacity 0.2s",
+                  textDecorationLine: "underline",
+                  textUnderlineOffset: 2
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
-                {siteConfig.portfolio.seeMore.label}
+                {siteConfig.portfolio.moreProjects.label}
               </a>
             </div>
           </div>
