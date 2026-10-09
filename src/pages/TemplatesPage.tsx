@@ -19,9 +19,9 @@ export default function TemplatesPage() {
     <div className="bg-brand-white min-h-screen font-body antialiased">
       <Navbar />
 
-      {/* pt-18 clears the fixed Navbar (h-18) — the banner itself starts
+      {/* pt-21 (mobile) / pt-18 (desktop) clears the fixed Navbar (h-21 / h-18) — the banner itself starts
           right below it, full-bleed edge to edge. */}
-      <div className="pt-18">
+      <div className="pt-21 lg:pt-18">
         <TemplatesBanner />
       </div>
 

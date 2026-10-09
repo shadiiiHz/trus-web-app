@@ -29,8 +29,33 @@ export function TemplatesBanner() {
       // the shadow and hides it completely.
       className="relative z-10 w-full"
     >
+      {/* Mobile / tablet (< lg): 425px-tall lavender banner — headline +
+          subtitle stacked above the template-stack graphic. */}
       <section
-        className="relative w-full overflow-hidden"
+        className="relative flex w-full flex-col overflow-hidden lg:hidden"
+        style={{
+          height: 425,
+          background:
+            "linear-gradient(180deg, #E7E2F6 0%, #F1EFFA 55%, #FAFAFA 100%)",
+        }}
+      >
+        <div className="mx-auto w-full max-w-330 px-5 pt-10">
+          <h1 className="m-0 max-w-[300px] font-hero text-[30px] leading-[1.12] font-bold tracking-[-0.02em] text-gallery-ink">
+            {headline}
+          </h1>
+          <p className="m-0 mt-3 max-w-[350px] font-body text-[16px] leading-[1.5] font-normal text-gallery-muted">
+            {subtitle}
+          </p>
+        </div>
+        <img
+          src={BANNER_GRAPHIC_SRC}
+          alt=""
+          className="mx-auto mt-auto mb-5 h-auto w-[240px] max-w-[70%] object-contain"
+        />
+      </section>
+
+      <section
+        className="relative hidden w-full overflow-hidden lg:block"
         style={{
           height: BANNER_HEIGHT,
           background: "#ffffff",

@@ -39,20 +39,20 @@ export default function TemplateGalleryCard({
         />
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-2">
+      <div className="mt-3.5 flex items-center justify-between gap-2 lg:mt-3">
         <span className="font-hero text-body font-semibold text-gallery-ink">
           {name}
         </span>
         <span
           aria-hidden="true"
-          className={`h-2.5 w-2.5 shrink-0 rounded-full ${
+          className={`h-3 w-3 shrink-0 lg:h-2.5 lg:w-2.5 rounded-full ${
             isDark ? "bg-gallery-ink" : "bg-white"
           }`}
           style={isDark ? undefined : { border: "0.5px solid rgba(0, 0, 0, 1)" }}
         />
       </div>
 
-      <div className="mt-1 flex items-center justify-between gap-2 font-body text-gallery-muted">
+      <div className="mt-0.5 flex items-center justify-between lg:mt-1 gap-2 font-body text-gallery-muted">
         <span className="text-body-sm font-semibold">{categoryLabel}</span>
         <span className="text-label font-normal">{layoutLabel}</span>
       </div>

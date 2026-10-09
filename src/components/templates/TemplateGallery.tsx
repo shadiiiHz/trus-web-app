@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { siteConfig } from "@/config/site.config";
 import TemplatesFilterSidebar from "@/components/templates/TemplatesFilterSidebar";
+import TemplatesFilterMobile from "@/components/templates/TemplatesFilterMobile";
 import TemplateGalleryCard from "@/components/templates/TemplateGalleryCard";
 
 /** Fixed Navbar height (h-18, see Navbar.tsx) + breathing room above the sidebar while it's pinned. */
@@ -13,6 +15,7 @@ type LayoutFilter = "One Page" | "Multi Page";
 export default function TemplatesGallery() {
   const { categories, templates } = siteConfig.templateCategories;
   const gallery = siteConfig.templatesPage.gallery;
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Lets the Home page's per-category link (see TemplateGridReveal) land
   // here with that category already selected, via "/templates?category=…".
@@ -113,13 +116,39 @@ export default function TemplatesGallery() {
   };
 
   return (
-    <section className="bg-gallery-bg py-12">
+    <section className="bg-[#FAFAFA] pt-6 pb-12 lg:bg-gallery-bg lg:py-12">
       {/* max-w-330 + px-5 together (not split across section/div) mirrors the
           Navbar's own `nav` element exactly, so this row's left/right content
           edges land on the same x-coordinates as the logo and the Login
           button — critical for the results grid's rightmost card to line up
           with the Login button's right edge below. */}
-      <div className="mx-auto flex max-w-330 items-start gap-5 px-5">
+      <div className="mx-auto flex max-w-330 flex-col items-stretch gap-0 px-5 lg:flex-row lg:items-start lg:gap-5">
+        {/* Mobile / tablet: collapsible Categories card above the results. */}
+        <div className="lg:hidden">
+          <TemplatesFilterMobile
+            search={search}
+            onSearchChange={setSearch}
+            categories={categoryOptions}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+            styleCounts={styleCounts}
+            activeStyles={activeStyles}
+            onToggleStyle={(style) => {
+              setActiveStyles((prev) => toggleInSet(prev, style));
+              scrollToTop();
+            }}
+            layoutCounts={layoutCounts}
+            activeLayouts={activeLayouts}
+            onToggleLayout={(layout) => {
+              setActiveLayouts((prev) => toggleInSet(prev, layout));
+              scrollToTop();
+            }}
+            onClearAll={handleClearAll}
+            labels={gallery}
+          />
+        </div>
+
+        <div className="hidden lg:block">
         <TemplatesFilterSidebar
           search={search}
           onSearchChange={setSearch}
@@ -142,20 +171,21 @@ export default function TemplatesGallery() {
           stickyTop={SIDEBAR_STICKY_TOP}
           labels={gallery}
         />
+        </div>
 
         <div className="min-w-0 flex-1">
-          <p className="mb-5 font-body text-body text-gallery-muted">
+          <p className="mt-6 mb-5 font-body text-body text-gallery-muted lg:mt-0">
             {gallery.resultsFound.replace("{count}", String(results.length))}
           </p>
 
           {results.length > 0 ? (
             <div
-              className="grid gap-x-5 gap-y-8"
+              className="grid gap-x-5 gap-y-6 lg:gap-y-8"
               // Fluid columns (not the old fixed 305px) so the 3 cards always
               // stretch to fill this column's full width — that's what makes
               // the rightmost card's right edge land exactly on the Login
               // button's right edge above (see the container comment above).
-              style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
+              style={{ gridTemplateColumns: `repeat(${isDesktop ? 3 : 2}, minmax(0, 1fr))` }}
             >
               {results.map((tpl) => (
                 <TemplateGalleryCard

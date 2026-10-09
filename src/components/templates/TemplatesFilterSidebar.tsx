@@ -4,7 +4,7 @@ import { CATEGORY_ICONS } from "@/components/templates/categoryIcons";
 const PURPLE = "var(--color-gallery-purple)";
 
 /** Search icon, per Figma spec — the lucide "Search" icon's geometry doesn't match. */
-function SearchIcon({ className }: { className?: string }) {
+export function SearchIcon({ className }: { className?: string }) {
   return (
     <svg
       width="16"
@@ -25,7 +25,7 @@ function SearchIcon({ className }: { className?: string }) {
 }
 
 /** Trash icon, per Figma spec — the lucide "Trash2" icon's geometry doesn't match. */
-function TrashIcon({ className }: { className?: string }) {
+export function TrashIcon({ className }: { className?: string }) {
   return (
     <svg
       width="12"
@@ -62,7 +62,7 @@ export interface TemplatesGalleryLabels {
   layoutOptions: { onePage: string; multiPage: string };
 }
 
-interface TemplatesFilterSidebarProps {
+export interface TemplatesFilterSidebarProps {
   search: string;
   onSearchChange: (value: string) => void;
   categories: CategoryFilterItem[];
