@@ -9,27 +9,6 @@ import { useChangePassword } from "@/hooks/auth/useAuthMutations";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/lib/toast";
 
-function BackIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15.8327 10H4.16602M9.99935 4.16669L4.16602 10L9.99935 15.8334"
-        stroke="var(--color-auth-icon)"
-        stroke-width="1.66667"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  );
-}
-
 function RequirementIcon({ met }: { met: boolean }) {
   return (
     <svg
@@ -97,7 +76,7 @@ const iconClass =
   "pointer-events-none absolute left-4 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-auth-border bg-white pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-[41px] lg:h-auto w-full rounded-md border border-auth-border bg-white pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -223,12 +202,13 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
       <div>
         <label
           htmlFor={currentPasswordId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
+          className="mb-1.5 block text-body-sm font-medium text-auth-text lg:mb-2"
         >
           {copy.currentPasswordLabel}
           <RequiredMark />
         </label>
         <div className={fieldWrapClass}>
+          <PasswordIcon className={`${iconClass} lg:hidden`} />
           <input
             id={currentPasswordId}
             name="currentPassword"
@@ -245,7 +225,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
               color: showCurrentPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
               caretColor: "var(--color-auth-placeholder)",
             }}
-            className={`${inputBaseClass} pl-4 ${
+            className={`${inputBaseClass} pl-11 lg:pl-4 ${
               errors.currentPassword ? "border-red-400" : "border-auth-border"
             }`}
           />
@@ -273,12 +253,13 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
       <div>
         <label
           htmlFor={newPasswordId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
+          className="mb-1.5 block text-body-sm font-medium text-auth-text lg:mb-2"
         >
           {copy.newPasswordLabel}
           <RequiredMark />
         </label>
         <div className={fieldWrapClass}>
+          <PasswordIcon className={`${iconClass} lg:hidden`} />
           <input
             id={newPasswordId}
             name="newPassword"
@@ -295,7 +276,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
               color: showNewPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
               caretColor: "var(--color-auth-placeholder)",
             }}
-            className={`${inputBaseClass} pl-4 ${
+            className={`${inputBaseClass} pl-11 lg:pl-4 ${
               errors.newPassword ? "border-red-400" : "border-auth-border"
             }`}
           />
@@ -315,7 +296,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
             {copy.errors[errors.newPassword]}
           </p>
         )}
-        <ul className="mt-2.5 flex flex-col gap-1.5">
+        <ul className="mt-2 flex flex-col gap-1.5 lg:mt-2.5">
           {passwordRequirements.map(({ key, test }) => {
             const met = test(newPassword);
             return (
@@ -335,7 +316,7 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
       <div>
         <label
           htmlFor={confirmPasswordId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
+          className="mb-1.5 block text-body-sm font-medium text-auth-text lg:mb-2"
         >
           {copy.confirmPasswordLabel}
           <RequiredMark />
@@ -387,17 +368,16 @@ export function ChangePasswordForm({ copy }: ChangePasswordFormProps) {
         variant="primary"
         loading={status === "submitting"}
         disabled={status === "submitting"}
-        className="mt-1 w-full rounded-md py-3.5 disabled:cursor-not-allowed disabled:opacity-60 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+        className="h-[38px] w-full rounded-md !py-0 lg:mt-1 lg:h-auto lg:!py-3.5 disabled:cursor-not-allowed disabled:opacity-60 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
         {copy.submit}
       </Button>
 
       <Link
-        to="/login"
+        to="/"
         className="inline-flex items-center justify-center gap-1 text-center text-body-sm font-semibold text-auth-muted"
       >
-        <BackIcon />
-        {copy.backToLogin}
+        {copy.cancel}
       </Link>
     </form>
   );

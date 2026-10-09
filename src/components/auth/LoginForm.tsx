@@ -23,7 +23,7 @@ const iconClass =
   "pointer-events-none absolute left-4 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-auth-border bg-white pl-11 pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-10 lg:h-auto w-full rounded-md border border-auth-border bg-white pl-11 pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -223,7 +223,7 @@ export function LoginForm({ copy }: LoginFormProps) {
       </div>
 
       {/* Remember me / Forgot password */}
-      <div className="flex items-center justify-end">
+      <div className="my-[11px] flex items-center justify-end lg:my-0">
         {/* Remember me — disabled for now
         <label className="flex cursor-pointer items-center gap-2 text-body-sm font-medium font-body text-auth-text select-none">
           <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
@@ -255,7 +255,7 @@ export function LoginForm({ copy }: LoginFormProps) {
         variant="primary"
         loading={status === "submitting"}
         disabled={status === "submitting"}
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 h-[38px] w-full rounded-md !py-0 text-body lg:mt-1 lg:h-auto lg:!py-3.5 font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {copy.submit}
       </Button>

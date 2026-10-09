@@ -434,7 +434,7 @@
       },
       "submit": "Şifreyi Güncelle",
       "success": "Şifre başarıyla güncellendi.",
-      "backToLogin": "Girişe dön",
+      "cancel": "İptal",
       "errors": {
         "currentPasswordRequired": "Lütfen mevcut şifrenizi girin",
         "newPasswordRequired": "Lütfen yeni bir şifre girin",

@@ -453,7 +453,7 @@
       },
       "submit": "Actualizar contraseña",
       "success": "Contraseña actualizada correctamente.",
-      "backToLogin": "Volver a iniciar sesión",
+      "cancel": "Cancelar",
       "errors": {
         "currentPasswordRequired": "Por favor introduce tu contraseña actual",
         "newPasswordRequired": "Por favor introduce una nueva contraseña",

@@ -440,7 +440,7 @@
       },
       "submit": "Обновить пароль",
       "success": "Пароль успешно обновлён.",
-      "backToLogin": "Назад ко входу",
+      "cancel": "Отмена",
       "errors": {
         "currentPasswordRequired": "Пожалуйста, введите текущий пароль",
         "newPasswordRequired": "Пожалуйста, введите новый пароль",

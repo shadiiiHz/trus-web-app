@@ -26,7 +26,7 @@ export function BillingToggle({
     <div
       role="radiogroup"
       aria-label={ariaLabel}
-      className="flex h-10 min-w-[218px] shrink-0 self-start sm:self-auto items-center rounded-lg border border-auth-border-light bg-white p-[3px]"
+      className="flex h-[38px] w-full sm:h-10 sm:w-auto min-w-[218px] shrink-0 self-start sm:self-auto items-center rounded-lg border border-auth-border-light bg-white p-[3px]"
     >
       {periods.map((period) => {
         const active = value === period;

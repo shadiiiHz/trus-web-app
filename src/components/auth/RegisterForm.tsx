@@ -38,7 +38,7 @@ const iconClass =
   "pointer-events-none absolute left-4 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-auth-border bg-white py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-10 lg:h-auto w-full rounded-md border border-auth-border bg-white py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -215,7 +215,7 @@ export function RegisterForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 lg:gap-3">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label
@@ -479,7 +479,7 @@ export function RegisterForm({
       {/* Captcha image display + refresh */}
       <div className="flex items-center gap-3">
         <div
-          className="flex h-16.5 flex-1 select-none items-center justify-center overflow-hidden rounded-xl border border-auth-border bg-white shadow-xs"
+          className="flex h-16 lg:h-16.5 flex-1 select-none items-center justify-center overflow-hidden rounded-xl border border-auth-border bg-white shadow-xs"
           aria-hidden="true"
         >
           {captchaLoading ? (
@@ -548,7 +548,7 @@ export function RegisterForm({
         variant="primary"
         loading={status === "submitting"}
         disabled={status === "submitting" || captchaLoading}
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 h-[38px] w-full rounded-md !py-0 text-body lg:h-auto lg:!py-3.5 font-semibold !bg-auth-primary hover:!bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {copy.submit}
       </Button>

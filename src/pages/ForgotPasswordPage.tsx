@@ -20,14 +20,14 @@ export default function ForgotPasswordPage() {
     <div className="bg-[#FAFAFA] min-h-screen font-body antialiased">
       <Navbar />
 
-      <main className="pt-18" style={{ background: "#F5F5F7" }}>
-        <div className="mx-auto w-full max-w-330 px-5 py-16">
+      <main className="pt-21 bg-[#FAFAFA] lg:pt-18 lg:bg-[#F5F5F7]">
+        <div className="mx-auto w-full max-w-330 px-5 py-8 lg:py-16">
           {/* Same left card + right-form layout as the login page, so the
               two auth screens line up under the navbar identically. The
               form is shorter than the card, so it's vertically centered
               against the card instead of stretching/top-aligning. */}
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-24 lg:pl-[80px]">
-            <FadeIn direction="left" className="lg:w-[414px] lg:shrink-0">
+            <FadeIn direction="left" className="hidden lg:block lg:w-[414px] lg:shrink-0">
               <LoginInfoCard
                 tagline={card.tagline}
                 cta={login.card.cta}
@@ -47,18 +47,22 @@ export default function ForgotPasswordPage() {
               className="lg:flex-1 max-w-[572px]"
             >
               <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
-                <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
+                <h1 className="mb-2 text-[20px] leading-7 font-semibold text-[#171717] lg:text-[24px] lg:leading-normal">
                   {forgotPassword.heading}
                 </h1>
-                <p className="mb-8 text-body font-normal text-[#525252]">
+                <p className="mb-6 text-body leading-6 font-normal text-[#525252] lg:mb-8 lg:leading-normal">
                   {forgotPassword.subtitle}
                 </p>
 
-                <ForgotPasswordForm
-                  copy={forgotPassword}
-                  status={status}
-                  onStatusChange={setStatus}
-                />
+                {/* Mobile: form sits in a bordered white card (Figma);
+                    desktop: bare form, unchanged. */}
+                <div className="rounded-2xl border border-[#E5E5E5] bg-white px-4 py-5 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
+                  <ForgotPasswordForm
+                    copy={forgotPassword}
+                    status={status}
+                    onStatusChange={setStatus}
+                  />
+                </div>
               </div>
             </FadeIn>
           </div>

@@ -444,7 +444,7 @@
       },
       "submit": "Mettre à jour le mot de passe",
       "success": "Mot de passe mis à jour avec succès.",
-      "backToLogin": "Retour à la connexion",
+      "cancel": "Annuler",
       "errors": {
         "currentPasswordRequired": "Veuillez saisir votre mot de passe actuel",
         "newPasswordRequired": "Veuillez saisir un nouveau mot de passe",

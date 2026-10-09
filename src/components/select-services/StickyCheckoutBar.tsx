@@ -47,9 +47,9 @@ export function StickyCheckoutBar({
   };
 
   return (
-    <div className="pointer-events-none sticky bottom-0 z-30 flex justify-end px-5 pb-4 font-body">
+    <div className="pointer-events-none sticky bottom-0 z-30 flex justify-end px-5 pb-4 font-body max-lg:px-0 max-lg:pb-0">
       {/* Floating card pinned to the bottom-right of the viewport. */}
-      <div className="pointer-events-auto relative mt-4 w-full max-w-[420px]">
+      <div className="pointer-events-auto relative mt-4 w-full max-w-[420px] max-lg:max-w-none">
         {/* Pill tab centered on the card's top edge — the visible "open me" affordance. */}
         <div className="pointer-events-none absolute inset-x-0 -top-4 z-10 flex justify-center">
           <button
@@ -80,7 +80,7 @@ export function StickyCheckoutBar({
           </button>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-auth-border-light bg-white/95 shadow-[0_8px_32px_0_rgba(0,0,0,0.14)] backdrop-blur">
+        <div className="overflow-hidden rounded-2xl border border-auth-border-light bg-white/95 shadow-[0_8px_32px_0_rgba(0,0,0,0.14)] backdrop-blur max-lg:rounded-b-none max-lg:rounded-t-[20px] max-lg:border-x-0 max-lg:border-b-0 max-lg:shadow-[0_-8px_24px_0_rgba(0,0,0,0.10)]">
           {/* Animated expand: grid-rows 0fr -> 1fr; inert while collapsed so it can't take focus. */}
           <div
             id={panelId}
@@ -91,22 +91,22 @@ export function StickyCheckoutBar({
               <div
                 className={`max-h-[calc(100vh-12rem)] overflow-y-auto transition-opacity duration-300 ${expanded ? "opacity-100" : "opacity-0"}`}
               >
-                <div className="flex flex-col gap-3 border-b border-auth-divider bg-[#FAFAFA] px-3 pt-6 pb-3">
+                <div className="flex flex-col gap-3 border-b border-auth-divider bg-[#FAFAFA] px-3 pt-6 pb-3 max-lg:gap-6 max-lg:px-5 max-lg:pb-4">
                   {children}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex h-16 items-center justify-between gap-3 px-4 pt-1">
+          <div className="flex h-16 items-center justify-between gap-3 px-4 pt-1 max-lg:h-auto max-lg:px-5 max-lg:pt-4 max-lg:pb-3">
             <button
               type="button"
               onClick={toggle}
               aria-label={label}
               tabIndex={-1}
-              className="flex min-w-0 cursor-pointer flex-col text-left"
+              className="flex min-w-0 cursor-pointer flex-col text-left max-lg:flex-row max-lg:items-baseline max-lg:gap-2"
             >
-              <span className="text-[12px] leading-4 font-medium text-[#525252]">{copy.total}</span>
+              <span className="text-[12px] leading-4 font-medium text-[#525252] max-lg:text-[14px] max-lg:leading-5 max-lg:font-normal">{copy.total}</span>
               <span className="flex items-baseline gap-2">
                 <span className="truncate text-[20px] leading-6 font-semibold text-auth-heading tabular-nums">
                   {formatMoney(total, currency)}
@@ -123,7 +123,7 @@ export function StickyCheckoutBar({
               type="button"
               onClick={onPay}
               disabled={disabled || loading}
-              className="inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-auth-primary px-6 text-[14px] font-semibold text-white shadow-sm transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
+              className="inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-auth-primary px-6 max-lg:h-[38px] max-lg:px-4 text-[14px] font-semibold text-white shadow-sm transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary"
             >
               {loading && <ButtonSpinner size={16} />}
               {copy.payNow}

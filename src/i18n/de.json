@@ -441,7 +441,7 @@
       },
       "submit": "Passwort aktualisieren",
       "success": "Passwort erfolgreich aktualisiert.",
-      "backToLogin": "Zurück zur Anmeldung",
+      "cancel": "Abbrechen",
       "errors": {
         "currentPasswordRequired": "Bitte geben Sie Ihr aktuelles Passwort ein",
         "newPasswordRequired": "Bitte geben Sie ein neues Passwort ein",

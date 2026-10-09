@@ -27,12 +27,12 @@ export default function ChangePasswordPage() {
     <div className="bg-[#FAFAFA] min-h-screen font-body antialiased">
       <Navbar />
 
-      <main className="pt-18" style={{ background: "#F5F5F7" }}>
-        <div className="mx-auto w-full max-w-330 px-5 py-16">
+      <main className="pt-21 bg-[#FAFAFA] lg:pt-18 lg:bg-[#F5F5F7]">
+        <div className="mx-auto w-full max-w-330 px-5 py-8 lg:py-16">
           {/* Same left card + right-form layout as the login/forgot-password
               pages, so every auth screen lines up under the navbar identically. */}
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-24 lg:pl-20">
-            <FadeIn direction="left" className="lg:w-[414px] lg:shrink-0">
+            <FadeIn direction="left" className="hidden lg:block lg:w-[414px] lg:shrink-0">
               <LoginInfoCard
                 tagline={card.tagline}
                 cta={login.card.cta}
@@ -51,11 +51,13 @@ export default function ChangePasswordPage() {
               delay={0.1}
               className="lg:flex-1 max-w-[572px]"
             >
-              <div className="mx-auto lg:mx-0 lg:max-w-none font-body">
-                <h1 className="mb-2 text-[24px] font-semibold text-[#171717]">
+              {/* Mobile: heading + form share one bordered white card (Figma);
+                  desktop: bare, unchanged. */}
+              <div className="mx-auto rounded-2xl border border-[#E5E5E5] bg-white px-4 py-5 lg:mx-0 lg:max-w-none lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 font-body">
+                <h1 className="mb-2 text-[20px] leading-7 font-semibold text-[#171717] lg:text-[24px] lg:leading-normal">
                   {changePassword.heading}
                 </h1>
-                <p className="mb-8 text-body font-normal text-[#525252]">
+                <p className="mb-3.5 text-body leading-6 font-normal text-[#525252] lg:mb-8 lg:leading-normal">
                   {changePassword.subtitle}
                 </p>
 

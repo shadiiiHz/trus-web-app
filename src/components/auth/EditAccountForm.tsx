@@ -143,12 +143,12 @@ const iconClass =
   "pointer-events-none absolute left-3 z-10 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "h-10 w-full rounded-md border border-auth-border bg-white pl-3 pr-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-10 max-sm:h-[38px] w-full rounded-md border border-auth-border bg-white pl-3 pr-4 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 const readOnlyClass = "border-auth-border focus:border-auth-border";
 
 const selectBaseClass =
-  "flex h-10 w-full items-center appearance-none rounded-md border border-auth-border bg-white pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
+  "flex h-10 max-sm:h-[38px] w-full items-center appearance-none rounded-md border border-auth-border bg-white pr-16 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -223,7 +223,7 @@ function Field({
     <div className={className}>
       <label
         htmlFor={id}
-        className="mb-2 block text-body-sm font-medium text-auth-text"
+        className="mb-1 block text-body-sm font-medium text-auth-text sm:mb-2"
       >
         {label}
         {required && <RequiredMark />}
@@ -243,7 +243,7 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-auth-border-light bg-white p-6 sm:p-7 ${className}`}
+      className={`rounded-2xl border border-auth-border-light bg-white px-3 py-4 sm:p-7 ${className}`}
     >
       {children}
     </div>
@@ -257,6 +257,7 @@ function SectionHeader({
   required,
   divider = true,
   className = "",
+  ellipsis = false,
 }: {
   title: string;
   badge?: string;
@@ -264,6 +265,8 @@ function SectionHeader({
   required?: boolean;
   divider?: boolean;
   className?: string;
+  /** Mobile: keep the subtitle on one line, ending in "…" (Figma). */
+  ellipsis?: boolean;
 }) {
   return (
     <div className={`font-body ${divider ? "mb-6" : ""} ${className}`}>
@@ -274,7 +277,11 @@ function SectionHeader({
           <span className="ml-1 font-normal text-auth-heading">{badge}</span>
         )}
       </h2>
-      <p className="mt-1 text-[14px] font-normal leading-snug text-auth-muted">
+      <p
+        className={`mt-1 text-[14px] font-normal leading-snug text-auth-muted ${
+          ellipsis ? "max-sm:truncate" : ""
+        }`}
+      >
         {subtitle}
       </p>
       {divider && <div className="mt-4 h-px bg-auth-divider" />}
@@ -658,7 +665,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5 sm:gap-6">
       {isLoading ? (
         <EditAccountSkeleton />
       ) : (
@@ -667,6 +674,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
             <SectionHeader
               title={copy.business.title}
               subtitle={copy.business.subtitle}
+              ellipsis
+              className="max-sm:!mb-4"
             />
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -725,7 +734,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 error={errors.phone && copy.errors[errors.phone]}
               >
                 <div
-                  className={`flex h-10 items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
+                  className={`flex h-10 max-sm:h-[38px] items-stretch rounded-md border bg-white transition-colors duration-200 focus-within:border-brand-accent ${
                     errors.phone ? "border-red-400" : "border-auth-border"
                   }`}
                 >
@@ -738,8 +747,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       searchable
                       searchPlaceholder={copy.business.phoneSearchPlaceholder}
                       noResultsText={copy.business.phoneNoResults}
-                      className="h-10"
-                      triggerClassName="flex h-10 items-center bg-transparent pl-3 pr-7 text-[16px] text-auth-ink outline-none"
+                      className="h-10 max-sm:h-[38px]"
+                      triggerClassName="flex h-10 max-sm:h-[38px] items-center bg-transparent pl-3 pr-7 text-[16px] text-auth-ink outline-none"
                       panelClassName="right-auto w-[300px]"
                     />
                     <svg
@@ -813,7 +822,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     value={email}
                     readOnly
                     aria-readonly="true"
-                    className={`${inputBaseClass} ${readOnlyClass} pl-9`}
+                    className={`${inputBaseClass} ${readOnlyClass} pl-9 !bg-auth-surface`}
                   />
                 </div>
               </Field>
@@ -904,7 +913,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 id={websiteId}
                 label={copy.business.websiteLabel}
               >
-                <div className="flex h-10 items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
+                <div className="flex h-10 max-sm:h-[38px] items-stretch overflow-hidden rounded-md border border-auth-border bg-white transition-colors duration-200 focus-within:border-brand-accent">
                   <span className="flex select-none items-center border-r border-auth-border px-3 text-[14px] text-auth-placeholder">
                     https://
                   </span>
@@ -981,6 +990,8 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               title={copy.social.title}
               badge={copy.social.optionalBadge}
               subtitle={copy.social.subtitle}
+              ellipsis
+              className="max-sm:!mb-4"
             />
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -1076,7 +1087,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               </Field>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5 sm:mt-6">
               <SectionHeader
                 title={copy.logo.title}
                 subtitle={copy.logo.subtitle}
@@ -1084,7 +1095,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               />
             </div>
 
-            <div className="flex flex-col items-center gap-8 sm:flex-row">
+            <div className="flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
               <img
                 src={logoPreview ?? businessLogoPlaceholder}
                 // Google-hosted images can refuse requests carrying a
@@ -1097,10 +1108,10 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   }
                 }}
                 alt=""
-                className="h-[146px] w-[146px] shrink-0 self-center rounded-full object-cover"
+                className="h-32 w-32 shrink-0 self-center rounded-full object-cover sm:h-[146px] sm:w-[146px]"
               />
 
-              <div className="flex w-full min-w-0 flex-1 flex-col gap-5">
+              <div className="flex w-full min-w-0 flex-1 flex-col gap-4 sm:gap-5">
                 <div
                   role="button"
                   tabIndex={0}
@@ -1121,7 +1132,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     setIsDragging(false);
                     applyLogoFile(e.dataTransfer.files?.[0]);
                   }}
-                  className={`relative flex cursor-pointer items-center justify-center gap-6 rounded-lg border-2 py-5 pl-4 pr-20 text-left transition-colors ${
+                  className={`relative flex cursor-pointer items-center justify-center gap-6 rounded-lg border-2 py-5 pl-4 pr-4 text-left transition-colors max-sm:py-[22px] sm:pr-20 ${
                     isDragging
                       ? "border-brand-accent bg-auth-surface-hover"
                       : errors.logo
@@ -1151,7 +1162,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       {copy.logo.uploadHint}
                     </p>
                   </div>
-                  <div className="absolute -right-3 top-1/2 h-14 w-auto -translate-y-[62%]">
+                  <div className="absolute -right-3 top-1/2 hidden h-14 w-auto -translate-y-[62%] sm:block">
                     <div className="relative h-auto w-auto">
                       <img
                         src={uploadBadge}
@@ -1181,7 +1192,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   </p>
                 )}
 
-                <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-3">
                   <button
                     type="button"
                     onClick={handleGenerateLogo}
@@ -1189,7 +1200,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     // limit), so each click re-asks and shows the error again.
                     disabled={isGeneratingLogo}
                     aria-busy={isGeneratingLogo}
-                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-4 py-2 text-center text-body-sm font-semibold text-auth-text transition-colors hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
+                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-4 py-2 text-center text-body-sm font-semibold text-auth-text transition-colors max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
                   >
                     <span className={`inline-flex items-center justify-center gap-2 transition-opacity duration-200 ${isGeneratingLogo ? "opacity-0" : ""}`}>
                       <img src={generateLogo} alt="" className="h-4 w-auto shrink-0" aria-hidden="true" />
@@ -1204,7 +1215,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-4 py-2 text-center text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
+                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-4 py-2 max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body text-center text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
                   >
                     <img
                       src={uploadLogo}
@@ -1225,7 +1236,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="rounded-md text-body-sm border border-auth-border bg-white px-4 py-2 font-semibold text-auth-text transition-colors hover:border-auth-icon"
+          className="rounded-md text-body-sm border border-auth-border bg-white px-4 py-2 font-semibold text-auth-text transition-colors max-sm:h-[44px] max-sm:flex-1 max-sm:py-0 max-sm:text-body hover:border-auth-icon"
         >
           {copy.cancel}
         </button>
@@ -1234,7 +1245,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
           variant="primary"
           loading={status === "submitting"}
           disabled={status === "submitting" || isLoading || isGeneratingLogo}
-          className="rounded-md disabled:cursor-not-allowed disabled:opacity-60 !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+          className="rounded-md max-sm:h-[44px] max-sm:flex-1 max-sm:!py-0 max-sm:!text-body disabled:cursor-not-allowed disabled:opacity-60 !px-4 !py-2 text-body-sm font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
         >
           {copy.submit}
         </Button>

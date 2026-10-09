@@ -287,8 +287,8 @@ export default function SelectServicesPage() {
     <div className="min-h-screen bg-[#FAFAFA] font-body antialiased">
       <Navbar />
 
-      <main className="bg-white pt-18">
-        <div className="mx-auto w-full max-w-[1380px] px-5 pt-8 pb-8">
+      <main className="bg-[#FAFAFA] pt-21 lg:bg-white lg:pt-18">
+        <div className="mx-auto w-full max-w-[1380px] px-4 pt-6 pb-8 sm:px-5 sm:pt-8">
           {!isReady && (
             <div className="mb-8">
               <AccountLockedNotice copy={copy.locked} href="/edit-account" />
@@ -301,7 +301,7 @@ export default function SelectServicesPage() {
                 {copy.heading}
               </h1>
               {!isReady && (
-                <p className="mt-2 text-body font-body font-semibold text-[#DC2626]">
+                <p className="mt-1.5 text-[15px] leading-[23px] font-body font-medium text-[#DC2626] sm:mt-2 sm:text-body sm:leading-normal sm:font-semibold">
                   {copy.notice}
                 </p>
               )}
@@ -316,7 +316,7 @@ export default function SelectServicesPage() {
             />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-4.5 sm:mt-8">
             <ServicesTable
               services={services}
               currency={currency}

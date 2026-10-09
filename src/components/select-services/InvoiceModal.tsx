@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { FileText, X } from "lucide-react";
@@ -116,14 +117,14 @@ function ServiceBadgeIcon({ src }: { src: string | null }) {
       <img
         src={src}
         alt=""
-        className="h-10 w-10 shrink-0 rounded-lg object-cover"
+        className="h-10 w-10 shrink-0 rounded-lg object-cover max-sm:h-7 max-sm:w-7"
       />
     );
   }
   return (
     <span
       aria-hidden="true"
-      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-auth-border-light bg-auth-surface"
+      className="flex h-8 w-8 max-sm:h-7 max-sm:w-7 shrink-0 items-center justify-center rounded-md border border-auth-border-light bg-auth-surface"
     />
   );
 }
@@ -165,14 +166,14 @@ function SectionHeader({
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="min-w-0">
-        <h3 className="text-[16px] leading-6 font-semibold text-auth-heading">
+        <h3 className="text-[16px] leading-6 font-semibold text-auth-heading max-sm:text-[12px] max-sm:leading-4">
           {title}
         </h3>
-        <p className="mt-0.5 text-[14px] leading-5 text-auth-muted">
+        <p className="mt-0.5 text-[14px] leading-5 text-auth-muted max-sm:text-[10px] max-sm:leading-[14px]">
           {subtitle}
         </p>
       </div>
-      <span className="inline-flex h-[22px] shrink-0 items-center rounded-[999px] border border-auth-border-light bg-auth-page-bg px-2 text-[12px] text-auth-text font-medium">
+      <span className="inline-flex h-[22px] shrink-0 items-center rounded-[999px] border border-auth-border-light bg-auth-page-bg px-2 text-[12px] text-auth-text font-medium max-sm:h-[18px] max-sm:px-1.5 max-sm:text-[9px]">
         {count}
       </span>
     </div>
@@ -199,59 +200,60 @@ function InvoiceRow({
   /** Set on the service's latest invoice (per its Billing column): shows the "current" pill and border. */
   currentLabel?: string;
 }) {
+  const isMobile = useMediaQuery("(max-width: 639px)");
   return (
     <label
-      className={`flex cursor-pointer items-center rounded-md border pl-3 transition-colors duration-150 ${
+      className={`flex cursor-pointer items-center rounded-md border pl-3 transition-colors duration-150 max-sm:grid max-sm:h-auto max-sm:grid-cols-[auto_minmax(0,1fr)_auto] max-sm:gap-x-2 max-sm:gap-y-2.5 max-sm:pt-2.5 max-sm:pr-3 max-sm:pb-3 max-sm:pl-2.5 ${
         tall ? "h-[70px]" : "h-16"
       } ${
         selected
           ? "border-auth-primary bg-auth-surface-hover"
           : currentLabel
-            ? "border-auth-primary bg-white hover:bg-auth-page-bg"
+            ? "border-auth-primary bg-white hover:bg-auth-page-bg max-sm:border-auth-border-light"
             : "border-auth-border-light bg-white hover:bg-auth-page-bg"
       }`}
     >
       <Checkbox
         checked={selected}
         onChange={onToggle}
-        size={20}
+        size={isMobile ? 16 : 20}
         aria-label={label}
       />
-      <div className={`ml-4 min-w-0 flex-1 ${gridClass}`}>
-        <div className="flex min-w-0 items-center gap-2">
+      <div className={`ml-4 min-w-0 flex-1 max-sm:contents ${gridClass}`}>
+        <div className="flex min-w-0 items-center gap-2 max-sm:col-span-2 max-sm:col-start-2 max-sm:row-start-1">
           <span
             aria-hidden="true"
-            className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-md border transition-colors duration-150 ${
+            className={`flex h-[34px] w-[34px] max-sm:h-7 max-sm:w-7 shrink-0 items-center justify-center rounded-md border transition-colors duration-150 ${
               selected
                 ? "border-auth-primary bg-auth-primary text-white"
                 : "border-auth-border-light bg-auth-surface-hover text-auth-primary"
             }`}
           >
-            <FileText size={18} strokeWidth={2} />
+            <FileText size={18} strokeWidth={2} className="max-sm:h-4 max-sm:w-4" />
           </span>
           <span className="min-w-0">
             <span className="flex min-w-0 items-center gap-2">
-              <span className="truncate text-[16px] leading-6 font-semibold text-auth-heading">
+              <span className="truncate text-[16px] leading-6 font-semibold text-auth-heading max-sm:text-[12px] max-sm:leading-4">
                 {label}
               </span>
               {currentLabel && (
-                <span className="inline-flex h-[22px] shrink-0 items-center rounded-[6px] bg-[#F5F3FF] px-2 text-[12px] font-medium text-[#6E43C1]">
+                <span className="inline-flex h-[22px] shrink-0 items-center rounded-[6px] bg-[#F5F3FF] px-2 text-[12px] font-medium text-[#6E43C1] max-sm:h-[18px] max-sm:px-1.5 max-sm:text-[9px]">
                   {currentLabel}
                 </span>
               )}
             </span>
-            <span className="block truncate text-[14px] leading-5 text-auth-placeholder">
+            <span className="block truncate text-[14px] leading-5 text-auth-placeholder max-sm:text-[10px] max-sm:leading-[14px]">
               {invoice.number}
             </span>
           </span>
         </div>
-        <div className="min-w-0 pr-2 text-[14px] leading-5">
+        <div className="min-w-0 pr-2 text-[14px] leading-5 max-sm:col-span-2 max-sm:col-start-1 max-sm:row-start-2 max-sm:pr-0 max-sm:text-[10px] max-sm:leading-[14px]">
           <p className="truncate font-medium text-auth-heading">
             {describePeriod(invoice, locale)}
           </p>
-          <p className="truncate text-auth-muted">{periodLabel}</p>
+          <p className="truncate text-auth-muted max-sm:text-[9px] max-sm:leading-3">{periodLabel}</p>
         </div>
-        <p className="text-[14px] leading-5 font-medium text-auth-heading tabular-nums">
+        <p className="text-[14px] leading-5 font-medium text-auth-heading tabular-nums max-sm:col-start-3 max-sm:row-start-2 max-sm:text-[11px] max-sm:font-semibold">
           {formatAmount(invoice.amount)}
         </p>
       </div>
@@ -340,14 +342,14 @@ export function InvoiceModal({
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.2 }}
-        className="flex max-h-full w-full max-w-[800px] flex-col overflow-hidden rounded-[12px] bg-white font-body shadow-xl"
+        className="flex max-h-full w-full max-w-[800px] flex-col overflow-hidden rounded-[12px] bg-white font-body shadow-xl max-sm:max-w-[295px] max-sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="min-h-0 flex-1 overflow-y-auto px-6 pt-5 pb-6">
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 pt-5 pb-6 max-sm:px-3.5 max-sm:pt-3.5 max-sm:pb-0">
           <div className="flex h-7 items-center justify-between gap-4">
             <h2
               id="invoice-modal-title"
-              className="text-[20px] leading-7 font-semibold text-auth-heading"
+              className="text-[20px] leading-7 font-semibold text-auth-heading max-sm:text-[16px]"
             >
               {copy.title}
             </h2>
@@ -361,29 +363,29 @@ export function InvoiceModal({
             </button>
           </div>
 
-          <div className="mt-5 flex items-center gap-3 rounded-lg border border-auth-border-light bg-auth-page-bg px-[11px] py-[11px]">
+          <div className="mt-5 flex items-center gap-3 rounded-lg border border-auth-border-light bg-auth-page-bg px-[11px] py-[11px] max-sm:mt-3 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2.5">
             <ServiceBadgeIcon src={service.icon} />
             <div className="min-w-0 flex-1">
-              <p className="text-[12px] font-medium leading-4 text-auth-placeholder uppercase">
+              <p className="text-[12px] font-medium leading-4 text-auth-placeholder uppercase max-sm:text-[9px] max-sm:leading-3">
                 {copy.serviceLabel}
               </p>
-              <p className="mt-1 truncate text-[16px] leading-6 font-semibold text-auth-heading">
+              <p className="mt-1 truncate text-[16px] leading-6 font-semibold text-auth-heading max-sm:mt-0 max-sm:text-[10px] max-sm:leading-4">
                 {service.name}
               </p>
             </div>
             {service.purchased ? (
-              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647]">
+              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#ABEFC6] bg-[#ECFDF3] px-[11px] text-[12px] font-medium text-[#067647] max-sm:h-[18px] max-sm:gap-1 max-sm:px-1.5 max-sm:text-[9px]">
                 <span
                   aria-hidden="true"
-                  className="h-2 w-2 rounded-full bg-[#17B26A]"
+                  className="h-2 w-2 rounded-full bg-[#17B26A] max-sm:h-1.5 max-sm:w-1.5"
                 />
                 {purchasedLabel}
               </span>
             ) : (
-              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#D4D4D4] bg-white px-[11px] text-[12px] font-medium text-[#404040]">
+              <span className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-[999px] border border-[#D4D4D4] bg-white px-[11px] text-[12px] font-medium text-[#404040] max-sm:h-[18px] max-sm:gap-1 max-sm:px-1.5 max-sm:text-[9px]">
                 <span
                   aria-hidden="true"
-                  className="h-2 w-2 rounded-full bg-[#737373]"
+                  className="h-2 w-2 rounded-full bg-[#737373] max-sm:h-1.5 max-sm:w-1.5"
                 />
                 {notPurchasedLabel}
               </span>
@@ -409,13 +411,13 @@ export function InvoiceModal({
           )}
 
           {monthly.length > 0 && (
-            <section className="mt-5">
+            <section className="mt-5 max-sm:mt-3.5">
               <SectionHeader
                 title={copy.monthlyTitle}
                 subtitle={fill(copy.monthlySubtitle, { count: monthly.length })}
                 count={countLabel(copy, monthly.length)}
               />
-              <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3">
+              <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3 max-sm:hidden">
                 <Checkbox
                   checked={allSelected}
                   onChange={toggleAll}
@@ -430,7 +432,7 @@ export function InvoiceModal({
                   <span>{copy.colAmount}</span>
                 </div>
               </div>
-              <ul className="mt-2 flex flex-col gap-2">
+              <ul className="mt-2 flex flex-col gap-2 max-sm:mt-3.5">
                 {monthly.map((invoice) => (
                   <li key={invoice.id}>
                     <InvoiceRow
@@ -451,14 +453,14 @@ export function InvoiceModal({
           )}
 
           {annual.length > 0 && (
-            <section className={monthly.length > 0 ? "mt-6" : "mt-5"}>
+            <section className={`${monthly.length > 0 ? "mt-6" : "mt-5"} max-sm:mt-3.5`}>
               <SectionHeader
                 title={copy.annualTitle}
                 subtitle={copy.annualSubtitle}
                 count={countLabel(copy, annual.length)}
               />
               {monthly.length === 0 && (
-                <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3">
+                <div className="mt-2 flex h-[38px] items-center rounded-md border border-auth-border-light bg-auth-page-bg pl-3 max-sm:hidden">
                   <Checkbox
                     checked={allSelected}
                     onChange={toggleAll}
@@ -474,7 +476,7 @@ export function InvoiceModal({
                   </div>
                 </div>
               )}
-              <ul className="mt-2 flex flex-col gap-2">
+              <ul className="mt-2 flex flex-col gap-2 max-sm:mt-3.5">
                 {annual.map((invoice) => (
                   <li key={invoice.id}>
                     <InvoiceRow
@@ -496,11 +498,11 @@ export function InvoiceModal({
           )}
         </div>
 
-        <div className="flex shrink-0 items-center justify-end gap-3 border-t border-auth-border-light bg-auth-page-bg px-6 py-4">
+        <div className="flex shrink-0 items-center justify-end gap-3 border-t border-auth-border-light bg-auth-page-bg px-6 py-4 max-sm:gap-2.5 max-sm:border-t-0 max-sm:bg-white max-sm:px-3.5 max-sm:py-3.5">
           <button
             type="button"
             onClick={onClose}
-            className="h-[40px] cursor-pointer rounded-md border border-auth-border bg-white px-3.5 text-[14px] font-semibold text-auth-text transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            className="h-[40px] cursor-pointer rounded-md border border-auth-border bg-white px-3.5 text-[14px] max-sm:h-[30px] max-sm:flex-1 max-sm:text-[11px] font-semibold text-auth-text transition-colors hover:bg-auth-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
           >
             {copy.cancel}
           </button>
@@ -509,7 +511,7 @@ export function InvoiceModal({
             onClick={handleDownload}
             disabled={selected.size === 0 || downloading}
             aria-busy={downloading || undefined}
-            className={`${downloading ? "btn-loading" : ""} relative inline-flex h-[40px] cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-3.5 text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50`}
+            className={`${downloading ? "btn-loading" : ""} relative inline-flex h-[40px] cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-3.5 text-[14px] max-sm:h-[30px] max-sm:flex-1 max-sm:justify-center max-sm:text-[11px] font-semibold text-white transition-colors hover:bg-auth-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent disabled:cursor-not-allowed disabled:opacity-50`}
           >
             <span
               className={`inline-flex items-center gap-2 transition-opacity duration-200 ${downloading ? "opacity-0" : ""}`}

@@ -434,7 +434,7 @@
       },
       "submit": "Update Password",
       "success": "Password updated successfully.",
-      "backToLogin": "Back to log in",
+      "cancel": "Cancel",
       "errors": {
         "currentPasswordRequired": "Please enter your current password",
         "newPasswordRequired": "Please enter a new password",

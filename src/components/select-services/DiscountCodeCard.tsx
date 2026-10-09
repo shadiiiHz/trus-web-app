@@ -25,7 +25,7 @@ const FIELD_ERRORS: ErrorKey[] = ["codeRequired", "codeInvalid", "codeNotApplica
 const labelClass = "sr-only";
 
 const inputClass =
-  "h-9 min-w-0 flex-1 rounded-md border bg-white px-3 text-[14px] font-body text-auth-ink outline-none shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-9 min-w-0 flex-1 rounded-md border bg-white px-3 text-[14px] max-lg:w-full max-lg:flex-none max-lg:text-[16px] font-body text-auth-ink outline-none shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCodeCardProps) {
   const codeId = useId();
@@ -66,15 +66,16 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="flex flex-col rounded-xl border border-auth-border-light bg-white p-4 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
+      className="flex flex-col rounded-xl border border-auth-border-light bg-white p-4 font-body shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] max-lg:rounded-2xl"
     >
-      <h2 className="text-[14px] leading-5 font-semibold text-auth-heading">{copy.heading}</h2>
-      <p className="mt-0.5 text-[13px] leading-4 text-auth-muted">{copy.subtitle}</p>
+      <h2 className="text-[14px] leading-5 font-semibold text-auth-heading max-lg:text-[16px] max-lg:leading-6">{copy.heading}</h2>
+      <p className="mt-0.5 text-[13px] leading-4 text-auth-muted max-lg:hidden">{copy.subtitle}</p>
+      <div className="mt-3.5 h-px bg-auth-divider lg:hidden" aria-hidden="true" />
 
       <label htmlFor={codeId} className={labelClass}>
         {copy.codeLabel}
       </label>
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2 max-lg:mt-3.5 max-lg:flex-col max-lg:items-stretch max-lg:gap-2.5">
         <input
           id={codeId}
           name="discountCode"
@@ -93,7 +94,7 @@ export function DiscountCodeCard({ copy, onApply, disabled = false }: DiscountCo
           type="submit"
           disabled={disabled || submitting}
           aria-busy={submitting || undefined}
-          className={`${submitting ? "btn-loading" : ""} relative inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-5 text-[13px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary`}
+          className={`${submitting ? "btn-loading" : ""} relative inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 rounded-md bg-auth-primary px-5 text-[13px] max-lg:h-[38px] max-lg:justify-center max-lg:text-[14px] font-semibold text-white transition-colors hover:bg-auth-primary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-auth-primary`}
         >
           <span className={`inline-flex items-center gap-2 transition-opacity duration-200 ${submitting ? "opacity-0" : ""}`}>
             {copy.submit}

@@ -80,7 +80,7 @@ const iconClass =
   "pointer-events-none absolute left-4 h-4.5 w-4.5 text-auth-icon";
 
 const inputBaseClass =
-  "w-full rounded-md border border-auth-border bg-white pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
+  "h-[41px] lg:h-auto w-full rounded-md border border-auth-border bg-white pr-11 py-2.5 text-[16px] font-body text-auth-ink outline-none transition-colors duration-200 placeholder:text-auth-placeholder focus:border-brand-accent";
 
 function RequiredMark() {
   return (
@@ -186,12 +186,13 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
       <div>
         <label
           htmlFor={newPasswordId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
+          className="mb-1.5 block text-body-sm font-medium text-auth-text lg:mb-2"
         >
           {copy.newPasswordLabel}
           <RequiredMark />
         </label>
         <div className={fieldWrapClass}>
+          <PasswordIcon className={`${iconClass} lg:hidden`} />
           <input
             id={newPasswordId}
             name="newPassword"
@@ -208,7 +209,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
               color: showNewPassword ? "var(--color-auth-ink)" : "var(--color-auth-masked)",
               caretColor: "var(--color-auth-placeholder)",
             }}
-            className={`${inputBaseClass} pl-4 ${
+            className={`${inputBaseClass} pl-11 lg:pl-4 ${
               errors.newPassword ? "border-red-400" : "border-auth-border"
             }`}
           />
@@ -228,7 +229,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
             {copy.errors[errors.newPassword]}
           </p>
         )}
-        <ul className="mt-2.5 flex flex-col gap-1.5">
+        <ul className="mt-2 flex flex-col gap-1.5 lg:mt-2.5">
           {passwordRequirements.map(({ key, test }) => {
             const met = test(newPassword);
             return (
@@ -248,7 +249,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
       <div>
         <label
           htmlFor={confirmPasswordId}
-          className="mb-2 block text-body-sm font-medium text-auth-text"
+          className="mb-1.5 block text-body-sm font-medium text-auth-text lg:mb-2"
         >
           {copy.confirmPasswordLabel}
           <RequiredMark />
@@ -299,7 +300,7 @@ export function ResetPasswordForm({ copy }: ResetPasswordFormProps) {
         type="submit"
         variant="primary"
         loading={status === "submitting"}
-        className="mt-1 w-full rounded-md py-3.5 text-body font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
+        className="h-[38px] w-full rounded-md !py-0 text-body lg:mt-1 lg:h-auto lg:!py-3.5 font-semibold !bg-auth-primary hover:!bg-auth-primary-hover"
       >
         {copy.submit}
       </Button>

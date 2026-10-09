@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import type { SiteConfig } from "@/config/site.config";
 import { useBackendText } from "@/i18n/backendText";
 import type { SelectableService } from "@/lib/api/servicesApi";
@@ -65,12 +65,18 @@ function ServiceIcon({ src }: { src: string | null }) {
 function StatusBadge({
   purchased,
   label,
+  compact = false,
 }: {
   purchased: boolean;
   label: string;
+  compact?: boolean;
 }) {
   return (
-    <span className="inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-[6px] border border-[#D4D4D4] bg-white px-2 text-[12px] font-medium text-[#404040]">
+    <span
+      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-[6px] border border-[#D4D4D4] bg-white px-2 font-medium text-[#404040] ${
+        compact ? "h-[21px] text-[11px]" : "h-6 text-[12px]"
+      }`}
+    >
       <span
         aria-hidden="true"
         className={`h-1.5 w-1.5 shrink-0 rounded-full ${purchased ? "bg-[#22C55E]" : "bg-[#737373]"}`}
@@ -135,12 +141,15 @@ function PriceOption({
   onSelect,
   name,
   disabled = false,
+  compact = false,
 }: {
   checked: boolean;
   label: string;
   onSelect: () => void;
   name: string;
   disabled?: boolean;
+  /** Smaller label used by the mobile service cards. */
+  compact?: boolean;
 }) {
   return (
     <label
@@ -160,13 +169,163 @@ function PriceOption({
         <span className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100" />
       </span>
       <span
-        className={`text-[14px] font-medium tabular-nums ${
-          checked ? "text-auth-heading" : "text-[#B3B3B3]"
-        }`}
+        className={`tabular-nums ${
+          compact
+            ? `text-[12px] ${checked ? "font-semibold" : "font-medium"}`
+            : "text-[14px] font-medium"
+        } ${checked ? "text-auth-heading" : "text-[#B3B3B3]"}`}
       >
         {label}
       </span>
     </label>
+  );
+}
+
+function SkeletonCard() {
+  return (
+    <div
+      className="rounded-2xl border border-auth-border-light bg-white px-3 py-4"
+      aria-hidden="true"
+    >
+      <div className="flex items-center gap-2">
+        <SkeletonBar className="h-5 w-5 shrink-0" />
+        <SkeletonBar className="h-10 w-10 shrink-0" />
+        <div className="min-w-0 flex-1">
+          <SkeletonBar className="h-4 w-32" />
+          <SkeletonBar className="mt-1.5 h-3 w-44" />
+        </div>
+      </div>
+      <SkeletonBar className="mt-3.5 h-7 w-28" />
+      <SkeletonBar className="mt-3.5 h-4 w-52" />
+      <SkeletonBar className="mt-3.5 h-5 w-24" />
+    </div>
+  );
+}
+
+/** Mobile layout of one service — a card instead of a table row. */
+function ServiceCard({
+  service,
+  selection,
+  currency,
+  billing,
+  billingLabels,
+  copy,
+  localize,
+  onChange,
+  onOpenInvoice,
+}: {
+  service: SelectableService;
+  selection: ServiceSelection;
+  currency: string;
+  billing: BillingPeriod;
+  billingLabels: Record<BillingPeriod, string>;
+  copy: SiteConfig["selectServicesPage"]["table"];
+  localize: (text: string) => string;
+  onChange: (id: string, patch: Partial<ServiceSelection>) => void;
+  onOpenInvoice: (service: SelectableService) => void;
+}) {
+  const { selected, quantity, period } = selection;
+  const setPeriod = (p: BillingPeriod) => onChange(service.id, { period: p });
+
+  return (
+    <div className="rounded-2xl border border-auth-border-light bg-white px-3 py-4 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+      <div className="flex items-center gap-2">
+        <Checkbox
+          size={20}
+          checked={selected}
+          onChange={(checked) => onChange(service.id, { selected: checked })}
+          aria-label={service.name}
+        />
+        <ServiceIcon src={service.icon} />
+        <div className="min-w-0">
+          <p className="break-words text-[14px] leading-5 font-semibold text-auth-heading">
+            {service.name}
+          </p>
+          {/* Only the first line — the "(N included)" part is left out on mobile. */}
+          <p className="mt-0.5 text-[12px] leading-4 text-[#61616B]">
+            {splitDescription(service.description)[0]}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-3.5 flex items-end gap-3.5">
+        <div>
+          <p className="mb-1.5 text-[10px] leading-3 text-[#73737A]">
+            {copy.quantity}
+          </p>
+          <QuantityStepper
+            compact
+            value={quantity}
+            min={service.baseQuantity}
+            max={service.maxQuantity}
+            onChange={(q) => onChange(service.id, { quantity: q })}
+            decreaseAria={copy.decreaseAria}
+            increaseAria={copy.increaseAria}
+          />
+        </div>
+        <div className="min-w-0">
+          <p className="mb-1.5 text-[10px] leading-3 text-[#73737A]">
+            {copy.unitPrice}
+          </p>
+          <div className="flex h-7 items-baseline gap-1.5">
+            <span className="self-center text-[14px] leading-5 font-semibold text-auth-heading tabular-nums">
+              {formatMoney(service.monthlyExtraUnitPriceUsd, currency)}
+            </span>
+            {service.unitLabel && (
+              <span className="min-w-0 self-center truncate text-[10px] leading-4 text-[#6B6B73]">
+                {localize(service.unitLabel)}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3.5 flex items-center gap-3">
+        <PriceOption
+          compact
+          name={`period-m-${service.id}`}
+          checked={period === "monthly"}
+          onSelect={() => setPeriod("monthly")}
+          disabled={billing !== "monthly"}
+          label={`${formatMoney(servicePrice(service, quantity, "monthly"), currency)}${copy.perMonth}`}
+        />
+        <PriceOption
+          compact
+          name={`period-m-${service.id}`}
+          checked={period === "yearly"}
+          onSelect={() => setPeriod("yearly")}
+          disabled={billing !== "yearly"}
+          label={`${formatMoney(servicePrice(service, quantity, "yearly"), currency)}${copy.perYear}`}
+        />
+      </div>
+
+      <div className="mt-3.5 flex items-center justify-between gap-3">
+        <StatusBadge
+          compact
+          purchased={service.purchased}
+          label={service.purchased ? copy.purchased : copy.notPurchased}
+        />
+        <div className="flex min-w-0 items-center gap-2.5 text-[10px] text-[#525252]">
+          <span className="truncate">
+            {copy.billing}:{" "}
+            {service.purchasedBilling
+              ? billingLabels[service.purchasedBilling]
+              : "—"}
+          </span>
+          {service.invoiceId && (
+            <button
+              type="button"
+              onClick={() => onOpenInvoice(service)}
+              aria-label={`${copy.invoiceAria}: ${service.name}`}
+              className="inline-flex shrink-0 cursor-pointer items-center gap-0.5 text-[11px] font-medium text-auth-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            >
+              {copy.invoice}
+              <ArrowUpRight size={12} strokeWidth={2} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -202,7 +361,33 @@ export function ServicesTable({
 
   return (
     <>
-      <div className="overflow-x-auto rounded-[12px] border border-auth-border-light bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+      {/* Mobile: one card per service */}
+      <div className="flex flex-col gap-3.5 lg:hidden" aria-busy={loading}>
+        {loading &&
+          Array.from({ length: skeletonRows }, (_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        {rows.map((service) => {
+          const selection = selections[service.id];
+          if (!selection) return null;
+          return (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              selection={selection}
+              currency={currency}
+              billing={billing}
+              billingLabels={billingLabels}
+              copy={copy}
+              localize={localize}
+              onChange={onChange}
+              onOpenInvoice={setInvoiceFor}
+            />
+          );
+        })}
+      </div>
+
+      <div className="hidden overflow-x-auto rounded-[12px] border border-auth-border-light bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] lg:block">
         <table className="w-full min-w-[1280px] table-fixed border-collapse font-body">
           <colgroup>
             <col style={{ width: "19.8%" }} />

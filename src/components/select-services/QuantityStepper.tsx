@@ -27,6 +27,8 @@ export interface QuantityStepperProps {
   onChange: (value: number) => void;
   decreaseAria: string;
   increaseAria: string;
+  /** Smaller control used by the mobile service cards. */
+  compact?: boolean;
 }
 
 const stepButtonClass =
@@ -39,15 +41,20 @@ export function QuantityStepper({
   onChange,
   decreaseAria,
   increaseAria,
+  compact = false,
 }: QuantityStepperProps) {
   return (
-    <div className="flex h-[36px] w-[110px] items-center justify-between rounded-md border border-auth-border bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]">
+    <div
+      className={`flex items-center ${
+        compact ? "h-7 w-[104px]" : "h-[36px] w-[110px]"
+      } justify-between rounded-md border border-auth-border bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]`}
+    >
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
         aria-label={decreaseAria}
-        className={stepButtonClass}
+        className={`${stepButtonClass} ${compact ? "!w-7" : ""}`}
       >
         <MinusIcon />
       </button>
@@ -59,7 +66,7 @@ export function QuantityStepper({
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
         aria-label={increaseAria}
-        className={stepButtonClass}
+        className={`${stepButtonClass} ${compact ? "!w-7" : ""}`}
       >
         <PlusIcon />
       </button>
