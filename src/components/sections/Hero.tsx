@@ -54,7 +54,7 @@ export function HeroSection({
                     className="min-w-0"
                   >
                     <span
-                      className="hero-headline block font-hero font-bold lg:font-normal text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] leading-[1.12] tracking-tight wrap-break-word"
+                      className="hero-headline block font-hero font-normal text-[clamp(1.35rem,0.9rem+1.4vw,2.26rem)] leading-[1.12] tracking-tight wrap-break-word"
                       style={{
                         overflowWrap: "break-word",
                         maxWidth: "525px",
