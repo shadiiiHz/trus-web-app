@@ -1,30 +1,33 @@
-import { useCallback, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
+
+import "swiper/css";
+
 import { siteConfig } from "@/config/site.config";
 import { ServiceCard } from "@/components/services/ServiceCard";
 
 const SLIDE_GAP = 12;
+const AUTOPLAY_DELAY = 3500;
+const TRANSITION_SPEED = 650;
 
-/**
- * Mobile / tablet Services — left-aligned header, a thin divider, then a
- * one-card-at-a-time swipeable carousel with pagination dots. Replaces the
- * desktop's pinned two-row crossing parallax.
- */
-export function ServicesMobile({ iconMap }: { iconMap: Record<string, ReactNode> }) {
+export function ServicesMobile({
+  iconMap,
+}: {
+  iconMap: Record<string, ReactNode>;
+}) {
   const { eyebrow, heading, description, items } = siteConfig.services;
-  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const swiperRef = useRef<SwiperClass | null>(null);
   const [active, setActive] = useState(0);
 
-  const onScroll = useCallback(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const next = Math.round(el.scrollLeft / (el.clientWidth + SLIDE_GAP));
-    setActive((prev) => (prev === next ? prev : next));
-  }, []);
+  const goTo = (index: number) => {
+    const swiper = swiperRef.current;
 
-  const goTo = (i: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollTo({ left: i * (el.clientWidth + SLIDE_GAP), behavior: "smooth" });
+    if (!swiper || swiper.destroyed) return;
+
+    swiper.slideToLoop(index, TRANSITION_SPEED);
   };
 
   return (
@@ -87,56 +90,90 @@ export function ServicesMobile({ iconMap }: { iconMap: Record<string, ReactNode>
           }}
         />
 
-        <div
-          ref={scrollerRef}
-          onScroll={onScroll}
-          aria-label="Service cards"
-          className="flex overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          style={{
-            gap: SLIDE_GAP,
-            marginTop: "clamp(22px, 6.4vw, 32px)",
-            overscrollBehaviorX: "contain",
-            alignItems: "stretch",
-          }}
-        >
-          {items.map((service, i) => (
-            <div key={service.id} className="snap-center shrink-0 basis-full flex">
-              <ServiceCard
-                fluid
-                dark={i % 2 === 1}
-                icon={iconMap[service.id]}
-                title={service.title}
-                description={service.description}
-              />
-            </div>
-          ))}
-        </div>
+        {items.length > 0 && (
+          <Swiper
+            modules={[Autoplay]}
+            onSwiper={(swiper: SwiperClass) => {
+              swiperRef.current = swiper;
+              setActive(swiper.realIndex);
+            }}
+            onRealIndexChange={(swiper: SwiperClass) => {
+              setActive(swiper.realIndex);
+            }}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            spaceBetween={SLIDE_GAP}
+            loop={items.length > 1}
+            speed={TRANSITION_SPEED}
+            grabCursor
+            watchOverflow
+            autoplay={
+              items.length > 1
+                ? {
+                    delay: AUTOPLAY_DELAY,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+                : false
+            }
+            className="services-mobile-swiper"
+            style={{
+              marginTop: "clamp(22px, 6.4vw, 32px)",
+              overflow: "hidden",
+            }}
+          >
+            {items.map((service, i) => (
+              <SwiperSlide
+                key={service.id}
+                style={{
+                  height: "auto",
+                  display: "flex",
+                }}
+              >
+                <div className="w-full flex">
+                  <ServiceCard
+                    fluid
+                    dark={i % 2 === 1}
+                    icon={iconMap[service.id]}
+                    title={service.title}
+                    description={service.description}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
 
-        <div
-          className="flex items-center justify-center"
-          style={{ gap: 6, marginTop: "clamp(18px, 5.2vw, 26px)" }}
-          role="tablist"
-          aria-label="Services"
-        >
-          {items.map((service, i) => (
-            <button
-              key={service.id}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              aria-label={service.title}
-              onClick={() => goTo(i)}
-              className="p-0 border-0 cursor-pointer"
-              style={{
-                width: i === active ? 23 : 8,
-                height: 8,
-                borderRadius: 4,
-                background: "#E3E3E3",
-                transition: "width 0.25s ease",
-              }}
-            />
-          ))}
-        </div>
+        {items.length > 1 && (
+          <div
+            className="flex items-center justify-center"
+            style={{
+              gap: 6,
+              marginTop: "clamp(18px, 5.2vw, 26px)",
+            }}
+            role="tablist"
+            aria-label="Services"
+          >
+            {items.map((service, i) => (
+              <button
+                key={service.id}
+                type="button"
+                role="tab"
+                aria-selected={i === active}
+                aria-label={service.title}
+                onClick={() => goTo(i)}
+                className="p-0 border-0 cursor-pointer"
+                style={{
+                  width: i === active ? 23 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  background: "#E3E3E3",
+                  transition: "width 0.25s ease",
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,33 +1,38 @@
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
+
+import "swiper/css";
+
 import { siteConfig } from "@/config/site.config";
 import { toTitleCase } from "@/utils/text";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 
 const SLIDE_GAP = 12;
+const AUTOPLAY_DELAY = 3500;
+const TRANSITION_SPEED = 650;
 
 /**
- * Mobile / tablet Portfolio — header copy followed by a swipeable one-card
- * carousel (scroll-snap) with pagination dots. Replaces the desktop's pinned,
- * scroll-driven two-row ribbon, which doesn't fit narrow screens.
+ * Mobile / tablet Portfolio
+ * - One project card per slide
+ * - Infinite looping
+ * - Smooth touch/swipe interaction
+ * - Custom pagination dots
  */
 export function PortfolioMobile() {
   const { eyebrow, headline, description, moreProjects, projects } =
     siteConfig.portfolio;
-  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const swiperRef = useRef<SwiperClass | null>(null);
   const [active, setActive] = useState(0);
 
-  const onScroll = useCallback(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const step = el.clientWidth + SLIDE_GAP;
-    const next = Math.round(el.scrollLeft / step);
-    setActive((prev) => (prev === next ? prev : next));
-  }, []);
+  const goTo = (index: number) => {
+    const swiper = swiperRef.current;
 
-  const goTo = (i: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollTo({ left: i * (el.clientWidth + SLIDE_GAP), behavior: "smooth" });
+    if (!swiper || swiper.destroyed) return;
+
+    swiper.slideToLoop(index, TRANSITION_SPEED);
   };
 
   return (
@@ -97,50 +102,77 @@ export function PortfolioMobile() {
         </a>
 
         {/* Carousel */}
-        <div
-          ref={scrollerRef}
-          onScroll={onScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          style={{
-            gap: SLIDE_GAP,
-            marginTop: "clamp(24px, 7.4vw, 36px)",
-            overscrollBehaviorX: "contain",
-          }}
-        >
-          {projects.map((p) => (
-            <div key={p.id} className="snap-center shrink-0 basis-full">
-              <ProjectCard image={p.image} link={p.link} fluid />
-            </div>
-          ))}
-        </div>
+        {projects.length > 0 && (
+          <Swiper
+            modules={[Autoplay]}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setActive(swiper.realIndex);
+            }}
+            onRealIndexChange={(swiper) => {
+              setActive(swiper.realIndex);
+            }}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            spaceBetween={SLIDE_GAP}
+            loop={projects.length > 1}
+            speed={TRANSITION_SPEED}
+            grabCursor
+            watchOverflow
+            autoplay={
+              projects.length > 1
+                ? {
+                    delay: AUTOPLAY_DELAY,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+                : false
+            }
+            className="portfolio-mobile-swiper"
+            style={{
+              marginTop: "clamp(24px, 7.4vw, 36px)",
+              overflow: "hidden",
+            }}
+          >
+            {projects.map((p) => (
+              <SwiperSlide key={p.id}>
+                <ProjectCard image={p.image} link={p.link} fluid />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
 
-        {/* Pagination dots */}
-        <div
-          className="flex items-center justify-center"
-          style={{ gap: 6, marginTop: "clamp(20px, 6.9vw, 32px)" }}
-          role="tablist"
-          aria-label="Portfolio projects"
-        >
-          {projects.map((p, i) => (
-            <button
-              key={p.id}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              aria-label={`Project ${i + 1}`}
-              onClick={() => goTo(i)}
-              className="p-0 border-0 cursor-pointer"
-              style={{
-                width: i === active ? 22 : 7,
-                height: 7,
-                borderRadius: 4,
-                background: "#FFFFFF",
-                opacity: i === active ? 1 : 0.95,
-                transition: "width 0.25s ease",
-              }}
-            />
-          ))}
-        </div>
+        {/* Custom pagination dots */}
+        {projects.length > 1 && (
+          <div
+            className="flex items-center justify-center"
+            style={{
+              gap: 6,
+              marginTop: "clamp(20px, 6.9vw, 32px)",
+            }}
+            role="group"
+            aria-label="Portfolio projects"
+          >
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                type="button"
+                aria-current={i === active ? "true" : undefined}
+                aria-label={`Go to project ${i + 1}`}
+                onClick={() => goTo(i)}
+                className="shrink-0 p-0 border-0 cursor-pointer"
+                style={{
+                  width: i === active ? 22 : 7,
+                  height: 7,
+                  borderRadius: 4,
+                  background: "#E5E5E5",
+                  opacity: i === active ? 1 : 0.95,
+                  transition: "width 0.25s ease, opacity 0.25s ease",
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
