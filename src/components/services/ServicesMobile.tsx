@@ -76,6 +76,7 @@ export function ServicesMobile({
             lineHeight: 1.55,
             color: "#BFBFBF",
             marginTop: "clamp(14px, 4vw, 20px)",
+            textAlign: "justify"
           }}
         >
           {description}

@@ -83,6 +83,7 @@ export function PortfolioMobile() {
             lineHeight: 1.3,
             color: "#BFBFBF",
             marginTop: "clamp(12px, 3.5vw, 18px)",
+            textAlign: "justify"
           }}
         >
           {description.join(" ")}

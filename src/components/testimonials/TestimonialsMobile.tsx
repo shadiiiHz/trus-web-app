@@ -108,6 +108,7 @@ export function TestimonialsMobile() {
             fontSize: "clamp(14px, 3.9vw, 19px)",
             lineHeight: 1.5,
             color: "#BFBFBF",
+            textAlign: "justify",
             marginTop: "clamp(12px, 3.6vw, 18px)",
           }}
         >

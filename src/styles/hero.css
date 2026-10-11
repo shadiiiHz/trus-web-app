@@ -66,7 +66,7 @@
   .hero-body {
     font-size: clamp(15px, 4.15vw, 21px);
     line-height: 1.52;
-    text-align: left;
+    text-align: justify;
   }
 
   .hero-ctas {

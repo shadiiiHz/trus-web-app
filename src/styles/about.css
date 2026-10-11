@@ -35,7 +35,7 @@
   .about-para {
     font-size: clamp(16px, 4.65vw, 22px) !important;
     line-height: 1.32;
-    text-align: left !important;
+    text-align: justify !important;
     max-width: none !important;
   }
 

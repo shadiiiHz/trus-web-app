@@ -44,6 +44,7 @@ export function TestimonialCard({ name, role, quote, avatar, style, fluid = fals
           color:      fluid ? '#FFFFFF' : '#E0E0E0',
           margin:     0,
           flex:       1,
+          textAlign:  'justify',
           overflow:   fluid ? 'visible' : 'hidden',
           display:    fluid ? 'block' : '-webkit-box',
           WebkitLineClamp: fluid ? 'unset' : 4,

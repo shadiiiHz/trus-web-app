@@ -96,6 +96,7 @@ export function TeamInfoPanel({ member, large = false }: TeamInfoPanelProps) {
               lineHeight: large ? 1.4 : '21px',
               color:      large ? '#FFFFFF' : 'rgba(255,255,255,0.72)',
               margin:     large ? '0 0 16px 0' : '0 0 24px 0',
+              textAlign:  large ? 'justify' : undefined,
             }}
           >
             {member.description}

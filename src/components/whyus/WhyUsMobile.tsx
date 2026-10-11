@@ -92,6 +92,7 @@ export function WhyUsMobile() {
             lineHeight: 1.35,
             color: "#BFBFBF",
             marginTop: "clamp(10px, 3vw, 16px)",
+            textAlign: "justify"
           }}
         >
           {description}

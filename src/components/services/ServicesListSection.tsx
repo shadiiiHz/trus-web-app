@@ -320,7 +320,7 @@ function ServiceRow({
 
       {/* Description */}
       <div
-        className="transition-opacity duration-300 text-left leading-5 lg:text-justify lg:leading-[18.75px]"
+        className="transition-opacity duration-300 leading-5 text-justify lg:leading-[18.75px]"
         style={{ color: isActive ? "#FFFFFF" : "#707075" }}
       >
         {item.eyebrow && (

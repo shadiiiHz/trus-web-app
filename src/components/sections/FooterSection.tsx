@@ -155,6 +155,7 @@ export function FooterSection() {
                 color: FOOTER_LINK_COLOR,
                 margin: 0,
                 marginBottom: "15px",
+                textAlign: "justify"
               }}
             >
               {footer.tagline}
