@@ -332,11 +332,22 @@ function SkeletonBlock({ className = "" }: { className?: string }) {
   return <div className={`skeleton ${className}`} aria-hidden="true" />;
 }
 
-function SkeletonSectionHeader({ divider = true }: { divider?: boolean }) {
+/** Same box heights as `SectionHeader` (16px title line, 14px subtitle line, divider). */
+function SkeletonSectionHeader({
+  divider = true,
+  className = "",
+}: {
+  divider?: boolean;
+  className?: string;
+}) {
   return (
-    <div className={divider ? "mb-6" : ""}>
-      <SkeletonBlock className="h-5 w-44 rounded-md" />
-      <SkeletonBlock className="mt-2.5 h-3.5 w-4/5 max-w-[420px] rounded-md" />
+    <div className={`${divider ? "mb-6" : ""} ${className}`}>
+      <div className="flex h-6 items-center">
+        <SkeletonBlock className="h-4 w-44 rounded-md" />
+      </div>
+      <div className="mt-1 flex h-[19px] items-center">
+        <SkeletonBlock className="h-3.5 w-4/5 max-w-[420px] rounded-md" />
+      </div>
       {divider && <div className="mt-4 h-px bg-auth-divider" />}
     </div>
   );
@@ -356,7 +367,7 @@ function EditAccountSkeleton() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2" aria-hidden="true">
       <Card>
-        <SkeletonSectionHeader />
+        <SkeletonSectionHeader className="max-sm:!mb-4" />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {Array.from({ length: 11 }, (_, i) => (
             <SkeletonField key={i} />
@@ -366,7 +377,7 @@ function EditAccountSkeleton() {
 
       <div className="flex flex-col gap-6">
       <Card>
-        <SkeletonSectionHeader />
+        <SkeletonSectionHeader className="max-sm:!mb-4" />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {Array.from({ length: 4 }, (_, i) => (
             <SkeletonField key={i} />
@@ -377,13 +388,13 @@ function EditAccountSkeleton() {
       <Card className="flex-1">
         <SkeletonSectionHeader />
 
-        <div className="flex flex-col items-center gap-8 sm:flex-row">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:gap-8">
           <SkeletonBlock className="h-[117px] w-[117px] shrink-0 rounded-full" />
-          <div className="flex w-full flex-1 flex-col gap-5">
-            <SkeletonBlock className="h-[117px] w-full rounded-lg" />
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <SkeletonBlock className="h-10 flex-1 rounded-md" />
-              <SkeletonBlock className="h-10 flex-1 rounded-md" />
+          <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
+            <SkeletonBlock className="h-[94px] w-full rounded-lg sm:h-[117px]" />
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <SkeletonBlock className="h-[42px] flex-1 rounded-md sm:h-10" />
+              <SkeletonBlock className="h-[42px] flex-1 rounded-md sm:h-10" />
             </div>
           </div>
         </div>
