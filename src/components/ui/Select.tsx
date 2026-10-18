@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { Search, X } from "lucide-react";
+import { Check, Search, X } from "lucide-react";
 
 export interface SelectOption {
   value: string;
@@ -11,6 +11,8 @@ export interface SelectOption {
   hint?: string;
   /** Extra terms the search box matches on (not displayed). */
   keywords?: string;
+  /** Leading visual (e.g. a flag) shown before the label in the list and on the trigger. */
+  icon?: React.ReactNode;
 }
 
 export interface SelectProps {
@@ -32,6 +34,10 @@ export interface SelectProps {
   searchable?: boolean;
   searchPlaceholder?: string;
   noResultsText?: string;
+  /** Mark the selected option in the open list with a check. */
+  showCheck?: boolean;
+  /** Open the list above the trigger instead of below it. */
+  openUp?: boolean;
 }
 
 /**
@@ -57,6 +63,8 @@ export function Select({
   searchable = false,
   searchPlaceholder = "Search",
   noResultsText = "No results",
+  showCheck = false,
+  openUp = false,
 }: SelectProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -137,7 +145,16 @@ export function Select({
         aria-label={ariaLabel}
         className={`truncate text-left ${triggerClassName}`}
       >
-        {selected ? selected.label : placeholder}
+        {selected?.icon ? (
+          <span className="flex items-center gap-2">
+            <span className="flex shrink-0 items-center">{selected.icon}</span>
+            <span className="truncate leading-normal">{selected.label}</span>
+          </span>
+        ) : selected ? (
+          selected.label
+        ) : (
+          placeholder
+        )}
       </button>
 
       {clearable && selected && (
@@ -153,7 +170,7 @@ export function Select({
 
       {open && (
         <div
-          className={`absolute left-0 right-0 top-[calc(100%+6px)] z-20 overflow-hidden rounded-xl border border-[#E5E5E5] bg-white shadow-xl ${panelClassName}`}
+          className={`absolute left-0 right-0 ${openUp ? "bottom-[calc(100%+6px)]" : "top-[calc(100%+6px)]"} z-20 overflow-hidden rounded-xl border border-[#E5E5E5] bg-white shadow-xl ${panelClassName}`}
         >
           {searchable && (
             <div className="relative border-b border-[#EDEDED] p-2">
@@ -176,7 +193,7 @@ export function Select({
                 placeholder={searchPlaceholder}
                 aria-label={searchPlaceholder}
                 aria-controls={listboxId}
-                className="h-9 w-full rounded-md border border-[#E5E5E5] bg-white pl-8 pr-3 text-[14px] font-body text-[#171717] outline-none transition-colors placeholder:text-[#A3A3A3] focus:border-brand-accent"
+                className="h-9 w-full rounded-md border border-[#D4D4D4] bg-white pl-8 pr-3 text-[14px] font-body text-[#171717] outline-none transition-colors placeholder:text-[#737373]"
               />
             </div>
           )}
@@ -196,12 +213,17 @@ export function Select({
                     aria-selected={isSelected}
                     onClick={() => choose(option)}
                     className={`flex w-full items-center gap-2 whitespace-nowrap px-4 py-2 text-left text-[15px] font-body transition-colors ${
-                      isSelected
+                      isSelected && !showCheck
                         ? "bg-[#F5F1FC] font-medium text-[#5B2BB9]"
                         : "text-[#171717] hover:bg-[#F5F5F5]"
                     }`}
                   >
-                    <span className="shrink-0">{option.label}</span>
+                    {option.icon && <span className="flex shrink-0 items-center">{option.icon}</span>}
+                    <span
+                      className={`shrink-0 ${option.icon ? "text-[16px] font-medium leading-normal" : ""}`}
+                    >
+                      {option.label}
+                    </span>
                     {option.description && (
                       <span className="min-w-0 truncate text-[#737373]">
                         {option.description}
@@ -211,6 +233,12 @@ export function Select({
                       <span className="ml-auto shrink-0 pl-3 text-[14px] text-[#737373]">
                         {option.hint}
                       </span>
+                    )}
+                    {showCheck && isSelected && (
+                      <Check
+                        className="ml-auto h-4 w-4 shrink-0 text-[#5B2BB9]"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 </li>

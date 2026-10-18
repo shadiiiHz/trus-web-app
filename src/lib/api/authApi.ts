@@ -388,6 +388,8 @@ export interface ProfileUpdatePayload {
   timezone: string;
   job: string;
   jobTitle: string;
+  /** Preferred language code, sent as `lang`. */
+  lang: string;
   linkedinPageName: string;
   instagramHandle: string;
   xHandle: string;
@@ -430,6 +432,7 @@ export async function updateProfile(
     timezone: payload.timezone,
     job: payload.job,
     job_title: payload.jobTitle,
+    lang: payload.lang,
     linkedin_page_name: payload.linkedinPageName,
     instagram_handle: payload.instagramHandle,
     x_handle: payload.xHandle,
@@ -478,6 +481,8 @@ export interface UserProfile {
   timezone: string;
   job: string;
   jobTitle: string;
+  /** Preferred language code (`en`, `tr`, `de`, `ru`, `es`, `fr`). */
+  lang: string;
   linkedinPageName: string;
   instagramHandle: string;
   xHandle: string;
@@ -553,6 +558,7 @@ export async function fetchProfile(signal?: AbortSignal): Promise<UserProfile> {
       timezone: str(raw.timezone),
       job: str(raw.job),
       jobTitle: str(raw.job_title),
+      lang: str(raw.lang),
       linkedinPageName: str(raw.linkedin_page_name),
       instagramHandle: str(raw.instagram_handle),
       xHandle: str(raw.x_handle),

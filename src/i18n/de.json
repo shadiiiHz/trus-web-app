@@ -582,7 +582,11 @@
         "industryLabel": "Beruf / Branche",
         "industryPlaceholder": "Wählen Sie Ihre Branche",
         "jobTitleLabel": "Berufsbezeichnung",
-        "jobTitlePlaceholder": "Geben Sie Ihre Berufsbezeichnung ein"
+        "jobTitlePlaceholder": "Geben Sie Ihre Berufsbezeichnung ein",
+        "languageLabel": "Benutzersprache",
+        "languagePlaceholder": "Geben Sie Ihre Sprache ein",
+        "languageSearchPlaceholder": "Sprache suchen",
+        "languageNoResults": "Keine Sprachen gefunden"
       },
       "logo": {
         "title": "Firmenlogo",
@@ -638,6 +642,7 @@
         "timezoneRequired": "Bitte wählen Sie Ihre Zeitzone",
         "industryRequired": "Bitte wählen Sie Ihre Branche",
         "jobTitleRequired": "Die Berufsbezeichnung ist erforderlich, wenn die Branche „Sonstiges“ ist",
+        "langRequired": "Bitte wählen Sie Ihre Sprache",
         "logoRequired": "Bitte laden Sie Ihr Firmenlogo hoch",
         "logoDailyLimitReached": "Sie können ein Logo pro Tag generieren.",
         "logoGenerationFailed": "Die Logo-Generierung ist fehlgeschlagen. Bitte versuchen Sie es später erneut.",

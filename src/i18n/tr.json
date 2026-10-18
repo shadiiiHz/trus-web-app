@@ -575,7 +575,11 @@
         "industryLabel": "Meslek / Sektör",
         "industryPlaceholder": "Sektörünüzü seçin",
         "jobTitleLabel": "Unvan",
-        "jobTitlePlaceholder": "Unvanınızı girin"
+        "jobTitlePlaceholder": "Unvanınızı girin",
+        "languageLabel": "Kullanıcı dili",
+        "languagePlaceholder": "Dilinizi girin",
+        "languageSearchPlaceholder": "Dil ara",
+        "languageNoResults": "Dil bulunamadı"
       },
       "logo": {
         "title": "İşletme Logosu",
@@ -631,6 +635,7 @@
         "timezoneRequired": "Lütfen saat diliminizi seçin",
         "industryRequired": "Lütfen sektörünüzü seçin",
         "jobTitleRequired": "Sektör “Diğer” olduğunda iş unvanı zorunludur",
+        "langRequired": "Lütfen dilinizi seçin",
         "logoRequired": "Lütfen işletme logonuzu yükleyin",
         "logoDailyLimitReached": "Günde bir logo oluşturabilirsiniz.",
         "logoGenerationFailed": "Logo oluşturulamadı. Lütfen daha sonra tekrar deneyin.",

@@ -575,7 +575,11 @@
         "industryLabel": "Job / Industry",
         "industryPlaceholder": "Select your industry",
         "jobTitleLabel": "Job title",
-        "jobTitlePlaceholder": "Enter your job title"
+        "jobTitlePlaceholder": "Enter your job title",
+        "languageLabel": "User language",
+        "languagePlaceholder": "Enter your language",
+        "languageSearchPlaceholder": "Search language",
+        "languageNoResults": "No languages found"
       },
       "logo": {
         "title": "Business Logo",
@@ -631,6 +635,7 @@
         "timezoneRequired": "Please select your timezone",
         "industryRequired": "Please select your industry",
         "jobTitleRequired": "Job title is required when Job / Industry is Other",
+        "langRequired": "Please select your language",
         "logoRequired": "Please upload your business logo",
         "logoDailyLimitReached": "You can generate one logo per day.",
         "logoGenerationFailed": "Logo generation failed. Please try again later.",

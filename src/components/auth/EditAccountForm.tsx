@@ -18,6 +18,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useJobs, useTimezones } from "@/hooks/queries/usePublicOptions";
 import { profileQuery } from "@/lib/api/profileQuery";
 import { useLocale } from "@/i18n";
+import { LANGUAGES } from "@/components/layout/LanguageSwitch";
 import { localizeBackendOptions } from "@/i18n/backendText";
 import {
   COUNTRY_DIAL_CODES,
@@ -114,6 +115,7 @@ type FieldName =
   | "timezone"
   | "industry"
   | "jobTitle"
+  | "lang"
   | "logo";
 type FieldErrors = Partial<Record<FieldName, FieldErrorKey>>;
 
@@ -128,7 +130,23 @@ const BACKEND_REQUIRED_FIELDS: Record<string, [FieldName, FieldErrorKey]> = {
   brand_name: ["brandName", "brandNameRequired"],
   job: ["industry", "industryRequired"],
   job_title: ["jobTitle", "jobTitleRequired"],
+  lang: ["lang", "langRequired"],
 };
+
+/** Language dropdown options (backend codes: en | tr | de | ru | es | fr), with flags. */
+const LANGUAGE_OPTIONS: SelectOption[] = LANGUAGES.map(({ code, name, Flag }) => ({
+  value: code,
+  label: name,
+  keywords: code,
+  icon: (
+    <span
+      className="flex shrink-0 items-center justify-center overflow-hidden rounded-[0.41px]"
+      style={{ width: 28, height: 19.76 }}
+    >
+      <Flag fit="slice" />
+    </span>
+  ),
+}));
 
 /** Job / Industry option that makes Job Title mandatory (matched by value or label). */
 function isOtherJob(job: string, options: SelectOption[]): boolean {
@@ -173,6 +191,27 @@ function ChevronDownIcon() {
         d="M5 7.5L10 12.5L15 7.5"
         stroke="currentColor"
         strokeWidth="1.66667"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RemoveLogoIcon() {
+  return (
+    <svg
+      width="15"
+      height="17"
+      viewBox="0 0 15 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M10.5 3.75V3.15C10.5 2.30992 10.5 1.88988 10.3365 1.56901C10.1927 1.28677 9.96323 1.0573 9.68099 0.91349C9.36012 0.75 8.94008 0.75 8.1 0.75H6.9C6.05992 0.75 5.63988 0.75 5.31901 0.91349C5.03677 1.0573 4.8073 1.28677 4.66349 1.56901C4.5 1.88988 4.5 2.30992 4.5 3.15V3.75M6 7.875V11.625M9 7.875V11.625M0.75 3.75H14.25M12.75 3.75V12.15C12.75 13.4101 12.75 14.0402 12.5048 14.5215C12.289 14.9448 11.9448 15.289 11.5215 15.5048C11.0402 15.75 10.4101 15.75 9.15 15.75H5.85C4.58988 15.75 3.95982 15.75 3.47852 15.5048C3.05516 15.289 2.71095 14.9448 2.49524 14.5215C2.25 14.0402 2.25 13.4101 2.25 12.15V3.75"
+        stroke="#DC2626"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -319,12 +358,13 @@ function EditAccountSkeleton() {
       <Card>
         <SkeletonSectionHeader />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {Array.from({ length: 10 }, (_, i) => (
+          {Array.from({ length: 11 }, (_, i) => (
             <SkeletonField key={i} />
           ))}
         </div>
       </Card>
 
+      <div className="flex flex-col gap-6">
       <Card>
         <SkeletonSectionHeader />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -332,15 +372,15 @@ function EditAccountSkeleton() {
             <SkeletonField key={i} />
           ))}
         </div>
+      </Card>
 
-        <div className="mt-6">
-          <SkeletonSectionHeader />
-        </div>
+      <Card className="flex-1">
+        <SkeletonSectionHeader />
 
         <div className="flex flex-col items-center gap-8 sm:flex-row">
-          <SkeletonBlock className="h-[146px] w-[146px] shrink-0 rounded-full" />
+          <SkeletonBlock className="h-[117px] w-[117px] shrink-0 rounded-full" />
           <div className="flex w-full flex-1 flex-col gap-5">
-            <SkeletonBlock className="h-[92px] w-full rounded-lg" />
+            <SkeletonBlock className="h-[117px] w-full rounded-lg" />
             <div className="flex flex-col gap-3 sm:flex-row">
               <SkeletonBlock className="h-10 flex-1 rounded-md" />
               <SkeletonBlock className="h-10 flex-1 rounded-md" />
@@ -348,6 +388,7 @@ function EditAccountSkeleton() {
           </div>
         </div>
       </Card>
+      </div>
     </div>
   );
 }
@@ -368,6 +409,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const timezoneId = useId();
   const industryId = useId();
   const jobTitleId = useId();
+  const langId = useId();
   const linkedinId = useId();
   const instagramId = useId();
   const xHandleId = useId();
@@ -404,6 +446,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
   const isLoading =
     profileLoading || timezonesQuery.isPending || jobsQuery.isPending;
   const [jobTitle, setJobTitle] = useState("");
+  const [lang, setLang] = useState("");
   const jobTitleRequired = isOtherJob(industry, industryOptions);
   const localizedIndustryOptions = useMemo(
     () => localizeBackendOptions(industryOptions, locale),
@@ -442,6 +485,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     setTimezone(profile.timezone);
     setIndustry(profile.job);
     setJobTitle(profile.jobTitle);
+    setLang(LANGUAGE_OPTIONS.some((o) => o.value === profile.lang) ? profile.lang : "");
     setLinkedin(profile.linkedinPageName);
     setInstagram(profile.instagramHandle);
     setXHandle(profile.xHandle);
@@ -595,6 +639,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
     if (!industry) nextErrors.industry = "industryRequired";
     if (jobTitleRequired && !jobTitle.trim())
       nextErrors.jobTitle = "jobTitleRequired";
+    if (!lang) nextErrors.lang = "langRequired";
     if (!logoPreview) nextErrors.logo = "logoRequired";
 
     setErrors(nextErrors);
@@ -613,6 +658,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
         timezone,
         job: industry,
         jobTitle: jobTitle.trim(),
+        lang,
         linkedinPageName: linkedin.trim(),
         instagramHandle: instagram.trim(),
         xHandle: xHandle.trim(),
@@ -982,9 +1028,41 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   }`}
                 />
               </Field>
+
+              <Field
+                id={langId}
+                label={copy.business.languageLabel}
+                required
+                error={errors.lang && copy.errors[errors.lang]}
+              >
+                <div className={fieldWrapClass}>
+                  <Select
+                    id={langId}
+                    value={lang}
+                    onChange={(value) => {
+                      setLang(value);
+                      clearError("lang");
+                    }}
+                    options={LANGUAGE_OPTIONS}
+                    placeholder={copy.business.languagePlaceholder}
+                    ariaInvalid={Boolean(errors.lang)}
+                    searchable
+                    searchPlaceholder={copy.business.languageSearchPlaceholder}
+                    noResultsText={copy.business.languageNoResults}
+                    showCheck
+                    openUp
+                    className="w-full"
+                    triggerClassName={`${selectBaseClass} pl-3 ${
+                      lang ? "text-auth-ink" : "text-auth-placeholder"
+                    } ${errors.lang ? "border-red-400" : "border-auth-border"}`}
+                  />
+                  <ChevronDownIcon />
+                </div>
+              </Field>
             </div>
           </Card>
 
+          <div className="flex flex-col gap-6">
           <Card>
             <SectionHeader
               title={copy.social.title}
@@ -1086,16 +1164,18 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                 </div>
               </Field>
             </div>
+          </Card>
 
-            <div className="mt-5 sm:mt-6">
-              <SectionHeader
-                title={copy.logo.title}
-                subtitle={copy.logo.subtitle}
-                required
-              />
-            </div>
+          <Card className="flex-1">
+            <SectionHeader
+              title={copy.logo.title}
+              subtitle={copy.logo.subtitle}
+              required
+            />
 
-            <div className="flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
+            <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:gap-8">
+              <div className="flex shrink-0 flex-col items-center gap-4">
+              <div className="relative">
               <img
                 src={logoPreview ?? businessLogoPlaceholder}
                 // Google-hosted images can refuse requests carrying a
@@ -1108,10 +1188,23 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   }
                 }}
                 alt=""
-                className="h-32 w-32 shrink-0 self-center rounded-full object-cover sm:h-[146px] sm:w-[146px]"
+                className={`h-[117px] w-[117px] rounded-full object-cover ${logoPreview ? "border border-[#E5E5E5]" : ""}`}
               />
+              {logoPreview && (
+                <button
+                  type="button"
+                  aria-label="Remove logo"
+                  // Front-end only for now: the remove-logo endpoint isn't ready.
+                  onClick={() => showToast("Removing the logo isn't available yet — the backend isn't ready.", "info")}
+                  className="absolute right-1 top-0 flex h-[28px] w-[28px] items-center justify-center sm:right-[6px] rounded-full border border-[#E5E5E5] bg-white text-red-600 shadow-sm transition-colors hover:bg-red-50"
+                >
+                  <RemoveLogoIcon />
+                </button>
+              )}
+              </div>
+              </div>
 
-              <div className="flex w-full min-w-0 flex-1 flex-col gap-4 sm:gap-5">
+              <div className="flex w-full min-w-0 flex-1 flex-col gap-4">
                 <div
                   role="button"
                   tabIndex={0}
@@ -1132,7 +1225,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     setIsDragging(false);
                     applyLogoFile(e.dataTransfer.files?.[0]);
                   }}
-                  className={`relative flex cursor-pointer items-center justify-center gap-6 rounded-lg border-2 py-5 pl-4 pr-4 text-left transition-colors max-sm:py-[22px] sm:pr-20 ${
+                  className={`relative flex cursor-pointer items-center justify-center gap-6 rounded-lg border-2 py-5 pl-4 pr-4 text-left transition-colors max-sm:h-[94px] max-sm:py-0 sm:h-[117px] sm:py-0 sm:pr-20 ${
                     isDragging
                       ? "border-brand-accent bg-auth-surface-hover"
                       : errors.logo
@@ -1149,12 +1242,12 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     />
                   </div>
 
-                  <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                  <div className="flex min-w-0 flex-col gap-1.5 sm:flex-1">
                     <p className="text-[14px] leading-snug">
                       <span className="font-semibold text-auth-primary">
                         {copy.logo.uploadCta}
                       </span>{" "}
-                      <span className="text-auth-muted">
+                      <span className="text-auth-muted max-sm:hidden">
                         {copy.logo.uploadCtaRest}
                       </span>
                     </p>
@@ -1162,21 +1255,20 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                       {copy.logo.uploadHint}
                     </p>
                   </div>
-                  <div className="absolute -right-3 top-1/2 hidden h-14 w-auto -translate-y-[62%] sm:block">
-                    <div className="relative h-auto w-auto">
-                      <img
-                        src={uploadBadge}
-                        alt=""
-                        className="h-full w-auto"
-                        aria-hidden="true"
-                      />
-                      <img
-                        src={uploadBadgePointer}
-                        alt=""
-                        className="absolute right-8 top-10 h-4 w-4"
-                        aria-hidden="true"
-                      />
-                    </div>
+                  {/* Figma: the 110×112 badge (shadow padding included) hangs 15px past the box's right edge, 12px below its top. */}
+                  <div className="pointer-events-none absolute -right-[15px] top-[12px] hidden h-[112px] w-[110px] sm:block">
+                    <img
+                      src={uploadBadge}
+                      alt=""
+                      className="h-full w-full"
+                      aria-hidden="true"
+                    />
+                    <img
+                      src={uploadBadgePointer}
+                      alt=""
+                      className="absolute left-[62px] top-[39px] h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </div>
                   <input
                     ref={fileInputRef}
@@ -1192,7 +1284,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   </p>
                 )}
 
-                <div className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-3">
+                <div className="flex flex-col-reverse gap-4 sm:flex-row">
                   <button
                     type="button"
                     onClick={handleGenerateLogo}
@@ -1200,7 +1292,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                     // limit), so each click re-asks and shows the error again.
                     disabled={isGeneratingLogo}
                     aria-busy={isGeneratingLogo}
-                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-4 py-2 text-center text-body-sm font-semibold text-auth-text transition-colors max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
+                    className={`${isGeneratingLogo ? "btn-loading" : ""} relative inline-flex min-w-0 flex-1 sm:h-10 items-center justify-center gap-2 rounded-md border border-auth-border bg-white px-4 py-2 text-center text-body-sm font-semibold text-auth-text transition-colors max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body hover:border-brand-accent hover:text-brand-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-auth-border disabled:hover:text-auth-text`}
                   >
                     <span className={`inline-flex items-center justify-center gap-2 transition-opacity duration-200 ${isGeneratingLogo ? "opacity-0" : ""}`}>
                       <img src={generateLogo} alt="" className="h-4 w-auto shrink-0" aria-hidden="true" />
@@ -1215,7 +1307,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-auth-primary px-4 py-2 max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body text-center text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
+                    className="inline-flex min-w-0 flex-1 sm:h-10 items-center justify-center gap-2 rounded-md bg-auth-primary px-4 py-2 max-sm:h-[42px] max-sm:flex-none max-sm:py-0 max-sm:text-body text-center text-body-sm font-semibold text-white transition-colors hover:bg-auth-primary-hover"
                   >
                     <img
                       src={uploadLogo}
@@ -1229,6 +1321,7 @@ export function EditAccountForm({ copy }: EditAccountFormProps) {
               </div>
             </div>
           </Card>
+          </div>
         </div>
       )}
 

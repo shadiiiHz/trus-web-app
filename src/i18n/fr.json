@@ -585,7 +585,11 @@
         "industryLabel": "Poste / Secteur",
         "industryPlaceholder": "Sélectionnez votre secteur",
         "jobTitleLabel": "Intitulé du poste",
-        "jobTitlePlaceholder": "Saisissez votre intitulé de poste"
+        "jobTitlePlaceholder": "Saisissez votre intitulé de poste",
+        "languageLabel": "Langue de l’utilisateur",
+        "languagePlaceholder": "Saisissez votre langue",
+        "languageSearchPlaceholder": "Rechercher une langue",
+        "languageNoResults": "Aucune langue trouvée"
       },
       "logo": {
         "title": "Logo de l'entreprise",
@@ -641,6 +645,7 @@
         "timezoneRequired": "Veuillez sélectionner votre fuseau horaire",
         "industryRequired": "Veuillez sélectionner votre secteur",
         "jobTitleRequired": "L’intitulé du poste est obligatoire lorsque le secteur est « Autre »",
+        "langRequired": "Veuillez sélectionner votre langue",
         "logoRequired": "Veuillez téléverser le logo de votre entreprise",
         "logoDailyLimitReached": "Vous pouvez générer un logo par jour.",
         "logoGenerationFailed": "La génération du logo a échoué. Veuillez réessayer plus tard.",

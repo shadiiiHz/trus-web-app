@@ -594,7 +594,11 @@
         "industryLabel": "Puesto / Sector",
         "industryPlaceholder": "Selecciona tu sector",
         "jobTitleLabel": "Cargo",
-        "jobTitlePlaceholder": "Introduce tu cargo"
+        "jobTitlePlaceholder": "Introduce tu cargo",
+        "languageLabel": "Idioma del usuario",
+        "languagePlaceholder": "Introduce tu idioma",
+        "languageSearchPlaceholder": "Buscar idioma",
+        "languageNoResults": "No se encontraron idiomas"
       },
       "logo": {
         "title": "Logo del negocio",
@@ -650,6 +654,7 @@
         "timezoneRequired": "Por favor selecciona tu zona horaria",
         "industryRequired": "Por favor selecciona tu sector",
         "jobTitleRequired": "El puesto es obligatorio cuando el sector es «Otro»",
+        "langRequired": "Selecciona tu idioma",
         "logoRequired": "Por favor sube el logo de tu negocio",
         "logoDailyLimitReached": "Puedes generar un logo por día.",
         "logoGenerationFailed": "No se pudo generar el logo. Inténtalo de nuevo más tarde.",

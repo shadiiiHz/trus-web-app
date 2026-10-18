@@ -581,7 +581,11 @@
         "industryLabel": "Должность / Отрасль",
         "industryPlaceholder": "Выберите отрасль",
         "jobTitleLabel": "Должность",
-        "jobTitlePlaceholder": "Введите вашу должность"
+        "jobTitlePlaceholder": "Введите вашу должность",
+        "languageLabel": "Язык пользователя",
+        "languagePlaceholder": "Введите ваш язык",
+        "languageSearchPlaceholder": "Поиск языка",
+        "languageNoResults": "Языки не найдены"
       },
       "logo": {
         "title": "Логотип компании",
@@ -637,6 +641,7 @@
         "timezoneRequired": "Пожалуйста, выберите часовой пояс",
         "industryRequired": "Пожалуйста, выберите отрасль",
         "jobTitleRequired": "Укажите должность, если в поле «Отрасль» выбрано «Другое»",
+        "langRequired": "Выберите ваш язык",
         "logoRequired": "Пожалуйста, загрузите логотип компании",
         "logoDailyLimitReached": "Вы можете сгенерировать один логотип в день.",
         "logoGenerationFailed": "Не удалось сгенерировать логотип. Пожалуйста, попробуйте позже.",
