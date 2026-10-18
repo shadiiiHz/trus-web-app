@@ -140,7 +140,7 @@ const LANGUAGE_OPTIONS: SelectOption[] = LANGUAGES.map(({ code, name, Flag }) =>
   keywords: code,
   icon: (
     <span
-      className="flex shrink-0 items-center justify-center overflow-hidden rounded-[0.41px]"
+      className="flex shrink-0 items-center justify-center overflow-hidden rounded-[2.63px]"
       style={{ width: 28, height: 19.76 }}
     >
       <Flag fit="slice" />
