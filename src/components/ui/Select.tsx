@@ -173,9 +173,10 @@ export function Select({
           className={`absolute left-0 right-0 ${openUp ? "bottom-[calc(100%+6px)]" : "top-[calc(100%+6px)]"} z-20 overflow-hidden rounded-xl border border-[#E5E5E5] bg-white shadow-xl ${panelClassName}`}
         >
           {searchable && (
-            <div className="relative border-b border-[#EDEDED] p-2">
+            <div className={`pb-0 ${showCheck ? "p-1.5" : "p-2"}`}>
+              <div className="relative">
               <Search
-                className="pointer-events-none absolute left-4.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#A3A3A3]"
+                className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#A3A3A3]"
                 aria-hidden="true"
               />
               <input
@@ -195,27 +196,30 @@ export function Select({
                 aria-controls={listboxId}
                 className="h-9 w-full rounded-md border border-[#D4D4D4] bg-white pl-8 pr-3 text-[14px] font-body text-[#171717] outline-none transition-colors placeholder:text-[#737373]"
               />
+              </div>
             </div>
           )}
           <ul
             id={listboxId}
             role="listbox"
             aria-label={ariaLabel}
-            className="relative max-h-60 overflow-auto py-1.5"
+            className={`relative max-h-60 overflow-auto ${showCheck ? "py-1" : "py-1.5"}`}
           >
             {visibleOptions.map((option) => {
               const isSelected = option.value === value;
               return (
-                <li key={option.value} role="none">
+                <li key={option.value} role="none" className={showCheck ? "px-1.5" : ""}>
                   <button
                     type="button"
                     role="option"
                     aria-selected={isSelected}
                     onClick={() => choose(option)}
-                    className={`flex w-full items-center gap-2 whitespace-nowrap px-4 py-2 text-left text-[15px] font-body transition-colors ${
-                      isSelected && !showCheck
-                        ? "bg-[#F5F1FC] font-medium text-[#5B2BB9]"
-                        : "text-[#171717] hover:bg-[#F5F5F5]"
+                    className={`flex w-full items-center gap-2 whitespace-nowrap py-2 ${showCheck ? "pl-2 pr-3" : "px-4"} text-left text-[15px] font-body transition-colors ${
+                      showCheck
+                        ? `rounded-[6px] text-[#171717] ${isSelected ? "bg-[#FAFAFA]" : "hover:bg-[#FAFAFA]"}`
+                        : isSelected
+                          ? "bg-[#F5F1FC] font-medium text-[#5B2BB9]"
+                          : "text-[#171717] hover:bg-[#F5F5F5]"
                     }`}
                   >
                     {option.icon && <span className="flex shrink-0 items-center">{option.icon}</span>}
