@@ -18,7 +18,7 @@ export function ServicesMobile({
 }: {
   iconMap: Record<string, ReactNode>;
 }) {
-  const { eyebrow, heading, description, items } = siteConfig.services;
+  const { eyebrow, heading, items } = siteConfig.services;
 
   const swiperRef = useRef<SwiperClass | null>(null);
   const [active, setActive] = useState(0);
@@ -70,7 +70,7 @@ export function ServicesMobile({
           {heading}
         </h2>
 
-        <p
+        {/* <p
           className="font-body font-normal m-0"
           style={{
             fontSize: "clamp(15px, 4.2vw, 20px)",
@@ -81,14 +81,14 @@ export function ServicesMobile({
           }}
         >
           {description}
-        </p>
+        </p> */}
 
         <div
           aria-hidden="true"
           style={{
             height: 1,
             background: "rgba(255,255,255,0.3)",
-            marginTop: "clamp(22px, 6.4vw, 32px)",
+            marginTop: "clamp(10px, 3vw, 14px)",
           }}
         />
 

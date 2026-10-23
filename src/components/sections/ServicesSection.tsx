@@ -1,4 +1,4 @@
-﻿import { useRef, useState, useEffect } from 'react'
+﻿import { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { motion, useMotionValue, useTransform, useInView } from 'framer-motion'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
@@ -32,7 +32,7 @@ export function ServicesSection() {
 }
 
 function ServicesDesktop() {
-  const { eyebrow, heading, description, items } = siteConfig.services
+  const { eyebrow, heading, items } = siteConfig.services
 
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -45,29 +45,7 @@ function ServicesDesktop() {
 
   const sectionRef = useRef<HTMLElement>(null)
   const pinRef = useRef<HTMLDivElement>(null)
-  const lineRef = useRef<HTMLDivElement>(null)
 
-  // The section pins (and the cards start moving) once the line under the
-  // title lines up with the navbar's bottom line. The sticky offset is
-  // therefore negative: navbar height minus the line's offset in the block.
-  const [pinTop, setPinTop] = useState(0)
-  const pinTopRef = useRef(0)
-  useEffect(() => {
-    const measure = () => {
-      const pin = pinRef.current
-      const line = lineRef.current
-      if (!pin || !line) return
-      const header = document.querySelector('[role="banner"]') as HTMLElement | null
-      const headerH = header ? header.offsetHeight : 0
-      const offset = line.getBoundingClientRect().top - pin.getBoundingClientRect().top
-      const next = Math.round(headerH - offset)
-      pinTopRef.current = next
-      setPinTop(next)
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [])
   const scrollYMV = useMotionValue(0)
 
   useEffect(() => {
@@ -86,7 +64,7 @@ function ServicesDesktop() {
     const pinH = pinRef.current?.offsetHeight ?? window.innerHeight
 
     const scrollableDistance = rect.height - pinH
-    const raw = (pinTopRef.current - rect.top) / Math.max(1, scrollableDistance)
+    const raw = (-rect.top) / Math.max(1, scrollableDistance)
 
     return Math.max(0, Math.min(1, raw))
   }
@@ -97,6 +75,19 @@ function ServicesDesktop() {
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
+
+  // All cards share the height of the tallest one. Cards render at natural
+  // height first (cardH === null), then the max is measured and applied.
+  const [measured, setMeasured] = useState<{ scale: number; items: unknown; h: number } | null>(null)
+  const cardH = measured && measured.scale === scale && measured.items === items ? measured.h : null
+  const rowsRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    if (cardH !== null) return
+    const cards = rowsRef.current?.querySelectorAll<HTMLElement>('[data-service-card]')
+    if (!cards?.length) return
+    const h = Math.ceil(Math.max(...Array.from(cards, (c) => c.offsetHeight)))
+    setMeasured({ scale, items, h })
+  }, [cardH, scale, items])
 
   const cardW = CARD_W * scale
   const gap = GAP * scale
@@ -138,10 +129,10 @@ function ServicesDesktop() {
         ref={pinRef}
         style={{
           position: isDesktop ? 'sticky' : 'relative',
-          top: isDesktop ? pinTop : 0,
+          top: 0,
           // height: isDesktop ? '115vh' : 'auto',
           overflow: 'hidden',
-          paddingBottom: '120px',
+          paddingBottom: '32px',
         }}
       >
         <div
@@ -185,7 +176,7 @@ function ServicesDesktop() {
               <h2
                 className="text-section-title"
                 style={{
-                  lineHeight: '67px',
+                  lineHeight: '46px',
                   color: '#FFFFFF',
                   margin: 0,
                 }}
@@ -194,7 +185,7 @@ function ServicesDesktop() {
               </h2>
             </FadeIn>
 
-            <FadeIn direction="up" delay={0.28}>
+            {/* <FadeIn direction="up" delay={0.28}>
               <p
                 className="text-section-subtitle"
                 style={{
@@ -206,14 +197,13 @@ function ServicesDesktop() {
               >
                 {description}
               </p>
-            </FadeIn>
+            </FadeIn> */}
 
             <FadeIn direction="none" delay={0.38}>
               <div
-                ref={lineRef}
                 style={{
                   position: 'relative',
-                  marginTop: '18px',
+                  marginTop: '8px',
                   overflow: 'hidden',
                   height: '1px',
                 }}
@@ -262,6 +252,7 @@ function ServicesDesktop() {
             marginTop: '21px',
           }}
           aria-label="Service cards"
+          ref={rowsRef}
         >
           {isDesktop ? (
             <>
@@ -280,6 +271,7 @@ function ServicesDesktop() {
                     title={service.title}
                     bullets={service.bullets}
                     width={cardW}
+                    height={cardH ?? undefined}
                     href={SERVICE_LINKS[service.id]}
                   />
                 ))}
@@ -301,6 +293,7 @@ function ServicesDesktop() {
                     title={service.title}
                     bullets={service.bullets}
                     width={cardW}
+                    height={cardH ?? undefined}
                     href={SERVICE_LINKS[service.id]}
                   />
                 ))}

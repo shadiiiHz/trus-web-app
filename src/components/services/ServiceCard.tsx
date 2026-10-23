@@ -13,6 +13,8 @@ interface ServiceCardProps {
   width?: number;
   /** Link the whole card to a service detail page. */
   href?: string;
+  /** Desktop only: explicit height in px (tallest card of the set); hugs content when omitted. */
+  height?: number;
 }
 
 export function ServiceCard({
@@ -23,15 +25,17 @@ export function ServiceCard({
   dark = false,
   width = 305,
   href,
+  height,
 }: ServiceCardProps) {
   const card = (
     <div
+      data-service-card
       style={{
         width: fluid ? "100%" : `${width}px`,
         minWidth: fluid ? 0 : `${width}px`,
-        height: fluid ? "auto" : "275px",
+        height: fluid || height === undefined ? "auto" : `${height}px`,
         borderRadius: "16px",
-        padding: "14px",
+        padding: "8px",
         background: dark ? "#000000" : "#FFFFFF",
         border: dark ? "1px solid rgba(255,255,255,0.3)" : "none",
         boxSizing: "border-box",
