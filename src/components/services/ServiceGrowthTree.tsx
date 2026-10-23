@@ -180,7 +180,7 @@ const MOBILE_LABELS: ReadonlyArray<{ id: string; x: number; y: number }> = [
   { id: "email-marketing", x: 22, y: 7 },
   { id: "social-media", x: 49.7, y: 16.6 },
   { id: "multilingual", x: 76, y: 24.5 },
-  { id: "web-design", x: 83.1, y: 10.3 },
+  { id: "web-design", x: 88.5, y: 9.2 },
   { id: "youtube", x: 23.6, y: 23 },
   { id: "brand-identity", x: 87.5, y: 37 },
   { id: "auto-post", x: 80.5, y: 52.4 },
