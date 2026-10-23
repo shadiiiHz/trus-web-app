@@ -127,16 +127,14 @@ const teamMeta = [
 ];
 
 const serviceMeta = [
-  { id: "seo" },
-  { id: "web-dev" },
+  { id: "business-growth" },
+  { id: "multilingual" },
   { id: "web-design" },
   { id: "branding" },
+  { id: "seo" },
   { id: "social-media" },
-  { id: "lead-maker" },
-  { id: "ai-agent" },
-  { id: "content" },
-  { id: "email-marketing" },
-  { id: "analytics" },
+  { id: "lead-email" },
+  { id: "youtube" },
 ];
 
 // Services page hero — the animated circuit-tree diagram. Each node's `id`
@@ -146,15 +144,19 @@ const serviceMeta = [
 // order of `servicesPage.hero.nodes` in the locale JSON files (zipped by
 // index via `merge()` below).
 const servicesTreeMeta = [
-  { id: "website-design" },
-  { id: "landing-page-builder" },
-  { id: "instagram-autopilot" },
-  { id: "lead-finder" },
-  { id: "smart-newsletter" },
-  { id: "followup" },
-  { id: "content-studio" },
-  { id: "linkedin-autopilot" },
-  { id: "lead-generation" },
+  { id: "seo" },
+  { id: "growth-intelligence" },
+  { id: "email-marketing" },
+  { id: "social-media" },
+  { id: "multilingual" },
+  { id: "web-design" },
+  { id: "youtube" },
+  { id: "brand-identity" },
+  { id: "auto-post" },
+  { id: "telegram" },
+  { id: "instagram" },
+  { id: "x-content" },
+  { id: "linkedin" },
 ];
 
 // Services page list section — hover-to-reveal service breakdown below the
@@ -173,18 +175,22 @@ const servicesListMeta = [
   // its play button opens a YouTube popup. Remove/replace once real
   // per-service videos are supplied for the rest.
   {
-    id: "website-design",
+    id: "growth-intelligence",
     media: "/services/video.png",
     youtubeId: "aqz-KE-bpKQ",
   },
-  { id: "landing-page-builder", media: "/services/video.png" },
-  { id: "content-studio", media: "/services/video.png" },
-  { id: "instagram-autopilot", media: "/services/video.png" },
-  { id: "linkedin-autopilot", media: "/services/video.png" },
-  { id: "smart-newsletter", media: "/services/video.png" },
-  { id: "lead-finder", media: "/services/video.png" },
-  { id: "lead-generation", media: "/services/video.png" },
-  { id: "followup", media: "/services/video.png" },
+  { id: "multilingual", media: "/services/video.png" },
+  { id: "web-design", media: "/services/video.png" },
+  { id: "brand-identity", media: "/services/video.png" },
+  { id: "seo", media: "/services/video.png" },
+  { id: "social-media", media: "/services/video.png" },
+  { id: "email-marketing", media: "/services/video.png" },
+  { id: "youtube", media: "/services/video.png" },
+  { id: "telegram", media: "/services/video.png" },
+  { id: "instagram", media: "/services/video.png" },
+  { id: "linkedin", media: "/services/video.png" },
+  { id: "x-content", media: "/services/video.png" },
+  { id: "auto-post", media: "/services/video.png" },
 ];
 
 // Per-category screenshots + the live site each template card links out to

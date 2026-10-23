@@ -28,7 +28,7 @@ const TrusAiIllustration = lazy(() => import("./TrusAiIllustration"));
  * siteConfig (`servicesPage.hero.nodes`).
  */
 
-type Side = "top" | "bottom" | "left" | "right";
+type Side = "top" | "bottom" | "left" | "right" | "center";
 
 interface Point {
   x: number;
@@ -69,73 +69,23 @@ const CENTER_X = LETTERBOX_OFFSET_X + 494.25 * LETTERBOX_SCALE;
 const CENTER_Y = 333.8 * LETTERBOX_SCALE;
 const CARD_HALF = 86 * LETTERBOX_SCALE;
 
-// Nine branch tips + one interior waypoint each, both traced against a
-// 2.5x-scaled render of the actual artwork (screenshot px / 0.4767 ≈ vb
-// units) so the curve hugs the real drawn line instead of approximating it.
+// Thirteen service labels. `x`/`y` is each pill's center in this frame,
+// mapped from the Figma frame (same artwork, so positions are relative to
+// the center card).
 const NODE_LAYOUT: NodeLayout[] = [
-  {
-    id: "website-design",
-    x: 501.5,
-    y: 48,
-    side: "top",
-    mids: [{ x: 525, y: 230 }],
-  },
-  {
-    id: "landing-page-builder",
-    x: 350,
-    y: 45,
-    side: "left",
-    mids: [
-      { x: 377, y: 305 },
-      { x: 334, y: 229 },
-    ],
-  },
-  {
-    id: "instagram-autopilot",
-    x: 305,
-    y: 145,
-    side: "left",
-    mids: [
-      { x: 377, y: 334 },
-      { x: 310, y: 291 },
-    ],
-  },
-  {
-    id: "lead-finder",
-    x: 573,
-    y: 109.5,
-    side: "right",
-    mids: [{ x: 593, y: 288 }],
-  },
-  {
-    id: "smart-newsletter",
-    x: 710,
-    y: 225,
-    side: "right",
-    mids: [{ x: 691, y: 379 }],
-  },
-  { id: "followup", x: 255, y: 341, side: "left", mids: [{ x: 238, y: 520 }] },
-  {
-    id: "content-studio",
-    x: 702,
-    y: 360,
-    side: "right",
-    mids: [{ x: 739, y: 510 }],
-  },
-  {
-    id: "linkedin-autopilot",
-    x: 355,
-    y: 408,
-    side: "left",
-    mids: [{ x: 310, y: 548 }],
-  },
-  {
-    id: "lead-generation",
-    x: 636,
-    y: 440,
-    side: "bottom",
-    mids: [{ x: 634, y: 596 }],
-  },
+  { id: "seo", x: 388.3, y: 9.3, side: "center", mids: [] },
+  { id: "growth-intelligence", x: 510.2, y: 41.8, side: "center", mids: [] },
+  { id: "email-marketing", x: 265, y: 60.3, side: "center", mids: [] },
+  { id: "social-media", x: 396.9, y: 100.1, side: "center", mids: [] },
+  { id: "multilingual", x: 733.6, y: 57.7, side: "center", mids: [] },
+  { id: "web-design", x: 624.9, y: 117.3, side: "center", mids: [] },
+  { id: "youtube", x: 270.3, y: 204, side: "center", mids: [] },
+  { id: "brand-identity", x: 673.3, y: 204, side: "center", mids: [] },
+  { id: "auto-post", x: 778, y: 233, side: "center", mids: [] },
+  { id: "telegram", x: 266.3, y: 342, side: "center", mids: [] },
+  { id: "instagram", x: 298.8, y: 405, side: "center", mids: [] },
+  { id: "x-content", x: 779, y: 361, side: "center", mids: [] },
+  { id: "linkedin", x: 617.6, y: 460, side: "center", mids: [] },
 ];
 
 /** Clamped, uniform Catmull-Rom through `pts`, as cubic-bezier segments (one per consecutive pair). */
@@ -225,14 +175,19 @@ function branchLoopPath(node: NodeLayout) {
 const MOBILE_VB_W = 922;
 const MOBILE_VB_H = 847;
 const MOBILE_LABELS: ReadonlyArray<{ id: string; x: number; y: number }> = [
-  { id: "website-design", x: 61, y: 2 },
-  { id: "landing-page-builder", x: 20.2, y: 5 },
-  { id: "lead-finder", x: 69, y: 16 },
-  { id: "smart-newsletter", x: 84.8, y: 36.8 },
-  { id: "followup", x: 5, y: 47 },
-  { id: "linkedin-autopilot", x: 24.1, y: 67 },
-  { id: "content-studio", x: 81.8, y: 66 },
-  { id: "lead-generation", x: 73, y: 75 },
+  { id: "seo", x: 36.4, y: -0.2 },
+  { id: "growth-intelligence", x: 59.3, y: 5.7 },
+  { id: "email-marketing", x: 22, y: 7 },
+  { id: "social-media", x: 49.7, y: 16.6 },
+  { id: "multilingual", x: 76, y: 24.5 },
+  { id: "web-design", x: 83.1, y: 10.3 },
+  { id: "youtube", x: 23.6, y: 23 },
+  { id: "brand-identity", x: 87.5, y: 37 },
+  { id: "auto-post", x: 80.5, y: 52.4 },
+  { id: "telegram", x: 22, y: 49.4 },
+  { id: "instagram", x: 31, y: 64.9 },
+  { id: "x-content", x: 82.9, y: 65.8 },
+  { id: "linkedin", x: 73.9, y: 72.9 },
 ];
 
 const pct = (x: number, y: number) => ({
@@ -245,6 +200,7 @@ const sideTransform: Record<Side, string> = {
   bottom: "translate(-50%, 2px)",
   left: "translate(calc(-100% - 2px), -50%)",
   right: "translate(2px, -50%)",
+  center: "translate(-50%, -50%)",
 };
 
 export function ServiceGrowthTree() {
@@ -288,21 +244,37 @@ export function ServiceGrowthTree() {
     // read off the Figma mobile frame). Instagram Autopilot has no spot in
     // that design, so it's omitted here; it stays reachable in the list.
     return (
-      <div className="w-full">
+      <div className="-mx-5 overflow-hidden">
+        {/* Mobile frame: 350×400. The artwork is a touch wider than the frame
+            (slightly cropped) so the labels keep a gutter on both sides; the
+            pills scale with it. */}
+        <div className="relative mx-auto overflow-hidden" style={{ width: 350, height: 400 }}>
+        {/* Artwork layer: zoomed past the frame (branches get cropped, as in
+            Figma) around the same card-center point the labels are laid out on. */}
         <div
-          className="relative mx-auto w-full select-none"
-          style={{ maxWidth: 480, aspectRatio: `${MOBILE_VB_W} / ${MOBILE_VB_H}` }}
-          aria-label="TruS growth services map"
+          aria-hidden="true"
+          className="pointer-events-none absolute select-none"
+          style={{ left: -56.5, top: 4.1, width: 432, height: 397 }}
         >
           <Suspense fallback={null}>
-            {/* The artwork's own content (card + rings) sits right of its
-                canvas center, so nudge it left to center it in the column. */}
             <TrusAiIllustration
               className="absolute inset-0 h-full w-full"
-              style={{ objectFit: "contain", transform: "translateX(-3.6%)" }}
+              style={{ objectFit: "contain" }}
             />
           </Suspense>
-
+        </div>
+        <div
+          className="absolute select-none"
+          style={{
+            left: "calc(50% - 62.2%)",
+            top: "50%",
+            width: "116%",
+            transform: "translateY(-50%)",
+            aspectRatio: `${MOBILE_VB_W} / ${MOBILE_VB_H}`,
+            containerType: "inline-size",
+          }}
+          aria-label="TruS growth services map"
+        >
           {MOBILE_LABELS.map((m) => (
             <a
               key={m.id}
@@ -313,9 +285,10 @@ export function ServiceGrowthTree() {
                 left: `${m.x}%`,
                 top: `${m.y}%`,
                 transform: "translate(-50%, -50%)",
-                fontSize: "12px",
-                lineHeight: "16px",
-                padding: "5px 8px",
+                fontSize: "2.2cqw",
+                lineHeight: 1.3,
+                padding: "0.4em 0.65em",
+                borderRadius: "6px",
               }}
             >
               <div aria-hidden="true" className="service-label-border">
@@ -328,6 +301,7 @@ export function ServiceGrowthTree() {
             </a>
           ))}
         </div>
+        </div>
       </div>
     );
   }
@@ -336,7 +310,7 @@ export function ServiceGrowthTree() {
     <div className="w-full">
       <div
         className="relative ml-auto w-full select-none"
-        style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}` }}
+        style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}`, containerType: "inline-size" }}
         aria-label="TruS growth services map"
       >
         <Suspense fallback={null}>
@@ -355,8 +329,9 @@ export function ServiceGrowthTree() {
               style={{
                 ...pct(b.layout.x, b.layout.y),
                 transform: sideTransform[b.layout.side],
-                fontSize: "12px",
-                padding: "4px 7px",
+                fontSize: "1.2876cqw",
+                padding: "0.333em 0.583em",
+                borderRadius: "8px",
               }}
             >
               <div aria-hidden="true" className="service-label-border">

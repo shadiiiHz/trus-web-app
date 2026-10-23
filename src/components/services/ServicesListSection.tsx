@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
@@ -10,7 +10,7 @@ import { VideoModal } from "@/components/services/VideoModal";
  * "TRUS AI Services" list — one row per service. Hovering (or tapping, on
  * touch) a row's content — its title or its media thumbnail — makes that
  * row the active one: its bullet and title both slide through the same
- * vertical "reel" (see `Bullet` and the title span below) to their active
+ * vertical "reel" (see the title span below) to their active
  * color, and its thumbnail (placeholder media for now, see
  * `servicesListMeta` in site.config.ts) expands into the row. Only one row
  * is active at a time; none are active on load — all rows start "off"
@@ -143,7 +143,7 @@ export function ServicesListSection() {
       <div className="mx-auto w-full max-w-330 px-5 pt-14 pb-12 lg:py-28">
         <FadeIn direction="up" delay={0.05}>
           <span
-            className="font-body text-[11px] font-normal uppercase tracking-[0.12em] lg:text-body lg:tracking-[0.22em]"
+            className="font-body text-[12px] font-normal uppercase tracking-[0.12em] lg:text-body lg:tracking-[0.22em]"
             style={{ color: "#9F7EE1" }}
           >
             {eyebrow}
@@ -151,7 +151,7 @@ export function ServicesListSection() {
         </FadeIn>
 
         <FadeIn direction="up" delay={0.14}>
-          <h2 className="font-hero font-bold text-[24px] leading-[1.2] mt-2 text-brand-white lg:text-[58px] lg:leading-normal lg:mt-1">
+          <h2 className="font-hero font-bold text-[26px] leading-[1.2] mt-2 text-brand-white lg:text-[38px] lg:leading-normal lg:mt-1">
             {heading}
           </h2>
         </FadeIn>
@@ -210,6 +210,20 @@ function ServiceRow({
   onPlay: () => void;
   delay: number;
 }) {
+  // The title wraps onto several lines, so the reel window is measured
+  // (one copy's height) instead of being a fixed single-line height.
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const [titleH, setTitleH] = useState(0);
+  useLayoutEffect(() => {
+    const el = titleRef.current;
+    if (!el) return;
+    const measure = () => setTitleH(el.offsetHeight);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div
       id={item.id}
@@ -221,31 +235,33 @@ function ServiceRow({
       tabIndex={0}
       role="button"
       aria-pressed={isActive}
-      className={`grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-3 py-6 outline-none lg:grid-cols-[minmax(260px,360px)_1fr_minmax(200px,303px)] lg:gap-8 lg:py-7 ${isLast ? "" : "border-b border-white/30"}`}
+      className={`grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-3 py-6 outline-none lg:grid-cols-[minmax(260px,600px)_1fr_minmax(200px,303px)] lg:gap-8 lg:py-7 ${isLast ? "" : "border-b border-white/30"}`}
     >
-      {/* Title + bullet — both are a vertical "reel" of two stacked
+      {/* Title — a vertical "reel" of two stacked
           duplicate copies (idle-gray on top, active-purple/white directly
           below) inside a same-size overflow-hidden window. Activating
           slides the stack up by exactly one copy-height to reveal the
           other, instead of fading/spinning between colors. */}
-      <div className="flex items-end gap-2.5">
-        <Bullet active={isActive} />
+      <div>
         <span
-          className="relative inline-block overflow-hidden h-[1.3em] lg:h-[1.8em]"
+          className="relative block overflow-hidden"
+          style={{ height: titleH || undefined }}
         >
           <motion.span
-            animate={{ y: isActive ? "-50%" : "0%" }}
+            animate={{ y: isActive ? -titleH : 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col"
           >
             <span
-              className="font-body text-[19px] leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
+              ref={titleRef}
+              className="block font-body text-[20px] leading-[1.6] font-semibold tracking-wide uppercase whitespace-pre-line lg:text-[32px] lg:leading-[1.8]"
               style={{ color: "#707075" }}
             >
               {item.title}
             </span>
             <span
-              className="font-body text-[19px] leading-tight font-semibold tracking-wide whitespace-nowrap uppercase lg:text-[24px]"
+              aria-hidden="true"
+              className="block font-body text-[20px] leading-[1.6] font-semibold tracking-wide uppercase whitespace-pre-line lg:text-[32px] lg:leading-[1.8]"
               style={{ color: "#FFFFFF" }}
             >
               {item.title}
@@ -267,7 +283,7 @@ function ServiceRow({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative my-2 w-full overflow-hidden rounded-md border border-white/20 lg:my-0 lg:ml-auto lg:mr-14 lg:w-[306.5px]"
+              className="relative my-2 w-full overflow-hidden rounded-md border border-white/20 lg:my-0 lg:ml-auto lg:mr-0 lg:w-[306.5px]"
               style={{
                 aspectRatio: "306.5 / 221.15",
               }}
@@ -276,7 +292,7 @@ function ServiceRow({
                 <iframe
                   className="pointer-events-none h-full w-full"
                   src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${item.youtubeId}&controls=0&modestbranding=1&rel=0&playsinline=1`}
-                  title={`${item.title} preview`}
+                  title={`${item.title.replace(/\n/g, " ")} preview`}
                   allow="autoplay; encrypted-media"
                 />
               ) : (
@@ -324,51 +340,15 @@ function ServiceRow({
         style={{ color: isActive ? "#FFFFFF" : "#707075" }}
       >
         {item.eyebrow && (
-          <p className="mb-1.5 font-body text-body uppercase tracking-[0.14em]">
+          <p className="mb-3 font-body text-[16px] font-bold leading-[18.75px] tracking-normal lg:tracking-[-0.5px]">
             {item.eyebrow}
           </p>
         )}
-        <p className="font-body text-body-sm">
+        <p className="font-body text-body-sm whitespace-pre-line">
           {item.description}
         </p>
       </div>
     </div>
-  );
-}
-
-/**
- * Target-style bullet (outer ring + concentric inner dot, per the Figma
- * spec). Same reel mechanism as the title next to it: two full copies
- * (idle-gray, active-purple) stacked inside a bullet-sized
- * overflow-hidden window, sliding via translateY(-50%) on a 200%-tall
- * inner column — not a separate spin/fill effect.
- */
-function Bullet({ active }: { active: boolean }) {
-  return (
-    <span
-      className="relative inline-block shrink-0 overflow-hidden rounded-full mb-[4.3px]"
-      style={{ width: 15, height: 15 }}
-    >
-      <motion.span
-        animate={{ y: active ? "-50%" : "0%" }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col"
-      >
-        <BulletFace color="#707075" />
-        <BulletFace color="#9F7EE1" />
-      </motion.span>
-    </span>
-  );
-}
-
-function BulletFace({ color }: { color: string }) {
-  return (
-    <span
-      className="flex items-center justify-center rounded-full"
-      style={{ width: 15, height: 15, border: `1.5px solid ${color}` }}
-    >
-      <span className="rounded-full" style={{ width: 10, height: 10, background: color }} />
-    </span>
   );
 }
 

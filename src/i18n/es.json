@@ -168,44 +168,103 @@
     "description": "Soluciones digitales integrales que incluyen desarrollo web a medida, hosting empresarial, SEO, automatización con IA y marketing orientado al rendimiento, todo diseñado para ayudar a que tu negocio crezca.",
     "items": [
       {
-        "title": "SEO",
-        "description": "Mejora la visibilidad con estrategias de búsqueda inteligentes y tráfico orgánico."
+        "title": "Inteligencia y Solución de Crecimiento Empresarial",
+        "bullets": [
+          "Descubrimiento y análisis empresarial con IA",
+          "Detección de problemas y cuellos de botella",
+          "Análisis de crecimiento y estrategia de IA",
+          "Asignación de problemas a agentes de IA",
+          "Resolución de problemas con agentes de IA",
+          "Reserva de reuniones online con IA",
+          "Monitoreo, informes y optimización",
+          "Ecosistema de crecimiento de lead a cliente"
+        ]
       },
       {
-        "title": "Desarrollo Web",
-        "description": "Construcción de sitios web rápidos, responsivos y escalables con tecnologías modernas."
+        "title": "Estrategia de Crecimiento Multilingüe y Localizada",
+        "bullets": [
+          "Contenido multilingüe con IA",
+          "Cuentas de redes sociales localizadas",
+          "Generación de leads geolocalizada",
+          "Boletines y contacto en el idioma del mercado",
+          "Publicación y programación por mercado",
+          "Monitoreo y analítica entre mercados",
+          "Crecimiento global escalable con agentes de IA"
+        ]
       },
       {
-        "title": "Diseño Web",
-        "description": "Diseño de interfaces modernas y fáciles de usar que mejoran la usabilidad y el compromiso."
+        "title": "Diseño y Desarrollo Web",
+        "bullets": [
+          "Método TRUS B3D",
+          "Diseño moderno y personalizado",
+          "Desarrollo asistido por IA",
+          "Rápido, seguro y listo para SEO",
+          "Escalable y de alto rendimiento",
+          "Sitios web multilingües y localizados",
+          "Monitoreo e informes con IA",
+          "Soporte y actualizaciones posteriores al lanzamiento"
+        ]
       },
       {
-        "title": "Branding",
-        "description": "Creación de identidades de marca distintivas que dejan una impresión duradera."
+        "title": "Identidad de Marca y Diseño de Logotipo",
+        "bullets": [
+          "Diseño de identidad de marca",
+          "Diseño de logotipo con IA",
+          "Sistema de color y tipografía",
+          "Estilo visual y guías de marca",
+          "Kit de marca para redes sociales",
+          "Coherencia de marca entre mercados"
+        ]
       },
       {
-        "title": "Redes Sociales",
-        "description": "Haciendo crecer tu audiencia con contenido social atractivo y alineado con tu marca."
+        "title": "SEO y Optimización de Contenido",
+        "bullets": [
+          "SEO técnico y on-page",
+          "Optimización de contenido y palabras clave",
+          "SEO con IA",
+          "Optimización para búsqueda con IA",
+          "SEO multilingüe y geolocalizado",
+          "Monitoreo SEO continuo",
+          "Analítica e informes de rendimiento"
+        ]
       },
       {
-        "title": "Generador de leads",
-        "description": "Creación de sistemas enfocados en la conversión que ayudan a convertir visitantes en clientes potenciales."
+        "title": "Creación y Publicación de Contenido en Redes Sociales",
+        "bullets": [
+          "Creación de contenido con IA",
+          "Publicación automática multiplataforma",
+          "Contenido multilingüe y localizado",
+          "Estrategia de cuentas sociales multilingües",
+          "Monitoreo de interacción y seguimiento con IA",
+          "Analítica de rendimiento entre mercados",
+          "Optimización continua del contenido"
+        ]
       },
       {
-        "title": "Agente de IA",
-        "description": "Creación de asistentes inteligentes y automatizaciones que respaldan los flujos de trabajo empresariales."
+        "title": "Crecimiento por Email de Lead a Cliente",
+        "bullets": [
+          "Segmentación de audiencia con IA",
+          "Buscador de leads con IA",
+          "Conteo y ciclos de leads con IA",
+          "Creador de boletines con IA",
+          "Email marketing con IA",
+          "Contacto multilingüe",
+          "Interacción y seguimiento",
+          "Conversión de lead a cliente"
+        ]
       },
       {
-        "title": "Generación de contenido",
-        "description": "Creación de contenido digital atractivo que conecta a las marcas con su audiencia."
-      },
-      {
-        "title": "Email Marketing",
-        "description": "Diseño de campañas de email dirigidas que nutren leads e impulsan negocios recurrentes."
-      },
-      {
-        "title": "Analítica",
-        "description": "Convirtiendo datos en información clara que guía decisiones empresariales más inteligentes."
+        "title": "Difusor de Crecimiento en YouTube",
+        "bullets": [
+          "Buscador de audiencia y leads con IA",
+          "Boletín en video con IA",
+          "Contacto multilingüe",
+          "Canales por idioma",
+          "Difusión segmentada",
+          "Crecimiento de espectadores y tiempo de visualización con IA",
+          "Información sobre interacción",
+          "Crecimiento empresarial en YouTube"
+        ]
       }
     ]
   },
@@ -329,15 +388,19 @@
       "subtitle": "Experiencia conectada, creada para impulsar tu negocio.",
       "brandTagline": "Growth AI",
       "nodes": [
+        { "label": "SEO y Contenido" },
+        { "label": "Inteligencia de Crecimiento" },
+        { "label": "Email Marketing" },
+        { "label": "Contenido Social" },
+        { "label": "Estrategia Multilingüe" },
         { "label": "Diseño Web" },
-        { "label": "Creador de Landing Pages" },
-        { "label": "Piloto Automático de Instagram" },
-        { "label": "Buscador de Leads" },
-        { "label": "Newsletter Inteligente" },
-        { "label": "Seguimiento" },
-        { "label": "Estudio de Contenido" },
-        { "label": "Piloto Automático de LinkedIn" },
-        { "label": "Generación de Leads" }
+        { "label": "YouTube Broadcaster" },
+        { "label": "Identidad de Marca" },
+        { "label": "Auto Post" },
+        { "label": "Canal de Telegram" },
+        { "label": "Contenido Instagram" },
+        { "label": "Contenido X" },
+        { "label": "Contenido LinkedIn" }
       ]
     },
     "list": {
@@ -345,40 +408,69 @@
       "heading": "TRUS AI Services",
       "items": [
         {
-          "title": "Diseño Web",
-          "description": "Obtén un sitio web moderno y responsive, diseñado en torno a tu marca, tus objetivos de negocio y tus clientes, combinando una estructura clara, elementos visuales cuidados y una usabilidad fluida."
+          "title": "Inteligencia y Solución de\nCrecimiento Empresarial",
+          "eyebrow": "Encuentra el cuello de botella. Construye la estrategia correcta. Crece con más inteligencia.",
+          "description": "TRUS ayuda a las empresas a entender qué frena su crecimiento. Analiza su presencia digital, marketing, recorrido del cliente y puntos de conversión para identificar los problemas y oportunidades más importantes. Con base en estos hallazgos, TRUS crea una estrategia de crecimiento enfocada y conecta cada necesidad con los agentes de IA y las soluciones adecuados. Luego monitorea los resultados, optimiza lo que necesita mejorar y ayuda a convertir oportunidades en clientes.\nEl resultado es un ecosistema de crecimiento inteligente que ayuda a las empresas a identificar y eliminar las verdaderas barreras al crecimiento, tomar decisiones más precisas y crecer con mayor enfoque."
         },
         {
-          "title": "Creador de Landing Pages",
-          "description": "Crea rápidamente landing pages responsive orientadas a la conversión. Convierte tus ideas de campaña en páginas pulidas que captan la atención y fomentan la acción."
+          "title": "Estrategia de Crecimiento\nMultilingüe y Localizada",
+          "eyebrow": "Convierte el alcance global en decisiones de crecimiento más inteligentes",
+          "description": "Entrar en nuevos mercados no debería basarse en suposiciones. TRUS ayuda a las empresas a probar diferentes idiomas, ciudades y países, comparar la respuesta real de la audiencia y descubrir dónde están las mayores oportunidades.\nCon el tiempo, las empresas pueden ver qué mercados responden mejor, qué idiomas generan más interacción y dónde deben centrarse los esfuerzos de marketing futuros. Así, la expansión internacional se convierte en un proceso de crecimiento medible y basado en datos."
         },
         {
-          "title": "Content Studio",
-          "description": "Crea contenido atractivo y coherente con tu marca para cada canal. Content Studio convierte tus ideas en contenido claro y persuasivo, adaptado a tu audiencia."
+          "title": "Diseño y Desarrollo Web",
+          "eyebrow": "Convierte tu visión en una experiencia digital",
+          "description": "Tu sitio web debe hacer más que verse bien; debe apoyar cómo crece, se comunica y rinde tu negocio en línea. TRUS transforma tus ideas en una experiencia digital a medida, construida en torno a tu marca, tus usuarios y tus necesidades futuras, con la flexibilidad para evolucionar a medida que tu negocio crece."
         },
         {
-          "title": "Piloto Automático de Instagram",
-          "description": "Crea y publica publicaciones atractivas en Instagram con menos esfuerzo. Mantén una presencia visual consistente mientras tu contenido se mantiene fresco y relevante."
+          "title": "Identidad de Marca y Diseño de Logotipo",
+          "eyebrow": "Convierte tu negocio en una marca distintiva",
+          "description": "Una marca sólida es más que un logotipo; es la forma en que las personas reconocen, recuerdan y se conectan con tu negocio. TRUS ayuda a definir una dirección visual distintiva que da a tu negocio una personalidad clara y hace que cada punto de contacto con el cliente se sienta conectado, intencional y únicamente tuyo."
         },
         {
-          "title": "Piloto Automático de LinkedIn",
-          "description": "Crea y publica contenido profesional en LinkedIn que fortalezca tu marca, comunique tu experiencia y mantenga a tu audiencia siempre comprometida."
+          "title": "SEO y Optimización de Contenido",
+          "eyebrow": "Convierte la visibilidad en búsquedas en crecimiento del negocio",
+          "description": "Construye una presencia digital más sólida con SEO, contenido optimizado, mejoras asistidas por IA y optimización continua del rendimiento, diseñados para ayudar a que tu marca sea descubierta y crezca."
         },
         {
-          "title": "Newsletter Inteligente",
-          "description": "Crea newsletters profesionales en menos tiempo. Smart Newsletter convierte tus objetivos y contenidos en correos atractivos diseñados para tu audiencia."
+          "title": "Creación y Publicación de Contenido\nen Redes Sociales",
+          "eyebrow": "Convierte la presencia social en conocimiento del mercado",
+          "description": "TRUS ayuda a convertir tu actividad diaria de negocio en comunicación estructurada en diferentes idiomas y mercados. Al conectar el contenido adecuado con la audiencia adecuada y mantener cada mercado enfocado con su propia presencia social, tu negocio puede construir conexiones locales más fuertes y ver dónde crecen el interés y la interacción.\nCon el tiempo, estas señales te ayudan a identificar qué idiomas, audiencias y mercados merecen más atención, para que tu presencia en redes sociales apoye decisiones de crecimiento más inteligentes y enfocadas."
         },
         {
-          "title": "Buscador de Leads",
-          "description": "Encuentra a los prospectos correctos más rápido. Lead Finder analiza datos de negocio para identificar leads relevantes y de alto potencial que coincidan con tu cliente ideal."
+          "title": "Crecimiento por Email\nde Lead a Cliente",
+          "eyebrow": "Convierte el contacto dirigido en oportunidades de negocio reales",
+          "description": "TRUS conecta la segmentación de audiencia con IA, el descubrimiento de leads, la creación de boletines y el email marketing inteligente en un único flujo de crecimiento. Te ayuda a encontrar a los prospectos adecuados, comunicarte con ellos en el idioma y el contexto de mercado que les corresponde y mejorar continuamente el contacto futuro según su respuesta.\nAl monitorear la interacción, aprender del comportamiento de la audiencia y dar seguimiento a los leads interesados, TRUS acerca cada oportunidad a una relación real con el cliente y apoya un crecimiento empresarial más enfocado."
         },
         {
-          "title": "Generación de Leads",
-          "description": "Atrae y capta nuevos clientes potenciales mediante campañas dirigidas y experiencias optimizadas, convirtiendo el interés de la audiencia en oportunidades de negocio cualificadas."
+          "title": "Difusor de Crecimiento en YouTube",
+          "eyebrow": "Convierte cada video en una nueva oportunidad de crecimiento",
+          "description": "Tu contenido de YouTube puede llegar mucho más allá de las personas que ya siguen tu canal. TRUS ayuda a conectar cada video con audiencias relevantes de distintas profesiones, ubicaciones, idiomas y mercados, incluidos canales de YouTube dedicados a idiomas específicos cuando corresponde.\nA medida que las audiencias responden, obtienes una visión más clara de qué temas, idiomas y mercados generan mayor interés. Esto te ayuda a enfocar los esfuerzos futuros de video y marketing donde pueden tener mayor impacto, tanto para tu presencia en YouTube como para el crecimiento de tu negocio."
         },
         {
-          "title": "Seguimiento",
-          "description": "Crea seguimientos personalizados automáticamente, mantén las conversaciones activas y convierte las oportunidades perdidas en interacciones significativas con los clientes."
+          "title": "TRUS Creador y Publicador de\nContenido para Canales de Telegram",
+          "eyebrow": "Construye relaciones directas entre idiomas y mercados",
+          "description": "TRUS te ayuda a convertir novedades del negocio, ofertas, contenido educativo e información útil en comunicación estructurada en Telegram para diferentes audiencias, idiomas y mercados. Cada canal puede tener su propio estilo de contenido, idioma, calendario de publicación y enfoque local, sin dejar de estar conectado a una estrategia de marca coherente.\nAl comparar la actividad de los suscriptores y el rendimiento del contenido entre distintos canales y mercados, puedes entender qué audiencias responden con más fuerza y enfocar la comunicación, las ofertas y los esfuerzos de marketing futuros en las áreas con mayor potencial de crecimiento."
+        },
+        {
+          "title": "TRUS Creador y Publicador\nde Contenido para Instagram",
+          "eyebrow": "Crea para cada audiencia. Aprende de cada mercado",
+          "description": "TRUS te ayuda a construir una presencia en Instagram más enfocada, creando contenido preciso, editable y específico para cada mercado, dirigido a diferentes audiencias, idiomas y cuentas. Cada publicación puede adaptarse al estilo de comunicación, las preferencias y las expectativas de su mercado objetivo y publicarse a través de la cuenta de Instagram adecuada en un horario local apropiado.\nAl comparar la interacción y el rendimiento entre idiomas, cuentas y regiones, puedes descubrir dónde el interés de la audiencia es mayor y concentrar más contenido, esfuerzo de marketing y recursos en los mercados con mayor potencial de crecimiento."
+        },
+        {
+          "title": "TRUS Creador y Publicador de\nContenido para LinkedIn",
+          "eyebrow": "Convierte la experiencia profesional en oportunidad de mercado",
+          "description": "TRUS ayuda a transformar tu experiencia, conocimientos del negocio, servicios y novedades de la empresa en comunicación profesional para LinkedIn, diseñada para industrias, responsables de decisión, idiomas y mercados específicos.\nAl adaptar cómo se comunica tu negocio con diferentes audiencias profesionales y comparar cómo responde cada mercado, puedes descubrir dónde tu experiencia genera mayor interés, qué industrias o regiones merecen más atención y dónde pueden centrarse el marketing B2B y el desarrollo de negocio futuros para lograr mayor potencial de crecimiento."
+        },
+        {
+          "title": "TRUS Creador y Publicador\nde Contenido para X",
+          "eyebrow": "Convierte las conversaciones rápidas en señales de mercado",
+          "description": "TRUS te ayuda a convertir ideas de negocio, novedades, experiencia y temas de actualidad en contenido conciso para X, adaptado a diferentes idiomas, audiencias y mercados. Cada mensaje puede adaptarse al estilo de comunicación de su audiencia objetivo y publicarse desde la cuenta adecuada en el momento local adecuado.\nAl comparar qué temas, idiomas, cuentas y regiones generan más interacción, puedes descubrir dónde las conversaciones están ganando impulso y enfocar el contenido y los esfuerzos de marketing futuros en los mercados con mayor potencial de crecimiento."
+        },
+        {
+          "title": "TRUS Creador y Publicador\nde Auto Post",
+          "eyebrow": "Convierte una actualización en un flujo de contenido multimercado",
+          "description": "Dale a TRUS una actualización del negocio y conviértela en publicaciones listas para publicar en diferentes plataformas, idiomas y mercados objetivo. Cada versión puede adaptarse a la audiencia, enviarse a la cuenta específica del idioma correspondiente y programarse según el mercado local y la zona horaria.\nAl comparar cómo responden las distintas cuentas, idiomas y regiones, TRUS también te ayuda a identificar dónde surgen mejores oportunidades, para que puedas enfocar el contenido y los esfuerzos de marketing futuros en los mercados con mayor potencial de crecimiento."
         }
       ]
     }
@@ -914,6 +1006,277 @@
     "subtitle": "Es posible que la página que buscas se haya movido, cambiado de nombre o nunca haya existido. Volvamos al camino.",
     "home": "Volver al inicio",
     "services": "Ver servicios"
+  },
+
+  "serviceDetail": {
+    "common": {
+      "aboutEyebrow": "Sobre el servicio",
+      "subjectLabel": "Asunto"
+    },
+    "pages": {
+      "seo": {
+        "name": "SEO y Optimización de Contenido",
+        "tagline": ["Mejora Tu Visibilidad.", "Fortalece Tu Marca."],
+        "metaTitle": "SEO y Optimización de Contenido | TruS",
+        "metaDescription": "Mejora tu visibilidad en buscadores con SEO técnico, optimización de contenido, análisis asistido por IA y monitoreo continuo para la búsqueda tradicional y la impulsada por IA.",
+        "about": {
+          "heading": "SEO y Optimización de Contenido",
+          "description": "TRUS mejora tu sitio web y tu contenido mediante SEO técnico, optimización de contenido, análisis asistido por IA, monitoreo continuo y optimización tanto para la búsqueda tradicional como para la búsqueda basada en IA.\nPara empresas que se dirigen a varios mercados, TRUS también ofrece **SEO multilingüe y localizado**, adaptando el contenido, las palabras clave, la intención de búsqueda y las estrategias de optimización a distintos idiomas, países y regiones objetivo.  Esto ayuda a que tu marca sea más fácil de encontrar no solo en un mercado, sino en los mercados e idiomas que importan para tu negocio.",
+          "imageAlt": "Panel de analítica SEO en un portátil"
+        },
+        "gain": {
+          "heading": "Lo Que Obtienes",
+          "items": [
+            "Mejor visibilidad en las búsquedas",
+            "Presencia online más sólida",
+            "Contenido y palabras clave optimizados",
+            "Mejora del SEO más rápida con IA",
+            "Optimización de búsqueda multilingüe y localizada",
+            "Mayor visibilidad en diferentes mercados",
+            "Monitoreo continuo del rendimiento",
+            "Informes claros de crecimiento y rendimiento por mercado"
+          ]
+        },
+        "highlights": {
+          "heading": "Destacados",
+          "items": [
+            "SEO con IA",
+            "Optimización para búsqueda con IA",
+            "SEO técnico y on-page",
+            "SEO multilingüe y localizado",
+            "Optimización de búsqueda geolocalizada",
+            "Monitoreo continuo",
+            "Informes de rendimiento y crecimiento"
+          ],
+          "imageAlt": "Profesional de marketing revisando gráficos de crecimiento"
+        },
+        "contact": {
+          "heading": "¿Listo para Hacer Crecer Tu Negocio?",
+          "description": "Mejora tu visibilidad en los motores de búsqueda, en la búsqueda basada en IA, en distintos idiomas y en tus mercados objetivo.  Cuéntanos sobre tu negocio, tu sitio web y los mercados que quieres alcanzar. TRUS te ayudará a construir la estrategia de SEO y optimización de contenido adecuada para tu crecimiento."
+        }
+      },
+      "webDesign": {
+        "name": "Diseño y Desarrollo Web",
+        "tagline": ["Ve Más Allá de las Plantillas.", "Crea Sin Límites."],
+        "metaTitle": "Diseño y Desarrollo Web | TruS",
+        "metaDescription": "Sitios web con código a medida y asistidos por IA, creados con nuestro Método B3D: Briefing, Design, Develop & Deliver. Rápidos, seguros, escalables y listos para SEO.",
+        "about": {
+          "heading": "Diseño y Desarrollo Web",
+          "description": "TRUS diseña y desarrolla sitios web modernos y de alto rendimiento con nuestro **Método B3D: Briefing, Design, Develop & Deliver.** Trabajamos contigo de cerca en cada etapa, incorporando tus comentarios, preferencias y objetivos de negocio antes de avanzar.\nNuestros sitios web combinan desarrollo con código personalizado y flujos de trabajo asistidos por IA para ofrecer experiencias rápidas, seguras, escalables y listas para SEO, sin las limitaciones de los constructores de sitios tradicionales ni de las plataformas basadas en plantillas.\nPara empresas que se dirigen a varios países o grupos de idiomas, también podemos crear **estructuras web multilingües y localizadas por mercado**. Cada idioma o mercado puede tener sus propias páginas, mensajes, llamadas a la acción, navegación, metadatos y estructura SEO, sin dejar de formar parte de una experiencia de marca coherente.\nEsto permite que tu sitio web crezca con tu negocio y apoye la expansión a nuevos idiomas y mercados geográficos sin tener que reconstruir toda la plataforma.",
+          "imageAlt": "Equipo colaborando en wireframes y diseño web"
+        },
+        "gain": {
+          "heading": "Lo Que Obtienes",
+          "items": [
+            "Un sitio web moderno adaptado a tu marca y a tu negocio",
+            "Colaboración y aprobación total durante todo el proceso B3D",
+            "Arquitectura rápida, segura y lista para SEO",
+            "Desarrollo con código personalizado, con mayor flexibilidad y escalabilidad",
+            "Gran rendimiento y experiencia de usuario",
+            "Arquitectura web multilingüe",
+            "Páginas localizadas para distintos idiomas y mercados objetivo",
+            "Estructuras de idioma y región compatibles con SEO",
+            "Monitoreo continuo de calidad después del lanzamiento",
+            "Soporte continuo, seguimiento, actualizaciones y optimización"
+          ]
+        },
+        "highlights": {
+          "heading": "Destacados",
+          "items": [
+            "Método TRUS B3D",
+            "Desarrollo asistido por IA y con código personalizado",
+            "Diseño moderno e interactivo",
+            "Rápido, seguro y listo para SEO",
+            "Sitios web multilingües y localizados",
+            "Arquitectura escalable de alto rendimiento",
+            "Monitoreo e informes de rendimiento con IA",
+            "Seguimiento y soporte posteriores al lanzamiento"
+          ],
+          "imageAlt": "Sitio web adaptable mostrado en escritorio, portátil y móvil"
+        },
+        "contact": {
+          "heading": "¿Listo para Hacer Crecer Tu Negocio?",
+          "description": "Cuéntanos sobre tu negocio, tus objetivos, tus mercados objetivo y el sitio web que quieres crear.  Ya sea que necesites un sitio web para un solo mercado o una plataforma multilingüe pensada para la expansión futura, TRUS puede ayudarte a convertir tus ideas en una experiencia digital rápida, profesional, escalable y lista para el mercado."
+        }
+      },
+      "brand": {
+        "name": "Identidad de Marca y Diseño de Logotipo",
+        "tagline": ["Crea una Marca que la Gente", "Reconozca y Recuerde."],
+        "metaTitle": "Identidad de Marca y Diseño de Logotipo | TruS",
+        "metaDescription": "Diseño de logotipos asistido por IA, colores, tipografía, estilo de marca y recursos para redes sociales: una identidad visual clara y coherente en todos los canales digitales.",
+        "about": {
+          "heading": "Identidad de Marca y Diseño de Logotipo",
+          "description": "Creamos una identidad visual clara y coherente para tu negocio, desde el diseño de logotipo asistido por IA hasta los colores, la tipografía, el estilo de marca y los recursos para redes sociales.\nTodo está diseñado para que tu marca se vea profesional, reconocible y coherente en cada canal digital.\nPara empresas que operan en varios idiomas o mercados, también creamos sistemas de marca que se adaptan a distintas audiencias manteniendo la misma identidad central. La tipografía, la estructura visual, los diseños y la presentación de marca pueden prepararse para funcionar de forma coherente en diferentes idiomas, regiones y canales específicos de cada mercado.",
+          "imageAlt": "Equipo de diseño revisando materiales de identidad de marca alrededor de una mesa"
+        },
+        "gain": {
+          "heading": "Lo Que Obtienes",
+          "items": [
+            "Una identidad de marca profesional y reconocible",
+            "Un logotipo único alineado con tu negocio",
+            "Colores, tipografía y estilo visual coherentes",
+            "Mayor presencia de marca en el sitio web y las redes sociales",
+            "Recursos visuales listos para usar en plataformas digitales",
+            "Un sistema de marca que se mantiene coherente entre idiomas y mercados",
+            "Mayor flexibilidad para el crecimiento internacional y multimercado",
+            "Una imagen coherente que genera confianza en tu audiencia"
+          ]
+        },
+        "highlights": {
+          "heading": "Destacados",
+          "items": [
+            "Diseño de logotipo con IA",
+            "Diseño de identidad de marca",
+            "Sistema de color y tipografía",
+            "Estilo visual y guías de marca",
+            "Kit de marca para redes sociales",
+            "Adaptación de marca multilingüe",
+            "Coherencia de marca entre mercados"
+          ],
+          "imageAlt": "Maqueta de guía de marca, papelería y paleta de colores"
+        },
+        "contact": {
+          "heading": "¿Listo para Hacer Crecer Tu Negocio?",
+          "description": "Cuéntanos sobre tu negocio, tu visión, tu estilo preferido y los mercados que quieres alcanzar.  Te ayudaremos a crear una identidad visual profesional que represente a tu marca de forma coherente en los canales digitales, los idiomas y los mercados objetivo, y que apoye tu crecimiento futuro."
+        }
+      },
+      "social": {
+        "name": "Creación y Publicación de Contenido para Redes Sociales",
+        "tagline": ["Crea Más Inteligente. Publica Más Rápido.", "Crece en Todas Partes."],
+        "metaTitle": "Creación y Publicación de Contenido para Redes Sociales | TruS",
+        "metaDescription": "Agentes de IA que automatizan la creación y publicación de contenido para redes sociales: publicaciones por plataforma, descripciones, hashtags, contenido localizado, monitoreo de interacción e informes de rendimiento.",
+        "about": {
+          "heading": "Creación y Publicación de Contenido para Redes Sociales",
+          "description": "TRUS utiliza agentes de IA para automatizar todo el proceso de creación y publicación de contenido en redes sociales; desde generar publicaciones por plataforma, descripciones, hashtags y contenido localizado hasta publicar, monitorear la interacción y elaborar informes de rendimiento.\nSimplemente envía a TRUS tu información diaria, imágenes o contenido. Tu publicación puede crearse en segundos, mostrarse para tu revisión cuando sea necesario y publicarse en la red social que elijas tras tu aprobación.\nCada contenido se crea y se optimiza según la plataforma de destino, tu marca, tu público objetivo, el idioma, la ubicación geográfica y tus objetivos de marketing.",
+          "imageAlt": "Equipo ideando una estrategia de contenido para redes sociales alrededor de un portátil"
+        },
+        "gain": {
+          "heading": "Lo Que Obtienes",
+          "items": [
+            "Ahorra tiempo en la creación y publicación diaria de contenido",
+            "Reduce la necesidad de creadores de contenido, administradores de redes sociales y equipos de publicación por separado",
+            "Mantén tu marca activa de forma constante en redes sociales",
+            "Crea contenido optimizado específicamente para cada plataforma",
+            "Mejora la visibilidad con descripciones, palabras clave, hashtags y estructura de contenido optimizados",
+            "Crea contenido multilingüe y localizado para distintos mercados",
+            "Monitorea la interacción y las reacciones de la audiencia",
+            "Recibe informes periódicos de rendimiento del contenido",
+            "Agiliza el seguimiento cuando los usuarios interactúan con tus publicaciones"
+          ]
+        },
+        "highlights": {
+          "heading": "Destacados",
+          "items": [
+            "Creación de contenido impulsada por IA",
+            "Publicación automatizada en varias plataformas",
+            "Publicación totalmente automática o con aprobación",
+            "Optimización de contenido por plataforma",
+            "Contenido multilingüe y localizado",
+            "Monitoreo de interacción con IA",
+            "Notificaciones rápidas para interacciones importantes",
+            "Optimización continua del contenido",
+            "Analítica de rendimiento e informes periódicos"
+          ],
+          "imageAlt": "Analítica de interacción, seguidores y alcance en redes sociales alrededor de un teléfono"
+        },
+        "process": {
+          "eyebrow": "NUESTRO PROCESO",
+          "heading": "Cómo funciona TRUS",
+          "description": "TRUS automatiza la creación y publicación de contenido en redes sociales mediante un flujo guiado que mantiene tu marca activa, coherente y optimizada en todas las plataformas.",
+          "steps": [
+            { "title": "Crear", "description": "Los agentes de IA generan contenido específico para cada plataforma según tu marca, imágenes, mensaje, audiencia y objetivos." },
+            { "title": "Revisar", "description": "Cuando sea necesario, el contenido se te muestra antes de publicarse para que puedas aprobarlo, editarlo o refinarlo." },
+            { "title": "Publicar", "description": "El contenido aprobado puede publicarse automáticamente en la red social seleccionada." },
+            { "title": "Supervisar", "description": "TRUS supervisa la actividad de las publicaciones, la interacción, los comentarios, los me gusta y otras interacciones relevantes." },
+            { "title": "Notificar y dar seguimiento", "description": "Las interacciones importantes pueden comunicarse al propietario de la marca para un seguimiento y una respuesta más rápidos." },
+            { "title": "Analizar y optimizar", "description": "Los agentes de IA analizan continuamente el rendimiento del contenido y mejoran futuras publicaciones, descripciones, hashtags y estrategias de publicación." }
+          ]
+        },
+        "automation": {
+          "eyebrow": "REDES SOCIALES",
+          "heading": "Automatización de redes sociales",
+          "imageAlt": "Publicaciones de redes sociales creadas y programadas para varias plataformas junto a una persona trabajando con un portátil",
+          "items": [
+            { "title": "TRUS Auto Post Creator & Publisher", "description": "Crea y publica contenido en redes sociales mediante un flujo de trabajo rápido y automatizado.\nTRUS genera la publicación, prepara descripciones y hashtags adecuados, adapta el contenido a la plataforma y el idioma elegidos, y publica la versión final en la cuenta seleccionada.\nPara negocios multilingües, se puede preparar la versión en el idioma adecuado para el mercado o la cuenta social correspondiente.\nEste servicio se centra en la rapidez, la sencillez y la automatización." },
+            { "title": "TRUS Instagram Creator & Publisher", "description": "Crea contenido centrado en Instagram según tu marca, audiencia, comunicación visual, descripciones, hashtags, palabras clave, idioma y mercado objetivo.\nPuedes revisar, editar y optimizar el contenido antes de publicarlo.\nTambién se pueden usar distintas cuentas de Instagram para diferentes idiomas o mercados, de modo que cada audiencia reciba una comunicación más relevante." },
+            { "title": "TRUS LinkedIn Creator & Publisher", "description": "Crea contenido profesional y orientado a negocios para LinkedIn, incluyendo comunicación B2B, experiencia, posicionamiento sectorial y autoridad de marca.\nEl contenido puede adaptarse a distintas audiencias profesionales, idiomas, países y mercados.\nPuedes revisar y refinar el mensaje, el tono, la terminología y la estructura antes de publicar." },
+            { "title": "TRUS X (Twitter) Creator & Publisher", "description": "Crea contenido conciso y segmentado, diseñado para el estilo de comunicación de X.\nTRUS puede adaptar las publicaciones según la audiencia, el idioma, la región, los objetivos del mensaje y la cuenta de destino.\nEl contenido puede revisarse y optimizarse antes de publicarse." },
+            { "title": "TRUS Telegram Channel Creator & Publisher", "description": "Crea contenido estructurado para canales de Telegram y mantén una comunicación constante con los suscriptores.\nDistintos canales de Telegram pueden atender diferentes idiomas o comunidades, y TRUS prepara y publica el contenido adecuado para cada audiencia." }
+          ]
+        },
+        "flexible": {
+          "eyebrow": "CREACIÓN Y PUBLICACIÓN FLEXIBLES",
+          "heading": "Creación y publicación flexibles",
+          "modes": [
+            { "title": "Creación y publicación automáticas", "description": "Los agentes de IA de TRUS crean publicaciones adecuadas para Instagram, LinkedIn, X y canales de Telegram según tu experiencia, la información de tu marca y modelos estandarizados de creación de contenido.\nDespués eliges la red social de destino y el contenido generado puede publicarse automáticamente.\nEl enfoque principal de este modelo es la rapidez, la sencillez y la automatización." },
+            { "title": "Publicación con aprobación", "description": "TRUS primero crea el contenido y te lo muestra para su revisión.\nTras tu aprobación, el contenido final se publica en la red social seleccionada." },
+            { "title": "Solo creación de contenido", "description": "Este servicio está pensado para quienes quieren centrarse en crear una publicación precisa y muy segmentada.\nTRUS genera el contenido inicial y puedes revisarlo, editarlo, refinarlo y optimizarlo hasta que la publicación final se ajuste a tus preferencias, objetivos, mensaje e identidad de marca.\nEl enfoque de este servicio es crear contenido preciso, segmentado y editable. La publicación no está incluida." },
+            { "title": "Solo publicación", "description": "Este servicio está pensado para situaciones en las que tu contenido ya está creado y no se necesita generar más.\nPuedes aportar una o varias publicaciones listas para publicar y usar TRUS para publicarlas en Instagram, LinkedIn, X o un canal de Telegram.\nAsí puedes publicar contenido existente sin volver a crearlo." }
+          ],
+          "scheduleImageAlt": "Mujer programando una publicación en un portátil mientras un compañero presenta una estrategia de contenido en una pizarra",
+          "multilingual": {
+            "heading": "Contenido multilingüe y localizado",
+            "intro": "TRUS puede crear contenido según el idioma, el país y la ubicación geográfica de tu audiencia. Esto incluye:",
+            "items": [
+              "Contenido adaptado al idioma de la audiencia",
+              "Descripciones localizadas",
+              "Hashtags y palabras clave relevantes",
+              "Mensajes específicos para cada mercado",
+              "Contenido adaptado a distintos países y regiones geográficas"
+            ],
+            "outro": "Esto ayuda a las marcas a comunicarse de forma más natural y eficaz con audiencias de distintos mercados.",
+            "imageAlt": "Equipo colaborando ante un portátil mientras el contenido se traduce al inglés, español, francés y alemán"
+          }
+        },
+        "contact": {
+          "heading": "¿Listo para Hacer Crecer Tu Negocio?",
+          "description": "Mantén una presencia constante y profesional en redes sociales sin dedicar horas cada día a crear, preparar y publicar contenido.\nCuéntanos qué redes sociales utilizas y cómo quieres que funcione tu flujo de creación y publicación de contenido. TRUS te ayudará a construir la solución de automatización adecuada para tu marca."
+        }
+      },
+      "autoPost": {
+        "name": "TRUS Auto Post Creator & Publisher",
+        "tagline": ["De la idea a la publicación","publicada; en segundos"],
+        "metaTitle": "TRUS Auto Post Creator & Publisher | TruS",
+        "metaDescription": "Crea y publica contenido en redes sociales con un flujo rápido y automatizado: contenido, descripciones y hashtags generados con IA, adaptados a tu plataforma e idioma y publicados en segundos.",
+        "about": {
+          "heading": "TRUS Auto Post Creator\n& Publisher",
+          "headingMobile": ["TRUS Auto Post Creator &", "Publisher"],
+          "description": "**TRUS Auto Post Creator & Publisher** está pensado para negocios que quieren crear y publicar contenido en redes sociales con rapidez, sin dedicar mucho tiempo a procesos complejos de producción de contenido.\nSimplemente aporta a TRUS tus imágenes, novedades, ideas o información diaria del negocio. Los agentes de IA de TRUS convierten esa información en publicaciones listas para publicar y optimizan el contenido, la descripción, los hashtags y el mensaje según tu negocio y la red social seleccionada.\nDespués, elige dónde quieres publicar: **Instagram, LinkedIn, X (Twitter) o un canal de Telegram**; y TRUS se encarga del proceso de creación y publicación por ti.\nEl objetivo de este servicio es sencillo: menos **trabajo manual, creación de contenido más rápida y una actividad constante y continua en redes sociales para tu marca.**",
+          "imageAlt": "Equipo debatiendo contenido para redes sociales alrededor de portátiles en una mesa compartida"
+        },
+        "gain": {
+          "heading": "Lo que ganas",
+          "items": [
+            "Crea publicaciones para redes sociales en segundos",
+            "Reduce el tiempo y la carga diaria de trabajo de la creación de contenido",
+            "Publica en varias redes sociales",
+            "Genera automáticamente descripciones, hashtags y mensajes optimizados",
+            "Mantén una actividad constante y continua en redes sociales para tu marca",
+            "Crea contenido multilingüe y localizado",
+            "Reduce la necesidad de gestión manual de redes sociales",
+            "Ahorra tiempo manteniendo estándares profesionales de contenido"
+          ]
+        },
+        "highlights": {
+          "heading": "Aspectos destacados",
+          "items": [
+            "Creación rápida de publicaciones con IA",
+            "Creación y publicación de contenido automatizadas",
+            "Instagram, LinkedIn, X y canal de Telegram",
+            "Descripciones y hashtags optimizados",
+            "Contenido multilingüe y localizado",
+            "Publicación con aprobación",
+            "Flujo de trabajo multiplataforma sencillo",
+            "Actividad constante y continua en redes sociales"
+          ],
+          "imageAlt": "Teléfono mostrando una nueva publicación, con los iconos de Instagram, Facebook, LinkedIn, X y Telegram a su alrededor"
+        },
+        "contact": {
+          "heading": "¿Listo para hacer crecer tu negocio?",
+          "description": "Dedica menos tiempo a crear publicaciones diarias para redes sociales y más tiempo a gestionar y hacer crecer tu negocio.\nCuéntanos sobre tu marca y las redes sociales que utilizas, y TRUS te ayudará a automatizar tu flujo de creación y publicación de contenido."
+        }
+      }
+    }
   },
 
   "footer": {

@@ -1,152 +1,34 @@
-import { useRef, useState, useEffect, type ReactNode } from 'react'
+﻿import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, useInView } from 'framer-motion'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { ServiceCard } from '@/components/services/ServiceCard'
 import { ServicesMobile } from '@/components/services/ServicesMobile'
+import { SERVICE_ICON_MAP, SERVICE_LINKS } from '@/components/services/serviceIconMap'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
-// Inline SVG icons — purple outline style
+// Row geometry from the Figma frame (1440px wide): 305px cards, 20px gap,
+// top row starting 99px from the left and bottom row 60px. Scrolling slides
+// the top row right and the bottom row left by the same distance until
+// Business Growth sits directly above YouTube. Scales with the viewport.
+const DESIGN_W = 1440
+const CARD_W = 305
+const GAP = 20
+const TOP_INSET = 99
+const BOTTOM_INSET = 60
+// Distance each row travels so card 1 of the top row ends directly above the
+// last card of the bottom row (top moves right, bottom moves left).
+const SHIFT = (BOTTOM_INSET + 3 * (CARD_W + GAP) - TOP_INSET) / 2
 
-const IconSEO = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <circle cx="18" cy="18" r="10" />
-    <line x1="25.5" y1="25.5" x2="36" y2="36" />
-    <polyline points="12,23 16,18 20,21 24,14" />
-  </svg>
-)
-
-const IconWebDev = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <polyline points="14,10 6,21 14,32" />
-    <polyline points="28,10 36,21 28,32" />
-    <line x1="18" y1="34" x2="24" y2="8" />
-  </svg>
-)
-
-const IconWebDesign = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <rect x="6" y="6" width="13" height="13" rx="2" />
-    <rect x="23" y="6" width="13" height="13" rx="2" />
-    <rect x="6" y="23" width="13" height="13" rx="2" />
-    <rect x="23" y="23" width="13" height="13" rx="2" />
-  </svg>
-)
-
-const IconLeadMaker = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <path d="M7 9h28L24 22v11l-6-3V22L7 9z" />
-  </svg>
-)
-
-const IconAIAgent = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <circle cx="21" cy="11" r="4" />
-    <circle cx="9" cy="31" r="4" />
-    <circle cx="33" cy="31" r="4" />
-    <line x1="21" y1="15" x2="21" y2="24" />
-    <line x1="21" y1="24" x2="9" y2="24" />
-    <line x1="21" y1="24" x2="33" y2="24" />
-    <line x1="9" y1="24" x2="9" y2="27" />
-    <line x1="33" y1="24" x2="33" y2="27" />
-  </svg>
-)
-
-const IconContent = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <rect x="8" y="5" width="26" height="32" rx="3" />
-    <line x1="14" y1="14" x2="28" y2="14" />
-    <line x1="14" y1="20" x2="28" y2="20" />
-    <line x1="14" y1="26" x2="22" y2="26" />
-  </svg>
-)
-
-const IconBranding = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <path d="M21 6c-8.8 0-16 6.9-16 15.4 0 5 3.2 7.6 6.6 7.6 2.1 0 3.4-1.2 3.4-3 0-1.4-1-2-1-3.4 0-2.6 2.4-4.6 5-4.6 5 0 8-3.4 8-8.6C27 8 24.6 6 21 6z" />
-    <circle cx="14" cy="17" r="1.6" />
-    <circle cx="21" cy="13" r="1.6" />
-    <circle cx="28" cy="17" r="1.6" />
-  </svg>
-)
-
-const IconSocialMedia = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <circle cx="10" cy="21" r="4.5" />
-    <circle cx="31" cy="9" r="4.5" />
-    <circle cx="31" cy="33" r="4.5" />
-    <line x1="14" y1="19" x2="27" y2="11" />
-    <line x1="14" y1="23" x2="27" y2="31" />
-  </svg>
-)
-
-const IconEmailMarketing = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <rect x="5" y="10" width="32" height="22" rx="3" />
-    <polyline points="5,12 21,24 37,12" />
-  </svg>
-)
-
-const IconAnalytics = () => (
-  <svg viewBox="0 0 42 42" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" width="42" height="42">
-    <line x1="7" y1="36" x2="7" y2="22" />
-    <line x1="17.5" y1="36" x2="17.5" y2="12" />
-    <line x1="28" y1="36" x2="28" y2="26" />
-    <line x1="38.5" y1="36" x2="38.5" y2="6" />
-    <line x1="4" y1="36" x2="41" y2="36" />
-  </svg>
-)
-
-const ICON_MAP: Record<string, ReactNode> = {
-  seo: <IconSEO />,
-  'web-dev': <IconWebDev />,
-  'web-design': <IconWebDesign />,
-  branding: <IconBranding />,
-  'social-media': <IconSocialMedia />,
-  'lead-maker': <IconLeadMaker />,
-  'ai-agent': <IconAIAgent />,
-  content: <IconContent />,
-  'email-marketing': <IconEmailMarketing />,
-  analytics: <IconAnalytics />,
-}
-
-// Row scroll geometry — desktop cards are a fixed 337px wide with a 24px
-// gap (see ServiceCard.tsx), both rows in natural (unreversed) order. At
-// rest, the top row's 1st card (SEO) and the bottom row's last card
-// (Analytics) meet at the center of the screen; the top row then slides
-// right-to-left and the bottom row slides left-to-right, at the same speed,
-// crossing at the section's midpoint, until the top row's last card
-// (Social Media) and the bottom row's 1st card (Lead Maker) meet at the
-// center of the screen.
-const CARD_WIDTH = 337
-const CARD_GAP = 24
-const ROW_SIZE = 5
-const CARD_PITCH = CARD_WIDTH + CARD_GAP
-const ROW_SIDE_INSET = 40
-const ROW_TOTAL_SHIFT = (ROW_SIZE - 1) * CARD_PITCH
-
-// translateX that puts a row's 1st card (content x = 0) at the screen's
-// horizontal center — recomputed live so centering always matches the
-// current viewport width.
-const getCenteredStartX = () =>
-  window.innerWidth / 2 - CARD_WIDTH / 2 - ROW_SIDE_INSET
+const getScale = () =>
+  Math.min(1.25, Math.max(0.8, window.innerWidth / DESIGN_W))
 
 // Component
 
 /** Below `lg` the pinned two-row parallax is replaced by a swipeable carousel. */
 export function ServicesSection() {
   const isWide = useMediaQuery('(min-width: 1024px)')
-  return isWide ? <ServicesDesktop /> : <ServicesMobile iconMap={ICON_MAP} />
+  return isWide ? <ServicesDesktop /> : <ServicesMobile iconMap={SERVICE_ICON_MAP} />
 }
 
 function ServicesDesktop() {
@@ -162,6 +44,30 @@ function ServicesDesktop() {
   }, [])
 
   const sectionRef = useRef<HTMLElement>(null)
+  const pinRef = useRef<HTMLDivElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
+
+  // The section pins (and the cards start moving) once the line under the
+  // title lines up with the navbar's bottom line. The sticky offset is
+  // therefore negative: navbar height minus the line's offset in the block.
+  const [pinTop, setPinTop] = useState(0)
+  const pinTopRef = useRef(0)
+  useEffect(() => {
+    const measure = () => {
+      const pin = pinRef.current
+      const line = lineRef.current
+      if (!pin || !line) return
+      const header = document.querySelector('[role="banner"]') as HTMLElement | null
+      const headerH = header ? header.offsetHeight : 0
+      const offset = line.getBoundingClientRect().top - pin.getBoundingClientRect().top
+      const next = Math.round(headerH - offset)
+      pinTopRef.current = next
+      setPinTop(next)
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
   const scrollYMV = useMotionValue(0)
 
   useEffect(() => {
@@ -177,30 +83,30 @@ function ServicesDesktop() {
     if (!el) return 0
 
     const rect = el.getBoundingClientRect()
-    const viewportH = window.innerHeight
+    const pinH = pinRef.current?.offsetHeight ?? window.innerHeight
 
-    const scrollableDistance = rect.height - viewportH
-    const raw = -rect.top / Math.max(1, scrollableDistance)
+    const scrollableDistance = rect.height - pinH
+    const raw = (pinTopRef.current - rect.top) / Math.max(1, scrollableDistance)
 
     return Math.max(0, Math.min(1, raw))
   }
 
-  // Top row: card 1 (SEO) starts centered and slides left by ROW_TOTAL_SHIFT
-  // (exactly 4 card-pitches), ending with card 5 (Social Media) centered.
-  const topRowX = useTransform(
-    scrollYMV,
-    (y) => getCenteredStartX() - computeT(y) * ROW_TOTAL_SHIFT,
-  )
+  const [scale, setScale] = useState(getScale)
+  useEffect(() => {
+    const onResize = () => setScale(getScale())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
-  // Bottom row: card 5 (Analytics) starts centered (i.e. the row itself
-  // starts ROW_TOTAL_SHIFT to the left of top's start) and slides right by
-  // the same ROW_TOTAL_SHIFT, ending with card 1 (Lead Maker) centered. Both
-  // rows travel the same distance at the same rate, so they cross exactly
-  // at the section's scroll midpoint.
-  const bottomRowX = useTransform(
-    scrollYMV,
-    (y) => getCenteredStartX() - ROW_TOTAL_SHIFT + computeT(y) * ROW_TOTAL_SHIFT,
-  )
+  const cardW = CARD_W * scale
+  const gap = GAP * scale
+  const shift = SHIFT * scale
+  const topStart = TOP_INSET * scale
+  const bottomStart = BOTTOM_INSET * scale
+
+  // Top row slides right, bottom row slides left, by the same distance.
+  const topRowX = useTransform(scrollYMV, (y) => topStart + computeT(y) * shift)
+  const bottomRowX = useTransform(scrollYMV, (y) => bottomStart - computeT(y) * shift)
 
   const [starKey, setStarKey] = useState(0)
   const isInView = useInView(sectionRef, { once: false, amount: 0.15 })
@@ -213,8 +119,8 @@ function ServicesDesktop() {
     prevInViewRef.current = isInView
   }, [isInView])
 
-  const topRow = items.slice(0, 5)
-  const bottomRow = items.slice(5, 10)
+  const topRow = items.slice(0, 4)
+  const bottomRow = items.slice(4, 8)
 
   return (
     <section
@@ -225,14 +131,15 @@ function ServicesDesktop() {
         background: 'var(--color-brand-bg)',
         position: 'relative',
         overflow: 'visible',
-        height: isDesktop ? '300vh' : 'auto',
+        height: isDesktop ? '650vh' : 'auto',
       }}
     >
       <div
+        ref={pinRef}
         style={{
           position: isDesktop ? 'sticky' : 'relative',
-          top: 0,
-          height: isDesktop ? '115vh' : 'auto',
+          top: isDesktop ? pinTop : 0,
+          // height: isDesktop ? '115vh' : 'auto',
           overflow: 'hidden',
           paddingBottom: '120px',
         }}
@@ -303,6 +210,7 @@ function ServicesDesktop() {
 
             <FadeIn direction="none" delay={0.38}>
               <div
+                ref={lineRef}
                 style={{
                   position: 'relative',
                   marginTop: '18px',
@@ -351,7 +259,7 @@ function ServicesDesktop() {
           style={{
             position: 'relative',
             zIndex: 1,
-            marginTop: '60px',
+            marginTop: '21px',
           }}
           aria-label="Service cards"
         >
@@ -361,17 +269,18 @@ function ServicesDesktop() {
                 style={{
                   x: topRowX,
                   display: 'flex',
-                  gap: '24px',
-                  paddingLeft: `${ROW_SIDE_INSET}px`,
+                  gap: `${gap}px`,
                   width: 'max-content',
                 }}
               >
                 {topRow.map((service) => (
                   <ServiceCard
                     key={service.id}
-                    icon={ICON_MAP[service.id]}
+                    icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
-                    description={service.description}
+                    bullets={service.bullets}
+                    width={cardW}
+                    href={SERVICE_LINKS[service.id]}
                   />
                 ))}
               </motion.div>
@@ -380,8 +289,7 @@ function ServicesDesktop() {
                 style={{
                   x: bottomRowX,
                   display: 'flex',
-                  gap: '24px',
-                  paddingLeft: `${ROW_SIDE_INSET}px`,
+                  gap: `${gap}px`,
                   marginTop: '24px',
                   width: 'max-content',
                 }}
@@ -389,9 +297,11 @@ function ServicesDesktop() {
                 {bottomRow.map((service) => (
                   <ServiceCard
                     key={service.id}
-                    icon={ICON_MAP[service.id]}
+                    icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
-                    description={service.description}
+                    bullets={service.bullets}
+                    width={cardW}
+                    href={SERVICE_LINKS[service.id]}
                   />
                 ))}
               </motion.div>
@@ -411,9 +321,9 @@ function ServicesDesktop() {
                 {topRow.map((service) => (
                   <ServiceCard
                     key={service.id}
-                    icon={ICON_MAP[service.id]}
+                    icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
-                    description={service.description}
+                    bullets={service.bullets}
                   />
                 ))}
               </div>
@@ -432,9 +342,9 @@ function ServicesDesktop() {
                 {bottomRow.map((service) => (
                   <ServiceCard
                     key={service.id}
-                    icon={ICON_MAP[service.id]}
+                    icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
-                    description={service.description}
+                    bullets={service.bullets}
                   />
                 ))}
               </div>

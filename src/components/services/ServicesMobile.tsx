@@ -7,6 +7,7 @@ import "swiper/css";
 
 import { siteConfig } from "@/config/site.config";
 import { ServiceCard } from "@/components/services/ServiceCard";
+import { SERVICE_LINKS } from "@/components/services/serviceIconMap";
 
 const SLIDE_GAP = 12;
 const AUTOPLAY_DELAY = 3500;
@@ -137,7 +138,8 @@ export function ServicesMobile({
                     dark={i % 2 === 1}
                     icon={iconMap[service.id]}
                     title={service.title}
-                    description={service.description}
+                    bullets={service.bullets}
+                    href={SERVICE_LINKS[service.id]}
                   />
                 </div>
               </SwiperSlide>

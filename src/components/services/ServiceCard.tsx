@@ -1,62 +1,101 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface ServiceCardProps {
-  icon: ReactNode
-  title: string
-  description: string
+  icon: ReactNode;
+  title: string;
+  bullets: string[];
   /** Fill the parent's width and hug content (mobile carousel slide). */
-  fluid?: boolean
+  fluid?: boolean;
   /** Dark outlined variant (mobile carousel, alternating). */
-  dark?: boolean
+  dark?: boolean;
+  /** Desktop only: explicit card width in px (viewport-scaled by the section). */
+  width?: number;
+  /** Link the whole card to a service detail page. */
+  href?: string;
 }
 
-export function ServiceCard({ icon, title, description, fluid = false, dark = false }: ServiceCardProps) {
-  return (
+export function ServiceCard({
+  icon,
+  title,
+  bullets,
+  fluid = false,
+  dark = false,
+  width = 305,
+  href,
+}: ServiceCardProps) {
+  const card = (
     <div
       style={{
-        width:        fluid ? '100%' : '337px',
-        minWidth:     fluid ? 0 : '337px',
-        height:       fluid ? 'auto' : '220px',
-        borderRadius: fluid ? 'clamp(16px, 4.5vw, 24px)' : '16px',
-        padding:      fluid ? 'clamp(22px, 6.4vw, 32px)' : '24px',
-        background:   dark ? '#000000' : fluid ? '#FFFFFF' : '#E3E3E3',
-        border:       dark ? '1px solid rgba(255,255,255,0.3)' : 'none',
-        boxSizing:    'border-box',
-        display:      'flex',
-        flexDirection: 'column',
-        gap:          fluid ? 'clamp(14px, 4vw, 22px)' : '14px',
-        flexShrink:   0,
+        width: fluid ? "100%" : `${width}px`,
+        minWidth: fluid ? 0 : `${width}px`,
+        height: fluid ? "auto" : "275px",
+        borderRadius: "16px",
+        padding: "14px",
+        background: dark ? "#000000" : "#FFFFFF",
+        border: dark ? "1px solid rgba(255,255,255,0.3)" : "none",
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        gap: "5px",
+        flexShrink: 0,
       }}
     >
-      <div style={{ color: dark ? '#9F7EE1' : '#6F45F6', width: '42px', height: '42px', flexShrink: 0 }}>
+      <div
+        style={{
+          color: dark ? "#9F7EE1" : "#5B2BB9",
+          width: fluid ? "43px" : "40px",
+          height: fluid ? "43px" : "40px",
+          flexShrink: 0,
+          marginBottom: "5px",
+        }}
+      >
         {icon}
       </div>
 
       <h3
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontWeight: 700,
-          fontSize:   fluid ? 'clamp(20px, 5.4vw, 28px)' : '20px',
-          lineHeight: '1.25',
-          color:      dark ? '#FFFFFF' : '#000000',
-          margin:     0,
+          fontSize: fluid ? "clamp(15px, 4.2vw, 20px)" : "14px",
+          lineHeight: fluid ? "1.3" : "100%",
+          color: dark ? "#FFFFFF" : "#070606",
+          margin: 0,
+          letterSpacing: "-4%"
         }}
       >
         {title}
       </h3>
 
-      <p
+      <ul
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontWeight: 400,
-          fontSize:   fluid ? 'clamp(14px, 3.9vw, 19px)' : '13.5px',
-          lineHeight: fluid ? '1.6' : '1.55',
-          color:      dark ? '#BFBFBF' : '#707075',
-          margin:     0,
+          fontSize: fluid ? "clamp(14px, 3.9vw, 18px)" : "14px",
+          lineHeight: fluid ? "1.43" : "19px",
+          color: dark ? "#BFBFBF" : "#5A5A5A",
+          margin: 0,
+          paddingLeft: fluid ? "24px" : "20px",
+          listStyleType: "disc",
         }}
       >
-        {description}
-      </p>
+        {bullets.map((b) => (
+          <li key={b}>{b}</li>
+        ))}
+      </ul>
     </div>
-  )
+  );
+
+  if (!href) return card;
+  return (
+    <Link
+      to={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={title}
+      style={{ display: "flex", flexShrink: 0, width: fluid ? "100%" : undefined, color: "inherit", textDecoration: "none" }}
+    >
+      {card}
+    </Link>
+  );
 }
