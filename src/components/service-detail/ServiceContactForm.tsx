@@ -1,158 +1,88 @@
-import { useState } from 'react'
-import GradientButton from '../ui/GradientButton'
+import { useState } from "react";
 
 interface Field {
-  readonly id:          string
-  readonly label:       string
-  readonly placeholder: string
+  readonly id: string;
+  readonly label: string;
+  readonly placeholder: string;
 }
 
 interface ServiceContactFormProps {
-  fields: readonly Field[]
-  submit: string
+  fields: readonly Field[];
+  submit: string;
   /** Pre-filled, read-only "Subject" field shown above the others. */
-  subject: { label: string; value: string }
-  className?: string
+  subject: { label: string; value: string };
+  className?: string;
 }
 
+const LABEL = "font-body text-[16px] font-normal leading-[19px] tracking-[-0.64px] text-[#070606]";
+const CONTROL =
+  "block w-full border-0 border-b border-b-[rgba(112,112,117,0.3)] bg-transparent font-body text-[14px] font-normal leading-[17px] text-[#070606] outline-none placeholder:text-[#707075] placeholder:opacity-100 focus:border-b-[rgba(91,43,185,0.5)] lg:text-[16px] lg:leading-[19px] lg:tracking-[-0.48px]";
+
+/**
+ * Service-page contact form (Figma): flat fields on a 20px rhythm, 44px inputs
+ * with a hairline underline, and a 125×40 purple submit button.
+ */
 export function ServiceContactForm({ fields, submit, subject, className }: ServiceContactFormProps) {
-  const [values, setValues] = useState<Record<string, string>>(
-    () => Object.fromEntries(fields.map((f) => [f.id, '']))
-  )
-
-  const set = (id: string, val: string) =>
-    setValues((prev) => ({ ...prev, [id]: val }))
-
-  const inputBase: React.CSSProperties = {
-    display:      'block',
-    width:        '100%',
-    border:       'none',
-    borderBottom: '1px solid rgba(0,0,0,0.15)',
-    background:   'transparent',
-    fontFamily:   'var(--font-body)',
-    fontSize:     '16px',
-    lineHeight:   '20px',
-    color:        '#070606',
-    padding:      '10px 0',
-    outline:      'none',
-    resize:       'none',
-  }
+  const [values, setValues] = useState<Record<string, string>>(() =>
+    Object.fromEntries(fields.map((f) => [f.id, ""])),
+  );
+  const set = (id: string, val: string) => setValues((prev) => ({ ...prev, [id]: val }));
 
   return (
-    <>
-      {/* Scoped placeholder styling — can't set ::placeholder via inline styles */}
-      <style>{`
-        .trus-contact-form input::placeholder,
-        .trus-contact-form textarea::placeholder {
-          color: #707075;
-          font-size: 16px;
-          opacity: 1;
-        }
-        .trus-contact-form input:focus,
-        .trus-contact-form textarea:focus {
-          border-bottom-color: rgba(91,43,185,0.50);
-        }
-        /* Mobile message box is ~100px tall (desktop keeps the single-row one). */
-        @media (max-width: 1023px) {
-          .trus-contact-form--service textarea { min-height: 100px; }
-        }
-      `}</style>
+    <form
+      className={["flex flex-col gap-5", className].filter(Boolean).join(" ")}
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <div className="flex flex-col gap-1">
+        <label htmlFor="contact-subject" className={LABEL}>
+          {subject.label}
+        </label>
+        <input
+          id="contact-subject"
+          name="subject"
+          type="text"
+          readOnly
+          value={subject.value}
+          className={`${CONTROL} h-11 pt-3 lg:pt-[12.5px]`}
+        />
+      </div>
 
-      <form
-        className={['trus-contact-form', subject && 'trus-contact-form--service', className]
-          .filter(Boolean)
-          .join(' ')}
-        onSubmit={(e) => e.preventDefault()}
-        style={{ display: 'flex', flexDirection: 'column', gap: subject ? '17px' : '20px' }}
-      >
-        {subject && (
-          <div>
-            <label
-              className="contact-field-label"
-              htmlFor="contact-subject"
-              style={{
-                display:      'block',
-                fontFamily:   'var(--font-body)',
-                fontWeight:   400,
-                fontSize:     '16px',
-                lineHeight:   '20px',
-                color:        '#070606',
-                marginBottom: '10px',
-              }}
-            >
-              {subject.label}
-            </label>
-            <input
-              id="contact-subject"
-              name="subject"
-              type="text"
-              readOnly
-              value={subject.value}
-              className="contact-input"
-              style={inputBase}
+      {fields.map((field) => (
+        <div key={field.id} className="flex flex-col gap-1">
+          <label htmlFor={`contact-${field.id}`} className={LABEL}>
+            {field.label}
+          </label>
+          {field.id === "message" ? (
+            <textarea
+              id={`contact-${field.id}`}
+              name={field.id}
+              placeholder={field.placeholder}
+              value={values[field.id]}
+              onChange={(e) => set(field.id, e.target.value)}
+              className={`${CONTROL} h-[104px] resize-none pt-3 lg:h-[53px] lg:pt-2.5`}
             />
-          </div>
-        )}
-
-        {fields.map((field) => (
-          <div key={field.id}>
-            <label
-              className="contact-field-label"
-              htmlFor={`contact-${field.id}`}
-              style={{
-                display:      'block',
-                fontFamily:   'var(--font-body)',
-                fontWeight:   400,
-                fontSize:     '16px',
-                lineHeight:   '20px',
-                color:        '#070606',
-                marginBottom: '10px',
-              }}
-            >
-              {field.label}
-            </label>
-
-            {field.id === 'message' ? (
-              <textarea
-                id={`contact-${field.id}`}
-                name={field.id}
-                placeholder={field.placeholder}
-                value={values[field.id]}
-                rows={subject ? 1 : 3}
-                onChange={(e) => set(field.id, e.target.value)}
-                className="contact-textarea"
-                style={inputBase}
-              />
-            ) : (
-              <input
-                id={`contact-${field.id}`}
-                name={field.id}
-                type={field.id === 'email' ? 'email' : 'text'}
-                placeholder={field.placeholder}
-                value={values[field.id]}
-                onChange={(e) => set(field.id, e.target.value)}
-                className="contact-input"
-                style={inputBase}
-              />
-            )}
-          </div>
-        ))}
-
-        <div>
-          <GradientButton
-            type="submit"
-            text={submit}
-            className="contact-submit justify-center"
-            style={{
-              ['--fill-gradient' as string]: subject
-                ? '#5B2BB9'
-                : 'linear-gradient(135deg, #875DD9 0%, #5328A8 100%)',
-            }}
-          />
+          ) : (
+            <input
+              id={`contact-${field.id}`}
+              name={field.id}
+              type={field.id === "email" ? "email" : "text"}
+              placeholder={field.placeholder}
+              value={values[field.id]}
+              onChange={(e) => set(field.id, e.target.value)}
+              className={`${CONTROL} h-11 pt-3 lg:pt-[12.5px]`}
+            />
+          )}
         </div>
-      </form>
-    </>
-  )
+      ))}
+
+      <button
+        type="submit"
+        className="flex h-10 w-[125px] items-center justify-center gap-1 rounded-md bg-[#5B2BB9] px-6 py-2.5 font-body text-[14px] font-normal leading-5 text-white shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(0,0,0,0.18),inset_0_-2px_0_rgba(0,0,0,0.05)] transition-[filter] hover:brightness-110"
+      >
+        {submit}
+      </button>
+    </form>
+  );
 }
 
-export default ServiceContactForm
+export default ServiceContactForm;

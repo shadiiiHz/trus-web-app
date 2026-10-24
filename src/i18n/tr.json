@@ -1002,6 +1002,7 @@
         "metaDescription": "Teknik SEO, içerik optimizasyonu, yapay zekâ destekli analiz ve sürekli izleme ile hem geleneksel hem de yapay zekâ destekli aramada görünürlüğünüzü artırın.",
         "about": {
           "heading": "SEO ve İçerik Optimizasyonu",
+          "headingMobile": ["SEO ve İçerik","Optimizasyonu"],
           "description": "TRUS, web sitenizi ve içeriğinizi teknik SEO, içerik optimizasyonu, yapay zekâ destekli analiz, sürekli izleme ve hem geleneksel hem de yapay zekâ destekli arama için optimizasyonla geliştirir.\nBirden fazla pazarı hedefleyen işletmeler için TRUS ayrıca içeriği, anahtar kelimeleri, arama niyetini ve optimizasyon stratejilerini farklı dillere, ülkelere ve hedef bölgelere uyarlayarak **çok dilli ve yerelleştirilmiş SEO** desteği sunar.  Bu sayede markanız yalnızca tek bir pazarda değil, işletmeniz için önemli olan tüm pazarlarda ve dillerde daha kolay keşfedilir.",
           "imageAlt": "Dizüstü bilgisayarda SEO analiz paneli"
         },
@@ -1043,6 +1044,7 @@
         "metaDescription": "B3D Yöntemimizle geliştirilen özel kodlu, yapay zekâ destekli web siteleri: Brifing, Tasarım, Geliştirme ve Teslim. Hızlı, güvenli, ölçeklenebilir ve SEO uyumlu.",
         "about": {
           "heading": "Web Tasarımı ve Geliştirme",
+          "headingMobile": ["Web Tasarımı","ve Geliştirme"],
           "description": "TRUS, **B3D Yöntemimiz: Briefing, Design, Develop & Deliver** ile modern, yüksek performanslı web siteleri tasarlar ve geliştirir. Her aşamada sizinle yakın çalışır, ilerlemeden önce geri bildirimlerinizi, tercihlerinizi ve iş hedeflerinizi dikkate alırız.\nWeb sitelerimiz, özel kod geliştirmeyi yapay zekâ destekli iş akışlarıyla birleştirerek geleneksel site oluşturucuların veya şablon tabanlı platformların sınırlamaları olmadan hızlı, güvenli, ölçeklenebilir ve SEO'ya hazır deneyimler sunar.\nBirden fazla ülkeyi veya dil grubunu hedefleyen işletmeler için **çok dilli ve pazara göre yerelleştirilmiş web sitesi yapıları** da oluşturabiliriz. Her dil veya pazarın kendi sayfaları, mesajları, harekete geçirici çağrıları, navigasyonu, meta verileri ve SEO yapısı olabilir; yine de tek ve tutarlı bir marka deneyiminin parçası olarak kalır.\nBu sayede web siteniz işletmenizle birlikte büyür ve tüm platformu yeniden kurmadan yeni dillere ve coğrafi pazarlara açılmayı destekler.",
           "imageAlt": "Web sitesi taslakları ve tasarımı üzerinde birlikte çalışan ekip"
         },
@@ -1083,10 +1085,12 @@
       "brand": {
         "name": "Marka Kimliği ve Logo Tasarımı",
         "tagline": ["İnsanların Tanıyıp", "Hatırlayacağı Bir Marka Kurun."],
+        "taglineMobile": ["İnsanların Tanıyıp Hatırlayacağı","Bir Marka Kurun."],
         "metaTitle": "Marka Kimliği ve Logo Tasarımı | TruS",
         "metaDescription": "Yapay zekâ destekli logo tasarımı, renkler, tipografi, marka stili ve sosyal medya varlıkları — tüm dijital kanallarda net ve tutarlı bir görsel kimlik.",
         "about": {
           "heading": "Marka Kimliği ve Logo Tasarımı",
+          "headingMobile": ["Marka Kimliği ve","Logo Tasarımı"],
           "description": "İşletmeniz için yapay zekâ destekli logo tasarımından renklere, tipografiye, marka stiline ve sosyal medya varlıklarına kadar net ve tutarlı bir görsel kimlik oluşturuyoruz.\nHer şey, markanızın her dijital kanalda profesyonel, tanınabilir ve tutarlı görünmesi için tasarlanır.\nBirden fazla dilde veya pazarda faaliyet gösteren işletmeler için, aynı temel kimliği koruyarak farklı kitlelere uyum sağlayabilen marka sistemleri de oluşturuyoruz. Tipografi, görsel yapı, yerleşimler ve marka sunumu; farklı dillerde, bölgelerde ve pazara özel kanallarda tutarlı çalışacak şekilde hazırlanabilir.",
           "imageAlt": "Marka kimliği materyallerini masa başında inceleyen tasarım ekibi"
         },
@@ -1124,61 +1128,95 @@
       "social": {
         "name": "Sosyal Medya İçerik Üretimi ve Yayını",
         "tagline": ["Daha Akıllı Üretin. Daha Hızlı Yayınlayın.", "Her Yerde Büyüyün."],
+        "taglineMobile": ["Daha Akıllı Üretin. Daha Hızlı","Yayınlayın. Her Yerde Büyüyün."],
         "metaTitle": "Sosyal Medya İçerik Üretimi ve Yayını | TruS",
         "metaDescription": "Sosyal medya içerik üretimini ve yayınını otomatikleştiren yapay zekâ ajanları — platforma özel gönderiler, açıklamalar, hashtag'ler, yerelleştirilmiş içerik, etkileşim izleme ve performans raporları.",
         "about": {
           "heading": "Sosyal Medya İçerik Üretimi ve Yayını",
-          "description": "TRUS, sosyal medya içerik üretimi ve yayın sürecinin tamamını otomatikleştirmek için yapay zekâ ajanlarını kullanır; platforma özel gönderiler, açıklamalar, hashtag'ler ve yerelleştirilmiş içerik üretiminden yayına, etkileşim izlemeye ve performans raporlamaya kadar.\nGünlük bilgilerinizi, görsellerinizi veya içeriğinizi TRUS'a iletmeniz yeterli. Gönderiniz saniyeler içinde oluşturulur, gerektiğinde incelemeniz için size gösterilir ve onaydan sonra seçtiğiniz sosyal medya platformunda yayınlanır.\nHer içerik; hedef platforma, markanıza, hedef kitlenize, diline, coğrafi konumuna ve pazarlama hedeflerinize göre oluşturulur ve optimize edilir.",
+          "headingMobile": ["Sosyal Medya İçerik","Üretimi ve Yayını"],
+          "description": "TRUS, Instagram, LinkedIn, X ve Telegram Kanalı genelinde sosyal medya içerik üretimini, yayınını, izlenmesini ve sürekli optimizasyonunu yönetmek için yapay zekâ ajanlarını kullanır.\nİşletmenizin güncellemelerini, görsellerini, fikirlerini, tekliflerini veya günlük bilgilerini paylaşmanız yeterli. TRUS bunları uygun açıklamalar, hashtag'ler, anahtar kelimeler, mesajlar ve içerik yapısıyla platforma özel gönderilere dönüştürebilir.\nİçerik saniyeler içinde üretilebilir, gerektiğinde incelenip geliştirilebilir ve ardından seçilen sosyal medya hesabında yayınlanabilir. Farklı dilleri veya pazarları hedefleyen işletmeler için TRUS basit çevirinin ötesine geçer. Farklı dillerin, ülkelerin veya hedef pazarların kendine ait sosyal medya hesaplarına ve yerelleştirilmiş iletişime sahip olduğu çok dilli bir sosyal hesap stratejisi kurabiliriz. Örneğin bir işletme Almanca konuşan kitle için bir Instagram hesabı, Türkçe konuşan kitle için başka bir hesap işletebilir. TRUS her hesap için uygun içeriği üretebilir, mesajı o pazara uyarlayabilir ve doğru hedefte yayınlayabilir.\nBu, işletmenizle birlikte birden fazla pazarda büyüyebilen yapılandırılmış bir sosyal medya sistemi oluşturur.",
           "imageAlt": "Dizüstü bilgisayar başında sosyal medya içerik stratejisi üzerine beyin fırtınası yapan ekip"
         },
         "gain": {
           "heading": "Neler Kazanırsınız",
           "items": [
-            "Günlük içerik üretiminde ve yayınında zamandan tasarruf",
-            "Ayrı İçerik Üreticisi, Sosyal Medya Yöneticisi ve yayın ekiplerine duyulan ihtiyacın azalması",
-            "Markanızın sosyal medyada sürekli aktif kalması",
-            "Her platform için özel olarak optimize edilmiş içerik",
-            "Optimize edilmiş açıklamalar, anahtar kelimeler, hashtag'ler ve içerik yapısıyla daha iyi keşfedilebilirlik",
-            "Farklı pazarlar için çok dilli ve yerelleştirilmiş içerik",
-            "Kitle etkileşiminin ve tepkilerin izlenmesi",
-            "Düzenli içerik performans raporları",
-            "Kullanıcılar gönderilerinizle etkileşime girdiğinde daha hızlı takip"
+            "Yapay zekâ destekli daha hızlı sosyal medya içerik üretimi",
+            "Birden fazla platformda otomatik yayın",
+            "Platforma özel gönderiler, açıklamalar, hashtag'ler ve anahtar kelimeler",
+            "Farklı diller ve pazarlar için özel sosyal medya stratejileri",
+            "Farklı ülkeler ve kitleler için yerelleştirilmiş içerik",
+            "Sosyal kanallarınızda daha tutarlı aktivite",
+            "İçerik üretimi ve yayınında daha az manuel iş",
+            "Önemli kitle etkileşimlerine daha hızlı yanıt",
+            "Hesaplar, diller ve pazarlar genelinde performans içgörüleri",
+            "Gelecekteki pazarlama çabalarına nereye odaklanacağınıza karar vermek için daha iyi veri"
           ]
-        },
-        "highlights": {
-          "heading": "Öne Çıkanlar",
-          "items": [
-            "Yapay Zekâ Destekli İçerik Üretimi",
-            "Otomatik Çok Platformlu Yayın",
-            "Tam Otomatik veya Onay Tabanlı Yayın",
-            "Platforma Özel İçerik Optimizasyonu",
-            "Çok Dilli ve Yerelleştirilmiş İçerik",
-            "Yapay Zekâ Destekli Etkileşim İzleme",
-            "Önemli Etkileşimler İçin Hızlı Bildirimler",
-            "Sürekli İçerik Optimizasyonu",
-            "Performans Analitiği ve Düzenli Raporlar"
-          ],
-          "imageAlt": "Telefon çevresinde sosyal medya etkileşim, takipçi ve erişim analitiği"
         },
         "process": {
           "eyebrow": "SÜRECİMİZ",
           "heading": "TRUS Nasıl Çalışır",
           "description": "TRUS, markanızı her platformda aktif, tutarlı ve optimize tutan yönlendirmeli bir iş akışıyla sosyal medya içerik üretimini ve yayınını otomatikleştirir.",
           "steps": [
-            { "title": "Oluştur", "description": "Yapay zekâ ajanları markanıza, görsellerinize, mesajınıza, hedef kitlenize ve hedeflerinize göre platforma özel içerik üretir." },
-            { "title": "İncele", "description": "Gerektiğinde içerik, yayınlanmadan önce size gösterilir; onaylayabilir, düzenleyebilir veya geliştirebilirsiniz." },
-            { "title": "Yayınla", "description": "Onaylanan içerik, seçilen sosyal medya platformunda otomatik olarak yayınlanabilir." },
-            { "title": "İzle", "description": "TRUS; gönderi etkinliğini, etkileşimi, yorumları, beğenileri ve diğer ilgili etkileşimleri izler." },
-            { "title": "Bildir ve Takip Et", "description": "Önemli etkileşimler marka sahibine bildirilebilir; böylece daha hızlı takip ve yanıt verilebilir." },
-            { "title": "Analiz Et ve Optimize Et", "description": "Yapay zekâ ajanları içerik performansını sürekli analiz eder ve gelecekteki gönderileri, açıklamaları, hashtag'leri ve yayın stratejilerini iyileştirir." }
+            { "title": "Oluştur", "description": "Yapay zekâ ajanları; işletmenize, markanıza, görsellerinize, mesajınıza, hedef kitlenize, platforma, dile ve pazarlama hedeflerinize göre içerik üretir." },
+            { "title": "İncele", "description": "Gerektiğinde, üretilen içeriği yayınlamadan önce inceleyebilir, düzenleyebilir, geliştirebilir veya optimize edebilirsiniz." },
+            { "title": "Yayınla", "description": "Onaylanan içerik doğru sosyal medya platformuna ve hesabına gönderilir. Çok dilli stratejilerde TRUS, içeriğin her sürümünü o dil veya hedef pazar için oluşturulan hesaba yönlendirebilir." },
+            { "title": "İzle", "description": "TRUS, yayınlanan içerik etrafındaki etkileşim, yorumlar, beğeniler ve kitle tepkileri dahil ilgili etkinlikleri izler." },
+            { "title": "Bildir ve Takip Et", "description": "Önemli etkileşimler işletme sahibine bildirilebilir; böylece ilgili fırsatlar veya müşteri görüşmeleri daha hızlı takip edilebilir." },
+            { "title": "Analiz Et ve Optimize Et", "description": "Yapay zekâ ajanları içerik performansını analiz eder ve bu içgörüleri gelecekteki gönderileri, mesajları, hashtag'leri, yayın zamanlarını ve içerik stratejilerini geliştirmek için kullanır." }
           ]
+        },
+        "strategy": {
+          "heading": "Çok Dilli Sosyal Hesap Stratejisi",
+          "intro": "Tek Marka. Farklı Pazarlar. Her Kitle İçin Doğru Dil.\nTRUS, işletmelerin sosyal medya varlığını ulaşmak istedikleri pazarlar etrafında düzenlemesine yardımcı olur.\nHer dili tek bir karışık hesap üzerinden yayınlamak yerine, işletmeler bu stratejinin anlamlı olduğu durumlarda farklı diller, ülkeler veya hedef pazarlar için özel sosyal medya hesapları oluşturabilir.",
+          "exampleHeading": "Örneğin",
+          "examples": [
+            {
+              "title": "Instagram Almanya:",
+              "description": "Almanca konuşan müşteriler için Almanca hazırlanan içerik."
+            },
+            {
+              "title": "Instagram Türkiye:",
+              "description": "Türkiye'deki kitle için Türkçe hazırlanan içerik."
+            },
+            {
+              "title": "LinkedIn Uluslararası:",
+              "description": "Uluslararası iş kitlesi için İngilizce hazırlanan profesyonel içerik. Aynı strateji **Instagram, LinkedIn, X ve Telegram Kanalı** için de uygulanabilir. TRUS, doğru içeriğin doğru hesapta, doğru kitle için oluşturulup yayınlanmasını sağlar."
+            }
+          ],
+          "includeHeading": "Bunlar Şunları İçerebilir",
+          "includeItems": [
+            "Dile özel sosyal medya hesapları",
+            "Pazara özel içerik ve mesajlar",
+            "Yerelleştirilmiş açıklamalar, anahtar kelimeler ve hashtag'ler",
+            "Farklı pazarlar için farklı içerik stratejileri",
+            "Hesaba özel yayın iş akışları",
+            "Pazara uygun yayın zamanlaması",
+            "Tüm hesaplarda tutarlı marka kimliği"
+          ],
+          "imageAlt": "Büyük bir monitörde marka ve içerik materyallerini inceleyen ekip"
+        },
+        "intelligence": {
+          "heading": "Çok Dilli İçerikten Pazar Zekâsına",
+          "intro": "Çok dilli sosyal medya yalnızca erişimi artırmamalıdır. İşletmenin **en güçlü fırsatların nerede olduğunu** anlamasına da yardımcı olmalıdır.\nTRUS, farklı hesaplar, diller, ülkeler ve hedef pazarlar arasındaki performansı karşılaştırabilir.",
+          "imageAlt": "Bir kadın dizüstü bilgisayarda sosyal medya gönderisi planlarken bir meslektaşı beyaz tahtada içerik stratejisi sunuyor",
+          "listHeading": "Zamanla Bu, İşletmelerin Şunları Anlamasına Yardımcı Olabilir:",
+          "items": [
+            "Hangi diller daha güçlü etkileşim sağlıyor",
+            "Hangi ülkeler veya bölgeler daha iyi yanıt veriyor",
+            "Hangi sosyal hesaplar daha fazla ilgi çekiyor",
+            "Hangi içerik her pazarda daha iyi performans gösteriyor",
+            "Gelecekteki pazarlama faaliyetleri nerede artırılmalı",
+            "Hangi pazarlar daha fazla reklam bütçesini hak edebilir",
+            "İş büyümesi fırsatları nerede daha güçlü görünüyor"
+          ],
+          "outro": "Bu, şirketlerin her pazara eşit davranmak yerine en umut verici sonuçları gösteren pazarlara odaklanmasını sağlar."
         },
         "automation": {
           "eyebrow": "SOSYAL MEDYA",
           "heading": "Sosyal Medya Otomasyonu",
           "imageAlt": "Dizüstü bilgisayarda çalışan bir kişinin yanında birden fazla platform için oluşturulan ve planlanan sosyal medya gönderileri",
           "items": [
-            { "title": "TRUS Auto Post Creator & Publisher", "description": "Sosyal medya içeriklerini hızlı ve otomatik bir iş akışıyla oluşturun ve yayınlayın.\nTRUS gönderiyi oluşturur, uygun açıklama ve hashtag'leri hazırlar, içeriği seçilen platforma ve dile uyarlar ve son sürümü seçilen hesapta yayınlar.\nÇok dilli işletmeler için ilgili pazara veya sosyal hesaba uygun dil sürümü hazırlanabilir.\nBu hizmet hız, sadelik ve otomasyona odaklanır." },
+            { "title": "TRUS Auto Post Creator & Publisher", "description": "Sosyal medya içeriklerini hızlı ve otomatik bir iş akışıyla oluşturun ve yayınlayın. TRUS gönderiyi oluşturur, uygun açıklama ve hashtag'leri hazırlar, içeriği seçilen platforma ve dile uyarlar ve son sürümü seçilen hesapta yayınlar.\nÇok dilli işletmeler için ilgili pazara veya sosyal hesaba uygun dil sürümü hazırlanabilir.\nBu hizmet hız, sadelik ve otomasyona odaklanır." },
             { "title": "TRUS Instagram Creator & Publisher", "description": "Markanıza, hedef kitlenize, görsel iletişiminize, açıklamalara, hashtag'lere, anahtar kelimelere, dile ve hedef pazara göre Instagram odaklı içerik oluşturun.\nİçeriği yayınlamadan önce inceleyebilir, düzenleyebilir ve optimize edebilirsiniz.\nFarklı diller veya pazarlar için farklı Instagram hesapları da kullanılabilir; böylece her kitle daha ilgili bir iletişim alır." },
             { "title": "TRUS LinkedIn Creator & Publisher", "description": "LinkedIn için B2B iletişim, uzmanlık, sektör konumlandırması ve marka otoritesi dahil profesyonel ve iş odaklı içerik oluşturun.\nİçerik farklı profesyonel kitlelere, dillere, ülkelere ve iş pazarlarına uyarlanabilir.\nYayınlamadan önce mesajı, tonu, terminolojiyi ve yapıyı inceleyip geliştirebilirsiniz." },
             { "title": "TRUS X (Twitter) Creator & Publisher", "description": "X'in iletişim tarzına uygun, kısa ve hedefli içerik oluşturun.\nTRUS gönderileri kitleye, dile, bölgeye, mesaj hedeflerine ve hedef hesaba göre uyarlayabilir.\nİçerik yayınlanmadan önce incelenebilir ve optimize edilebilir." },
@@ -1186,32 +1224,56 @@
           ]
         },
         "flexible": {
-          "eyebrow": "ESNEK OLUŞTURMA & YAYINLAMA",
           "heading": "Esnek Oluşturma & Yayınlama",
+          "description": "TRUS, markanızı her platformda aktif, tutarlı ve optimize tutan yönlendirmeli bir iş akışıyla sosyal medya içerik üretimini ve yayınını otomatikleştirir.",
           "modes": [
-            { "title": "Otomatik Oluşturma & Yayınlama", "description": "TRUS yapay zekâ ajanları; uzmanlığınıza, marka bilgilerinize ve standartlaştırılmış içerik oluşturma modellerine göre Instagram, LinkedIn, X ve Telegram Kanalı için uygun gönderiler oluşturur.\nArdından hedef sosyal medya platformunu seçersiniz ve oluşturulan içerik otomatik olarak yayınlanabilir.\nBu modelin ana odağı hız, sadelik ve otomasyondur." },
-            { "title": "Onay Tabanlı Yayınlama", "description": "TRUS önce içeriği oluşturur ve incelemeniz için size gösterir.\nOnayınızın ardından nihai içerik seçilen sosyal medya platformunda yayınlanır." },
-            { "title": "Yalnızca İçerik Oluşturma", "description": "Bu hizmet, hassas ve yüksek hedefli bir gönderi oluşturmaya odaklanmak isteyen kullanıcılar için tasarlanmıştır.\nTRUS ilk içeriği oluşturur; nihai gönderi tercihlerinize, hedeflerinize, mesajınıza ve marka kimliğinize tam uyana kadar içeriği inceleyebilir, düzenleyebilir, geliştirebilir ve optimize edebilirsiniz.\nBu hizmetin odağı tamamen doğru, hedefli ve düzenlenebilir içerik oluşturmaktır. Yayınlama dahil değildir." },
-            { "title": "Yalnızca Yayınlama", "description": "Bu hizmet, içeriğinizin zaten oluşturulduğu ve ek içerik üretimine gerek olmadığı durumlar için tasarlanmıştır.\nBir veya birden fazla yayına hazır gönderi sağlayıp TRUS ile Instagram, LinkedIn, X veya bir Telegram Kanalında yayınlayabilirsiniz.\nBu sayede mevcut içeriği yeniden oluşturmadan yayınlayabilirsiniz." }
+            {
+              "title": "Otomatik Oluşturma & Yayınlama",
+              "description": "TRUS yapay zekâ ajanları; işletmenize, uzmanlığınıza, platforma, dile, hedef kitleye ve içerik stratejinize göre uygun gönderiler oluşturur.\nÜretilen içerik daha sonra doğru sosyal medya hesabında otomatik olarak yayınlanabilir.\nBaşlıca odak hız, **sadelik ve otomasyondur.**"
+            },
+            {
+              "title": "Onay Tabanlı Yayınlama",
+              "description": "TRUS içeriği oluşturur ve yayınlanmadan önce size gösterir.\nSon sürüm yayınlanmadan önce onaylayabilir, düzenleyebilir veya geliştirebilirsiniz."
+            },
+            {
+              "title": "Yalnızca İçerik Oluşturma",
+              "description": "İçerik üretimi üzerinde tam kontrol isteyen işletmeler için.\nTRUS ilk gönderiyi oluşturur, ardından mesajınıza, hedef kitlenize, dilinize, pazarınıza ve marka yönünüze uyana kadar içeriği incelemenize, düzenlemenize, geliştirmenize ve optimize etmenize olanak tanır.\nYayın dahil değildir."
+            },
+            {
+              "title": "Yalnızca Yayınlama",
+              "description": "Zaten tamamlanmış içerikler için.\nFarklı dil veya pazar sürümleri dahil, yayına hazır bir ya da birden fazla gönderi sağlayabilirsiniz; TRUS her sürümü uygun Instagram, LinkedIn, X veya Telegram Kanalı hesabında yayınlayabilir."
+            }
+          ]
+        },
+        "growth": {
+          "eyebrow": "Bağlantılı Çok Dilli Büyüme",
+          "heading": "Bağlantılı Çok Dilli Büyüme",
+          "description": "Sosyal medya, büyüme stratejinizin geri kalanıyla birlikte çalıştığında daha güçlü hale gelir.",
+          "listIntro": "Diğer TRUS hizmetleriyle birleştirildiğinde sosyal medya faaliyetleri şunlarla uyumlu hale getirilebilir:",
+          "listItems": [
+            "Coğrafi hedefli potansiyel müşteri üretimi",
+            "Dile uygun bültenler",
+            "Yerelleştirilmiş web sitesi içeriği",
+            "Çok dilli SEO",
+            "Pazarlar arası performans analizi"
           ],
-          "scheduleImageAlt": "Bir iş arkadaşı beyaz tahtada içerik stratejisi sunarken dizüstü bilgisayarda gönderi planlayan kadın",
-          "multilingual": {
-            "heading": "Çok Dilli & Yerelleştirilmiş İçerik",
-            "intro": "TRUS, hedef kitlenizin diline, ülkesine ve coğrafi konumuna göre içerik oluşturabilir. Buna şunlar dahildir:",
-            "items": [
-              "Kitlenin diline uyarlanmış içerik",
-              "Yerelleştirilmiş açıklamalar",
-              "İlgili hashtag'ler ve anahtar kelimeler",
-              "Pazara özel mesajlar",
-              "Farklı ülkelere ve coğrafi bölgelere göre hazırlanmış içerik"
-            ],
-            "outro": "Bu, markaların farklı pazarlardaki kitlelerle daha doğal ve etkili iletişim kurmasına yardımcı olur.",
-            "imageAlt": "İçerik İngilizce, İspanyolca, Fransızca ve Almancaya çevrilirken dizüstü bilgisayar başında çalışan ekip"
-          }
+          "outro": "Bu, işletmelerin dil, konum, hedef kitle ve iş hedeflerini uyumlu tutarak aynı hedef pazarla birden fazla koordineli kanal üzerinden iletişim kurmasını sağlar.",
+          "highlightsHeading": "Öne Çıkanlar",
+          "highlights": [
+            "Yapay Zekâ Destekli İçerik Üretimi",
+            "Otomatik Çok Platformlu Yayın",
+            "Çok Dilli Sosyal Hesap Stratejisi",
+            "Çok Dilli ve Yerelleştirilmiş İçerik",
+            "Platforma ve Pazara Özel Optimizasyon",
+            "Yapay Zekâ Destekli Etkileşim İzleme ve Takip",
+            "Pazarlar Arası Performans Analitiği",
+            "Sürekli İçerik Optimizasyonu"
+          ],
+          "imageAlt": "İçerik İngilizce, İspanyolca, Fransızca ve Almancaya çevrilirken dizüstü bilgisayar başında çalışan ekip"
         },
         "contact": {
           "heading": "İşinizi Büyütmeye Hazır mısınız?",
-          "description": "İçerik oluşturmak, hazırlamak ve yayınlamak için her gün saatler harcamadan tutarlı ve profesyonel bir sosyal medya varlığı sürdürün.\nHangi sosyal medya platformlarını kullandığınızı ve içerik üretimi ile yayın iş akışınızın nasıl çalışmasını istediğinizi bize söyleyin. TRUS, markanız için doğru otomasyon çözümünü kurmanıza yardımcı olacaktır."
+          "description": "İşletmenizin hangi platformları, dilleri ve pazarları hedeflemek istediğini bize söyleyin.\nTRUS, doğru içeriği üreten, doğru hesapta yayınlayan, kitle tepkisini izleyen ve en güçlü büyüme fırsatlarınızın nerede olduğunu anlamanıza yardımcı olan yapılandırılmış bir sosyal medya sistemi kurmanıza yardımcı olabilir."
         }
       },
       "autoPost": {

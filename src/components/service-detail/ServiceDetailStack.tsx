@@ -1,10 +1,14 @@
 import { useLayoutEffect, useRef } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichText } from "@/components/service-detail/richText";
+import { ServiceStackIconGlyph, type ServiceStackIcon } from "@/components/service-detail/socialIcons";
 import type { ServiceDetailAutomation } from "@/config/serviceDetails.config";
 
 /** Scroll distance (in viewport heights) spent on each card sliding in. */
-const VH_PER_STEP = 1.8;
+const VH_PER_STEP = 3;
+
+/** Empty space (px) kept between the card in place and the next one waiting below it. */
+const CARD_GAP = 40;
 
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
 
@@ -13,13 +17,21 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n));
  * scrolls, each card slides up over the previous one. Scrolling back reverses it.
  * Progress is derived from scroll position, so it is naturally reversible.
  */
-export function ServiceDetailStack({ automation, image }: { automation: ServiceDetailAutomation; image: string }) {
-  const { eyebrow, heading, imageAlt, items } = automation;
+export function ServiceDetailStack({
+  automation,
+  image,
+  icons,
+}: {
+  automation: ServiceDetailAutomation;
+  image: string;
+  /** One glyph per item, shown before its title. */
+  icons?: readonly ServiceStackIcon[];
+}) {
+  const { heading, imageAlt, items } = automation;
   const wrapRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const spacerRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLOListElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const count = items.length;
 
   useLayoutEffect(() => {
@@ -30,6 +42,11 @@ export function ServiceDetailStack({ automation, image }: { automation: ServiceD
       frame = 0;
       const wrap = wrapRef.current;
       if (!wrap) return;
+      // Below lg the cards are a plain list: no pinning, no sliding.
+      if (!window.matchMedia("(min-width: 1024px)").matches) {
+        cardRefs.current.forEach((card) => card && (card.style.transform = ""));
+        return;
+      }
       const sticky = stickyRef.current;
       const spacer = spacerRef.current;
       if (!sticky || !spacer) return;
@@ -40,12 +57,10 @@ export function ServiceDetailStack({ automation, image }: { automation: ServiceD
       // Cards wait below in a list (one card height apart) and each rises to the top slot in turn.
       const step = cardRefs.current[0]?.offsetHeight ?? 0;
       const u = progress * (count - 1);
-      // The top slot stays fully opaque; only the waiting cards below it fade.
-      listRef.current?.style.setProperty("--stack-step", `${step}px`);
       cardRefs.current.forEach((card, i) => {
         if (!card || i === 0) return;
         const pos = Math.max(0, i - (reduce ? Math.round(u) : u));
-        card.style.transform = `translate3d(0, ${pos * step}px, 0)`;
+        card.style.transform = `translate3d(0, ${pos * (step + CARD_GAP)}px, 0)`;
       });
     };
     const schedule = () => {
@@ -66,38 +81,32 @@ export function ServiceDetailStack({ automation, image }: { automation: ServiceD
     <section
       aria-labelledby="service-stack-heading"
       ref={wrapRef}
-      className="relative overflow-clip"
-      style={{ background: "#E3E3E3" }}
+      className="relative overflow-clip shadow-[0_1px_0_#070606]"
+      style={{ background: "#070606" }}
     >
       {/* Sticks just below the fixed Navbar; the vertical padding is the section's top/bottom space. */}
-      <div ref={stickyRef} className="sticky top-21 h-[calc(100vh-84px)] overflow-hidden pt-[60px] lg:top-18 lg:h-[calc(100vh-72px)] lg:pt-20">
-        <div className="mx-auto flex h-full w-full max-w-[1068px] flex-col px-5">
+      <div ref={stickyRef} className="px-0 py-14 lg:sticky lg:top-18 lg:h-[calc(100vh-72px)] lg:overflow-hidden lg:py-0 lg:pt-20">
+        <div className="mx-auto flex h-full w-full max-w-[1064px] flex-col px-5 min-[1104px]:px-0">
           <FadeIn direction="up">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[#5B2BB9] lg:text-section-label">{eyebrow}</p>
             <h2
               id="service-stack-heading"
-              className="mt-2 font-hero text-[26px] font-bold leading-[1.1] text-[#070606] lg:mt-3 lg:text-[38px]"
+              className="font-hero text-[26px] font-bold leading-[34px] text-white lg:text-[32px] lg:leading-[42px]"
             >
               {heading}
             </h2>
           </FadeIn>
 
-          <div className="mt-6 flex min-h-0 flex-1 flex-col gap-3 lg:mt-20 lg:flex-row lg:gap-5">
+          <div className="mt-10 flex flex-col gap-4 lg:mt-[67px] lg:min-h-0 lg:flex-1 lg:flex-row lg:gap-5">
             <img
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="aspect-[2.1/1] w-full shrink-0 rounded-[20px] object-cover lg:h-[264px] lg:w-[321px] lg:aspect-auto"
+              className="h-[200px] w-full shrink-0 rounded-lg lg:rounded-2xl object-cover object-center lg:object-left lg:h-[267px] lg:w-[420px] lg:aspect-auto"
             />
 
             {/* All cards share one grid cell, so the stack is as tall as the tallest card. */}
             <ol
-              ref={listRef}
-              className="grid min-h-0 flex-1 content-start overflow-hidden"
-              style={{
-                maskImage: "linear-gradient(to bottom, #000 var(--stack-step, 40%), transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, #000 var(--stack-step, 40%), transparent 100%)",
-              }}
+              className="flex flex-col gap-4 lg:grid lg:min-h-0 lg:flex-1 lg:content-start lg:gap-0 lg:overflow-hidden"
             >
               {items.map((item, i) => (
                 <li
@@ -105,16 +114,22 @@ export function ServiceDetailStack({ automation, image }: { automation: ServiceD
                   ref={(el) => {
                     cardRefs.current[i] = el as HTMLDivElement | null;
                   }}
-                  className="col-start-1 row-start-1 border-b border-[#B8B8B8] pb-5 pt-6 will-change-transform lg:h-[275px] lg:px-[25px] lg:pb-0 lg:pt-[13px]"
-                  style={{ background: "#E3E3E3", zIndex: i }}
+                  className={`lg:col-start-1 lg:row-start-1 lg:will-change-transform lg:h-[267px] lg:pt-5 ${i === 0 ? "lg:px-5" : "lg:px-[25px]"} ${i < count - 1 ? "lg:border-b lg:border-white/30" : ""}`}
+                  style={{ background: "#070606", zIndex: i }}
                 >
-                  <p className="font-body text-[12px] leading-none text-[#5B2BB9] lg:text-[14px]">
+                  <p className="font-body text-[14px] leading-6 text-[#9F7EE1]">
                     {String(i + 1).padStart(2, "0")}/{String(count).padStart(2, "0")}
                   </p>
-                  <h3 className="mt-2 font-body text-[18px] font-semibold leading-tight text-[#070606] lg:mt-1.5 lg:text-[24px]">
+                  <h3 className={`mt-0 flex items-start gap-2 font-body text-[18px] font-bold leading-[31px] text-white lg:text-[20px] ${i === 0 ? "lg:mt-2" : "lg:mt-0"}`}>
+                    {icons?.[i] && (
+                      <ServiceStackIconGlyph
+                        name={icons[i]}
+                        className="size-8 shrink-0"
+                      />
+                    )}
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-justify font-body text-[13px] leading-5 text-[#070606] lg:mt-3 lg:text-[16px] lg:leading-[25px]">
+                  <p className={`mt-2.5 text-justify font-body text-[16px] leading-[22px] text-white ${i === 0 ? "lg:mt-2" : "lg:mt-2.5"} ${i < 3 ? "lg:leading-[22px]" : "lg:leading-[26px]"}`}>
                     {renderRichText(item.description)}
                   </p>
                 </li>
@@ -124,7 +139,7 @@ export function ServiceDetailStack({ automation, image }: { automation: ServiceD
         </div>
       </div>
       {/* Extra scroll distance while the section is pinned. */}
-      <div ref={spacerRef} aria-hidden style={{ height: `${(count - 1) * VH_PER_STEP * 100}vh` }} />
+      <div ref={spacerRef} aria-hidden className="hidden lg:block" style={{ height: `${(count - 1) * VH_PER_STEP * 100}vh` }} />
     </section>
   );
 }

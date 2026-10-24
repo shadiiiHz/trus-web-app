@@ -1002,6 +1002,7 @@
         "metaDescription": "Improve your search visibility with technical SEO, content optimization, AI-assisted analysis and continuous monitoring for traditional and AI-powered search.",
         "about": {
           "heading": "SEO & Content Optimization",
+          "headingMobile": ["SEO & Content", "Optimization"],
           "description": "TRUS improves your website and content through technical SEO, content optimization, AI-assisted analysis, continuous monitoring, and optimization for both traditional and AI-powered search.\nFor businesses targeting multiple markets, TRUS also supports **multilingual and localized SEO** by adapting content, keywords, search intent, and optimization strategies to different languages, countries, and target regions.  This helps your brand become more discoverable not only in one market, but across the markets and languages that matter to your business.",
           "imageAlt": "SEO analytics dashboard on a laptop"
         },
@@ -1043,6 +1044,7 @@
         "metaDescription": "Custom-code, AI-assisted websites built with our B3D Method: Briefing, Design, Develop & Deliver. Fast, secure, scalable and SEO-ready.",
         "about": {
           "heading": "Web Design & Development",
+          "headingMobile": ["Web Design &","Development"],
           "description": "TRUS designs and develops modern, high-performance websites using our **B3D Method: Briefing, Design, Develop & Deliver.** We work closely with you at every stage, incorporating your feedback, preferences, and business goals before moving forward.\nOur websites combine custom-code development with AI-assisted workflows to deliver fast, secure, scalable, and SEO-ready experiences without the limitations of traditional website builders or template-based platforms.\nFor businesses targeting multiple countries or language groups, we can also build **multilingual and market-localized website structures**. Each language or market can have its own pages, messaging, calls to action, navigation, metadata, and SEO structure while remaining part of one consistent brand experience.\nThis allows your website to grow with your business and support expansion into new languages and geographic markets without rebuilding the entire platform.",
           "imageAlt": "Team collaborating on website wireframes and design"
         },
@@ -1088,6 +1090,7 @@
         "metaDescription": "AI-assisted logo design, colors, typography, brand style and social media assets — a clear, consistent visual identity across every digital channel.",
         "about": {
           "heading": "Brand Identity & Logo Design",
+          "headingMobile": ["Brand Identity & Logo","Design"],
           "description": "We create a clear and consistent visual identity for your business, from AI-assisted logo design to colors, typography, brand style, and social media assets.\nEverything is designed to make your brand look professional, recognizable, and consistent across every digital channel.\nFor businesses operating across multiple languages or markets, we also build brand systems that can adapt to different audiences while preserving the same core identity. Typography, visual structure, layouts, and brand presentation can be prepared to work consistently across different languages, regions, and market-specific channels.",
           "imageAlt": "Design team reviewing brand identity materials around a table"
         },
@@ -1131,57 +1134,89 @@
         "about": {
           "heading": "Social Media Content\nCreation & Publishing",
           "headingMobile": ["Social Media Content","Creation & Publishing"],
-          "description": "TRUS uses AI Agents to automate the entire social media content creation and publishing process; from generating platform-specific posts, captions, hashtags, and localized content to publishing, engagement monitoring, and performance reporting.\nSimply provide your daily information, images, or content to TRUS. Your post can be created within seconds, shown to you for review when needed, and published to your selected social media platform after approval.\nEvery piece of content is created and optimized based on the destination platform, your brand, target audience, language, geographic location, and marketing goals.",
+          "description": "TRUS uses AI Agents to manage social media content creation, publishing, monitoring, and continuous optimization across Instagram, LinkedIn, X, and Telegram Channel.\nSimply provide your business updates, images, ideas, offers, or daily information. TRUS can transform them into platform-specific posts with suitable captions, hashtags, keywords, messaging, and content structure.\nContent can be created within seconds, reviewed and refined when needed, then published to the selected social media account. For businesses targeting different languages or markets, TRUS goes beyond simple translation. We can build a multilingual social account strategy, where different languages, countries, or target markets can have dedicated social media accounts and localized communication. For example, a business may operate one Instagram account for German-speaking audiences and another for Turkish-speaking audiences. TRUS can create the appropriate content for each account, adapt the message to that market, and publish it to the correct destination.\nThis creates a structured social media system that can grow with your business across multiple markets.",
           "imageAlt": "Team brainstorming social media content strategy around a laptop"
         },
         "gain": {
           "heading": "What You Gain",
           "items": [
-            "Save time on daily content creation and publishing",
-            "Reduce the need for separate Content Creators, Social Media Admins, and publishing teams",
-            "Keep your brand consistently active across social media",
-            "Create content specifically optimized for each platform",
-            "Improve discoverability with optimized captions, keywords, hashtags, and content structure",
-            "Create multilingual and localized content for different markets",
-            "Monitor audience engagement and reactions",
-            "Receive periodic content performance reports",
-            "Enable faster follow-up when users interact with your posts"
+            "Faster AI-powered social media content creation",
+            "Automated publishing across multiple platforms",
+            "Platform-specific posts, captions, hashtags, and keywords",
+            "Dedicated social media strategies for different languages and markets",
+            "Localized content for different countries and audiences",
+            "More consistent activity across your social channels",
+            "Less manual work for content creation and publishing",
+            "Faster response to important audience interactions",
+            "Performance insights across accounts, languages, and markets",
+            "Better data for deciding where to focus future marketing efforts"
           ]
-        },
-        "highlights": {
-          "heading": "Highlights",
-          "items": [
-            "AI-Powered Content Creation",
-            "Automated Multi-Platform Publishing",
-            "Fully Automated or Approval-Based Publishing",
-            "Platform-Specific Content Optimization",
-            "Multilingual & Localized Content",
-            "AI-Powered Engagement Monitoring",
-            "Fast Notifications for Important Interactions",
-            "Continuous Content Optimization",
-            "Performance Analytics & Periodic Reports"
-          ],
-          "imageAlt": "Social media engagement, followers and reach analytics around a phone"
         },
         "process": {
           "eyebrow": "OUR PROCESS",
           "heading": "How TRUS Works",
           "description": "TRUS automates social media content creation and publishing through a guided workflow that keeps your brand active, consistent, and optimized across every platform.",
           "steps": [
-            { "title": "Create", "description": "AI Agents generate platform-specific content based on your brand, images, message, audience, and goals." },
-            { "title": "Review", "description": "When required, content is shown to you before publishing so you can approve, edit, or refine it." },
-            { "title": "Publish", "description": "Approved content can be automatically published to the selected social media platform." },
-            { "title": "Monitor", "description": "TRUS monitors post activity, engagement, comments, likes, and other relevant interactions." },
-            { "title": "Notify & Follow Up", "description": "Important interactions can be reported to the brand owner, allowing faster follow-up and response." },
-            { "title": "Analyze & Optimize", "description": "AI Agents continuously analyze content performance and improve future posts, captions, hashtags, and publishing strategies." }
+            { "title": "Create", "description": "AI Agents generate content based on your business, brand, images, message, target audience, platform, language, and marketing goals." },
+            { "title": "Review", "description": "When required, you can review, edit, refine, or optimize the generated content before publishing." },
+            { "title": "Publish", "description": "Approved content is sent to the correct social media platform and account. For multilingual strategies, TRUS can route each version of the content to the account created for that language or target market." },
+            { "title": "Monitor", "description": "TRUS monitors relevant activity around published content, including engagement, comments, likes, and audience reactions." },
+            { "title": "Notify & Follow Up", "description": "Important interactions can be reported to the business owner so relevant opportunities or customer conversations can be followed up more quickly." },
+            { "title": "Analyze & Optimize", "description": "AI Agents analyze content performance and use those insights to improve future posts, messaging, hashtags, publishing times, and content strategies." }
           ]
+        },
+        "strategy": {
+          "heading": "Multilingual Social Account Strategy",
+          "intro": "One Brand. Different Markets. The Right Language for Each Audience.\nTRUS helps businesses organize their social media presence around the markets they want to reach.\nInstead of publishing every language through one mixed account, businesses can create dedicated social media accounts for different languages, countries, or target markets where this strategy makes sense.",
+          "exampleHeading": "For Example",
+          "examples": [
+            {
+              "title": "Instagram Germany:",
+              "description": "Content created in German for German-speaking customers."
+            },
+            {
+              "title": "Instagram Türkiye:",
+              "description": "Content created in Turkish for audiences in Türkiye."
+            },
+            {
+              "title": "LinkedIn International:",
+              "description": "Professional content created in English for international business audiences. The same strategy can be applied to **Instagram, LinkedIn, X, and Telegram Channel.** TRUS helps ensure that the right content is created and published to the right account, for the right audience."
+            }
+          ],
+          "includeHeading": "This Can Include",
+          "includeItems": [
+            "Language-specific social media accounts",
+            "Market-specific content and messaging",
+            "Localized captions, keywords, and hashtags",
+            "Different content strategies for different markets",
+            "Account-specific publishing workflows",
+            "Market-relevant publishing schedules",
+            "Consistent brand identity across all accounts"
+          ],
+          "imageAlt": "Team reviewing brand and content materials on a large monitor"
+        },
+        "intelligence": {
+          "heading": "From Multilingual Content To Market Intelligence",
+          "intro": "Multilingual social media should not only increase reach. It should also help the business understand **where the strongest opportunities are.**\nTRUS can compare performance across different accounts, languages, countries, and target markets.",
+          "imageAlt": "Woman scheduling a social media post on a laptop while a colleague presents a content strategy on a whiteboard",
+          "listHeading": "Over Time, This Can Help Businesses Understand:",
+          "items": [
+            "Which languages generate stronger engagement",
+            "Which countries or regions respond better",
+            "Which social accounts attract more interest",
+            "Which content performs better in each market",
+            "Where future marketing activity should be increased",
+            "Which markets may deserve more advertising budget",
+            "Where business growth opportunities appear stronger"
+          ],
+          "outro": "This allows companies to narrow their focus toward the markets that show the most promising results instead of treating every market equally."
         },
         "automation": {
           "eyebrow": "SOCIAL MEDIA",
           "heading": "Social Media Automation",
           "imageAlt": "Social media posts being created and scheduled for several platforms next to a person working on a laptop",
           "items": [
-            { "title": "TRUS Auto Post Creator & Publisher", "description": "Create and publish social media content through a fast and automated workflow.\nTRUS generates the post, prepares suitable captions and hashtags, adapts the content to the selected platform and language, and publishes the final version to the selected account.\nFor multilingual businesses, the appropriate language version can be prepared for the corresponding market or social account.\nThis service focuses on speed, simplicity, and automation." },
+            { "title": "TRUS Auto Post Creator & Publisher", "description": "Create and publish social media content through a fast and automated workflow. TRUS generates the post, prepares suitable captions and hashtags, adapts the content to the selected platform and language, and publishes the final version to the selected account.\nFor multilingual businesses, the appropriate language version can be prepared for the corresponding market or social account.\nThis service focuses on speed, simplicity, and automation." },
             { "title": "TRUS Instagram Creator & Publisher", "description": "Create Instagram-focused content based on your brand, audience, visual communication, captions, hashtags, keywords, language, and target market.\nYou can review, edit, and optimize the content before publishing.\nDifferent Instagram accounts can also be used for different languages or markets, allowing each audience to receive more relevant communication." },
             { "title": "TRUS LinkedIn Creator & Publisher", "description": "Create professional and business-focused content for LinkedIn, including B2B communication, expertise, industry positioning, and brand authority.\nContent can be adapted to different professional audiences, languages, countries, and business markets.\nYou can review and refine the message, tone, terminology, and structure before publishing." },
             { "title": "TRUS X (Twitter) Creator & Publisher", "description": "Create concise and targeted content designed for the communication style of X.\nTRUS can adapt posts based on audience, language, region, messaging goals, and the destination account.\nContent can be reviewed and optimized before publishing." },
@@ -1189,32 +1224,56 @@
           ]
         },
         "flexible": {
-          "eyebrow": "FLEXIBLE CREATION & PUBLISHING",
           "heading": "Flexible Creation & Publishing",
+          "description": "TRUS automates social media content creation and publishing through a guided workflow that keeps your brand active, consistent, and optimized across every platform.",
           "modes": [
-            { "title": "Automatic Creation & Publishing", "description": "TRUS AI Agents create suitable posts for Instagram, LinkedIn, X, and Telegram Channel based on your expertise, brand information, and standardized content creation models.\nYou then select the destination social media platform, and the generated content can be published automatically.\nThe main focus of this model is speed, simplicity, and automation." },
-            { "title": "Approval-Based Publishing", "description": "TRUS first creates the content and shows it to you for review.\nAfter your approval, the final content is published to the selected social media platform." },
-            { "title": "Content Creation Only", "description": "This service is designed for users who want to focus on creating a precise and highly targeted post.\nTRUS generates the initial content, and you can review, edit, refine, and optimize it until the final post closely matches your preferences, goals, message, and brand identity.\nThe focus of this service is entirely on creating accurate, targeted, and editable content. Publishing is not included." },
-            { "title": "Publishing Only", "description": "This service is designed for situations where your content has already been created, and no additional content generation is required.\nYou can provide one or multiple ready-to-publish posts and use TRUS to publish them on Instagram, LinkedIn, X, or a Telegram Channel.\nThis allows you to publish existing content without recreating it." }
+            {
+              "title": "Automatic Creation & Publishing",
+              "description": "TRUS AI Agents create suitable posts based on your business, expertise, platform, language, audience, and content strategy.\nThe generated content can then be automatically published to the correct social media account.\nThe main focus is speed, **simplicity, and automation.**"
+            },
+            {
+              "title": "Approval-Based Publishing",
+              "description": "TRUS creates the content and shows it to you before publication.\nYou can approve, edit, or refine it before the final version is published."
+            },
+            {
+              "title": "Content Creation Only",
+              "description": "For businesses that want full control over content creation.\nTRUS generates the initial post, then allows you to review, edit, refine, and optimize the content until it matches your message, audience, language, market, and brand direction.\nPublishing is not included."
+            },
+            {
+              "title": "Publishing Only",
+              "description": "For content that has already been finalized.\nYou can provide one or multiple ready-to-publish posts, including different language or market versions, and TRUS can publish each version to the appropriate Instagram, LinkedIn, X, or Telegram Channel account."
+            }
+          ]
+        },
+        "growth": {
+          "eyebrow": "Connected Multilingual Growth",
+          "heading": "Connected Multilingual Growth",
+          "description": "Social media becomes more powerful when it works together with the rest of your growth strategy.",
+          "listIntro": "When combined with other TRUS services, social media activity can be aligned with:",
+          "listItems": [
+            "Geo-targeted lead generation",
+            "Language-matched newsletters",
+            "Localized website content",
+            "Multilingual SEO",
+            "Cross-market performance analysis"
           ],
-          "scheduleImageAlt": "Woman scheduling a social media post on a laptop while a colleague presents a content strategy on a whiteboard",
-          "multilingual": {
-            "heading": "Multilingual & Localized Content",
-            "intro": "TRUS can create content based on the language, country, and geographic location of your target audience. This includes:",
-            "items": [
-              "Content adapted to the audience's language",
-              "Localized captions",
-              "Relevant hashtags and keywords",
-              "Market-specific messaging",
-              "Content tailored to different countries and geographic regions"
-            ],
-            "outro": "This helps brands communicate more naturally and effectively with audiences across different markets.",
-            "imageAlt": "Team collaborating on a laptop while content is translated into English, Spanish, French and German"
-          }
+          "outro": "This allows businesses to communicate with the same target market through multiple coordinated channels while keeping language, location, audience, and business goals aligned.",
+          "highlightsHeading": "Highlights",
+          "highlights": [
+            "AI-Powered Content Creation",
+            "Automated Multi-Platform Publishing",
+            "Multilingual Social Account Strategy",
+            "Multilingual & Localized Content",
+            "Platform & Market-Specific Optimization",
+            "AI Engagement Monitoring & Follow-Up",
+            "Cross-Market Performance Analytics",
+            "Continuous Content Optimization"
+          ],
+          "imageAlt": "Team collaborating on a laptop while content is translated into English, Spanish, French and German"
         },
         "contact": {
           "heading": "Ready to Grow Your Business?",
-          "description": "Maintain a consistent and professional social media presence without spending hours every day creating, preparing, and publishing content.\nTell us which social media platforms you use and how you want your content creation and publishing workflow to operate. TRUS will help you build the right automation solution for your brand."
+          "description": "Tell us which platforms, languages, and markets your business wants to target.\nTRUS can help you build a structured social media system that creates the right content, publishes it to the right account, monitors audience response, and helps you understand where your strongest growth opportunities are."
         }
       },
       "autoPost": {

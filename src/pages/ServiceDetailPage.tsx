@@ -5,8 +5,11 @@ import { FooterSection } from "@/components/sections/FooterSection";
 import { ServiceDetailHero } from "@/components/service-detail/ServiceDetailHero";
 import { ServiceDetailAbout } from "@/components/service-detail/ServiceDetailAbout";
 import { ServiceDetailProcess } from "@/components/service-detail/ServiceDetailProcess";
+import { ServiceDetailStrategy } from "@/components/service-detail/ServiceDetailStrategy";
+import { ServiceDetailIntelligence } from "@/components/service-detail/ServiceDetailIntelligence";
 import { ServiceDetailStack } from "@/components/service-detail/ServiceDetailStack";
 import { ServiceDetailFlexible } from "@/components/service-detail/ServiceDetailFlexible";
+import { ServiceDetailGrowth } from "@/components/service-detail/ServiceDetailGrowth";
 import { ServiceDetailContact } from "@/components/service-detail/ServiceDetailContact";
 import {
   getServiceContent,
@@ -55,12 +58,13 @@ export default function ServiceDetailPage() {
         />
       </div>
 
-      {content.about && content.gain && content.highlights && (
+      {content.about && content.gain && (
         <ServiceDetailAbout
           about={content.about}
           gain={content.gain}
           highlights={content.highlights}
           glow={service.aboutGlow}
+          textLeading={service.aboutTextLeading}
           aboutImageSize={service.aboutImageSize}
           highlightsImageSize={service.highlightsImageSize}
         />
@@ -68,13 +72,21 @@ export default function ServiceDetailPage() {
 
       {content.process && <ServiceDetailProcess process={content.process} />}
 
-      {content.automation && service.stackImage && (
-        <ServiceDetailStack automation={content.automation} image={service.stackImage} />
+      {content.strategy && service.strategyImage && (
+        <ServiceDetailStrategy strategy={content.strategy} image={service.strategyImage} />
       )}
 
-      {content.flexible && service.flexibleImages && (
-        <ServiceDetailFlexible flexible={content.flexible} images={service.flexibleImages} />
+      {content.intelligence && service.intelligenceImage && (
+        <ServiceDetailIntelligence intelligence={content.intelligence} image={service.intelligenceImage} />
       )}
+
+      {content.automation && service.stackImage && (
+        <ServiceDetailStack automation={content.automation} image={service.stackImage} icons={service.stackIcons} />
+      )}
+
+      {content.flexible && <ServiceDetailFlexible flexible={content.flexible} />}
+
+      {content.growth && service.growthImage && <ServiceDetailGrowth growth={content.growth} image={service.growthImage} />}
 
       {content.contact && (
         <ServiceDetailContact

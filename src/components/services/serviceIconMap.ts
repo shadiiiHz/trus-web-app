@@ -12,4 +12,5 @@ export const SERVICE_LINKS: Record<string, string> = {
   seo: serviceDetailPath('seo-content-optimization'),
   'web-design': serviceDetailPath('web-design-development'),
   branding: serviceDetailPath('brand-identity-logo-design'),
+  'social-media': serviceDetailPath('social-media-content-creation-publishing'),
 }

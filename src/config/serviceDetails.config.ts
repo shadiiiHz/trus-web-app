@@ -17,6 +17,7 @@
  * (content not designed yet).
  */
 import { t } from "@/i18n";
+import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
 export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost";
@@ -29,6 +30,28 @@ export interface ServiceDetailProcess {
   steps: readonly { title: string; description: string }[];
 }
 
+/** Optional dark "strategy" section (image + example list + second list). Example `description` supports **bold**. */
+export interface ServiceDetailStrategy {
+  heading: string;
+  /** Supports \n line breaks. */
+  intro: string;
+  exampleHeading: string;
+  examples: readonly { title: string; description: string }[];
+  includeHeading: string;
+  includeItems: readonly string[];
+  imageAlt: string;
+}
+
+/** Optional light "insights" section (heading + intro, image, bullet list, closing paragraph). `intro` supports **bold** and line breaks. */
+export interface ServiceDetailIntelligence {
+  heading: string;
+  intro: string;
+  imageAlt: string;
+  listHeading: string;
+  items: readonly string[];
+  outro: string;
+}
+
 /** Optional scroll-stacked card section (cards slide over each other). */
 export interface ServiceDetailAutomation {
   eyebrow: string;
@@ -38,13 +61,24 @@ export interface ServiceDetailAutomation {
   items: readonly { title: string; description: string }[];
 }
 
-/** Optional dark "modes + localization" section. */
-export interface ServiceDetailFlexible {
+/** Optional dark "connected growth" section (heading, intro + list, image beside a highlights list). */
+export interface ServiceDetailGrowth {
   eyebrow: string;
   heading: string;
+  description: string;
+  listIntro: string;
+  listItems: readonly string[];
+  outro: string;
+  highlightsHeading: string;
+  highlights: readonly string[];
+  imageAlt: string;
+}
+
+/** Optional light "modes" section. Mode `description` supports **bold** and line breaks. */
+export interface ServiceDetailFlexible {
+  heading: string;
+  description: string;
   modes: readonly { title: string; description: string }[];
-  scheduleImageAlt: string;
-  multilingual: { heading: string; intro: string; items: readonly string[]; outro: string; imageAlt: string };
 }
 
 /** Shape of one page's copy in the locale JSON files. */
@@ -66,9 +100,15 @@ export interface ServiceDetailText {
   /** Rendered between About and Contact when present. */
   process?: ServiceDetailProcess;
   /** Rendered after `process` when present. */
+  strategy?: ServiceDetailStrategy;
+  /** Rendered after `strategy` when present. */
+  intelligence?: ServiceDetailIntelligence;
+  /** Rendered after `intelligence` when present. */
   automation?: ServiceDetailAutomation;
   /** Rendered after `automation` when present. */
   flexible?: ServiceDetailFlexible;
+  /** Rendered after `flexible` when present. */
+  growth?: ServiceDetailGrowth;
   /** `description` supports `\n` line breaks. */
   contact?: { heading: string; description: string };
 }
@@ -105,19 +145,27 @@ export interface ServiceDetail {
   /** Render only the hero (page not fully designed yet). Without this or `images`, the URL renders the 404 page. */
   heroOnly?: boolean;
   /** About-section images; omit while the page isn't designed yet. */
-  images?: { about: string; highlights: string };
+  images?: { about: string; highlights?: string };
   /** Purple radial glow behind the About section (Figma background). */
   aboutGlow?: boolean;
+  /** Desktop line-height (px) of the About description on pages with a Highlights block (default 20). */
+  aboutTextLeading?: number;
   /** Desktop size (px) of the centered About image, default 414×212. */
   aboutImageSize?: { width: number; height: number };
   /** Desktop size (px) of the Highlights image, default 414×212. */
   highlightsImageSize?: { width: number; height: number };
   /** Contact description spans the full container width. */
   contactWide?: boolean;
+  /** Image of the `strategy` section (only for pages with `strategy` copy). */
+  strategyImage?: string;
+  /** Image of the `intelligence` section (only for pages with `intelligence` copy). */
+  intelligenceImage?: string;
+  /** Glyphs shown before each scroll-stacked card title, in item order. */
+  stackIcons?: readonly ServiceStackIcon[];
+  /** Image of the `growth` section (only for pages with `growth` copy). */
+  growthImage?: string;
   /** Image beside the scroll-stacked cards (only for pages with `automation` copy). */
   stackImage?: string;
-  /** Images of the `flexible` section (only for pages with `flexible` copy). */
-  flexibleImages?: { schedule: string; multilingual: string };
 }
 
 export const SERVICE_DETAILS: readonly ServiceDetail[] = [
@@ -142,6 +190,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroTextY: 33,
     heroMobile: { imageX: "59%" },
     aboutGlow: true,
+    aboutTextLeading: 22,
     aboutImageSize: { width: 420, height: 212 },
     highlightsImageSize: { width: 314, height: 226 },
     contactWide: true,
@@ -157,6 +206,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroTextY: 34,
     heroMobile: { align: "top", imageX: "67%", titleWidth: 240 },
     aboutGlow: true,
+    aboutTextLeading: 22,
     aboutImageSize: { width: 414, height: 212 },
     highlightsImageSize: { width: 414, height: 212 },
     contactWide: true,
@@ -172,16 +222,16 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroTextY: 30,
     heroDesktopFade: true,
     heroMobile: { imageX: "79%", titleWidth: 300 },
+    aboutGlow: true,
+    aboutImageSize: { width: 420, height: 267 },
     contactWide: true,
-    // TODO: replace with the Figma export of the automation image.
-    stackImage: "/services/social-team-brainstorm.jpg",
-    flexibleImages: {
-      schedule: "/services/social-schedule-publish.png",
-      multilingual: "/services/social-multilingual-content.png",
-    },
+    strategyImage: "/services/social-multilingual-strategy.png",
+    intelligenceImage: "/services/social-market-intelligence.png",
+    stackImage: "/services/social-automation-workspace.png",
+    growthImage: "/services/social-connected-growth.png",
+    stackIcons: ["settings", "instagram", "linkedin", "x", "telegram"],
     images: {
       about: "/services/social-team-brainstorm.jpg",
-      highlights: "/services/social-analytics-phone.jpg",
     },
   },
   {
@@ -224,7 +274,7 @@ export function getServiceContent(service: ServiceDetail): ServiceDetailContent 
   return {
     ...text,
     about: text.about && images ? { ...text.about, image: images.about } : undefined,
-    highlights: text.highlights && images ? { ...text.highlights, image: images.highlights } : undefined,
+    highlights: text.highlights && images?.highlights ? { ...text.highlights, image: images.highlights } : undefined,
     contact: text.contact ? { ...text.contact, wide: service.contactWide } : undefined,
   };
 }

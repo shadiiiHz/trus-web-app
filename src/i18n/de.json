@@ -1009,6 +1009,7 @@
         "metaDescription": "Steigern Sie Ihre Sichtbarkeit mit technischem SEO, Content-Optimierung, KI-gestützter Analyse und laufendem Monitoring für klassische und KI-basierte Suche.",
         "about": {
           "heading": "SEO & Content-Optimierung",
+          "headingMobile": ["SEO &","Content-Optimierung"],
           "description": "TRUS verbessert Ihre Website und Ihre Inhalte durch technisches SEO, Content-Optimierung, KI-gestützte Analysen, kontinuierliches Monitoring und die Optimierung für klassische sowie KI-basierte Suche.\nFür Unternehmen, die mehrere Märkte ansprechen, unterstützt TRUS außerdem **mehrsprachiges und lokalisiertes SEO**, indem Inhalte, Keywords, Suchintention und Optimierungsstrategien an verschiedene Sprachen, Länder und Zielregionen angepasst werden.  So wird Ihre Marke nicht nur in einem Markt, sondern in allen Märkten und Sprachen besser auffindbar, die für Ihr Unternehmen wichtig sind.",
           "imageAlt": "SEO-Analyse-Dashboard auf einem Laptop"
         },
@@ -1050,6 +1051,7 @@
         "metaDescription": "Individuell programmierte, KI-gestützte Websites nach unserer B3D-Methode: Briefing, Design, Develop & Deliver. Schnell, sicher, skalierbar und SEO-ready.",
         "about": {
           "heading": "Webdesign & Entwicklung",
+          "headingMobile": ["Webdesign &","Entwicklung"],
           "description": "TRUS gestaltet und entwickelt moderne, leistungsstarke Websites mit unserer **B3D-Methode: Briefing, Design, Develop & Deliver.** Wir arbeiten in jeder Phase eng mit Ihnen zusammen und berücksichtigen Ihr Feedback, Ihre Präferenzen und Ihre Geschäftsziele, bevor wir weitergehen.\nUnsere Websites verbinden individuelle Code-Entwicklung mit KI-gestützten Workflows, um schnelle, sichere, skalierbare und SEO-fähige Erlebnisse zu liefern, ohne die Einschränkungen klassischer Website-Baukästen oder vorlagenbasierter Plattformen.\nFür Unternehmen, die mehrere Länder oder Sprachgruppen ansprechen, können wir außerdem **mehrsprachige und marktlokalisierte Website-Strukturen** aufbauen. Jede Sprache oder jeder Markt kann eigene Seiten, Botschaften, Handlungsaufforderungen, Navigation, Metadaten und eine eigene SEO-Struktur haben und bleibt dennoch Teil eines einheitlichen Markenerlebnisses.\nSo kann Ihre Website mit Ihrem Unternehmen wachsen und die Expansion in neue Sprachen und geografische Märkte unterstützen, ohne die gesamte Plattform neu aufzubauen.",
           "imageAlt": "Team arbeitet gemeinsam an Wireframes und Webdesign"
         },
@@ -1090,10 +1092,12 @@
       "brand": {
         "name": "Markenidentität & Logodesign",
         "tagline": ["Eine Marke, die man", "wiedererkennt und im Kopf behält."],
+        "taglineMobile": ["Eine Marke, die man wiedererkennt","und im Kopf behält."],
         "metaTitle": "Markenidentität & Logodesign | TruS",
         "metaDescription": "KI-gestütztes Logodesign, Farben, Typografie, Markenstil und Social-Media-Assets — eine klare, einheitliche visuelle Identität über alle digitalen Kanäle.",
         "about": {
           "heading": "Markenidentität & Logodesign",
+          "headingMobile": ["Markenidentität &","Logodesign"],
           "description": "Wir schaffen eine klare und einheitliche visuelle Identität für Ihr Unternehmen, von KI-gestütztem Logodesign über Farben, Typografie und Markenstil bis zu Social-Media-Assets.\nAlles ist darauf ausgelegt, Ihre Marke professionell, wiedererkennbar und über jeden digitalen Kanal hinweg konsistent wirken zu lassen.\nFür Unternehmen, die in mehreren Sprachen oder Märkten tätig sind, entwickeln wir außerdem Markensysteme, die sich an unterschiedliche Zielgruppen anpassen und dabei dieselbe Kernidentität bewahren. Typografie, visuelle Struktur, Layouts und Markenauftritt lassen sich so vorbereiten, dass sie über verschiedene Sprachen, Regionen und marktspezifische Kanäle hinweg einheitlich funktionieren.",
           "imageAlt": "Designteam prüft Materialien zur Markenidentität an einem Tisch"
         },
@@ -1131,61 +1135,95 @@
       "social": {
         "name": "Social-Media-Content-Erstellung & Veröffentlichung",
         "tagline": ["Smarter erstellen. Schneller veröffentlichen.", "Überall wachsen."],
+        "taglineMobile": ["Smarter erstellen. Schneller","veröffentlichen. Überall wachsen."],
         "metaTitle": "Social-Media-Content-Erstellung & Veröffentlichung | TruS",
         "metaDescription": "KI-Agenten, die Erstellung und Veröffentlichung von Social-Media-Content automatisieren — plattformspezifische Beiträge, Captions, Hashtags, lokalisierte Inhalte, Engagement-Monitoring und Performance-Berichte.",
         "about": {
           "heading": "Social-Media-Content-Erstellung & Veröffentlichung",
-          "description": "TRUS nutzt KI-Agenten, um den gesamten Prozess der Erstellung und Veröffentlichung von Social-Media-Content zu automatisieren; von plattformspezifischen Beiträgen, Captions, Hashtags und lokalisierten Inhalten bis hin zu Veröffentlichung, Engagement-Monitoring und Performance-Reporting.\nGeben Sie TRUS einfach Ihre täglichen Informationen, Bilder oder Inhalte. Ihr Beitrag wird in Sekunden erstellt, bei Bedarf zur Prüfung angezeigt und nach Freigabe auf der gewählten Social-Media-Plattform veröffentlicht.\nJeder Inhalt wird auf Basis der Zielplattform, Ihrer Marke, Ihrer Zielgruppe, der Sprache, des geografischen Standorts und Ihrer Marketingziele erstellt und optimiert.",
+          "headingMobile": ["Social-Media-Content-Erstellung","& Veröffentlichung"],
+          "description": "TRUS nutzt KI-Agenten, um Erstellung, Veröffentlichung, Monitoring und kontinuierliche Optimierung von Social-Media-Content auf Instagram, LinkedIn, X und Telegram-Kanal zu steuern.\nGeben Sie einfach Ihre Business-Updates, Bilder, Ideen, Angebote oder tägliche Informationen vor. TRUS verwandelt sie in plattformspezifische Beiträge mit passenden Captions, Hashtags, Keywords, Botschaften und Content-Struktur.\nInhalte können in Sekunden erstellt, bei Bedarf geprüft und angepasst und anschließend auf dem gewählten Social-Media-Konto veröffentlicht werden. Für Unternehmen, die verschiedene Sprachen oder Märkte ansprechen, geht TRUS über eine reine Übersetzung hinaus. Wir können eine mehrsprachige Social-Account-Strategie aufbauen, bei der unterschiedliche Sprachen, Länder oder Zielmärkte eigene Social-Media-Konten und lokalisierte Kommunikation erhalten. Beispielsweise kann ein Unternehmen ein Instagram-Konto für deutschsprachige und ein weiteres für türkischsprachige Zielgruppen betreiben. TRUS erstellt für jedes Konto die passenden Inhalte, passt die Botschaft an den jeweiligen Markt an und veröffentlicht sie am richtigen Ziel.\nSo entsteht ein strukturiertes Social-Media-System, das mit Ihrem Unternehmen über mehrere Märkte hinweg wachsen kann.",
           "imageAlt": "Team entwickelt am Laptop eine Social-Media-Content-Strategie"
         },
         "gain": {
           "heading": "Ihr Nutzen",
           "items": [
-            "Zeit sparen bei der täglichen Content-Erstellung und Veröffentlichung",
-            "Weniger Bedarf an separaten Content-Erstellern, Social-Media-Admins und Veröffentlichungsteams",
-            "Ihre Marke bleibt in sozialen Medien dauerhaft aktiv",
-            "Für jede Plattform gezielt optimierte Inhalte",
-            "Bessere Auffindbarkeit durch optimierte Captions, Keywords, Hashtags und Content-Struktur",
-            "Mehrsprachige und lokalisierte Inhalte für verschiedene Märkte",
-            "Überwachung von Zielgruppen-Engagement und Reaktionen",
-            "Regelmäßige Berichte zur Content-Performance",
-            "Schnellere Nachverfolgung, wenn Nutzer mit Ihren Beiträgen interagieren"
+            "Schnellere KI-gestützte Erstellung von Social-Media-Content",
+            "Automatisierte Veröffentlichung auf mehreren Plattformen",
+            "Plattformspezifische Beiträge, Captions, Hashtags und Keywords",
+            "Eigene Social-Media-Strategien für verschiedene Sprachen und Märkte",
+            "Lokalisierte Inhalte für unterschiedliche Länder und Zielgruppen",
+            "Konsistentere Aktivität auf Ihren Social-Media-Kanälen",
+            "Weniger manueller Aufwand bei Content-Erstellung und Veröffentlichung",
+            "Schnellere Reaktion auf wichtige Interaktionen Ihrer Zielgruppe",
+            "Performance-Einblicke über Konten, Sprachen und Märkte hinweg",
+            "Bessere Daten, um zukünftige Marketingaktivitäten gezielt zu priorisieren"
           ]
-        },
-        "highlights": {
-          "heading": "Highlights",
-          "items": [
-            "KI-gestützte Content-Erstellung",
-            "Automatisierte Multi-Plattform-Veröffentlichung",
-            "Vollautomatische oder freigabebasierte Veröffentlichung",
-            "Plattformspezifische Content-Optimierung",
-            "Mehrsprachige & lokalisierte Inhalte",
-            "KI-gestütztes Engagement-Monitoring",
-            "Schnelle Benachrichtigungen bei wichtigen Interaktionen",
-            "Kontinuierliche Content-Optimierung",
-            "Performance-Analysen & regelmäßige Berichte"
-          ],
-          "imageAlt": "Social-Media-Analysen zu Engagement, Followern und Reichweite rund um ein Smartphone"
         },
         "process": {
           "eyebrow": "UNSER PROZESS",
           "heading": "So funktioniert TRUS",
           "description": "TRUS automatisiert die Erstellung und Veröffentlichung von Social-Media-Inhalten in einem geführten Workflow, der Ihre Marke auf jeder Plattform aktiv, konsistent und optimiert hält.",
           "steps": [
-            { "title": "Erstellen", "description": "KI-Agenten erstellen plattformspezifische Inhalte auf Basis Ihrer Marke, Bilder, Botschaft, Zielgruppe und Ziele." },
-            { "title": "Prüfen", "description": "Bei Bedarf werden Ihnen Inhalte vor der Veröffentlichung gezeigt, damit Sie sie freigeben, bearbeiten oder verfeinern können." },
-            { "title": "Veröffentlichen", "description": "Freigegebene Inhalte können automatisch auf der gewählten Social-Media-Plattform veröffentlicht werden." },
-            { "title": "Überwachen", "description": "TRUS überwacht Beitragsaktivität, Engagement, Kommentare, Likes und andere relevante Interaktionen." },
-            { "title": "Benachrichtigen & Nachfassen", "description": "Wichtige Interaktionen können an den Markeninhaber gemeldet werden – für schnellere Nachverfolgung und Reaktion." },
-            { "title": "Analysieren & Optimieren", "description": "KI-Agenten analysieren kontinuierlich die Content-Performance und verbessern künftige Beiträge, Beschreibungen, Hashtags und Veröffentlichungsstrategien." }
+            { "title": "Erstellen", "description": "KI-Agenten erstellen Inhalte auf Basis Ihres Unternehmens, Ihrer Marke, Bilder, Botschaft, Zielgruppe, Plattform, Sprache und Marketingziele." },
+            { "title": "Prüfen", "description": "Bei Bedarf können Sie die erstellten Inhalte vor der Veröffentlichung prüfen, bearbeiten, verfeinern oder optimieren." },
+            { "title": "Veröffentlichen", "description": "Freigegebene Inhalte werden an die richtige Social-Media-Plattform und das richtige Konto gesendet. Bei mehrsprachigen Strategien kann TRUS jede Version des Inhalts an das Konto weiterleiten, das für die jeweilige Sprache oder den Zielmarkt angelegt wurde." },
+            { "title": "Überwachen", "description": "TRUS überwacht relevante Aktivitäten rund um veröffentlichte Inhalte, darunter Engagement, Kommentare, Likes und Reaktionen der Zielgruppe." },
+            { "title": "Benachrichtigen & Nachfassen", "description": "Wichtige Interaktionen können an den Unternehmensinhaber gemeldet werden, damit relevante Chancen oder Kundengespräche schneller nachverfolgt werden können." },
+            { "title": "Analysieren & Optimieren", "description": "KI-Agenten analysieren die Content-Performance und nutzen diese Erkenntnisse, um künftige Beiträge, Botschaften, Hashtags, Veröffentlichungszeiten und Content-Strategien zu verbessern." }
           ]
+        },
+        "strategy": {
+          "heading": "Mehrsprachige Social-Account-Strategie",
+          "intro": "Eine Marke. Verschiedene Märkte. Die richtige Sprache für jede Zielgruppe.\nTRUS hilft Unternehmen, ihre Social-Media-Präsenz an den Märkten auszurichten, die sie erreichen möchten.\nStatt jede Sprache über ein gemischtes Konto zu veröffentlichen, können Unternehmen eigene Social-Media-Konten für unterschiedliche Sprachen, Länder oder Zielmärkte anlegen, wo diese Strategie sinnvoll ist.",
+          "exampleHeading": "Zum Beispiel",
+          "examples": [
+            {
+              "title": "Instagram Deutschland:",
+              "description": "Inhalte auf Deutsch für deutschsprachige Kunden."
+            },
+            {
+              "title": "Instagram Türkiye:",
+              "description": "Inhalte auf Türkisch für Zielgruppen in der Türkei."
+            },
+            {
+              "title": "LinkedIn International:",
+              "description": "Professionelle Inhalte auf Englisch für internationale Geschäftszielgruppen. Dieselbe Strategie lässt sich auf **Instagram, LinkedIn, X und Telegram-Kanal** anwenden. TRUS stellt sicher, dass der richtige Inhalt erstellt und im richtigen Konto für die richtige Zielgruppe veröffentlicht wird."
+            }
+          ],
+          "includeHeading": "Das kann umfassen",
+          "includeItems": [
+            "Sprachspezifische Social-Media-Konten",
+            "Marktspezifische Inhalte und Botschaften",
+            "Lokalisierte Captions, Keywords und Hashtags",
+            "Unterschiedliche Content-Strategien für verschiedene Märkte",
+            "Kontospezifische Veröffentlichungs-Workflows",
+            "Marktrelevante Veröffentlichungszeiten",
+            "Konsistente Markenidentität über alle Konten hinweg"
+          ],
+          "imageAlt": "Team prüft Marken- und Content-Materialien auf einem großen Monitor"
+        },
+        "intelligence": {
+          "heading": "Von mehrsprachigen Inhalten zu Marktintelligenz",
+          "intro": "Mehrsprachige Social-Media-Arbeit sollte nicht nur die Reichweite erhöhen. Sie sollte Unternehmen auch helfen zu verstehen, **wo die größten Chancen liegen.**\nTRUS kann die Performance über verschiedene Konten, Sprachen, Länder und Zielmärkte hinweg vergleichen.",
+          "imageAlt": "Frau plant einen Social-Media-Beitrag am Laptop, während ein Kollege an einem Whiteboard eine Content-Strategie vorstellt",
+          "listHeading": "Mit der Zeit kann Unternehmen das helfen zu verstehen:",
+          "items": [
+            "Welche Sprachen stärkeres Engagement erzeugen",
+            "Welche Länder oder Regionen besser reagieren",
+            "Welche Social-Media-Konten mehr Interesse wecken",
+            "Welche Inhalte in welchem Markt besser funktionieren",
+            "Wo künftige Marketingaktivitäten verstärkt werden sollten",
+            "Welche Märkte ein höheres Werbebudget verdienen könnten",
+            "Wo Wachstumschancen für das Unternehmen stärker erscheinen"
+          ],
+          "outro": "So können Unternehmen ihren Fokus auf die Märkte mit den vielversprechendsten Ergebnissen legen, statt jeden Markt gleich zu behandeln."
         },
         "automation": {
           "eyebrow": "SOCIAL MEDIA",
           "heading": "Social-Media-Automatisierung",
           "imageAlt": "Social-Media-Beiträge werden für mehrere Plattformen erstellt und geplant, daneben eine Person am Laptop",
           "items": [
-            { "title": "TRUS Auto Post Creator & Publisher", "description": "Erstellen und veröffentlichen Sie Social-Media-Inhalte in einem schnellen, automatisierten Workflow.\nTRUS erstellt den Beitrag, bereitet passende Beschreibungen und Hashtags vor, passt den Inhalt an Plattform und Sprache an und veröffentlicht die finale Version im gewählten Konto.\nFür mehrsprachige Unternehmen kann die passende Sprachversion für den jeweiligen Markt oder das jeweilige Social-Media-Konto vorbereitet werden.\nDieser Service setzt auf Geschwindigkeit, Einfachheit und Automatisierung." },
+            { "title": "TRUS Auto Post Creator & Publisher", "description": "Erstellen und veröffentlichen Sie Social-Media-Inhalte in einem schnellen, automatisierten Workflow. TRUS erstellt den Beitrag, bereitet passende Beschreibungen und Hashtags vor, passt den Inhalt an Plattform und Sprache an und veröffentlicht die finale Version im gewählten Konto.\nFür mehrsprachige Unternehmen kann die passende Sprachversion für den jeweiligen Markt oder das jeweilige Social-Media-Konto vorbereitet werden.\nDieser Service setzt auf Geschwindigkeit, Einfachheit und Automatisierung." },
             { "title": "TRUS Instagram Creator & Publisher", "description": "Erstellen Sie Instagram-Inhalte auf Basis von Marke, Zielgruppe, visueller Kommunikation, Beschreibungen, Hashtags, Keywords, Sprache und Zielmarkt.\nSie können den Inhalt vor der Veröffentlichung prüfen, bearbeiten und optimieren.\nUnterschiedliche Instagram-Konten können für verschiedene Sprachen oder Märkte genutzt werden, sodass jede Zielgruppe relevantere Kommunikation erhält." },
             { "title": "TRUS LinkedIn Creator & Publisher", "description": "Erstellen Sie professionelle, geschäftsorientierte Inhalte für LinkedIn, u. a. B2B-Kommunikation, Expertise, Branchenpositionierung und Markenautorität.\nInhalte lassen sich an unterschiedliche Fachzielgruppen, Sprachen, Länder und Geschäftsmärkte anpassen.\nSie können Botschaft, Tonalität, Terminologie und Struktur vor der Veröffentlichung prüfen und verfeinern." },
             { "title": "TRUS X (Twitter) Creator & Publisher", "description": "Erstellen Sie prägnante, zielgerichtete Inhalte im Kommunikationsstil von X.\nTRUS kann Beiträge nach Zielgruppe, Sprache, Region, Kommunikationszielen und Zielkonto anpassen.\nInhalte können vor der Veröffentlichung geprüft und optimiert werden." },
@@ -1193,32 +1231,56 @@
           ]
         },
         "flexible": {
-          "eyebrow": "FLEXIBLE ERSTELLUNG & VERÖFFENTLICHUNG",
           "heading": "Flexible Erstellung & Veröffentlichung",
+          "description": "TRUS automatisiert die Erstellung und Veröffentlichung von Social-Media-Inhalten in einem geführten Workflow, der Ihre Marke auf jeder Plattform aktiv, konsistent und optimiert hält.",
           "modes": [
-            { "title": "Automatische Erstellung & Veröffentlichung", "description": "TRUS KI-Agenten erstellen passende Beiträge für Instagram, LinkedIn, X und Telegram-Kanäle auf Basis Ihrer Expertise, Markeninformationen und standardisierter Content-Erstellungsmodelle.\nAnschließend wählen Sie die Ziel-Plattform, und der erstellte Inhalt kann automatisch veröffentlicht werden.\nDer Fokus dieses Modells liegt auf Geschwindigkeit, Einfachheit und Automatisierung." },
-            { "title": "Freigabebasierte Veröffentlichung", "description": "TRUS erstellt den Inhalt zunächst und zeigt ihn Ihnen zur Prüfung.\nNach Ihrer Freigabe wird der finale Inhalt auf der gewählten Social-Media-Plattform veröffentlicht." },
-            { "title": "Nur Content-Erstellung", "description": "Dieser Service richtet sich an Nutzer, die sich auf die Erstellung eines präzisen, gezielten Beitrags konzentrieren möchten.\nTRUS erstellt den ersten Inhalt, und Sie können ihn prüfen, bearbeiten, verfeinern und optimieren, bis der finale Beitrag zu Ihren Präferenzen, Zielen, Ihrer Botschaft und Markenidentität passt.\nDer Fokus liegt ganz auf der Erstellung präziser, zielgerichteter und bearbeitbarer Inhalte. Die Veröffentlichung ist nicht enthalten." },
-            { "title": "Nur Veröffentlichung", "description": "Dieser Service ist für Fälle gedacht, in denen Ihr Inhalt bereits erstellt wurde und keine weitere Inhaltserstellung nötig ist.\nSie können einen oder mehrere veröffentlichungsfertige Beiträge bereitstellen und mit TRUS auf Instagram, LinkedIn, X oder in einem Telegram-Kanal veröffentlichen.\nSo können Sie bestehende Inhalte veröffentlichen, ohne sie neu zu erstellen." }
+            {
+              "title": "Automatische Erstellung & Veröffentlichung",
+              "description": "TRUS KI-Agenten erstellen passende Beiträge auf Basis Ihres Unternehmens, Ihrer Expertise, Plattform, Sprache, Zielgruppe und Content-Strategie.\nDie erstellten Inhalte können anschließend automatisch auf dem richtigen Social-Media-Konto veröffentlicht werden.\nDer Fokus liegt auf Geschwindigkeit, **Einfachheit und Automatisierung.**"
+            },
+            {
+              "title": "Freigabebasierte Veröffentlichung",
+              "description": "TRUS erstellt den Inhalt und zeigt ihn Ihnen vor der Veröffentlichung.\nSie können ihn freigeben, bearbeiten oder verfeinern, bevor die finale Version veröffentlicht wird."
+            },
+            {
+              "title": "Nur Content-Erstellung",
+              "description": "Für Unternehmen, die die volle Kontrolle über die Content-Erstellung behalten möchten.\nTRUS erstellt den ersten Beitrag und ermöglicht Ihnen dann, den Inhalt zu prüfen, zu bearbeiten, zu verfeinern und zu optimieren, bis er zu Ihrer Botschaft, Zielgruppe, Sprache, Ihrem Markt und Ihrer Markenausrichtung passt.\nDie Veröffentlichung ist nicht enthalten."
+            },
+            {
+              "title": "Nur Veröffentlichung",
+              "description": "Für Inhalte, die bereits finalisiert sind.\nSie können einen oder mehrere veröffentlichungsfertige Beiträge bereitstellen, auch in verschiedenen Sprach- oder Marktversionen, und TRUS kann jede Version auf dem passenden Instagram-, LinkedIn-, X- oder Telegram-Kanal-Konto veröffentlichen."
+            }
+          ]
+        },
+        "growth": {
+          "eyebrow": "Vernetztes mehrsprachiges Wachstum",
+          "heading": "Vernetztes mehrsprachiges Wachstum",
+          "description": "Social Media wird wirkungsvoller, wenn es mit dem Rest Ihrer Wachstumsstrategie zusammenspielt.",
+          "listIntro": "In Kombination mit anderen TRUS-Services kann Social-Media-Aktivität abgestimmt werden mit:",
+          "listItems": [
+            "Geo-gezielter Lead-Generierung",
+            "Sprachspezifischen Newslettern",
+            "Lokalisierten Website-Inhalten",
+            "Mehrsprachigem SEO",
+            "Marktübergreifender Performance-Analyse"
           ],
-          "scheduleImageAlt": "Frau plant einen Social-Media-Beitrag am Laptop, während ein Kollege an einem Whiteboard eine Content-Strategie vorstellt",
-          "multilingual": {
-            "heading": "Mehrsprachige & lokalisierte Inhalte",
-            "intro": "TRUS kann Inhalte nach Sprache, Land und geografischem Standort Ihrer Zielgruppe erstellen. Dazu gehören:",
-            "items": [
-              "An die Sprache der Zielgruppe angepasste Inhalte",
-              "Lokalisierte Beschreibungen",
-              "Relevante Hashtags und Keywords",
-              "Marktspezifische Botschaften",
-              "Auf verschiedene Länder und Regionen zugeschnittene Inhalte"
-            ],
-            "outro": "So kommunizieren Marken natürlicher und wirkungsvoller mit Zielgruppen auf unterschiedlichen Märkten.",
-            "imageAlt": "Team arbeitet am Laptop, während Inhalte ins Englische, Spanische, Französische und Deutsche übersetzt werden"
-          }
+          "outro": "So können Unternehmen mit demselben Zielmarkt über mehrere koordinierte Kanäle kommunizieren und dabei Sprache, Standort, Zielgruppe und Geschäftsziele aufeinander abgestimmt halten.",
+          "highlightsHeading": "Highlights",
+          "highlights": [
+            "KI-gestützte Content-Erstellung",
+            "Automatisierte Multi-Plattform-Veröffentlichung",
+            "Mehrsprachige Social-Account-Strategie",
+            "Mehrsprachige & lokalisierte Inhalte",
+            "Plattform- & marktspezifische Optimierung",
+            "KI-gestütztes Engagement-Monitoring & Follow-up",
+            "Marktübergreifende Performance-Analysen",
+            "Kontinuierliche Content-Optimierung"
+          ],
+          "imageAlt": "Team arbeitet gemeinsam am Laptop, während Inhalte ins Englische, Spanische, Französische und Deutsche übersetzt werden"
         },
         "contact": {
           "heading": "Bereit, Ihr Geschäft auszubauen?",
-          "description": "Pflegen Sie eine konsistente und professionelle Social-Media-Präsenz, ohne jeden Tag Stunden mit Erstellen, Vorbereiten und Veröffentlichen von Inhalten zu verbringen.\nSagen Sie uns, welche Social-Media-Plattformen Sie nutzen und wie Ihr Workflow für Content-Erstellung und Veröffentlichung ablaufen soll. TRUS hilft Ihnen, die passende Automatisierungslösung für Ihre Marke aufzubauen."
+          "description": "Sagen Sie uns, welche Plattformen, Sprachen und Märkte Ihr Unternehmen ansprechen möchte.\nTRUS hilft Ihnen, ein strukturiertes Social-Media-System aufzubauen, das die richtigen Inhalte erstellt, im richtigen Konto veröffentlicht, die Reaktionen der Zielgruppe überwacht und Ihnen zeigt, wo Ihre stärksten Wachstumschancen liegen."
         }
       },
       "autoPost": {

@@ -1021,6 +1021,7 @@
         "metaDescription": "Mejora tu visibilidad en buscadores con SEO técnico, optimización de contenido, análisis asistido por IA y monitoreo continuo para la búsqueda tradicional y la impulsada por IA.",
         "about": {
           "heading": "SEO y Optimización de Contenido",
+          "headingMobile": ["SEO y Optimización","de Contenido"],
           "description": "TRUS mejora tu sitio web y tu contenido mediante SEO técnico, optimización de contenido, análisis asistido por IA, monitoreo continuo y optimización tanto para la búsqueda tradicional como para la búsqueda basada en IA.\nPara empresas que se dirigen a varios mercados, TRUS también ofrece **SEO multilingüe y localizado**, adaptando el contenido, las palabras clave, la intención de búsqueda y las estrategias de optimización a distintos idiomas, países y regiones objetivo.  Esto ayuda a que tu marca sea más fácil de encontrar no solo en un mercado, sino en los mercados e idiomas que importan para tu negocio.",
           "imageAlt": "Panel de analítica SEO en un portátil"
         },
@@ -1062,6 +1063,7 @@
         "metaDescription": "Sitios web con código a medida y asistidos por IA, creados con nuestro Método B3D: Briefing, Design, Develop & Deliver. Rápidos, seguros, escalables y listos para SEO.",
         "about": {
           "heading": "Diseño y Desarrollo Web",
+          "headingMobile": ["Diseño y","Desarrollo Web"],
           "description": "TRUS diseña y desarrolla sitios web modernos y de alto rendimiento con nuestro **Método B3D: Briefing, Design, Develop & Deliver.** Trabajamos contigo de cerca en cada etapa, incorporando tus comentarios, preferencias y objetivos de negocio antes de avanzar.\nNuestros sitios web combinan desarrollo con código personalizado y flujos de trabajo asistidos por IA para ofrecer experiencias rápidas, seguras, escalables y listas para SEO, sin las limitaciones de los constructores de sitios tradicionales ni de las plataformas basadas en plantillas.\nPara empresas que se dirigen a varios países o grupos de idiomas, también podemos crear **estructuras web multilingües y localizadas por mercado**. Cada idioma o mercado puede tener sus propias páginas, mensajes, llamadas a la acción, navegación, metadatos y estructura SEO, sin dejar de formar parte de una experiencia de marca coherente.\nEsto permite que tu sitio web crezca con tu negocio y apoye la expansión a nuevos idiomas y mercados geográficos sin tener que reconstruir toda la plataforma.",
           "imageAlt": "Equipo colaborando en wireframes y diseño web"
         },
@@ -1102,10 +1104,12 @@
       "brand": {
         "name": "Identidad de Marca y Diseño de Logotipo",
         "tagline": ["Crea una Marca que la Gente", "Reconozca y Recuerde."],
+        "taglineMobile": ["Crea una Marca que la Gente Reconozca","y Recuerde."],
         "metaTitle": "Identidad de Marca y Diseño de Logotipo | TruS",
         "metaDescription": "Diseño de logotipos asistido por IA, colores, tipografía, estilo de marca y recursos para redes sociales: una identidad visual clara y coherente en todos los canales digitales.",
         "about": {
           "heading": "Identidad de Marca y Diseño de Logotipo",
+          "headingMobile": ["Identidad de Marca y","Diseño de Logotipo"],
           "description": "Creamos una identidad visual clara y coherente para tu negocio, desde el diseño de logotipo asistido por IA hasta los colores, la tipografía, el estilo de marca y los recursos para redes sociales.\nTodo está diseñado para que tu marca se vea profesional, reconocible y coherente en cada canal digital.\nPara empresas que operan en varios idiomas o mercados, también creamos sistemas de marca que se adaptan a distintas audiencias manteniendo la misma identidad central. La tipografía, la estructura visual, los diseños y la presentación de marca pueden prepararse para funcionar de forma coherente en diferentes idiomas, regiones y canales específicos de cada mercado.",
           "imageAlt": "Equipo de diseño revisando materiales de identidad de marca alrededor de una mesa"
         },
@@ -1143,61 +1147,95 @@
       "social": {
         "name": "Creación y Publicación de Contenido para Redes Sociales",
         "tagline": ["Crea Más Inteligente. Publica Más Rápido.", "Crece en Todas Partes."],
+        "taglineMobile": ["Crea Más Inteligente. Publica","Más Rápido. Crece en Todas Partes."],
         "metaTitle": "Creación y Publicación de Contenido para Redes Sociales | TruS",
         "metaDescription": "Agentes de IA que automatizan la creación y publicación de contenido para redes sociales: publicaciones por plataforma, descripciones, hashtags, contenido localizado, monitoreo de interacción e informes de rendimiento.",
         "about": {
           "heading": "Creación y Publicación de Contenido para Redes Sociales",
-          "description": "TRUS utiliza agentes de IA para automatizar todo el proceso de creación y publicación de contenido en redes sociales; desde generar publicaciones por plataforma, descripciones, hashtags y contenido localizado hasta publicar, monitorear la interacción y elaborar informes de rendimiento.\nSimplemente envía a TRUS tu información diaria, imágenes o contenido. Tu publicación puede crearse en segundos, mostrarse para tu revisión cuando sea necesario y publicarse en la red social que elijas tras tu aprobación.\nCada contenido se crea y se optimiza según la plataforma de destino, tu marca, tu público objetivo, el idioma, la ubicación geográfica y tus objetivos de marketing.",
+          "headingMobile": ["Creación y Publicación de Contenido","para Redes Sociales"],
+          "description": "TRUS utiliza agentes de IA para gestionar la creación, publicación, monitoreo y optimización continua de contenido en redes sociales en Instagram, LinkedIn, X y Canal de Telegram.\nSimplemente proporciona las novedades de tu negocio, imágenes, ideas, ofertas o información diaria. TRUS puede convertirlas en publicaciones específicas para cada plataforma con descripciones, hashtags, palabras clave, mensajes y estructura de contenido adecuados.\nEl contenido puede crearse en segundos, revisarse y refinarse cuando sea necesario, y luego publicarse en la cuenta de red social seleccionada. Para negocios dirigidos a distintos idiomas o mercados, TRUS va más allá de la simple traducción. Podemos construir una estrategia de cuentas sociales multilingüe, donde distintos idiomas, países o mercados objetivo tengan cuentas de redes sociales propias y comunicación localizada. Por ejemplo, un negocio puede operar una cuenta de Instagram para audiencias de habla alemana y otra para audiencias de habla turca. TRUS puede crear el contenido adecuado para cada cuenta, adaptar el mensaje a ese mercado y publicarlo en el destino correcto.\nEsto crea un sistema de redes sociales estructurado que puede crecer con tu negocio en múltiples mercados.",
           "imageAlt": "Equipo ideando una estrategia de contenido para redes sociales alrededor de un portátil"
         },
         "gain": {
           "heading": "Lo Que Obtienes",
           "items": [
-            "Ahorra tiempo en la creación y publicación diaria de contenido",
-            "Reduce la necesidad de creadores de contenido, administradores de redes sociales y equipos de publicación por separado",
-            "Mantén tu marca activa de forma constante en redes sociales",
-            "Crea contenido optimizado específicamente para cada plataforma",
-            "Mejora la visibilidad con descripciones, palabras clave, hashtags y estructura de contenido optimizados",
-            "Crea contenido multilingüe y localizado para distintos mercados",
-            "Monitorea la interacción y las reacciones de la audiencia",
-            "Recibe informes periódicos de rendimiento del contenido",
-            "Agiliza el seguimiento cuando los usuarios interactúan con tus publicaciones"
-          ]
-        },
-        "highlights": {
-          "heading": "Destacados",
-          "items": [
-            "Creación de contenido impulsada por IA",
+            "Creación de contenido para redes sociales más rápida con IA",
             "Publicación automatizada en varias plataformas",
-            "Publicación totalmente automática o con aprobación",
-            "Optimización de contenido por plataforma",
-            "Contenido multilingüe y localizado",
-            "Monitoreo de interacción con IA",
-            "Notificaciones rápidas para interacciones importantes",
-            "Optimización continua del contenido",
-            "Analítica de rendimiento e informes periódicos"
-          ],
-          "imageAlt": "Analítica de interacción, seguidores y alcance en redes sociales alrededor de un teléfono"
+            "Publicaciones, descripciones, hashtags y palabras clave específicos para cada plataforma",
+            "Estrategias de redes sociales dedicadas para distintos idiomas y mercados",
+            "Contenido localizado para distintos países y audiencias",
+            "Actividad más constante en tus canales sociales",
+            "Menos trabajo manual en la creación y publicación de contenido",
+            "Respuesta más rápida a interacciones importantes de la audiencia",
+            "Información de rendimiento entre cuentas, idiomas y mercados",
+            "Mejores datos para decidir dónde enfocar tus futuros esfuerzos de marketing"
+          ]
         },
         "process": {
           "eyebrow": "NUESTRO PROCESO",
           "heading": "Cómo funciona TRUS",
           "description": "TRUS automatiza la creación y publicación de contenido en redes sociales mediante un flujo guiado que mantiene tu marca activa, coherente y optimizada en todas las plataformas.",
           "steps": [
-            { "title": "Crear", "description": "Los agentes de IA generan contenido específico para cada plataforma según tu marca, imágenes, mensaje, audiencia y objetivos." },
-            { "title": "Revisar", "description": "Cuando sea necesario, el contenido se te muestra antes de publicarse para que puedas aprobarlo, editarlo o refinarlo." },
-            { "title": "Publicar", "description": "El contenido aprobado puede publicarse automáticamente en la red social seleccionada." },
-            { "title": "Supervisar", "description": "TRUS supervisa la actividad de las publicaciones, la interacción, los comentarios, los me gusta y otras interacciones relevantes." },
-            { "title": "Notificar y dar seguimiento", "description": "Las interacciones importantes pueden comunicarse al propietario de la marca para un seguimiento y una respuesta más rápidos." },
-            { "title": "Analizar y optimizar", "description": "Los agentes de IA analizan continuamente el rendimiento del contenido y mejoran futuras publicaciones, descripciones, hashtags y estrategias de publicación." }
+            { "title": "Crear", "description": "Los agentes de IA generan contenido según tu negocio, marca, imágenes, mensaje, audiencia objetivo, plataforma, idioma y objetivos de marketing." },
+            { "title": "Revisar", "description": "Cuando sea necesario, puedes revisar, editar, refinar u optimizar el contenido generado antes de publicarlo." },
+            { "title": "Publicar", "description": "El contenido aprobado se envía a la plataforma y cuenta de redes sociales correctas. En estrategias multilingües, TRUS puede dirigir cada versión del contenido a la cuenta creada para ese idioma o mercado objetivo." },
+            { "title": "Supervisar", "description": "TRUS supervisa la actividad relevante en torno al contenido publicado, incluidas la interacción, los comentarios, los me gusta y las reacciones de la audiencia." },
+            { "title": "Notificar y dar seguimiento", "description": "Las interacciones importantes pueden notificarse al propietario del negocio para que las oportunidades relevantes o las conversaciones con clientes se atiendan más rápido." },
+            { "title": "Analizar y optimizar", "description": "Los agentes de IA analizan el rendimiento del contenido y usan esos datos para mejorar futuras publicaciones, mensajes, hashtags, horarios de publicación y estrategias de contenido." }
           ]
+        },
+        "strategy": {
+          "heading": "Estrategia de Cuentas Sociales Multilingüe",
+          "intro": "Una marca. Distintos mercados. El idioma adecuado para cada audiencia.\nTRUS ayuda a las empresas a organizar su presencia en redes sociales en torno a los mercados que quieren alcanzar.\nEn lugar de publicar todos los idiomas desde una sola cuenta mezclada, las empresas pueden crear cuentas de redes sociales dedicadas para distintos idiomas, países o mercados objetivo donde esta estrategia tenga sentido.",
+          "exampleHeading": "Por Ejemplo",
+          "examples": [
+            {
+              "title": "Instagram Alemania:",
+              "description": "Contenido creado en alemán para clientes de habla alemana."
+            },
+            {
+              "title": "Instagram Türkiye:",
+              "description": "Contenido creado en turco para audiencias en Türkiye."
+            },
+            {
+              "title": "LinkedIn Internacional:",
+              "description": "Contenido profesional creado en inglés para audiencias empresariales internacionales. La misma estrategia puede aplicarse a **Instagram, LinkedIn, X y Canal de Telegram.** TRUS ayuda a garantizar que el contenido correcto se cree y publique en la cuenta correcta, para la audiencia correcta."
+            }
+          ],
+          "includeHeading": "Esto Puede Incluir",
+          "includeItems": [
+            "Cuentas de redes sociales específicas por idioma",
+            "Contenido y mensajes específicos para cada mercado",
+            "Descripciones, palabras clave y hashtags localizados",
+            "Distintas estrategias de contenido para distintos mercados",
+            "Flujos de publicación específicos por cuenta",
+            "Horarios de publicación relevantes para cada mercado",
+            "Identidad de marca coherente en todas las cuentas"
+          ],
+          "imageAlt": "Equipo revisando materiales de marca y contenido en un monitor grande"
+        },
+        "intelligence": {
+          "heading": "De Contenido Multilingüe a Inteligencia de Mercado",
+          "intro": "Las redes sociales multilingües no solo deben aumentar el alcance. También deben ayudar al negocio a entender **dónde están las mayores oportunidades.**\nTRUS puede comparar el rendimiento entre distintas cuentas, idiomas, países y mercados objetivo.",
+          "imageAlt": "Mujer programando una publicación en redes sociales en un portátil mientras un colega presenta una estrategia de contenido en una pizarra",
+          "listHeading": "Con el Tiempo, Esto Puede Ayudar a los Negocios a Entender:",
+          "items": [
+            "Qué idiomas generan mayor interacción",
+            "Qué países o regiones responden mejor",
+            "Qué cuentas sociales atraen más interés",
+            "Qué contenido funciona mejor en cada mercado",
+            "Dónde debería aumentar la actividad de marketing futura",
+            "Qué mercados podrían merecer más presupuesto publicitario",
+            "Dónde las oportunidades de crecimiento del negocio parecen más sólidas"
+          ],
+          "outro": "Esto permite a las empresas concentrar su atención en los mercados con los resultados más prometedores en lugar de tratar todos los mercados por igual."
         },
         "automation": {
           "eyebrow": "REDES SOCIALES",
           "heading": "Automatización de redes sociales",
           "imageAlt": "Publicaciones de redes sociales creadas y programadas para varias plataformas junto a una persona trabajando con un portátil",
           "items": [
-            { "title": "TRUS Auto Post Creator & Publisher", "description": "Crea y publica contenido en redes sociales mediante un flujo de trabajo rápido y automatizado.\nTRUS genera la publicación, prepara descripciones y hashtags adecuados, adapta el contenido a la plataforma y el idioma elegidos, y publica la versión final en la cuenta seleccionada.\nPara negocios multilingües, se puede preparar la versión en el idioma adecuado para el mercado o la cuenta social correspondiente.\nEste servicio se centra en la rapidez, la sencillez y la automatización." },
+            { "title": "TRUS Auto Post Creator & Publisher", "description": "Crea y publica contenido en redes sociales mediante un flujo de trabajo rápido y automatizado. TRUS genera la publicación, prepara descripciones y hashtags adecuados, adapta el contenido a la plataforma y el idioma elegidos, y publica la versión final en la cuenta seleccionada.\nPara negocios multilingües, se puede preparar la versión en el idioma adecuado para el mercado o la cuenta social correspondiente.\nEste servicio se centra en la rapidez, la sencillez y la automatización." },
             { "title": "TRUS Instagram Creator & Publisher", "description": "Crea contenido centrado en Instagram según tu marca, audiencia, comunicación visual, descripciones, hashtags, palabras clave, idioma y mercado objetivo.\nPuedes revisar, editar y optimizar el contenido antes de publicarlo.\nTambién se pueden usar distintas cuentas de Instagram para diferentes idiomas o mercados, de modo que cada audiencia reciba una comunicación más relevante." },
             { "title": "TRUS LinkedIn Creator & Publisher", "description": "Crea contenido profesional y orientado a negocios para LinkedIn, incluyendo comunicación B2B, experiencia, posicionamiento sectorial y autoridad de marca.\nEl contenido puede adaptarse a distintas audiencias profesionales, idiomas, países y mercados.\nPuedes revisar y refinar el mensaje, el tono, la terminología y la estructura antes de publicar." },
             { "title": "TRUS X (Twitter) Creator & Publisher", "description": "Crea contenido conciso y segmentado, diseñado para el estilo de comunicación de X.\nTRUS puede adaptar las publicaciones según la audiencia, el idioma, la región, los objetivos del mensaje y la cuenta de destino.\nEl contenido puede revisarse y optimizarse antes de publicarse." },
@@ -1205,32 +1243,56 @@
           ]
         },
         "flexible": {
-          "eyebrow": "CREACIÓN Y PUBLICACIÓN FLEXIBLES",
           "heading": "Creación y publicación flexibles",
+          "description": "TRUS automatiza la creación y publicación de contenido en redes sociales mediante un flujo guiado que mantiene tu marca activa, coherente y optimizada en todas las plataformas.",
           "modes": [
-            { "title": "Creación y publicación automáticas", "description": "Los agentes de IA de TRUS crean publicaciones adecuadas para Instagram, LinkedIn, X y canales de Telegram según tu experiencia, la información de tu marca y modelos estandarizados de creación de contenido.\nDespués eliges la red social de destino y el contenido generado puede publicarse automáticamente.\nEl enfoque principal de este modelo es la rapidez, la sencillez y la automatización." },
-            { "title": "Publicación con aprobación", "description": "TRUS primero crea el contenido y te lo muestra para su revisión.\nTras tu aprobación, el contenido final se publica en la red social seleccionada." },
-            { "title": "Solo creación de contenido", "description": "Este servicio está pensado para quienes quieren centrarse en crear una publicación precisa y muy segmentada.\nTRUS genera el contenido inicial y puedes revisarlo, editarlo, refinarlo y optimizarlo hasta que la publicación final se ajuste a tus preferencias, objetivos, mensaje e identidad de marca.\nEl enfoque de este servicio es crear contenido preciso, segmentado y editable. La publicación no está incluida." },
-            { "title": "Solo publicación", "description": "Este servicio está pensado para situaciones en las que tu contenido ya está creado y no se necesita generar más.\nPuedes aportar una o varias publicaciones listas para publicar y usar TRUS para publicarlas en Instagram, LinkedIn, X o un canal de Telegram.\nAsí puedes publicar contenido existente sin volver a crearlo." }
+            {
+              "title": "Creación y publicación automáticas",
+              "description": "Los agentes de IA de TRUS crean publicaciones adecuadas según tu negocio, experiencia, plataforma, idioma, audiencia y estrategia de contenido.\nEl contenido generado puede publicarse automáticamente en la cuenta de redes sociales correcta.\nEl enfoque principal es la velocidad, **la simplicidad y la automatización.**"
+            },
+            {
+              "title": "Publicación con aprobación",
+              "description": "TRUS crea el contenido y te lo muestra antes de publicarlo.\nPuedes aprobarlo, editarlo o refinarlo antes de que se publique la versión final."
+            },
+            {
+              "title": "Solo creación de contenido",
+              "description": "Para negocios que quieren control total sobre la creación de contenido.\nTRUS genera la publicación inicial y luego te permite revisar, editar, refinar y optimizar el contenido hasta que coincida con tu mensaje, audiencia, idioma, mercado y dirección de marca.\nLa publicación no está incluida."
+            },
+            {
+              "title": "Solo publicación",
+              "description": "Para contenido que ya ha sido finalizado.\nPuedes proporcionar una o varias publicaciones listas para publicar, incluidas versiones para distintos idiomas o mercados, y TRUS puede publicar cada versión en la cuenta adecuada de Instagram, LinkedIn, X o Canal de Telegram."
+            }
+          ]
+        },
+        "growth": {
+          "eyebrow": "Crecimiento Multilingüe Conectado",
+          "heading": "Crecimiento Multilingüe Conectado",
+          "description": "Las redes sociales son más poderosas cuando funcionan junto con el resto de tu estrategia de crecimiento.",
+          "listIntro": "Combinada con otros servicios de TRUS, la actividad en redes sociales puede alinearse con:",
+          "listItems": [
+            "Generación de leads geolocalizados",
+            "Boletines adaptados al idioma",
+            "Contenido web localizado",
+            "SEO multilingüe",
+            "Análisis de rendimiento entre mercados"
           ],
-          "scheduleImageAlt": "Mujer programando una publicación en un portátil mientras un compañero presenta una estrategia de contenido en una pizarra",
-          "multilingual": {
-            "heading": "Contenido multilingüe y localizado",
-            "intro": "TRUS puede crear contenido según el idioma, el país y la ubicación geográfica de tu audiencia. Esto incluye:",
-            "items": [
-              "Contenido adaptado al idioma de la audiencia",
-              "Descripciones localizadas",
-              "Hashtags y palabras clave relevantes",
-              "Mensajes específicos para cada mercado",
-              "Contenido adaptado a distintos países y regiones geográficas"
-            ],
-            "outro": "Esto ayuda a las marcas a comunicarse de forma más natural y eficaz con audiencias de distintos mercados.",
-            "imageAlt": "Equipo colaborando ante un portátil mientras el contenido se traduce al inglés, español, francés y alemán"
-          }
+          "outro": "Esto permite a las empresas comunicarse con el mismo mercado objetivo a través de múltiples canales coordinados, manteniendo alineados el idioma, la ubicación, la audiencia y los objetivos de negocio.",
+          "highlightsHeading": "Destacados",
+          "highlights": [
+            "Creación de contenido con IA",
+            "Publicación automatizada en varias plataformas",
+            "Estrategia de cuentas sociales multilingüe",
+            "Contenido multilingüe y localizado",
+            "Optimización por plataforma y mercado",
+            "Monitoreo de interacción y seguimiento con IA",
+            "Analítica de rendimiento entre mercados",
+            "Optimización continua del contenido"
+          ],
+          "imageAlt": "Equipo colaborando en un portátil mientras el contenido se traduce al inglés, español, francés y alemán"
         },
         "contact": {
           "heading": "¿Listo para Hacer Crecer Tu Negocio?",
-          "description": "Mantén una presencia constante y profesional en redes sociales sin dedicar horas cada día a crear, preparar y publicar contenido.\nCuéntanos qué redes sociales utilizas y cómo quieres que funcione tu flujo de creación y publicación de contenido. TRUS te ayudará a construir la solución de automatización adecuada para tu marca."
+          "description": "Cuéntanos qué plataformas, idiomas y mercados quiere alcanzar tu negocio.\nTRUS puede ayudarte a construir un sistema de redes sociales estructurado que crea el contenido adecuado, lo publica en la cuenta correcta, monitorea la respuesta de la audiencia y te ayuda a entender dónde están tus mayores oportunidades de crecimiento."
         }
       },
       "autoPost": {

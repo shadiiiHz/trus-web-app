@@ -1,13 +1,10 @@
 import { FadeIn } from "@/components/motion/FadeIn";
 import { type ServiceDetailProcess as ProcessContent } from "@/config/serviceDetails.config";
 
-/** Faint grid behind the section, per Figma. */
-const GRID_STYLE = {
-  backgroundColor: "#070606",
-  backgroundImage:
-    "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
-  backgroundSize: "160px 160px",
-} as const;
+/** Faint divider grid behind the section, per Figma (positions are % of the 1440×900 frame). */
+const VERTICAL_LINES = [11.17, 22.28, 33.39, 44.43, 55.54, 66.59, 77.7, 88.81];
+const HORIZONTAL_LINES = [18.89, 38.67, 58.44, 78.22];
+const LINE_ALPHA = "rgba(255, 255, 255, 0.005) 0%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.005) 100%";
 
 /**
  * "How it works" — numbered step cards (2 columns on desktop, 1 on mobile).
@@ -19,31 +16,46 @@ export function ServiceDetailProcess({ process }: { process: ProcessContent }) {
   return (
     <section
       aria-labelledby="service-process-heading"
-      className="px-5 py-[60px] text-white lg:py-[120px]"
-      style={GRID_STYLE}
+      className="relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] lg:py-[109px]"
     >
-      <div className="mx-auto w-full max-w-[1060px]">
-        <FadeIn direction="up" className="mx-auto flex max-w-[680px] flex-col items-center text-center">
-          <p className="text-[12px] uppercase tracking-[0.04em] text-[#9F7EE1] lg:text-section-label">{eyebrow}</p>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block">
+        {VERTICAL_LINES.map((left) => (
+          <span
+            key={`v${left}`}
+            className="absolute inset-y-0 w-0.5"
+            style={{ left: `${left}%`, background: `linear-gradient(180deg, ${LINE_ALPHA})` }}
+          />
+        ))}
+        {HORIZONTAL_LINES.map((top) => (
+          <span
+            key={`h${top}`}
+            className="absolute inset-x-0 h-0.5"
+            style={{ top: `${top}%`, background: `linear-gradient(90deg, ${LINE_ALPHA})` }}
+          />
+        ))}
+      </div>
+      <div className="relative mx-auto w-full max-w-[1064px]">
+        <FadeIn direction="up" className="mx-auto flex max-w-[684px] flex-col items-center text-center">
+          <p className="text-[12px] uppercase tracking-[0.04em] text-[#5B2BB9] lg:text-[14px] lg:leading-[17px]">{eyebrow}</p>
           <h2
             id="service-process-heading"
-            className="mt-2 font-hero text-[26px] font-bold leading-[1.2] lg:text-[38px] lg:leading-[1.2]"
+            className="mt-2 font-hero text-[26px] font-bold leading-[34px] lg:text-[32px] lg:leading-[42px]"
           >
             {heading}
           </h2>
-          <p className="mt-4 font-body text-[14px] leading-6 text-[#B3B3B3] lg:mt-5 lg:text-[16px]">{description}</p>
+          <p className="mt-4 w-full font-body text-justify text-[16px] leading-[22px] text-black lg:mt-4 lg:text-center lg:leading-6">{description}</p>
         </FadeIn>
 
-        <ol className="mt-8 grid gap-4 lg:mt-[56px] lg:grid-cols-2 lg:gap-5">
+        <ol className="mt-10 grid gap-5 lg:mt-[67px] lg:grid-cols-2 lg:gap-5">
           {steps.map((step, i) => (
             <li key={step.title}>
-              <FadeIn direction="up" delay={(i % 2) * 0.08}>
-                <div className="flex h-full min-h-[130px] flex-col rounded-[16px] border border-white/20 bg-[#070606] p-5 lg:h-[130px]">
-                  <span className="font-body text-[14px] font-semibold leading-none text-[#9F7EE1]">
+              <FadeIn direction="up" delay={(i % 2) * 0.08} className="h-full">
+                <div className="flex h-full flex-col rounded-[16px] border border-white/30 bg-white p-5">
+                  <span className="font-body text-[14px] font-bold uppercase leading-[17px] text-[#5B2BB9]">
                     {String(i + 1).padStart(2, "0")} —
                   </span>
-                  <h3 className="mt-3 font-body text-[20px] font-semibold leading-6 text-white">{step.title}</h3>
-                  <p className="mt-2 font-body text-[14px] leading-[17px] text-[#B3B3B3]">{step.description}</p>
+                  <h3 className="mt-2 font-body text-[18px] font-bold leading-[22px] text-[#070606] lg:text-[20px] lg:leading-6">{step.title}</h3>
+                  <p className="mt-2 font-body text-justify text-[14px] leading-5 text-[#070606] lg:text-left lg:leading-[22px]">{step.description}</p>
                 </div>
               </FadeIn>
             </li>
