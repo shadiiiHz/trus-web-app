@@ -4,6 +4,9 @@ import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { ServiceDetailHero } from "@/components/service-detail/ServiceDetailHero";
 import { ServiceDetailAbout } from "@/components/service-detail/ServiceDetailAbout";
+import { ServiceDetailPublishing } from "@/components/service-detail/ServiceDetailPublishing";
+import { ServiceDetailTiming } from "@/components/service-detail/ServiceDetailTiming";
+import { ServiceDetailWorkflow } from "@/components/service-detail/ServiceDetailWorkflow";
 import { ServiceDetailProcess } from "@/components/service-detail/ServiceDetailProcess";
 import { ServiceDetailStrategy } from "@/components/service-detail/ServiceDetailStrategy";
 import { ServiceDetailIntelligence } from "@/components/service-detail/ServiceDetailIntelligence";
@@ -64,13 +67,32 @@ export default function ServiceDetailPage() {
           gain={content.gain}
           highlights={content.highlights}
           glow={service.aboutGlow}
+          tight={service.aboutTight}
           textLeading={service.aboutTextLeading}
           aboutImageSize={service.aboutImageSize}
           highlightsImageSize={service.highlightsImageSize}
         />
       )}
 
-      {content.process && <ServiceDetailProcess process={content.process} />}
+      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} />}
+
+      {content.publishing && service.publishingImage && (
+        <ServiceDetailPublishing
+          publishing={content.publishing}
+          image={service.publishingImage}
+          icons={service.publishingIcons}
+        />
+      )}
+
+      {content.timing && <ServiceDetailTiming timing={content.timing} />}
+
+      {content.workflow && service.workflowImages && (
+        <ServiceDetailWorkflow
+          workflow={content.workflow}
+          growthImage={service.workflowImages.growth}
+          workflowImage={service.workflowImages.workflow}
+        />
+      )}
 
       {content.strategy && service.strategyImage && (
         <ServiceDetailStrategy strategy={content.strategy} image={service.strategyImage} />
@@ -93,6 +115,7 @@ export default function ServiceDetailPage() {
           subject={getServiceName(service)}
           heading={content.contact.heading}
           description={content.contact.description}
+          descriptionDesktop={content.contact.descriptionDesktop}
           wide={content.contact.wide}
         />
       )}

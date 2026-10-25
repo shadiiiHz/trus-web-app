@@ -1282,22 +1282,26 @@
         "metaTitle": "TRUS Auto Post Creator & Publisher | TruS",
         "metaDescription": "Create and publish social media posts through a fast, automated workflow — AI-generated content, captions and hashtags, adapted to your platform and language, published in seconds.",
         "about": {
-          "heading": "TRUS Auto Post Creator\n& Publisher",
+          "heading": "TRUS Auto Post Creator & Publisher",
           "headingMobile": ["TRUS Auto Post Creator &", "Publisher"],
-          "description": "**TRUS Auto Post Creator & Publisher** is designed for businesses that want to create and publish social media content quickly, without spending significant time on complex content production processes.\nSimply provide your images, updates, ideas, or daily business information to TRUS. TRUS AI Agents turn this input into ready-to-publish posts and optimize the content, caption, hashtags, and messaging based on your business and the selected social media platform.\nThen simply choose where you want to publish; **Instagram, LinkedIn, X (Twitter), or Telegram Channel**; and TRUS handles the creation and publishing workflow for you.\nThe goal of this service is simple: less **manual work, faster content creation, and consistent, ongoing social media activity for your brand.**",
+          "description": "**TRUS Auto Post Creator & Publisher** is designed for businesses that want to create and publish social media content quickly, consistently, and with minimal manual work.\nSimply provide your images, updates, ideas, offers, or daily business information. TRUS AI Agents transform your input into ready-to-publish posts and automatically prepare suitable content, captions, hashtags, keywords, and messaging based on your business and the selected social media platform.\nYou can then choose where the content should be published across **Instagram, LinkedIn, X (Twitter), or Telegram Channel**, and TRUS manages the creation and publishing workflow.\nFor businesses targeting multiple languages and markets, the same workflow can be expanded across **different language-specific social accounts**. One business update can be adapted into different versions for different audiences, with each version created in the appropriate language and communication style, then published to the corresponding account.\nThe goal is simple: **less manual work, faster content creation, consistent social media activity, and a more scalable way to communicate with different markets.**",
           "imageAlt": "Team discussing social media content around laptops at a shared table"
         },
         "gain": {
           "heading": "What You Gain",
           "items": [
-            "Create social media posts within seconds",
-            "Reduce the time and daily workload required for content creation",
-            "Publish across multiple social media platforms",
-            "Automatically generate optimized captions, hashtags, and messaging",
-            "Maintain consistent and ongoing social media activity for your brand",
-            "Create multilingual and localized content",
-            "Reduce the need for manual social media management",
-            "Save time while maintaining professional content standards"
+            "Create ready-to-publish social media posts within seconds",
+            "Reduce daily content creation and publishing workload",
+            "Publish across Instagram, LinkedIn, X, and Telegram Channel",
+            "Automatically generate captions, hashtags, keywords, and messaging",
+            "Create content in multiple languages",
+            "Adapt content to different audiences and markets",
+            "Publish each language to the appropriate social account",
+            "Schedule posts around different local markets and time zones",
+            "Maintain consistent and ongoing social media activity",
+            "Compare how different languages and markets respond",
+            "Use performance insights to focus future content on stronger markets",
+            "Reduce manual social media management while maintaining professional standards"
           ]
         },
         "highlights": {
@@ -1314,9 +1318,94 @@
           ],
           "imageAlt": "Phone showing a new post, with Instagram, Facebook, LinkedIn, X and Telegram icons around it"
         },
+        "process": {
+          "eyebrow": "OUR PROCESS",
+          "heading": "How It Works",
+          "description": "TRUS automates social media content creation and publishing through a guided workflow that keeps your brand active, consistent, and optimized across every platform.",
+          "steps": [
+            {
+              "title": "Send Your Content",
+              "description": "Share your images, ideas, offers, updates, or daily business information with TRUS.\nYou provide the core information once."
+            },
+            {
+              "title": "AI Creates the Post",
+              "description": "TRUS transforms your input into a ready-to-publish post based on:\n- Your business and expertise\n- Selected social platform\n- Target audience\n- Selected language\n- Target market\n- Brand communication style\nFor multilingual workflows, TRUS can create different versions of the same business message rather than simply translating one identical post.\nEach version can use wording, captions, hashtags, keywords, and messaging that better match the intended audience."
+            },
+            {
+              "title": "Review When Needed",
+              "description": "You can review the generated content before publication whenever approval is required. For more automated workflows, approved content rules can reduce repetitive manual steps."
+            },
+            {
+              "title": "Choose the Account & Market",
+              "description": "Select the platform and connected account where the post should be published.\n**For example, your business could operate:**\n**Instagram Germany:** German content for German-speaking audiences.\n**Instagram International:** English content for international audiences.\n**Instagram Türkiye:** Turkish content for Turkish-speaking audiences.\nThe same structure can also be used across LinkedIn, X, and Telegram Channels.\nTRUS directs each content version to the appropriate account instead of mixing different languages within the same communication stream."
+            },
+            {
+              "title": "Schedule for the Local Audience",
+              "description": "Different markets are active at different times.\nTRUS can schedule content according to the relevant country, audience, and local time zone so that a post intended for one market does not have to be published at the same time as a post for another.\nAs performance data grows, publishing strategies can also be refined based on when each audience responds more effectively."
+            },
+            {
+              "title": "Publish",
+              "description": "TRUS publishes the approved content through the connected workflow to the selected account and platform.\nA single business update can therefore become several localized posts and be automatically distributed across multiple language-specific accounts."
+            }
+          ]
+        },
+        "publishing": {
+          "heading": "Multilingual Automated Publishing",
+          "subheading": "One Business Update. Multiple Markets. The Right Account for Each Audience.",
+          "description": "The multilingual capability of TRUS Auto Post is designed for businesses that want to expand their communication without multiplying their daily workload.",
+          "imageAlt": "Phone showing a new post, with Instagram, Facebook, LinkedIn, X and Telegram icons around it",
+          "listHeading": "For Example, Imagine That Your Business Has",
+          "items": [
+            "3 Instagram accounts: German, English, and Turkish",
+            "2 LinkedIn presences for different markets",
+            "Separate X accounts",
+            "Different Telegram Channels for local audiences"
+          ],
+          "outro": "TRUS can turn that update into different market-specific versions, prepare the appropriate language and messaging, and route each version to the correct social media account.\nThis means the German audience does not simply receive a translated English post. The German version can be structured for that audience, while the Turkish or English version can communicate the same business message differently where appropriate.\nThe result is a more organized and locally relevant social media presence without requiring separate teams to manually create and publish every version."
+        },
+        "timing": {
+          "heading": "Publish at the Right Time for Each Market",
+          "intro": "Multilingual growth is not only about language. **Timing also matters.**\nAudiences in different countries and regions may be active at different times.\nTRUS can support market-specific scheduling so that content for Germany, Türkiye, the UK, the US, or other target regions can be published according to the local audience and time zone.\nInstead of publishing every language simultaneously, each account can follow a schedule designed around its own market.",
+          "insightsHeading": "Learn Which Markets Respond Better",
+          "insightsIntro": "Publishing across different languages also creates valuable business data.\nTRUS can help compare the performance of content across connected language-specific accounts and markets.",
+          "listHeading": "Over time, you can identify:",
+          "items": [
+            "Which languages generate stronger engagement",
+            "Which geographic markets react more positively",
+            "Which accounts attract more audience interest",
+            "Which type of content works better in each market",
+            "Which publishing times perform better",
+            "Where additional content may be worthwhile",
+            "Which markets may deserve more advertising or marketing investment"
+          ],
+          "outro": "This allows your multilingual social media strategy to become more focused over time. Instead of investing equally in every market, your business can put more attention on the locations and audiences showing stronger potential."
+        },
+        "workflow": {
+          "heading": "From Automation to Smarter Growth",
+          "intro": "The purpose of multilingual automation is not simply to publish more posts.\nIt helps your business communicate with customers in their own language, create a more relevant local connection, test different markets, and learn where demand is stronger. For example, if German-language posts consistently generate stronger engagement and business interest than another market, you may decide to:\n- Publish more frequently for that audience\n- Develop more German-specific content\n- Increase marketing activity in that region\n- Test additional German cities or customer segments\n- Allocate more advertising budget to the stronger market\nIn this way, automated content publishing becomes part of a broader data-informed growth strategy.",
+          "growthImageAlt": "Dashboard showing automated content flowing into performance insights and growth metrics",
+          "workflowHeading": "Multi-Platform, Multi-Language Workflow",
+          "workflowIntro": "The same multilingual strategy can be used across:",
+          "platforms": "**Instagram**: Create and publish language-specific visual and promotional content to separate Instagram accounts.\n**LinkedIn**: Publish professional and business-focused content adapted to different languages and professional markets.\n**X (Twitter)**: Create shorter, localized messages and publish them to the appropriate language or market-specific account.\n**Telegram Channel**: Maintain separate channels for different language communities and automatically deliver appropriate content to each audience.\nThis gives businesses one structured system for managing multiple platforms, accounts, languages, and markets.",
+          "highlightsHeading": "Highlights",
+          "highlights": [
+            "Fast AI-Powered Post Creation",
+            "Automated Content Creation & Publishing",
+            "Instagram, LinkedIn, X & Telegram Channel",
+            "Multilingual & Localized Post Creation",
+            "Language-Specific Account Publishing",
+            "Market & Time-Zone-Based Scheduling",
+            "Optimized Captions, Hashtags & Keywords",
+            "Cross-Market Performance Insights",
+            "Approval-Based or Automated Publishing",
+            "Consistent & Ongoing Social Media Activity"
+          ],
+          "workflowImageAlt": "Two colleagues reviewing an Auto Post workflow on a large screen"
+        },
         "contact": {
           "heading": "Ready to Grow Your Business?",
-          "description": "Spend less time creating daily social media posts and more time managing and growing your business.\nTell us about your brand and the social media platforms you use, and TRUS will help automate your content creation and publishing workflow."
+          "description": "Spend less time creating daily social media posts and more time managing and growing your business.\nTell us about your brand and the social media platforms you use, and TRUS will help automate your content creation and publishing workflow.",
+          "descriptionDesktop": "Spend less time manually creating and publishing daily content while reaching more relevant audiences across languages and markets.\nTell us about your business, social media platforms, target languages, countries, and connected accounts. TRUS will help you build an automated publishing workflow that delivers the right content to the right account, for the right audience, at the right time."
         }
       }
     }

@@ -1289,22 +1289,26 @@
         "metaTitle": "TRUS Auto Post Creator & Publisher | TruS",
         "metaDescription": "Erstellen und veröffentlichen Sie Social-Media-Beiträge in einem schnellen, automatisierten Workflow – KI-generierte Inhalte, Beschreibungen und Hashtags, angepasst an Plattform und Sprache, in Sekunden veröffentlicht.",
         "about": {
-          "heading": "TRUS Auto Post Creator\n& Publisher",
+          "heading": "TRUS Auto Post Creator & Publisher",
           "headingMobile": ["TRUS Auto Post Creator &", "Publisher"],
-          "description": "**TRUS Auto Post Creator & Publisher** richtet sich an Unternehmen, die Social-Media-Inhalte schnell erstellen und veröffentlichen möchten, ohne viel Zeit in aufwendige Content-Produktionsprozesse zu investieren.\nStellen Sie TRUS einfach Ihre Bilder, Neuigkeiten, Ideen oder täglichen Geschäftsinformationen bereit. Die TRUS KI-Agenten verwandeln diese Eingaben in veröffentlichungsfertige Beiträge und optimieren Inhalt, Beschreibung, Hashtags und Botschaft passend zu Ihrem Unternehmen und der gewählten Social-Media-Plattform.\nWählen Sie anschließend, wo Sie veröffentlichen möchten – **Instagram, LinkedIn, X (Twitter) oder Telegram-Kanal** – und TRUS übernimmt den Erstellungs- und Veröffentlichungsprozess für Sie.\nDas Ziel dieses Services ist einfach: weniger **manueller Aufwand, schnellere Content-Erstellung und konsistente, kontinuierliche Social-Media-Aktivität für Ihre Marke.**",
+          "description": "**TRUS Auto Post Creator & Publisher** richtet sich an Unternehmen, die Social-Media-Inhalte schnell, konsistent und mit minimalem manuellem Aufwand erstellen und veröffentlichen möchten.\nStellen Sie einfach Ihre Bilder, Neuigkeiten, Ideen, Angebote oder täglichen Geschäftsinformationen bereit. Die TRUS KI-Agenten verwandeln Ihre Eingaben in veröffentlichungsfertige Beiträge und bereiten passende Inhalte, Beschreibungen, Hashtags, Keywords und Botschaften passend zu Ihrem Unternehmen und der gewählten Social-Media-Plattform automatisch vor.\nAnschließend wählen Sie, wo der Inhalt veröffentlicht werden soll – auf **Instagram, LinkedIn, X (Twitter) oder im Telegram-Kanal** – und TRUS steuert den Erstellungs- und Veröffentlichungsprozess.\nFür Unternehmen, die mehrere Sprachen und Märkte ansprechen, lässt sich derselbe Workflow auf **sprachspezifische Social-Media-Konten** erweitern. Ein Unternehmens-Update kann in verschiedene Versionen für unterschiedliche Zielgruppen angepasst werden, jeweils in der passenden Sprache und Kommunikationsart erstellt und im entsprechenden Konto veröffentlicht.\nDas Ziel ist einfach: **weniger manueller Aufwand, schnellere Content-Erstellung, konsistente Social-Media-Aktivität und ein skalierbarerer Weg, mit verschiedenen Märkten zu kommunizieren.**",
           "imageAlt": "Team bespricht Social-Media-Inhalte an einem gemeinsamen Tisch mit Laptops"
         },
         "gain": {
           "heading": "Ihr Nutzen",
           "items": [
-            "Social-Media-Beiträge in Sekunden erstellen",
-            "Zeitaufwand und tägliche Arbeitslast für die Content-Erstellung reduzieren",
-            "Auf mehreren Social-Media-Plattformen veröffentlichen",
-            "Optimierte Beschreibungen, Hashtags und Botschaften automatisch generieren",
-            "Konsistente und kontinuierliche Social-Media-Aktivität für Ihre Marke aufrechterhalten",
-            "Mehrsprachige und lokalisierte Inhalte erstellen",
-            "Den Bedarf an manuellem Social-Media-Management reduzieren",
-            "Zeit sparen und dabei professionelle Content-Standards einhalten"
+            "Veröffentlichungsfertige Social-Media-Beiträge in Sekunden erstellen",
+            "Täglichen Aufwand für Content-Erstellung und Veröffentlichung reduzieren",
+            "Auf Instagram, LinkedIn, X und im Telegram-Kanal veröffentlichen",
+            "Beschreibungen, Hashtags, Keywords und Botschaften automatisch generieren",
+            "Inhalte in mehreren Sprachen erstellen",
+            "Inhalte an verschiedene Zielgruppen und Märkte anpassen",
+            "Jede Sprache im passenden Social-Media-Konto veröffentlichen",
+            "Beiträge auf verschiedene lokale Märkte und Zeitzonen abstimmen",
+            "Konsistente und kontinuierliche Social-Media-Aktivität aufrechterhalten",
+            "Vergleichen, wie verschiedene Sprachen und Märkte reagieren",
+            "Performance-Einblicke nutzen, um künftige Inhalte auf stärkere Märkte auszurichten",
+            "Manuelles Social-Media-Management reduzieren und professionelle Standards wahren"
           ]
         },
         "highlights": {
@@ -1321,9 +1325,94 @@
           ],
           "imageAlt": "Smartphone mit einem neuen Beitrag, umgeben von Instagram-, Facebook-, LinkedIn-, X- und Telegram-Symbolen"
         },
+        "process": {
+          "eyebrow": "UNSER PROZESS",
+          "heading": "So funktioniert es",
+          "description": "TRUS automatisiert die Erstellung und Veröffentlichung von Social-Media-Inhalten über einen geführten Workflow, der Ihre Marke auf jeder Plattform aktiv, konsistent und optimiert hält.",
+          "steps": [
+            {
+              "title": "Inhalte senden",
+              "description": "Teilen Sie Ihre Bilder, Ideen, Angebote, Neuigkeiten oder täglichen Geschäftsinformationen mit TRUS.\nSie liefern die Kerninformationen nur einmal."
+            },
+            {
+              "title": "KI erstellt den Beitrag",
+              "description": "TRUS verwandelt Ihre Eingabe in einen veröffentlichungsfertigen Beitrag auf Basis von:\n- Ihrem Unternehmen und Ihrer Expertise\n- Der gewählten Social-Media-Plattform\n- Der Zielgruppe\n- Der gewählten Sprache\n- Dem Zielmarkt\n- Dem Kommunikationsstil der Marke\nBei mehrsprachigen Workflows kann TRUS verschiedene Versionen derselben Geschäftsbotschaft erstellen, statt nur einen identischen Beitrag zu übersetzen.\nJede Version kann Formulierungen, Beschreibungen, Hashtags, Keywords und Botschaften nutzen, die besser zur Zielgruppe passen."
+            },
+            {
+              "title": "Prüfen, wenn nötig",
+              "description": "Sie können die erstellten Inhalte vor der Veröffentlichung prüfen, wenn eine Freigabe erforderlich ist. Bei stärker automatisierten Workflows können freigegebene Inhaltsregeln wiederkehrende manuelle Schritte reduzieren."
+            },
+            {
+              "title": "Konto und Markt wählen",
+              "description": "Wählen Sie die Plattform und das verbundene Konto, auf dem der Beitrag veröffentlicht werden soll.\n**Zum Beispiel könnte Ihr Unternehmen betreiben:**\n**Instagram Deutschland:** Deutsche Inhalte für deutschsprachige Zielgruppen.\n**Instagram International:** Englische Inhalte für internationale Zielgruppen.\n**Instagram Türkiye:** Türkische Inhalte für türkischsprachige Zielgruppen.\nDieselbe Struktur kann auch für LinkedIn, X und Telegram-Kanäle genutzt werden.\nTRUS leitet jede Inhaltsversion an das passende Konto, statt verschiedene Sprachen im selben Kommunikationsstrom zu mischen."
+            },
+            {
+              "title": "Für das lokale Publikum planen",
+              "description": "Verschiedene Märkte sind zu unterschiedlichen Zeiten aktiv.\nTRUS kann Inhalte nach Land, Zielgruppe und lokaler Zeitzone planen, sodass ein Beitrag für einen Markt nicht gleichzeitig mit einem Beitrag für einen anderen veröffentlicht werden muss.\nMit wachsenden Performance-Daten lassen sich Veröffentlichungsstrategien zudem danach verfeinern, wann die jeweilige Zielgruppe besser reagiert."
+            },
+            {
+              "title": "Veröffentlichen",
+              "description": "TRUS veröffentlicht die freigegebenen Inhalte über den verbundenen Workflow auf dem gewählten Konto und der gewählten Plattform.\nEin einzelnes Unternehmens-Update kann so zu mehreren lokalisierten Beiträgen werden und automatisch auf mehrere sprachspezifische Konten verteilt werden."
+            }
+          ]
+        },
+        "publishing": {
+          "heading": "Mehrsprachiges automatisiertes Publishing",
+          "subheading": "Ein Unternehmens-Update. Mehrere Märkte. Das richtige Konto für jede Zielgruppe.",
+          "description": "Die mehrsprachige Funktion von TRUS Auto Post richtet sich an Unternehmen, die ihre Kommunikation ausweiten möchten, ohne ihren täglichen Aufwand zu vervielfachen.",
+          "imageAlt": "Smartphone mit einem neuen Beitrag, umgeben von Instagram-, Facebook-, LinkedIn-, X- und Telegram-Symbolen",
+          "listHeading": "Stellen Sie sich zum Beispiel vor, Ihr Unternehmen hat",
+          "items": [
+            "3 Instagram-Konten: Deutsch, Englisch und Türkisch",
+            "2 LinkedIn-Auftritte für verschiedene Märkte",
+            "Separate X-Konten",
+            "Verschiedene Telegram-Kanäle für lokale Zielgruppen"
+          ],
+          "outro": "TRUS kann dieses Update in verschiedene marktspezifische Versionen verwandeln, die passende Sprache und Botschaft vorbereiten und jede Version an das richtige Social-Media-Konto weiterleiten.\nDas bedeutet, dass die deutsche Zielgruppe nicht einfach einen übersetzten englischen Beitrag erhält. Die deutsche Version kann auf diese Zielgruppe zugeschnitten werden, während die türkische oder englische Version dieselbe Geschäftsbotschaft bei Bedarf anders vermittelt.\nDas Ergebnis ist ein organisierterer und lokal relevanterer Social-Media-Auftritt, ohne dass separate Teams jede Version manuell erstellen und veröffentlichen müssen."
+        },
+        "timing": {
+          "heading": "Zum richtigen Zeitpunkt für jeden Markt veröffentlichen",
+          "intro": "Mehrsprachiges Wachstum hängt nicht nur von der Sprache ab. **Auch das Timing zählt.**\nZielgruppen in verschiedenen Ländern und Regionen sind möglicherweise zu unterschiedlichen Zeiten aktiv.\nTRUS kann marktspezifische Planung unterstützen, sodass Inhalte für Deutschland, die Türkei, Großbritannien, die USA oder andere Zielregionen passend zur lokalen Zielgruppe und Zeitzone veröffentlicht werden können.\nStatt jede Sprache gleichzeitig zu veröffentlichen, kann jedes Konto einem Zeitplan folgen, der auf den eigenen Markt abgestimmt ist.",
+          "insightsHeading": "Erfahren Sie, welche Märkte besser reagieren",
+          "insightsIntro": "Die Veröffentlichung in verschiedenen Sprachen erzeugt außerdem wertvolle Geschäftsdaten.\nTRUS kann helfen, die Performance von Inhalten über verbundene sprachspezifische Konten und Märkte hinweg zu vergleichen.",
+          "listHeading": "Mit der Zeit können Sie erkennen:",
+          "items": [
+            "Welche Sprachen stärkeres Engagement erzeugen",
+            "Welche geografischen Märkte positiver reagieren",
+            "Welche Konten mehr Interesse der Zielgruppe wecken",
+            "Welche Art von Inhalt in jedem Markt besser funktioniert",
+            "Welche Veröffentlichungszeiten besser performen",
+            "Wo zusätzliche Inhalte sinnvoll sein können",
+            "Welche Märkte mehr Werbe- oder Marketinginvestitionen verdienen"
+          ],
+          "outro": "So kann Ihre mehrsprachige Social-Media-Strategie im Laufe der Zeit fokussierter werden. Statt in jeden Markt gleich viel zu investieren, kann Ihr Unternehmen den Orten und Zielgruppen mit stärkerem Potenzial mehr Aufmerksamkeit widmen."
+        },
+        "workflow": {
+          "heading": "Von Automatisierung zu intelligenterem Wachstum",
+          "intro": "Der Zweck mehrsprachiger Automatisierung ist nicht einfach, mehr Beiträge zu veröffentlichen.\nSie hilft Ihrem Unternehmen, mit Kunden in deren eigener Sprache zu kommunizieren, eine relevantere lokale Verbindung aufzubauen, verschiedene Märkte zu testen und zu erkennen, wo die Nachfrage stärker ist. Wenn deutschsprachige Beiträge zum Beispiel durchgehend mehr Engagement und Geschäftsinteresse erzeugen als in einem anderen Markt, können Sie entscheiden:\n- Für diese Zielgruppe häufiger zu veröffentlichen\n- Mehr deutschspezifische Inhalte zu entwickeln\n- Die Marketingaktivität in dieser Region zu erhöhen\n- Weitere deutsche Städte oder Kundensegmente zu testen\n- Dem stärkeren Markt mehr Werbebudget zuzuweisen\nAuf diese Weise wird automatisiertes Content-Publishing Teil einer umfassenderen datenbasierten Wachstumsstrategie.",
+          "growthImageAlt": "Dashboard, das zeigt, wie automatisierte Inhalte in Performance-Einblicke und Wachstumskennzahlen münden",
+          "workflowHeading": "Workflow für mehrere Plattformen und Sprachen",
+          "workflowIntro": "Dieselbe mehrsprachige Strategie lässt sich nutzen auf:",
+          "platforms": "**Instagram**: Sprachspezifische visuelle und werbliche Inhalte erstellen und auf separaten Instagram-Konten veröffentlichen.\n**LinkedIn**: Professionelle, geschäftsorientierte Inhalte veröffentlichen, angepasst an verschiedene Sprachen und Fachmärkte.\n**X (Twitter)**: Kürzere, lokalisierte Nachrichten erstellen und im passenden sprach- oder marktspezifischen Konto veröffentlichen.\n**Telegram-Kanal**: Separate Kanäle für verschiedene Sprachgemeinschaften führen und passende Inhalte automatisch an jede Zielgruppe ausliefern.\nSo erhalten Unternehmen ein strukturiertes System zur Verwaltung mehrerer Plattformen, Konten, Sprachen und Märkte.",
+          "highlightsHeading": "Highlights",
+          "highlights": [
+            "Schnelle KI-gestützte Beitragserstellung",
+            "Automatisierte Content-Erstellung und Veröffentlichung",
+            "Instagram, LinkedIn, X und Telegram-Kanal",
+            "Mehrsprachige und lokalisierte Beitragserstellung",
+            "Sprachspezifische Konto-Veröffentlichung",
+            "Markt- und zeitzonenbasierte Planung",
+            "Optimierte Beschreibungen, Hashtags und Keywords",
+            "Marktübergreifende Performance-Einblicke",
+            "Freigabebasierte oder automatisierte Veröffentlichung",
+            "Konsistente und kontinuierliche Social-Media-Aktivität"
+          ],
+          "workflowImageAlt": "Zwei Kollegen besprechen einen Auto-Post-Workflow auf einem großen Bildschirm"
+        },
         "contact": {
           "heading": "Bereit, Ihr Unternehmen wachsen zu lassen?",
-          "description": "Verbringen Sie weniger Zeit mit der täglichen Erstellung von Social-Media-Beiträgen und mehr Zeit mit der Führung und dem Wachstum Ihres Unternehmens.\nErzählen Sie uns von Ihrer Marke und den Social-Media-Plattformen, die Sie nutzen – TRUS hilft Ihnen, Ihren Workflow für Content-Erstellung und Veröffentlichung zu automatisieren."
+          "description": "Verbringen Sie weniger Zeit mit der täglichen Erstellung von Social-Media-Beiträgen und mehr Zeit mit der Führung und dem Wachstum Ihres Unternehmens.\nErzählen Sie uns von Ihrer Marke und den Social-Media-Plattformen, die Sie nutzen – TRUS hilft Ihnen, Ihren Workflow für Content-Erstellung und Veröffentlichung zu automatisieren.",
+          "descriptionDesktop": "Verbringen Sie weniger Zeit mit der manuellen Erstellung und Veröffentlichung täglicher Inhalte und erreichen Sie gleichzeitig relevantere Zielgruppen in verschiedenen Sprachen und Märkten.\nErzählen Sie uns von Ihrem Unternehmen, Ihren Social-Media-Plattformen, Zielsprachen, Ländern und verbundenen Konten. TRUS hilft Ihnen, einen automatisierten Veröffentlichungs-Workflow aufzubauen, der den richtigen Inhalt zur richtigen Zeit an das richtige Konto für die richtige Zielgruppe liefert."
         }
       }
     }

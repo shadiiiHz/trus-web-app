@@ -61,6 +61,42 @@ export interface ServiceDetailAutomation {
   items: readonly { title: string; description: string }[];
 }
 
+/** Optional dark "publishing" section (heading + intro, centred image, icon list, closing paragraph). `outro` supports `
+` line breaks. */
+export interface ServiceDetailPublishing {
+  heading: string;
+  subheading: string;
+  description: string;
+  imageAlt: string;
+  listHeading: string;
+  items: readonly string[];
+  outro: string;
+}
+
+/** Optional light text-only "timing" section. `intro` / `insightsIntro` support **bold** and `\n` line breaks. */
+export interface ServiceDetailTiming {
+  heading: string;
+  intro: string;
+  insightsHeading: string;
+  insightsIntro: string;
+  listHeading: string;
+  items: readonly string[];
+  outro: string;
+}
+
+/** Optional dark "growth + workflow" section. `intro` supports **bold**, `\n` line breaks and `- ` bullet lines; `platforms` supports **bold** and `\n`. */
+export interface ServiceDetailWorkflow {
+  heading: string;
+  intro: string;
+  growthImageAlt: string;
+  workflowHeading: string;
+  workflowIntro: string;
+  platforms: string;
+  highlightsHeading: string;
+  highlights: readonly string[];
+  workflowImageAlt: string;
+}
+
 /** Optional dark "connected growth" section (heading, intro + list, image beside a highlights list). */
 export interface ServiceDetailGrowth {
   eyebrow: string;
@@ -100,6 +136,12 @@ export interface ServiceDetailText {
   /** Rendered between About and Contact when present. */
   process?: ServiceDetailProcess;
   /** Rendered after `process` when present. */
+  publishing?: ServiceDetailPublishing;
+  /** Rendered after `publishing` when present. */
+  timing?: ServiceDetailTiming;
+  /** Rendered after `timing` when present. */
+  workflow?: ServiceDetailWorkflow;
+  /** Rendered after `workflow` when present. */
   strategy?: ServiceDetailStrategy;
   /** Rendered after `strategy` when present. */
   intelligence?: ServiceDetailIntelligence;
@@ -110,7 +152,7 @@ export interface ServiceDetailText {
   /** Rendered after `flexible` when present. */
   growth?: ServiceDetailGrowth;
   /** `description` supports `\n` line breaks. */
-  contact?: { heading: string; description: string };
+  contact?: { heading: string; description: string; /** Replaces `description` from the lg breakpoint up. */ descriptionDesktop?: string };
 }
 
 /** Labels shared by every service page. */
@@ -148,6 +190,15 @@ export interface ServiceDetail {
   images?: { about: string; highlights?: string };
   /** Purple radial glow behind the About section (Figma background). */
   aboutGlow?: boolean;
+  /** Figma 22px leading, 20px mobile gutters and 40px block gaps (pages without a Highlights block). */
+  aboutTight?: boolean;
+  /** "How it works" cards render as an accordion (first open) with Figma sizing. */
+  processAccordion?: boolean;
+  /** Image + per-item icons of the `publishing` section. */
+  publishingImage?: string;
+  publishingIcons?: readonly ServiceStackIcon[];
+  /** Images of the `workflow` section: the centred growth image and the one beside Highlights. */
+  workflowImages?: { growth: string; workflow: string };
   /** Desktop line-height (px) of the About description on pages with a Highlights block (default 20). */
   aboutTextLeading?: number;
   /** Desktop size (px) of the centered About image, default 414×212. */
@@ -242,10 +293,19 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroDesktopFade: true,
     heroWideTitle: true,
     heroMobile: { imageX: "41%", titleWidth: 300 },
+    aboutGlow: true,
+    aboutTight: true,
+    processAccordion: true,
+    publishingImage: "/services/auto-post-multi-platform.png",
+    publishingIcons: ["instagram", "linkedin", "x", "telegram"],
+    workflowImages: {
+      growth: "/services/auto-post-growth-dashboard.png",
+      workflow: "/services/auto-post-workflow-presentation.png",
+    },
+    aboutImageSize: { width: 420, height: 326 },
     contactWide: true,
     images: {
       about: "/services/auto-post-team-collaboration.png",
-      highlights: "/services/auto-post-multi-platform.png",
     },
   },
 ];

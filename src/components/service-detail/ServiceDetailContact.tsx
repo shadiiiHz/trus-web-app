@@ -10,6 +10,8 @@ interface ServiceDetailContactProps {
   subject: string;
   heading: string;
   description: string;
+  /** Optional copy shown from lg up instead of `description`. */
+  descriptionDesktop?: string;
   /** Kept for config compatibility — the description always spans the full container width (Figma). */
   wide?: boolean;
 }
@@ -19,7 +21,7 @@ interface ServiceDetailContactProps {
  * beside the contact form, with the service pre-filled as the form's Subject.
  * Identical on every service page; only the copy differs.
  */
-export function ServiceDetailContact({ subject, heading, description }: ServiceDetailContactProps) {
+export function ServiceDetailContact({ subject, heading, description, descriptionDesktop }: ServiceDetailContactProps) {
   const { eyebrow, card, form } = siteConfig.contact;
   const { login } = siteConfig.auth;
 
@@ -38,9 +40,16 @@ export function ServiceDetailContact({ subject, heading, description }: ServiceD
               {heading}
             </h2>
           </div>
-          <p className="text-justify font-body text-[16px] leading-6 tracking-[-0.45px] text-[#070606] lg:text-left">
+          <p
+            className={`text-justify font-body text-[16px] leading-6 tracking-[-0.45px] text-[#070606] lg:text-left ${descriptionDesktop ? "lg:hidden" : ""}`}
+          >
             {renderRichText(description)}
           </p>
+          {descriptionDesktop && (
+            <p className="hidden text-left font-body text-[16px] leading-6 tracking-[-0.45px] text-[#070606] lg:block">
+              {renderRichText(descriptionDesktop)}
+            </p>
+          )}
         </FadeIn>
 
         <div className="flex flex-col gap-7 lg:flex-row lg:gap-5">

@@ -1282,22 +1282,26 @@
         "metaTitle": "TRUS Auto Post Creator & Publisher | TruS",
         "metaDescription": "Sosyal medya gönderilerini hızlı ve otomatik bir iş akışıyla oluşturun ve yayınlayın — yapay zekâ ile üretilen içerik, açıklama ve hashtag'ler platformunuza ve diline uyarlanır, saniyeler içinde yayınlanır.",
         "about": {
-          "heading": "TRUS Auto Post Creator\n& Publisher",
+          "heading": "TRUS Auto Post Creator & Publisher",
           "headingMobile": ["TRUS Auto Post Creator &", "Publisher"],
-          "description": "**TRUS Auto Post Creator & Publisher**, karmaşık içerik üretim süreçlerine fazla zaman harcamadan sosyal medya içeriklerini hızlıca oluşturmak ve yayınlamak isteyen işletmeler için tasarlanmıştır.\nGörsellerinizi, güncellemelerinizi, fikirlerinizi veya günlük iş bilgilerinizi TRUS'a iletmeniz yeterlidir. TRUS yapay zekâ ajanları bu girdiyi yayına hazır gönderilere dönüştürür; içeriği, açıklamayı, hashtag'leri ve mesajı işletmenize ve seçilen sosyal medya platformuna göre optimize eder.\nArdından nerede yayınlamak istediğinizi seçin; **Instagram, LinkedIn, X (Twitter) veya Telegram Kanalı**; oluşturma ve yayınlama sürecini TRUS sizin için yönetir.\nBu hizmetin amacı basittir: markanız için daha az **manuel iş, daha hızlı içerik üretimi ve tutarlı, sürekli sosyal medya etkinliği.**",
+          "description": "**TRUS Auto Post Creator & Publisher**, sosyal medya içeriklerini hızlı, tutarlı ve minimum manuel iş ile oluşturmak ve yayınlamak isteyen işletmeler için tasarlanmıştır.\nGörsellerinizi, güncellemelerinizi, fikirlerinizi, tekliflerinizi veya günlük iş bilgilerinizi iletmeniz yeterlidir. TRUS yapay zekâ ajanları bu girdiyi yayına hazır gönderilere dönüştürür; işletmenize ve seçilen sosyal medya platformuna uygun içerik, açıklama, hashtag, anahtar kelime ve mesajları otomatik olarak hazırlar.\nArdından içeriğin **Instagram, LinkedIn, X (Twitter) veya Telegram Kanalı** üzerinde nerede yayınlanacağını seçebilirsiniz; oluşturma ve yayınlama sürecini TRUS yönetir.\nBirden fazla dil ve pazarı hedefleyen işletmeler için aynı iş akışı **farklı dillere özel sosyal medya hesaplarına** genişletilebilir. Tek bir iş güncellemesi, her biri uygun dil ve iletişim tarzıyla oluşturulmuş farklı kitlelere yönelik sürümlere uyarlanabilir ve ilgili hesapta yayınlanır.\nAmaç basittir: **daha az manuel iş, daha hızlı içerik üretimi, tutarlı sosyal medya etkinliği ve farklı pazarlarla iletişim kurmak için daha ölçeklenebilir bir yol.**",
           "imageAlt": "Ortak bir masada dizüstü bilgisayarların etrafında sosyal medya içeriklerini tartışan ekip"
         },
         "gain": {
           "heading": "Neler Kazanırsınız",
           "items": [
-            "Saniyeler içinde sosyal medya gönderileri oluşturun",
-            "İçerik üretimi için gereken süreyi ve günlük iş yükünü azaltın",
-            "Birden fazla sosyal medya platformunda yayınlayın",
-            "Optimize edilmiş açıklamaları, hashtag'leri ve mesajları otomatik oluşturun",
-            "Markanız için tutarlı ve sürekli sosyal medya etkinliğini sürdürün",
-            "Çok dilli ve yerelleştirilmiş içerik oluşturun",
-            "Manuel sosyal medya yönetimi ihtiyacını azaltın",
-            "Profesyonel içerik standartlarını korurken zaman kazanın"
+            "Saniyeler içinde yayına hazır sosyal medya gönderileri oluşturun",
+            "Günlük içerik üretimi ve yayınlama iş yükünü azaltın",
+            "Instagram, LinkedIn, X ve Telegram Kanalı'nda yayınlayın",
+            "Açıklamaları, hashtag'leri, anahtar kelimeleri ve mesajları otomatik oluşturun",
+            "Birden fazla dilde içerik oluşturun",
+            "İçeriği farklı kitlelere ve pazarlara uyarlayın",
+            "Her dili uygun sosyal medya hesabında yayınlayın",
+            "Gönderileri farklı yerel pazarlara ve saat dilimlerine göre planlayın",
+            "Tutarlı ve sürekli sosyal medya etkinliğini sürdürün",
+            "Farklı dillerin ve pazarların nasıl yanıt verdiğini karşılaştırın",
+            "Performans verilerini kullanarak gelecekteki içeriği güçlü pazarlara odaklayın",
+            "Profesyonel standartları korurken manuel sosyal medya yönetimini azaltın"
           ]
         },
         "highlights": {
@@ -1314,9 +1318,94 @@
           ],
           "imageAlt": "Etrafında Instagram, Facebook, LinkedIn, X ve Telegram simgeleri bulunan, yeni bir gönderiyi gösteren telefon"
         },
+        "process": {
+          "eyebrow": "SÜRECİMİZ",
+          "heading": "Nasıl Çalışır",
+          "description": "TRUS, sosyal medya içeriği oluşturma ve yayınlamayı yönlendirilmiş bir iş akışıyla otomatikleştirir; markanızı her platformda aktif, tutarlı ve optimize tutar.",
+          "steps": [
+            {
+              "title": "İçeriğinizi Gönderin",
+              "description": "Görsellerinizi, fikirlerinizi, tekliflerinizi, güncellemelerinizi veya günlük iş bilgilerinizi TRUS ile paylaşın.\nTemel bilgiyi yalnızca bir kez iletirsiniz."
+            },
+            {
+              "title": "Yapay Zekâ Gönderiyi Oluşturur",
+              "description": "TRUS, girdinizi şunlara dayanarak yayına hazır bir gönderiye dönüştürür:\n- İşletmeniz ve uzmanlığınız\n- Seçilen sosyal medya platformu\n- Hedef kitle\n- Seçilen dil\n- Hedef pazar\n- Marka iletişim tarzı\nÇok dilli iş akışlarında TRUS, aynı gönderiyi basitçe çevirmek yerine aynı iş mesajının farklı sürümlerini oluşturabilir.\nHer sürüm, hedef kitleye daha uygun ifadeler, açıklamalar, hashtag'ler, anahtar kelimeler ve mesajlar kullanabilir."
+            },
+            {
+              "title": "Gerektiğinde İnceleyin",
+              "description": "Onay gerektiğinde oluşturulan içeriği yayınlamadan önce inceleyebilirsiniz. Daha otomatik iş akışlarında, onaylanmış içerik kuralları tekrarlayan manuel adımları azaltabilir."
+            },
+            {
+              "title": "Hesabı ve Pazarı Seçin",
+              "description": "Gönderinin yayınlanacağı platformu ve bağlı hesabı seçin.\n**Örneğin, işletmeniz şunları yönetebilir:**\n**Instagram Almanya:** Almanca konuşan kitleler için Almanca içerik.\n**Instagram Uluslararası:** Uluslararası kitleler için İngilizce içerik.\n**Instagram Türkiye:** Türkçe konuşan kitleler için Türkçe içerik.\nAynı yapı LinkedIn, X ve Telegram Kanallarında da kullanılabilir.\nTRUS, farklı dilleri aynı iletişim akışında karıştırmak yerine her içerik sürümünü uygun hesaba yönlendirir."
+            },
+            {
+              "title": "Yerel Kitleye Göre Planlayın",
+              "description": "Farklı pazarlar farklı zamanlarda aktiftir.\nTRUS, bir pazar için hazırlanan gönderinin diğeriyle aynı anda yayınlanmasına gerek kalmaması için içeriği ilgili ülkeye, kitleye ve yerel saat dilimine göre planlayabilir.\nPerformans verileri arttıkça, yayın stratejileri her kitlenin ne zaman daha iyi yanıt verdiğine göre de iyileştirilebilir."
+            },
+            {
+              "title": "Yayınlayın",
+              "description": "TRUS, onaylanan içeriği bağlı iş akışı üzerinden seçilen hesap ve platformda yayınlar.\nTek bir iş güncellemesi böylece birden fazla yerelleştirilmiş gönderiye dönüşebilir ve dile özel birçok hesapta otomatik olarak dağıtılabilir."
+            }
+          ]
+        },
+        "publishing": {
+          "heading": "Çok Dilli Otomatik Yayınlama",
+          "subheading": "Tek İş Güncellemesi. Birden Fazla Pazar. Her Kitle İçin Doğru Hesap.",
+          "description": "TRUS Auto Post'un çok dilli yeteneği, günlük iş yükünü katlamadan iletişimini genişletmek isteyen işletmeler için tasarlanmıştır.",
+          "imageAlt": "Etrafında Instagram, Facebook, LinkedIn, X ve Telegram simgeleri bulunan, yeni bir gönderiyi gösteren telefon",
+          "listHeading": "Örneğin, İşletmenizin Şunlara Sahip Olduğunu Düşünün",
+          "items": [
+            "3 Instagram hesabı: Almanca, İngilizce ve Türkçe",
+            "Farklı pazarlar için 2 LinkedIn varlığı",
+            "Ayrı X hesapları",
+            "Yerel kitleler için farklı Telegram Kanalları"
+          ],
+          "outro": "TRUS, bu güncellemeyi pazara özel farklı sürümlere dönüştürebilir, uygun dili ve mesajı hazırlayabilir ve her sürümü doğru sosyal medya hesabına yönlendirebilir.\nBu, Alman kitlesinin yalnızca çevrilmiş bir İngilizce gönderi almadığı anlamına gelir. Almanca sürüm o kitleye göre yapılandırılabilir; Türkçe veya İngilizce sürüm ise aynı iş mesajını uygun olduğunda farklı biçimde iletebilir.\nSonuç, her sürümü manuel olarak oluşturup yayınlayacak ayrı ekipler gerektirmeden daha organize ve yerel olarak daha ilgili bir sosyal medya varlığıdır."
+        },
+        "timing": {
+          "heading": "Her Pazar İçin Doğru Zamanda Yayınlayın",
+          "intro": "Çok dilli büyüme yalnızca dille ilgili değildir. **Zamanlama da önemlidir.**\nFarklı ülke ve bölgelerdeki kitleler farklı zamanlarda aktif olabilir.\nTRUS, Almanya, Türkiye, Birleşik Krallık, ABD veya diğer hedef bölgeler için içeriğin yerel kitleye ve saat dilimine göre yayınlanabilmesi için pazara özel planlamayı destekleyebilir.\nHer dili aynı anda yayınlamak yerine, her hesap kendi pazarına göre tasarlanmış bir takvimi izleyebilir.",
+          "insightsHeading": "Hangi Pazarların Daha İyi Yanıt Verdiğini Öğrenin",
+          "insightsIntro": "Farklı dillerde yayın yapmak aynı zamanda değerli iş verileri oluşturur.\nTRUS, bağlı dile özel hesaplar ve pazarlar arasında içerik performansını karşılaştırmaya yardımcı olabilir.",
+          "listHeading": "Zamanla şunları belirleyebilirsiniz:",
+          "items": [
+            "Hangi diller daha güçlü etkileşim sağlıyor",
+            "Hangi coğrafi pazarlar daha olumlu tepki veriyor",
+            "Hangi hesaplar daha fazla kitle ilgisi çekiyor",
+            "Her pazarda hangi içerik türü daha iyi çalışıyor",
+            "Hangi yayın saatleri daha iyi performans gösteriyor",
+            "Ek içeriğin nerede faydalı olabileceği",
+            "Hangi pazarlar daha fazla reklam veya pazarlama yatırımını hak ediyor"
+          ],
+          "outro": "Bu, çok dilli sosyal medya stratejinizin zamanla daha odaklı hale gelmesini sağlar. Her pazara eşit yatırım yapmak yerine işletmeniz, daha güçlü potansiyel gösteren konumlara ve kitlelere daha fazla odaklanabilir."
+        },
+        "workflow": {
+          "heading": "Otomasyondan Daha Akıllı Büyümeye",
+          "intro": "Çok dilli otomasyonun amacı yalnızca daha fazla gönderi yayınlamak değildir.\nİşletmenizin müşterilerle kendi dillerinde iletişim kurmasına, daha ilgili bir yerel bağ oluşturmasına, farklı pazarları test etmesine ve talebin nerede daha güçlü olduğunu öğrenmesine yardımcı olur. Örneğin, Almanca gönderiler başka bir pazara göre sürekli olarak daha güçlü etkileşim ve iş ilgisi yaratıyorsa şunlara karar verebilirsiniz:\n- Bu kitle için daha sık yayın yapmak\n- Almanya'ya özel daha fazla içerik geliştirmek\n- O bölgede pazarlama faaliyetini artırmak\n- Ek Alman şehirlerini veya müşteri segmentlerini test etmek\n- Daha güçlü pazara daha fazla reklam bütçesi ayırmak\nBu şekilde otomatik içerik yayınlama, veriye dayalı daha geniş bir büyüme stratejisinin parçası olur.",
+          "growthImageAlt": "Otomatik içeriğin performans analizlerine ve büyüme metriklerine aktığını gösteren panel",
+          "workflowHeading": "Çok Platformlu, Çok Dilli İş Akışı",
+          "workflowIntro": "Aynı çok dilli strateji şurada kullanılabilir:",
+          "platforms": "**Instagram**: Dile özel görsel ve tanıtım içeriklerini ayrı Instagram hesaplarında oluşturun ve yayınlayın.\n**LinkedIn**: Farklı dillere ve profesyonel pazarlara uyarlanmış profesyonel, iş odaklı içerikler yayınlayın.\n**X (Twitter)**: Daha kısa, yerelleştirilmiş mesajlar oluşturun ve bunları uygun dile veya pazara özel hesapta yayınlayın.\n**Telegram Kanalı**: Farklı dil topluluklarına ayrı kanallar yürütün ve her kitleye uygun içeriği otomatik olarak iletin.\nBu, işletmelere birden fazla platformu, hesabı, dili ve pazarı yönetmek için tek bir yapılandırılmış sistem sunar.",
+          "highlightsHeading": "Öne Çıkanlar",
+          "highlights": [
+            "Yapay Zekâ ile Hızlı Gönderi Oluşturma",
+            "Otomatik İçerik Oluşturma ve Yayınlama",
+            "Instagram, LinkedIn, X ve Telegram Kanalı",
+            "Çok Dilli ve Yerelleştirilmiş Gönderi Oluşturma",
+            "Dile Özel Hesaplarda Yayınlama",
+            "Pazara ve Saat Dilimine Göre Planlama",
+            "Optimize Edilmiş Açıklamalar, Hashtag'ler ve Anahtar Kelimeler",
+            "Pazarlar Arası Performans Analizleri",
+            "Onaylı veya Otomatik Yayınlama",
+            "Tutarlı ve Sürekli Sosyal Medya Etkinliği"
+          ],
+          "workflowImageAlt": "İki çalışma arkadaşının büyük bir ekranda Auto Post iş akışını incelemesi"
+        },
         "contact": {
           "heading": "İşinizi Büyütmeye Hazır mısınız?",
-          "description": "Günlük sosyal medya gönderileri oluşturmaya daha az, işinizi yönetmeye ve büyütmeye daha çok zaman ayırın.\nBize markanızdan ve kullandığınız sosyal medya platformlarından bahsedin; TRUS içerik oluşturma ve yayınlama iş akışınızı otomatikleştirmenize yardımcı olsun."
+          "description": "Günlük sosyal medya gönderileri oluşturmaya daha az, işinizi yönetmeye ve büyütmeye daha çok zaman ayırın.\nBize markanızdan ve kullandığınız sosyal medya platformlarından bahsedin; TRUS içerik oluşturma ve yayınlama iş akışınızı otomatikleştirmenize yardımcı olsun.",
+          "descriptionDesktop": "Günlük içeriği manuel olarak oluşturup yayınlamaya daha az zaman harcayın ve diller ile pazarlar genelinde daha ilgili kitlelere ulaşın.\nBize işletmenizi, sosyal medya platformlarınızı, hedef dillerinizi, ülkelerinizi ve bağlı hesaplarınızı anlatın. TRUS, doğru içeriği doğru hesaba, doğru kitleye ve doğru zamanda ulaştıran otomatik bir yayın iş akışı kurmanıza yardımcı olur."
         }
       }
     }
