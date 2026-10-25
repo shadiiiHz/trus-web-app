@@ -1276,6 +1276,176 @@
           "description": "Tell us which platforms, languages, and markets your business wants to target.\nTRUS can help you build a structured social media system that creates the right content, publishes it to the right account, monitors audience response, and helps you understand where your strongest growth opportunities are."
         }
       },
+      "instagram": {
+        "name": "TRUS Instagram Content Creator & Publisher",
+        "tagline": ["Create Better Instagram", "Content. Stay in Control."],
+        "metaTitle": "TRUS Instagram Content Creator & Publisher | TruS",
+        "metaDescription": "Create better Instagram content and stay in control of what gets published, with TRUS Instagram Content Creator & Publisher.",
+        "focus": {
+          "heading": "TRUS Instagram Creator",
+          "subheading": "Focus on the Perfect Post",
+          "body": "TRUS Instagram Creator focuses entirely on creating and optimizing Instagram content. Publishing is not included.\nTRUS AI Agents create the initial post based on your business information, images, objectives, brand identity, audience, language, and target market.\nYou can then review the generated content, request changes, rewrite individual parts, adjust the tone, refine the caption, optimize hashtags and keywords, and continue working on the post until it matches exactly what you want to communicate.\nFor multilingual Instagram strategies, you can create a separate version for each language or market.\nFor example, a German post does not need to be a direct translation of the English version. The message, wording, caption, call to action, hashtags, and communication style can be adapted specifically for German-speaking followers.\nThe Turkish version can then be developed independently for the Turkish-speaking audience.\nThis gives you much greater control over how the same brand communicates with different markets.",
+          "imageAlt": "Phone showing an Instagram feed beside a camera, books and a content planner",
+          "gainHeading": "What You Gain",
+          "gainItems": [
+            "Full focus on the quality of each post",
+            "Greater precision in content creation",
+            "Multi-step editing and refinement",
+            "Stronger alignment with your brand voice",
+            "Full control before finalizing content",
+            "Optimized captions, hashtags, and keywords",
+            "Audience-focused messaging",
+            "Language-specific content creation",
+            "Market-specific adaptation",
+            "Separate content versions for different Instagram accounts",
+            "More flexibility for important or high-value posts"
+          ],
+          "bestForHeading": "Best For",
+          "bestFor": "Businesses and users who value **accuracy, customization, localization, and content quality** and want precise control over how their brand communicates with different Instagram audiences."
+        },
+        "publisher": {
+          "heading": "TRUS Instagram Publisher",
+          "subheading": "Your Content. Ready to Publish.",
+          "body": "TRUS Instagram Publisher is designed for situations where Instagram content has already been created and finalized.\nTRUS does not create new content in this service.\nYou simply provide your ready-to-publish posts, and TRUS manages the Instagram publishing workflow.\nFor multilingual strategies, you can provide different finalized versions for different accounts.\nFor example:\n- German post: German Instagram account\n- English post: International Instagram account\n- Turkish post: Turkish Instagram account\nTRUS can route each version to the appropriate connected account and schedule it based on the target market and local time.\nThis makes it easier to manage several Instagram accounts without repeatedly handling each publishing process manually.",
+          "imageAlt": "Team reviewing printed Instagram posts and a content plan around a table",
+          "gainHeading": "What You Gain",
+          "gainItems": [
+            "Publish ready-made Instagram content",
+            "No need to recreate existing posts",
+            "Separate content creation from publishing",
+            "Publish different language versions to the correct accounts",
+            "Manage multiple Instagram accounts more efficiently",
+            "Schedule posts for different markets and time zones",
+            "Reduce repetitive publishing tasks",
+            "Maintain an organized multilingual publishing workflow"
+          ],
+          "bestForHeading": "Best For",
+          "bestFor": "Businesses and content teams that already have finalized Instagram content and need a structured way to publish different posts across **multiple accounts, languages, and markets.**"
+        },
+        "multilingual": {
+          "heading": "Multilingual Instagram Account Strategy",
+          "subheading": "Different Audiences. Different Accounts. One Brand Strategy.",
+          "intro": "TRUS supports an Instagram strategy where businesses can maintain separate accounts for different languages, countries, or target markets. The goal is not simply to translate content.\nEach account can have its own communication approach based on:\n- Audience language\n- Country or region\n- Local interests\n- Local terminology\n- Market expectations\n- Captions and calls to action\n- Hashtags and keywords\n- Publishing schedule\n- Audience behavior",
+          "exampleIntro": "For example, a company could operate:",
+          "examples": [
+            {
+              "title": "Instagram Germany",
+              "description": "Content in German, created for German-speaking users and adapted to that market."
+            },
+            {
+              "title": "Instagram International",
+              "description": "English content designed for broader international audiences."
+            },
+            {
+              "title": "Instagram Türkiye",
+              "description": "Turkish content created around the language and communication preferences of the Turkish market."
+            }
+          ],
+          "outro": "All three accounts can remain part of the same brand while communicating differently where needed.\nThis gives businesses a much more targeted Instagram presence than publishing several unrelated languages through one general account."
+        },
+        "localization": {
+          "heading": "Create Content People In Each Market Actually Want To See",
+          "imageAlt": "Two creators arranging a product scene in front of a phone on a tripod",
+          "body": "Localization is more than changing the language. A post that performs well with one audience may not necessarily work the same way with another. TRUS can help adapt Instagram content according to each market's communication style and audience expectations.\nThis may include changing:\n- Headline or opening message\n- Caption structure\n- Tone of voice\n- Hashtags\n- Keywords\n- Call to action\n- Content emphasis\n- Product or service messaging\n- Local references when appropriate\nThis allows each audience to receive content that feels more relevant instead of receiving a direct translation created for another market.",
+          "publishHeading": "Publish When Each Market Is Ready",
+          "publishBody": "Different audiences may use Instagram at different times.\nContent for a German account, Turkish account, or international account does not have to be published at the same time. TRUS can help organize publishing based on the relevant **market, local time zone, account, and audience behavior.**\nAs performance information becomes available, publishing schedules can be refined to better match the times when each audience responds more effectively."
+        },
+        "marketInsights": {
+          "heading": "Learn Which Instagram Markets Perform Better",
+          "imageAlt": "Tablet showing Instagram publishing and performance for several accounts beside printed photos and a notebook",
+          "intro": "Separate Instagram accounts also create a valuable opportunity to compare markets.\nTRUS can help analyze how different accounts, languages, and audience groups respond to your content.\nOver time, you can compare factors such as:\n- Engagement by language\n- Engagement by account\n- Audience response by market\n- Performance of different content styles\n- Stronger-performing hashtags or messaging\n- Effective publishing times\n- Growth of different Instagram audiences\nThis information can support better business decisions.",
+          "example": "For example, if the German Instagram account consistently shows stronger engagement, business interest, or audience growth than another market, you may decide to:\n- Create more German-specific posts\n- Publish more frequently to that account\n- Focus on additional German regions or customer groups\n- Increase marketing activity in that market\n- Allocate more advertising budget there\nInstead of guessing where to invest your time and marketing resources, you can gradually focus on the markets showing stronger potential."
+        },
+        "focusedGrowth": {
+          "heading": "From Local Communication to Focused Growth",
+          "intro": "The purpose of a multilingual Instagram strategy is not simply to operate more accounts.\nIt is to help your business communicate with customers **in their own language and in a way that feels relevant to their market**, then use the response from those audiences to make better growth decisions.\n**This creates a continuous cycle:**",
+          "steps": [
+            "Create",
+            "Localize",
+            "Refine",
+            "Publish",
+            "Measure",
+            "Compare",
+            "Improve",
+            "Focus"
+          ],
+          "closing": "Over time, your Instagram activity can help reveal which languages, audiences, and geographic markets deserve more attention.",
+          "workflowHeading": "Choose The Right Instagram Workflow",
+          "workflows": [
+            {
+              "title": "Creator & Publisher",
+              "description": "Choose this option when you want TRUS to create, refine, localize, and publish Instagram content to the appropriate account."
+            },
+            {
+              "title": "Creator",
+              "description": "Choose this option when your priority is creating highly precise, editable, targeted, and localized Instagram content without publishing it."
+            },
+            {
+              "title": "Publisher",
+              "description": "Choose this option when your content is already finalized and you need TRUS to publish the appropriate version to the correct Instagram account."
+            }
+          ],
+          "gainHeading": "What You Gain From TRUS Instagram",
+          "gainItems": [
+            "Instagram-specific AI content creation",
+            "Greater control over the final result",
+            "Editable and optimizable posts",
+            "Content aligned with your brand and audience",
+            "Optimized captions, hashtags, and keywords",
+            "Multilingual and localized Instagram content",
+            "Language and market-specific Instagram accounts",
+            "Market-specific publishing schedules",
+            "Cross-market performance insights",
+            "Flexible creation and publishing workflows",
+            "Less time spent on daily Instagram management"
+          ],
+          "gainImageAlt": "Phone showing an Instagram plan beside a camera, coffee and printed travel photos",
+          "highlightsHeading": "Highlights",
+          "highlightItems": [
+            "Instagram-Specific AI Content",
+            "Editable & Refinable Posts",
+            "Creator, Publisher or Complete Workflow",
+            "Multilingual & Localized Content",
+            "Language-Specific Instagram Accounts",
+            "Market-Specific Content Strategy",
+            "Optimized Captions, Hashtags & Keywords",
+            "Market & Time-Zone-Based Publishing",
+            "Cross-Market Performance Insights",
+            "Full Control Before Publishing"
+          ],
+          "highlightsImageAlt": "Hands holding a phone with a new Instagram post and account selection for Germany, International and Türkiye"
+        },
+        "contact": {
+          "heading": "Ready to Grow Your Business?",
+          "description": "Tell us how you want to manage your Instagram presence, including your target audiences, languages, countries, Instagram accounts, and preferred level of control.\nWhether you need content creation, publishing, or the complete workflow, TRUS can help you build an Instagram strategy that creates more precise and relevant content for each audience, communicates in the right language, publishes through the right account, and uses performance insights to identify the markets with the strongest opportunities, helping you achieve your ultimate goal: faster and more focused business growth."
+        },
+        "creator": {
+          "aboutHeading": "TRUS Instagram Content Creator & Publisher",
+          "aboutDescription": "TRUS helps brands create and manage Instagram content with greater precision, flexibility, and control using AI.\nUnlike **TRUS Auto Post**, which primarily focuses on speed and automation, TRUS Instagram services provide a more interactive and customizable content creation experience.\nYou can review, edit, refine, and optimize generated posts until the final result closely matches your **brand identity, communication style, target audience, business goals, and personal preferences.**\nFor businesses targeting different languages and markets, Instagram content can also be developed specifically for **separate language or market-focused Instagram accounts.**\nInstead of simply translating one post into several languages, TRUS can adapt the content, caption, hashtags, keywords, tone, call to action, and messaging to better match the audience of each account.\nThis allows each Instagram presence to communicate more naturally with its own audience while remaining connected to the same overall brand strategy. Depending on your needs, you can choose from three dedicated Instagram services.",
+          "aboutImageAlt": "Instagram profile on a phone beside a laptop, camera, coffee and a content planner",
+          "heading": "TRUS Instagram Creator & Publisher",
+          "subheading": "Create, Refine & Publish",
+          "body": "This service is designed for businesses that want TRUS to both create and publish their Instagram content. TRUS AI Agents create posts based on your brand, business, topic, images, target audience, language, market, and the purpose of the post. The content is structured specifically for Instagram and can be refined to match the communication preferences of the audience you want to reach.\nYou remain in control throughout the process. You can review and modify the:\n- Post content\n- Caption\n- Hashtags\n- Keywords\n- Tone\n- Call to action\n- Marketing message\n- Language and local communication style\nFor multilingual businesses, you can also select the Instagram account and market for which the post is being created.\nFor example, the same business may have:\n\n**Instagram Germany:** German content designed for German-speaking customers.\n**Instagram International:** English content for international audiences.\n**Instagram Türkiye:** Turkish content adapted to audiences in Türkiye.\n\nEach post can be created separately for the intended audience rather than using one identical message everywhere.\nAfter final approval, TRUS can publish or schedule the content to the appropriate Instagram account.",
+          "gainHeading": "What You Gain",
+          "gainItems": [
+            "Instagram-specific content creation",
+            "Greater control during the creation process",
+            "Editable and refinable posts",
+            "Optimized captions, hashtags, and keywords",
+            "Content aligned with your brand identity",
+            "Audience and goal-focused messaging",
+            "Multilingual Instagram content",
+            "Market-specific content adaptation",
+            "Publishing to the appropriate language-specific account",
+            "Market and time-zone-based scheduling",
+            "Publishing after final approval",
+            "Consistent content without sacrificing quality"
+          ],
+          "gainImageAlt": "Content creator filming a product setup with a phone on a tripod",
+          "bestForHeading": "Best For",
+          "bestFor": "Businesses that want professional Instagram content while maintaining control over the **message, appearance, language, target market, and quality** of every post."
+        }
+      },
       "autoPost": {
         "name": "TRUS Auto Post Creator & Publisher",
         "tagline": ["From Idea to Published","Post; in Seconds"],

@@ -1276,6 +1276,176 @@
           "description": "İşletmenizin hangi platformları, dilleri ve pazarları hedeflemek istediğini bize söyleyin.\nTRUS, doğru içeriği üreten, doğru hesapta yayınlayan, kitle tepkisini izleyen ve en güçlü büyüme fırsatlarınızın nerede olduğunu anlamanıza yardımcı olan yapılandırılmış bir sosyal medya sistemi kurmanıza yardımcı olabilir."
         }
       },
+      "instagram": {
+        "name": "TRUS Instagram Content Creator & Publisher",
+        "tagline": ["Daha İyi Instagram İçeriği", "Oluşturun. Kontrol Sizde Kalsın."],
+        "metaTitle": "TRUS Instagram Content Creator & Publisher | TruS",
+        "metaDescription": "TRUS Instagram Content Creator & Publisher ile daha iyi Instagram içeriği oluşturun ve nelerin yayınlanacağı üzerindeki kontrolü elinizde tutun.",
+        "focus": {
+          "heading": "TRUS Instagram Creator",
+          "subheading": "Mükemmel Gönderiye Odaklanın",
+          "body": "TRUS Instagram Creator tamamen Instagram içeriği oluşturmaya ve optimize etmeye odaklanır. Yayınlama dahil değildir.\nTRUS Yapay Zekâ Ajanları, işletme bilgilerinize, görsellerinize, hedeflerinize, marka kimliğinize, kitlenize, diline ve hedef pazarınıza göre ilk gönderiyi oluşturur.\nArdından oluşturulan içeriği inceleyebilir, değişiklik isteyebilir, tek tek bölümleri yeniden yazdırabilir, tonu ayarlayabilir, açıklamayı geliştirebilir, hashtag'leri ve anahtar kelimeleri optimize edebilir ve gönderi tam olarak iletmek istediğiniz şeyi yansıtana kadar üzerinde çalışmaya devam edebilirsiniz.\nÇok dilli Instagram stratejileri için her dil veya pazar için ayrı bir sürüm oluşturabilirsiniz.\nÖrneğin bir Almanca gönderinin İngilizce sürümün birebir çevirisi olması gerekmez. Mesaj, ifadeler, açıklama, harekete geçirici mesaj, hashtag'ler ve iletişim tarzı özellikle Almanca konuşan takipçiler için uyarlanabilir.\nTürkçe sürüm ise Türkçe konuşan kitle için bağımsız olarak geliştirilebilir.\nBu, aynı markanın farklı pazarlarla nasıl iletişim kurduğu üzerinde çok daha fazla kontrol sağlar.",
+          "imageAlt": "Kamera, kitaplar ve içerik planlayıcısının yanında Instagram akışını gösteren telefon",
+          "gainHeading": "Neler Kazanırsınız",
+          "gainItems": [
+            "Her gönderinin kalitesine tam odak",
+            "İçerik oluşturmada daha fazla hassasiyet",
+            "Çok aşamalı düzenleme ve geliştirme",
+            "Marka sesinizle daha güçlü uyum",
+            "İçeriği kesinleştirmeden önce tam kontrol",
+            "Optimize edilmiş açıklamalar, hashtag'ler ve anahtar kelimeler",
+            "Kitle odaklı mesajlar",
+            "Dile özel içerik oluşturma",
+            "Pazara özel uyarlama",
+            "Farklı Instagram hesapları için ayrı içerik sürümleri",
+            "Önemli veya yüksek değerli gönderiler için daha fazla esneklik"
+          ],
+          "bestForHeading": "Kimler İçin Uygun",
+          "bestFor": "**Doğruluğa, kişiselleştirmeye, yerelleştirmeye ve içerik kalitesine** değer veren ve markalarının farklı Instagram kitleleriyle nasıl iletişim kurduğu üzerinde hassas kontrol isteyen işletmeler ve kullanıcılar."
+        },
+        "publisher": {
+          "heading": "TRUS Instagram Publisher",
+          "subheading": "İçeriğiniz. Yayına Hazır.",
+          "body": "TRUS Instagram Publisher, Instagram içeriğinin zaten oluşturulup kesinleştirildiği durumlar için tasarlanmıştır.\nTRUS bu hizmette yeni içerik oluşturmaz.\nYayına hazır gönderilerinizi sağlamanız yeterlidir; Instagram yayın sürecini TRUS yönetir.\nÇok dilli stratejiler için farklı hesaplara farklı kesinleşmiş sürümler sunabilirsiniz.\nÖrneğin:\n- Almanca gönderi: Almanca Instagram hesabı\n- İngilizce gönderi: Uluslararası Instagram hesabı\n- Türkçe gönderi: Türkçe Instagram hesabı\nTRUS, her sürümü uygun bağlı hesaba yönlendirebilir ve hedef pazara ile yerel saate göre zamanlayabilir.\nBu, her yayın sürecini tekrar tekrar elle yönetmeden birden fazla Instagram hesabını yönetmeyi kolaylaştırır.",
+          "imageAlt": "Bir masa etrafında basılı Instagram gönderilerini ve içerik planını inceleyen ekip",
+          "gainHeading": "Neler Kazanırsınız",
+          "gainItems": [
+            "Hazır Instagram içeriğini yayınlama",
+            "Mevcut gönderileri yeniden oluşturmaya gerek yok",
+            "İçerik oluşturmayı yayınlamadan ayırma",
+            "Farklı dil sürümlerini doğru hesaplarda yayınlama",
+            "Birden fazla Instagram hesabını daha verimli yönetme",
+            "Gönderileri farklı pazarlar ve saat dilimleri için zamanlama",
+            "Tekrarlayan yayın işlerini azaltma",
+            "Düzenli bir çok dilli yayın akışını sürdürme"
+          ],
+          "bestForHeading": "Kimler İçin Uygun",
+          "bestFor": "Kesinleşmiş Instagram içeriğine zaten sahip olan ve farklı gönderileri **birden fazla hesap, dil ve pazarda** yayınlamak için düzenli bir yönteme ihtiyaç duyan işletmeler ve içerik ekipleri."
+        },
+        "multilingual": {
+          "heading": "Çok Dilli Instagram Hesap Stratejisi",
+          "subheading": "Farklı Kitleler. Farklı Hesaplar. Tek Marka Stratejisi.",
+          "intro": "TRUS, işletmelerin farklı diller, ülkeler veya hedef pazarlar için ayrı hesaplar yönetebildiği bir Instagram stratejisini destekler. Amaç yalnızca içeriği çevirmek değildir.\nHer hesabın kendi iletişim yaklaşımı olabilir; bu yaklaşım şunlara dayanır:\n- Kitlenin dili\n- Ülke veya bölge\n- Yerel ilgi alanları\n- Yerel terminoloji\n- Pazar beklentileri\n- Açıklamalar ve harekete geçirici mesajlar\n- Hashtag'ler ve anahtar kelimeler\n- Yayın takvimi\n- Kitle davranışı",
+          "exampleIntro": "Örneğin bir şirket şunları yönetebilir:",
+          "examples": [
+            {
+              "title": "Instagram Almanya",
+              "description": "Almanca konuşan kullanıcılar için oluşturulmuş ve bu pazara uyarlanmış Almanca içerik."
+            },
+            {
+              "title": "Instagram International",
+              "description": "Daha geniş uluslararası kitleler için tasarlanmış İngilizce içerik."
+            },
+            {
+              "title": "Instagram Türkiye",
+              "description": "Türk pazarının dil ve iletişim tercihleri etrafında oluşturulmuş Türkçe içerik."
+            }
+          ],
+          "outro": "Üç hesap da aynı markanın parçası olarak kalırken gerektiğinde farklı iletişim kurabilir.\nBu, birbiriyle ilgisiz birkaç dili tek bir genel hesaptan yayınlamaya kıyasla işletmelere çok daha hedefli bir Instagram varlığı sağlar."
+        },
+        "localization": {
+          "heading": "Her Pazardaki İnsanların Gerçekten Görmek İstediği İçeriği Oluşturun",
+          "imageAlt": "Tripod üzerindeki telefonun önünde ürün sahnesi hazırlayan iki içerik üreticisi",
+          "body": "Yerelleştirme, dili değiştirmekten fazlasıdır. Bir kitlede iyi performans gösteren bir gönderi, başka bir kitlede aynı şekilde çalışmayabilir. TRUS, Instagram içeriğini her pazarın iletişim tarzına ve kitle beklentilerine göre uyarlamanıza yardımcı olabilir.\nBu şunları değiştirmeyi içerebilir:\n- Başlık veya açılış mesajı\n- Açıklama yapısı\n- Ses tonu\n- Hashtag'ler\n- Anahtar kelimeler\n- Harekete geçirici mesaj\n- İçerik vurgusu\n- Ürün veya hizmet mesajları\n- Uygun olduğunda yerel göndermeler\nBöylece her kitle, başka bir pazar için hazırlanmış doğrudan bir çeviri yerine kendine daha uygun hissettiren içerik alır.",
+          "publishHeading": "Her Pazar Hazır Olduğunda Yayınlayın",
+          "publishBody": "Farklı kitleler Instagram'ı farklı zamanlarda kullanabilir.\nAlmanca, Türkçe veya uluslararası bir hesap için içeriğin aynı anda yayınlanması gerekmez. TRUS, yayınları ilgili **pazara, yerel saat dilimine, hesaba ve kitle davranışına** göre düzenlemenize yardımcı olabilir.\nPerformans bilgileri ortaya çıktıkça yayın takvimleri, her kitlenin daha iyi yanıt verdiği zamanlara daha uygun olacak şekilde geliştirilebilir."
+        },
+        "marketInsights": {
+          "heading": "Hangi Instagram Pazarlarının Daha İyi Performans Gösterdiğini Öğrenin",
+          "imageAlt": "Basılı fotoğrafların ve bir defterin yanında birden fazla hesabın Instagram yayınını ve performansını gösteren tablet",
+          "intro": "Ayrı Instagram hesapları, pazarları karşılaştırmak için de değerli bir fırsat sunar.\nTRUS, farklı hesapların, dillerin ve kitle gruplarının içeriğinize nasıl yanıt verdiğini analiz etmenize yardımcı olabilir.\nZamanla şu gibi unsurları karşılaştırabilirsiniz:\n- Dile göre etkileşim\n- Hesaba göre etkileşim\n- Pazara göre kitle tepkisi\n- Farklı içerik stillerinin performansı\n- Daha iyi performans gösteren hashtag'ler veya mesajlar\n- Etkili yayın zamanları\n- Farklı Instagram kitlelerinin büyümesi\nBu bilgiler daha iyi iş kararlarını destekleyebilir.",
+          "example": "Örneğin Almanya Instagram hesabı başka bir pazara göre sürekli daha güçlü etkileşim, iş ilgisi veya kitle büyümesi gösteriyorsa şunlara karar verebilirsiniz:\n- Almanya'ya özel daha fazla gönderi oluşturmak\n- O hesapta daha sık yayın yapmak\n- Ek Alman bölgelerine veya müşteri gruplarına odaklanmak\n- O pazardaki pazarlama faaliyetini artırmak\n- Oraya daha fazla reklam bütçesi ayırmak\nZamanınızı ve pazarlama kaynaklarınızı nereye yatıracağınızı tahmin etmek yerine, daha güçlü potansiyel gösteren pazarlara kademeli olarak odaklanabilirsiniz."
+        },
+        "focusedGrowth": {
+          "heading": "Yerel İletişimden Odaklı Büyümeye",
+          "intro": "Çok dilli bir Instagram stratejisinin amacı yalnızca daha fazla hesap yönetmek değildir.\nAmaç, işletmenizin müşterilerle **kendi dillerinde ve pazarlarına uygun hissettiren bir şekilde** iletişim kurmasına yardımcı olmak, ardından bu kitlelerden gelen tepkiyi daha iyi büyüme kararları almak için kullanmaktır.\n**Bu, sürekli bir döngü oluşturur:**",
+          "steps": [
+            "Oluştur",
+            "Yerelleştir",
+            "Geliştir",
+            "Yayınla",
+            "Ölç",
+            "Karşılaştır",
+            "İyileştir",
+            "Odaklan"
+          ],
+          "closing": "Zamanla Instagram faaliyetleriniz, hangi dillerin, kitlelerin ve coğrafi pazarların daha fazla ilgiyi hak ettiğini ortaya çıkarmanıza yardımcı olabilir.",
+          "workflowHeading": "Doğru Instagram İş Akışını Seçin",
+          "workflows": [
+            {
+              "title": "Creator & Publisher",
+              "description": "TRUS'un Instagram içeriğini oluşturmasını, geliştirmesini, yerelleştirmesini ve uygun hesapta yayınlamasını istediğinizde bu seçeneği tercih edin."
+            },
+            {
+              "title": "Creator",
+              "description": "Önceliğiniz, yayınlamadan son derece hassas, düzenlenebilir, hedefli ve yerelleştirilmiş Instagram içeriği oluşturmaksa bu seçeneği tercih edin."
+            },
+            {
+              "title": "Publisher",
+              "description": "İçeriğiniz zaten kesinleşmişse ve TRUS'un uygun sürümü doğru Instagram hesabında yayınlamasına ihtiyacınız varsa bu seçeneği tercih edin."
+            }
+          ],
+          "gainHeading": "TRUS Instagram ile Neler Kazanırsınız",
+          "gainItems": [
+            "Instagram'a özel yapay zekâ ile içerik oluşturma",
+            "Nihai sonuç üzerinde daha fazla kontrol",
+            "Düzenlenebilir ve optimize edilebilir gönderiler",
+            "Marka ve kitlenizle uyumlu içerik",
+            "Optimize edilmiş açıklamalar, hashtag'ler ve anahtar kelimeler",
+            "Çok dilli ve yerelleştirilmiş Instagram içeriği",
+            "Dile ve pazara özel Instagram hesapları",
+            "Pazara özel yayın takvimleri",
+            "Pazarlar arası performans içgörüleri",
+            "Esnek oluşturma ve yayınlama iş akışları",
+            "Günlük Instagram yönetiminde daha az zaman harcama"
+          ],
+          "gainImageAlt": "Kamera, kahve ve basılı seyahat fotoğraflarının yanında Instagram planını gösteren telefon",
+          "highlightsHeading": "Öne Çıkanlar",
+          "highlightItems": [
+            "Instagram'a Özel Yapay Zekâ İçeriği",
+            "Düzenlenebilir ve Geliştirilebilir Gönderiler",
+            "Creator, Publisher veya Tam İş Akışı",
+            "Çok Dilli ve Yerelleştirilmiş İçerik",
+            "Dile Özel Instagram Hesapları",
+            "Pazara Özel İçerik Stratejisi",
+            "Optimize Edilmiş Açıklamalar, Hashtag'ler ve Anahtar Kelimeler",
+            "Pazara ve Saat Dilimine Göre Yayınlama",
+            "Pazarlar Arası Performans İçgörüleri",
+            "Yayından Önce Tam Kontrol"
+          ],
+          "highlightsImageAlt": "Yeni bir Instagram gönderisi ve Almanya, Uluslararası ve Türkiye hesap seçimini gösteren telefonu tutan eller"
+        },
+        "contact": {
+          "heading": "İşinizi Büyütmeye Hazır mısınız?",
+          "description": "Hedef kitleleriniz, dilleriniz, ülkeleriniz, Instagram hesaplarınız ve tercih ettiğiniz kontrol düzeyi dahil olmak üzere Instagram varlığınızı nasıl yönetmek istediğinizi bize anlatın.\nİster içerik oluşturma, ister yayınlama, ister tam iş akışı gereksin; TRUS, her kitle için daha hassas ve ilgili içerik oluşturan, doğru dilde iletişim kuran, doğru hesap üzerinden yayın yapan ve performans içgörülerini en güçlü fırsatlara sahip pazarları belirlemek için kullanan bir Instagram stratejisi kurmanıza yardımcı olabilir. Böylece nihai hedefinize ulaşırsınız: daha hızlı ve daha odaklı iş büyümesi."
+        },
+        "creator": {
+          "aboutHeading": "TRUS Instagram Content Creator & Publisher",
+          "aboutDescription": "TRUS, markaların yapay zekâ ile Instagram içeriklerini daha hassas, esnek ve kontrollü biçimde oluşturmasına ve yönetmesine yardımcı olur.\nAğırlıklı olarak hız ve otomasyona odaklanan **TRUS Auto Post**'un aksine, TRUS Instagram hizmetleri daha etkileşimli ve özelleştirilebilir bir içerik oluşturma deneyimi sunar.\nOluşturulan gönderileri, nihai sonuç **marka kimliğinize, iletişim tarzınıza, hedef kitlenize, iş hedeflerinize ve kişisel tercihlerinize** tam olarak uyana kadar inceleyebilir, düzenleyebilir, geliştirebilir ve optimize edebilirsiniz.\nFarklı dilleri ve pazarları hedefleyen işletmeler için Instagram içerikleri, **dile veya pazara özel ayrı Instagram hesapları** için de geliştirilebilir.\nTRUS, bir gönderiyi yalnızca birkaç dile çevirmek yerine; içeriği, açıklamayı, hashtag'leri, anahtar kelimeleri, tonu, harekete geçirici mesajı ve iletişimi her hesabın kitlesine daha iyi uyacak şekilde uyarlayabilir.\nBöylece her Instagram varlığı kendi kitlesiyle daha doğal iletişim kurarken aynı genel marka stratejisine bağlı kalır. İhtiyaçlarınıza göre üç özel Instagram hizmeti arasından seçim yapabilirsiniz.",
+          "aboutImageAlt": "Dizüstü bilgisayar, kamera, kahve ve içerik planlayıcısının yanında telefonda Instagram profili",
+          "heading": "TRUS Instagram Creator & Publisher",
+          "subheading": "Oluşturun, Geliştirin ve Yayınlayın",
+          "body": "Bu hizmet, Instagram içeriklerinin hem oluşturulmasını hem de yayınlanmasını TRUS'a bırakmak isteyen işletmeler için tasarlanmıştır. TRUS Yapay Zekâ Ajanları; markanıza, işletmenize, konuya, görsellere, hedef kitleye, dile, pazara ve gönderinin amacına göre gönderiler oluşturur. İçerik özellikle Instagram için yapılandırılır ve ulaşmak istediğiniz kitlenin iletişim tercihlerine uyacak şekilde geliştirilebilir.\nSüreç boyunca kontrol sizde kalır. Şunları inceleyip değiştirebilirsiniz:\n- Gönderi içeriği\n- Açıklama\n- Hashtag'ler\n- Anahtar kelimeler\n- Ton\n- Harekete geçirici mesaj\n- Pazarlama mesajı\n- Dil ve yerel iletişim tarzı\nÇok dilli işletmeler için gönderinin hazırlandığı Instagram hesabını ve pazarı da seçebilirsiniz.\nÖrneğin aynı işletmenin şu hesapları olabilir:\n\n**Instagram Almanya:** Almanca konuşan müşteriler için Almanca içerik.\n**Instagram International:** Uluslararası kitleler için İngilizce içerik.\n**Instagram Türkiye:** Türkiye'deki kitleye uyarlanmış Türkçe içerik.\n\nHer gönderi, her yerde aynı mesajı kullanmak yerine hedef kitle için ayrı ayrı oluşturulabilir.\nNihai onaydan sonra TRUS, içeriği uygun Instagram hesabında yayınlayabilir veya zamanlayabilir.",
+          "gainHeading": "Neler Kazanırsınız",
+          "gainItems": [
+            "Instagram'a özel içerik oluşturma",
+            "Oluşturma sürecinde daha fazla kontrol",
+            "Düzenlenebilir ve geliştirilebilir gönderiler",
+            "Optimize edilmiş açıklamalar, hashtag'ler ve anahtar kelimeler",
+            "Marka kimliğinizle uyumlu içerik",
+            "Kitle ve hedef odaklı mesajlar",
+            "Çok dilli Instagram içeriği",
+            "Pazara özel içerik uyarlaması",
+            "Dile uygun hesapta yayınlama",
+            "Pazara ve saat dilimine göre zamanlama",
+            "Nihai onaydan sonra yayınlama",
+            "Kaliteden ödün vermeden tutarlı içerik"
+          ],
+          "gainImageAlt": "Tripod üzerindeki telefonla ürün düzenini çeken içerik üreticisi",
+          "bestForHeading": "Kimler İçin Uygun",
+          "bestFor": "Her gönderinin **mesajı, görünümü, dili, hedef pazarı ve kalitesi** üzerindeki kontrolü korurken profesyonel Instagram içeriği isteyen işletmeler."
+        }
+      },
       "autoPost": {
         "name": "TRUS Auto Post Creator & Publisher",
         "tagline": ["Fikirden Yayınlanan","Gönderiye; Saniyeler İçinde"],

@@ -3,6 +3,13 @@ import { useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { ServiceDetailHero } from "@/components/service-detail/ServiceDetailHero";
+import { ServiceDetailCreator } from "@/components/service-detail/ServiceDetailCreator";
+import { ServiceDetailFocus } from "@/components/service-detail/ServiceDetailFocus";
+import { ServiceDetailPublisher } from "@/components/service-detail/ServiceDetailPublisher";
+import { ServiceDetailMultilingual } from "@/components/service-detail/ServiceDetailMultilingual";
+import { ServiceDetailLocalization } from "@/components/service-detail/ServiceDetailLocalization";
+import { ServiceDetailMarketInsights } from "@/components/service-detail/ServiceDetailMarketInsights";
+import { ServiceDetailFocusedGrowth } from "@/components/service-detail/ServiceDetailFocusedGrowth";
 import { ServiceDetailAbout } from "@/components/service-detail/ServiceDetailAbout";
 import { ServiceDetailPublishing } from "@/components/service-detail/ServiceDetailPublishing";
 import { ServiceDetailTiming } from "@/components/service-detail/ServiceDetailTiming";
@@ -60,6 +67,30 @@ export default function ServiceDetailPage() {
           mobileTitleWidth={service.heroMobile?.titleWidth}
         />
       </div>
+
+      {content.creator && service.creatorImages && (
+        <ServiceDetailCreator creator={content.creator} images={service.creatorImages} />
+      )}
+
+      {content.focus && service.focusImage && <ServiceDetailFocus focus={content.focus} image={service.focusImage} />}
+
+      {content.publisher && service.publisherImage && (
+        <ServiceDetailPublisher publisher={content.publisher} image={service.publisherImage} />
+      )}
+
+      {content.multilingual && <ServiceDetailMultilingual multilingual={content.multilingual} />}
+
+      {content.localization && service.localizationImage && (
+        <ServiceDetailLocalization localization={content.localization} image={service.localizationImage} />
+      )}
+
+      {content.marketInsights && service.marketInsightsImage && (
+        <ServiceDetailMarketInsights insights={content.marketInsights} image={service.marketInsightsImage} />
+      )}
+
+      {content.focusedGrowth && service.focusedGrowthImages && (
+        <ServiceDetailFocusedGrowth growth={content.focusedGrowth} images={service.focusedGrowthImages} />
+      )}
 
       {content.about && content.gain && (
         <ServiceDetailAbout

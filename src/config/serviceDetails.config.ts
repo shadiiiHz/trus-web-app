@@ -20,7 +20,7 @@ import { t } from "@/i18n";
 import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
-export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost";
+export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram";
 
 /** Optional "how it works" section (numbered step cards). */
 export interface ServiceDetailProcess {
@@ -117,6 +117,83 @@ export interface ServiceDetailFlexible {
   modes: readonly { title: string; description: string }[];
 }
 
+/**
+ * Optional dark "service" section: about block + image, then a service block (`body` supports **bold**, `\n` line
+ * breaks, `- ` bullet lines and `\n\n` paragraph gaps), an image beside a "gain" list, and a closing "best for" note.
+ */
+export interface ServiceDetailCreator {
+  aboutHeading: string;
+  aboutDescription: string;
+  aboutImageAlt: string;
+  heading: string;
+  subheading: string;
+  body: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  gainImageAlt: string;
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional light grey "focus" section (heading, description, image beside "gain" list, "best for" note). `body` / `bestFor` support **bold** and `\n` line breaks. */
+export interface ServiceDetailFocus {
+  heading: string;
+  subheading: string;
+  body: string;
+  imageAlt: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional light grey text-only "multilingual strategy" section. `intro` supports `\n` line breaks and `- ` bullet lines; `outro` supports `\n` line breaks. */
+export interface ServiceDetailMultilingual {
+  heading: string;
+  subheading: string;
+  intro: string;
+  exampleIntro: string;
+  examples: readonly { title: string; description: string }[];
+  outro: string;
+}
+
+/** Optional dark "localization" section (heading, image beside text, second heading + text). `body` / `publishBody` support **bold**, `\n` line breaks and `- ` bullet lines. */
+export interface ServiceDetailLocalization {
+  heading: string;
+  imageAlt: string;
+  body: string;
+  publishHeading: string;
+  publishBody: string;
+}
+
+/** Optional light grey "market insights" section (heading, two bullet-list texts, centred image). Texts support **bold**, `\n` line breaks and `- ` bullet lines. */
+export interface ServiceDetailMarketInsights {
+  heading: string;
+  imageAlt: string;
+  intro: string;
+  example: string;
+}
+
+/** Optional dark "focused growth" section: intro + step pills, workflow options, "gain" list beside an image, highlights beside an image. `intro` supports **bold** and `\n` line breaks. */
+export interface ServiceDetailFocusedGrowth {
+  heading: string;
+  intro: string;
+  /** Pills of the cycle (a row on desktop, a column on mobile). */
+  steps: readonly string[];
+  closing: string;
+  workflowHeading: string;
+  workflows: readonly { title: string; description: string }[];
+  gainHeading: string;
+  gainItems: readonly string[];
+  gainImageAlt: string;
+  highlightsHeading: string;
+  highlightItems: readonly string[];
+  highlightsImageAlt: string;
+}
+
+/** Optional dark "publisher" section — same copy shape as `focus`. */
+export type ServiceDetailPublisher = ServiceDetailFocus;
+
 /** Shape of one page's copy in the locale JSON files. */
 export interface ServiceDetailText {
   name: string;
@@ -151,6 +228,20 @@ export interface ServiceDetailText {
   flexible?: ServiceDetailFlexible;
   /** Rendered after `flexible` when present. */
   growth?: ServiceDetailGrowth;
+  /** Rendered right after the hero when present. */
+  creator?: ServiceDetailCreator;
+  /** Rendered after `creator` when present. */
+  focus?: ServiceDetailFocus;
+  /** Rendered after `focus` when present. */
+  publisher?: ServiceDetailPublisher;
+  /** Rendered after `publisher` when present. */
+  multilingual?: ServiceDetailMultilingual;
+  /** Rendered after `multilingual` when present. */
+  localization?: ServiceDetailLocalization;
+  /** Rendered after `localization` when present. */
+  marketInsights?: ServiceDetailMarketInsights;
+  /** Rendered after `marketInsights` when present. */
+  focusedGrowth?: ServiceDetailFocusedGrowth;
   /** `description` supports `\n` line breaks. */
   contact?: { heading: string; description: string; /** Replaces `description` from the lg breakpoint up. */ descriptionDesktop?: string };
 }
@@ -217,13 +308,25 @@ export interface ServiceDetail {
   growthImage?: string;
   /** Image beside the scroll-stacked cards (only for pages with `automation` copy). */
   stackImage?: string;
+  /** Images of the `creator` section: beside the about text, and beside the "gain" list. */
+  creatorImages?: { about: string; gain: string };
+  /** Image of the `focus` section (only for pages with `focus` copy). */
+  focusImage?: string;
+  /** Image of the `publisher` section (only for pages with `publisher` copy). */
+  publisherImage?: string;
+  /** Image of the `localization` section (only for pages with `localization` copy). */
+  localizationImage?: string;
+  /** Image of the `marketInsights` section (only for pages with `marketInsights` copy). */
+  marketInsightsImage?: string;
+  /** Images of the `focusedGrowth` section: beside the "gain" list, and beside the highlights. */
+  focusedGrowthImages?: { gain: string; highlights: string };
 }
 
 export const SERVICE_DETAILS: readonly ServiceDetail[] = [
   {
     slug: "seo-content-optimization",
     textKey: "seo",
-    heroImage: "/services/SEO & Content Optimization.png",
+    heroImage: "/services/seo-hero.png",
     heroMobile: { titleWidth: 240 },
     aboutGlow: true,
     aboutImageSize: { width: 414, height: 212 },
@@ -237,7 +340,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
   {
     slug: "web-design-development",
     textKey: "webDesign",
-    heroImage: "/services/Web Design & Development.png",
+    heroImage: "/services/web-design-hero.png",
     heroTextY: 33,
     heroMobile: { imageX: "59%" },
     aboutGlow: true,
@@ -253,7 +356,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
   {
     slug: "brand-identity-logo-design",
     textKey: "brand",
-    heroImage: "/services/Brand Identity & Logo Design.png",
+    heroImage: "/services/brand-hero.png",
     heroTextY: 34,
     heroMobile: { align: "top", imageX: "67%", titleWidth: 240 },
     aboutGlow: true,
@@ -269,7 +372,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
   {
     slug: "social-media-content-creation-publishing",
     textKey: "social",
-    heroImage: "/services/Social Media Content Creation & Publishing.png",
+    heroImage: "/services/social-hero.png",
     heroTextY: 30,
     heroDesktopFade: true,
     heroMobile: { imageX: "79%", titleWidth: 300 },
@@ -306,6 +409,27 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactWide: true,
     images: {
       about: "/services/auto-post-team-collaboration.png",
+    },
+  },
+  {
+    slug: "instagram-content-creator-publisher",
+    textKey: "instagram",
+    heroImage: "/services/instagram-hero.png",
+    heroTextY: 31,
+    heroMobile: { imageX: "60%", titleWidth: 329 },
+    heroOnly: true,
+    contactWide: true,
+    creatorImages: {
+      about: "/services/instagram-creator-workspace.png",
+      gain: "/services/instagram-creator-filming.png",
+    },
+    focusImage: "/services/instagram-hero.png",
+    publisherImage: "/services/instagram-publisher-team.png",
+    localizationImage: "/services/instagram-market-content.png",
+    marketInsightsImage: "/services/instagram-market-insights.png",
+    focusedGrowthImages: {
+      gain: "/services/instagram-growth-desk.png",
+      highlights: "/services/instagram-growth-phone.png",
     },
   },
 ];
