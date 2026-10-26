@@ -317,6 +317,7 @@ function ServicesDesktop() {
                     icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
                     bullets={service.bullets}
+                    href={SERVICE_LINKS[service.id]}
                   />
                 ))}
               </div>
@@ -338,6 +339,7 @@ function ServicesDesktop() {
                     icon={SERVICE_ICON_MAP[service.id]}
                     title={service.title}
                     bullets={service.bullets}
+                    href={SERVICE_LINKS[service.id]}
                   />
                 ))}
               </div>
