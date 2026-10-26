@@ -6,6 +6,9 @@ import { type ServiceDetailProcess as ProcessContent } from "@/config/serviceDet
 /** Faint divider grid behind the section, per Figma (positions are % of the 1440×900 frame). */
 const VERTICAL_LINES = [11.17, 22.28, 33.39, 44.43, 55.54, 66.59, 77.7, 88.81];
 const HORIZONTAL_LINES = [18.89, 38.67, 58.44, 78.22];
+/** Figma pattern of the localized-growth page: frame is 1440×486 at the top; vertical lines span its upper 54%. */
+const FIGMA_VERTICAL_LINES = [11.17, 22.28, 33.39, 44.43, 55.54, 66.59, 77.7, 88.81];
+const FIGMA_HORIZONTAL_LINES = [10.2, 20.89, 31.57, 42.26];
 const LINE_ALPHA =
   "rgba(255, 255, 255, 0.005) 0%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.005) 100%";
 
@@ -13,14 +16,17 @@ function AccordionCard({
   index,
   title,
   body,
-  defaultOpen,
+  open,
+  onToggle,
+  justify,
 }: {
   index: number;
   title: string;
   body: string;
-  defaultOpen: boolean;
+  open: boolean;
+  onToggle: () => void;
+  justify?: boolean;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   return (
     <div className="flex h-full flex-col rounded-[16px] ring-1 ring-inset ring-white/30 bg-white p-5">
@@ -32,7 +38,7 @@ function AccordionCard({
           type="button"
           aria-expanded={open}
           aria-controls={id}
-          onClick={() => setOpen((v) => !v)}
+          onClick={onToggle}
           className="flex w-full cursor-pointer items-center gap-2.5 text-left font-body text-[20px] font-bold leading-6 text-[#070606]"
         >
           <span className="flex-1">{title}</span>
@@ -56,7 +62,7 @@ function AccordionCard({
         className={`grid transition-[grid-template-rows] duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="pt-2 font-body text-[14px] leading-[22px] text-[#070606]">
+          <div className={`pt-2 font-body text-[14px] leading-[22px] text-[#070606] ${justify ? "text-justify" : ""}`}>
             {renderRichBlocks(body, "list-disc pl-5")}
           </div>
         </div>
@@ -72,11 +78,16 @@ function AccordionCard({
 export function ServiceDetailProcess({
   process,
   accordion,
+  figma,
 }: {
   process: ProcessContent;
   accordion?: boolean;
+  /** Figma-exact spacing, 32px heading, centred description, justified card text and the 486px divider pattern (needs `accordion`). */
+  figma?: boolean;
 }) {
   const { eyebrow, heading, description, steps } = process;
+  // Only one card can be open at a time; the first starts open.
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section
@@ -85,9 +96,25 @@ export function ServiceDetailProcess({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden lg:block"
+        className={`pointer-events-none absolute hidden lg:block ${figma ? "inset-x-0 top-0 h-[486.19px]" : "inset-0"}`}
       >
-        {VERTICAL_LINES.map((left) => (
+        {figma &&
+          FIGMA_VERTICAL_LINES.map((left) => (
+            <span
+              key={`fv${left}`}
+              className="absolute top-0 h-[54.02%] w-0.5"
+              style={{ left: `${left}%`, background: `linear-gradient(180deg, ${LINE_ALPHA})` }}
+            />
+          ))}
+        {figma &&
+          FIGMA_HORIZONTAL_LINES.map((top) => (
+            <span
+              key={`fh${top}`}
+              className="absolute inset-x-0 h-px"
+              style={{ top: `${top}%`, background: `linear-gradient(90deg, ${LINE_ALPHA})` }}
+            />
+          ))}
+        {!figma && VERTICAL_LINES.map((left) => (
           <span
             key={`v${left}`}
             className="absolute inset-y-0 w-0.5"
@@ -97,7 +124,7 @@ export function ServiceDetailProcess({
             }}
           />
         ))}
-        {HORIZONTAL_LINES.map((top) => (
+        {!figma && HORIZONTAL_LINES.map((top) => (
           <span
             key={`h${top}`}
             className="absolute inset-x-0 h-0.5"
@@ -120,7 +147,7 @@ export function ServiceDetailProcess({
           </p>
           <h2
             id="service-process-heading"
-            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${accordion ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
+            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${accordion && !figma ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
           >
             {heading}
           </h2>
@@ -132,7 +159,7 @@ export function ServiceDetailProcess({
         </FadeIn>
 
         <ol
-          className={`mt-10 grid lg:grid-cols-2 lg:gap-5 ${accordion ? "gap-2.5" : "gap-5 lg:mt-[67px]"}`}
+          className={`grid lg:grid-cols-2 lg:gap-5 ${figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
         >
           {steps.map((step, i) => (
             <li key={step.title}>
@@ -142,7 +169,9 @@ export function ServiceDetailProcess({
                     index={i}
                     title={step.title}
                     body={step.description}
-                    defaultOpen={i === 0}
+                    open={openIndex === i}
+                    onToggle={() => setOpenIndex((cur) => (cur === i ? null : i))}
+                    justify={figma && step.description.length > 160 && !step.description.includes("\n")}
                   />
                 ) : (
                   <div className="flex h-full flex-col rounded-[16px] border border-white/30 bg-white p-5">

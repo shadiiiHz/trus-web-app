@@ -14,6 +14,16 @@ import { ServiceDetailAbout } from "@/components/service-detail/ServiceDetailAbo
 import { ServiceDetailPublishing } from "@/components/service-detail/ServiceDetailPublishing";
 import { ServiceDetailTiming } from "@/components/service-detail/ServiceDetailTiming";
 import { ServiceDetailWorkflow } from "@/components/service-detail/ServiceDetailWorkflow";
+import { ServiceDetailIntro } from "@/components/service-detail/ServiceDetailIntro";
+import { ServiceDetailOverview } from "@/components/service-detail/ServiceDetailOverview";
+import { ServiceDetailContentCreator } from "@/components/service-detail/ServiceDetailContentCreator";
+import { ServiceDetailPublisherLight } from "@/components/service-detail/ServiceDetailPublisherLight";
+import { ServiceDetailMarketStrategy } from "@/components/service-detail/ServiceDetailMarketStrategy";
+import { ServiceDetailAudience } from "@/components/service-detail/ServiceDetailAudience";
+import { ServiceDetailResponses } from "@/components/service-detail/ServiceDetailResponses";
+import { ServiceDetailJourney } from "@/components/service-detail/ServiceDetailJourney";
+import { ServiceDetailBenefits } from "@/components/service-detail/ServiceDetailBenefits";
+import { ServiceDetailMatters } from "@/components/service-detail/ServiceDetailMatters";
 import { ServiceDetailProcess } from "@/components/service-detail/ServiceDetailProcess";
 import { ServiceDetailStrategy } from "@/components/service-detail/ServiceDetailStrategy";
 import { ServiceDetailIntelligence } from "@/components/service-detail/ServiceDetailIntelligence";
@@ -61,12 +71,47 @@ export default function ServiceDetailPage() {
           textY={service.heroTextY}
           desktopFade={service.heroDesktopFade}
           wideTitle={service.heroWideTitle}
+          figma={service.heroFigma}
           taglineMobile={content.taglineMobile}
           mobileAlign={service.heroMobile?.align}
           mobileImageX={service.heroMobile?.imageX}
           mobileTitleWidth={service.heroMobile?.titleWidth}
         />
       </div>
+
+      {content.intro && service.introImage && <ServiceDetailIntro intro={content.intro} image={service.introImage} />}
+
+      {content.overview && service.overviewImage && (
+        <ServiceDetailOverview overview={content.overview} image={service.overviewImage} />
+      )}
+
+      {content.contentCreator && service.contentCreatorImage && (
+        <ServiceDetailContentCreator content={content.contentCreator} image={service.contentCreatorImage} />
+      )}
+
+      {content.publisherLight && service.publisherLightImage && (
+        <ServiceDetailPublisherLight content={content.publisherLight} image={service.publisherLightImage} />
+      )}
+
+      {content.marketStrategy && service.marketStrategyImage && (
+        <ServiceDetailMarketStrategy content={content.marketStrategy} image={service.marketStrategyImage} />
+      )}
+
+      {content.audience && service.audienceImage && (
+        <ServiceDetailAudience content={content.audience} image={service.audienceImage} />
+      )}
+
+      {content.responses && service.responsesImage && (
+        <ServiceDetailResponses content={content.responses} image={service.responsesImage} />
+      )}
+
+      {content.journey && service.journeyImage && (
+        <ServiceDetailJourney content={content.journey} image={service.journeyImage} />
+      )}
+
+      {content.benefits && service.benefitsImages && (
+        <ServiceDetailBenefits content={content.benefits} images={service.benefitsImages} />
+      )}
 
       {content.creator && service.creatorImages && (
         <ServiceDetailCreator creator={content.creator} images={service.creatorImages} />
@@ -101,11 +146,16 @@ export default function ServiceDetailPage() {
           tight={service.aboutTight}
           textLeading={service.aboutTextLeading}
           aboutImageSize={service.aboutImageSize}
+          imageEnd={service.aboutImageEnd}
           highlightsImageSize={service.highlightsImageSize}
         />
       )}
 
-      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} />}
+      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} />}
+
+      {content.matters && service.mattersImage && (
+        <ServiceDetailMatters matters={content.matters} image={service.mattersImage} />
+      )}
 
       {content.publishing && service.publishingImage && (
         <ServiceDetailPublishing
@@ -148,6 +198,7 @@ export default function ServiceDetailPage() {
           description={content.contact.description}
           descriptionDesktop={content.contact.descriptionDesktop}
           wide={content.contact.wide}
+          plainText={service.contactPlainText}
         />
       )}
 

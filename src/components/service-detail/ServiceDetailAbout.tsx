@@ -20,6 +20,8 @@ interface ServiceDetailAboutProps {
   /** Desktop image sizes in px (defaults 414×212). */
   aboutImageSize?: { width: number; height: number };
   highlightsImageSize?: { width: number; height: number };
+  /** Without `highlights`: image after the "gain" list instead of before it (Figma: 624px list + 420px image, 32px headings). */
+  imageEnd?: boolean;
 }
 
 const DEFAULT_IMAGE_SIZE = { width: 414, height: 212 };
@@ -72,6 +74,7 @@ export function ServiceDetailAbout({
   textLeading = 20,
   aboutImageSize = DEFAULT_IMAGE_SIZE,
   highlightsImageSize = DEFAULT_IMAGE_SIZE,
+  imageEnd,
 }: ServiceDetailAboutProps) {
   const aboutVars = {
     "--img-w": `${aboutImageSize.width}px`,
@@ -168,6 +171,26 @@ export function ServiceDetailAbout({
               </div>
             </FadeIn>
           </>
+        ) : imageEnd ? (
+          <FadeIn direction="up" delay={0.1}>
+            <div className="relative mt-10 flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-5" style={aboutVars}>
+              {glow && <Glow wide />}
+              <div className="relative flex flex-col gap-2 lg:flex-1">
+                <h3 className="flex min-h-10 items-center font-hero text-[26px] font-bold capitalize leading-[22px] tracking-[-0.5px] text-white lg:text-[32px]">
+                  {gain.heading}
+                </h3>
+                <BulletList items={gain.items} tight />
+              </div>
+              {about.image && (
+                <img
+                  src={about.image}
+                  alt={about.imageAlt}
+                  loading="lazy"
+                  className="relative h-[212px] w-full rounded-lg object-cover lg:h-(--img-h) lg:w-(--img-w) lg:shrink-0 lg:rounded-2xl"
+                />
+              )}
+            </div>
+          </FadeIn>
         ) : (
           /* No Highlights block: the About image sits beside "What You Gain" (stacked on mobile). */
           <FadeIn direction="up" delay={0.1}>

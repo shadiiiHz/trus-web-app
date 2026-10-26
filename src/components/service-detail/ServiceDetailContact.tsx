@@ -14,6 +14,8 @@ interface ServiceDetailContactProps {
   descriptionDesktop?: string;
   /** Kept for config compatibility — the description always spans the full container width (Figma). */
   wide?: boolean;
+  /** Figma text rendering without the tight -0.45px tracking, justified on desktop too (LinkedIn page). */
+  plainText?: boolean;
 }
 
 /**
@@ -21,7 +23,7 @@ interface ServiceDetailContactProps {
  * beside the contact form, with the service pre-filled as the form's Subject.
  * Identical on every service page; only the copy differs.
  */
-export function ServiceDetailContact({ subject, heading, description, descriptionDesktop }: ServiceDetailContactProps) {
+export function ServiceDetailContact({ subject, heading, description, descriptionDesktop, plainText }: ServiceDetailContactProps) {
   const { eyebrow, card, form } = siteConfig.contact;
   const { login } = siteConfig.auth;
 
@@ -41,7 +43,7 @@ export function ServiceDetailContact({ subject, heading, description, descriptio
             </h2>
           </div>
           <p
-            className={`text-justify font-body text-[16px] leading-6 tracking-[-0.45px] text-[#070606] lg:text-left ${descriptionDesktop ? "lg:hidden" : ""}`}
+            className={`text-justify font-body text-[16px] leading-6 ${plainText ? "lg:text-justify" : "tracking-[-0.45px] lg:text-left"} text-[#070606] ${descriptionDesktop ? "lg:hidden" : ""}`}
           >
             {renderRichText(description)}
           </p>

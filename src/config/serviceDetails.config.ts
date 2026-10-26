@@ -17,10 +17,11 @@
  * (content not designed yet).
  */
 import { t } from "@/i18n";
+import type { FigmaHeroOptions } from "@/components/service-detail/ServiceDetailHero";
 import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
-export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram";
+export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin";
 
 /** Optional "how it works" section (numbered step cards). */
 export interface ServiceDetailProcess {
@@ -194,6 +195,144 @@ export interface ServiceDetailFocusedGrowth {
 /** Optional dark "publisher" section — same copy shape as `focus`. */
 export type ServiceDetailPublisher = ServiceDetailFocus;
 
+/** Optional dark "benefits" section: a "gain" list beside an image, then an image beside a "highlights" list. `imageAlt` is shared by both images. */
+export interface ServiceDetailBenefits {
+  heading: string;
+  items: readonly string[];
+  imageAlt: string;
+  highlightsHeading: string;
+  highlightItems: readonly string[];
+}
+
+/** Optional light grey "journey" section: image, heading + intro with a connected pill workflow (`steps`), closing text, and a workflow-choice block (`workflow` supports **bold** and `
+`). */
+export interface ServiceDetailJourney {
+  heading: string;
+  imageAlt: string;
+  intro: string;
+  /** Bold line below the intro. */
+  introLead: string;
+  steps: readonly string[];
+  outro: string;
+  workflowHeading: string;
+  workflow: string;
+}
+
+/** Optional dark "responses" section: image beside heading, intro and a comparison list, then a "decide where to" list. `lead` / `nextLead` support **bold**. */
+export interface ServiceDetailResponses {
+  heading: string;
+  /** Shorter desktop title (Figma's desktop frame omits the last word). */
+  headingDesktop: string;
+  intro: string;
+  lead: string;
+  items: readonly string[];
+  outro: string;
+  imageAlt: string;
+  nextLead: string;
+  nextItems: readonly string[];
+  nextOutro: string;
+}
+
+/** Optional light grey "audience" section: intro, an image beside a target-audience list (`text` supports `
+` line breaks), then a "publish by market" block. */
+export interface ServiceDetailAudience {
+  heading: string;
+  intro: string;
+  imageAlt: string;
+  lead: string;
+  items: readonly string[];
+  text: string;
+  publishHeading: string;
+  publishIntro: string;
+  publishLead: string;
+  publishItems: readonly string[];
+  publishText: string;
+}
+
+/** Optional dark "market strategy" section: intro (supports **bold**, `
+`) + adaptable factors beside an image, then a markets example (`marketsExample` supports **bold**, `
+`). */
+export interface ServiceDetailMarketStrategy {
+  heading: string;
+  intro: string;
+  adjustHeading: string;
+  adjustItems: readonly string[];
+  outro: string;
+  imageAlt: string;
+  marketsHeading: string;
+  marketsIntro: string;
+  marketsExample: string;
+}
+
+/** Optional light grey "publisher" section: lead + text, an example block (supports **bold** and `
+`), image beside "gain", "best for". `text` supports `
+` line breaks. */
+export interface ServiceDetailPublisherLight {
+  heading: string;
+  /** Bold first line. */
+  lead: string;
+  text: string;
+  example: string;
+  imageAlt: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional dark "content creator" section: intro, adjustable options, image beside "gain", "best for". `multilingual` supports `
+` line breaks, `bestFor` supports **bold**. */
+export interface ServiceDetailContentCreator {
+  heading: string;
+  /** Bold first line. */
+  lead: string;
+  text: string;
+  adjustHeading: string;
+  adjustItems: readonly string[];
+  multilingual: string;
+  imageAlt: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional light grey "overview" section: intro with bullets, image beside a refine list, "gain" list, "best for" note. `text` supports `
+` line breaks, `bestFor` supports **bold**. */
+export interface ServiceDetailOverview {
+  heading: string;
+  /** Bold first line. */
+  lead: string;
+  text: string;
+  items: readonly string[];
+  outro: string;
+  imageAlt: string;
+  refineHeading: string;
+  refineItems: readonly string[];
+  refineOutro: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional dark "about the service" block right after the hero (heading, description, centred image). `body` supports **bold** and `
+` line breaks. */
+export interface ServiceDetailIntro {
+  heading: string;
+  body: string;
+  imageAlt: string;
+}
+
+/** Optional dark "why this matters" section (heading + paragraph, image beside a highlights list). */
+export interface ServiceDetailMatters {
+  heading: string;
+  body: string;
+  imageAlt: string;
+  highlightsHeading: string;
+  items: readonly string[];
+}
+
 /** Shape of one page's copy in the locale JSON files. */
 export interface ServiceDetailText {
   name: string;
@@ -228,6 +367,26 @@ export interface ServiceDetailText {
   flexible?: ServiceDetailFlexible;
   /** Rendered after `flexible` when present. */
   growth?: ServiceDetailGrowth;
+  /** Rendered right after the hero when present. */
+  intro?: ServiceDetailIntro;
+  /** Rendered after `intro` when present. */
+  overview?: ServiceDetailOverview;
+  /** Rendered after `overview` when present. */
+  contentCreator?: ServiceDetailContentCreator;
+  /** Rendered after `contentCreator` when present. */
+  publisherLight?: ServiceDetailPublisherLight;
+  /** Rendered after `publisherLight` when present. */
+  marketStrategy?: ServiceDetailMarketStrategy;
+  /** Rendered after `marketStrategy` when present. */
+  audience?: ServiceDetailAudience;
+  /** Rendered after `audience` when present. */
+  responses?: ServiceDetailResponses;
+  /** Rendered after `responses` when present. */
+  journey?: ServiceDetailJourney;
+  /** Rendered after `journey` when present. */
+  benefits?: ServiceDetailBenefits;
+  /** Rendered after `process` (and the other About-area sections) when present. */
+  matters?: ServiceDetailMatters;
   /** Rendered right after the hero when present. */
   creator?: ServiceDetailCreator;
   /** Rendered after `creator` when present. */
@@ -275,6 +434,8 @@ export interface ServiceDetail {
   heroWideTitle?: boolean;
   /** Mobile hero: text position over the photo (default "bottom"), the photo's crop x (default "93%") and title max width. */
   heroMobile?: { align?: "top" | "bottom"; imageX?: string; titleWidth?: number };
+  /** Hero laid out in Figma's 1440×822 / 390×613 frames, scaling proportionally (no clamp()s, 0 tracking, Figma gradients). */
+  heroFigma?: boolean | FigmaHeroOptions;
   /** Render only the hero (page not fully designed yet). Without this or `images`, the URL renders the 404 page. */
   heroOnly?: boolean;
   /** About-section images; omit while the page isn't designed yet. */
@@ -283,8 +444,12 @@ export interface ServiceDetail {
   aboutGlow?: boolean;
   /** Figma 22px leading, 20px mobile gutters and 40px block gaps (pages without a Highlights block). */
   aboutTight?: boolean;
+  /** About image sits after "What You Gain" (right on desktop, below on mobile) with the Figma 420×393 sizing and 32px headings. */
+  aboutImageEnd?: boolean;
   /** "How it works" cards render as an accordion (first open) with Figma sizing. */
   processAccordion?: boolean;
+  /** With `processAccordion`: Figma-exact "process" section (32px heading, centred intro, 486px divider pattern). */
+  processFigma?: boolean;
   /** Image + per-item icons of the `publishing` section. */
   publishingImage?: string;
   publishingIcons?: readonly ServiceStackIcon[];
@@ -298,6 +463,8 @@ export interface ServiceDetail {
   highlightsImageSize?: { width: number; height: number };
   /** Contact description spans the full container width. */
   contactWide?: boolean;
+  /** Contact description uses plain tracking and is justified on desktop (that page's Figma). */
+  contactPlainText?: boolean;
   /** Image of the `strategy` section (only for pages with `strategy` copy). */
   strategyImage?: string;
   /** Image of the `intelligence` section (only for pages with `intelligence` copy). */
@@ -310,6 +477,26 @@ export interface ServiceDetail {
   stackImage?: string;
   /** Images of the `creator` section: beside the about text, and beside the "gain" list. */
   creatorImages?: { about: string; gain: string };
+  /** Image of the `intro` section (only for pages with `intro` copy). */
+  introImage?: string;
+  /** Image of the `overview` section (only for pages with `overview` copy). */
+  overviewImage?: string;
+  /** Image of the `contentCreator` section (only for pages with `contentCreator` copy). */
+  contentCreatorImage?: string;
+  /** Image of the `publisherLight` section (only for pages with `publisherLight` copy). */
+  publisherLightImage?: string;
+  /** Image of the `marketStrategy` section (only for pages with `marketStrategy` copy). */
+  marketStrategyImage?: string;
+  /** Image of the `audience` section (only for pages with `audience` copy). */
+  audienceImage?: string;
+  /** Image of the `responses` section (only for pages with `responses` copy). */
+  responsesImage?: string;
+  /** Image of the `journey` section (only for pages with `journey` copy). */
+  journeyImage?: string;
+  /** Images of the `benefits` section: beside the "gain" list, and beside the highlights. */
+  benefitsImages?: { gain: string; highlights: string };
+  /** Image of the `matters` section (only for pages with `matters` copy). */
+  mattersImage?: string;
   /** Image of the `focus` section (only for pages with `focus` copy). */
   focusImage?: string;
   /** Image of the `publisher` section (only for pages with `publisher` copy). */
@@ -431,6 +618,49 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
       gain: "/services/instagram-growth-desk.png",
       highlights: "/services/instagram-growth-phone.png",
     },
+  },
+  {
+    slug: "multilingual-localized-growth-strategy",
+    textKey: "localizedGrowth",
+    heroImage: "/services/localized-growth-hero.png",
+    heroFigma: true,
+    heroMobile: { imageX: "59%", titleWidth: 329 },
+    aboutGlow: true,
+    aboutTight: true,
+    aboutImageEnd: true,
+    processAccordion: true,
+    processFigma: true,
+    mattersImage: "/services/localized-growth-notebook.png",
+    aboutImageSize: { width: 420, height: 393 },
+    contactWide: true,
+    images: {
+      about: "/services/localized-growth-dashboard.png",
+    },
+  },
+  {
+    slug: "linkedin-content-creator-publisher",
+    textKey: "linkedin",
+    heroImage: "/services/linkedin-hero.png",
+    heroFigma: {
+      bottom: true,
+      gradient: "linear-gradient(76.15deg, rgba(255,255,255,0.72) 31.92%, rgba(255,255,255,0) 47.83%)",
+    },
+    heroMobile: { imageX: "23%", titleWidth: 329 },
+    contactPlainText: true,
+    introImage: "/services/linkedin-strategy.png",
+    overviewImage: "/services/linkedin-creator.png",
+    contentCreatorImage: "/services/linkedin-content-cards.png",
+    publisherLightImage: "/services/linkedin-publisher.png",
+    marketStrategyImage: "/services/linkedin-multilingual.png",
+    audienceImage: "/services/linkedin-audience-placeholder.png",
+    responsesImage: "/services/linkedin-audience-placeholder.png",
+    journeyImage: "/services/linkedin-audience-placeholder.png",
+    benefitsImages: {
+      gain: "/services/linkedin-audience-placeholder.png",
+      highlights: "/services/linkedin-audience-placeholder.png",
+    },
+    heroOnly: true,
+    contactWide: true,
   },
 ];
 
