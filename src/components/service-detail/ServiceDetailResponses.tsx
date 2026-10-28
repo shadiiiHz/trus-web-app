@@ -44,31 +44,28 @@ export function ServiceDetailResponses({ content, image }: { content: ResponsesC
     >
       <div className="mx-auto flex w-full max-w-[1064px] flex-col gap-10">
         <FadeIn direction="up">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
+          <div className="flex flex-col lg:grid lg:grid-cols-[414px_minmax(0,1fr)] lg:gap-x-10">
             <img
               src={image}
               alt={content.imageAlt}
               loading="lazy"
-              className="h-[212px] w-full shrink-0 rounded-lg object-cover lg:h-[341px] lg:w-[420px] lg:rounded-2xl"
+              className="mb-10 h-[212px] w-full rounded-lg object-cover lg:col-start-1 lg:row-start-2 lg:mb-0 lg:h-auto lg:min-h-0 lg:self-stretch lg:rounded-2xl"
             />
-            <div className="flex flex-col gap-4 lg:min-w-0 lg:flex-1 lg:gap-5">
-              <h2
-                id="service-responses-heading"
-                className="font-hero text-[26px] font-bold leading-[1.1] text-white lg:text-[32px] min-[1440px]:w-[745px] min-[1440px]:whitespace-nowrap"
-              >
-                <span className="lg:hidden">{content.heading}</span>
-                <span className="hidden lg:inline">{content.headingDesktop}</span>
-              </h2>
-              <div className={`flex flex-col gap-4 lg:gap-0 ${BODY}`}>
-                <p>{content.intro}</p>
-                <Lead text={content.lead} />
-                <ul className="list-disc pl-6 text-left">
-                  {content.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <p>{content.outro}</p>
-              </div>
+            <h2
+              id="service-responses-heading"
+              className="mb-4 font-hero text-[26px] font-bold leading-[1.1] text-white lg:col-span-2 lg:row-start-1 lg:mb-10 lg:font-body lg:text-[32px] lg:leading-[39px]"
+            >
+              {content.heading}
+            </h2>
+            <div className={`flex flex-col gap-4 lg:col-start-2 lg:row-start-2 lg:gap-0 ${BODY}`}>
+              <p>{content.intro}</p>
+              <Lead text={content.lead} />
+              <ul className="list-disc pl-6 text-left">
+                {content.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p>{content.outro}</p>
             </div>
           </div>
         </FadeIn>

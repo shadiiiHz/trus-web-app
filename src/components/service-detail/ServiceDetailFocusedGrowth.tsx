@@ -9,11 +9,12 @@ interface ServiceDetailFocusedGrowthProps {
 }
 
 const BODY = "font-body text-[16px] leading-[22px] text-white";
-const H2 = "font-hero text-[26px] font-bold leading-[1.1] text-white lg:text-[32px]";
+const H2 = "font-hero text-[26px] font-bold leading-[29px] text-white lg:text-[32px] lg:leading-[1.1]";
 
-function BulletList({ items }: { items: readonly string[] }) {
+/** `tightOnPhone` mirrors Figma's 19px line height for the "gain" list on phones. */
+function BulletList({ items, tightOnPhone }: { items: readonly string[]; tightOnPhone?: boolean }) {
   return (
-    <ul className={`list-disc pl-6 ${BODY}`}>
+    <ul className={`list-disc pl-6 ${tightOnPhone ? BODY.replace("leading-[22px]", "leading-[19px] lg:leading-[22px]") : BODY}`}>
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -22,7 +23,7 @@ function BulletList({ items }: { items: readonly string[] }) {
 }
 
 /**
- * Dark "focused growth" block: intro with a step cycle (pills joined by lines), workflow options, a "gain" list beside
+ * Dark "focused growth" block: intro with a step cycle (pills joined by arrows; a scrollable row of chevron-linked pills on phones), workflow options, a "gain" list beside
  * an image and highlights beside an image. Rendered only for services whose copy defines `focusedGrowth`.
  */
 export function ServiceDetailFocusedGrowth({ growth, images }: ServiceDetailFocusedGrowthProps) {
@@ -51,14 +52,16 @@ export function ServiceDetailFocusedGrowth({ growth, images }: ServiceDetailFocu
             <div className="flex flex-col gap-4">
               <p className={`text-justify ${BODY}`}>{renderRichText(growth.intro)}</p>
 
-              <ol className="gap-2 max-lg:grid max-lg:grid-cols-[minmax(106px,auto)] max-lg:justify-center lg:flex lg:flex-row lg:items-center">
+              <ol className="-mx-5 flex items-center overflow-x-auto px-5 [scrollbar-width:none] lg:mx-0 lg:gap-2 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
                 {growth.steps.map((step, i) => (
                   <Fragment key={step}>
                     {i > 0 && (
                       <li
                         aria-hidden="true"
-                        className="h-5 w-px bg-white max-lg:justify-self-center lg:h-px lg:w-auto lg:min-w-1 lg:flex-1"
-                      />
+                        className="flex shrink-0 items-center justify-center px-2 lg:relative lg:block lg:h-px lg:min-w-4 lg:flex-1 lg:bg-white lg:p-0"
+                      >
+                        <span className="block size-[6px] -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-white lg:absolute lg:right-[1.25px] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:border-r lg:border-t" />
+                      </li>
                     )}
                     <li className="box-border flex h-[34px] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/30 bg-white p-[7px] font-hero text-[14px] font-bold leading-[18px] text-[#070606]">
                       {step}
@@ -93,7 +96,7 @@ export function ServiceDetailFocusedGrowth({ growth, images }: ServiceDetailFocu
             <h3 className={H2}>{growth.gainHeading}</h3>
             <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-2">
               <div className="lg:flex-1">
-                <BulletList items={growth.gainItems} />
+                <BulletList items={growth.gainItems} tightOnPhone />
               </div>
               <img
                 src={images.gain}

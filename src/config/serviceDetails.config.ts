@@ -221,8 +221,6 @@ export interface ServiceDetailJourney {
 /** Optional dark "responses" section: image beside heading, intro and a comparison list, then a "decide where to" list. `lead` / `nextLead` support **bold**. */
 export interface ServiceDetailResponses {
   heading: string;
-  /** Shorter desktop title (Figma's desktop frame omits the last word). */
-  headingDesktop: string;
   intro: string;
   lead: string;
   items: readonly string[];
@@ -652,12 +650,12 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contentCreatorImage: "/services/linkedin-content-cards.png",
     publisherLightImage: "/services/linkedin-publisher.png",
     marketStrategyImage: "/services/linkedin-multilingual.png",
-    audienceImage: "/services/linkedin-audience-placeholder.png",
-    responsesImage: "/services/linkedin-audience-placeholder.png",
-    journeyImage: "/services/linkedin-audience-placeholder.png",
+    audienceImage: "/services/linkedin-audience.png",
+    responsesImage: "/services/linkedin-responses.png",
+    journeyImage: "/services/linkedin-journey.png",
     benefitsImages: {
-      gain: "/services/linkedin-audience-placeholder.png",
-      highlights: "/services/linkedin-audience-placeholder.png",
+      gain: "/services/linkedin-benefits-gain.png",
+      highlights: "/services/linkedin-benefits-highlights.png",
     },
     heroOnly: true,
     contactWide: true,
