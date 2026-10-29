@@ -13,7 +13,7 @@ export function ServiceDetailMarketStrategy({ content, image }: { content: Marke
   return (
     <section
       aria-labelledby="service-market-strategy-heading"
-      className="bg-brand-bg px-5 py-14 text-white lg:flex lg:min-h-[860px] lg:flex-col lg:justify-center lg:py-20"
+      className="bg-[#070606] px-5 py-14 text-white lg:flex lg:min-h-[860px] lg:flex-col lg:justify-center lg:py-20"
     >
       <div className="mx-auto flex w-full max-w-[1064px] flex-col gap-10">
         <FadeIn direction="up">

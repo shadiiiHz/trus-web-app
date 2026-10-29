@@ -21,7 +21,7 @@ import type { FigmaHeroOptions } from "@/components/service-detail/ServiceDetail
 import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
-export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin";
+export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin" | "x" | "telegram";
 
 /** Optional "how it works" section (numbered step cards). */
 export interface ServiceDetailProcess {
@@ -271,6 +271,8 @@ export interface ServiceDetailPublisherLight {
   lead: string;
   text: string;
   example: string;
+  /** Optional closing sentence after the example (Telegram page). */
+  closing?: string;
   imageAlt: string;
   gainHeading: string;
   gainItems: readonly string[];
@@ -322,6 +324,170 @@ export interface ServiceDetailIntro {
   imageAlt: string;
 }
 
+/** Optional dark "about the service" block: eyebrow, heading and description, then an image beside a second heading, bold lead and list. `body` / `text` support **bold** and line breaks. */
+export interface ServiceDetailAboutService {
+  heading: string;
+  body: string;
+  imageAlt: string;
+  subHeading: string;
+  /** Bold first line(s). */
+  lead: string;
+  text: string;
+  items: readonly string[];
+}
+
+/** Optional light block: two list columns, a "What You Gain" list beside an image, and a "Best For" note. `bestFor` supports **bold**. */
+export interface ServiceDetailCreatorOverview {
+  intro: string;
+  items: readonly string[];
+  outro: string;
+  adjustLead: string;
+  adjustItems: readonly string[];
+  adjustOutro: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  imageAlt: string;
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional dark multilingual-strategy block: adaptation list, separate accounts with examples, then an image beside a "short post or thread?" text. `text` / `examples` support **bold** and line breaks. */
+export interface ServiceDetailMarketAccounts {
+  heading: string;
+  /** Bold first line(s). */
+  lead: string;
+  intro: string;
+  adaptHeading: string;
+  adaptItems: readonly string[];
+  adaptOutro: string;
+  accountsHeading: string;
+  accountsIntro: string;
+  accountsExamples: string;
+  accountsOutro: string;
+  imageAlt: string;
+  formatHeading: string;
+  formatText: string;
+  formatItems: readonly string[];
+  formatOutro: string;
+}
+
+/** Optional light block: a timing text, then a "learn which markets perform better" text beside an image. `intro` / `insightsLead` support **bold** and line breaks. */
+export interface ServiceDetailTimingPerformance {
+  heading: string;
+  intro: string;
+  items: readonly string[];
+  outro: string;
+  insightsHeading: string;
+  insightsLead: string;
+  insightsItems: readonly string[];
+  insightsOutro: string;
+  decideLead: string;
+  decideItems: readonly string[];
+  imageAlt: string;
+}
+
+/** Optional light "creator guide" block: heading, a "based on" list, an image beside purposes, a refine list, a "What You Gain" list beside an image and a "Best For" note. `bestFor` supports **bold**. */
+export interface ServiceDetailCreatorGuide {
+  heading: string;
+  tagline: string;
+  basedLead: string;
+  basedItems: readonly string[];
+  imageAlt: string;
+  purposesLead: string;
+  purposesItems: readonly string[];
+  purposesOutro: string;
+  refineLead: string;
+  refineItems: readonly string[];
+  refineOutro: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  gainImageAlt: string;
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional dark "channel creator" block: heading and intro, an image beside a refine list, a closing text, a "What You Gain" list beside an image and a "Best For" note. `intro` / `closing` support line breaks. */
+export interface ServiceDetailChannelCreator {
+  heading: string;
+  tagline: string;
+  intro: string;
+  refineImageAlt: string;
+  refineLead: string;
+  refineItems: readonly string[];
+  closing: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  gainImageAlt: string;
+  bestForHeading: string;
+  bestFor: string;
+}
+
+/** Optional dark "multilingual channel strategy" block: heading, intro, labelled examples, then a list beside an image (image above the list on phones). */
+export interface ServiceDetailChannelStrategy {
+  heading: string;
+  tagline: string;
+  intro: string;
+  exampleLead: string;
+  examples: readonly { label: string; text: string }[];
+  listLead: string;
+  listItems: readonly string[];
+  listOutro: string;
+  imageAlt: string;
+}
+
+/** Optional light "local channel" block: heading and intro, an image beside an adapt list, then an "ongoing relationship" text with a scheduled-content list. `ongoingText` supports **bold**. */
+export interface ServiceDetailChannelLocal {
+  heading: string;
+  intro: string;
+  imageAlt: string;
+  adaptLead: string;
+  adaptItems: readonly string[];
+  adaptOutro: string;
+  ongoingHeading: string;
+  ongoingText: string;
+  exampleLead: string;
+  exampleItems: readonly string[];
+  closing: string;
+}
+
+/** Optional dark "channel market" block: heading and tagline, an image beside a publish-by list (image above on phones), then a "learn which channels respond better" list. */
+export interface ServiceDetailChannelMarket {
+  heading: string;
+  tagline: string;
+  imageAlt: string;
+  publishLead: string;
+  publishItems: readonly string[];
+  publishOutro: string;
+  insightHeading: string;
+  insightText: string;
+  compareLead: string;
+  compareItems: readonly string[];
+}
+
+/** Optional light "channel growth" block: an "over time you can identify" list, an image, then a heading with intro and a pill process chain. `intro` supports **bold**. */
+export interface ServiceDetailChannelGrowth {
+  listLead: string;
+  listItems: readonly string[];
+  listOutro: string;
+  imageAlt: string;
+  heading: string;
+  intro: string;
+  processLead: string;
+  steps: readonly string[];
+  closing: string;
+}
+
+/** Optional dark "channel workflow" block: a workflow-choice list with bold labels, a "What You Gain" list, then an image beside a highlights list. */
+export interface ServiceDetailChannelWorkflow {
+  workflowHeading: string;
+  workflows: readonly { title: string; description: string }[];
+  gainHeading: string;
+  gainItems: readonly string[];
+  imageAlt: string;
+  highlightsHeading: string;
+  highlightItems: readonly string[];
+}
+
 /** Optional dark "why this matters" section (heading + paragraph, image beside a highlights list). */
 export interface ServiceDetailMatters {
   heading: string;
@@ -367,6 +533,28 @@ export interface ServiceDetailText {
   growth?: ServiceDetailGrowth;
   /** Rendered right after the hero when present. */
   intro?: ServiceDetailIntro;
+  /** Rendered right after the hero when present. */
+  aboutService?: ServiceDetailAboutService;
+  /** Rendered after `aboutService` when present. */
+  creatorOverview?: ServiceDetailCreatorOverview;
+  /** Rendered after `intro` when present. */
+  creatorGuide?: ServiceDetailCreatorGuide;
+  /** Rendered after `creatorGuide` when present. */
+  channelCreator?: ServiceDetailChannelCreator;
+  /** Rendered after `publisherLight` when present. */
+  channelStrategy?: ServiceDetailChannelStrategy;
+  /** Rendered after `channelStrategy` when present. */
+  channelLocal?: ServiceDetailChannelLocal;
+  /** Rendered after `channelLocal` when present. */
+  channelMarket?: ServiceDetailChannelMarket;
+  /** Rendered after `channelMarket` when present. */
+  channelGrowth?: ServiceDetailChannelGrowth;
+  /** Rendered after `channelGrowth` when present. */
+  channelWorkflow?: ServiceDetailChannelWorkflow;
+  /** Rendered after `marketStrategy` when present. */
+  marketAccounts?: ServiceDetailMarketAccounts;
+  /** Rendered after `marketAccounts` when present. */
+  timingPerformance?: ServiceDetailTimingPerformance;
   /** Rendered after `intro` when present. */
   overview?: ServiceDetailOverview;
   /** Rendered after `overview` when present. */
@@ -475,14 +663,44 @@ export interface ServiceDetail {
   stackImage?: string;
   /** Images of the `creator` section: beside the about text, and beside the "gain" list. */
   creatorImages?: { about: string; gain: string };
+  /** Image of the `aboutService` section (only for pages with `aboutService` copy). */
+  aboutServiceImage?: string;
+  /** Image of the `creatorOverview` section (only for pages with `creatorOverview` copy). */
+  creatorOverviewImage?: string;
+  /** Images of the `creatorGuide` section: beside the purposes list, and beside "What You Gain". */
+  creatorGuideImages?: { purposes: string; gain: string };
+  /** Images of the `channelCreator` section: beside the refine list, and beside "What You Gain". */
+  channelCreatorImages?: { refine: string; gain: string };
+  /** Image of the `channelStrategy` section (only for pages with `channelStrategy` copy). */
+  channelStrategyImage?: string;
+  /** Image of the `channelLocal` section (only for pages with `channelLocal` copy). */
+  channelLocalImage?: string;
+  /** Image of the `channelMarket` section (only for pages with `channelMarket` copy). */
+  channelMarketImage?: string;
+  /** Image of the `channelGrowth` section (only for pages with `channelGrowth` copy). */
+  channelGrowthImage?: string;
+  /** Image of the `channelWorkflow` section (only for pages with `channelWorkflow` copy). */
+  channelWorkflowImage?: string;
+  /** Image of the `marketAccounts` section (only for pages with `marketAccounts` copy). */
+  marketAccountsImage?: string;
+  /** Image of the `timingPerformance` section (only for pages with `timingPerformance` copy). */
+  timingPerformanceImage?: string;
   /** Image of the `intro` section (only for pages with `intro` copy). */
   introImage?: string;
+  /** `intro` in the Telegram page's Figma style (see `ServiceDetailIntro`). */
+  introFigma?: boolean;
   /** Image of the `overview` section (only for pages with `overview` copy). */
   overviewImage?: string;
   /** Image of the `contentCreator` section (only for pages with `contentCreator` copy). */
   contentCreatorImage?: string;
+  /** `contentCreator` in the X page's Figma style: 20px lead, regular adjust heading, 414px image, purple haze. */
+  contentCreatorX?: boolean;
   /** Image of the `publisherLight` section (only for pages with `publisherLight` copy). */
   publisherLightImage?: string;
+  /** `publisherLight` in the X page's Figma style: 414px image, 24px list indent, 16/19 desktop "Best For" with **bold**. */
+  publisherLightX?: boolean;
+  /** `publisherLight` in the Telegram page's Figma style (see `ServiceDetailPublisherLight`). */
+  publisherLightChannel?: boolean;
   /** Image of the `marketStrategy` section (only for pages with `marketStrategy` copy). */
   marketStrategyImage?: string;
   /** Image of the `audience` section (only for pages with `audience` copy). */
@@ -505,6 +723,8 @@ export interface ServiceDetail {
   marketInsightsImage?: string;
   /** Images of the `focusedGrowth` section: beside the "gain" list, and beside the highlights. */
   focusedGrowthImages?: { gain: string; highlights: string };
+  /** `focusedGrowth` in the X page's Figma style (see `ServiceDetailFocusedGrowth`). */
+  focusedGrowthX?: boolean;
 }
 
 export const SERVICE_DETAILS: readonly ServiceDetail[] = [
@@ -659,6 +879,65 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
     heroOnly: true,
     contactWide: true,
+  },
+  {
+    slug: "x-content-creator-publisher",
+    textKey: "x",
+    heroImage: "/services/x-hero.png",
+    heroFigma: {
+      bottom: true,
+      dark: true,
+      gradient:
+        "linear-gradient(11.31deg, rgba(0,0,0,0.792) 7.6%, rgba(0,0,0,0.64116) 24.37%, rgba(0,0,0,0.54) 35.62%, rgba(0,0,0,0) 45.39%)",
+    },
+    heroMobile: { imageX: "50%", titleWidth: 329 },
+    aboutServiceImage: "/services/x-about.png",
+    creatorOverviewImage: "/services/x-workspace.png",
+    contentCreatorImage: "/services/x-creator.png",
+    contentCreatorX: true,
+    publisherLightImage: "/services/x-publisher.png",
+    publisherLightX: true,
+    contactPlainText: true,
+    marketAccountsImage: "/services/x-strategy.png",
+    timingPerformanceImage: "/services/x-timing.png",
+    focusedGrowthImages: {
+      gain: "/services/x-growth-gain.png",
+      highlights: "/services/x-growth-highlights.png",
+    },
+    focusedGrowthX: true,
+    heroOnly: true,
+    contactWide: true,
+  },
+  {
+    slug: "telegram-channel-content-creator-publisher",
+    textKey: "telegram",
+    heroImage: "/services/telegram-hero.png",
+    heroFigma: {
+      bottom: true,
+      dark: true,
+      gradient: "linear-gradient(15.38deg, rgba(0,0,0,0.8) 9.39%, rgba(0,0,0,0) 66.43%)",
+    },
+    heroMobile: { imageX: "53%", titleWidth: 329 },
+    introImage: "/services/telegram-about.png",
+    introFigma: true,
+    creatorGuideImages: {
+      purposes: "/services/telegram-creator.png",
+      gain: "/services/telegram-gain.png",
+    },
+    publisherLightImage: "/services/telegram-publisher.png",
+    publisherLightChannel: true,
+    channelStrategyImage: "/services/telegram-multilingual.png",
+    channelLocalImage: "/services/telegram-local.png",
+    channelMarketImage: "/services/telegram-schedule.png",
+    channelGrowthImage: "/services/telegram-insights.png",
+    channelWorkflowImage: "/services/telegram-workshop.png",
+    channelCreatorImages: {
+      refine: "/services/telegram-refine.png",
+      gain: "/services/telegram-growth.png",
+    },
+    heroOnly: true,
+    contactWide: true,
+    contactPlainText: true,
   },
 ];
 

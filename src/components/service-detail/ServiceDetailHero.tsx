@@ -6,7 +6,12 @@ export interface FigmaHeroOptions {
   bottom?: boolean;
   /** Desktop: CSS `linear-gradient(…)` laid over the photo behind the text. */
   gradient?: string;
+  /** Dark hero: black bottom fades and white text (instead of the white fade and dark text). */
+  dark?: boolean;
 }
+
+const FIGMA_DARK_MOBILE_GRADIENT = "linear-gradient(0deg, rgba(0,0,0,0.898039) 0%, rgba(0,0,0,0) 53.45%)";
+const FIGMA_LIGHT_MOBILE_GRADIENT = "linear-gradient(0deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 53.46%)";
 
 const FIGMA_DEFAULT_GRADIENT =
   "linear-gradient(83.42deg, rgba(255,255,255,0.7) 30.19%, rgba(255,255,255,0) 46.7%)";
@@ -52,19 +57,38 @@ export function ServiceDetailHero({
 }: ServiceDetailHeroProps) {
   if (figma) {
     const opts: FigmaHeroOptions = figma === true ? {} : figma;
+    const textColor = opts.dark ? "text-white" : "text-[#070606]";
     return (
-      <section className="relative isolate overflow-hidden bg-white [container-type:inline-size]">
+      <section
+        className={`relative isolate overflow-hidden [container-type:inline-size] ${
+          opts.dark
+            ? "bg-[#070606] max-lg:aspect-[390/613] max-lg:[background-image:var(--hero-fade-mobile),var(--hero-photo)] max-lg:[background-position:0_0,var(--hero-img-x)_center] max-lg:[background-repeat:no-repeat] max-lg:[background-size:100%_100%,cover]"
+            : "bg-white"
+        }`}
+        style={
+          opts.dark
+            ? {
+                ["--hero-fade-mobile" as string]: FIGMA_DARK_MOBILE_GRADIENT,
+                ["--hero-photo" as string]: `url(${image})`,
+                ["--hero-img-x" as string]: mobileImageX,
+              }
+            : undefined
+        }
+      >
         <img
           src={image}
           alt=""
           fetchPriority="high"
           style={{ ["--hero-img-x" as string]: mobileImageX }}
-          className="block aspect-[390/613] w-full object-cover [object-position:var(--hero-img-x)_center] lg:aspect-[1440/822] lg:object-center"
+          className={`block aspect-[390/613] w-full object-cover [object-position:var(--hero-img-x)_center] lg:aspect-[1440/822] lg:object-center ${opts.dark ? "max-lg:hidden" : ""}`}
         />
         <div
           aria-hidden="true"
-          style={{ ["--hero-fade" as string]: opts.gradient ?? FIGMA_DEFAULT_GRADIENT }}
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0)_53.46%)] lg:bg-(image:--hero-fade)"
+          style={{
+            ["--hero-fade" as string]: opts.gradient ?? FIGMA_DEFAULT_GRADIENT,
+            ["--hero-fade-mobile" as string]: opts.dark ? FIGMA_DARK_MOBILE_GRADIENT : FIGMA_LIGHT_MOBILE_GRADIENT,
+          }}
+          className={`pointer-events-none absolute inset-x-0 -bottom-px top-0 bg-(image:--hero-fade-mobile) lg:bg-(image:--hero-fade) ${opts.dark ? "max-lg:hidden" : ""}`}
         />
 
         <div
@@ -77,13 +101,13 @@ export function ServiceDetailHero({
           <FadeIn direction="up" delay={0.06}>
             <h1
               style={mobileTitleWidth ? { ["--title-w" as string]: `${mobileTitleWidth}px` } : undefined}
-              className={`font-hero text-[24px] font-bold leading-[31px] text-[#070606] max-lg:max-w-(--title-w) ${opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:text-[4.7222cqw] lg:leading-[5.5556cqw]`}
+              className={`font-hero text-[24px] font-bold leading-[31px] ${textColor} max-lg:max-w-(--title-w) ${opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:text-[4.7222cqw] lg:leading-[5.5556cqw]`}
             >
               {name}
             </h1>
           </FadeIn>
           <FadeIn direction="up" delay={0.16}>
-            <p className="font-body text-[16px] font-medium leading-[19px] text-[#070606] lg:text-[2.6389cqw] lg:leading-[3.1944cqw]">
+            <p className={`font-body text-[16px] font-medium leading-[19px] ${textColor} lg:text-[2.6389cqw] lg:leading-[3.1944cqw]`}>
               {taglineMobile.map((line) => (
                 <span key={line} className="block whitespace-nowrap lg:hidden">
                   {line}

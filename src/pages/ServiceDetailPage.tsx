@@ -14,6 +14,17 @@ import { ServiceDetailAbout } from "@/components/service-detail/ServiceDetailAbo
 import { ServiceDetailPublishing } from "@/components/service-detail/ServiceDetailPublishing";
 import { ServiceDetailTiming } from "@/components/service-detail/ServiceDetailTiming";
 import { ServiceDetailWorkflow } from "@/components/service-detail/ServiceDetailWorkflow";
+import { ServiceDetailAboutService } from "@/components/service-detail/ServiceDetailAboutService";
+import { ServiceDetailCreatorOverview } from "@/components/service-detail/ServiceDetailCreatorOverview";
+import { ServiceDetailMarketAccounts } from "@/components/service-detail/ServiceDetailMarketAccounts";
+import { ServiceDetailTimingPerformance } from "@/components/service-detail/ServiceDetailTimingPerformance";
+import { ServiceDetailCreatorGuide } from "@/components/service-detail/ServiceDetailCreatorGuide";
+import { ServiceDetailChannelCreator } from "@/components/service-detail/ServiceDetailChannelCreator";
+import { ServiceDetailChannelStrategy } from "@/components/service-detail/ServiceDetailChannelStrategy";
+import { ServiceDetailChannelLocal } from "@/components/service-detail/ServiceDetailChannelLocal";
+import { ServiceDetailChannelMarket } from "@/components/service-detail/ServiceDetailChannelMarket";
+import { ServiceDetailChannelGrowth } from "@/components/service-detail/ServiceDetailChannelGrowth";
+import { ServiceDetailChannelWorkflow } from "@/components/service-detail/ServiceDetailChannelWorkflow";
 import { ServiceDetailIntro } from "@/components/service-detail/ServiceDetailIntro";
 import { ServiceDetailOverview } from "@/components/service-detail/ServiceDetailOverview";
 import { ServiceDetailContentCreator } from "@/components/service-detail/ServiceDetailContentCreator";
@@ -79,22 +90,75 @@ export default function ServiceDetailPage() {
         />
       </div>
 
-      {content.intro && service.introImage && <ServiceDetailIntro intro={content.intro} image={service.introImage} />}
+      {content.aboutService && service.aboutServiceImage && (
+        <ServiceDetailAboutService content={content.aboutService} image={service.aboutServiceImage} />
+      )}
+
+      {content.creatorOverview && service.creatorOverviewImage && (
+        <ServiceDetailCreatorOverview content={content.creatorOverview} image={service.creatorOverviewImage} />
+      )}
+
+      {content.intro && service.introImage && <ServiceDetailIntro intro={content.intro} image={service.introImage} figma={service.introFigma} />}
+
+      {content.creatorGuide && service.creatorGuideImages && (
+        <ServiceDetailCreatorGuide content={content.creatorGuide} images={service.creatorGuideImages} />
+      )}
+
+      {content.channelCreator && service.channelCreatorImages && (
+        <ServiceDetailChannelCreator content={content.channelCreator} images={service.channelCreatorImages} />
+      )}
 
       {content.overview && service.overviewImage && (
         <ServiceDetailOverview overview={content.overview} image={service.overviewImage} />
       )}
 
       {content.contentCreator && service.contentCreatorImage && (
-        <ServiceDetailContentCreator content={content.contentCreator} image={service.contentCreatorImage} />
+        <ServiceDetailContentCreator
+          content={content.contentCreator}
+          image={service.contentCreatorImage}
+          xStyle={service.contentCreatorX}
+        />
       )}
 
       {content.publisherLight && service.publisherLightImage && (
-        <ServiceDetailPublisherLight content={content.publisherLight} image={service.publisherLightImage} />
+        <ServiceDetailPublisherLight
+          content={content.publisherLight}
+          image={service.publisherLightImage}
+          xStyle={service.publisherLightX}
+          channelStyle={service.publisherLightChannel}
+        />
       )}
 
       {content.marketStrategy && service.marketStrategyImage && (
         <ServiceDetailMarketStrategy content={content.marketStrategy} image={service.marketStrategyImage} />
+      )}
+
+      {content.channelStrategy && service.channelStrategyImage && (
+        <ServiceDetailChannelStrategy content={content.channelStrategy} image={service.channelStrategyImage} />
+      )}
+
+      {content.channelLocal && service.channelLocalImage && (
+        <ServiceDetailChannelLocal content={content.channelLocal} image={service.channelLocalImage} />
+      )}
+
+      {content.channelMarket && service.channelMarketImage && (
+        <ServiceDetailChannelMarket content={content.channelMarket} image={service.channelMarketImage} />
+      )}
+
+      {content.channelGrowth && service.channelGrowthImage && (
+        <ServiceDetailChannelGrowth content={content.channelGrowth} image={service.channelGrowthImage} />
+      )}
+
+      {content.channelWorkflow && service.channelWorkflowImage && (
+        <ServiceDetailChannelWorkflow content={content.channelWorkflow} image={service.channelWorkflowImage} />
+      )}
+
+      {content.marketAccounts && service.marketAccountsImage && (
+        <ServiceDetailMarketAccounts content={content.marketAccounts} image={service.marketAccountsImage} />
+      )}
+
+      {content.timingPerformance && service.timingPerformanceImage && (
+        <ServiceDetailTimingPerformance content={content.timingPerformance} image={service.timingPerformanceImage} />
       )}
 
       {content.audience && service.audienceImage && (
@@ -134,7 +198,11 @@ export default function ServiceDetailPage() {
       )}
 
       {content.focusedGrowth && service.focusedGrowthImages && (
-        <ServiceDetailFocusedGrowth growth={content.focusedGrowth} images={service.focusedGrowthImages} />
+        <ServiceDetailFocusedGrowth
+          growth={content.focusedGrowth}
+          images={service.focusedGrowthImages}
+          xStyle={service.focusedGrowthX}
+        />
       )}
 
       {content.about && content.gain && (

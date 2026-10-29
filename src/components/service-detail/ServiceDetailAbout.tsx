@@ -87,7 +87,7 @@ export function ServiceDetailAbout({
   return (
     <section
       aria-labelledby="service-about-heading"
-      className={`relative isolate overflow-hidden bg-brand-bg px-10 pb-14 pt-14 text-white lg:px-5 lg:py-20 min-[1104px]:px-0 ${tight ? "max-sm:px-5" : ""}`}
+      className={`relative isolate overflow-hidden bg-[#070606] px-10 pb-14 pt-14 text-white lg:px-5 lg:py-20 min-[1104px]:px-0 ${tight ? "max-sm:px-5" : ""}`}
     >
       <div className="relative mx-auto w-full max-w-[790px] lg:max-w-[1064px]">
         <FadeIn direction="up">

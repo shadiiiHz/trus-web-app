@@ -18,7 +18,7 @@ export function ServiceDetailCreator({ creator, images }: ServiceDetailCreatorPr
   const paragraphs = creator.body.split("\n\n");
 
   return (
-    <section aria-labelledby="service-creator-heading" className="relative isolate overflow-hidden bg-brand-bg px-5 py-14 text-white lg:py-20">
+    <section aria-labelledby="service-creator-heading" className="relative isolate overflow-hidden bg-[#070606] px-5 py-14 text-white lg:py-20">
       <div className="mx-auto flex w-full max-w-[1064px] flex-col gap-10">
         <FadeIn direction="up">
           <div className="flex flex-col gap-4">
