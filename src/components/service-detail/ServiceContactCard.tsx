@@ -9,6 +9,8 @@ interface ServiceContactCardProps {
   officeLabel: string;
   phoneLabel: string;
   emailLabel: string;
+  /** Mobile spacing from the Business Growth Figma (310px tall card); desktop is unchanged. */
+  compact?: boolean;
 }
 
 /**
@@ -25,12 +27,15 @@ export function ServiceContactCard({
   officeLabel,
   phoneLabel,
   emailLabel,
+  compact,
 }: ServiceContactCardProps) {
+  /** Figma value rows are 20px tall (19px line height centred in a 20px box). */
+  const value = `${compact ? "leading-5" : "leading-[19px]"} text-[#070606]`;
   const telHref = `tel:${phone.replace(/\s+/g, "")}`;
 
   return (
     <div
-      className="relative flex flex-col gap-5 rounded-2xl p-6 lg:h-[484px] lg:w-[414px] lg:shrink-0 lg:justify-between lg:gap-[103px]"
+      className={`relative flex flex-col rounded-2xl p-6 ${compact ? "gap-7" : "gap-5"} lg:h-[484px] lg:w-[414px] lg:shrink-0 lg:justify-between lg:gap-[103px]`}
       style={{ background: "rgba(255, 255, 255, 0.2)" }}
     >
       <div
@@ -65,17 +70,17 @@ export function ServiceContactCard({
       />
 
       <div className="z-[1] flex flex-col gap-5 font-body text-[14px]">
-        <div className="flex flex-col gap-[5px]">
+        <div className={`flex flex-col ${compact ? "gap-1 lg:gap-[5px]" : "gap-[5px]"}`}>
           <p className="leading-[17px] text-[#707075]">{officeLabel}</p>
-          <p className="leading-[19px] text-[#070606]">{office}</p>
+          <p className={value}>{office}</p>
         </div>
-        <div className="flex flex-col gap-[3px]">
+        <div className={`flex flex-col ${compact ? "gap-1 lg:gap-[3px]" : "gap-[3px]"}`}>
           <p className="leading-[17px] text-[#707075]">{phoneLabel}</p>
-          <p className="leading-[19px] text-[#070606]">{phone}</p>
+          <p className={value}>{phone}</p>
         </div>
         <div className="flex flex-col gap-1">
           <p className="leading-[17px] text-[#707075]">{emailLabel}</p>
-          <p className="leading-[19px] text-[#070606]">{email}</p>
+          <p className={value}>{email}</p>
         </div>
       </div>
     </div>

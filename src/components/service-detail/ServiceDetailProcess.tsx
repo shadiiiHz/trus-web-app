@@ -79,24 +79,27 @@ export function ServiceDetailProcess({
   process,
   accordion,
   figma,
+  grid,
 }: {
   process: ProcessContent;
   accordion?: boolean;
   /** Figma-exact spacing, 32px heading, centred description, justified card text and the 486px divider pattern (needs `accordion`). */
   figma?: boolean;
+  /** Single column of closed accordion cards with the Figma heading, 43px gap and no divider grid (needs `accordion`). */
+  grid?: boolean;
 }) {
   const { eyebrow, heading, description, steps } = process;
   // Only one card can be open at a time; the first starts open.
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(grid ? null : 0);
 
   return (
     <section
       aria-labelledby="service-process-heading"
-      className={`relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] ${accordion ? "lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-[109px]"}`}
+      className={`relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] ${grid ? "lg:py-20" : accordion ? "lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-[109px]"}`}
     >
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute hidden lg:block ${figma ? "inset-x-0 top-0 h-[486.19px]" : "inset-0"}`}
+        className={`pointer-events-none absolute hidden ${grid ? "" : "lg:block"} ${figma ? "inset-x-0 top-0 h-[486.19px]" : "inset-0"}`}
       >
         {figma &&
           FIGMA_VERTICAL_LINES.map((left) => (
@@ -138,16 +141,16 @@ export function ServiceDetailProcess({
       <div className="relative mx-auto w-full max-w-[1064px]">
         <FadeIn
           direction="up"
-          className="mx-auto flex max-w-[684px] flex-col items-center text-center"
+          className={`mx-auto flex flex-col items-center text-center ${grid ? "max-w-[1064px]" : "max-w-[684px]"}`}
         >
           <p
-            className={`text-[12px] uppercase text-[#5B2BB9] lg:text-[14px] lg:leading-[17px] ${accordion ? "leading-[15px]" : "tracking-[0.04em]"}`}
+            className={`uppercase text-[#5B2BB9] lg:text-[14px] lg:leading-[17px] ${grid ? "text-[14px] leading-[17px]" : accordion ? "text-[12px] leading-[15px]" : "text-[12px] tracking-[0.04em]"}`}
           >
             {eyebrow}
           </p>
           <h2
             id="service-process-heading"
-            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${accordion && !figma ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
+            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${accordion && !figma && !grid ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
           >
             {heading}
           </h2>
@@ -159,7 +162,7 @@ export function ServiceDetailProcess({
         </FadeIn>
 
         <ol
-          className={`grid lg:grid-cols-2 lg:gap-5 ${figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
+          className={`grid ${grid ? "mt-10 gap-2.5 lg:mt-[43px] lg:gap-5" : "lg:grid-cols-2 lg:gap-5"} ${grid ? "" : figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
         >
           {steps.map((step, i) => (
             <li key={step.title}>
@@ -171,7 +174,7 @@ export function ServiceDetailProcess({
                     body={step.description}
                     open={openIndex === i}
                     onToggle={() => setOpenIndex((cur) => (cur === i ? null : i))}
-                    justify={figma && step.description.length > 160 && !step.description.includes("\n")}
+                    justify={grid || figma && step.description.length > 160 && !step.description.includes("\n")}
                   />
                 ) : (
                   <div className="flex h-full flex-col rounded-[16px] border border-white/30 bg-white p-5">

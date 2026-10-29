@@ -8,6 +8,15 @@ export interface FigmaHeroOptions {
   gradient?: string;
   /** Dark hero: black bottom fades and white text (instead of the white fade and dark text). */
   dark?: boolean;
+  /** Mobile: CSS `linear-gradient(…)` laid over the photo (defaults to the dark / light bottom fade). */
+  mobileGradient?: string;
+  /** Desktop title line height and width, in px at 1440 (default 80 / 676 with `bottom`). */
+  titleLeading?: number;
+  titleWidth?: number;
+  /** Title letter-spacing in em (this Figma title is set tighter than DM Sans’ default). */
+  titleTracking?: number;
+  /** Text colour (default #070606, or white when `dark`). */
+  ink?: string;
 }
 
 const FIGMA_DARK_MOBILE_GRADIENT = "linear-gradient(0deg, rgba(0,0,0,0.898039) 0%, rgba(0,0,0,0) 53.45%)";
@@ -58,37 +67,30 @@ export function ServiceDetailHero({
   if (figma) {
     const opts: FigmaHeroOptions = figma === true ? {} : figma;
     const textColor = opts.dark ? "text-white" : "text-[#070606]";
+    const mobileFade = opts.mobileGradient ?? (opts.dark ? FIGMA_DARK_MOBILE_GRADIENT : FIGMA_LIGHT_MOBILE_GRADIENT);
+    const cqw = (px: number) => `${Math.round((px / 1440) * 1000000) / 10000}cqw`;
     return (
       <section
-        className={`relative isolate overflow-hidden [container-type:inline-size] ${
-          opts.dark
-            ? "bg-[#070606] max-lg:aspect-[390/613] max-lg:[background-image:var(--hero-fade-mobile),var(--hero-photo)] max-lg:[background-position:0_0,var(--hero-img-x)_center] max-lg:[background-repeat:no-repeat] max-lg:[background-size:100%_100%,cover]"
-            : "bg-white"
-        }`}
-        style={
-          opts.dark
-            ? {
-                ["--hero-fade-mobile" as string]: FIGMA_DARK_MOBILE_GRADIENT,
-                ["--hero-photo" as string]: `url(${image})`,
-                ["--hero-img-x" as string]: mobileImageX,
-              }
-            : undefined
-        }
+        className={`relative isolate overflow-hidden [container-type:inline-size] max-lg:aspect-[390/613] max-lg:[background-image:var(--hero-fade-mobile),var(--hero-photo)] max-lg:[background-position:0_0,var(--hero-img-x)_center] max-lg:[background-repeat:no-repeat] max-lg:[background-size:100%_100%,cover] ${opts.dark ? "bg-[#070606]" : "bg-white"}`}
+        style={{
+          ["--hero-fade-mobile" as string]: mobileFade,
+          ["--hero-photo" as string]: `url(${image})`,
+          ["--hero-img-x" as string]: mobileImageX,
+        }}
       >
         <img
           src={image}
           alt=""
           fetchPriority="high"
           style={{ ["--hero-img-x" as string]: mobileImageX }}
-          className={`block aspect-[390/613] w-full object-cover [object-position:var(--hero-img-x)_center] lg:aspect-[1440/822] lg:object-center ${opts.dark ? "max-lg:hidden" : ""}`}
+          className={`block aspect-[390/613] w-full object-cover [object-position:var(--hero-img-x)_center] lg:aspect-[1440/822] lg:object-center max-lg:hidden`}
         />
         <div
           aria-hidden="true"
           style={{
             ["--hero-fade" as string]: opts.gradient ?? FIGMA_DEFAULT_GRADIENT,
-            ["--hero-fade-mobile" as string]: opts.dark ? FIGMA_DARK_MOBILE_GRADIENT : FIGMA_LIGHT_MOBILE_GRADIENT,
           }}
-          className={`pointer-events-none absolute inset-x-0 -bottom-px top-0 bg-(image:--hero-fade-mobile) lg:bg-(image:--hero-fade) ${opts.dark ? "max-lg:hidden" : ""}`}
+          className={`pointer-events-none absolute inset-x-0 -bottom-px top-0 bg-(image:--hero-fade-mobile) lg:bg-(image:--hero-fade) max-lg:hidden`}
         />
 
         <div
@@ -100,24 +102,42 @@ export function ServiceDetailHero({
         >
           <FadeIn direction="up" delay={0.06}>
             <h1
-              style={mobileTitleWidth ? { ["--title-w" as string]: `${mobileTitleWidth}px` } : undefined}
-              className={`font-hero text-[24px] font-bold leading-[31px] ${textColor} max-lg:max-w-(--title-w) ${opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:text-[4.7222cqw] lg:leading-[5.5556cqw]`}
+              style={{
+                ...(mobileTitleWidth ? { ["--title-w" as string]: `${mobileTitleWidth}px` } : null),
+                ...(opts.ink ? { color: opts.ink } : null),
+                ...(opts.titleTracking ? { letterSpacing: `${opts.titleTracking}em` } : null),
+                ...(opts.titleLeading ? { ["--title-lh" as string]: cqw(opts.titleLeading) } : null),
+                ...(opts.titleWidth ? { ["--title-wd" as string]: cqw(opts.titleWidth) } : null),
+              }}
+              className={`font-hero text-[24px] font-bold leading-[31px] ${textColor} max-lg:max-w-(--title-w) ${opts.titleWidth ? "lg:w-(--title-wd)" : opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:text-[4.7222cqw] ${opts.titleLeading ? "lg:leading-(--title-lh)" : "lg:leading-[5.5556cqw]"}`}
             >
               {name}
             </h1>
           </FadeIn>
           <FadeIn direction="up" delay={0.16}>
-            <p className={`font-body text-[16px] font-medium leading-[19px] ${textColor} lg:text-[2.6389cqw] lg:leading-[3.1944cqw]`}>
-              {taglineMobile.map((line) => (
-                <span key={line} className="block whitespace-nowrap lg:hidden">
-                  {line}
-                </span>
-              ))}
-              {tagline.map((line) => (
-                <span key={line} className="hidden whitespace-nowrap lg:block">
-                  {line}
-                </span>
-              ))}
+            <p
+              style={opts.ink ? { color: opts.ink } : undefined}
+              className={`font-body text-[16px] font-medium leading-[19px] ${textColor} lg:text-[2.6389cqw] lg:leading-[3.1944cqw]`}
+            >
+              {/* An empty line is a spacer: one text line on phones, 24px on desktop. */}
+              {taglineMobile.map((line, i) =>
+                line ? (
+                  <span key={i} className="block whitespace-nowrap lg:hidden">
+                    {line}
+                  </span>
+                ) : (
+                  <span key={i} aria-hidden="true" className="block h-[19px] lg:hidden" />
+                ),
+              )}
+              {tagline.map((line, i) =>
+                line ? (
+                  <span key={i} className="hidden whitespace-nowrap lg:block">
+                    {line}
+                  </span>
+                ) : (
+                  <span key={i} aria-hidden="true" className="hidden h-[1.6667cqw] lg:block" />
+                ),
+              )}
             </p>
           </FadeIn>
         </div>

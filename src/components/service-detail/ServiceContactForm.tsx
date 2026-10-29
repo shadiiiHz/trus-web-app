@@ -12,17 +12,28 @@ interface ServiceContactFormProps {
   /** Pre-filled, read-only "Subject" field shown above the others. */
   subject: { label: string; value: string };
   className?: string;
+  /** Mobile sizes from the Business Growth Figma (45px inputs, 63px message field); desktop is unchanged. */
+  compact?: boolean;
 }
 
 const LABEL = "font-body text-[16px] font-normal leading-[19px] tracking-[-0.64px] text-[#070606]";
 const CONTROL =
-  "block w-full border-0 border-b border-b-[rgba(112,112,117,0.3)] bg-transparent font-body text-[14px] font-normal leading-[17px] text-[#070606] outline-none placeholder:text-[#707075] placeholder:opacity-100 focus:border-b-[rgba(91,43,185,0.5)] lg:text-[16px] lg:leading-[19px] lg:tracking-[-0.48px]";
+  "block w-full border-0 border-b border-b-[rgba(112,112,117,0.3)] bg-transparent font-body font-normal text-[#070606] outline-none placeholder:text-[#707075] placeholder:opacity-100 focus:border-b-[rgba(91,43,185,0.5)] lg:text-[16px] lg:tracking-[-0.48px]";
+const TEXT_DEFAULT = "text-[14px] leading-[17px] lg:leading-[19px]";
+const TEXT_COMPACT = "text-[16px] leading-[22px] lg:leading-[19px]";
 
 /**
  * Service-page contact form (Figma): flat fields on a 20px rhythm, 44px inputs
  * with a hairline underline, and a 125×40 purple submit button.
  */
-export function ServiceContactForm({ fields, submit, subject, className }: ServiceContactFormProps) {
+export function ServiceContactForm({ fields, submit, subject, className, compact }: ServiceContactFormProps) {
+  const fieldGap = "gap-1";
+  const inputSize = compact
+    ? `${TEXT_COMPACT} h-[46px] pt-3 lg:h-11 lg:pt-[12.5px]`
+    : `${TEXT_DEFAULT} h-11 pt-3 lg:pt-[12.5px]`;
+  const textareaSize = compact
+    ? `${TEXT_COMPACT} h-16 pt-3 lg:h-[53px] lg:pt-2.5`
+    : `${TEXT_DEFAULT} h-[104px] pt-3 lg:h-[53px] lg:pt-2.5`;
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(fields.map((f) => [f.id, ""])),
   );
@@ -33,7 +44,7 @@ export function ServiceContactForm({ fields, submit, subject, className }: Servi
       className={["flex flex-col gap-5", className].filter(Boolean).join(" ")}
       onSubmit={(e) => e.preventDefault()}
     >
-      <div className="flex flex-col gap-1">
+      <div className={`flex flex-col ${fieldGap}`}>
         <label htmlFor="contact-subject" className={LABEL}>
           {subject.label}
         </label>
@@ -43,12 +54,12 @@ export function ServiceContactForm({ fields, submit, subject, className }: Servi
           type="text"
           readOnly
           value={subject.value}
-          className={`${CONTROL} h-11 pt-3 lg:pt-[12.5px]`}
+          className={`${CONTROL} ${inputSize}`}
         />
       </div>
 
       {fields.map((field) => (
-        <div key={field.id} className="flex flex-col gap-1">
+        <div key={field.id} className={`flex flex-col ${fieldGap}`}>
           <label htmlFor={`contact-${field.id}`} className={LABEL}>
             {field.label}
           </label>
@@ -59,7 +70,7 @@ export function ServiceContactForm({ fields, submit, subject, className }: Servi
               placeholder={field.placeholder}
               value={values[field.id]}
               onChange={(e) => set(field.id, e.target.value)}
-              className={`${CONTROL} h-[104px] resize-none pt-3 lg:h-[53px] lg:pt-2.5`}
+              className={`${CONTROL} resize-none ${textareaSize}`}
             />
           ) : (
             <input
@@ -69,7 +80,7 @@ export function ServiceContactForm({ fields, submit, subject, className }: Servi
               placeholder={field.placeholder}
               value={values[field.id]}
               onChange={(e) => set(field.id, e.target.value)}
-              className={`${CONTROL} h-11 pt-3 lg:pt-[12.5px]`}
+              className={`${CONTROL} ${inputSize}`}
             />
           )}
         </div>
@@ -77,7 +88,7 @@ export function ServiceContactForm({ fields, submit, subject, className }: Servi
 
       <button
         type="submit"
-        className="flex h-10 w-[125px] items-center justify-center gap-1 rounded-md bg-[#5B2BB9] px-6 py-2.5 font-body text-[14px] font-normal leading-5 text-white shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(0,0,0,0.18),inset_0_-2px_0_rgba(0,0,0,0.05)] transition-[filter] hover:brightness-110"
+        className={`flex h-10 ${compact ? "w-[127px]" : "w-[125px]"} items-center justify-center gap-1 rounded-md bg-[#5B2BB9] px-6 py-2.5 font-body text-[14px] font-normal leading-5 text-white shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(0,0,0,0.18),inset_0_-2px_0_rgba(0,0,0,0.05)] transition-[filter] hover:brightness-110`}
       >
         {submit}
       </button>

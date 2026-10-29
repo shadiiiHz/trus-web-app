@@ -25,6 +25,8 @@ import { ServiceDetailChannelLocal } from "@/components/service-detail/ServiceDe
 import { ServiceDetailChannelMarket } from "@/components/service-detail/ServiceDetailChannelMarket";
 import { ServiceDetailChannelGrowth } from "@/components/service-detail/ServiceDetailChannelGrowth";
 import { ServiceDetailChannelWorkflow } from "@/components/service-detail/ServiceDetailChannelWorkflow";
+import { ServiceDetailMission } from "@/components/service-detail/ServiceDetailMission";
+import { ServiceDetailEcosystem } from "@/components/service-detail/ServiceDetailEcosystem";
 import { ServiceDetailIntro } from "@/components/service-detail/ServiceDetailIntro";
 import { ServiceDetailOverview } from "@/components/service-detail/ServiceDetailOverview";
 import { ServiceDetailContentCreator } from "@/components/service-detail/ServiceDetailContentCreator";
@@ -89,6 +91,10 @@ export default function ServiceDetailPage() {
           mobileTitleWidth={service.heroMobile?.titleWidth}
         />
       </div>
+
+      {content.mission && service.missionImage && (
+        <ServiceDetailMission content={content.mission} image={service.missionImage} />
+      )}
 
       {content.aboutService && service.aboutServiceImage && (
         <ServiceDetailAboutService content={content.aboutService} image={service.aboutServiceImage} />
@@ -219,7 +225,11 @@ export default function ServiceDetailPage() {
         />
       )}
 
-      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} />}
+      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} grid={service.processGrid} />}
+
+      {content.ecosystem && service.ecosystemImage && (
+        <ServiceDetailEcosystem content={content.ecosystem} image={service.ecosystemImage} />
+      )}
 
       {content.matters && service.mattersImage && (
         <ServiceDetailMatters matters={content.matters} image={service.mattersImage} />
@@ -267,6 +277,7 @@ export default function ServiceDetailPage() {
           descriptionDesktop={content.contact.descriptionDesktop}
           wide={content.contact.wide}
           plainText={service.contactPlainText}
+          compact={service.contactCompact}
         />
       )}
 

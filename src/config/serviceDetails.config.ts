@@ -21,7 +21,7 @@ import type { FigmaHeroOptions } from "@/components/service-detail/ServiceDetail
 import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
-export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin" | "x" | "telegram";
+export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin" | "x" | "telegram" | "growthIntelligence";
 
 /** Optional "how it works" section (numbered step cards). */
 export interface ServiceDetailProcess {
@@ -488,6 +488,32 @@ export interface ServiceDetailChannelWorkflow {
   highlightItems: readonly string[];
 }
 
+/** Optional dark "mission" block: eyebrow, heading, an image beside a paragraph list, then a "clear path" pill chain. A `""` paragraph is a spacer line. */
+export interface ServiceDetailMission {
+  heading: string;
+  paragraphs: readonly { text: string; bold?: boolean; justifyLast?: boolean }[];
+  imageAlt: string;
+  pathLead: string;
+  steps: readonly string[];
+}
+
+/** Optional dark "ecosystem" block: heading and intro, a short pill chain, an image beside a "What You Gain" list, then a mission header with a summary. `intro` supports **bold** and `
+` lines (a non-breaking-space line is a spacer). */
+export interface ServiceDetailEcosystem {
+  heading: string;
+  intro: string;
+  steps: readonly string[];
+  imageAlt: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  missionLabel: string;
+  missionHeading: string;
+  missionIntro: string;
+  missionQuestions: readonly string[];
+  missionConnect: string;
+  missionGoal: string;
+}
+
 /** Optional dark "why this matters" section (heading + paragraph, image beside a highlights list). */
 export interface ServiceDetailMatters {
   heading: string;
@@ -539,6 +565,10 @@ export interface ServiceDetailText {
   creatorOverview?: ServiceDetailCreatorOverview;
   /** Rendered after `intro` when present. */
   creatorGuide?: ServiceDetailCreatorGuide;
+  /** Rendered right after the hero when present. */
+  mission?: ServiceDetailMission;
+  /** Rendered after `process` when present. */
+  ecosystem?: ServiceDetailEcosystem;
   /** Rendered after `creatorGuide` when present. */
   channelCreator?: ServiceDetailChannelCreator;
   /** Rendered after `publisherLight` when present. */
@@ -636,6 +666,8 @@ export interface ServiceDetail {
   processAccordion?: boolean;
   /** With `processAccordion`: Figma-exact "process" section (32px heading, centred intro, 486px divider pattern). */
   processFigma?: boolean;
+  /** With `processAccordion`: the Business Growth page's single column of closed cards (see `ServiceDetailProcess`). */
+  processGrid?: boolean;
   /** Image + per-item icons of the `publishing` section. */
   publishingImage?: string;
   publishingIcons?: readonly ServiceStackIcon[];
@@ -651,6 +683,8 @@ export interface ServiceDetail {
   contactWide?: boolean;
   /** Contact description uses plain tracking and is justified on desktop (that page's Figma). */
   contactPlainText?: boolean;
+  /** Contact block follows the Business Growth Figma (120.5px top, 32/42 heading, mobile card/form sizes). */
+  contactCompact?: boolean;
   /** Image of the `strategy` section (only for pages with `strategy` copy). */
   strategyImage?: string;
   /** Image of the `intelligence` section (only for pages with `intelligence` copy). */
@@ -669,6 +703,10 @@ export interface ServiceDetail {
   creatorOverviewImage?: string;
   /** Images of the `creatorGuide` section: beside the purposes list, and beside "What You Gain". */
   creatorGuideImages?: { purposes: string; gain: string };
+  /** Image of the `mission` section (only for pages with `mission` copy). */
+  missionImage?: string;
+  /** Image of the `ecosystem` section (only for pages with `ecosystem` copy). */
+  ecosystemImage?: string;
   /** Images of the `channelCreator` section: beside the refine list, and beside "What You Gain". */
   channelCreatorImages?: { refine: string; gain: string };
   /** Image of the `channelStrategy` section (only for pages with `channelStrategy` copy). */
@@ -938,6 +976,29 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroOnly: true,
     contactWide: true,
     contactPlainText: true,
+  },
+  {
+    slug: "business-growth-intelligence-solver",
+    textKey: "growthIntelligence",
+    heroImage: "/services/growth-hero.png",
+    heroFigma: {
+      bottom: true,
+      ink: "#0A0A0A",
+      titleLeading: 64,
+      titleTracking: -0.044,
+      titleWidth: 650,
+      gradient:
+        "linear-gradient(36.6deg, rgba(255,255,255,0.64) 24.87%, rgba(255,255,255,0.558431) 39.75%, rgba(255,255,255,0) 56.54%)",
+      mobileGradient: "linear-gradient(0.2deg, rgba(255,255,255,0.898039) 18.46%, rgba(255,255,255,0) 58.32%)",
+    },
+    heroMobile: { imageX: "50%", titleWidth: 329 },
+    missionImage: "/services/growth-about.png",
+    processAccordion: true,
+    processGrid: true,
+    ecosystemImage: "/services/growth-ecosystem.png",
+    heroOnly: true,
+    contactWide: true,
+    contactCompact: true,
   },
 ];
 
