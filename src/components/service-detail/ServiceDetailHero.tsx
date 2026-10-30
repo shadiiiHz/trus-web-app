@@ -13,8 +13,12 @@ export interface FigmaHeroOptions {
   /** Desktop title line height and width, in px at 1440 (default 80 / 676 with `bottom`). */
   titleLeading?: number;
   titleWidth?: number;
+  /** Desktop gap between title and supporting line, in px at 1440 (default 24 with `bottom`). */
+  gap?: number;
   /** Title letter-spacing in em (this Figma title is set tighter than DM Sans’ default). */
   titleTracking?: number;
+  /** With `titleTracking`: apply it on desktop only (the mobile title keeps the default tracking). */
+  titleTrackingDesktopOnly?: boolean;
   /** Text colour (default #070606, or white when `dark`). */
   ink?: string;
 }
@@ -94,9 +98,10 @@ export function ServiceDetailHero({
         />
 
         <div
+          style={opts.gap ? { ["--hero-gap" as string]: cqw(opts.gap) } : undefined}
           className={`absolute inset-0 flex flex-col items-start justify-end gap-4 px-5 py-10 lg:px-[5.5556cqw] ${
             opts.bottom
-              ? "lg:gap-[1.6667cqw] lg:py-[5.5556cqw]"
+              ? "lg:gap-(--hero-gap,1.6667cqw) lg:py-[5.5556cqw]"
               : "lg:justify-start lg:gap-[1.1111cqw] lg:pb-0 lg:pt-[4.0972cqw]"
           }`}
         >
@@ -105,11 +110,16 @@ export function ServiceDetailHero({
               style={{
                 ...(mobileTitleWidth ? { ["--title-w" as string]: `${mobileTitleWidth}px` } : null),
                 ...(opts.ink ? { color: opts.ink } : null),
-                ...(opts.titleTracking ? { letterSpacing: `${opts.titleTracking}em` } : null),
+                ...(opts.titleTracking
+                  ? {
+                      ["--title-tr" as string]: `${opts.titleTracking}em`,
+                      ...(opts.titleTrackingDesktopOnly ? null : { letterSpacing: `${opts.titleTracking}em` }),
+                    }
+                  : null),
                 ...(opts.titleLeading ? { ["--title-lh" as string]: cqw(opts.titleLeading) } : null),
                 ...(opts.titleWidth ? { ["--title-wd" as string]: cqw(opts.titleWidth) } : null),
               }}
-              className={`font-hero text-[24px] font-bold leading-[31px] ${textColor} max-lg:max-w-(--title-w) ${opts.titleWidth ? "lg:w-(--title-wd)" : opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:text-[4.7222cqw] ${opts.titleLeading ? "lg:leading-(--title-lh)" : "lg:leading-[5.5556cqw]"}`}
+              className={`font-hero text-[24px] font-bold leading-[31px] ${textColor} max-lg:max-w-(--title-w) ${opts.titleWidth ? "lg:w-(--title-wd)" : opts.bottom ? "lg:w-[46.9444cqw]" : "lg:w-[50.3472cqw]"} lg:tracking-(--title-tr,normal) lg:text-[4.7222cqw] ${opts.titleLeading ? "lg:leading-(--title-lh)" : "lg:leading-[5.5556cqw]"}`}
             >
               {name}
             </h1>

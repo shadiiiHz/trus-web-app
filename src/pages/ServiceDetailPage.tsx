@@ -25,6 +25,13 @@ import { ServiceDetailChannelLocal } from "@/components/service-detail/ServiceDe
 import { ServiceDetailChannelMarket } from "@/components/service-detail/ServiceDetailChannelMarket";
 import { ServiceDetailChannelGrowth } from "@/components/service-detail/ServiceDetailChannelGrowth";
 import { ServiceDetailChannelWorkflow } from "@/components/service-detail/ServiceDetailChannelWorkflow";
+import { ServiceDetailAboutProcess } from "@/components/service-detail/ServiceDetailAboutProcess";
+import { ServiceDetailNewsletter } from "@/components/service-detail/ServiceDetailNewsletter";
+import { ServiceDetailGrowthSystem } from "@/components/service-detail/ServiceDetailGrowthSystem";
+import { ServiceDetailBroadcastAbout } from "@/components/service-detail/ServiceDetailBroadcastAbout";
+import { ServiceDetailTwoGoals } from "@/components/service-detail/ServiceDetailTwoGoals";
+import { ServiceDetailBroadcastInsights } from "@/components/service-detail/ServiceDetailBroadcastInsights";
+import { ServiceDetailGainHighlights } from "@/components/service-detail/ServiceDetailGainHighlights";
 import { ServiceDetailMission } from "@/components/service-detail/ServiceDetailMission";
 import { ServiceDetailEcosystem } from "@/components/service-detail/ServiceDetailEcosystem";
 import { ServiceDetailIntro } from "@/components/service-detail/ServiceDetailIntro";
@@ -91,6 +98,27 @@ export default function ServiceDetailPage() {
           mobileTitleWidth={service.heroMobile?.titleWidth}
         />
       </div>
+
+      {content.broadcastAbout && service.broadcastAboutImage && (
+        <ServiceDetailBroadcastAbout content={content.broadcastAbout} image={service.broadcastAboutImage} />
+      )}
+
+      {content.aboutProcess && content.process && service.aboutProcessImage && (
+        <ServiceDetailAboutProcess
+          content={content.aboutProcess}
+          process={content.process}
+          image={service.aboutProcessImage}
+          imagePosition={service.aboutProcessImagePosition}
+        />
+      )}
+
+      {content.newsletter && service.newsletterImage && (
+        <ServiceDetailNewsletter content={content.newsletter} image={service.newsletterImage} />
+      )}
+
+      {content.growthSystem && service.growthSystemImage && (
+        <ServiceDetailGrowthSystem content={content.growthSystem} image={service.growthSystemImage} />
+      )}
 
       {content.mission && service.missionImage && (
         <ServiceDetailMission content={content.mission} image={service.missionImage} />
@@ -225,7 +253,19 @@ export default function ServiceDetailPage() {
         />
       )}
 
-      {content.process && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} grid={service.processGrid} />}
+      {content.process && !content.aboutProcess && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} grid={service.processGrid} centered={service.processCentered} />}
+
+      {content.twoGoals && service.twoGoalsImage && (
+        <ServiceDetailTwoGoals content={content.twoGoals} image={service.twoGoalsImage} />
+      )}
+
+      {content.broadcastInsights && service.broadcastInsightsImage && (
+        <ServiceDetailBroadcastInsights content={content.broadcastInsights} image={service.broadcastInsightsImage} />
+      )}
+
+      {content.gainHighlights && service.gainHighlightsImages && (
+        <ServiceDetailGainHighlights content={content.gainHighlights} images={service.gainHighlightsImages} />
+      )}
 
       {content.ecosystem && service.ecosystemImage && (
         <ServiceDetailEcosystem content={content.ecosystem} image={service.ecosystemImage} />
@@ -271,13 +311,16 @@ export default function ServiceDetailPage() {
 
       {content.contact && (
         <ServiceDetailContact
-          subject={getServiceName(service)}
+          subject={content.contact.subject ?? getServiceName(service)}
           heading={content.contact.heading}
           description={content.contact.description}
           descriptionDesktop={content.contact.descriptionDesktop}
           wide={content.contact.wide}
           plainText={service.contactPlainText}
           compact={service.contactCompact}
+          tightText={service.contactTightText}
+          tightForm={service.contactTightForm}
+          topPadding={service.contactTopPadding}
         />
       )}
 

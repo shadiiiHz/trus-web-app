@@ -10,6 +10,8 @@ export const SERVICE_ICON_MAP: Record<string, ReactNode> = Object.fromEntries(
 /** Service cards that have a dedicated detail page, by card id. */
 export const SERVICE_LINKS: Record<string, string> = {
   'business-growth': serviceDetailPath('business-growth-intelligence-solver'),
+  youtube: serviceDetailPath('youtube-growth-broadcaster'),
+  'lead-email': serviceDetailPath('lead-to-customer-email-growth'),
   multilingual: serviceDetailPath('multilingual-localized-growth-strategy'),
   seo: serviceDetailPath('seo-content-optimization'),
   'web-design': serviceDetailPath('web-design-development'),

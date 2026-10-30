@@ -12,7 +12,7 @@ const FIGMA_HORIZONTAL_LINES = [10.2, 20.89, 31.57, 42.26];
 const LINE_ALPHA =
   "rgba(255, 255, 255, 0.005) 0%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.005) 100%";
 
-function AccordionCard({
+export function AccordionCard({
   index,
   title,
   body,
@@ -55,6 +55,7 @@ function AccordionCard({
           </svg>
         </button>
       </h3>
+      {body && (
       <div
         id={id}
         role="region"
@@ -67,6 +68,7 @@ function AccordionCard({
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
@@ -80,6 +82,7 @@ export function ServiceDetailProcess({
   accordion,
   figma,
   grid,
+  centered,
 }: {
   process: ProcessContent;
   accordion?: boolean;
@@ -87,6 +90,8 @@ export function ServiceDetailProcess({
   figma?: boolean;
   /** Single column of closed accordion cards with the Figma heading, 43px gap and no divider grid (needs `accordion`). */
   grid?: boolean;
+  /** With `grid`: a 900px desktop frame centring its content, a centred description on phones too, and 40px / 10px gaps (the YouTube page's Figma). */
+  centered?: boolean;
 }) {
   const { eyebrow, heading, description, steps } = process;
   // Only one card can be open at a time; the first starts open.
@@ -95,7 +100,7 @@ export function ServiceDetailProcess({
   return (
     <section
       aria-labelledby="service-process-heading"
-      className={`relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] ${grid ? "lg:py-20" : accordion ? "lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-[109px]"}`}
+      className={`relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] ${grid ? (centered ? "lg:flex lg:h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-20") : accordion ? "lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-[109px]"}`}
     >
       <div
         aria-hidden="true"
@@ -150,19 +155,19 @@ export function ServiceDetailProcess({
           </p>
           <h2
             id="service-process-heading"
-            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${accordion && !figma && !grid ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
+            className={`mt-2 font-hero text-[26px] font-bold leading-[34px] ${centered ? "lg:tracking-[-0.0235em]" : ""} ${accordion && !figma && !grid ? "lg:text-[38px] lg:leading-[49px]" : "lg:text-[32px] lg:leading-[42px]"}`}
           >
             {heading}
           </h2>
           <p
-            className={`mt-4 w-full font-body text-justify text-[16px] text-black lg:mt-4 lg:text-center lg:leading-6 ${accordion ? "leading-6" : "leading-[22px]"}`}
+            className={`mt-4 w-full font-body ${centered ? "text-center" : "text-justify lg:text-center"} text-[16px] text-black lg:mt-4 lg:leading-6 ${accordion ? "leading-6" : "leading-[22px]"}`}
           >
             {description}
           </p>
         </FadeIn>
 
         <ol
-          className={`grid ${grid ? "mt-10 gap-2.5 lg:mt-[43px] lg:gap-5" : "lg:grid-cols-2 lg:gap-5"} ${grid ? "" : figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
+          className={`grid ${grid ? (centered ? "mt-10 gap-2.5" : "mt-10 gap-2.5 lg:mt-[43px] lg:gap-5") : "lg:grid-cols-2 lg:gap-5"} ${grid ? "" : figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
         >
           {steps.map((step, i) => (
             <li key={step.title}>

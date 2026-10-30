@@ -14,6 +14,8 @@ interface ServiceContactFormProps {
   className?: string;
   /** Mobile sizes from the Business Growth Figma (45px inputs, 63px message field); desktop is unchanged. */
   compact?: boolean;
+  /** With `compact`: 44px inputs and a 53px message field on phones too (the YouTube page's Figma). */
+  tightMobile?: boolean;
 }
 
 const LABEL = "font-body text-[16px] font-normal leading-[19px] tracking-[-0.64px] text-[#070606]";
@@ -26,13 +28,13 @@ const TEXT_COMPACT = "text-[16px] leading-[22px] lg:leading-[19px]";
  * Service-page contact form (Figma): flat fields on a 20px rhythm, 44px inputs
  * with a hairline underline, and a 125×40 purple submit button.
  */
-export function ServiceContactForm({ fields, submit, subject, className, compact }: ServiceContactFormProps) {
+export function ServiceContactForm({ fields, submit, subject, className, compact, tightMobile }: ServiceContactFormProps) {
   const fieldGap = "gap-1";
   const inputSize = compact
-    ? `${TEXT_COMPACT} h-[46px] pt-3 lg:h-11 lg:pt-[12.5px]`
+    ? `${TEXT_COMPACT} ${tightMobile ? "h-11 pt-2.5" : "h-[46px] pt-3"} lg:h-11 lg:pt-[12.5px]`
     : `${TEXT_DEFAULT} h-11 pt-3 lg:pt-[12.5px]`;
   const textareaSize = compact
-    ? `${TEXT_COMPACT} h-16 pt-3 lg:h-[53px] lg:pt-2.5`
+    ? `${TEXT_COMPACT} ${tightMobile ? "h-[53px] pt-2.5" : "h-16 pt-3"} lg:h-[53px] lg:pt-2.5`
     : `${TEXT_DEFAULT} h-[104px] pt-3 lg:h-[53px] lg:pt-2.5`;
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(fields.map((f) => [f.id, ""])),

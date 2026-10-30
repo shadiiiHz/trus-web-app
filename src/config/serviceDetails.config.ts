@@ -21,7 +21,7 @@ import type { FigmaHeroOptions } from "@/components/service-detail/ServiceDetail
 import type { ServiceStackIcon } from "@/components/service-detail/socialIcons";
 
 /** Keys of `serviceDetail.pages` in the locale JSON files. */
-export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin" | "x" | "telegram" | "growthIntelligence";
+export type ServiceTextKey = "seo" | "webDesign" | "brand" | "social" | "autoPost" | "instagram" | "localizedGrowth" | "linkedin" | "x" | "telegram" | "growthIntelligence" | "leadEmail" | "youtube";
 
 /** Optional "how it works" section (numbered step cards). */
 export interface ServiceDetailProcess {
@@ -488,6 +488,86 @@ export interface ServiceDetailChannelWorkflow {
   highlightItems: readonly string[];
 }
 
+/** Optional dark "about the service" block (image beside paragraphs) that precedes `process` in one section. A `""` paragraph is a spacer line; `text` supports **bold** and `
+` lines. */
+export interface ServiceDetailAboutProcess {
+  heading: string;
+  paragraphs: readonly { text: string; justifyLast?: boolean }[];
+  imageAlt: string;
+}
+
+/** Optional light "newsletter services" block: three services (the second beside an image). A `""` paragraph is a spacer line; `
+` is a line break whose line is justified to the full width; `**bold**` is supported. */
+export interface ServiceDetailNewsletterStep {
+  heading: string;
+  paragraphs: readonly string[];
+}
+
+export interface ServiceDetailNewsletter {
+  eyebrow: string;
+  heading: string;
+  sendCreate: ServiceDetailNewsletterStep;
+  create: ServiceDetailNewsletterStep;
+  send: ServiceDetailNewsletterStep;
+  imageAlt: string;
+}
+
+/** Optional dark "growth system" block: heading, lead line and pill chain, a summary with a result list, then an image beside "What You Gain" and a "Highlights" list. */
+export interface ServiceDetailGrowthSystem {
+  heading: string;
+  lead: string;
+  steps: readonly string[];
+  text: string;
+  resultLabel: string;
+  resultItems: readonly string[];
+  imageAlt: string;
+  gainHeading: string;
+  gainItems: readonly string[];
+  highlightsHeading: string;
+  highlightItems: readonly string[];
+}
+
+/** Optional dark YouTube "about the service" block: title, intro, an example list, outro paragraphs, a goal pair and an image. A `""` paragraph is a spacer line; `**bold**` is supported. */
+export interface ServiceDetailBroadcastAbout {
+  heading: string;
+  intro: readonly string[];
+  exampleLabel: string;
+  examples: readonly string[];
+  outro: readonly string[];
+  /** The two goal pills, joined by a "+". */
+  goals: readonly string[];
+  imageAlt: string;
+}
+
+/** Optional dark "two growth goals" block: title, a YouTube-presence column, an image beside a business-growth column with a pill chain, and a summary. `summary` supports **bold**. */
+export interface ServiceDetailTwoGoals {
+  heading: string;
+  youtube: { title: string; intro: string; items: readonly string[]; note: string };
+  business: { title: string; intro: string; items: readonly string[]; text: string; steps: readonly string[] };
+  summary: string;
+  imageAlt: string;
+}
+
+/** Optional light "smarter broadcasting" block: title, description, an example list, a closing line and a wide image. */
+export interface ServiceDetailBroadcastInsights {
+  heading: string;
+  description: string;
+  exampleLabel: string;
+  examples: readonly string[];
+  closing: string;
+  imageAlt: string;
+}
+
+/** Optional dark "what you gain / highlights" block: two lists, each beside its own image. */
+export interface ServiceDetailGainHighlights {
+  gainHeading: string;
+  gainItems: readonly string[];
+  gainImageAlt: string;
+  highlightsHeading: string;
+  highlightItems: readonly string[];
+  highlightsImageAlt: string;
+}
+
 /** Optional dark "mission" block: eyebrow, heading, an image beside a paragraph list, then a "clear path" pill chain. A `""` paragraph is a spacer line. */
 export interface ServiceDetailMission {
   heading: string;
@@ -565,6 +645,20 @@ export interface ServiceDetailText {
   creatorOverview?: ServiceDetailCreatorOverview;
   /** Rendered after `intro` when present. */
   creatorGuide?: ServiceDetailCreatorGuide;
+  /** Rendered right after the hero when present, with `process` folded into the same dark section. */
+  aboutProcess?: ServiceDetailAboutProcess;
+  /** Rendered right after the hero when present. */
+  broadcastAbout?: ServiceDetailBroadcastAbout;
+  /** Rendered after `process` when present. */
+  twoGoals?: ServiceDetailTwoGoals;
+  /** Rendered after `twoGoals` when present. */
+  broadcastInsights?: ServiceDetailBroadcastInsights;
+  /** Rendered after `broadcastInsights` when present. */
+  gainHighlights?: ServiceDetailGainHighlights;
+  /** Rendered after `aboutProcess` when present. */
+  newsletter?: ServiceDetailNewsletter;
+  /** Rendered after `newsletter` when present. */
+  growthSystem?: ServiceDetailGrowthSystem;
   /** Rendered right after the hero when present. */
   mission?: ServiceDetailMission;
   /** Rendered after `process` when present. */
@@ -618,7 +712,7 @@ export interface ServiceDetailText {
   /** Rendered after `marketInsights` when present. */
   focusedGrowth?: ServiceDetailFocusedGrowth;
   /** `description` supports `\n` line breaks. */
-  contact?: { heading: string; description: string; /** Replaces `description` from the lg breakpoint up. */ descriptionDesktop?: string };
+  contact?: { heading: string; description: string; /** Form Subject, when it differs from the service name. */ subject?: string; /** Replaces `description` from the lg breakpoint up. */ descriptionDesktop?: string };
 }
 
 /** Labels shared by every service page. */
@@ -668,6 +762,8 @@ export interface ServiceDetail {
   processFigma?: boolean;
   /** With `processAccordion`: the Business Growth page's single column of closed cards (see `ServiceDetailProcess`). */
   processGrid?: boolean;
+  /** With `processGrid`: 900px desktop frame, centred copy on phones too, 40px / 10px gaps (the YouTube page's Figma). */
+  processCentered?: boolean;
   /** Image + per-item icons of the `publishing` section. */
   publishingImage?: string;
   publishingIcons?: readonly ServiceStackIcon[];
@@ -685,6 +781,12 @@ export interface ServiceDetail {
   contactPlainText?: boolean;
   /** Contact block follows the Business Growth Figma (120.5px top, 32/42 heading, mobile card/form sizes). */
   contactCompact?: boolean;
+  /** Phones: 22px contact description leading (that page's Figma). */
+  contactTightText?: boolean;
+  /** Phones: 44px contact form inputs and a 53px message field (that page's Figma). */
+  contactTightForm?: boolean;
+  /** Desktop top padding of the contact block in px (that page's Figma). */
+  contactTopPadding?: number;
   /** Image of the `strategy` section (only for pages with `strategy` copy). */
   strategyImage?: string;
   /** Image of the `intelligence` section (only for pages with `intelligence` copy). */
@@ -703,6 +805,21 @@ export interface ServiceDetail {
   creatorOverviewImage?: string;
   /** Images of the `creatorGuide` section: beside the purposes list, and beside "What You Gain". */
   creatorGuideImages?: { purposes: string; gain: string };
+  /** Image of the `aboutProcess` section (only for pages with `aboutProcess` copy) and its CSS `object-position`. */
+  aboutProcessImage?: string;
+  aboutProcessImagePosition?: string;
+  /** Image of the `broadcastAbout` section (only for pages with `broadcastAbout` copy). */
+  broadcastAboutImage?: string;
+  /** Image of the `twoGoals` section (only for pages with `twoGoals` copy). */
+  twoGoalsImage?: string;
+  /** Image of the `broadcastInsights` section (only for pages with `broadcastInsights` copy). */
+  broadcastInsightsImage?: string;
+  /** Images of the `gainHighlights` section: beside "What You Gain", and beside "Highlights". */
+  gainHighlightsImages?: { gain: string; highlights: string };
+  /** Image of the `newsletter` section (only for pages with `newsletter` copy). */
+  newsletterImage?: string;
+  /** Image of the `growthSystem` section (only for pages with `growthSystem` copy). */
+  growthSystemImage?: string;
   /** Image of the `mission` section (only for pages with `mission` copy). */
   missionImage?: string;
   /** Image of the `ecosystem` section (only for pages with `ecosystem` copy). */
@@ -999,6 +1116,58 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     heroOnly: true,
     contactWide: true,
     contactCompact: true,
+  },
+  {
+    slug: "lead-to-customer-email-growth",
+    textKey: "leadEmail",
+    heroImage: "/services/email-growth-hero.png",
+    aboutProcessImage: "/services/email-growth-about.png",
+    aboutProcessImagePosition: "81% 0%",
+    newsletterImage: "/services/email-growth-newsletter.png",
+    growthSystemImage: "/services/email-growth-ecosystem.png",
+    heroFigma: {
+      bottom: true,
+      dark: true,
+      titleWidth: 650,
+      titleTracking: -0.044,
+      titleTrackingDesktopOnly: true,
+      gap: 16,
+      gradient:
+        "linear-gradient(12.01deg, rgba(0,0,0,0.72) 10.29%, rgba(0,0,0,0.558431) 30.19%, rgba(0,0,0,0) 53.45%)",
+    },
+    heroMobile: { imageX: "18.6%", titleWidth: 329 },
+    heroOnly: true,
+    contactCompact: true,
+    contactPlainText: true,
+    contactTightText: true,
+    contactTopPadding: 80,
+  },
+  {
+    slug: "youtube-growth-broadcaster",
+    textKey: "youtube",
+    heroImage: "/services/youtube-hero.png",
+    broadcastAboutImage: "/services/youtube-about.png",
+    processAccordion: true,
+    processGrid: true,
+    processCentered: true,
+    twoGoalsImage: "/services/youtube-goals.png",
+    broadcastInsightsImage: "/services/youtube-insights.png",
+    gainHighlightsImages: { gain: "/services/youtube-gain.png", highlights: "/services/youtube-highlights.png" },
+    contactCompact: true,
+    contactPlainText: true,
+    contactTightText: true,
+    contactTightForm: true,
+    contactTopPadding: 80,
+    heroFigma: {
+      bottom: true,
+      titleTracking: -0.048,
+      titleTrackingDesktopOnly: true,
+      dark: true,
+      gradient: "linear-gradient(20.85deg, rgba(0,0,0,0.878431) 5.16%, rgba(0,0,0,0) 48.73%, rgba(0,0,0,0) 64.35%)",
+      mobileGradient: "linear-gradient(359.59deg, rgba(0,0,0,0.8) 4.9%, rgba(0,0,0,0) 24.46%, rgba(0,0,0,0) 33.66%)",
+    },
+    heroMobile: { imageX: "50%", titleWidth: 329 },
+    heroOnly: true,
   },
 ];
 

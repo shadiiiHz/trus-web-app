@@ -18,6 +18,12 @@ interface ServiceDetailContactProps {
   plainText?: boolean;
   /** Desktop: 121px top padding and a 112% heading line height instead of 129px / 49px. */
   compact?: boolean;
+  /** Phones: 22px description leading instead of 24px (that page's Figma). */
+  tightText?: boolean;
+  /** Phones: 44px form inputs and a 53px message field (that page's Figma). */
+  tightForm?: boolean;
+  /** Desktop top padding in px, replacing the compact / default one, with the 32px heading tracked to its Figma width (that page's Figma). */
+  topPadding?: number;
 }
 
 /**
@@ -25,14 +31,15 @@ interface ServiceDetailContactProps {
  * beside the contact form, with the service pre-filled as the form's Subject.
  * Identical on every service page; only the copy differs.
  */
-export function ServiceDetailContact({ subject, heading, description, descriptionDesktop, plainText, compact }: ServiceDetailContactProps) {
+export function ServiceDetailContact({ subject, heading, description, descriptionDesktop, plainText, compact, tightText, tightForm, topPadding }: ServiceDetailContactProps) {
   const { eyebrow, card, form } = siteConfig.contact;
   const { login } = siteConfig.auth;
 
   return (
     <section
       id="contact"
-      className={`bg-[#E3E3E3] px-5 py-14 lg:min-h-[900px] lg:pb-[105px] ${compact ? "lg:pt-[120.5px]" : "lg:pt-[129px]"}`}
+      style={topPadding ? { ["--contact-pt" as string]: `${topPadding}px` } : undefined}
+      className={`bg-[#E3E3E3] px-5 py-14 ${topPadding ? "lg:pb-20 lg:pt-(--contact-pt)" : `lg:min-h-[900px] lg:pb-[105px] ${compact ? "lg:pt-[120.5px]" : "lg:pt-[129px]"}`}`}
     >
       <div className="mx-auto flex w-full max-w-[1064px] flex-col gap-7 lg:gap-5">
         <FadeIn direction="up" className="flex flex-col gap-4">
@@ -43,13 +50,13 @@ export function ServiceDetailContact({ subject, heading, description, descriptio
               {eyebrow}
             </p>
             <h2
-              className={`font-hero text-[26px] font-bold text-[#070606] ${compact ? "leading-[29px] lg:text-[32px] lg:leading-[42px]" : "leading-[112%] lg:text-[38px] lg:leading-[49px]"}`}
+              className={`font-hero text-[26px] font-bold text-[#070606] ${topPadding ? "lg:tracking-[-0.0238em]" : ""} ${compact ? "leading-[29px] lg:text-[32px] lg:leading-[42px]" : "leading-[112%] lg:text-[38px] lg:leading-[49px]"}`}
             >
               {heading}
             </h2>
           </div>
           <p
-            className={`text-justify font-body text-[16px] leading-6 ${plainText ? "lg:text-justify" : "tracking-[-0.45px] lg:text-left"} text-[#070606] ${descriptionDesktop ? "lg:hidden" : ""}`}
+            className={`text-justify font-body text-[16px] ${tightText ? "leading-[22px] lg:leading-6" : "leading-6"} ${plainText ? "lg:text-justify" : "tracking-[-0.45px] lg:text-left"} text-[#070606] ${descriptionDesktop ? "lg:hidden" : ""}`}
           >
             {renderRichText(description)}
           </p>
@@ -76,6 +83,7 @@ export function ServiceDetailContact({ subject, heading, description, descriptio
           />
           <div className="min-w-0 flex-1">
             <ServiceContactForm
+              tightMobile={tightForm}
               className="lg:h-[484px]"
               compact={compact}
               fields={form.fields}
