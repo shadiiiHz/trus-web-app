@@ -116,7 +116,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                 <div className="box-border flex flex-1 flex-col pl-4 pr-4 pt-2">
                   {activeItem?.children && (
                     <div className="w-full" role="none">
-                      <p className="flex h-9 items-center font-body text-[14px] font-bold leading-[22px]">{activeItem.label}</p>
+                      <p className="flex min-h-9 items-center py-1 font-body text-[14px] font-bold leading-[22px]">{activeItem.label}</p>
                       <div className="h-px w-full bg-black/10" aria-hidden="true" />
                       <ul role="menu" aria-label={activeItem.label}>
                         {activeItem.children.map((child) => (
