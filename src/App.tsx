@@ -5,7 +5,6 @@ import HomePage from "@/pages/HomePage";
 import TemplatesPage from "@/pages/TemplatesPage";
 import ServicesPage from "@/pages/ServicesPage";
 import ServiceDetailPage from "@/pages/ServiceDetailPage";
-import ServiceDetailDemoPage from "@/pages/ServiceDetailDemoPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
@@ -34,7 +33,6 @@ export default function App() {
         <Route path="/templates" element={<TemplatesPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:slug" element={<ServiceDetailPage />} />
-        <Route path="/services-demo" element={<ServiceDetailDemoPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/change-password" element={<ChangePasswordPage />} />
