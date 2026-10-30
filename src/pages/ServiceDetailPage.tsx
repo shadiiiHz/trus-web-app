@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { ServiceDetailHero } from "@/components/service-detail/ServiceDetailHero";
@@ -66,9 +66,19 @@ export default function ServiceDetailPage() {
   const service = getServiceDetail(slug);
   const content = service ? getServiceContent(service) : undefined;
 
+  const { hash } = useLocation();
+
+  // Top of the page on a new service; a `#section` link (e.g. from the Services menu) scrolls to that section instead.
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    if (target) {
+      // Clear the fixed navbar (72px on desktop, 84px on phones).
+      const offset = window.innerWidth >= 1024 ? 72 : 84;
+      window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - offset);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [slug, hash]);
 
   usePageMeta({
     title: content?.metaTitle ?? "TruS",

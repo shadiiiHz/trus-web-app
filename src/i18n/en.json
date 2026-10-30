@@ -2,6 +2,7 @@
   "nav": {
     "links": ["Home", "About", "Portfolio", "Templates", "Services", "Contact"],
     "mainMenu": "Main Menu",
+    "servicesMenu": {"root":"Services","seo":"SEO & Content","web":"Web Design","multilingual":"Multilingual Strategy","brand":"Brand Identity","social":"Social Media Content","growth":"Growth Intelligence","email":"Email Marketing","youtube":"YouTube Growth","items":{"logoDesigner":"TRUS AI Logo Designer","autoPost":"TRUS AI Auto Post","instagram":"TRUS AI Instagram Content","linkedin":"TRUS AI LinkedIn Content","x":"TRUS AI X Content","telegram":"TRUS AI TelegramCH Content","meetingBooking":"TRUS AI Online Meeting Booking","leadFinder":"TRUS AI Lead Finder","newsletterCreatorSender":"TRUS AI Newsletter Creator & Sender","newsletterCreator":"TRUS AI Newsletter Creator","emailSender":"TRUS AI Email Sender","audienceTargeting":"TRUS AI Audience Targeting","youtubeBroadcaster":"TRUS AI YouTube Broadcaster"}},
     "language": "Language",
     "cta": "Login",
     "account": {
@@ -158,6 +159,7 @@
   "services": {
     "eyebrow": "WHAT WE DO",
     "heading": "Our Core Services",
+    "showMore": "Show More",
     "description": "End-to-end digital solutions including custom web development, enterprise hosting, SEO, AI automation, and performance-driven marketing—all designed to help your business grow.",
     "items": [
       {

@@ -51,6 +51,7 @@ function Paragraphs({ items }: { items: readonly string[] }) {
 export function ServiceDetailNewsletter({ content, image }: { content: NewsletterContent; image: string }) {
   return (
     <section
+      id="newsletter-services"
       aria-labelledby="service-newsletter-heading"
       className="bg-[#E3E3E3] px-5 py-14 text-[#070606] lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20"
     >

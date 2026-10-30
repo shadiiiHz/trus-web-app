@@ -1,5 +1,6 @@
 ﻿import { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { motion, useMotionValue, useTransform, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { siteConfig } from '@/config/site.config'
 import { FadeIn } from '@/components/motion/FadeIn'
 import { ServiceCard } from '@/components/services/ServiceCard'
@@ -32,7 +33,7 @@ export function ServicesSection() {
 }
 
 function ServicesDesktop() {
-  const { eyebrow, heading, items } = siteConfig.services
+  const { eyebrow, heading, showMore, items } = siteConfig.services
 
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -173,16 +174,24 @@ function ServicesDesktop() {
             </FadeIn>
 
             <FadeIn direction="up" delay={0.18}>
-              <h2
-                className="text-section-title"
-                style={{
-                  lineHeight: '46px',
-                  color: '#FFFFFF',
-                  margin: 0,
-                }}
-              >
-                {heading}
-              </h2>
+              <div className="flex items-center justify-between gap-6">
+                <h2
+                  className="text-section-title"
+                  style={{
+                    lineHeight: '46px',
+                    color: '#FFFFFF',
+                    margin: 0,
+                  }}
+                >
+                  {heading}
+                </h2>
+                <Link
+                  to="/services"
+                  className="shrink-0 font-body text-[16px] font-semibold leading-[19px] text-[#9F7EE1] underline underline-offset-2 transition-colors duration-200 hover:text-brand-accent-light"
+                >
+                  {showMore}
+                </Link>
+              </div>
             </FadeIn>
 
             {/* <FadeIn direction="up" delay={0.28}>

@@ -99,6 +99,7 @@ export function ServiceDetailProcess({
 
   return (
     <section
+      id="how-it-works"
       aria-labelledby="service-process-heading"
       className={`relative overflow-hidden bg-[#E3E3E3] px-5 py-14 text-[#070606] ${grid ? (centered ? "lg:flex lg:h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-20") : accordion ? "lg:flex lg:min-h-[900px] lg:flex-col lg:justify-center lg:py-20" : "lg:py-[109px]"}`}
     >

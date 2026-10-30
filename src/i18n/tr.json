@@ -2,6 +2,7 @@
   "nav": {
     "links": ["Ana Sayfa", "Hakkımızda", "Portfolyo", "Şablonlar", "Hizmetler", "İletişim"],
     "mainMenu": "Ana Menü",
+    "servicesMenu": {"root":"Hizmetler","seo":"SEO ve İçerik","web":"Web Tasarım","multilingual":"Çok Dilli Strateji","brand":"Marka Kimliği","social":"Sosyal Medya İçeriği","growth":"Growth Intelligence","email":"E-posta Pazarlaması","youtube":"YouTube Büyümesi","items":{"logoDesigner":"TRUS AI Logo Designer","autoPost":"TRUS AI Auto Post","instagram":"TRUS AI Instagram Content","linkedin":"TRUS AI LinkedIn Content","x":"TRUS AI X Content","telegram":"TRUS AI TelegramCH Content","meetingBooking":"TRUS AI Online Meeting Booking","leadFinder":"TRUS AI Lead Finder","newsletterCreatorSender":"TRUS AI Newsletter Creator & Sender","newsletterCreator":"TRUS AI Newsletter Creator","emailSender":"TRUS AI Email Sender","audienceTargeting":"TRUS AI Audience Targeting","youtubeBroadcaster":"TRUS AI YouTube Broadcaster"}},
     "language": "Dil",
     "cta": "Giriş Yap",
     "account": {
@@ -158,6 +159,7 @@
   "services": {
     "eyebrow": "NE YAPIYORUZ",
     "heading": "Temel Hizmetlerimiz",
+    "showMore": "Daha Fazla",
     "description": "Özel web geliştirme, kurumsal barındırma, SEO, yapay zekâ otomasyonu ve performans odaklı pazarlamayı içeren uçtan uca dijital çözümler; hepsi işletmenizin büyümesine yardımcı olmak için tasarlandı.",
     "items": [
       {

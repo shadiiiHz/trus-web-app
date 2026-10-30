@@ -9,6 +9,7 @@
       "Contacto"
     ],
     "mainMenu": "Menú principal",
+    "servicesMenu": {"root":"Servicios","seo":"SEO y contenido","web":"Diseño web","multilingual":"Estrategia multilingüe","brand":"Identidad de marca","social":"Contenido para redes sociales","growth":"Growth Intelligence","email":"Email marketing","youtube":"Crecimiento en YouTube","items":{"logoDesigner":"TRUS AI Logo Designer","autoPost":"TRUS AI Auto Post","instagram":"TRUS AI Instagram Content","linkedin":"TRUS AI LinkedIn Content","x":"TRUS AI X Content","telegram":"TRUS AI TelegramCH Content","meetingBooking":"TRUS AI Online Meeting Booking","leadFinder":"TRUS AI Lead Finder","newsletterCreatorSender":"TRUS AI Newsletter Creator & Sender","newsletterCreator":"TRUS AI Newsletter Creator","emailSender":"TRUS AI Email Sender","audienceTargeting":"TRUS AI Audience Targeting","youtubeBroadcaster":"TRUS AI YouTube Broadcaster"}},
     "language": "Idioma",
     "cta": "Iniciar sesión",
     "account": {
@@ -165,6 +166,7 @@
   "services": {
     "eyebrow": "QUÉ HACEMOS",
     "heading": "Nuestros servicios principales",
+    "showMore": "Ver más",
     "description": "Soluciones digitales integrales que incluyen desarrollo web a medida, hosting empresarial, SEO, automatización con IA y marketing orientado al rendimiento, todo diseñado para ayudar a que tu negocio crezca.",
     "items": [
       {

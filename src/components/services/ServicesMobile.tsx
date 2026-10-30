@@ -1,4 +1,5 @@
 import { useRef, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperClass } from "swiper";
@@ -18,7 +19,7 @@ export function ServicesMobile({
 }: {
   iconMap: Record<string, ReactNode>;
 }) {
-  const { eyebrow, heading, items } = siteConfig.services;
+  const { eyebrow, heading, showMore, items } = siteConfig.services;
 
   const swiperRef = useRef<SwiperClass | null>(null);
   const [active, setActive] = useState(0);
@@ -177,6 +178,15 @@ export function ServicesMobile({
             ))}
           </div>
         )}
+
+        <div className="flex justify-center" style={{ marginTop: 24 }}>
+          <Link
+            to="/services"
+            className="font-body text-[16px] font-semibold leading-[19px] text-[#9F7EE1] underline underline-offset-2 transition-colors duration-200 hover:text-brand-accent-light"
+          >
+            {showMore}
+          </Link>
+        </div>
       </div>
     </section>
   );

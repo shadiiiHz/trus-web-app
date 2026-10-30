@@ -740,6 +740,7 @@ function buildSiteConfig(locale: Locale) {
       links: dict.nav.links.map((label, i) => ({ label, href: navHrefs[i] })),
       cta: { label: dict.nav.cta, href: "/login" },
       mainMenu: dict.nav.mainMenu,
+      servicesMenu: dict.nav.servicesMenu,
       language: dict.nav.language,
       /** Shown instead of the login CTA once a session is authenticated. */
       account: {
@@ -801,6 +802,7 @@ function buildSiteConfig(locale: Locale) {
     services: {
       eyebrow: dict.services.eyebrow,
       heading: dict.services.heading,
+      showMore: dict.services.showMore,
       description: dict.services.description,
       items: merge(dict.services.items, serviceMeta),
     },

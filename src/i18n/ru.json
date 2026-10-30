@@ -2,6 +2,7 @@
   "nav": {
     "links": ["Главная", "О нас", "Портфолио", "Шаблоны", "Услуги", "Контакты"],
     "mainMenu": "Главное меню",
+    "servicesMenu": {"root":"Услуги","seo":"SEO и контент","web":"Веб-дизайн","multilingual":"Многоязычная стратегия","brand":"Айдентика бренда","social":"Контент для соцсетей","growth":"Growth Intelligence","email":"Email-маркетинг","youtube":"Рост на YouTube","items":{"logoDesigner":"TRUS AI Logo Designer","autoPost":"TRUS AI Auto Post","instagram":"TRUS AI Instagram Content","linkedin":"TRUS AI LinkedIn Content","x":"TRUS AI X Content","telegram":"TRUS AI TelegramCH Content","meetingBooking":"TRUS AI Online Meeting Booking","leadFinder":"TRUS AI Lead Finder","newsletterCreatorSender":"TRUS AI Newsletter Creator & Sender","newsletterCreator":"TRUS AI Newsletter Creator","emailSender":"TRUS AI Email Sender","audienceTargeting":"TRUS AI Audience Targeting","youtubeBroadcaster":"TRUS AI YouTube Broadcaster"}},
     "language": "Язык",
     "cta": "Войти",
     "account": {
@@ -158,6 +159,7 @@
   "services": {
     "eyebrow": "ЧЕМ МЫ ЗАНИМАЕМСЯ",
     "heading": "Наши ключевые услуги",
+    "showMore": "Показать ещё",
     "description": "Комплексные цифровые решения: разработка сайтов на заказ, корпоративный хостинг, SEO, автоматизация с ИИ и маркетинг, ориентированный на результат, — всё для роста вашего бизнеса.",
     "items": [
       {

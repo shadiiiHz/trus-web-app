@@ -6,6 +6,7 @@ import { resolveSectionLink } from "@/lib/navigation";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { AccountMenu } from "@/components/layout/AccountMenu";
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import { ServicesMenu } from "@/components/layout/ServicesMenu";
 import { useAuth } from "@/hooks/useAuth";
 import { EASE_PREMIUM, DURATION_SM } from "@/motion/variants";
 import trusLogo from "@/assets/logo.png";
@@ -197,7 +198,7 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
           </a>
 
           {/* Desktop nav links */}
-          <ul className="hidden lg:flex items-center gap-2.5" role="list">
+          <ul className="hidden lg:flex items-center gap-2.5 self-stretch" role="list">
             {data.links.map((link) => {
               // Derive the section ID from the href.
               // href '#'       → sectionId ''        → active when at top of page
@@ -212,16 +213,26 @@ export function Navbar({ data = siteConfig.nav, hidden = false }: NavbarProps) {
                 ? activeSection === sectionId
                 : isPageLink && pathname === link.href;
 
-              return (
-                <li key={link.label}>
-                  <NavLink
-                    href={link.href}
-                    label={link.label}
-                    active={isActive}
-                    to={resolveSectionLink(link.href, isHome)}
-                  />
-                </li>
+              const navLink = (
+                <NavLink
+                  href={link.href}
+                  label={link.label}
+                  active={isActive}
+                  to={resolveSectionLink(link.href, isHome)}
+                  menuOnly={link.href === "/services"}
+                />
               );
+
+              // "Services" opens a hover mega-menu; every other link is unchanged.
+              if (link.href === "/services") {
+                return (
+                  <li key={link.label} className="self-stretch">
+                    <ServicesMenu>{navLink}</ServicesMenu>
+                  </li>
+                );
+              }
+
+              return <li key={link.label}>{navLink}</li>;
             })}
           </ul>
 
@@ -284,27 +295,39 @@ function NavLink({
   label,
   active = false,
   to,
+  menuOnly = false,
 }: {
   href: string;
   label: string;
   active?: boolean;
   /** Route to navigate to via react-router; `null` renders a plain in-page anchor. */
   to: string | null;
+  /** Not a link: the item only opens its hover menu (clicking does nothing). */
+  menuOnly?: boolean;
 }) {
   const className =
-    "group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light transition-colors duration-200 px-1.75 py-1";
+    "group relative text-[15px] font-body font-normal text-brand-white hover:text-brand-accent-light group-data-[menu-open=true]/menu:text-brand-accent-light transition-colors duration-200 px-1.75 py-1";
 
   const underline = (
     // Underline — full width when active, animates in on hover otherwise
     <span
       className={[
         "absolute -bottom-0.5 left-1.75 h-px rounded-full transition-all duration-300",
-        active ? "w-[calc(100%-14px)]" : "w-0 group-hover:w-[calc(100%-14px)]",
+        active ? "w-[calc(100%-14px)]" : "w-0 group-hover:w-[calc(100%-14px)] group-data-[menu-open=true]/menu:w-[calc(100%-14px)]",
       ].join(" ")}
       style={{ background: "var(--color-brand-accent)" }}
       aria-hidden="true"
     />
   );
+
+  if (menuOnly) {
+    return (
+      <button type="button" aria-haspopup="menu" className={`${className} cursor-default`}>
+        {label}
+        {underline}
+      </button>
+    );
+  }
 
   if (to) {
     return (

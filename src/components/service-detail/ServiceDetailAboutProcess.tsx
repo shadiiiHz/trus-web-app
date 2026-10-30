@@ -33,6 +33,7 @@ export function ServiceDetailAboutProcess({
 
   return (
     <section
+      id="how-it-works"
       aria-labelledby="service-about-process-heading"
       className="relative isolate overflow-hidden bg-[#070606] px-5 py-14 text-white lg:py-20"
     >

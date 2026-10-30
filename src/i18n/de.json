@@ -9,6 +9,7 @@
       "Kontakt"
     ],
     "mainMenu": "Hauptmenü",
+    "servicesMenu": {"root":"Leistungen","seo":"SEO & Content","web":"Webdesign","multilingual":"Mehrsprachige Strategie","brand":"Markenidentität","social":"Social-Media-Content","growth":"Growth Intelligence","email":"E-Mail-Marketing","youtube":"YouTube-Wachstum","items":{"logoDesigner":"TRUS AI Logo Designer","autoPost":"TRUS AI Auto Post","instagram":"TRUS AI Instagram Content","linkedin":"TRUS AI LinkedIn Content","x":"TRUS AI X Content","telegram":"TRUS AI TelegramCH Content","meetingBooking":"TRUS AI Online Meeting Booking","leadFinder":"TRUS AI Lead Finder","newsletterCreatorSender":"TRUS AI Newsletter Creator & Sender","newsletterCreator":"TRUS AI Newsletter Creator","emailSender":"TRUS AI Email Sender","audienceTargeting":"TRUS AI Audience Targeting","youtubeBroadcaster":"TRUS AI YouTube Broadcaster"}},
     "language": "Sprache",
     "cta": "Anmelden",
     "account": {
@@ -165,6 +166,7 @@
   "services": {
     "eyebrow": "WAS WIR TUN",
     "heading": "Unsere Kernleistungen",
+    "showMore": "Mehr anzeigen",
     "description": "Ganzheitliche digitale Lösungen – von individueller Webentwicklung und Enterprise-Hosting über SEO und KI-Automatisierung bis zu performanceorientiertem Marketing – entwickelt, damit Ihr Unternehmen wächst.",
     "items": [
       {

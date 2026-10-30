@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { useCardHoverWave } from "@/components/services/useCardHoverWave";
 
 interface ServiceCardProps {
   icon: ReactNode;
@@ -27,8 +28,12 @@ export function ServiceCard({
   href,
   height,
 }: ServiceCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  useCardHoverWave(cardRef);
+
   const card = (
     <div
+      ref={cardRef}
       data-service-card
       style={{
         width: fluid ? "100%" : `${width}px`,
