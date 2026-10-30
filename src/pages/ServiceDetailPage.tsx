@@ -312,7 +312,12 @@ export default function ServiceDetailPage() {
       )}
 
       {content.automation && service.stackImage && (
-        <ServiceDetailStack automation={content.automation} image={service.stackImage} icons={service.stackIcons} />
+        <ServiceDetailStack
+          automation={content.automation}
+          image={service.stackImage}
+          icons={service.stackIcons}
+          links={service.stackLinks?.map(serviceDetailPath)}
+        />
       )}
 
       {content.flexible && <ServiceDetailFlexible flexible={content.flexible} />}

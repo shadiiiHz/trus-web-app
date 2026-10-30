@@ -793,6 +793,8 @@ export interface ServiceDetail {
   intelligenceImage?: string;
   /** Glyphs shown before each scroll-stacked card title, in item order. */
   stackIcons?: readonly ServiceStackIcon[];
+  /** Service slugs the scroll-stacked card titles link to, in item order. */
+  stackLinks?: readonly string[];
   /** Image of the `growth` section (only for pages with `growth` copy). */
   growthImage?: string;
   /** Image beside the scroll-stacked cards (only for pages with `automation` copy). */
@@ -944,6 +946,13 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     stackImage: "/services/social-automation-workspace.png",
     growthImage: "/services/social-connected-growth.png",
     stackIcons: ["settings", "instagram", "linkedin", "x", "telegram"],
+    stackLinks: [
+      "auto-post-creator-publisher",
+      "instagram-content-creator-publisher",
+      "linkedin-content-creator-publisher",
+      "x-content-creator-publisher",
+      "telegram-channel-content-creator-publisher",
+    ],
     images: {
       about: "/services/social-team-brainstorm.jpg",
     },

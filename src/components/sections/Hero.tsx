@@ -22,6 +22,17 @@ export function HeroSection({
   orbitOpacity,
   onVideoReady,
 }: HeroSectionProps) {
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   return (
     <section
       className="hero-section relative overflow-hidden"
@@ -119,7 +130,8 @@ export function HeroSection({
           <motion.div
             className="hero-visual flex items-center justify-center"
             style={{
-              opacity: orbitOpacity,
+              // Scroll fade is desktop-only; on mobile the video stays visible
+              opacity: isDesktop ? orbitOpacity : 1,
               x: 20,
               scale: 1.1,
               transformOrigin: "center right",

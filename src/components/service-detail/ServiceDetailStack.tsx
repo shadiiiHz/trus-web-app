@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichText } from "@/components/service-detail/richText";
 import { ServiceStackIconGlyph, type ServiceStackIcon } from "@/components/service-detail/socialIcons";
@@ -21,11 +22,14 @@ export function ServiceDetailStack({
   automation,
   image,
   icons,
+  links,
 }: {
   automation: ServiceDetailAutomation;
   image: string;
   /** One glyph per item, shown before its title. */
   icons?: readonly ServiceStackIcon[];
+  /** One route per item; when set, the item's title links to it. */
+  links?: readonly string[];
 }) {
   const { heading, imageAlt, items } = automation;
   const wrapRef = useRef<HTMLElement>(null);
@@ -127,7 +131,13 @@ export function ServiceDetailStack({
                         className="size-8 shrink-0"
                       />
                     )}
-                    {item.title}
+                    {links?.[i] ? (
+                      <Link to={links[i]} target="_blank" rel="noopener noreferrer" className="transition-colors duration-200 hover:text-[#9F7EE1]">
+                        {item.title}
+                      </Link>
+                    ) : (
+                      item.title
+                    )}
                   </h3>
                   <p className={`mt-2.5 text-justify font-body text-[16px] leading-[22px] text-white ${i === 0 ? "lg:mt-2" : "lg:mt-2.5"} ${i < 3 ? "lg:leading-[22px]" : "lg:leading-[26px]"}`}>
                     {renderRichText(item.description)}
