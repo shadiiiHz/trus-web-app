@@ -84,7 +84,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
             <div
               role="menu"
               aria-label={root.label}
-              className={`box-border flex h-[340px] ${showSub ? "w-[442px]" : "w-[202px]"} items-stretch overflow-hidden rounded-lg border border-black/10 bg-[#FAFAFA] text-[#1E1E1E] shadow-[0_12px_16px_-4px_rgba(0,0,0,0.08),0_4px_6px_-2px_rgba(0,0,0,0.03),0_2px_2px_-1px_rgba(0,0,0,0.04)]`}
+              className={`box-border flex min-h-[340px] ${showSub ? "w-[442px]" : "w-[202px]"} items-stretch overflow-hidden rounded-lg border border-black/10 bg-[#FAFAFA] text-[#1E1E1E] shadow-[0_12px_16px_-4px_rgba(0,0,0,0.08),0_4px_6px_-2px_rgba(0,0,0,0.03),0_2px_2px_-1px_rgba(0,0,0,0.04)]`}
             >
               <div className="box-border flex flex-1 items-stretch border border-[#E5E5E5] bg-white">
                 <ul className={`box-border flex w-[200px] shrink-0 flex-col py-2 ${showSub ? "border-r border-black/10" : ""}`} role="none">
@@ -93,7 +93,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                     const hasChildren = !!item.children?.length;
                     const isActive = index >= 0 && active === index;
                     return (
-                      <li key={item.label} className="flex h-9 items-center px-1.5" role="none">
+                      <li key={item.label} className="flex min-h-9 items-center px-1.5" role="none">
                         <Link
                           to={item.href}
                           onClick={close}
@@ -102,9 +102,9 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                           aria-expanded={hasChildren ? isActive : undefined}
                           onMouseEnter={() => setActive(index >= 0 ? index : null)}
                           onFocus={() => setActive(index >= 0 ? index : null)}
-                          className={`flex h-9 flex-1 items-center justify-between gap-3 rounded-md p-2 font-body text-[14px] font-medium leading-5 outline-none transition-colors hover:bg-[#FAFAFA] focus-visible:bg-[#FAFAFA] ${isActive ? "bg-[#FAFAFA]" : ""}`}
+                          className={`flex min-h-9 flex-1 items-center justify-between gap-2 rounded-md p-2 font-body text-[14px] font-medium leading-5 outline-none transition-colors hover:bg-[#FAFAFA] focus-visible:bg-[#FAFAFA] ${isActive ? "bg-[#FAFAFA]" : ""}`}
                         >
-                          <span className="whitespace-nowrap">{item.label}</span>
+                          <span>{item.label}</span>
                           {hasChildren && <Chevron />}
                         </Link>
                       </li>
@@ -113,7 +113,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                 </ul>
 
                 {showSub && (
-                <div className="box-border flex flex-1 flex-col pl-4 pt-2">
+                <div className="box-border flex flex-1 flex-col pl-4 pr-4 pt-2">
                   {activeItem?.children && (
                     <div className="w-full" role="none">
                       <p className="flex h-9 items-center font-body text-[14px] font-bold leading-[22px]">{activeItem.label}</p>
@@ -125,7 +125,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                               to={child.href}
                               onClick={close}
                               role="menuitem"
-                              className="flex min-h-9 items-center py-1.5 font-body text-[14px] font-normal leading-5 outline-none transition-colors hover:text-brand-accent focus-visible:text-brand-accent"
+                              className="flex min-h-9 items-center py-1.5 font-body text-[14px] font-normal leading-[22px] outline-none transition-colors hover:text-brand-accent focus-visible:text-brand-accent"
                             >
                               {child.label}
                             </Link>
