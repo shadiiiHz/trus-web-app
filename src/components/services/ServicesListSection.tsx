@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site.config";
 import { SERVICE_PATHS } from "@/config/serviceDetails.config";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { ServicesRail } from "@/components/services/ServicesRail";
 import { VideoModal } from "@/components/services/VideoModal";
 
 /** Detail page of each row, by row id (the title and the bold tagline link to it). */
@@ -166,8 +167,9 @@ export function ServicesListSection() {
   }, [items]);
 
   return (
-    <section aria-label="TruS AI Services" className="bg-black lg:bg-[#070606]">
-      <div className="mx-auto w-full max-w-330 px-5 py-14 lg:py-20">
+    <section id="services-list" aria-label="TruS AI Services" className="bg-black lg:bg-[#070606]">
+      {/* On desktop the right rail (56px + 4px from the edge) sits over the margin, so the content keeps 80px there (Figma): a 20px gap to the rail at any width. */}
+      <div className="mx-auto w-full max-w-330 px-5 py-14 lg:py-20 lg:pr-[clamp(20px,calc(80px_-_(100%_-_1320px)_/_2),80px)]">
         <FadeIn direction="up" delay={0.05}>
           <span
             className="block font-body text-[12px] font-normal uppercase leading-[15px] lg:text-[16px] lg:leading-[19px]"
@@ -199,6 +201,8 @@ export function ServicesListSection() {
           ))}
         </div>
       </div>
+
+      {isDesktop && <ServicesRail sectionId="services-list" />}
 
       {playingItem?.youtubeId && (
         <VideoModal

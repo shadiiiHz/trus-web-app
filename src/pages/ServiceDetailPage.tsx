@@ -55,9 +55,12 @@ import {
   getServiceContent,
   getServiceDetail,
   getServiceName,
+  SERVICE_SLUGS,
   serviceDetailPath,
 } from "@/config/serviceDetails.config";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { SocialServicesRail } from "@/components/services/SocialServicesRail";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 /** `/services/:slug` — one page per service, driven by `serviceDetails.config`. */
@@ -67,6 +70,7 @@ export default function ServiceDetailPage() {
   const content = service ? getServiceContent(service) : undefined;
 
   const { hash } = useLocation();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Top of the page on a new service; a `#section` link (e.g. from the Services menu) scrolls to that section instead.
   useLayoutEffect(() => {
@@ -117,7 +121,7 @@ export default function ServiceDetailPage() {
       <Navbar />
 
       {/* Clears the fixed Navbar (h-21 mobile / h-18 desktop). */}
-      <div className="pt-21 lg:pt-18">
+      <div id="service-hero" className="pt-21 lg:pt-18">
         <ServiceDetailHero
           name={content.name}
           tagline={content.tagline}
@@ -362,6 +366,8 @@ export default function ServiceDetailPage() {
           topPadding={service.contactTopPadding}
         />
       )}
+
+      {isDesktop && service.slug === SERVICE_SLUGS.social && <SocialServicesRail heroId="service-hero" endId="footer" />}
 
       <FooterSection />
     </div>
