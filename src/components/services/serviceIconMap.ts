@@ -1,7 +1,7 @@
 import { createElement, type ReactNode } from 'react'
 import { ServiceIcon } from './ServiceIcon'
 import { ICON_MARKUP } from './serviceIcons'
-import { serviceDetailPath } from '@/config/serviceDetails.config'
+import { SERVICE_PATHS } from '@/config/serviceDetails.config'
 
 export const SERVICE_ICON_MAP: Record<string, ReactNode> = Object.fromEntries(
   Object.keys(ICON_MARKUP).map((id) => [id, createElement(ServiceIcon, { key: id, id })]),
@@ -9,12 +9,12 @@ export const SERVICE_ICON_MAP: Record<string, ReactNode> = Object.fromEntries(
 
 /** Service cards that have a dedicated detail page, by card id. */
 export const SERVICE_LINKS: Record<string, string> = {
-  'business-growth': serviceDetailPath('business-growth-intelligence-solver'),
-  youtube: serviceDetailPath('youtube-growth-broadcaster'),
-  'lead-email': serviceDetailPath('lead-to-customer-email-growth'),
-  multilingual: serviceDetailPath('multilingual-localized-growth-strategy'),
-  seo: serviceDetailPath('seo-content-optimization'),
-  'web-design': serviceDetailPath('web-design-development'),
-  branding: serviceDetailPath('brand-identity-logo-design'),
-  'social-media': serviceDetailPath('social-media-content-creation-publishing'),
+  'business-growth': SERVICE_PATHS.growth,
+  youtube: SERVICE_PATHS.youtube,
+  'lead-email': SERVICE_PATHS.email,
+  multilingual: SERVICE_PATHS.multilingual,
+  seo: SERVICE_PATHS.seo,
+  'web-design': SERVICE_PATHS.webDesign,
+  branding: SERVICE_PATHS.brand,
+  'social-media': SERVICE_PATHS.social,
 }

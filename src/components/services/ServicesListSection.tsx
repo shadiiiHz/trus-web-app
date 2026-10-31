@@ -1,10 +1,40 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
+import { SERVICE_PATHS } from "@/config/serviceDetails.config";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { VideoModal } from "@/components/services/VideoModal";
+
+/** Detail page of each row, by row id (the title and the bold tagline link to it). */
+const ROW_LINKS: Record<string, string> = {
+  "growth-intelligence": SERVICE_PATHS.growth,
+  multilingual: SERVICE_PATHS.multilingual,
+  "web-design": SERVICE_PATHS.webDesign,
+  "brand-identity": SERVICE_PATHS.brand,
+  seo: SERVICE_PATHS.seo,
+  "social-media": SERVICE_PATHS.social,
+  "email-marketing": SERVICE_PATHS.email,
+  youtube: SERVICE_PATHS.youtube,
+  telegram: SERVICE_PATHS.telegram,
+  instagram: SERVICE_PATHS.instagram,
+  linkedin: SERVICE_PATHS.linkedin,
+  "x-content": SERVICE_PATHS.x,
+  "auto-post": SERVICE_PATHS.autoPost,
+};
+
+/** A link to the row's detail page, or a plain wrapper for a row that has none. */
+function RowLink({ href, className, children }: { href?: string; className?: string; children: ReactNode }) {
+  return href ? (
+    <Link to={href} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </Link>
+  ) : (
+    <div className={className}>{children}</div>
+  );
+}
 
 /**
  * "TRUS AI Services" list — one row per service. Hovering (or tapping, on
@@ -136,14 +166,11 @@ export function ServicesListSection() {
   }, [items]);
 
   return (
-    <section
-      aria-label="TruS AI Services"
-      style={{ background: "var(--color-brand-bg)" }}
-    >
-      <div className="mx-auto w-full max-w-330 px-5 pt-14 pb-12 lg:py-28">
+    <section aria-label="TruS AI Services" className="bg-black lg:bg-[#070606]">
+      <div className="mx-auto w-full max-w-330 px-5 py-14 lg:py-20">
         <FadeIn direction="up" delay={0.05}>
           <span
-            className="font-body text-[12px] font-normal uppercase tracking-[0.12em] lg:text-body lg:tracking-[0.22em]"
+            className="block font-body text-[12px] font-normal uppercase leading-[15px] lg:text-[16px] lg:leading-[19px]"
             style={{ color: "#9F7EE1" }}
           >
             {eyebrow}
@@ -151,12 +178,12 @@ export function ServicesListSection() {
         </FadeIn>
 
         <FadeIn direction="up" delay={0.14}>
-          <h2 className="font-hero font-bold text-[26px] leading-[1.2] mt-2 text-brand-white lg:text-[38px] lg:leading-normal lg:mt-1">
+          <h2 className="mt-2 font-hero text-[26px] font-bold leading-[1.12] tracking-[-0.02em] text-brand-white lg:text-[38px] lg:leading-[49px] lg:tracking-normal lg:capitalize">
             {heading}
           </h2>
         </FadeIn>
 
-        <div className="mt-8 lg:mt-10">
+        <div className="mt-3 lg:mt-10">
           {items.map((item, i) => (
             <ServiceRow
               key={item.id}
@@ -224,6 +251,9 @@ function ServiceRow({
     return () => ro.disconnect();
   }, []);
 
+  // Figma tightens the long email-marketing title so it keeps its two lines.
+  const titleTracking = item.id === "email-marketing" ? "lg:tracking-[-1px]" : "";
+
   return (
     <div
       id={item.id}
@@ -235,14 +265,14 @@ function ServiceRow({
       tabIndex={0}
       role="button"
       aria-pressed={isActive}
-      className={`grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-3 py-6 outline-none lg:grid-cols-[minmax(260px,600px)_1fr_minmax(200px,303px)] lg:gap-8 lg:py-7 ${isLast ? "" : "border-b border-white/30"}`}
+      className={`grid scroll-mt-28 cursor-pointer grid-cols-1 items-center gap-4 py-6 outline-none lg:grid-cols-[minmax(260px,574px)_1fr_minmax(200px,302px)] lg:gap-0 lg:py-0 lg:first:mt-0 lg:mt-6 ${isLast ? "lg:min-h-[354px]" : "border-b border-white/30 lg:min-h-[379px] lg:pb-6"}`}
     >
       {/* Title — a vertical "reel" of two stacked
           duplicate copies (idle-gray on top, active-purple/white directly
           below) inside a same-size overflow-hidden window. Activating
           slides the stack up by exactly one copy-height to reveal the
           other, instead of fading/spinning between colors. */}
-      <div>
+      <RowLink href={ROW_LINKS[item.id]} className="block">
         <span
           className="relative block overflow-hidden"
           style={{ height: titleH || undefined }}
@@ -254,21 +284,20 @@ function ServiceRow({
           >
             <span
               ref={titleRef}
-              className="block font-body text-[20px] leading-[1.6] font-semibold tracking-wide uppercase whitespace-pre-line lg:text-[32px] lg:leading-[1.8]"
+              className={`block font-body text-[20px] leading-[1.25] font-bold uppercase whitespace-pre-line lg:text-[32px] lg:leading-[60px] ${titleTracking}`}
               style={{ color: "#707075" }}
             >
               {item.title}
             </span>
             <span
               aria-hidden="true"
-              className="block font-body text-[20px] leading-[1.6] font-semibold tracking-wide uppercase whitespace-pre-line lg:text-[32px] lg:leading-[1.8]"
-              style={{ color: "#FFFFFF" }}
+              className={`block font-body text-[20px] leading-[1.25] font-bold uppercase text-[#FBFBFB] lg:text-white whitespace-pre-line lg:text-[32px] lg:leading-[60px] ${titleTracking}`}
             >
               {item.title}
             </span>
           </motion.span>
         </span>
-      </div>
+      </RowLink>
 
       {/* Media thumbnail — only the active row shows one. Right-aligned
           (not centered) within its column so it sits close to the
@@ -283,9 +312,9 @@ function ServiceRow({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative my-2 w-full overflow-hidden rounded-md border border-white/20 lg:my-0 lg:ml-auto lg:mr-0 lg:w-[306.5px]"
+              className="relative w-full overflow-hidden rounded-[8px] lg:ml-auto lg:mr-[38px] lg:w-[332.62px] lg:rounded-[17.3634px] min-[1320px]:ml-[33px] min-[1320px]:mr-0"
               style={{
-                aspectRatio: "306.5 / 221.15",
+                aspectRatio: "332.62 / 240",
               }}
             >
               {item.youtubeId ? (
@@ -307,7 +336,7 @@ function ServiceRow({
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)",
+                    "rgba(7, 6, 6, 0.25)",
                 }}
               />
               <span className="absolute inset-0 flex items-center justify-center">
@@ -319,7 +348,7 @@ function ServiceRow({
                     onPlay();
                   }}
                   aria-label="Play video"
-                  className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg disabled:cursor-default"
+                  className="flex h-14 w-14 items-center justify-center rounded-full bg-white/[0.89] disabled:cursor-default lg:h-[60.77px] lg:w-[60.77px]"
                 >
                   <Play
                     size={21}
@@ -336,15 +365,24 @@ function ServiceRow({
 
       {/* Description */}
       <div
-        className="transition-opacity duration-300 leading-5 text-justify lg:leading-[18.75px]"
+        className="transition-opacity duration-300 leading-[19px] text-justify"
         style={{ color: isActive ? "#FFFFFF" : "#707075" }}
       >
         {item.eyebrow && (
-          <p className="mb-3 font-body text-[16px] font-bold leading-[18.75px] tracking-normal lg:tracking-[-0.5px]">
-            {item.eyebrow}
+          <p className="mb-4 font-body text-[16px] font-bold leading-[19px]">
+            {ROW_LINKS[item.id] ? (
+              <Link to={ROW_LINKS[item.id]} target="_blank" rel="noopener noreferrer">
+                {item.eyebrow}
+              </Link>
+            ) : (
+              item.eyebrow
+            )}
           </p>
         )}
-        <p className="font-body text-body-sm whitespace-pre-line">
+        <p
+          className="font-body text-[14px] leading-[19px] whitespace-pre-line"
+          style={isActive ? { color: "#BFBFBF" } : undefined}
+        >
           {item.description}
         </p>
       </div>

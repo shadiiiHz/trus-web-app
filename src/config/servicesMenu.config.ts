@@ -4,7 +4,7 @@
  * own page or points at the section of its parent page that describes it (`#hash`, resolved by the service page).
  */
 import { siteConfig } from "@/config/site.config";
-import { serviceDetailPath } from "@/config/serviceDetails.config";
+import { SERVICE_PATHS } from "@/config/serviceDetails.config";
 
 export interface ServicesMenuItem {
   label: string;
@@ -15,28 +15,28 @@ export interface ServicesMenuItem {
 export function getServicesMenu(): { root: ServicesMenuItem; items: readonly ServicesMenuItem[] } {
   const m = siteConfig.nav.servicesMenu;
   const sub = m.items;
-  const brand = serviceDetailPath("brand-identity-logo-design");
-  const social = serviceDetailPath("social-media-content-creation-publishing");
-  const growth = serviceDetailPath("business-growth-intelligence-solver");
-  const email = serviceDetailPath("lead-to-customer-email-growth");
-  const youtube = serviceDetailPath("youtube-growth-broadcaster");
+  const brand = SERVICE_PATHS.brand;
+  const social = SERVICE_PATHS.social;
+  const growth = SERVICE_PATHS.growth;
+  const email = SERVICE_PATHS.email;
+  const youtube = SERVICE_PATHS.youtube;
 
   return {
     root: { label: m.root, href: "/services" },
     items: [
-      { label: m.seo, href: serviceDetailPath("seo-content-optimization") },
-      { label: m.web, href: serviceDetailPath("web-design-development") },
-      { label: m.multilingual, href: serviceDetailPath("multilingual-localized-growth-strategy") },
+      { label: m.seo, href: SERVICE_PATHS.seo },
+      { label: m.web, href: SERVICE_PATHS.webDesign },
+      { label: m.multilingual, href: SERVICE_PATHS.multilingual },
       { label: m.brand, href: brand, children: [{ label: sub.logoDesigner, href: `${brand}#about-service` }] },
       {
         label: m.social,
         href: social,
         children: [
-          { label: sub.autoPost, href: serviceDetailPath("auto-post-creator-publisher") },
-          { label: sub.instagram, href: serviceDetailPath("instagram-content-creator-publisher") },
-          { label: sub.linkedin, href: serviceDetailPath("linkedin-content-creator-publisher") },
-          { label: sub.x, href: serviceDetailPath("x-content-creator-publisher") },
-          { label: sub.telegram, href: serviceDetailPath("telegram-channel-content-creator-publisher") },
+          { label: sub.autoPost, href: SERVICE_PATHS.autoPost },
+          { label: sub.instagram, href: SERVICE_PATHS.instagram },
+          { label: sub.linkedin, href: SERVICE_PATHS.linkedin },
+          { label: sub.x, href: SERVICE_PATHS.x },
+          { label: sub.telegram, href: SERVICE_PATHS.telegram },
         ],
       },
       { label: m.growth, href: growth, children: [{ label: sub.meetingBooking, href: `${growth}#process-step-5` }] },

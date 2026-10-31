@@ -884,9 +884,28 @@ export interface ServiceDetail {
   focusedGrowthX?: boolean;
 }
 
+/** The one place each service's URL slug is written; everything else links through `SERVICE_PATHS`. */
+export const SERVICE_SLUGS = {
+  seo: "seo-content-optimization",
+  webDesign: "web-design-development",
+  brand: "brand-identity-logo-design",
+  social: "social-media-content-creation-publishing",
+  autoPost: "auto-post-creator-publisher",
+  instagram: "instagram-content-creator-publisher",
+  multilingual: "multilingual-localized-growth-strategy",
+  linkedin: "linkedin-content-creator-publisher",
+  x: "x-content-creator-publisher",
+  telegram: "telegram-channel-content-creator-publisher",
+  growth: "business-growth-intelligence-solver",
+  email: "lead-to-customer-email-growth",
+  youtube: "youtube-growth-broadcaster",
+} as const;
+
+export type ServiceKey = keyof typeof SERVICE_SLUGS;
+
 export const SERVICE_DETAILS: readonly ServiceDetail[] = [
   {
-    slug: "seo-content-optimization",
+    slug: SERVICE_SLUGS.seo,
     textKey: "seo",
     heroImage: "/services/seo-hero.webp",
     heroMobile: { titleWidth: 240 },
@@ -900,7 +919,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "web-design-development",
+    slug: SERVICE_SLUGS.webDesign,
     textKey: "webDesign",
     heroImage: "/services/web-design-hero.webp",
     heroTextY: 33,
@@ -916,7 +935,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "brand-identity-logo-design",
+    slug: SERVICE_SLUGS.brand,
     textKey: "brand",
     heroImage: "/services/brand-hero.webp",
     heroTextY: 34,
@@ -932,7 +951,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "social-media-content-creation-publishing",
+    slug: SERVICE_SLUGS.social,
     textKey: "social",
     heroImage: "/services/social-hero.webp",
     heroTextY: 30,
@@ -947,18 +966,18 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     growthImage: "/services/social-connected-growth.webp",
     stackIcons: ["settings", "instagram", "linkedin", "x", "telegram"],
     stackLinks: [
-      "auto-post-creator-publisher",
-      "instagram-content-creator-publisher",
-      "linkedin-content-creator-publisher",
-      "x-content-creator-publisher",
-      "telegram-channel-content-creator-publisher",
+      SERVICE_SLUGS.autoPost,
+      SERVICE_SLUGS.instagram,
+      SERVICE_SLUGS.linkedin,
+      SERVICE_SLUGS.x,
+      SERVICE_SLUGS.telegram,
     ],
     images: {
       about: "/services/social-team-brainstorm.webp",
     },
   },
   {
-    slug: "auto-post-creator-publisher",
+    slug: SERVICE_SLUGS.autoPost,
     textKey: "autoPost",
     heroImage: "/services/auto-post-hero.webp",
     heroTextY: 72,
@@ -981,7 +1000,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "instagram-content-creator-publisher",
+    slug: SERVICE_SLUGS.instagram,
     textKey: "instagram",
     heroImage: "/services/instagram-hero.webp",
     heroTextY: 31,
@@ -1002,7 +1021,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "multilingual-localized-growth-strategy",
+    slug: SERVICE_SLUGS.multilingual,
     textKey: "localizedGrowth",
     heroImage: "/services/localized-growth-hero.webp",
     heroFigma: true,
@@ -1020,7 +1039,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     },
   },
   {
-    slug: "linkedin-content-creator-publisher",
+    slug: SERVICE_SLUGS.linkedin,
     textKey: "linkedin",
     heroImage: "/services/linkedin-hero.webp",
     heroFigma: {
@@ -1045,7 +1064,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactWide: true,
   },
   {
-    slug: "x-content-creator-publisher",
+    slug: SERVICE_SLUGS.x,
     textKey: "x",
     heroImage: "/services/x-hero.webp",
     heroFigma: {
@@ -1073,7 +1092,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactWide: true,
   },
   {
-    slug: "telegram-channel-content-creator-publisher",
+    slug: SERVICE_SLUGS.telegram,
     textKey: "telegram",
     heroImage: "/services/telegram-hero.webp",
     heroFigma: {
@@ -1104,7 +1123,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactPlainText: true,
   },
   {
-    slug: "business-growth-intelligence-solver",
+    slug: SERVICE_SLUGS.growth,
     textKey: "growthIntelligence",
     heroImage: "/services/growth-hero.webp",
     heroFigma: {
@@ -1127,7 +1146,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactCompact: true,
   },
   {
-    slug: "lead-to-customer-email-growth",
+    slug: SERVICE_SLUGS.email,
     textKey: "leadEmail",
     heroImage: "/services/email-growth-hero.webp",
     aboutProcessImage: "/services/email-growth-about.webp",
@@ -1152,7 +1171,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     contactTopPadding: 80,
   },
   {
-    slug: "youtube-growth-broadcaster",
+    slug: SERVICE_SLUGS.youtube,
     textKey: "youtube",
     heroImage: "/services/youtube-hero.webp",
     broadcastAboutImage: "/services/youtube-about.webp",
@@ -1185,6 +1204,11 @@ export function getServiceDetail(slug: string | undefined): ServiceDetail | unde
 }
 
 export const serviceDetailPath = (slug: string) => `/services/${slug}`;
+
+/** Detail-page path of every service, by `ServiceKey` — use this instead of writing a slug or path by hand. */
+export const SERVICE_PATHS = Object.fromEntries(
+  Object.entries(SERVICE_SLUGS).map(([key, slug]) => [key, serviceDetailPath(slug)]),
+) as Record<ServiceKey, string>;
 
 /** Copy shared by every service page, in the active locale. */
 export function getServiceDetailCommon(): ServiceDetailCommon {
