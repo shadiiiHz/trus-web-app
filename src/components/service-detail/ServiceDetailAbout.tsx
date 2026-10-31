@@ -91,7 +91,7 @@ export function ServiceDetailAbout({
     >
       <div className="relative mx-auto w-full max-w-[790px] lg:max-w-[1064px]">
         <FadeIn direction="up">
-          <p className="text-[12px] uppercase leading-[15px] text-[#9F7EE1] lg:text-[14px] lg:leading-[17px]">
+          <p id="about-service" className="scroll-mt-21 text-[12px] uppercase leading-[15px] text-[#9F7EE1] lg:scroll-mt-18 lg:text-[14px] lg:leading-[17px]">
             {getServiceDetailCommon().aboutEyebrow}
           </p>
           <h2

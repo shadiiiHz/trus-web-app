@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichBlocks } from "@/components/service-detail/richText";
 import { type ServiceDetailProcess as ProcessContent } from "@/config/serviceDetails.config";
@@ -95,7 +96,16 @@ export function ServiceDetailProcess({
 }) {
   const { eyebrow, heading, description, steps } = process;
   // Only one card can be open at a time; the first starts open.
-  const [openIndex, setOpenIndex] = useState<number | null>(grid ? null : 0);
+  // A `#process-step-N` link (e.g. from the Services menu) opens that card; the page scrolls to it.
+  const { hash } = useLocation();
+  const hashStep = /^#process-step-(\d+)$/.exec(hash)?.[1];
+  const hashIndex = hashStep ? Number(hashStep) - 1 : null;
+  const [openIndex, setOpenIndex] = useState<number | null>(hashIndex ?? (grid ? null : 0));
+  const [seenHashIndex, setSeenHashIndex] = useState(hashIndex);
+  if (hashIndex !== seenHashIndex) {
+    setSeenHashIndex(hashIndex);
+    if (hashIndex !== null && hashIndex < steps.length) setOpenIndex(hashIndex);
+  }
 
   return (
     <section
@@ -171,7 +181,7 @@ export function ServiceDetailProcess({
           className={`grid ${grid ? (centered ? "mt-10 gap-2.5" : "mt-10 gap-2.5 lg:mt-[43px] lg:gap-5") : "lg:grid-cols-2 lg:gap-5"} ${grid ? "" : figma ? "mt-10 gap-2.5 lg:mt-[67px]" : accordion ? "mt-10 gap-2.5" : "mt-10 gap-5 lg:mt-[67px]"}`}
         >
           {steps.map((step, i) => (
-            <li key={step.title}>
+            <li key={step.title} id={`process-step-${i + 1}`} className="scroll-mt-21 lg:scroll-mt-18">
               <FadeIn direction="up" delay={(i % 2) * 0.08} className="h-full">
                 {accordion ? (
                   <AccordionCard

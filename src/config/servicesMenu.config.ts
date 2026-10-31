@@ -27,7 +27,7 @@ export function getServicesMenu(): { root: ServicesMenuItem; items: readonly Ser
       { label: m.seo, href: serviceDetailPath("seo-content-optimization") },
       { label: m.web, href: serviceDetailPath("web-design-development") },
       { label: m.multilingual, href: serviceDetailPath("multilingual-localized-growth-strategy") },
-      { label: m.brand, href: brand, children: [{ label: sub.logoDesigner, href: brand }] },
+      { label: m.brand, href: brand, children: [{ label: sub.logoDesigner, href: `${brand}#about-service` }] },
       {
         label: m.social,
         href: social,
@@ -39,19 +39,19 @@ export function getServicesMenu(): { root: ServicesMenuItem; items: readonly Ser
           { label: sub.telegram, href: serviceDetailPath("telegram-channel-content-creator-publisher") },
         ],
       },
-      { label: m.growth, href: growth, children: [{ label: sub.meetingBooking, href: `${growth}#how-it-works` }] },
+      { label: m.growth, href: growth, children: [{ label: sub.meetingBooking, href: `${growth}#process-step-5` }] },
       {
         label: m.email,
         href: email,
         children: [
-          { label: sub.leadFinder, href: `${email}#how-it-works` },
-          { label: sub.newsletterCreatorSender, href: `${email}#newsletter-services` },
-          { label: sub.newsletterCreator, href: `${email}#newsletter-services` },
-          { label: sub.emailSender, href: `${email}#newsletter-services` },
-          { label: sub.audienceTargeting, href: `${email}#how-it-works` },
+          { label: sub.leadFinder, href: `${email}#process-step-2` },
+          { label: sub.newsletterCreatorSender, href: `${email}#newsletter-creator-sender` },
+          { label: sub.newsletterCreator, href: `${email}#newsletter-creator` },
+          { label: sub.emailSender, href: `${email}#newsletter-sender` },
+          { label: sub.audienceTargeting, href: `${email}#process-step-1` },
         ],
       },
-      { label: m.youtube, href: youtube, children: [{ label: sub.youtubeBroadcaster, href: youtube }] },
+      { label: m.youtube, href: youtube, children: [{ label: sub.youtubeBroadcaster, href: `${youtube}#process-step-4` }] },
     ],
   };
 }

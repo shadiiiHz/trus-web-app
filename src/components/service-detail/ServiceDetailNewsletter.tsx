@@ -64,7 +64,7 @@ export function ServiceDetailNewsletter({ content, image }: { content: Newslette
         </FadeIn>
 
         <FadeIn direction="up" className="flex flex-col gap-2">
-          <h3 className={HEADING}>{content.sendCreate.heading}</h3>
+          <h3 id="newsletter-creator-sender" className={`${HEADING} scroll-mt-21 lg:scroll-mt-18`}>{content.sendCreate.heading}</h3>
           <Paragraphs items={content.sendCreate.paragraphs} />
         </FadeIn>
 
@@ -77,14 +77,14 @@ export function ServiceDetailNewsletter({ content, image }: { content: Newslette
               className="h-[212px] w-full rounded-lg object-cover lg:h-[260px] lg:w-[420px] lg:shrink-0 lg:rounded-2xl"
             />
             <div className="flex flex-col gap-2 lg:min-w-0 lg:flex-1">
-              <h3 className={`${HEADING} max-lg:whitespace-nowrap max-lg:tracking-[-0.04em]`}>{content.create.heading}</h3>
+              <h3 id="newsletter-creator" className={`${HEADING} scroll-mt-21 lg:scroll-mt-18 max-lg:whitespace-nowrap max-lg:tracking-[-0.04em]`}>{content.create.heading}</h3>
               <Paragraphs items={content.create.paragraphs} />
             </div>
           </div>
         </FadeIn>
 
         <FadeIn direction="up" className="flex flex-col gap-2">
-          <h3 className={HEADING}>{content.send.heading}</h3>
+          <h3 id="newsletter-sender" className={`${HEADING} scroll-mt-21 lg:scroll-mt-18`}>{content.send.heading}</h3>
           <Paragraphs items={content.send.paragraphs} />
         </FadeIn>
       </div>

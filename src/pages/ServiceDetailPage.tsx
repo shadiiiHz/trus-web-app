@@ -71,13 +71,37 @@ export default function ServiceDetailPage() {
   // Top of the page on a new service; a `#section` link (e.g. from the Services menu) scrolls to that section instead.
   useLayoutEffect(() => {
     const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
-    if (target) {
-      // Clear the fixed navbar (72px on desktop, 84px on phones).
-      const offset = window.innerWidth >= 1024 ? 72 : 84;
-      window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - offset);
-    } else {
+    if (!target) {
       window.scrollTo(0, 0);
+      return;
     }
+    // Clear the fixed navbar (72px on desktop, 84px on phones).
+    // Document offset of the target from the layout (offsetTop), so FadeIn transforms in flight don't move it.
+    const documentTop = () => {
+      let top = 0;
+      for (let el: HTMLElement | null = target; el; el = el.offsetParent as HTMLElement | null) top += el.offsetTop;
+      return top;
+    };
+    const align = () => {
+      const offset = window.innerWidth >= 1024 ? 72 : 84;
+      window.scrollTo(0, documentTop() - offset);
+    };
+    align();
+    // Lazy images above the target change the page height after the first scroll, so re-align whenever it changes — until the user scrolls.
+    const observer = new ResizeObserver(align);
+    observer.observe(document.documentElement);
+    const stop = () => observer.disconnect();
+    const timeout = window.setTimeout(stop, 2500);
+    window.addEventListener("wheel", stop, { once: true, passive: true });
+    window.addEventListener("touchstart", stop, { once: true, passive: true });
+    window.addEventListener("keydown", stop, { once: true });
+    return () => {
+      stop();
+      window.clearTimeout(timeout);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    };
   }, [slug, hash]);
 
   usePageMeta({

@@ -8,6 +8,7 @@ import {
 } from "@/config/serviceDetails.config";
 import { HAZE_STYLE, hazeMask } from "@/components/service-detail/haze";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const HAZE_Y = hazeMask([[0, 0], [0.18, 3.8], [0.47, 19], [0.76, 26.5], [0.88, 34], [0.97, 42], [1, 50], [0.97, 58], [0.88, 66], [0.76, 73.5], [0.47, 81], [0.18, 96.2], [0, 100]]);
 
@@ -29,7 +30,16 @@ export function ServiceDetailAboutProcess({
   image: string;
   imagePosition?: string;
 }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // A `#process-step-N` link (e.g. from the Services menu) opens that card; the page scrolls to it.
+  const { hash } = useLocation();
+  const hashStep = /^#process-step-(\d+)$/.exec(hash)?.[1];
+  const hashIndex = hashStep ? Number(hashStep) - 1 : null;
+  const [openIndex, setOpenIndex] = useState<number | null>(hashIndex);
+  const [seenHashIndex, setSeenHashIndex] = useState(hashIndex);
+  if (hashIndex !== seenHashIndex) {
+    setSeenHashIndex(hashIndex);
+    if (hashIndex !== null && hashIndex < process.steps.length) setOpenIndex(hashIndex);
+  }
 
   return (
     <section
@@ -93,7 +103,7 @@ export function ServiceDetailAboutProcess({
 
           <ol className="flex flex-col gap-2.5 lg:gap-5">
             {process.steps.map((step, i) => (
-              <li key={step.title}>
+              <li key={step.title} id={`process-step-${i + 1}`} className="scroll-mt-21 lg:scroll-mt-18">
                 <FadeIn direction="up">
                   <AccordionCard
                     index={i}
