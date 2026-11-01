@@ -8,6 +8,22 @@ import { TrusServicesIcon } from "./TrusServicesIcon";
 
 const OPEN_DELAY_MS = 0;
 const CLOSE_DELAY_MS = 140;
+/** How long a category switch is held back while the pointer is heading for the open sub-menu. */
+const SWITCH_INTENT_MS = 350;
+
+type Point = { x: number; y: number };
+
+const sign = (p: Point, a: Point, b: Point) =>
+  (p.x - b.x) * (a.y - b.y) - (a.x - b.x) * (p.y - b.y);
+
+function inTriangle(p: Point, a: Point, b: Point, c: Point) {
+  const d1 = sign(p, a, b);
+  const d2 = sign(p, b, c);
+  const d3 = sign(p, c, a);
+  const neg = d1 < 0 || d2 < 0 || d3 < 0;
+  const pos = d1 > 0 || d2 > 0 || d3 > 0;
+  return !(neg && pos);
+}
 
 /** Grid cells in Figma's column-major order: `index` is the position in `items` (-1 is the "Services" root). */
 const GRID: readonly { index: number; icon: string }[] = [
@@ -34,6 +50,12 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<number | null>(null);
   const timer = useRef<number | undefined>(undefined);
+  const switchTimer = useRef<number | undefined>(undefined);
+  const pendingIndex = useRef<number | null>(null);
+  const pointer = useRef<Point>({ x: 0, y: 0 });
+  const anchor = useRef<Point | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const subRef = useRef<HTMLDivElement>(null);
 
   const schedule = (next: boolean) => {
     window.clearTimeout(timer.current);
@@ -51,7 +73,63 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
     setOpen(false);
     setActive(null);
   };
-  useEffect(() => () => window.clearTimeout(timer.current), []);
+  useEffect(
+    () => () => {
+      window.clearTimeout(timer.current);
+      window.clearTimeout(switchTimer.current);
+    },
+    [],
+  );
+
+  const cancelSwitch = () => {
+    window.clearTimeout(switchTimer.current);
+    pendingIndex.current = null;
+  };
+
+  /** True while the pointer is travelling from where it left the active item towards the sub-menu panel (safe triangle). */
+  const headingToSub = () => {
+    const col = subRef.current;
+    const card = cardRef.current;
+    const from = anchor.current;
+    if (!col || !card || !from) return false;
+    const c = col.getBoundingClientRect();
+    const k = card.getBoundingClientRect();
+    return inTriangle(
+      pointer.current,
+      from,
+      { x: c.left, y: k.top },
+      { x: c.left, y: k.bottom },
+    );
+  };
+
+  const activate = (index: number | null) => {
+    if (index === active) return cancelSwitch();
+    if (active !== null && showSubNow() && headingToSub()) {
+      pendingIndex.current = index;
+      window.clearTimeout(switchTimer.current);
+      switchTimer.current = window.setTimeout(() => {
+        setActive(pendingIndex.current);
+        pendingIndex.current = null;
+      }, SWITCH_INTENT_MS);
+      return;
+    }
+    cancelSwitch();
+    setActive(index);
+  };
+
+  const showSubNow = () => !!items[active ?? -1]?.children?.length;
+
+  // Re-evaluated on every pointer move over the grid: once the pointer stops heading to the panel, switch right away.
+  const onGridMove = (e: React.MouseEvent) => {
+    pointer.current = { x: e.clientX, y: e.clientY };
+    if (pendingIndex.current === null) {
+      anchor.current = pointer.current;
+    } else if (!headingToSub()) {
+      const next = pendingIndex.current;
+      cancelSwitch();
+      setActive(next);
+    }
+  };
 
   const activeItem = active !== null ? items[active] : undefined;
   // The right-hand list only exists for a main service that has sub-services (the ones with an arrow).
@@ -87,6 +165,7 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
         className="absolute left-5 top-full z-50 w-[calc(100%-41px)]"
       >
         <div
+          ref={cardRef}
           role="menu"
           aria-label={root.label}
           className="relative box-border flex h-[290px] w-full overflow-hidden rounded-2xl border border-[#303037] bg-[#121217] pl-8 pr-8 pt-3 font-body"
@@ -103,6 +182,8 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
             <ul
               className="mt-3 grid grid-flow-col grid-rows-3 gap-3 max-xl:grid-cols-3 xl:grid-cols-[299px_296px_297px]"
               role="none"
+              onMouseMove={onGridMove}
+              onMouseLeave={cancelSwitch}
             >
               {GRID.map(({ index, icon }) => {
                 const item = index < 0 ? root : items[index];
@@ -116,8 +197,11 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
                       role="menuitem"
                       aria-haspopup={hasChildren ? "menu" : undefined}
                       aria-expanded={hasChildren ? isActive : undefined}
-                      onMouseEnter={() => setActive(index >= 0 ? index : null)}
-                      onFocus={() => setActive(index >= 0 ? index : null)}
+                      onMouseEnter={() => activate(index >= 0 ? index : null)}
+                      onFocus={() => {
+                        cancelSwitch();
+                        setActive(index >= 0 ? index : null);
+                      }}
                       className={`box-border flex h-full min-h-[58px] w-full items-center justify-between gap-3 rounded-[10px] border border-[#303037] p-3 text-base font-semibold leading-[19px] text-[#F8F8FA] outline-none transition-colors hover:bg-[#22192F] focus-visible:bg-[#22192F] ${isActive ? "bg-[#22192F]" : "bg-[#19191F]"}`}
                     >
                       <span
@@ -169,7 +253,11 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
             aria-hidden="true"
           />
 
-          <div className="ml-3 min-w-[213px]">
+          <div
+            ref={subRef}
+            className="ml-3 min-w-[213px]"
+            onMouseEnter={cancelSwitch}
+          >
             {showSub && activeItem?.children && (
               <>
                 <p className="flex h-9 items-center px-2 text-xs font-bold leading-[15px] text-[#707075]">
