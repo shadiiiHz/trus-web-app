@@ -1,45 +1,49 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ICON_MARKUP } from "@/components/services/serviceIcons";
 import { getServicesMenu } from "@/config/servicesMenu.config";
+import { siteConfig } from "@/config/site.config";
+import { TrusServicesIcon } from "./TrusServicesIcon";
 
 const OPEN_DELAY_MS = 0;
 const CLOSE_DELAY_MS = 140;
 
-function Chevron({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={`size-5 shrink-0 ${className}`}
-    >
-      <path d="M7.5 5L12.5 10L7.5 15" />
-    </svg>
-  );
-}
+/** Grid cells in Figma's column-major order: `index` is the position in `items` (-1 is the "Services" root). */
+const GRID: readonly { index: number; icon: string }[] = [
+  { index: -1, icon: "business-growth" },
+  { index: 5, icon: "business-growth" },
+  { index: 2, icon: "multilingual" },
+  { index: 1, icon: "web-design" },
+  { index: 3, icon: "branding" },
+  { index: 0, icon: "seo" },
+  { index: 4, icon: "social-media" },
+  { index: 6, icon: "lead-email" },
+  { index: 7, icon: "youtube" },
+];
 
 /**
- * Desktop navbar "Services" item: the link itself plus a hover / focus mega-menu (Figma: 442×340 card, a 200px list of
- * the main services beside a 242px list of the AI agents under the hovered one). The wrapper stretches to the navbar's
- * height so the card hangs 2px below the bar and the pointer never leaves the item while moving into it.
+ * Desktop navbar "Services" item: the link itself plus a hover / focus mega-menu (Figma: 1279×290 dark card hung 1px
+ * below the bar, a 3×3 grid of the main services beside a list of the AI agents under the hovered one). The card is
+ * positioned against the navbar container (the wrapper is not `relative`) and the wrapper stretches to the bar's height
+ * so the pointer never leaves the item while moving into it.
  */
 export function ServicesMenu({ children }: { children: ReactNode }) {
   const { root, items } = getServicesMenu();
+  const copy = siteConfig.nav.servicesMenu;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<number | null>(null);
   const timer = useRef<number | undefined>(undefined);
 
   const schedule = (next: boolean) => {
     window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => {
-      setOpen(next);
-      if (!next) setActive(null);
-    }, next ? OPEN_DELAY_MS : CLOSE_DELAY_MS);
+    timer.current = window.setTimeout(
+      () => {
+        setOpen(next);
+        if (!next) setActive(null);
+      },
+      next ? OPEN_DELAY_MS : CLOSE_DELAY_MS,
+    );
   };
 
   const close = () => {
@@ -55,13 +59,14 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="group/menu relative flex h-full items-center"
+      className="group/menu flex h-full items-center"
       data-menu-open={open}
       onMouseEnter={() => schedule(true)}
       onMouseLeave={() => schedule(false)}
       onFocus={() => schedule(true)}
       onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) schedule(false);
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+          schedule(false);
       }}
       onKeyDown={(e) => {
         if (e.key === "Escape") close();
@@ -79,65 +84,119 @@ export function ServicesMenu({ children }: { children: ReactNode }) {
         }
         style={{ visibility: "hidden" }}
         transition={{ duration: 0.16, ease: "easeOut" }}
-        className="absolute -left-3.5 top-full z-50"
+        className="absolute left-5 top-full z-50 w-[calc(100%-41px)]"
       >
-            <div
-              role="menu"
-              aria-label={root.label}
-              className={`box-border flex min-h-[340px] ${showSub ? "w-[442px]" : "w-[202px]"} items-stretch overflow-hidden rounded-lg border border-black/10 bg-[#FAFAFA] text-[#1E1E1E] shadow-[0_12px_16px_-4px_rgba(0,0,0,0.08),0_4px_6px_-2px_rgba(0,0,0,0.03),0_2px_2px_-1px_rgba(0,0,0,0.04)]`}
-            >
-              <div className="box-border flex flex-1 items-stretch border border-[#E5E5E5] bg-white">
-                <ul className={`box-border flex w-[200px] shrink-0 flex-col py-2 ${showSub ? "border-r border-black/10" : ""}`} role="none">
-                  {[root, ...items].map((item, i) => {
-                    const index = i - 1; // root is -1
-                    const hasChildren = !!item.children?.length;
-                    const isActive = index >= 0 && active === index;
-                    return (
-                      <li key={item.label} className="flex min-h-9 items-center px-1.5" role="none">
-                        <Link
-                          to={item.href}
-                          onClick={close}
-                          role="menuitem"
-                          aria-haspopup={hasChildren ? "menu" : undefined}
-                          aria-expanded={hasChildren ? isActive : undefined}
-                          onMouseEnter={() => setActive(index >= 0 ? index : null)}
-                          onFocus={() => setActive(index >= 0 ? index : null)}
-                          className={`flex min-h-9 flex-1 items-center justify-between gap-2 rounded-md p-2 font-body text-[14px] font-medium leading-5 outline-none transition-colors hover:bg-[#FAFAFA] focus-visible:bg-[#FAFAFA] ${isActive ? "bg-[#FAFAFA]" : ""}`}
-                        >
-                          <span>{item.label}</span>
-                          {hasChildren && <Chevron />}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+        <div
+          role="menu"
+          aria-label={root.label}
+          className="relative box-border flex h-[290px] w-full overflow-hidden rounded-2xl border border-[#303037] bg-[#121217] pl-8 pr-8 pt-3 font-body"
+        >
+          <span
+            className="absolute left-[890px] top-[23px] h-px w-px bg-[#303037]"
+            aria-hidden="true"
+          />
 
-                {showSub && (
-                <div className="box-border flex flex-1 flex-col pl-4 pr-4 pt-2">
-                  {activeItem?.children && (
-                    <div className="w-full" role="none">
-                      <p className="flex min-h-9 items-center py-1 font-body text-[14px] font-bold leading-[22px]">{activeItem.label}</p>
-                      <div className="h-px w-full bg-black/10" aria-hidden="true" />
-                      <ul role="menu" aria-label={activeItem.label}>
-                        {activeItem.children.map((child) => (
-                          <li key={child.label} role="none">
-                            <Link
-                              to={child.href}
-                              onClick={close}
-                              role="menuitem"
-                              className="flex min-h-9 items-center py-1.5 font-body text-[14px] font-normal leading-[22px] outline-none transition-colors hover:text-brand-accent focus-visible:text-brand-accent"
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                )}
-              </div>
-            </div>
+          <div className="w-[915px] shrink-0 max-xl:w-0 max-xl:flex-1">
+            <p className="flex h-9 items-center text-xs font-bold uppercase leading-[15px] text-[#707075]">
+              {copy.explore}
+            </p>
+            <ul
+              className="mt-3 grid grid-flow-col grid-rows-3 gap-3 max-xl:grid-cols-3 xl:grid-cols-[299px_296px_297px]"
+              role="none"
+            >
+              {GRID.map(({ index, icon }) => {
+                const item = index < 0 ? root : items[index];
+                const hasChildren = !!item.children?.length;
+                const isActive = index >= 0 && active === index;
+                return (
+                  <li key={item.label} role="none" className="min-h-[58px]">
+                    <Link
+                      to={item.href}
+                      onClick={close}
+                      role="menuitem"
+                      aria-haspopup={hasChildren ? "menu" : undefined}
+                      aria-expanded={hasChildren ? isActive : undefined}
+                      onMouseEnter={() => setActive(index >= 0 ? index : null)}
+                      onFocus={() => setActive(index >= 0 ? index : null)}
+                      className={`box-border flex h-full min-h-[58px] w-full items-center justify-between gap-3 rounded-[10px] border border-[#303037] p-3 text-base font-semibold leading-[19px] text-[#F8F8FA] outline-none transition-colors hover:bg-[#22192F] focus-visible:bg-[#22192F] ${isActive ? "bg-[#22192F]" : "bg-[#19191F]"}`}
+                    >
+                      <span
+                        className={`flex min-w-0 items-center ${index === 2 ? "gap-2.5" : "gap-3"}`}
+                      >
+                        {index < 0 ? (
+                          <TrusServicesIcon className="shrink-0 text-white" />
+                        ) : (
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 43 43"
+                            fill="none"
+                            aria-hidden="true"
+                            className="shrink-0 text-white"
+                            dangerouslySetInnerHTML={{
+                              __html: ICON_MARKUP[icon] ?? "",
+                            }}
+                          />
+                        )}
+                        <span className="min-w-0">{item.label}</span>
+                      </span>
+                      {hasChildren && (
+                        <svg
+                          aria-hidden="true"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          className="shrink-0"
+                        >
+                          <path
+                            d="M10 17L15 12L10 7"
+                            stroke="white"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div
+            className="ml-3 h-[246px] w-px shrink-0 bg-[#303037]"
+            aria-hidden="true"
+          />
+
+          <div className="ml-3 min-w-[213px]">
+            {showSub && activeItem?.children && (
+              <>
+                <p className="flex h-9 items-center px-2 text-xs font-bold leading-[15px] text-[#707075]">
+                  {activeItem.label}
+                </p>
+                <ul
+                  className="mt-3 flex flex-col gap-1"
+                  role="menu"
+                  aria-label={activeItem.label}
+                >
+                  {activeItem.children.map((child) => (
+                    <li key={child.label} role="none" className="min-h-9">
+                      <Link
+                        to={child.href}
+                        onClick={close}
+                        role="menuitem"
+                        className="box-border flex min-h-9 w-fit max-w-full items-center rounded-md border border-transparent p-2 text-sm font-medium leading-5 text-white outline-none transition-colors hover:border-[#303037] hover:bg-[#22192F] focus-visible:border-[#303037] focus-visible:bg-[#22192F] "
+                      >
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </div>
       </motion.div>
     </div>
   );
