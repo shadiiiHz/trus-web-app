@@ -170,28 +170,28 @@
     "description": "Des solutions numériques de bout en bout, dont le développement web sur mesure, l'hébergement d'entreprise, le SEO, l'automatisation par IA et un marketing axé sur la performance, conçues pour aider votre entreprise à se développer.",
     "items": [
       {
-        "title": "Intelligence et Résolution de Croissance d'Entreprise",
+        "title": "Intelligence et Résolution de Croissance",
         "bullets": [
-          "Découverte et analyse d'entreprise par IA",
-          "Détection des problèmes et goulots d'étranglement",
+          "Analyse d'entreprise par IA",
+          "Détection des problèmes et blocages",
           "Analyse de croissance et stratégie IA",
           "Association problème–agent IA",
           "Résolution de problèmes par agents IA",
-          "Réservation de réunions en ligne par IA",
+          "Réservation de réunions par IA",
           "Suivi, rapports et optimisation",
-          "Écosystème de croissance du lead au client"
+          "Écosystème du lead au client"
         ]
       },
       {
-        "title": "Stratégie de Croissance Multilingue et Localisée",
+        "title": "Croissance Multilingue et Localisée",
         "bullets": [
           "Contenu multilingue propulsé par l'IA",
           "Comptes de réseaux sociaux localisés",
           "Génération de leads géociblée",
           "Newsletters et prospection localisées",
-          "Publication et planification localisées",
+          "Publication localisée et planning",
           "Suivi et analyses inter-marchés",
-          "Croissance mondiale évolutive avec agents IA"
+          "Croissance mondiale évolutive par IA"
         ]
       },
       {
@@ -204,7 +204,7 @@
           "Évolutif et haute performance",
           "Sites web multilingues et localisés",
           "Suivi et rapports IA",
-          "Support et mises à jour après lancement"
+          "Suivi et mises à jour post-lancement"
         ]
       },
       {
@@ -222,7 +222,7 @@
         "title": "SEO et Optimisation de Contenu",
         "bullets": [
           "SEO technique et on-page",
-          "Optimisation du contenu et des mots-clés",
+          "Optimisation contenu et mots-clés",
           "SEO propulsé par l'IA",
           "Optimisation pour la recherche IA",
           "SEO multilingue et géociblé",
@@ -231,12 +231,12 @@
         ]
       },
       {
-        "title": "Création et Publication de Contenu Social Media",
+        "title": "Création et Publication Social Media",
         "bullets": [
           "Création de contenu par IA",
-          "Publication automatisée multi-plateformes",
+          "Publication automatisée multicanale",
           "Contenu multilingue et localisé",
-          "Stratégie de comptes sociaux multilingues",
+          "Stratégie de comptes multilingues",
           "Engagement et relances par IA",
           "Analyses de performance inter-marchés",
           "Optimisation continue du contenu"
@@ -258,12 +258,12 @@
       {
         "title": "Diffuseur de Croissance YouTube",
         "bullets": [
-          "Recherche d'audience et de leads par IA",
+          "Recherche d'audience et de leads IA",
           "Newsletter vidéo IA",
           "Prospection multilingue",
           "Chaînes par langue",
           "Diffusion ciblée",
-          "Croissance des spectateurs et du temps de visionnage par IA",
+          "Croissance des vues et du visionnage",
           "Analyses d'engagement",
           "Croissance d'entreprise sur YouTube"
         ]

@@ -28,6 +28,8 @@ export function ServiceCard({
   href,
   height,
 }: ServiceCardProps) {
+  // Every Figma metric (designed at a 305px card) scales with the card width.
+  const s = fluid ? 1 : width / 305;
   const cardRef = useRef<HTMLDivElement>(null);
   useCardHoverWave(cardRef);
 
@@ -38,39 +40,50 @@ export function ServiceCard({
       style={{
         width: fluid ? "100%" : `${width}px`,
         minWidth: fluid ? 0 : `${width}px`,
-        height: fluid || height === undefined ? "auto" : `${height}px`,
-        borderRadius: "16px",
-        padding: "8px",
+        height: "auto",
+        minHeight: fluid || height === undefined ? undefined : `${height}px`,
+        borderRadius: `${16 * s}px`,
+        padding: `${16 * s}px`,
         background: dark ? "#000000" : "#FFFFFF",
         border: dark ? "1px solid rgba(255,255,255,0.3)" : "none",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
-        gap: "5px",
+        alignItems: "flex-start",
+        gap: `${8 * s}px`,
         flexShrink: 0,
       }}
     >
       <div
         style={{
           color: dark ? "#9F7EE1" : "#5B2BB9",
-          width: fluid ? "43px" : "40px",
-          height: fluid ? "43px" : "40px",
+          width: `${38 * s}px`,
+          height: `${38 * s}px`,
           flexShrink: 0,
-          marginBottom: "5px",
+          marginBottom: 0,
         }}
       >
         {icon}
       </div>
 
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          alignSelf: "stretch",
+          gap: `${4 * s}px`,
+        }}
+      >
       <h3
         style={{
           fontFamily: "var(--font-body)",
           fontWeight: 700,
-          fontSize: fluid ? "clamp(15px, 4.2vw, 20px)" : "14px",
-          lineHeight: fluid ? "1.3" : "100%",
+          fontSize: `${14 * s}px`,
+          lineHeight: `${17 * s}px`,
           color: dark ? "#FFFFFF" : "#070606",
           margin: 0,
-          letterSpacing: "-4%"
+          letterSpacing: "-0.01em",
         }}
       >
         {title}
@@ -80,11 +93,11 @@ export function ServiceCard({
         style={{
           fontFamily: "var(--font-body)",
           fontWeight: 400,
-          fontSize: fluid ? "clamp(14px, 3.9vw, 18px)" : "14px",
-          lineHeight: fluid ? "1.43" : "19px",
+          fontSize: `${14 * s}px`,
+          lineHeight: `${19 * s}px`,
           color: dark ? "#BFBFBF" : "#5A5A5A",
           margin: 0,
-          paddingLeft: fluid ? "24px" : "20px",
+          paddingLeft: `${21 * s}px`,
           listStyleType: "disc",
         }}
       >
@@ -92,6 +105,7 @@ export function ServiceCard({
           <li key={b}>{b}</li>
         ))}
       </ul>
+      </div>
     </div>
   );
 

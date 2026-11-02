@@ -90,6 +90,17 @@ function ServicesDesktop() {
     setMeasured({ scale, items, h })
   }, [cardH, scale, items])
 
+  // Text reflows once the web font loads, so the first measurement can be too small.
+  useEffect(() => {
+    let cancelled = false
+    document.fonts?.ready.then(() => {
+      if (!cancelled) setMeasured(null)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const cardW = CARD_W * scale
   const gap = GAP * scale
   const shift = SHIFT * scale
