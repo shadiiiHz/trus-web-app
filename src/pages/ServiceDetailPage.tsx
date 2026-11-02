@@ -127,6 +127,7 @@ export default function ServiceDetailPage() {
           tagline={content.tagline}
           image={service.heroImage}
           textY={service.heroTextY}
+          imageY={service.heroImageY}
           desktopFade={service.heroDesktopFade}
           wideTitle={service.heroWideTitle}
           figma={service.heroFigma}

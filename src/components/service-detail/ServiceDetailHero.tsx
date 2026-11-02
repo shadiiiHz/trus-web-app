@@ -41,6 +41,8 @@ interface ServiceDetailHeroProps {
   /** Mobile line breaks, when they differ from desktop's. */
   taglineMobile?: readonly string[];
   image: string;
+  /** Desktop: vertical focal point of the photo (object-position y, %). */
+  imageY?: number;
   /** Desktop: vertical center of the text block as a % of the hero's height (each Figma hero places it differently). */
   textY?: number;
   /** Mobile: where the text sits over the photo. */
@@ -65,6 +67,7 @@ export function ServiceDetailHero({
   tagline,
   taglineMobile = tagline,
   image,
+  imageY = 0,
   textY = 50,
   mobileAlign = "bottom",
   mobileImageX = "93%",
@@ -91,8 +94,11 @@ export function ServiceDetailHero({
           src={image}
           alt=""
           fetchPriority="high"
-          style={{ ["--hero-img-x" as string]: mobileImageX }}
-          className="absolute inset-0 block h-full w-full object-fill max-lg:object-cover max-lg:[object-position:var(--hero-img-x)_center]"
+          style={{
+            ["--hero-img-x" as string]: mobileImageX,
+            ["--hero-img-y" as string]: `${imageY}%`,
+          }}
+          className="absolute inset-0 block h-full w-full object-cover [object-position:var(--hero-img-x)_center] lg:[object-position:center_var(--hero-img-y)]"
         />
         <div
           aria-hidden="true"
@@ -185,8 +191,11 @@ export function ServiceDetailHero({
         src={image}
         alt=""
         fetchPriority="high"
-        style={{ ["--hero-img-x" as string]: mobileImageX }}
-        className="absolute inset-0 block h-full w-full object-fill max-lg:object-cover max-lg:[object-position:var(--hero-img-x)_center]"
+        style={{
+          ["--hero-img-x" as string]: mobileImageX,
+          ["--hero-img-y" as string]: `${imageY}%`,
+        }}
+        className="absolute inset-0 block h-full w-full object-cover [object-position:var(--hero-img-x)_center] lg:[object-position:center_var(--hero-img-y)]"
       />
       <div
         aria-hidden="true"

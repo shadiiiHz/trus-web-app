@@ -736,6 +736,8 @@ export interface ServiceDetail {
   textKey: ServiceTextKey;
   /** Full-width hero photo. */
   heroImage: string;
+  /** Desktop hero: vertical focal point (object-position y, %) used when a wide screen crops the photo — keeps the people in frame. */
+  heroImageY?: number;
   /** Desktop hero: vertical center of the title block, % of hero height (default 50). */
   heroTextY?: number;
   /** Desktop hero: white left-to-right fade (70% → 0%) behind the title. */
@@ -908,6 +910,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.seo,
     textKey: "seo",
     heroImage: "/services/seo-hero.webp",
+    heroImageY: 17,
     heroMobile: { titleWidth: 240 },
     aboutGlow: true,
     aboutImageSize: { width: 414, height: 212 },
@@ -922,6 +925,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.webDesign,
     textKey: "webDesign",
     heroImage: "/services/web-design-hero.webp",
+    heroImageY: 2,
     heroTextY: 33,
     heroMobile: { imageX: "59%" },
     aboutGlow: true,
@@ -938,6 +942,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.brand,
     textKey: "brand",
     heroImage: "/services/brand-hero.webp",
+    heroImageY: 23,
     heroTextY: 33.3,
     heroMobile: { align: "top", imageX: "67%", titleWidth: 240 },
     aboutGlow: true,
@@ -954,6 +959,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.social,
     textKey: "social",
     heroImage: "/services/social-hero.webp",
+    heroImageY: 28,
     heroTextY: 31,
     heroDesktopFade: true,
     heroMobile: { imageX: "79%", titleWidth: 300 },
@@ -980,6 +986,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.autoPost,
     textKey: "autoPost",
     heroImage: "/services/auto-post-hero.webp",
+    heroImageY: 0,
     heroTextY: 74,
     heroDesktopFade: true,
     heroWideTitle: true,
@@ -1003,6 +1010,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.instagram,
     textKey: "instagram",
     heroImage: "/services/instagram-hero.webp",
+    heroImageY: 28,
     heroTextY: 31,
     heroMobile: { imageX: "60%", titleWidth: 329 },
     heroOnly: true,
@@ -1024,6 +1032,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.multilingual,
     textKey: "localizedGrowth",
     heroImage: "/services/localized-growth-hero.webp",
+    heroImageY: 6,
     heroFigma: true,
     heroMobile: { imageX: "59%", titleWidth: 329 },
     aboutGlow: true,
@@ -1042,6 +1051,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.linkedin,
     textKey: "linkedin",
     heroImage: "/services/linkedin-hero.webp",
+    heroImageY: 39,
     heroFigma: {
       bottom: true,
       gradient: "linear-gradient(76.15deg, rgba(255,255,255,0.72) 31.92%, rgba(255,255,255,0) 47.83%)",
@@ -1067,6 +1077,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.x,
     textKey: "x",
     heroImage: "/services/x-hero.webp",
+    heroImageY: 28,
     heroFigma: {
       bottom: true,
       dark: true,
@@ -1095,6 +1106,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.telegram,
     textKey: "telegram",
     heroImage: "/services/telegram-hero.webp",
+    heroImageY: 39,
     heroFigma: {
       bottom: true,
       dark: true,
@@ -1126,6 +1138,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.growth,
     textKey: "growthIntelligence",
     heroImage: "/services/growth-hero.webp",
+    heroImageY: 17,
     heroFigma: {
       bottom: true,
       ink: "#0A0A0A",
@@ -1149,6 +1162,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.email,
     textKey: "leadEmail",
     heroImage: "/services/email-growth-hero.webp",
+    heroImageY: 0,
     aboutProcessImage: "/services/email-growth-about.webp",
     aboutProcessImagePosition: "81% 0%",
     newsletterImage: "/services/email-growth-newsletter.webp",
@@ -1174,6 +1188,7 @@ export const SERVICE_DETAILS: readonly ServiceDetail[] = [
     slug: SERVICE_SLUGS.youtube,
     textKey: "youtube",
     heroImage: "/services/youtube-hero.webp",
+    heroImageY: 39,
     broadcastAboutImage: "/services/youtube-about.webp",
     processAccordion: true,
     processGrid: true,
