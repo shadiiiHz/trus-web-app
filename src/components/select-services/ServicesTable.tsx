@@ -105,7 +105,7 @@ function SkeletonRow() {
           <SkeletonBar className="h-4 w-32" />
         </div>
       </td>
-      <td className="pr-4">
+      <td className="pl-3 pr-4">
         <SkeletonBar className="h-4 w-4/5" />
         <SkeletonBar className="mt-1.5 h-4 w-3/5" />
       </td>
@@ -426,7 +426,7 @@ export function ServicesTable({
                   </button>
                 </div>
               </th>
-              <th className={headCellClass} scope="col">
+              <th className={`${headCellClass} pl-3`} scope="col">
                 {copy.description}
               </th>
               <th className={headCellClass} scope="col">
@@ -484,7 +484,7 @@ export function ServicesTable({
                       </div>
                     </div>
                   </td>
-                  <td className="pr-4 text-[14px] leading-5.5 text-auth-muted">
+                  <td className="pl-3 pr-4 text-[14px] leading-5.5 text-auth-muted">
                     {splitDescription(service.description).map((line, i) => (
                       <p key={i}>{line}</p>
                     ))}
