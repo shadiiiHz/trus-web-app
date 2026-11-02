@@ -122,7 +122,7 @@ export function AccountMenu({ copy, className = "" }: AccountMenuProps) {
         {/* The account's uploaded logo, or an empty placeholder until one is set. */}
         <span
           aria-hidden="true"
-          className="h-8 w-8 shrink-0 overflow-hidden rounded-md border border-white/15 bg-white/10"
+          className="h-8 w-8 shrink-0 overflow-hidden rounded-md border border-[rgba(0,0,0,0.12)] bg-white/10"
         >
           {showLogo && (
             <img
