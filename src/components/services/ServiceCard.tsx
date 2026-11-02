@@ -43,7 +43,7 @@ export function ServiceCard({
         height: "auto",
         minHeight: fluid || height === undefined ? undefined : `${height}px`,
         borderRadius: `${16 * s}px`,
-        padding: `${16 * s}px`,
+        padding: `${12 * s}px`,
         background: dark ? "#000000" : "#FFFFFF",
         border: dark ? "1px solid rgba(255,255,255,0.3)" : "none",
         boxSizing: "border-box",
@@ -79,8 +79,8 @@ export function ServiceCard({
         style={{
           fontFamily: "var(--font-body)",
           fontWeight: 700,
-          fontSize: `${14 * s}px`,
-          lineHeight: `${17 * s}px`,
+          fontSize: `${13.5 * s}px`,
+          lineHeight: `${16 * s}px`,
           color: dark ? "#FFFFFF" : "#070606",
           margin: 0,
           letterSpacing: "-0.01em",
@@ -93,11 +93,11 @@ export function ServiceCard({
         style={{
           fontFamily: "var(--font-body)",
           fontWeight: 400,
-          fontSize: `${14 * s}px`,
-          lineHeight: `${19 * s}px`,
+          fontSize: `${13 * s}px`,
+          lineHeight: `${18 * s}px`,
           color: dark ? "#BFBFBF" : "#5A5A5A",
           margin: 0,
-          paddingLeft: `${21 * s}px`,
+          paddingLeft: `${18 * s}px`,
           listStyleType: "disc",
         }}
       >

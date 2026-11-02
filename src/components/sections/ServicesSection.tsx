@@ -14,9 +14,10 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 // Business Growth sits directly above YouTube. Scales with the viewport.
 const DESIGN_W = 1440
 const CARD_W = 305
-const GAP = 20
+const GAP = 12
 const TOP_INSET = 99
 const BOTTOM_INSET = 60
+
 // Distance each row travels so card 1 of the top row ends directly above the
 // last card of the bottom row (top moves right, bottom moves left).
 const SHIFT = (BOTTOM_INSET + 3 * (CARD_W + GAP) - TOP_INSET) / 2
@@ -103,9 +104,9 @@ function ServicesDesktop() {
 
   const cardW = CARD_W * scale
   const gap = GAP * scale
-  const shift = SHIFT * scale
   const topStart = TOP_INSET * scale
   const bottomStart = BOTTOM_INSET * scale
+  const shift = SHIFT * scale
 
   // Top row slides right, bottom row slides left, by the same distance.
   const topRowX = useTransform(scrollYMV, (y) => topStart + computeT(y) * shift)
@@ -167,7 +168,7 @@ function ServicesDesktop() {
           className="relative mx-auto w-full"
           style={{ maxWidth: '1320px', padding: '0 20px', zIndex: 1 }}
         >
-          <div style={{ paddingTop: '100px' }}>
+          <div style={{ paddingTop: '80px' }}>
             <FadeIn direction="up" delay={0.08}>
               <p
                 className="text-section-label"
@@ -185,7 +186,7 @@ function ServicesDesktop() {
             </FadeIn>
 
             <FadeIn direction="up" delay={0.18}>
-              <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center justify-between gap-6" style={{ marginTop: "-1.5px" }}>
                 <h2
                   className="text-section-title"
                   style={{
@@ -223,7 +224,7 @@ function ServicesDesktop() {
               <div
                 style={{
                   position: 'relative',
-                  marginTop: '8px',
+                  marginTop: '2px',
                   overflow: 'hidden',
                   height: '1px',
                 }}
@@ -269,7 +270,7 @@ function ServicesDesktop() {
           style={{
             position: 'relative',
             zIndex: 1,
-            marginTop: '21px',
+            marginTop: '12px',
           }}
           aria-label="Service cards"
           ref={rowsRef}
@@ -302,7 +303,7 @@ function ServicesDesktop() {
                   x: bottomRowX,
                   display: 'flex',
                   gap: `${gap}px`,
-                  marginTop: '24px',
+                  marginTop: '12px',
                   width: 'max-content',
                 }}
               >

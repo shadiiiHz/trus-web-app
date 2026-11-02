@@ -6,8 +6,8 @@ export function ServiceIcon({ id }: { id: string }) {
   if (!markup) return null
   return (
     <svg
-      width="43"
-      height="43"
+      width="100%"
+      height="100%"
       viewBox="0 0 43 43"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
