@@ -15,8 +15,8 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 const DESIGN_W = 1440
 const CARD_W = 305
 const GAP = 12
-const TOP_INSET = 99
-const BOTTOM_INSET = 60
+const TOP_INSET = 150
+const BOTTOM_INSET = 18
 
 // Distance each row travels so card 1 of the top row ends directly above the
 // last card of the bottom row (top moves right, bottom moves left).
