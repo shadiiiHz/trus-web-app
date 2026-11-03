@@ -307,20 +307,33 @@ function ServicesPanel({
           return (
             <li key={item.label}>
               {hasChildren ? (
-                <button
-                  type="button"
-                  onClick={() => setExpanded(isOpen ? null : index)}
-                  aria-expanded={isOpen}
-                  className={`${rowBase} h-11 ${isOpen ? rowActive : ""}`}
+                <div
+                  className={`box-border flex h-11 w-full items-center rounded-lg border border-transparent transition-colors hover:bg-[rgba(159,126,225,0.1)] ${
+                    isOpen ? rowActive : ""
+                  }`}
                 >
-                  {item.label}
-                  <ChevronRight
-                    size={24}
-                    strokeWidth={1.875}
-                    className={`shrink-0 transition-transform duration-200 ${isOpen ? "-rotate-90" : ""}`}
-                    aria-hidden="true"
-                  />
-                </button>
+                  <Link
+                    to={item.href}
+                    onClick={onNavigate}
+                    className="flex h-full min-w-0 flex-1 items-center pl-4 text-left font-body text-[16px] leading-4 text-white"
+                  >
+                    {item.label}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    aria-label={item.label}
+                    className="flex h-full w-12 shrink-0 cursor-pointer items-center justify-center text-white"
+                  >
+                    <ChevronRight
+                      size={24}
+                      strokeWidth={1.875}
+                      className={`transition-transform duration-200 ${isOpen ? "-rotate-90" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
               ) : (
                 <Link to={item.href} onClick={onNavigate} className={`${rowBase} h-11`}>
                   {item.label}
