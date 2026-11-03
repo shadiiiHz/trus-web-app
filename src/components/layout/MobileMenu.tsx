@@ -196,10 +196,12 @@ export function MobileMenu({
   );
 }
 
-function FlagBox({ Flag }: { Flag: (typeof LANGUAGES)[number]["Flag"] }) {
+function FlagBox({ Flag, bordered = true }: { Flag: (typeof LANGUAGES)[number]["Flag"]; bordered?: boolean }) {
   return (
     <span
-      className="box-border inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[3px] border-[0.5px] border-white"
+      className={`box-border inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[3px] ${
+        bordered ? "border-[0.5px] border-white" : ""
+      }`}
       style={{ width: 32, height: 22.59 }}
     >
       <Flag fit="slice" />
@@ -215,11 +217,11 @@ function LanguageTrigger({ onClick }: { onClick: () => void }) {
       type="button"
       onClick={onClick}
       aria-label={`Language: ${current.name}. Open language menu`}
-      className={`box-border flex h-14 w-full cursor-pointer items-center justify-between border-t ${LINE} p-4 text-white`}
+      className="box-border flex h-14 w-full cursor-pointer items-center justify-between p-4 text-white"
     >
       <span className="flex items-center gap-2.5">
         <span className="font-body text-[16px] leading-4 font-normal">{current.label}</span>
-        <FlagBox Flag={current.Flag} />
+        <FlagBox Flag={current.Flag} bordered={false} />
       </span>
       <ChevronRight size={24} strokeWidth={1.875} className="shrink-0" aria-hidden="true" />
     </button>

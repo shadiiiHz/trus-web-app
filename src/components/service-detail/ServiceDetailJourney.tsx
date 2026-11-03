@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import type { ServiceDetailJourney as JourneyContent } from "@/config/serviceDetails.config";
 import { renderRichText } from "@/components/service-detail/richText";
@@ -38,22 +37,21 @@ export function ServiceDetailJourney({ content, image }: { content: JourneyConte
               </div>
             </div>
 
-            <ol className="-mx-5 -mt-6 flex items-center overflow-x-auto px-5 [scrollbar-width:none] lg:mt-0 xl:mx-0 xl:gap-0.5 xl:overflow-visible xl:px-0 [&::-webkit-scrollbar]:hidden">
+            <ol className="-mt-6 flex flex-wrap items-center gap-y-3 lg:mt-0 xl:flex-nowrap xl:gap-0.5">
               {content.steps.map((step, i) => (
-                <Fragment key={step}>
-                  {i > 0 && (
-                    <li
-                      role="presentation"
+                <li key={step} className="flex items-center xl:contents">
+                  <div className="flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#070606] p-2 font-hero text-[14px] font-bold leading-[18px] text-white">
+                    {step}
+                  </div>
+                  {i < content.steps.length - 1 && (
+                    <div
                       aria-hidden="true"
                       className="flex shrink-0 items-center justify-center px-2 xl:relative xl:block xl:h-px xl:min-w-0 xl:flex-1 xl:bg-[#070606] xl:p-0"
                     >
                       <span className="block size-[6px] -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-[#070606] xl:absolute xl:right-[1.25px] xl:top-1/2 xl:translate-x-0 xl:-translate-y-1/2 xl:border-r xl:border-t" />
-                    </li>
+                    </div>
                   )}
-                  <li className="flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#070606] p-2 font-hero text-[14px] font-bold leading-[18px] text-white">
-                    {step}
-                  </li>
-                </Fragment>
+                </li>
               ))}
             </ol>
 

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichText } from "@/components/service-detail/richText";
 import type { ServiceDetailTwoGoals as TwoGoalsContent } from "@/config/serviceDetails.config";
@@ -62,21 +61,21 @@ export function ServiceDetailTwoGoals({ content, image }: { content: TwoGoalsCon
                     ))}
                   </ul>
                   <p className="font-body text-[15px] leading-[22px] text-white">{business.text}</p>
-                  <ol className="-mx-5 flex items-center overflow-x-auto px-5 max-lg:mt-8 [scrollbar-width:none] lg:mx-0 lg:gap-0.5 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+                  <ol className="flex flex-wrap items-center gap-y-3 max-lg:mt-8 lg:flex-nowrap lg:gap-0.5">
                     {business.steps.map((step, i) => (
-                      <Fragment key={step}>
-                        {i > 0 && (
-                          <li
+                      <li key={step} className="flex items-center lg:contents">
+                        <div className="box-border flex h-[34px] shrink-0 items-center whitespace-nowrap rounded-full border border-white bg-white p-[7px] font-hero text-[14px] font-bold leading-[18px] text-[#070606]">
+                          {step}
+                        </div>
+                        {i < business.steps.length - 1 && (
+                          <div
                             aria-hidden="true"
                             className="flex shrink-0 items-center justify-center max-lg:mx-2 max-lg:w-0.5 lg:relative lg:block lg:h-px lg:min-w-4 lg:flex-1 lg:bg-white lg:p-0"
                           >
-                            <span className="block size-[6px] -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-white lg:absolute lg:right-[1.25px] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:border-r lg:border-t" />
-                          </li>
+                            <span className="block size-[6px] shrink-0 -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-white lg:absolute lg:right-[1.25px] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:border-r lg:border-t" />
+                          </div>
                         )}
-                        <li className="box-border flex h-[34px] shrink-0 items-center whitespace-nowrap rounded-full border border-white bg-white p-[7px] font-hero text-[14px] font-bold leading-[18px] text-[#070606]">
-                          {step}
-                        </li>
-                      </Fragment>
+                      </li>
                     ))}
                   </ol>
                 </div>

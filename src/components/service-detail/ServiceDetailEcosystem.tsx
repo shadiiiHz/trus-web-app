@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichText } from "@/components/service-detail/richText";
 import type { ServiceDetailEcosystem as EcosystemContent } from "@/config/serviceDetails.config";
@@ -30,21 +29,21 @@ export function ServiceDetailEcosystem({ content, image }: { content: EcosystemC
         </FadeIn>
 
         <FadeIn direction="up">
-          <ol className="-mx-5 flex items-center overflow-x-auto px-5 [scrollbar-width:none] lg:mx-0 lg:justify-center lg:gap-2 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+          <ol className="flex flex-wrap items-center gap-y-3 lg:flex-nowrap lg:justify-center lg:gap-2">
             {content.steps.map((step, i) => (
-              <Fragment key={step}>
-                {i > 0 && (
-                  <li
+              <li key={step} className="flex items-center lg:contents">
+                <div className="box-border flex h-[34px] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/30 bg-white px-[7px] font-hero text-[14px] font-bold leading-[18px] text-[#070606] lg:px-[15px]">
+                  {step}
+                </div>
+                {i < content.steps.length - 1 && (
+                  <div
                     aria-hidden="true"
                     className="flex shrink-0 items-center justify-center px-2 lg:relative lg:block lg:h-px lg:w-[100px] lg:bg-white lg:p-0"
                   >
                     <span className="block size-[6px] -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-white lg:absolute lg:right-[1.25px] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:border-r lg:border-t" />
-                  </li>
+                  </div>
                 )}
-                <li className="box-border flex h-[34px] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/30 bg-white px-[7px] font-hero text-[14px] font-bold leading-[18px] text-[#070606] lg:px-[15px]">
-                  {step}
-                </li>
-              </Fragment>
+              </li>
             ))}
           </ol>
         </FadeIn>

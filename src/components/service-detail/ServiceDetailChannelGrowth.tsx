@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { renderRichText } from "@/components/service-detail/richText";
 import type { ServiceDetailChannelGrowth as ChannelGrowthContent } from "@/config/serviceDetails.config";
@@ -53,21 +52,21 @@ export function ServiceDetailChannelGrowth({ content, image }: { content: Channe
               <p className={`text-justify ${BODY}`}>{renderRichText(content.intro)}</p>
               <p className={`text-justify font-bold ${BODY}`}>{content.processLead}</p>
 
-              <ol className="-mx-5 flex items-center overflow-x-auto px-5 [scrollbar-width:none] lg:mx-0 lg:gap-2 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+              <ol className="flex flex-wrap items-center gap-y-3 lg:flex-nowrap lg:gap-2">
                 {content.steps.map((step, i) => (
-                  <Fragment key={step}>
-                    {i > 0 && (
-                      <li
+                  <li key={step} className="flex items-center lg:contents">
+                    <div className="box-border flex h-[34px] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/30 bg-[#070606] p-[7px] font-hero text-[14px] font-bold leading-[18px] text-white">
+                      {step}
+                    </div>
+                    {i < content.steps.length - 1 && (
+                      <div
                         aria-hidden="true"
                         className="flex shrink-0 items-center justify-center px-2 lg:relative lg:block lg:h-px lg:min-w-4 lg:flex-1 lg:bg-[#070606] lg:p-0"
                       >
                         <span className="block size-[6px] -translate-x-[2.12px] rotate-45 border-r-[1.5px] border-t-[1.5px] border-[#070606] lg:absolute lg:right-[1.25px] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:border-r lg:border-t" />
-                      </li>
+                      </div>
                     )}
-                    <li className="box-border flex h-[34px] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-white/30 bg-[#070606] p-[7px] font-hero text-[14px] font-bold leading-[18px] text-white">
-                      {step}
-                    </li>
-                  </Fragment>
+                  </li>
                 ))}
               </ol>
 
