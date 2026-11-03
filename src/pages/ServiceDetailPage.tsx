@@ -145,6 +145,7 @@ export default function ServiceDetailPage() {
 
       {content.aboutProcess && content.process && service.aboutProcessImage && (
         <ServiceDetailAboutProcess
+          key={service.slug}
           content={content.aboutProcess}
           process={content.process}
           image={service.aboutProcessImage}
@@ -293,7 +294,7 @@ export default function ServiceDetailPage() {
         />
       )}
 
-      {content.process && !content.aboutProcess && <ServiceDetailProcess process={content.process} accordion={service.processAccordion} figma={service.processFigma} grid={service.processGrid} centered={service.processCentered} />}
+      {content.process && !content.aboutProcess && <ServiceDetailProcess key={service.slug} process={content.process} accordion={service.processAccordion} figma={service.processFigma} grid={service.processGrid} centered={service.processCentered} />}
 
       {content.twoGoals && service.twoGoalsImage && (
         <ServiceDetailTwoGoals content={content.twoGoals} image={service.twoGoalsImage} />
