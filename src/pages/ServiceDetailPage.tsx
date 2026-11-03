@@ -400,6 +400,9 @@ export default function ServiceDetailPage() {
       {isDesktop && service.slug === SERVICE_SLUGS.youtube && (
         <ServiceLinksRail current="youtube" heroId="service-hero" endId="footer" />
       )}
+      {isDesktop && service.slug === SERVICE_SLUGS.brand && (
+        <ServiceLinksRail current="brand" heroId="service-hero" endId="footer" />
+      )}
       {isDesktop && service.slug === SERVICE_SLUGS.webDesign && (
         <ServiceLinksRail current="webDesign" heroId="service-hero" endId="footer" />
       )}
