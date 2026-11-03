@@ -61,6 +61,7 @@ import {
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { SocialServicesRail } from "@/components/services/SocialServicesRail";
+import { ServiceLinksRail } from "@/components/services/ServiceLinksRail";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 /** `/services/:slug` — one page per service, driven by `serviceDetails.config`. */
@@ -369,6 +370,39 @@ export default function ServiceDetailPage() {
       )}
 
       {isDesktop && service.slug === SERVICE_SLUGS.social && <SocialServicesRail heroId="service-hero" endId="footer" />}
+      {isDesktop && service.slug === SERVICE_SLUGS.seo && (
+        <ServiceLinksRail current="seo" heroId="service-hero" endId="footer" />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.growth && (
+        <ServiceLinksRail current="growth" heroId="service-hero" endId="footer" />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.multilingual && (
+        <ServiceLinksRail current="multilingual" heroId="service-hero" endId="footer" />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.email && (
+        <ServiceLinksRail current="email" heroId="service-hero" endId="footer" />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.instagram && (
+        <SocialServicesRail heroId="service-hero" endId="footer" current={serviceDetailPath(SERVICE_SLUGS.instagram)} />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.linkedin && (
+        <SocialServicesRail heroId="service-hero" endId="footer" current={serviceDetailPath(SERVICE_SLUGS.linkedin)} />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.x && (
+        <SocialServicesRail heroId="service-hero" endId="footer" current={serviceDetailPath(SERVICE_SLUGS.x)} />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.autoPost && (
+        <SocialServicesRail heroId="service-hero" endId="footer" current={serviceDetailPath(SERVICE_SLUGS.autoPost)} />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.telegram && (
+        <SocialServicesRail heroId="service-hero" endId="footer" current={serviceDetailPath(SERVICE_SLUGS.telegram)} />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.youtube && (
+        <ServiceLinksRail current="youtube" heroId="service-hero" endId="footer" />
+      )}
+      {isDesktop && service.slug === SERVICE_SLUGS.webDesign && (
+        <ServiceLinksRail current="webDesign" heroId="service-hero" endId="footer" />
+      )}
 
       <FooterSection />
     </div>
