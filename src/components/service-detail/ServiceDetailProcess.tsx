@@ -95,12 +95,12 @@ export function ServiceDetailProcess({
   centered?: boolean;
 }) {
   const { eyebrow, heading, description, steps } = process;
-  // Only one card can be open at a time; the first starts open.
+  // Only one card can be open at a time; all start closed.
   // A `#process-step-N` link (e.g. from the Services menu) opens that card; the page scrolls to it.
   const { hash } = useLocation();
   const hashStep = /^#process-step-(\d+)$/.exec(hash)?.[1];
   const hashIndex = hashStep ? Number(hashStep) - 1 : null;
-  const [openIndex, setOpenIndex] = useState<number | null>(hashIndex ?? (grid ? null : 0));
+  const [openIndex, setOpenIndex] = useState<number | null>(hashIndex);
   const [seenHashIndex, setSeenHashIndex] = useState(hashIndex);
   if (hashIndex !== seenHashIndex) {
     setSeenHashIndex(hashIndex);
